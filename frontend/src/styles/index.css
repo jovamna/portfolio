@@ -1,0 +1,3926 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body
+ { /* Cambia #root por el id de tu contenedor principal si es diferente */
+  height: 100%;
+  width: 100%;
+  margin-bottom: 4rem;
+  padding: 0;
+}
+  html {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    font-family: Nunito, sans-serif, ui-sans-serif, system-ui;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+}
+    
+ 
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    /*overflow: hidden;*/
+  }
+
+
+/* Agrega estilos CSS para el ToastContainer en FullWidthLayout */
+.Toastify__toast-body {
+  color: rgb(30, 31, 32);
+  font-size: 0.9em;
+  padding: 10px;
+  width: 100%;
+  font-weight: 400;
+} 
+
+
+
+
+.Toastify__toast--success {
+  background: #F0F9FA !important;
+
+  border: 1px solid #3A9EA5 !important;
+  border-radius: 50px !important;
+}
+
+.Toastify__toast--error {
+  background: #F0F9FA !important;
+  background-size: 50px 50px; /* Ajusta el tamaño de la imagen de fondo */
+  border: 1px solid #3A9EA5 !important;
+  border-radius: 50px !important;
+ 
+}
+
+
+
+
+
+  .hover-image {
+    position:  absolute;
+    top: 0px;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  
+  .home-image:hover .hover-image {
+    opacity: 1;
+  }
+
+  /*greetings*/
+  .texto-animado {
+    position: relative;
+    animation-name: moveToRight;
+    animation-duration: 1s;
+  }
+
+  @keyframes moveToRight {
+  0% {
+      opacity: 0;
+      left: -10000px;
+  }
+  100% {
+      opacity: 1;
+      left: 0;
+  }
+}
+
+/*fin ggreetings*/
+  
+ 
+  .navbar{
+    position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff; /* Ajusta el color de fondo según sea necesario */
+  z-index: 1000; 
+  }
+
+  /*PAGINA HOME*/
+  .fade-in {
+    opacity: 0;
+    animation: fadeInAnimation 1s ease forwards;
+  }
+  
+  @keyframes fadeInAnimation {
+    to {
+      opacity: 1;
+    }
+  }
+
+/*fin home*/
+ 
+/*ABOU IMPORTANTE PARA EL SLIDER DE TEXTO*/
+.letra-dise{
+  top: 148px;
+   right: 205px;
+  display: block;
+  width: 175px;
+  height: 85px;
+  overflow: hidden;
+  position: relative;
+}
+
+
+
+
+
+
+.semicirculo {
+  height: 48px;
+  width: 100px;
+  background-color: white;
+  border-radius: 50% / 100% 100% 0 0;
+}
+.semicirculo-contacto {
+  height: 48px;
+  width: 100px;
+  border-radius: 50% / 100% 100% 0 0;
+}
+
+.icon-centre {
+  transition: transform 0.3s ease;
+}
+
+.icon-centre:hover {
+  transform: translateY(-5px);
+  color: rgb(92, 109, 109);
+}
+
+
+/*LOGO INCIANDO*/
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  animation: fadeIn 2s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Aplicar la animación de desvanecimiento al ocultar el logo */
+.logo-container.hide {
+  animation: fadeOut 1s;
+}
+
+
+
+
+
+.wave-emoji {
+  animation-duration: 1.8s;
+  animation-iteration-count: infinite;
+  animation-name: wave;
+  display: inline-block;
+  transform-origin: 70% 70%;
+}
+
+@keyframes wave {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(-10deg);
+  }
+  20% {
+    transform: rotate(12deg);
+  }
+  30% {
+    transform: rotate(-10deg);
+  }
+  40% {
+    transform: rotate(9deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+
+
+.logo .img-jova{
+  height: 52px;
+  width: 160px;
+  }
+
+.hide {
+  display: none;
+}
+
+.review-scroll::-webkit-scrollbar {
+  /*width: 0px;*/
+  width: 2px;
+  background-color: white
+}
+
+.review-scroll::-webkit-scrollbar-track {
+  background: white;
+}
+
+.review-scroll::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 20px;
+  border: 1px solid white;
+}
+
+
+
+.nav-item:hover {
+    color: grey;
+    cursor: pointer;
+  }
+.nav-item{
+    color: black;
+}
+.z-index{
+  z-index: 200;
+}
+
+.container-blogpost-tres-columnas {
+  display: flex;
+}
+
+.blogpost-column-1,
+.blogpost-column-3 {
+  width: 20%;
+  padding-top: 80px;
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  max-height: 50vh;
+}
+
+/*max-height: 80vh; /* Ajusta la altura máxima según tus necesidades */
+.blogpost-column-2 {
+  width: 60%;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  /*scrollbar-width: thin;
+  scrollbar-color: blue orange;*/
+}
+
+/* Works on Chrome, Edge, and Safari */
+.blogpost-column-2::-webkit-scrollbar {
+  /*width: 0px;*/
+  width: 2px;
+  background-color: white
+}
+
+.blogpost-column-2::-webkit-scrollbar-track {
+  background: white;
+}
+
+.blogpost-column-2::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 20px;
+  border: 1px solid white;
+}
+
+
+.project-column-1,
+.project-column-3 {
+ 
+  padding-top: 80px;
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  max-height: 50vh;
+}
+
+/*max-height: 80vh; /* Ajusta la altura máxima según tus necesidades */
+.project-column-2 {
+
+  padding: 4px;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  /*scrollbar-width: thin;
+  scrollbar-color: blue orange;*/
+}
+
+/* Works on Chrome, Edge, and Safari */
+.project-column-2::-webkit-scrollbar {
+  /*width: 0px;*/
+  width: 2px;
+  background-color: white
+}
+
+.project-column-2::-webkit-scrollbar-track {
+  background: white;
+}
+
+.project-column-2::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 20px;
+  border: 1px solid white;
+}
+
+/* NEWSKLETTER SUSCRIBE EN FOOTER CSS para la animación de rebote */
+/* Agrega estas clases al archivo de estilos CSS */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+button:hover .newsletter-animation {
+  animation: bounce 0.5s ease infinite;
+}
+
+.reset-password{
+  margin-top: -70px;
+}
+
+
+
+.cookie{
+  position: fixed;
+  z-index: 1100;
+  bottom: 20px;
+  right: 0;
+  left: 0;
+}
+
+
+
+.chat-container{
+  scrollbar-width: thin;
+  scrollbar-color: blue orange;
+}
+
+/* Works on Chrome, Edge, and Safari */
+.chat-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-container::-webkit-scrollbar-track {
+  background: orange;
+}
+
+.chat-container::-webkit-scrollbar-thumb {
+  background-color: blue;
+  border-radius: 20px;
+  border: 2px solid orange;
+}
+
+
+
+
+/*--No estoy usando BOTON SUBE ARRIBA--  */
+#topButtongf {
+  visibility: hidden;
+  position: fixed;
+  bottom: 130px;
+  right: 32px;
+  z-index: 99;
+  border: 2px solid #e2cbcb; /*NONE*/
+  outline: none;
+  background-color: rgb(221, 221, 202);
+  color: white;
+  cursor: pointer;
+  padding: 1px;
+  border-radius: 15px;
+  font-size: 25px;
+}
+
+#topButtonlf:hover {
+  background-color: rgb(133, 118, 118);
+  transition: all ease-in-out 0.2s;
+}
+
+
+.top{
+  color: #000;
+  font-size: 1.6em;
+}
+
+.top:hover{
+  color: #fff;
+}
+
+
+
+/*PARA DISPLAY LOTTIE */
+.sk-circle {
+  margin: 100px auto;
+  width: 40px;
+  height: 40px;
+  position: relative;
+}
+.sk-circle .sk-child {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.sk-circle .sk-child:before {
+  content: "";
+  display: block;
+  margin: 0 auto;
+  width: 15%;
+  height: 15%;
+  background-color: red;
+  border-radius: 100%;
+  -webkit-animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;
+  animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;
+}
+.sk-circle .sk-circle2 {
+  -webkit-transform: rotate(30deg);
+  -ms-transform: rotate(30deg);
+  transform: rotate(30deg);
+}
+.sk-circle .sk-circle3 {
+  -webkit-transform: rotate(60deg);
+  -ms-transform: rotate(60deg);
+  transform: rotate(60deg);
+}
+.sk-circle .sk-circle4 {
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+.sk-circle .sk-circle5 {
+  -webkit-transform: rotate(120deg);
+  -ms-transform: rotate(120deg);
+  transform: rotate(120deg);
+}
+.sk-circle .sk-circle6 {
+  -webkit-transform: rotate(150deg);
+  -ms-transform: rotate(150deg);
+  transform: rotate(150deg);
+}
+.sk-circle .sk-circle7 {
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+.sk-circle .sk-circle8 {
+  -webkit-transform: rotate(210deg);
+  -ms-transform: rotate(210deg);
+  transform: rotate(210deg);
+}
+.sk-circle .sk-circle9 {
+  -webkit-transform: rotate(240deg);
+  -ms-transform: rotate(240deg);
+  transform: rotate(240deg);
+}
+.sk-circle .sk-circle10 {
+  -webkit-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
+.sk-circle .sk-circle11 {
+  -webkit-transform: rotate(300deg);
+  -ms-transform: rotate(300deg);
+  transform: rotate(300deg);
+}
+.sk-circle .sk-circle12 {
+  -webkit-transform: rotate(330deg);
+  -ms-transform: rotate(330deg);
+  transform: rotate(330deg);
+}
+.sk-circle .sk-circle2:before {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+.sk-circle .sk-circle3:before {
+  -webkit-animation-delay: -1s;
+  animation-delay: -1s;
+}
+.sk-circle .sk-circle4:before {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+.sk-circle .sk-circle5:before {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+.sk-circle .sk-circle6:before {
+  -webkit-animation-delay: -0.7s;
+  animation-delay: -0.7s;
+}
+.sk-circle .sk-circle7:before {
+  -webkit-animation-delay: -0.6s;
+  animation-delay: -0.6s;
+}
+.sk-circle .sk-circle8:before {
+  -webkit-animation-delay: -0.5s;
+  animation-delay: -0.5s;
+}
+.sk-circle .sk-circle9:before {
+  -webkit-animation-delay: -0.4s;
+  animation-delay: -0.4s;
+}
+.sk-circle .sk-circle10:before {
+  -webkit-animation-delay: -0.3s;
+  animation-delay: -0.3s;
+}
+.sk-circle .sk-circle11:before {
+  -webkit-animation-delay: -0.2s;
+  animation-delay: -0.2s;
+}
+.sk-circle .sk-circle12:before {
+  -webkit-animation-delay: -0.1s;
+  animation-delay: -0.1s;
+}
+
+@-webkit-keyframes sk-circleBounceDelay {
+  0%,
+  80%,
+  100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  40% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+@keyframes sk-circleBounceDelay {
+  0%,
+  80%,
+  100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  40% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+/*WORK*/
+.hover{
+  color: #000;
+  font-weight: bold;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-style: oblique;
+  font-size: 1.1em;
+}
+.hover:hover{
+  cursor: pointer;
+  text-decoration: underline;
+  color:rgb(133, 118, 118);
+}
+
+
+.description{
+  color: #4D5656;
+  font-size: 1em;
+}
+
+
+.keywords{
+  font-size: 1em;
+  font-weight: lighter;
+  color: #4D5656;
+}
+
+
+
+/*antiquewhite*/
+.about-center{
+ color: #fff;
+padding-top: 20px;
+}
+
+
+/*PAGINA SKILLS*/
+
+
+.refresh{
+  padding: 16px;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 14px;
+  width: 240px;
+  height: 290px;
+  top: 10px;
+  right: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+
+
+/*CONTENEDOR SECUNDARIO DONDE ESTA EL MENU 
+SOFTWARE DEVELOPMENT, WEB, DATABASE DATACIENCIA ETC*/
+/* padding: 1px 1px 4px 1px;*/
+.tab-menu li .tab-button{
+  display: inline-block; /* Convertir el botón en un elemento inline-block */
+  position: relative; 
+  width: 100%;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1em;
+  font-weight: 800;
+  transform: scale(0.9);
+  transition: all 250ms ease;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  text-align: center;
+  margin: auto;
+  height: 50px;
+
+ 
+}
+
+
+
+.navbar-project{
+  border: none;
+  width: 95%;
+  margin: auto;
+}
+
+
+
+
+/*PROJECT-CARD*/
+.keywords{
+  font-size: 1em;
+  height: 70px;
+}
+
+
+
+
+
+/*GALAXY-FOLF*/
+@media only screen and (min-width: 280px) and (max-width: 359px) {
+  html,
+body
+ { /* Cambia #root por el id de tu contenedor principal si es diferente */
+  height: 100%;
+  width: 100%;
+  margin-bottom: 4rem;
+  padding: 0;
+}
+  html {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    font-family: Nunito, sans-serif, ui-sans-serif, system-ui;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+}
+    
+ 
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    /*overflow: hidden;*/
+  }
+
+
+  .tab-menu {
+    overflow-x: auto;
+  }
+
+  /*BOTON ARRIBA*/
+  #topButton{
+  margin-right: -14px;
+  }
+
+
+
+.project-pagina{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+  /*CHATBOT*/
+  .chat-container{
+    width: 90%;
+   margin-right: -14px;
+  }
+
+
+
+  .navbar-project-movil-popover{
+   max-width: 100%;
+  }
+
+
+  .navbar{
+    width: 100%;
+   }
+  
+   .navbar-menu{
+    width: 100%;
+   }
+   /*NAVBAR DEL PORTAFOLIO*/
+  
+  
+     /*IMPORTANTE PARA PONER A ALTURA DEL
+     NAVBAR DEL MOVIL*/
+     .navbar-logo-menu{
+      width: 500px;
+      max-width: 100%;
+      height: 35px;
+      margin: auto;
+    
+    }
+  
+    .navbar-logo-menu .logo{
+      width: 70%;
+      height: 35px;
+   
+    }
+  
+    .logo img{
+      padding-top: 2px;
+      width: 90%;
+      height: 30px;
+     
+    }
+    .movil-lupa-bihome{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      height: 35px;
+      width: 30%;
+       }
+  
+       .movil-lupa-bihome .search{
+       width: 35px;
+       height: 20px;
+       }
+       .casa{
+        height: 25px;
+       }
+
+  .bihome-movil-navbarproject {
+    margin-right: -12px;
+  }
+
+  /*BLOG */
+  /*BLOG POST*/
+  /*CONTAINER DE LA IMAGEN Y VIDEO*/
+  .movil-portada{
+    display: flex;
+    flex-direction: column;
+    max-width: 359px;
+    max-height:350px;
+  }
+
+  /*CONTAINER DE LA IMAGEN*/
+  .movil-portada-subcaja{
+    max-width: 359px;
+    max-height: 350px;
+  }
+  .movil-portada-subcaja img{
+    max-width: 359px;
+    max-height:350px;
+    top: 40px;
+   }
+
+  .movil-video-portada {
+    max-height:350px;
+   }
+
+   /*CONTAINER DE LA CATGEORIA TITULO DESCRIPTION DEL BLOG-POST*/
+  .movil-redaccion-blog-post{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+   
+  }
+
+  .movil-redaccion-blog-post p{
+    font-size: 0.9em;
+  }
+
+  .movil-redaccion-blog-post h1{
+    font-size: 2.1em;
+
+  }
+ 
+  /*FIN POST MOVIL*/
+
+
+
+/*REVIEWS*/
+/*container para crera review*/
+.review-title-form-like-movil{
+  width: 100%;
+}
+
+.review-hearts-form{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  justify-items: center;
+}
+
+/*CONTAINER DELOS HEARTS Y BOTON*/
+.review-hearts-movil{
+  width: 70%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 2PX;
+}
+
+/*BOTON MOSTRAR TODOS*/
+.review-heart-button{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+
+.review-heart-cinco{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+
+.review-heart-cuatro{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+
+
+.review-heart-tres{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+
+
+.review-heart-cinco{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+
+
+.review-heart-dos{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+
+.review-heart-uno{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+
+
+.review-form-movil{
+  width: 100%;
+}
+
+.review-like-submit-movil{
+  display: flex;
+  flex-direction: row;
+
+  width: 400px;
+  margin: auto;
+
+}
+
+
+.review-like p{
+  margin-right: 9px;
+}
+
+.review-button-form-movil{
+  width: 100%;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+/*CONTAINER GENERAL DE LAS RESEÑAS*/
+.reviews-movil{
+  width: 93%;
+
+}
+
+.reviews-movil h1{
+  font-size: 1.4em;
+
+}
+/*RESEÑA INIDIVIDUAL*/
+.reviews-review-movil{
+  width: 100%;
+
+}
+
+.reviews-review-movil img{
+  width: 9.6%;
+}
+
+.reviews-review-button-movil{
+  width: 90%;
+ margin-top: -4px;
+}
+
+
+  
+ /*GREETING PORTADA PRINCIPAL*/
+  .home{
+   padding-top: 51px;
+
+  }
+   /*RESPONSIVE DE LOS GITHUB E IMAGEN*/
+ /*SUBCONTAINER 1 DE LA PAGINA PROJECT*/
+ .project-movil{
+  width: 100%;
+  height: 1250px;
+}
+/*SUBCONTAINER IMPORTANTE DEL PROJECT-MOVIL DE LA PAGINA PROJECT IMPORTANTE*/
+.project-tercero{
+  height: 1250px;
+  max-height: 100%;
+}
+
+/*SUBCONTAINER 2 DE LA PAGINA PROJECT*/
+.project-row-movil{
+  width: 100%;
+  height:100%;
+  margin-top: -60px;
+  margin-left: -29px;
+}
+
+   /*CONTAINER PRINCIPAL DE LA PAGINA PROJECTHOME*/
+   /*PAGINA DE LISTADO DE LOS GITHUBS*/
+   .project-home{
+    width: 260px;
+   height: 920px;
+   max-height: 100%;
+  }
+
+ /*SUBCONTAINER DE PROJECTHOME NARANJA*/
+ .home-project{
+  display: grid;
+  width: 260px;
+  height: 100%;
+ 
+}
+
+
+  /*CONTAINER PRINCIPAL DEL PROJECTCARD DEL GITHUB */
+  /*ESTE ES SOLO UN GITHUB ES EL ESPACIO BLANCO*/
+  .project-movil-card{
+    width: 250px;
+    height: 100%;
+  }
+
+  /*SUBCONTAINER DE PROJECT-MOVIL-CARD*/
+ /*ES EL ESPACIO  NARANJA COGE 2 GITHUBS*/
+  .card-project{
+    width: 235px;
+   height: 100%;
+ }
+
+   /*SUBCONTAINER DE CARD-POJECT PRIMER CUADRO*/
+    /*CONTIENE EL TITULO LA DESCRIPTION ETC*/
+  .project-card{
+    width: 235px;
+    height:82%;
+  }
+
+  /*IMAGEN DEL ICONO GITHUB*/
+  .project-card img{
+    margin-left: -100px;
+  }
+
+   /*SUBCONTAINER DE CARD-POJECT SEGUNDO CUADRO*/
+   .authors{
+    width: 235px;
+    height: 70px;
+  }
+
+
+/*IMAGEN COSTADO DE LOS GITHUBS*/
+.project-img-movil{
+ left: 70px;
+ top: 40px;
+ width: 120px;
+ }
+
+ .project-img-movil img{
+  width: 350px;
+  }
+
+/* FIN RESPONSIVE DE LOS GITHUB E IMAGEN*/
+
+.container-general-chat{
+  width: 100%;
+}
+
+
+/*BLOG*/
+.container-blogpost-tres-columnas {
+  display: flex;
+  flex-direction: column;
+}
+
+.blogpost-column-1 {
+  display: none;
+}
+
+.blogpost-column-2 {
+  width: 100%;
+  padding: 20px;
+  overflow-y: hidden;
+}
+
+.blogpost-column-2  .movil-redaccion-blog-post {
+  max-width: 359px;
+}
+
+
+
+.blogpost-column-3 {
+  width: 100%;
+  padding-top: 80px;
+  box-sizing: border-box;
+  top: 0;
+}
+
+
+.movil-redaccion-blog-post{
+  width: 100%;
+  margin: auto;
+ 
+}
+
+.movil-redaccion-blog-post h1{
+  font-size: 1.2em;
+}
+
+
+.blogpost-aviso-a-no-authenticados{
+  width: 100%;
+
+}
+.blogpost-aviso-a-no-authenticados h1{
+  font-size: 0.9em;
+}
+
+.review-heart-title{
+  display: flex;
+  flex-direction: column;
+}
+
+.review-form-movil {
+width: 100%;
+}
+
+/*container de like y submt*/
+.review-like-submit{
+  width: 100%;
+}
+
+.review-like{
+  margin-left: -25px;
+  width: 50%;
+}
+
+.review-like p{
+  padding-left: 5px;
+ 
+}
+
+.review-button-form-movil{
+  width: 50%;
+}
+
+/*COMENTARIOS REVIEWS*/
+.reviews-movil h1{
+  font-size: 1.1em;
+}
+
+
+
+.movil-form{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+ }
+
+ .movil-suscribe-text{
+  font-size: 0.8em;
+ }
+
+ .movil-button-suscribe {
+  font-size: 0.6em;
+  padding-left: 2px;
+  padding-right: 2px;
+  }
+
+  .movil-footer-tres-menus{
+    display: grid;
+    grid-column: fr fr fr ;
+    gap: 2px;
+   justify-content: center;
+   width: 99.5%;
+   
+   }
+
+   .movil-footer-tres-menus-uno h3{
+    margin-left: -9px;
+    font-size: 0.8em;
+   }
+  
+   .movil-footer-tres-menus-uno a{
+    margin-left: -9px;
+    font-size: 0.8em;
+   }
+
+   
+ .movil-footer-pie{
+  width: 99.4%;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.movil-footer-pie-p{
+  margin: auto;
+  font-size: 0.8em;
+  margin-top: 10px;
+}
+  
+
+/*INICIO PAGINA ABOUT*/
+.container-about-movil{
+display: flex;
+flex-direction: column;
+width: 100%;
+padding-top: 12px;
+}
+
+.container-about-movil .subcontainer-about-movil{
+width: 100%;
+}
+
+.container-about-movil h1{
+font-size: 1.5em;
+}
+
+.container-about-movil p{
+font-size: 0.9em;
+}
+
+
+
+.container-about-movil .subcontainer-about-movil-img {
+width: 80%;
+margin: auto;
+}
+
+
+
+/*PAGINA SKILL*/
+.container-general-tab  .tab-menu{
+height: 65px;
+
+}
+
+
+/*LU LI letras softw, web, databa, tools*/
+.tab-menu li{
+  height: 52px;
+ 
+}
+
+.tab-menu li .tab-button{
+    font-size: 0.9em;
+    height: 42px;
+    margin: auto;
+    line-height: 19px;
+  }
+
+  .tab-button:hover{
+    font-size: 0.905em;
+
+  }
+
+.skill-movil{
+  display: flex;
+  flex-direction: column;
+}
+
+
+}
+
+
+
+@media only screen and (min-width: 360px) and (max-width: 640px) {
+
+  html,
+body
+ { /* Cambia #root por el id de tu contenedor principal si es diferente */
+  height: 100%;
+  width: 100%;
+  margin-bottom: 4rem;
+  padding: 0;
+}
+  html {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    font-family: Nunito, sans-serif, ui-sans-serif, system-ui;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+}
+    
+ 
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    /*overflow: hidden;*/
+  }
+
+
+
+
+  
+
+
+    /*BOTON ARRIBA*/
+    #topButton{
+      margin-right: -20px;
+      }
+    
+    /*NEWSLETTER*/
+    .boton-newsletter{
+     margin-left: -20px;
+    }
+    
+
+/*IMPORTANTE PARA PONER A ALTURA DEL
+   NAVBAR DEL MOVIL*/
+     /*#303535  #333636*/
+ .navbar{
+  width: 100%;
+  height: 38px;
+
+ }
+
+ .navbar-menu{
+  width: 100%;
+  height: 38px;
+
+ }
+ /*NAVBAR DEL PORTAFOLIO*/
+
+   .navbar-logo{
+    display: flex;
+    align-items: flex-end;
+    height: 40px;
+
+  }
+
+  .navbar-logo .logo{
+      width: 35%;
+      height: 34px;
+      margin-top: 25px;
+      align-items: flex-end;
+  }
+
+
+    .logo img{
+      max-width: 100px;
+ 
+      max-height: 35px;
+    }
+   /*navbar projcet*/
+    .user-activo{
+      display: inline-flex;
+      width: 50%;
+      height: 40px;
+      align-items: center;
+   
+    }
+
+    .hola-button{
+      display: flex;
+      flex-direction: row;
+    
+    }
+    .hola{
+      width: 100%;
+    
+    }
+
+    /*lupa casa*/
+.menu-movil{
+  display: flex;
+    align-items: flex-end;
+    height: 38px;
+
+}
+
+
+   .container-movil-login-registro {
+    display: flex;
+    flex-direction: row;
+    width: 120px;
+    max-height: 24px;
+    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+ 
+    }
+
+    .container-movil-login-registro img {
+    width: 17px;
+    height: 17px;
+  
+    }
+
+
+   .container-movil-login-registro p {
+    font-size: 0.7rem;
+    margin-left: 5px;
+    word-spacing: -1.2px;
+    }
+
+
+
+
+   .movil-uno{
+    width: 90%;
+    margin: auto;
+    height: 40px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+   color: #5f5f5f;
+   font-weight: 600;
+   font-size: 1.2em;
+  }
+
+
+  .movil-dos{
+    width: 90%;
+    margin: auto;
+    height: 40px;
+    
+  }
+
+  
+
+
+
+
+  /*SEARCH*/
+  /*blogcardsearch.jsx*/
+  .card-search-imagen-description h1{
+    font-size: 1.3rem;
+    margin: auto;
+    
+  }
+
+  .search-card-cat-date{
+    margin: auto;
+  }
+
+  .search p{
+    font-size: 0.96rem;
+    line-height: 20px;
+    text-align: center;
+  }
+  /*search.jsx*/
+  .search h2{
+    font-size: 0.9rem;
+  }
+
+  .card-search-imagen-description{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .card-search-imagen{
+    width: 100%;
+  }
+
+  .card-search-description{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .search-pagination{
+    margin-bottom: 20px;
+    height: 30px;
+   
+  }
+
+
+
+  /*BLOG BLOG-LIST IMAGEN VIDEO PORTADA*/
+  .portada-blog{
+    max-height:50%
+  }
+  .portada-blog-video{
+    max-height:50%;
+  }
+
+  .portada-blog{
+    max-height:350px;
+  }
+
+  .portada-blog-video{
+    max-height:350px;
+  }
+
+
+  /*BLOG POST*/
+  /*CONTAINER DE LA IMAGEN Y VIDEO*/
+  .movil-portada{
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    max-height:350px;
+  }
+
+  /*CONTAINER DE LA IMAGEN*/
+  .movil-portada-subcaja{
+    max-width: 600px;
+    max-height: 350px;
+  }
+  .movil-portada-subcaja img{
+    max-width: 600px;
+    max-height:350px;
+    top: 40px;
+   }
+
+  .movil-video-portada {
+    max-height:350px;
+   }
+
+
+
+   
+/*CONTAINER PRINCIPAL DE LAS CATEGORIAS PAGE CATEGOESBLOGLIST*/
+.container-blog-categorias{
+  padding-left: 5px;
+  padding-right: 6px;
+  height: 90px;
+}
+
+
+.li-categories-blog{
+  width: 100%;
+  
+  }
+  
+/*CATEGROIAS BOTON*/
+.blog-header-category-name{
+ width: 100%;
+ font-size: 1.1em;
+ 
+}
+
+   /*CONTAINER DE LA CATGEORIA TITULO DESCRIPTION DEL BLOG-POST*/
+  .movil-redaccion-blog-post{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+   
+  }
+
+  .movil-redaccion-blog-post p{
+    font-size: 0.9em;
+  }
+
+  .movil-redaccion-blog-post h1{
+    font-size: 2.1em;
+
+  }
+ 
+  /*FIN POST MOVIL*/
+
+
+
+
+  .home{
+    height: 100%;
+  
+    
+  }
+
+
+
+  .home-image img{
+    width: 100%;
+    height: auto; 
+    margin-top: 30px;
+  }
+
+
+/*COMPONENTE GREETING greetings*/
+/*MANO*/
+.wave-emoji{
+  width: 10%;
+}
+
+.greeting-texto{
+  top:86px;
+  left:26px;
+  width: 110px;
+  height: 130px;
+  
+}
+
+.greeting-texto h1{
+  font-size: 0.67em;
+ 
+  line-height: 24px;
+}
+
+.greeting-texto h2{
+  font-size: 0.6em;
+  margin-bottom: 5px;
+  line-height: 6px;
+}
+
+
+.greeting-texto p{
+  font-size: 0.56em;
+  line-height: 12px;
+}
+
+/*fin greetings*/
+
+
+  
+ 
+/*INICIO PAGINA ABOUT*/
+.about{
+  height: 100%;
+}
+
+
+  .container-about-tres{
+  display: flex;
+  flex-direction: column;
+   margin: auto;
+    width: 100%;
+    height: 100%; 
+  
+  }
+
+  .container-about-dos{
+    display: flex;
+    flex-direction: column;
+     margin: auto;
+      width: 100%;
+   
+      height: auto; 
+      margin-bottom: 40px;
+    
+    }
+
+ .subcontainer-about-movil{
+  width: 100%;
+  }
+
+  .subcontainer-about-movil h1{
+    font-size: 1.3em;
+
+  }
+  .subcontainer-about-movil h2{
+    font-size: 0.9em;
+
+  }
+  .subcontainer-about-movil p{
+    font-size: 0.8em;
+
+  }
+
+  .subcontainer-about-movil-img{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+   align-items: center;
+    width: 100%;
+
+  
+  }
+  
+
+  .subcontainer-about-movil-img img{
+    width: 85%;
+    height: 85%; 
+  margin-top: -60px;
+  }
+  
+  .letra-dise{
+    top: 35px;
+    right: 4px;
+  }
+
+  .letra-dise p{
+    font-size: 0.6em;
+  }
+
+  /*FIN COMPONENTE ABOUT*/
+
+  
+ 
+
+
+   /*PAGINA SKILL*/
+   .skill{
+    height: 100%;
+
+  }
+
+  .skill img{
+    width: 100%;
+    height: auto; 
+  }
+
+
+  
+   .skill-tres{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .skill-dos{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+
+  }
+
+ .skill-card-movil{
+  height: 60vh;
+  margin-bottom: 20px;
+ }
+
+ 
+/* background-color: #767679;*/
+.skill-card-movil-img-title {
+  width: 450px;
+  margin: auto;
+  height: 100%;
+ }
+
+ .skill-container-images{
+  height:45vh ;
+ }
+
+
+ .skill-card-movil .skillcard-img-circle{
+  height:20vh ;
+  width: 100%;
+ }
+
+
+ .skill-card-movil .skillcard-img-developer{
+  width: 80%;
+ }
+
+ .skill-container-description{
+ padding-left: 0;
+ padding-right: 0;
+ height: auto;
+ }
+ .skill-container-description h1{
+  font-size: 0.9em;
+ }
+ .skill-container-description p{
+  font-size: 0.9em;
+ }
+ 
+ 
+ 
+ 
+  /*TABLERO DEL SKILLS MENU E ICONOS*/
+.skills-page-movil{
+    width:100%;
+    height: 52vh;
+
+  }
+
+   /*TITULO SKILLS*/
+  .skills-page-movil h1{
+    font-size: 1.9em;
+   margin-top: 10px;
+  }
+
+  
+ /*PAGINA BUTTON DINAMICO*/
+ .container-general-tab{
+  width: 100%;
+ }
+  /*UL*/
+
+   .tab-menu li{
+
+    font-size: 0.8em;
+   
+   }
+
+  .tab-button:hover{
+    font-size: 0.905em;
+    }
+
+
+  /*PAGINA BUTTON DINAMICO y Skills Page*/
+  /*CONTAINER DE LOS ICONOS DE LOS TABS*/
+  .tab__content{
+    margin-top: 4px;
+    }
+  
+   /*Iconos del TabPanel*/
+  .tab__content img{
+    width: 41%;
+   }
+
+   /*COMPONENTE PROJECT*/
+   .project{
+    height: 100%;
+  }
+
+  .project img{
+    width: 100%;
+    height: auto; 
+  }
+
+ /*SUBCONTAINER 1 DE LA PAGINA PROJECT*/
+ .project-movil{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  
+}
+/*SUBCONTAINER IMPORTANTE DEL PROJECT-MOVIL DE LA PAGINA PROJECT*/
+.project-movil-colores{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+}
+
+/*SUBCONTAINER 2 DE LA PAGINA PROJECT*/
+.project-row-movil{
+  height: auto;
+}
+
+/*IMAGEN COSTADO DE LOS GITHUBS*/
+  .project-img-movil img{
+   width: 240px;
+   }
+ 
+/*CONTAINER PRINCIPAL DE PROJECTHOME MARRON OSCURO*/
+   /*CONTIENE AL PROJECTCARD*/
+   .project-home{
+    width: 350px;
+   padding-left: 4px;
+   padding-right: 4px;
+   margin-left: -40px;
+  }
+
+ /*SUBCONTAINER DE PROJECTHOME NARANJA*/
+ .project-home-subcontainer {
+  display: grid;
+  gap: 5px;
+  max-width: none; /* Ajusta este valor según tus necesidades */
+  width: 100%; /* Asegura que ocupa todo el ancho disponible */
+  margin: 0 auto; /* Para centrar el contenedor horizontalmente */
+
+}
+
+
+
+
+  /*CONTAINER PRINCIPAL DEL PROJECTCARD */
+  /*ESTE ES SOLO UN GITHUB ES EL ESPACIO BLANCO*/
+  .project-movil-card{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    width: 345px;
+  }
+
+   /*COMPONENTE CURRICULUM*/
+  .curriculum{
+    height: 100%;
+  }
+
+  .cv{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+  }
+
+  .contacto{
+    height: 100%;
+    
+  }
+  
+  .movil-footer{
+    width: 100%;
+    margin: auto;
+  }
+
+  .movil-footer .movil-suscribe{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 98%;
+ }
+
+
+.movil-suscribe-text{
+ font-size: 0.9em;
+}
+
+ .movil-form{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+ }
+
+ .movil-button-suscribe {
+ font-size: 0.8em;
+ padding-left: 2px;
+ padding-right: 2px;
+ }
+
+
+ .movil-footer-tres-menus{
+  display: grid;
+  grid-column: fr fr fr ;
+  gap: 4px;
+ justify-content: center;
+ width: 98%;
+ }
+
+ 
+ .movil-footer-tres-menus-uno h3{
+  margin-left: -18px;
+  font-size: 0.9em;
+ }
+
+ .movil-footer-tres-menus-uno a{
+  margin-left: -18px;
+ }
+
+  /*FOOTER PIE SOCIAL Y DERECHOS DE AUTOR*/
+ .movil-footer-social-ul{
+  margin: auto;
+  margin-top: -6px;
+ 
+ }
+
+  .movil-footer-pie{
+    width: 99.4%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+  }
+
+  .movil-footer-pie-p{
+    margin: auto;
+    font-size: 0.8em;
+    margin-top: 10px;
+  }
+
+  
+   
+  
+  /*IMAGEN DEL ICONO GITHUB*/
+  
+  /*PAGINA DE LOS PROJECTS*/
+  .project-list-grid{
+    display: grid;
+    width: 100%;
+
+  }
+
+   /*SUBCONTAINER DE CARD-POJECT SEGUNDO CUADRO*/
+   .project-card-authors{
+    height: 76px;
+    
+  }
+
+  .project-card-authors p{
+    font-size: 0.9em;
+    
+  }
+
+  .pagination-project{
+    margin-bottom: 20px;
+  }
+
+
+  .project-list{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+   
+  }
+
+  .project-pagina{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+   
+  }
+
+  .project-column-1{
+    width: 94%;
+    margin: auto;
+  }
+
+  .project-column-2{
+    width: 94%;
+    margin: auto;
+  }
+  .project-column-3{
+    width: 94%;
+    margin: auto;
+  }
+
+ 
+
+
+
+
+
+/* FIN RESPONSIVE DE LOS GITHUB E IMAGEN*/
+
+
+
+/*BLOG */
+/*BLOG*/
+.container-blogpost-tres-columnas {
+  display: flex;
+  flex-direction: column;
+}
+
+.blogpost-column-1 {
+  display: none;
+}
+
+.blogpost-column-2 {
+  width: 100%;
+  padding: 20px;
+  overflow-y: hidden;
+}
+
+.blogpost-column-3 {
+  width: 100%;
+  padding-top: 80px;
+  box-sizing: border-box;
+  top: 0;
+}
+
+.blogpost-aviso-a-no-authenticados{
+  width: 100%;
+
+}
+.blogpost-aviso-a-no-authenticados h1{
+  font-size: 0.9em;
+}
+
+
+.movil-redaccion-blog-post{
+  width: 100%;
+  margin: auto;
+ 
+}
+
+.movil-redaccion-blog-post h1{
+  font-size: 1.4em;
+}
+
+/*REVIEWS*/
+/*container para crera review*/
+.review-title-form-like-movil{
+  width: 100%;
+}
+
+.review-hearts-form{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  justify-items: center;
+}
+
+/*CONTAINER DELOS HEARTS Y BOTON*/
+.review-hearts-movil{
+  width: 70%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/*BOTON MOSTRAR TODOS*/
+.review-heart-button{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+
+.review-heart-cinco{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+
+.review-heart-cuatro{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+
+
+.review-heart-tres{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+
+
+.review-heart-cinco{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+
+
+.review-heart-dos{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+
+.review-heart-uno{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+
+
+.review-form-movil{
+  width: 100%;
+}
+
+.review-like-submit-movil{
+  display: flex;
+  flex-direction: row;
+  width: 400px;
+  margin: auto;
+
+}
+
+
+.review-like p{
+  margin-right: 9px;
+}
+
+.review-button-form-movil{
+  width: 100%;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+/*CONTAINER GENERAL DE LAS RESEÑAS*/
+.reviews-movil{
+  width: 100%;
+}
+
+.reviews-movil h1{
+  font-size: 1.3em;
+}
+
+
+/*RESEÑA INIDIVIDUAL*/
+.reviews-review-movil{
+  width: 100%;
+
+}
+
+.reviews-review-movil img{
+  width: 9.6%;
+}
+
+.reviews-review-button-movil{
+  width: 90%;
+ margin-top: -4px;
+}
+
+.review-heart-title{
+  display: flex;
+  flex-direction: column;
+}
+
+/*CHAT*/
+.container-general-chat{
+  width: 98%;
+}
+.chat-container{
+ width: 62%;
+ margin-right: -19px;
+
+}
+
+
+
+.chat-asistente-aspa{
+width: 60%;
+}
+
+
+.chat-jm{
+  font-size: 1.2em;
+  margin-right: 8px;
+}
+
+
+
+}
+
+
+
+@media only screen and (min-width: 641px) and (max-width: 667px) {
+  #topButton{
+    margin-right: -20px;
+    }
+  
+  
+  
+    /*CHATBOT*/
+    .chat-container{
+      width: 80%;
+     margin-right: -22px;
+    }
+  
+
+
+
+ /*navbar projcet*/
+ .container-movil-login-registro{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 8px;
+ }
+
+
+ .movil-uno{
+  width: 90%;
+  margin: auto;
+  height: 40px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+ color: #5f5f5f;
+ font-weight: 600;
+ font-size: 1.2em;
+}
+
+
+.movil-dos{
+  width: 90%;
+  margin: auto;
+  height: 40px;
+  
+}
+
+  /*#303535  #333636*/
+.navbar{
+width: 100%;
+height: 40px;
+}
+
+.navbar-menu{
+width: 100%;
+height: 40px;
+}
+/*NAVBAR DEL PORTAFOLIO*/
+
+
+ /*IMPORTANTE PARA PONER A ALTURA DEL
+ NAVBAR DEL MOVIL*/
+ .navbar-logo-menu{
+  height: 40px;
+  margin: auto;
+}
+
+.navbar-logo-menu .logo{
+  width: 60%;
+  height: 40px;
+}
+
+.logo img{
+  padding-top: 2px;
+  width: 90%;
+  height: 35px;
+}
+
+
+
+
+
+.logo-movil{
+  width: 100%;
+}
+
+.logo-movil img{
+  width: 80%;
+}
+
+/*BLOG POST*/
+/*CONTAINER DE LA IMAGEN Y VIDEO*/
+.movil-portada{
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  max-height:350px;
+}
+
+/*CONTAINER DE LA IMAGEN*/
+.movil-portada-subcaja{
+  max-width: 600px;
+  max-height: 350px;
+}
+.movil-portada-subcaja img{
+  max-width: 600px;
+  max-height:350px;
+  top: 40px;
+ }
+
+.movil-video-portada {
+  max-height:350px;
+ }
+
+ /*CONTAINER DE LA CATGEORIA TITULO DESCRIPTION DEL BLOG-POST*/
+.movil-redaccion-blog-post{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+ 
+}
+
+.movil-redaccion-blog-post p{
+  font-size: 0.9em;
+}
+
+.movil-redaccion-blog-post h1{
+  font-size: 2.1em;
+
+}
+
+/*FIN POST MOVIL*/
+
+
+
+
+.home{
+ padding-top: 24px;
+}
+
+
+ /*pagina portada*/
+ .greeting{
+  display: block;
+  width: 100%;
+  margin: auto;
+  margin-top: 9px;
+}
+.greet{
+  font-size: 0.74em;
+}
+
+
+
+/*INICIO PAGINA ABOUT*/
+.container-about-movil{
+display: flex;
+flex-direction: column;
+ margin: auto;
+  width: 100%;
+ margin-top: 20px;
+ padding-left: 14px;
+ padding-right: 12px;
+
+}
+
+.subcontainer-about-movil{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+  width: 100%;
+  
+}
+
+.subcontainer-about-movil h1{
+  font-size: 1.6em;
+
+}
+.subcontainer-about-movil p{
+  font-size: 1em;
+
+}
+
+.skill-item{
+  margin: auto;
+}
+
+.container-about-movil .subcontainer-about-movil-img {
+  width: 100%;
+ 
+
+}
+
+.subcontainer-about-movil-img img{
+  width: 60%;
+  margin: auto;
+  margin-top: 10px;
+}
+
+
+ /*PAGINA SKILL*/
+
+
+.skills-main-div{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+ padding-top: 0.2px;
+ padding-bottom: 0.2px;
+
+
+}
+
+/* background-color: #767679;*/
+.skills-main-div .skill-card-movil{
+ width: 100%;
+ margin: auto;
+ margin-bottom: 2px;
+ padding-top: 10px;
+ padding-bottom: 10px;
+ background-color: #767679;
+
+}
+
+.skill-card-movil-img-title{
+height: 99.5%;
+}
+
+/*TABLERO DEL SKILLS MENU E ICONOS*/
+.skills-page-movil{
+  width: 100%;
+  margin-top: 2px;
+  height: 440px;
+max-height: 100%;
+}
+
+.skills-page-movil h1{
+  font-size: 1.9em;
+  margin-bottom: 10px;
+}
+
+
+/*PAGINA BUTTON DINAMICO*/
+.container-general-tab{
+padding-right: 4px;
+padding-left: 2px;
+height: 380px;
+max-height: 100%;
+}
+/*UL*/
+.tab-menu{
+  width: 600px;
+  height: 80px;
+  max-height: 100%;
+ }
+
+ .tab-menu li{
+  height: 65px;
+  font-size: 0.9em;
+    margin-left: 3px;
+ }
+
+.tab-button:hover{
+  font-size: 0.905em;
+  }
+
+
+/*PAGINA BUTTON DINAMICO y Skills Page*/
+/*CONTAINER DE LOS ICONOS DE LOS TABS*/
+.tab__content{
+  margin-top: 4px;
+  
+  }
+
+     
+ /*Iconos del TabPanel*/
+.tab__content img{
+  width: 35%;
+  height: 45%;
+ }
+
+
+
+
+.curriculum{
+  padding-top: 20px;
+}
+
+.contacto{
+  padding-top: 20px;
+}
+
+.movil-footer{
+  width: 100%;
+  margin: auto;
+}
+
+.movil-footer .movil-suscribe{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 98%;
+}
+
+
+.movil-suscribe-text{
+font-size: 0.9em;
+}
+
+.movil-form{
+display: flex;
+flex-direction: row;
+width: 100%;
+}
+
+.movil-button-suscribe {
+font-size: 0.8em;
+padding-left: 2px;
+padding-right: 2px;
+}
+
+
+.movil-footer-tres-menus{
+display: grid;
+grid-column: fr fr fr ;
+gap: 4px;
+justify-content: center;
+width: 98%;
+}
+
+
+.movil-footer-tres-menus-uno h3{
+margin-left: -18px;
+font-size: 0.9em;
+}
+
+.movil-footer-tres-menus-uno a{
+margin-left: -18px;
+}
+
+/*FOOTER PIE SOCIAL Y DERECHOS DE AUTOR*/
+.movil-footer-social-ul{
+margin: auto;
+margin-top: -6px;
+
+}
+
+.movil-footer-pie{
+  width: 99.4%;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
+.movil-footer-pie-p{
+  margin: auto;
+  font-size: 0.8em;
+  margin-top: 10px;
+}
+
+
+
+ /*HOME RESPONSIVE DE LOS GITHUB E IMAGEN*/
+/*SUBCONTAINER 1 DE LA PAGINA PROJECT*/
+.project-movil{
+width: 100%;
+height: 1150px;
+}
+/*SUBCONTAINER IMPORTANTE DEL PROJECT-MOVIL DE LA PAGINA PROJECT*/
+.project-tercero{
+height: 1150px;
+max-height: 100%;
+}
+
+/*SUBCONTAINER 2 DE LA PAGINA PROJECT*/
+.project-row-movil{
+width: 100%;
+height:100%;
+margin-top: -60px;
+margin-left: -29px;
+}
+
+ /*CONTAINER PRINCIPAL DE LA PAGINA PROJECTHOME*/
+ /*PAGINA DE LISTADO DE LOS GITHUBS*/
+ .project-home{
+  width: 330px;
+ height: 920px;
+ max-height: 100%;
+}
+
+/*SUBCONTAINER DE PROJECTHOME NARANJA*/
+.home-project{
+display: grid;
+width: 318px;
+height: 100%;
+
+}
+
+
+/*CONTAINER PRINCIPAL DEL PROJECTCARD DEL GITHUB */
+/*ESTE ES SOLO UN GITHUB ES EL ESPACIO BLANCO*/
+.project-movil-card{
+  width: 318px;
+  height: 100%;
+}
+
+/*SUBCONTAINER DE PROJECT-MOVIL-CARD*/
+.card-project{
+  width: 310px;
+ height: 100%;
+}
+
+ /*SUBCONTAINER DE CARD-POJECT PRIMER CUADRO*/
+.project-card{
+  width: 305px;
+  height:80%;
+}
+
+/*IMAGEN DEL ICONO GITHUB*/
+.project-card img{
+  margin-left: -30px;
+}
+
+ /*SUBCONTAINER DE CARD-POJECT SEGUNDO CUADRO*/
+ .authors{
+  width: 305px;
+  height: 72px;
+}
+
+
+/*IMAGEN COSTADO DE LOS GITHUBS*/
+.project-img-movil{
+left: 70px;
+top: 40px;
+width: 120px;
+}
+
+.project-img-movil img{
+width: 350px;
+}
+
+/* FIN RESPONSIVE DE LOS GITHUB E IMAGEN*/
+
+/*CHAT*/
+.container-general-chat{
+width: 98%;
+}
+
+/*BLOG */
+/*REVIEWS*/
+/*container para crera review*/
+.review-title-form-like-movil{
+width: 100%;
+}
+
+.review-hearts-form{
+display: flex;
+flex-direction: column;
+width: 100%;
+justify-content: center;
+justify-items: center;
+}
+
+/*CONTAINER DELOS HEARTS Y BOTON*/
+.review-hearts-movil{
+width: 70%;
+margin: auto;
+display: flex;
+flex-direction: column;
+justify-content: center;
+margin-bottom: 2PX;
+}
+
+/*BOTON MOSTRAR TODOS*/
+.review-heart-button{
+width: 100%;
+display: flex;
+justify-content: center;
+justify-items: center;
+}
+
+.review-heart-cinco{
+width: 100%;
+display: flex;
+justify-content: center;
+justify-items: center;
+}
+
+.review-heart-cuatro{
+width: 100%;
+display: flex;
+justify-content: center;
+justify-items: center;
+}
+
+
+.review-heart-tres{
+width: 100%;
+display: flex;
+justify-content: center;
+justify-items: center;
+}
+
+
+.review-heart-cinco{
+width: 100%;
+display: flex;
+justify-content: center;
+justify-items: center;
+}
+
+
+.review-heart-dos{
+width: 100%;
+display: flex;
+justify-content: center;
+justify-items: center;
+}
+
+.review-heart-uno{
+width: 100%;
+display: flex;
+justify-content: center;
+justify-items: center;
+}
+
+
+.review-form-movil{
+width: 100%;
+}
+
+.review-like-submit-movil{
+display: flex;
+flex-direction: row;
+
+width: 400px;
+margin: auto;
+
+}
+
+
+.review-like p{
+margin-right: 9px;
+}
+
+.review-button-form-movil{
+width: 100%;
+padding-left: 8px;
+padding-right: 8px;
+}
+
+/*CONTAINER GENERAL DE LAS RESEÑAS*/
+.reviews-movil{
+width: 93%;
+
+}
+/*RESEÑA INIDIVIDUAL*/
+.reviews-review-movil{
+width: 100%;
+
+}
+
+.reviews-review-movil img{
+width: 9.6%;
+}
+
+.reviews-review-button-movil{
+width: 90%;
+margin-top: -4px;
+}
+
+}
+
+@media only screen and (min-width: 668px) and (max-width: 719px) {
+  
+  
+  .logo-movil{
+    width: 100%;
+  }
+  
+  .logo-movil img{
+    width: 80%;
+  }
+  
+  /*BLOG POST*/
+  /*CONTAINER DE LA IMAGEN Y VIDEO*/
+  .movil-portada{
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    max-height:350px;
+  }
+  
+  /*CONTAINER DE LA IMAGEN*/
+  .movil-portada-subcaja{
+    max-width: 600px;
+    max-height: 350px;
+  }
+  .movil-portada-subcaja img{
+    max-width: 600px;
+    max-height:350px;
+    top: 40px;
+   }
+  
+  .movil-video-portada {
+    max-height:350px;
+   }
+  
+   /*CONTAINER DE LA CATGEORIA TITULO DESCRIPTION DEL BLOG-POST*/
+  .movil-redaccion-blog-post{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+   
+  }
+  
+  .movil-redaccion-blog-post p{
+    font-size: 0.9em;
+  }
+  
+  .movil-redaccion-blog-post h1{
+    font-size: 2.1em;
+  
+  }
+  
+  /*FIN POST MOVIL*/
+  
+  
+  
+  
+  .home{
+   padding-top: 24px;
+  }
+  
+  
+   /*pagina portada*/
+   .greeting{
+    display: block;
+    width: 100%;
+    margin: auto;
+    margin-top: 9px;
+  }
+  .greet{
+    font-size: 0.74em;
+  }
+  
+  
+  
+  /*INICIO PAGINA ABOUT*/
+  .container-about-movil{
+  display: flex;
+  flex-direction: column;
+   margin: auto;
+    width: 100%;
+   margin-top: 20px;
+   padding-left: 14px;
+   padding-right: 12px;
+  
+  }
+  
+  .subcontainer-about-movil{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    width: 100%;
+    
+  }
+  
+  .subcontainer-about-movil h1{
+    font-size: 1.6em;
+  
+  }
+  .subcontainer-about-movil p{
+    font-size: 1em;
+  
+  }
+  
+  .skill-item{
+    margin: auto;
+  }
+  
+  .container-about-movil .subcontainer-about-movil-img {
+    width: 100%;
+   
+  
+  }
+  
+  .subcontainer-about-movil-img img{
+    width: 60%;
+    margin: auto;
+    margin-top: 10px;
+  }
+  
+  
+   /*PAGINA SKILL*/
+ 
+  .skills-main-div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+   padding-top: 0.2px;
+   padding-bottom: 0.2px;
+  
+  
+  }
+  
+  /* background-color: #767679;*/
+  .skills-main-div .skill-card-movil{
+   width: 100%;
+   margin: auto;
+   margin-bottom: 2px;
+   padding-top: 10px;
+   padding-bottom: 10px;
+   background-color: #767679;
+  
+  }
+  
+  .skill-card-movil-img-title{
+  height: 99.5%;
+  }
+  
+  /*TABLERO DEL SKILLS MENU E ICONOS*/
+  .skills-page-movil{
+    width: 100%;
+    margin-top: 2px;
+    height: 440px;
+  max-height: 100%;
+  }
+  
+  .skills-page-movil h1{
+    font-size: 1.9em;
+    margin-bottom: 10px;
+  }
+  
+  
+  /*PAGINA BUTTON DINAMICO*/
+  .container-general-tab{
+  padding-right: 4px;
+  padding-left: 2px;
+  height: 380px;
+  max-height: 100%;
+  }
+  /*UL*/
+  .tab-menu{
+    width: 600px;
+    height: 80px;
+    max-height: 100%;
+   }
+  
+   .tab-menu li{
+    height: 65px;
+    font-size: 0.9em;
+      margin-left: 3px;
+   }
+  
+  .tab-button:hover{
+    font-size: 0.905em;
+    }
+  
+  
+  /*PAGINA BUTTON DINAMICO y Skills Page*/
+  /*CONTAINER DE LOS ICONOS DE LOS TABS*/
+  .tab__content{
+    margin-top: 4px;
+    
+    }
+  
+       
+   /*Iconos del TabPanel*/
+  .tab__content img{
+    width: 35%;
+    height: 45%;
+   }
+  
+   .blogpost-column-2 {
+    width: 100%;
+    padding: 20px;
+    overflow-y: hidden;
+  }
+  
+  
+  
+}
+
+
+
+@media only screen and (min-width: 540px) and (max-width: 720px) {
+  
+
+
+  .navbar-menu{
+    width: 100%;
+   }
+
+  /*navbar projcet*/
+  .movil-uno{
+    width: 100%;
+    margin-bottom: 24px;
+   
+  }
+
+
+  /*POST BLOG*/
+  .movil-form{
+    width: 80%;
+   }
+
+   .movil-suscribe-text{
+    font-size: 1.4em;
+  }
+
+   .movil-button-suscribe{
+    font-size: 1em;
+   }
+
+   /*FOOTER PIE SOCIAL Y DERECHOS DE AUTOR*/
+ .movil-footer-social-ul{
+  margin: auto;
+  margin-top: -6px;
+ 
+ }
+
+  .movil-footer-pie{
+    width: 99.4%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+  }
+
+  .movil-footer-pie-p{
+    margin: auto;
+    font-size: 1em;
+    margin-top: 20px;
+  }
+
+
+ 
+/*RESPONSIVE DE LOS GITHUB E IMAGEN*/
+ /*SUBCONTAINER 1 DE LA PAGINA PROJECT*/
+ .project-movil{
+  width: 100%;
+  height: 1100px;
+}
+/*SUBCONTAINER IMPORTANTE DEL PROJECT-,OVIL DE LA PAGINA PROJECT*/
+.project-tercero{
+  height: 1100px;
+  max-height: 100%;
+}
+
+/*SUBCONTAINER 2 DE LA PAGINA PROJECT*/
+.project-row-movil{
+  width: 100%;
+  height:100%;
+  margin-top: -60px;
+  margin-left: -20px;
+}
+
+   /*CONTAINER PRINCIPAL DE LA PAGINA PROJECTHOME*/
+   /*PAGINA DE LISTADO DE LOS GITHUBS*/
+   .project-home{
+    width: 345px;
+   height: 920px;
+   max-height: 100%;
+  }
+
+ /*SUBCONTAINER DE PROJECTHOME*/
+ .home-project{
+  display: grid;
+  width: 335px;
+  height: 100%;
+}
+
+
+  /*CONTAINER PRINCIPAL DEL PROJECTCARD DEL GITHUB */
+  /*ESTE ES SOLO UN GITHUB ES EL ESPACIO BLANCO*/
+  .project-movil-card{
+    width: 330px;
+    height: 100%;
+  }
+
+  /*SUBCONTAINER DE PROJECT-MOVIL-CARD*/
+  .card-project{
+    width: 320px;
+   height: 100%;
+ }
+
+   /*SUBCONTAINER DE CARD-POJECT PRIMER CUADRO*/
+  .project-card{
+    width: 315px;
+    height:80%;
+  }
+
+  /*IMAGEN DEL ICONO GITHUB*/
+  .project-card img{
+    margin-left: -30px;
+  }
+
+   /*SUBCONTAINER DE CARD-POJECT SEGUNDO CUADRO*/
+   .authors{
+    width: 315px;
+    height: 72px;
+  }
+
+
+/*IMAGEN COSTADO DE LOS GITHUBS*/
+.project-img-movil{
+ left: 70px;
+ top: 40px;
+
+ }
+/* FIN RESPONSIVE DE LOS GITHUB E IMAGEN*/
+
+}
+
+
+
+@media only screen and (min-width: 721px) and (max-width: 767px) {
+  
+     /*fin navbar oprafolio*/
+   /*PAGINA SKILLS*/
+    /*PAGINA SKILLS*/
+  .skills-main-div {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+   padding-top: 0.2px;
+   padding-bottom: 0.2px;
+  }
+
+  /*PAGINA SKILLCARD*/
+  .skills-main-div .skill-card-movil{
+    width: 100%;
+    margin: auto;
+    padding-top: 10px;
+    padding-bottom: 8px;
+    background-color: rgb(115 115 115);
+  }
+
+  .skill-card-movil .skill-card-movil-img-title{
+   height: 99.9%;
+  }
+
+
+  /*TABLERO DEL SKILLS MENU E ICONOS*/
+  .skills-page-movil{
+    width: 100%;
+    margin-top: 4px;
+    height: 440px;
+  max-height: 100%;
+
+  }
+
+  .skills-page-movil h1{
+    font-size: 1.9em;
+    margin-bottom: 10px;
+  }
+
+  
+ /*PAGINA BUTTON DINAMICO*/
+ .container-general-tab{
+  padding-right: 4px;
+  padding-left: 2px;
+ 
+ }
+  /*UL*/
+  .tab-menu{
+    width: 100%;
+    
+   }
+
+   .tab-menu li{
+    height: 65px;
+    font-size: 0.9em;
+      margin-left: 3px;
+   }
+
+  .tab-button:hover{
+    font-size: 0.905em;
+    }
+
+
+  /*PAGINA BUTTON DINAMICO y Skills Page*/
+  /*CONTAINER DE LOS ICONOS DE LOS TABS*/
+  .tab__content{
+    margin-top: 4px;
+    }
+   /*Iconos del TabPanel*/
+  .tab__content img{
+    width: 30%;
+    height: 40%;
+   }
+
+
+ 
+  /*Fin Pagina Skill*/
+
+  .movil-suscribe-text{
+    font-size: 1.5em;
+  }
+
+  /*POST BLOG*/
+  .movil-form{
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+
+   }
+
+    /*FOOTER PIE SOCIAL Y DERECHOS DE AUTOR*/
+ .movil-footer-social-ul{
+  margin: auto;
+  margin-top: -6px;
+ 
+ }
+
+  .movil-footer-pie{
+    width: 99.4%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+  }
+
+  .movil-footer-pie-p{
+    margin: auto;
+    font-size: 0.8em;
+    margin-top: 10px;
+  }
+
+  /*PAGINA ABOUT*/
+  .container-about-movil{
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 3px;
+  }
+
+   .container-about-movil .subcontainer-about-movil{
+    width: 54%;
+    }
+
+  .subcontainer-about-movil h1{
+   font-size: 2em;
+  }
+
+  .subcontainer-about-movil p{
+    font-size: 1em;
+  }
+   
+
+
+  .subcontainer-about-movil-img{
+  width: 45%;
+  padding-right: 18px;
+  }
+
+  .subcontainer-about-movil-img img{
+  width: 90%;
+  height: 80%;
+  }
+   
+
+
+   /*CHATBOT*/
+   .container-general-chat{
+    width: 65%;
+  }
+
+  /*CHATBOT*/
+  .chat-container{
+   margin-right: -8.8px;
+    width: 50%;
+
+  }
+
+  /*PAGINA TOP*/
+  #topButton{
+   margin-right: -12px;
+  }
+  .blogpost-column-2 {
+    width: 100%;
+    padding: 20px;
+    overflow-y: hidden;
+  }
+  
+
+}
+
+
+
+
+/*ipad mini */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+
+  .logo{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+
+  }
+  .logo img{
+    max-width: 100%;
+   height: 75%;
+  }
+
+  .menu-movil{
+    width: 70%;
+   
+  }
+
+ 
+   .user-activo{
+    width: 20%;
+  
+   }
+
+   .hola{
+    width: 100%;
+   }
+
+
+  .container-movil-login-registro{
+    width: 20%;
+    height: 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-around;
+   
+  }
+
+  
+  /*COMPONENT GREETINGS*/
+  .home{
+    margin-top: 18px;
+  }
+  .greeting-texto{
+    left: 34px;
+    height: 220px;
+    width: 240px;
+    top: 120px;
+  }
+
+  .greeting-texto h1{
+    font-size: 1.2em;
+    line-height: 32px;
+  }
+
+  .greeting-texto h2{
+    font-size: 1em;
+    line-height: 4px;
+  }
+
+  .greeting-texto p{
+    font-size: 0.94em;
+    line-height: 17px;
+  }
+
+
+
+  /*fin navbar oprafolio*/
+
+  /*PAGINA ABOUT*/
+  .container-about-dos{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .subcontainer-about-movil{
+    width: 100%;
+  }
+
+  .subcontainer-about-movil-img{
+    width: 100%;
+   margin-top: -40px;
+  }
+
+  .subcontainer-about-movil-img img{
+    width: 90%;
+    margin: auto;
+
+  }
+
+  .letra-dise{
+    width: 260px;
+    right: 270px;
+    top: 166px;
+  }
+
+
+  
+  /*PAGINA SKILLS*/
+
+  .skill-dos{
+    display: flex;
+    flex-direction: column;
+  }
+  
+
+  /*PAGINA SKILLCARD*/
+
+  .skill-card-movil .skill-card-movil-img-title{
+   height: 99.9%;
+  }
+
+
+  /*TABLERO DEL SKILLS MENU E ICONOS*/
+  .skills-page-movil{
+    width: 100%;
+    margin-top: 20px;
+    height: 440px;
+  max-height: 100%;
+
+  }
+
+  .skills-page-movil h1{
+    font-size: 1.9em;
+    margin-bottom: 10px;
+  }
+
+  
+ /*PAGINA BUTTON DINAMICO*/
+ .container-general-tab{
+  padding-right: 4px;
+  padding-left: 2px;
+ 
+ }
+  /*UL*/
+  .tab-menu{
+    width: 100%;
+    
+   }
+
+   .tab-menu li{
+    height: 65px;
+    font-size: 0.9em;
+      margin-left: 3px;
+   }
+
+  .tab-button:hover{
+    font-size: 0.905em;
+    }
+
+
+  /*PAGINA BUTTON DINAMICO y Skills Page*/
+  /*CONTAINER DE LOS ICONOS DE LOS TABS*/
+  .tab__content{
+    margin-top: 4px;
+    }
+   /*Iconos del TabPanel*/
+  .tab__content img{
+    width: 30%;
+    height: 40%;
+   }
+
+
+ 
+  /*Fin Pagina Skill*/
+
+
+  /*RESPONSIVE DE LOS GITHUB E IMAGEN*/
+  /*SUBCONTAINER 1 DE LA PAGINA PROJECT*/
+  .project-movil{
+    width: 100%;
+  }
+ 
+
+   /*CONTAINER PRINCIPAL DE LA PAGINA PROJECTHOME*/
+   /*PAGINA DE LISTADO DE LOS GITHUBS*/
+  .project-home{
+ 
+    width: 400px;
+   
+  }
+
+  .project-home-subcontainer{
+  
+    width: 370px;
+   
+  }
+
+
+  /*CONTAINER PRINCIPAL DEL PROJECTCARD DEL GITHUB */
+    /*ESTE ES SOLO UN GITHUB ES EL ESPACIO BLANCO*/
+    .project-movil-card{
+      height: 346px;
+      max-width:100%;
+     width: 370px;
+    
+     }
+ 
+   /*SUBCONTAINER DE PROJECT-MOVIL-CARD*/
+ 
+ 
+ 
+   .project-card-title-description{
+     padding-bottom: 10px;
+   }
+   
+
+   /*COMPONENTE PROJECT ES EL CONTAINER QUE CONTENE GITHUBS Y IMAGEN COSTADO*/
+  .project-row-movil{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height:100%;
+    margin-top: -60px;
+    margin-left: -60px;
+  }
+
+  .project-row-movil h2{
+    font-size: 1.6em;
+  }
+
+     /*IMAGEN COSTADO DE LOS GITHUBS*/
+          /*SUBCONTAINER 2 DE LA PAGINA PROJECT*/
+  .project-img-movil{
+    left: 60px;
+    background-color: rgb(177, 110, 22);
+   }
+   .project-img-movil img{
+    top: 50px;
+     width: 410px;
+     height: 430px;
+   }
+   /*FIN RESPONSIVE DE LOS GITHUB E IMAGEN*/
+
+  /*CONTAINER PRINCIPAL DEL PROJECTCARD DEL GITHUB */
+  /*ESTE ES SOLO UN GITHUB ES EL ESPACIO BLANCO*/
+  /*pagina myprojecxt*/
+
+
+
+
+  .project-list{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+   
+  }
+  
+  .project-pagina{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+   
+  }
+  
+  .project-column-1{
+    width: 94%;
+    margin: auto;
+  }
+
+  .project-column-2{
+    width: 94%;
+    margin: auto;
+  }
+  .project-column-3{
+    width: 94%;
+    margin: auto;
+  }
+  
+  
+    
+
+     /*SUBCONTAINER DE CARD-POJECT SEGUNDO CUADRO*/
+
+
+
+
+
+   
+  .movil-suscribe{
+    height: 130px;
+  }
+
+  .movil-suscribe-text{
+    font-size: 1.1em;
+   }
+   
+    .movil-form{
+     display: flex;
+     flex-direction: row;
+     width: 100%;
+    
+    }
+   
+    .movil-button-suscribe {
+    font-size: 0.8em;
+    padding-left: 2px;
+    padding-right: 2px;
+    }
+   
+   
+    .movil-footer-tres-menus{
+     display: grid;
+     grid-column: fr fr fr ;
+     gap: 4px;
+    justify-content: center;
+    width: 98%;
+    }
+   
+    
+    .movil-footer-tres-menus-uno h3{
+     font-size: 0.9em;
+    }
+   
+   
+  .movil-form{
+  display: flex;
+  flex-direction: row;
+  width: 70%;
+   }
+
+
+   .movil-footer-social-ul{
+    margin: auto;
+   }
+
+   .movil-footer-pie{
+    width: 99.4%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-top: 10px;
+  }
+
+  .movil-footer-pie-p{
+    margin: auto;
+    font-size: 0.8em;
+    margin-top: 10px;
+  }
+  
+  
+    /*CHATBOT*/
+  .container-general-chat{
+    width: 65%;
+  }
+
+  /*CHATBOT*/
+  .chat-container{
+   margin-right: -8.8px;
+    width: 50%;
+
+  }
+
+  /*PAGINA TOP*/
+  #topButton{
+   margin-right: -12px;
+  }
+
+ .responsive-altura-blogcard {
+  max-width: 1000px;
+  width: 100%;
+ }
+
+ .bloglist-blogcard-grid {
+  max-width: 1000px;
+  width: 100%;
+ }
+
+ .responsive-blogcard-title-excerpt{
+  margin-top: 30px;
+  
+  }
+
+ .responsive-blogcard-title-excerpt h1{
+ font-size: 1.4em;
+ 
+ }
+
+ 
+
+ /*BLOG*/
+.container-blogpost-tres-columnas {
+  display: flex;
+  flex-direction: column;
+}
+
+.blogpost-column-1 {
+  display: none;
+}
+
+.blogpost-column-2 {
+  width: 100%;
+  padding: 20px;
+  overflow-y: hidden;
+}
+
+
+.blogpost-column-3 {
+  width: 100%;
+  padding-top: 80px;
+  box-sizing: border-box;
+  top: 0;
+}
+
+.movil-redaccion-blog-post h1{
+  font-size: 1.6em;
+}
+
+.blogpost-aviso-a-no-authenticados{
+  width: 100%;
+
+}
+
+
+.review-hearts-form{
+  width: 100%;
+}
+
+}
+
+/*surface duo pantalla grande*/
+@media only screen and (min-width: 912px) and (max-width: 1368px) {
+
+ 
+
+}
+
+
+@media only screen and (min-width: 925px) and (max-width: 1040px) {
+     /*#303535  #333636*/
+  .navbar{
+  width: 100%;
+  height: 40px;
+  }
+    
+   
+     
+    .navbar-logo-menu{
+    width: 98%;
+    height: 40px;
+    margin: auto;
+    }
+        
+  .navbar-logo-menu .logo{
+  width: 59%;
+   height: 40px;
+  }
+        
+    .logo img{
+    padding-top: 2px;
+    width: 90%;
+    height: 35px;
+    }
+    
+    
+    .navbar-logo-menu .navbar-portfolio-pc{
+    display: none;
+    }
+
+    
+    
+    .navbar-logo-menu .movil-lupa-bihome{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 40px;
+    width: 42%;
+    justify-content: flex-end;
+    visibility: visible;
+    }
+
+  
+    .movil-lupa-bihome .search{
+    width: 70px;
+    height: 20px;
+    }
+  
+    .movil-lupa-bihome .casa{
+    width: 40px;
+    height: 26px;
+    padding-left: 15px;
+    }
+      
+    /*CONTAINER DESPLEGLABE DEL MOVIL*/
+    .navbar .navbar-movil-desplegable{
+    display: block;
+    visibility: visible;
+    }
+     /*fin navbar oprafolio*/
+  
+
+    
+
+
+  .movil-form{
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+   }
+
+
+   .movil-footer-social-ul{
+    margin: auto;
+   }
+
+   .movil-footer-pie{
+    width: 99.4%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-top: 10px;
+  }
+
+  .movil-footer-pie-p{
+    margin: auto;
+    font-size: 0.8em;
+    margin-top: 10px;
+  }
+
+  .container-about-movil{
+    width: 100%;
+  }
+
+  .container-about-movil .subcontainer-about-movil{
+    width: 45%;
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+
+  .subcontainer-about-movil-img {
+    width: 48%;
+    padding-left: 6px;
+  }
+
+  .subcontainer-about-movil-img img {
+    width: 75%;
+    height: 75%;
+  }
+
+  /*PAGINA SKILL*/
+  .skills-main-div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+
+  }
+ 
+  /*PAGINA SKILLS CARD CONTAINER GENERAL DEL CARD*/
+  .skills-main-div .skill-card-movil{
+    background-color: rgb(115 115 115);
+    margin-bottom: 4px;
+   margin-right: 2px;
+ 
+
+  }
+
+  /**PAGINA SKILLS PAGE CONTAINER DEL MENU Y ICONOS*/
+  .skills-page-movil{
+    width: 100%;
+  }
+
+  /*PAGINA GREETINGS*/
+  .portada-movil{
+ padding-top: 8px;
+  }
+
+  .review-hearts-form{
+    width: 100%;
+    
+  }
+  
+
+
+}
+
+
+
+/*@media only screen and (min-width: 980px) and (max-width: 1170px) {
+  .navbar-logo-menu {
+    background-color: rgb(178, 237, 100);
+  }
+
+
+    .movil-lupa-bihome{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 40px;
+    width: 40%;
+   align-items: end;
+   justify-content: end;
+   visibility: visible;
+  background-color: #1c0081;
+     }
+}*/
+
+/*RESPONSIVE TAILWIND CSS */
+/*max-sm	@media not all and (min-width: 640px) { ... }
+max-md	@media not all and (min-width: 768px) { ... }
+max-lg	@media not all and (min-width: 1024px) { ... }
+max-xl	@media not all and (min-width: 1280px) { ... }
+max-2xl	@media not all and (min-width: 1536px) { ... }*/
+
+/*
+
+Breakpoint prefix	Minimum width	CSS
+sm	640px	@media (min-width: 640px) { ... }
+md	768px	@media (min-width: 768px) { ... }
+lg	1024px	@media (min-width: 1024px) { ... }
+xl	1280px	@media (min-width: 1280px) { ... }
+2xl	1536px	@media (min-width: 1536px) { ... }
+*/
