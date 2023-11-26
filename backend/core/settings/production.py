@@ -6,15 +6,16 @@ from .jwt import *
 
 # Configuración específica para el entorno de producción
 
-DEBUG = False
+DEBUG = True
 
 # Configuración de la base de datos para producción (por ejemplo, PostgreSQL)
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['104.248.82.51', 'foodingemotion.com']
+
 
 SECRET_KEY=os.environ.get('SECRET_KEY')
 
 DATABASES = {
-    "default" : env.db("DATABASE_URL", default="postgres:///myportfolio"),
+    "default" : env.db("DATABASE_URL", default="postgres:///portfolio"),
 }
 
 

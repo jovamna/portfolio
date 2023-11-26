@@ -11,7 +11,9 @@ env = environ.Env()
 environ.Env.read_env()
 ENVIRONMENT = env
 
-DEBUG = (bool, False)
+#DEBUG = (bool, False)
+
+DEBUG = True
 
 
 SECRET_KEY=os.environ.get('SECRET_KEY')
@@ -82,7 +84,7 @@ LOGGING = {
 
 
 REST_FRAMEWORK = {
-     'DEFAULT_PERMISSIONS_CLASSES':(
+     'DEFAULT_PERMISSION_CLASSES':(
          'rest_framework.permissions.IsAuthenticated',
          
          'rest_framework.permissions.AllowAny'
@@ -94,13 +96,6 @@ REST_FRAMEWORK = {
 
    
 }
-
-
-
-
-
-
-
 
 
 
@@ -120,40 +115,37 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'core.urls'
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5173', "https://www.fooding.com"
+    'http://localhost:5173',
+    'https://www.foodingemotion.com',
+    'http://104.248.82.51',
 ]
-
-
-
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:5173',
     'http://localhost:8000',
     'http://127.0.0.1:5173',
     'http://127.0.0.1:8000',
-    
+    'http://104.248.82.51',
 ]
-
 
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:5173',
     'http://localhost:8000',
     'http://127.0.0.1:5173',
     'http://127.0.0.1:8000',
-    
+    'http://104.248.82.51',
 ]
 
 CSRF_CONFIG_DOMAIN = "foodingemotion.com"
 
-
 if not DEBUG:
-    ALLOWED_HOSTS= [
+    ALLOWED_HOSTS = [
         ".foodingemotion.com",
         "foodingemotion.com",
         "www.foodingemotion.com",
+        "104.248.82.51",
     ]
     CORS_ORIGIN_WHITELIST = env.list('CORS_ORIGIN_WHITELIST_DEPLOY')
-
     CSRF_TRUSTED_ORIGINS = env.list('CORS_TRUSTED_ORIGIN_DEPLOY')
 
 
