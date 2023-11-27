@@ -13,6 +13,7 @@ from apps.reviews.models import Review
 from .serializers import PostSerializer, PostListSerializer
 from .pagination import SmallSetPagination, MediumSetPagination
 from django.db.models import Sum
+from rest_framework.permissions import AllowAny
 
 import logging
 
@@ -24,8 +25,9 @@ logger = logging.getLogger(__name__)
 #el postobjects es igual cuanod usamos Posts.objects.all() pero hemos cambiado
 #en nuestro model la logiga de objects como postobjects
 class BlogListView(APIView):
+    authentication_classes = []  # Desactiva la autenticación
+    permission_classes = [AllowAny]  # Permite el acceso a cualquier usuario
     def get(self, request, format=None):
-        
         try:
             posts = Post.post_objects.all() #posts=Post.objects.values()-SIN SERIALIZER
             paginator = SmallSetPagination()
@@ -41,6 +43,9 @@ class BlogListView(APIView):
 
 
 class BlogListCategoryView(APIView):
+    authentication_classes = []  # Desactiva la autenticación
+    permission_classes = [AllowAny]  # Permite el acceso a cualquier usuario
+
     def get(self, request, category_slug, format=None):
         if Post.post_objects.all().exists():
             
@@ -61,6 +66,9 @@ class BlogListCategoryView(APIView):
 
 
 class PostDetailView(APIView):
+    authentication_classes = []  # Desactiva la autenticación
+    permission_classes = [AllowAny]  # Permite el acceso a cualquier usuario
+
     def get(self, request, post_slug,format=None):
         #print(post_slug)
         #print(f"Received request for post_slug: {post_slug}")
@@ -89,6 +97,8 @@ class PostDetailView(APIView):
     
 
 class SearchBlogView(APIView):
+    authentication_classes = []  # Desactiva la autenticación
+    permission_classes = [AllowAny]  # Permite el acceso a cualquier usuario
     
     def get(self,request,format=None):
     #def get(self,request,search_term):  

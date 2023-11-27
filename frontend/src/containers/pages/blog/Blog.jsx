@@ -12,7 +12,7 @@ import { get_categories } from "../../../redux/actions/categories";
 import { useParams } from "react-router-dom"
 import ResetPasswordSuccess from '../../../components/auth//ResetPasswordSuccess'; 
 import { Helmet } from 'react-helmet-async';
-
+import CategoriesBlogHeader from "../../../components/blog/CategoriesBlogHeader";
 
 function Blog({
     categories,
@@ -63,25 +63,32 @@ function Blog({
 
 
 
-            <Header/>
-              <div className="reset-password z-50 absolute w-[40%] max-auto">
-              <ResetPasswordSuccess /> {/* Agrega el componente aquí */}
-              </div>
+           <div className=" ">
+               <Header />
+       
+                <div className="reset-password z-50 absolute w-[40%] max-auto">
+                <ResetPasswordSuccess /> {/* Agrega el componente aquí */}
+                </div>
 
-              
+                  {/*max-w-lg limita el ancho y lo pone a lado left*/}
+                 <div className="segmento-header-categoria  relative inset-x-0  top-[0] bottom-10 bg-opacity-50  w-[100%] text-white   z-10">
+            
+                 <CategoriesBlogHeader />
+                 </div>
 
-             {/*el violet son nombres de la pagination*/}
-             <div className="blog-list-top">
-             <BlogList 
-             get_blog_list_page={get_blog_list_page} 
-             blog_list={blog_list&&blog_list} 
-             count={count&&count} />
+
+                 {/*el violet son nombres de la pagination*/}
+                 <div className="blog-list-top">
+                 <BlogList 
+                 get_blog_list_page={get_blog_list_page} 
+                 blog_list={blog_list&&blog_list} 
+                 count={count&&count} />
+                 </div>
+
+
+
+
             </div>
-
-
-
-
-
 
 
 

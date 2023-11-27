@@ -46,24 +46,27 @@ function Chatbot() {
     event.preventDefault();
 
     try {
-        const response = await axios.post('http://localhost:8000/api/chatbot/chat/', { user_message: userMessage });
-        console.log(response)
-        const botResponse = response.data.bot_response;
-        //const botImage = response.data.bot_image; // Asegúrate de que este campo esté presente en la respuesta de la API
-        console.log(response.data.bot_response);
-        console.log(response.data.bot_image)
-        setChatbotResponse((prevChatbotResponse) => [
-            ...prevChatbotResponse,
-            { message: userMessage, isUser: true },
-            { message: botResponse, isUser: false, botImage: chatbotImageURL }, 
-           // { message: botResponse, isUser: false, botImage: '/images/f.png' }, 
-          ]);
-          
-        setUserMessage(''); // Limpia el campo de entrada después de enviar el mensaje
-    } catch (error) {
-        console.log(error);
-    }
-  };
+      const response = await axios.post(`${import.meta.env.VITE_REACT_API_URL}/api/chatbot/chat/`, { user_message: userMessage });
+      console.log(response);
+      const botResponse = response.data.bot_response;
+      // Asegúrate de que este campo esté presente en la respuesta de la API
+      // const botImage = response.data.bot_image;
+      console.log(response.data.bot_response);
+      console.log(response.data.bot_image);
+  
+      setChatbotResponse((prevChatbotResponse) => [
+          ...prevChatbotResponse,
+          { message: userMessage, isUser: true },
+          { message: botResponse, isUser: false, botImage: chatbotImageURL }, 
+          // { message: botResponse, isUser: false, botImage: '/images/f.png' }, 
+      ]);
+      
+      setUserMessage(''); // Limpia el campo de entrada después de enviar el mensaje
+  } catch (error) {
+      console.log(error);
+  }
+}
+
 
 
   

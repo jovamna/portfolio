@@ -5,9 +5,13 @@ from rest_framework import status
 from rest_framework import permissions
 from .models import Category
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import AllowAny
 
 
 class ListCategoriesView(APIView):
+    authentication_classes = []  # Desactiva la autenticación
+    permission_classes = [AllowAny]  # Permite el acceso a cualquier usuario
+
     def get(self, request, format=None):
         if Category.objects.all().exists():
             categories = Category.objects.all()

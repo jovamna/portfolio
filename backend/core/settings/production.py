@@ -9,7 +9,7 @@ from .jwt import *
 DEBUG = True
 
 # Configuración de la base de datos para producción (por ejemplo, PostgreSQL)
-ALLOWED_HOSTS = ['104.248.82.51', 'foodingemotion.com']
+ALLOWED_HOSTS = ['localhost', '104.248.82.51']
 
 
 SECRET_KEY=os.environ.get('SECRET_KEY')

@@ -1490,6 +1490,11 @@ body
     max-height:350px;
   }
 
+  .error-message{
+    max-height:350px;
+ 
+  }
+
 
   /*BLOG POST*/
   /*CONTAINER DE LA IMAGEN Y VIDEO*/

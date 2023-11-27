@@ -57,11 +57,11 @@ function BlogPost({
     const renderMedia = () => {
       if (post.thumbnail && !post.video) {
         return (
-                 <div className="movil-portada-subcaja relative w-full h-[62%] h-[62vh] mb-4">
+                 <div className="movil-portada-subcaja relative w-[100%] h-[400px] mb-4">
                  <img 
                  src={thumbnailUrl} 
                  alt="post"  
-                 className="absolute w-full h-[62vh] h-[62%]  object-cover z-0 w-[100%]"
+                 className="object-cover h-[100%] z-0"
                  />
                  </div>
                );
@@ -73,8 +73,9 @@ function BlogPost({
           // Reemplaza 'video' con la propiedad de video en tu objeto 'post'
           // Por ejemplo, si el video está almacenado en post.video_url:
           return (
+            <div className=" w-[100%] h-[400px] mb-4">
                  <video
-                 className="absolute w-full h-[70vh] h-[70%]  inset-0  object-cover z-0 movil-video-portada"
+                 className="object-cover h-[100%] z-0 movil-video-portada"
                  src={videoUrl}
                  controlsList="nodownload nofullscreen" // Ocultar botón de reproducción
                  width="100%"
@@ -87,6 +88,7 @@ function BlogPost({
                  console.error("Error al cargar el video:", e.target.error);
                  }}
                 />
+                </div>
                 );
 
 
@@ -95,17 +97,17 @@ function BlogPost({
           // Aquí se muestra solo el video, pero puedes cambiar el orden o mostrar ambos si lo deseas
           return (
                  <>
-                 <div className="w-full h-[62%] h-[62vh] aspect-w-1 aspect-h-1 lg:[66%] lg:aspect-none rounded-md overflow-hidden group-hover:opacity-75 bg-gray-200  movil-portada-subcaja">
+                 <div className=" w-[100%] h-[400px] aspect-w-1 aspect-h-1 lg:[66%] lg:aspect-none rounded-md overflow-hidden group-hover:opacity-75 bg-gray-200  movil-portada-subcaja">
                      <img 
                      src={thumbnailUrl} 
                      alt="post"  
-                     className="absolute w-full h-[62vh] h-[62%]  inset-0  object-cover z-0"
+                     className="object-cover h-[100%] inset-0 z-0"
                      />
                  </div>
 
-          
+                 <div className=" w-[100%] h-[400px] mb-4">
                  <video
-                 className="absolute w-full h-[70vh] h-[70%] inset-0 object-cover z-0 movil-video-portada"
+                 className="object-cover h-[100%] inset-0 z-0 movil-video-portada"
                  src={videoUrl}
                  controlsList="nodownload nofullscreen" // Ocultar botón de reproducción
                  width="100%"
@@ -115,6 +117,7 @@ function BlogPost({
                  muted
                  duration="10" // Cambia este valor a la duración deseada en segundos
                  />
+                 </div>
                  </>
                  );
 
@@ -149,31 +152,10 @@ function BlogPost({
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             {/*PORTADA DEL POST DETAIL*/}
             {
             post ?
-              <div className="movil-portada relative pt-12 fullscreen-bg inset-0 object-cover z-0 relative w-full h-[72%] h-[72vh] mb-4">
+              <div className="movil-portada relative pt-12 fullscreen-bg inset-0 object-cover z-0 relative mb-4">
                 {renderMedia()}
               </div>
 

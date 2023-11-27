@@ -3,11 +3,13 @@ from rest_framework.response import Response
 from .models import ChatMessage
 from .serializers import ChatMessageSerializer
 from rest_framework import viewsets, status
-
+from rest_framework.permissions import AllowAny
 
 
 
 class ChatbotViewSet(viewsets.ViewSet):
+    authentication_classes = []  # Desactiva la autenticación
+    permission_classes = [AllowAny]  # Permite el acceso a cualquier usuario
     queryset = ChatMessage.objects.all()
     serializer_class = ChatMessageSerializer
 
