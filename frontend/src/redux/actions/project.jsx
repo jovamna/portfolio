@@ -8,7 +8,14 @@ import{
   
 } from "./types"
 
+
+
+
+
 export const get_project_list = () => async dispatch => {
+    console.log(import.meta.env.VITE_REACT_API_URL);
+    const apiUrl = `${import.meta.env.VITE_REACT_API_URL}/api/myprojects/list`;
+    console.log(apiUrl);
 
     const config = {
         headers: {
@@ -16,7 +23,8 @@ export const get_project_list = () => async dispatch => {
         }
     };
     try{
-        const res = await axios.get(`${import.meta.env.VITE_REACT_API_URL}/api/myprojects/list`, config);
+        //const res = await axios.get(`${import.meta.env.VITE_REACT_API_URL}/api/myprojects/list`, config);
+        const res = await axios.get(apiUrl, config);
 
         if (res.status === 200) {
             dispatch({
