@@ -10,6 +10,13 @@ import{
 
 
 
+const URL =
+  process.env.NODE_ENV === "production"
+    ? import.meta.env.VITE_BACKEND_URL
+    : "http://localhost:8000";
+
+console.log(URL);
+
 
 
 export const get_project_list = () => async dispatch => {
@@ -23,9 +30,8 @@ export const get_project_list = () => async dispatch => {
         }
     };
     try{
-        //const res = await axios.get(`${import.meta.env.VITE_REACT_API_URL}/api/myprojects/list`, config);
-        const res = await axios.get(apiUrl, config);
-
+        const res = await axios.get(`${URL}/api/myprojects/list`, config);
+      
         if (res.status === 200) {
             dispatch({
                 type: GET_PROJECT_LIST_SUCCESS,
@@ -53,7 +59,7 @@ export const get_project_list_page = (p) => async dispatch => {
         }
     };
     try{
-        const res = await axios.get(`${import.meta.env.VITE_REACT_API_URL}/api/myprojects/list?p=${p}`, config);
+        const res = await axios.get(`${URL}/api/myprojects/list?p=${p}`, config);
 
         if (res.status === 200) {
             dispatch({
@@ -83,7 +89,7 @@ export const get_project = (slug) => async dispatch =>{
         }
     };
     try{
-        const res = await axios.get(`${import.meta.env.VITE_REACT_API_URL}/api/myprojects/${slug}`, config)
+        const res = await axios.get(`${URL}/api/myprojects/${slug}`, config)
 
         if(res.status === 200){
             dispatch({

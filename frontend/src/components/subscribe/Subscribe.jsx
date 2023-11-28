@@ -5,11 +5,20 @@ const SubscribeForm = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
+
+  const URL =
+  process.env.NODE_ENV === "production"
+    ? import.meta.env.VITE_REACT_API_URL
+    : "http://localhost:8000";
+
+  console.log(URL);
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/contacts/subscribe', { email: email });
+      const response = await axios.post(`${URL}/api/contacts/subscribe`, { email: email });
       if (response.status === 201) {
         setMessage(response.data.success);
         setEmail('');

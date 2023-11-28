@@ -12,6 +12,15 @@ import {
    
 } from "./types"
 
+
+
+const URL =
+  process.env.NODE_ENV === "production"
+    ? import.meta.env.VITE_REACT_API_URL
+    : "http://localhost:8000";
+
+console.log(URL);
+
 export const get_blog_list = () => async dispatch => {
 
     const config = {
@@ -21,7 +30,7 @@ export const get_blog_list = () => async dispatch => {
     };
 
     try{
-        const res = await axios.get(`${import.meta.env.VITE_REACT_API_URL}/api/blog/list`, config);
+        const res = await axios.get(`${URL}/api/blog/list`, config);
         console.log(res)
 
         if (res.status === 200) {
@@ -51,7 +60,7 @@ export const get_blog_list_page = (page) => async dispatch => {
     };
 
     try{
-        const res = await axios.get(`${import.meta.env.VITE_REACT_API_URL}/api/blog/list?p=${page}`, config);
+        const res = await axios.get(`${URL}/api/blog/list?p=${page}`, config);
 
         if (res.status === 200) {
             dispatch({
@@ -88,7 +97,7 @@ export const get_blog_list_category =(categorySlug) => async dispatch => {
     };
 
     try{
-        const res = await axios.get(`${import.meta.env.VITE_REACT_API_URL}/api/blog/category/${categorySlug}`, config);
+        const res = await axios.get(`${URL}/api/blog/category/${categorySlug}`, config);
         console.log(res)
 
         if (res.status === 200) {
@@ -119,7 +128,7 @@ export const get_blog_list_category_page = (categorySlug,p) => async dispatch =>
     };
 
     try{
-        const res = await axios.get(`${import.meta.env.VITE_REACT_API_URL}/api/blog/category/${categorySlug}?p=${p}`, config);
+        const res = await axios.get(`${URL}/api/blog/category/${categorySlug}?p=${p}`, config);
         console.log(res)
 
         if (res.status === 200) {
@@ -160,7 +169,7 @@ export const get_blog = (slug) => async dispatch => {
     };
 
     try {
-        const res = await axios.get(`${import.meta.env.VITE_REACT_API_URL}/api/blog/detail/${slug}`, config);
+        const res = await axios.get(`${URL}/api/blog/detail/${slug}`, config);
         console.log(res)
 
         if (res.status === 200) {
@@ -191,7 +200,7 @@ export const search_blog = (search_term) => async dispatch => {
     };
 
     try {
-        const res = await axios.get(`${import.meta.env.VITE_REACT_API_URL}/api/blog/search?s=${search_term}`, config);
+        const res = await axios.get(`${URL}/api/blog/search?s=${search_term}`, config);
         console.log(res)
         if (res.status === 200) {
             dispatch({
@@ -223,7 +232,7 @@ export const search_blog_page = (search_term,page) => async dispatch => {
     };
 
     try {
-        const res = await axios.get(`${import.meta.env.VITE_REACT_API_URL}/api/blog/search?p=${page}&s=${search_term}`, config);
+        const res = await axios.get(`${URL}/api/blog/search?p=${page}&s=${search_term}`, config);
         console.log(res)
         if (res.status === 200) {
             dispatch({

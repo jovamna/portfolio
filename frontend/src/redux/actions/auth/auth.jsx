@@ -26,6 +26,12 @@ import axios from 'axios'
 
 
 
+const URL =
+  process.env.NODE_ENV === "production"
+    ? import.meta.env.VITE_REACT_API_URL
+    : "http://localhost:8000";
+
+console.log(URL);
 
 
 //con veryfy para mantener la authentication
@@ -44,7 +50,7 @@ export const check_authenticated = () => async dispatch => {
         });
 
         try {
-            const res = await axios.post(`${import.meta.env.VITE_REACT_API_URL}/api/user/login/verify/`, body, config);
+            const res = await axios.post(`${URL}/api/user/login/verify/`, body, config);
 
             if (res.status === 200) {
                 dispatch({
@@ -103,7 +109,7 @@ export const signup =  (first_name, last_name, email, password) => async dispatc
 }
     
     try {
-        const res = await axios.post(`${import.meta.env.VITE_REACT_API_URL}/api/user/create/`, body, config);
+        const res = await axios.post(`${URL}/api/user/create/`, body, config);
 
         if(res.status === 201){
             dispatch({
@@ -147,7 +153,7 @@ export const load_user = () => async dispatch => {
         };
 
         try {
-            const res = await axios.get(`${import.meta.env.VITE_REACT_API_URL}/api/user/me/`, config);
+            const res = await axios.get(`${URL}/api/user/me/`, config);
             console.log("Respuesta del servidor:", res.data);
         
             if (res.status === 200) {
@@ -210,7 +216,7 @@ export const login = (email, password) => async dispatch => {
     });
 
     try {
-        const res = await axios.post(`${import.meta.env.VITE_REACT_API_URL}/api/user/login/`, body, config);
+        const res = await axios.post(`${URL}/api/user/login/`, body, config);
         console.log(res)
 
         if(res.status === 200) {
@@ -271,7 +277,7 @@ export const refresh = () => async dispatch => {
         });
 
         try {
-            const res = await axios.post(`${import.meta.env.VITE_REACT_API_URL}/api/user/login/refresh/`, body, config);
+            const res = await axios.post(`${URL}/api/user/login/refresh/`, body, config);
             
             if (res.status === 200) {
                 dispatch({
@@ -331,7 +337,7 @@ export const reset_password = (email) => async dispatch => {
         const body = JSON.stringify({email});
 
         try {
-            const res = await axios.post(`${import.meta.env.VITE_REACT_API_URL}/api/user/reset-password/`, body, config);
+            const res = await axios.post(`${URL}/api/user/reset-password/`, body, config);
             
             if (res.status === 200) {
                 dispatch({

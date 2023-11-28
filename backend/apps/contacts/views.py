@@ -12,11 +12,14 @@ from .forms import NewsletterForm
 from .models import Contact, Subscribe, Newsletter
 from django.urls import reverse
 from core.settings import EMAIL_HOST_USER
-
+from rest_framework.permissions import AllowAny
 
 
 
 class ContactCreateView(APIView):
+    authentication_classes = []  # Desactiva la autenticación
+    permission_classes = [AllowAny]  # Permite el acceso a cualquier usuario
+
     def post(self, request, format=None):
         serializer = ContactSerializer(data=request.data)
         print('Before is_valid()')
@@ -66,6 +69,10 @@ class ContactCreateView(APIView):
 
 # views.py
 class SubscribeView(APIView):
+    authentication_classes = []  # Desactiva la autenticación
+    permission_classes = [AllowAny]  # Permite el acceso a cualquier usuario
+
+
     def post(self, request, format=None):
         email = request.data.get('email')
         
@@ -203,6 +210,8 @@ from django.http import JsonResponse
 
 
 def unsubscribe_view(request, email, token):
+    authentication_classes = []  # Desactiva la autenticación
+    permission_classes = [AllowAny]  # Permite el acceso a cualquier usuario
     # Verifica si el token es válido para el email dado
     try:
         subscriber = Subscribe.objects.get(email=email)

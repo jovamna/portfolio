@@ -60,6 +60,12 @@ const onChange = (e)=> setFormData({...formData, [e.target.name]:e.target.value}
 
 
 
+const URL =
+  process.env.NODE_ENV === "production"
+    ? import.meta.env.VITE_REACT_API_URL
+    : "http://localhost:8000";
+
+console.log(URL);
 
 
 const onSubmit = async (e) => {
@@ -80,7 +86,7 @@ const onSubmit = async (e) => {
     formData.append('budget', budgetValue === null ? '' : budgetValue);
 
     try {
-      const res = await axios.post('http://127.0.0.1:8000/api/contacts/', formData);
+      const res = await axios.post(`${URL}/api/contacts/`, formData);
       console.log(res);
       setLoading(false);
      

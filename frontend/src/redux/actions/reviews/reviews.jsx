@@ -17,6 +17,16 @@ import {
 import { setAlert } from '../alert';
 
 
+const URL =
+  process.env.NODE_ENV === "production"
+    ? import.meta.env.VITE_REACT_API_URL
+    : "http://localhost:8000";
+
+console.log(URL);
+
+
+
+
 
 
 export const get_reviews = slug => async dispatch => {
@@ -27,7 +37,7 @@ export const get_reviews = slug => async dispatch => {
     };
 
     try {
-        const res = await axios.get(`${import.meta.env.VITE_REACT_API_URL}/api/reviews/get-reviews/${slug}`, config
+        const res = await axios.get(`${URL}/api/reviews/get-reviews/${slug}`, config
         );
 
         if (res.status === 200) {
@@ -58,7 +68,7 @@ export const get_review = (review_id) => async dispatch => {
         }
     };
     try {
-        const res = await axios.get(`${import.meta.env.VITE_REACT_API_URL}/api/reviews/get-review/${review_id}`, config);
+        const res = await axios.get(`${URL}/api/reviews/get-review/${review_id}`, config);
         console.log(res)
         if (res.status === 200) {
             dispatch({
@@ -101,7 +111,7 @@ export const create_review = (slug, hearts, title, comment) => async dispatch=> 
         });
 
         try {
-            const res = await axios.post(`${import.meta.env.VITE_REACT_API_URL}/api/reviews/create-review/${slug}`, body, config);
+            const res = await axios.post(`${URL}/api/reviews/create-review/${slug}`, body, config);
             console.log(res)
 
             if (res.status === 201) {
@@ -153,7 +163,7 @@ export const update_review = (slug, review_id, hearts, comment) => async dispatc
             
         });
         console.log(body)
-        const updateUrl = `${import.meta.env.VITE_REACT_API_URL}/api/reviews/update-review/${slug}/${review_id}`;
+        const updateUrl = `${URL}/api/reviews/update-review/${slug}/${review_id}`;
         console.log("Update URL:", updateUrl);
 
         try {
@@ -193,7 +203,7 @@ export const delete_review =(review_id) => async dispatch => {
             },
             data: {}
         };
-        const updateUrl = `${import.meta.env.VITE_REACT_API_URL}/api/reviews/delete-review/${review_id}`;
+        const updateUrl = `${URL}/api/reviews/delete-review/${review_id}`;
         console.log("Update URL:", updateUrl);
 
         try {
@@ -252,9 +262,7 @@ export const filter_reviews = (slug, hearts) => async dispatch => {
        myHeart = '5.0';
 
         try {
-            const res = await axios.get(
-                `${import.meta.env.VITE_REACT_API_URL}/api/reviews/filter-reviews/${slug}?hearts=${myHeart}`,
-                config
+            const res = await axios.get(`${URL}/api/reviews/filter-reviews/${slug}?hearts=${myHeart}`, config
             );
     
             if (res.status === 200) {

@@ -40,13 +40,19 @@ function Chatbot() {
   //SEGUNDA imagen de respuesta del chatbot
   const chatbotImageURL = "/images/mail.jpg"; // Reemplaza esta URL con la ruta correcta de tu imagen
 
-  
+  const URL =
+  process.env.NODE_ENV === "production"
+    ? import.meta.env.VITE_REACT_API_URL
+    : "http://localhost:8000";
+
+  console.log(URL);
+
    //SEGUNDA IMAGEN DE RESPUESTA
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_REACT_API_URL}/api/chatbot/chat/`, { user_message: userMessage });
+      const response = await axios.post(`${URL}/api/chatbot/chat/`, { user_message: userMessage });
       console.log(response);
       const botResponse = response.data.bot_response;
       // Asegúrate de que este campo esté presente en la respuesta de la API

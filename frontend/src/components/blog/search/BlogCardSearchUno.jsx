@@ -7,10 +7,15 @@ function BlogCardSearchUno({data,index}){
   console.log("BlogCardSearchUno Data: ", index);
   //console.log("BlogCardSearchUno Term: ", term);
 
+  const URL =
+   process.env.NODE_ENV === "production"
+     ? import.meta.env.VITE_REACT_API_URL
+     : "http://localhost:8000";
+ 
+   console.log(URL);
 
-
-  const videoUrl = `${import.meta.env.VITE_REACT_API_URL}${data.video}`;
-    const thumbnailUrl = `${import.meta.env.VITE_REACT_API_URL}${data.thumbnail}`;
+  const videoUrl = `${URL}${data.video}`;
+  const thumbnailUrl = `${URL}${data.thumbnail}`;
 
     
 

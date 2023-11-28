@@ -43,10 +43,17 @@ function BlogPost({
      return <div>Cargando...</div>;
    }
 
+   const URL =
+   process.env.NODE_ENV === "production"
+     ? import.meta.env.VITE_REACT_API_URL
+     : "http://localhost:8000";
+ 
+   console.log(URL);
+
     // Construir las URL completas utilizando la URL base de tu aplicación React
-    const imageUrl = `${import.meta.env.VITE_REACT_API_URL}${post.image}`;
-    const videoUrl = `${import.meta.env.VITE_REACT_API_URL}${post.video}`;
-    const thumbnailUrl = `${import.meta.env.VITE_REACT_API_URL}${post.thumbnail}`;
+    const imageUrl = `${URL}${post.image}`;
+    const videoUrl = `${URL}${post.video}`;
+    const thumbnailUrl = `${URL}${post.thumbnail}`;
     //FIN URL PARA LAS IMAGENES LOCALIZEN EN LA CARPETA BACKEND
 
  

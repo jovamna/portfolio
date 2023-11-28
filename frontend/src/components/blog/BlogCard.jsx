@@ -21,11 +21,17 @@ function BlogCard(data){
       return <div>Cargando...</div>;
     }
 
+    const URL =
+    process.env.NODE_ENV === "production"
+     ? import.meta.env.VITE_REACT_API_URL
+     : "http://localhost:8000";
+ 
+    console.log(URL);
+
   
-    const videoUrl = `${import.meta.env.VITE_REACT_API_URL}${post.video}`;
-    const thumbnailUrl = `${import.meta.env.VITE_REACT_API_URL}${post.thumbnail}`;
-    //const videoUrl = `${import.meta.env.VITE_REACT_API_URL}/media/blog/${post.video}`;
-    //const thumbnailUrl = `${import.meta.env.VITE_REACT_API_URL}/media/blog/${post.thumbnail}`;
+    const videoUrl = `${URL}${post.video}`;
+    const thumbnailUrl = `${URL}${post.thumbnail}`;
+  
 
 
     
