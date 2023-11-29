@@ -7,6 +7,9 @@ export default defineConfig({
   base: process.env.NODE_ENV === 'production' ? '/frontend/' : '/',
   build: {
     chunkSizeWarningLimit: 1600, // Ajusta el límite según tus necesidades
+    minify: false,
+    sourcemap: false,
+
 
     rollupOptions: {
       output: {
