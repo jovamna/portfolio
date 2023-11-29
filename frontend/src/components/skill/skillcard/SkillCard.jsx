@@ -158,19 +158,13 @@ export default function SkillCard() {
                  { /*CONTAINER DEL LA IMAGEN FONDO DE LA DEVELOPER />*/}
                 <CircleWrapper  className="skillcard-container-fondo overflow-hidden  rounded-tl-2xl rounded-tr-2xl " >
                    <Circle className=" rounded-tl-2xl rounded-tr-2xl overflow-hidden">
-                      <motion.div  className="overflow-hidden"
-                      initial={{ opacity: 1, scale: 1}}
-                      animate={{y: [60, 40], opacity: 1, scale: 1.8 }}
-                      transition={{ duration: 10, repeat:Infinity,  ease: [0.5, 0.71, 1, 1.5], }}
-                      whileHover={{ scale: 1.2 }}  
-                      >
+                    
                           <img className="skillcard-img-circle w-[100%] h-[20px]" 
                           onLoad={handleImageLoad} 
                           src={skillFond} 
                           alt="skillFond" 
                           />
                
-                      </motion.div>
                    </Circle >
 
                 </CircleWrapper>
