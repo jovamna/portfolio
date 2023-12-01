@@ -20,10 +20,7 @@ console.log(URL);
 
 
 export const get_project_list = () => async dispatch => {
-    console.log(import.meta.env.VITE_REACT_API_URL);
-    const apiUrl = `${import.meta.env.VITE_REACT_API_URL}/api/myprojects/list`;
-    console.log(apiUrl);
-
+    
     const config = {
         headers: {
             'Accept': 'application/json'
