@@ -8,7 +8,7 @@ from rest_framework.documentation import include_docs_urls
 
 urlpatterns = [
     path('api/user/', include('apps.user.urls')),
-    path('api/myprojects/', include('apps.myprojects.urls')),
+    path('api/project/', include('apps.myprojects.urls')),
     path('api/blog/', include('apps.blog.urls')),
     path('api/category/', include('apps.category.urls')),
     path('api/reviews/', include('apps.reviews.urls')),

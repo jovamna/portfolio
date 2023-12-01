@@ -81,6 +81,3 @@ export default connect(mapStateToProps,{
 
 
 
-{/*project_list.slice(0, project_list.length > 2 ? 2 : project_list.length).map((project, index) => (
-    <ProjectCard key={index} data={project} />
-))*/}

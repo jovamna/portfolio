@@ -8,6 +8,6 @@ urlpatterns = [
     path('category/<slug:category_slug>', BlogListCategoryView.as_view()),
     path('detail/<post_slug>', PostDetailView.as_view(), name='post-detail'),
     path('search',SearchBlogView.as_view()),
-    #path("search/<str:search_term>",SearchBlogView.as_view()),
+   
 ]
 

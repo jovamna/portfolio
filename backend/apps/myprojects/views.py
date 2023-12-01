@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import permissions
 from rest_framework import status
 from django.shortcuts import get_object_or_404
 from apps.myprojects import serializers
@@ -9,11 +8,8 @@ from apps.myprojects.models import Project, Category, Tag, Authors, ViewCount
 from apps.myprojects.serializers import ProjectListSerializer, ProjectSerializer, CategorySerializer, TagSerializer, AuthorsSerializer, CreateSerializer
 
 from apps.myprojects import models
-
 from apps.user.models import User
 from apps.user.serializers import UserSerializer
-
-
 from .pagination import SmallSetPagination, MediumSetPagination, LargeSetPagination
 from rest_framework.permissions import AllowAny
 
@@ -35,8 +31,6 @@ class ProjectListView(APIView):
             paginator = SmallSetPagination()
             results = paginator.paginate_queryset(projects, request)
             serializer = ProjectListSerializer(results, many=True)
-            #serializer = ProjectListSerializer(projects, many=True)
-            #return Response({'projects': serializer.data})
             return paginator.get_paginated_response({'projects': serializer.data})
         else:
             return Response({'error': 'No projects found'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

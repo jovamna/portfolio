@@ -54,25 +54,23 @@ class ProjectListSerializer(serializers.ModelSerializer):
         model= Project
         fields = [
             'author',
-    'title',
-    'description',
-   # 'content' ,
-    'slug', 
-    'url', 
-    'category',
-    'tags', 
-    'authors', 
-    'published', 
-    'views', 
-    'status', 
+            'title',
+            'description',
+            'slug', 
+            'url', 
+            'category',
+            'tags', 
+            'authors', 
+            'published', 
+            'views', 
+          'status', 
         ]
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
         data['description'] = strip_tags(instance.description)
-        #data['content'] = strip_tags(instance.content)
         return data
-        #return super().to_representation(instance)
+        
 
 
 
@@ -103,18 +101,17 @@ class ProjectSerializer(serializers.ModelSerializer):
         model= Project
         fields = [
             'author',
-           'title',
-           'description', 
-           #'content',  
-          'slug', 
-           'url', 
-          'category',
-          'tags', 
-         'authors', 
-         'published', 
-         'views', 
-         'status', 
-        ]
+            'title',
+            'description', 
+            'slug', 
+            'url', 
+            'category',
+            'tags', 
+            'authors', 
+            'published', 
+            'views', 
+            'status', 
+             ]
 
 
 class CreateSerializer(serializers.ModelSerializer):
@@ -127,7 +124,6 @@ class CreateSerializer(serializers.ModelSerializer):
             'title',
             'thumbnail',
             'description',
-           # 'content',
             'published',
             'slug',
             'authors',
@@ -151,8 +147,3 @@ class CreateSerializer(serializers.ModelSerializer):
             obj.category.set(category)
 
         return obj 
-
-        #return Project.objects.create(**validated_data)
-
-
-          #authors = serializers.StringRelatedField()

@@ -27,8 +27,8 @@ export const get_project_list = () => async dispatch => {
         }
     };
     try{
-        const res = await axios.get(`${URL}/api/myprojects/list`, config);
-      
+        const res = await axios.get(`${URL}/api/project/projects`, config);
+        console.log(res)
         if (res.status === 200) {
             dispatch({
                 type: GET_PROJECT_LIST_SUCCESS,
@@ -56,7 +56,7 @@ export const get_project_list_page = (p) => async dispatch => {
         }
     };
     try{
-        const res = await axios.get(`${URL}/api/myprojects/list?p=${p}`, config);
+        const res = await axios.get(`${URL}/api/project/projects?p=${p}`, config);
 
         if (res.status === 200) {
             dispatch({
@@ -86,7 +86,7 @@ export const get_project = (slug) => async dispatch =>{
         }
     };
     try{
-        const res = await axios.get(`${URL}/api/myprojects/${slug}`, config)
+        const res = await axios.get(`${URL}/api/project/${slug}`, config)
 
         if(res.status === 200){
             dispatch({

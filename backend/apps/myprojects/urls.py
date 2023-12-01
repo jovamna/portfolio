@@ -6,8 +6,8 @@ app_name = 'myprojects'
 
 urlpatterns = [
     
-     path('list' ,ProjectListView.as_view()),
+     path('projects', ProjectListView.as_view(), name='project-list'),
      path('<slug>', ProjectDetailView.as_view()),
-     #path('create', CreateProjectView.as_view()),
+ 
     
 ]
