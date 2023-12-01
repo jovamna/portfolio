@@ -16,7 +16,7 @@ function ProjectCard(data){
    
        
              {/*CONTAINER 1 DE ICONO DE GITHUB TITLE. DESCRIPTION bg-zinc-300*/}
-             <div className="project-card-title-description px-4 h-[266px] pt-[15px] flex flex-col items-center w-full rounded-lg border-white  bg-zinc-300">
+             <div className="project-card-title-description px-4 h-[280px] pt-[15px] flex flex-col items-center w-full rounded-lg border-white  bg-zinc-300">
                   {/*ICONO DE GITHUB */}
                   <div className='flex justify-end items-end'>
                     <div className='w-[26%]'>
@@ -86,19 +86,19 @@ function ProjectCard(data){
 
             
                 
-        </div>
-        {/*FIN CONTAINER 1*/}
+             </div>
+             {/*FIN CONTAINER 1*/}
 
 
 
 
 
 
-        {/* CONTAINER 2 authors */}
-      <div className="project-card-authors bg-zinc-300  rounded-lg items-center mt-2 py-4 px-4 h-[88px]">
+             {/* CONTAINER 2 authors */}
+             <div className="project-card-authors bg-zinc-300  rounded-lg items-center mt-2 py-4 px-2 h-[74px]">
 
-           {/*CONTAINER GENERAL DE AUTRORES Y DATA CON ICONO */}
-           <div className='flex flex-row'>
+                {/*CONTAINER GENERAL DE AUTRORES Y DATA CON ICONO */}
+                <div className='flex flex-row'>
                  {/*SOLO EL ICONO */}
                  <div className="flex-shrink-0 w-[2.2rem]">    
                    <img
@@ -109,15 +109,15 @@ function ProjectCard(data){
                  </div>
 
                  {/*CONTAINER GRAL DE AUTRHOS Y DATE */}
-                 <div className='flex flex-col w-[20rem]'>
+                 <div className='flex flex-col w-[280px] '>
 
                       {/*CONTAINER DE AUTHORS Y NOMBRES*/}
-                       <div className="flex flex-row">
-                          <p className="w-[4rem] text-sm font-bold text-gray-900">
+                       <div className="flex flex-row  w-[99%]">
+                          <p className="w-[21%] text-xs font-bold text-gray-900">
                           authors: 
                           </p>
-                          <div className='text-sm '>
-                            <p className="text-gray-900 dark:text-white tracking-tight text-sm truncate w-[218px] sm:text-sm" dangerouslySetInnerHTML={{
+                          <div className=' w-[78%] '>
+                            <p className="text-gray-900 dark:text-white tracking-tight text-sm truncate w-[99%] sm:text-sm" dangerouslySetInnerHTML={{
                                    __html:
                                    project.authors && DOMPurify.sanitize(project.authors.length) > 20
                                     ? DOMPurify.sanitize(project.authors.slice(0, 50)) 
@@ -130,7 +130,7 @@ function ProjectCard(data){
 
 
                       <div className=" flex space-x-1 text-sm text-gray-500">
-                      <time className='w-[4rem] font-bold text-gray-900'>date</time>
+                      <time className='w-[4rem] text-xs font-bold text-gray-900'>date</time>
                       <span aria-hidden="true">&middot;</span>
                       <span>read time</span>
                       </div>

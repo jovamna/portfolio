@@ -20,7 +20,7 @@ function Project() {
     return (
 
       <div className='project h-[100%] w-[100%] py-8 flex items-center justify-center'>
-            <div className="project-movil  flex flex-col isolate bg-neutral-600 max-w-[95%]  mx-auto sm:rounded-3xl">
+            <div className="project-movil  flex flex-col isolate bg-neutral-600 w-[95%] mx-auto sm:rounded-3xl">
          
           
              {/* DIV DE COLORES DE FONDO Y GENERAL DE TODO EL CONTENIDO*/}
@@ -48,7 +48,7 @@ function Project() {
                    </svg>
 
 
-                  <div className='project-row-movil flex flex-row w-[100%]'>  
+                  <div className='project-row-movil flex flex-row w-[98%] h-[100%] mx-auto '>  
                      <div className="flex flex-col w-8/12 px-4   lg:mx-0  lg:py-3">
 
                       <h2 className="underline underline-offset-8  text-3xl font-bold text-center tracking-tight text-white sm:text-4xl  md:text-center mt-8">

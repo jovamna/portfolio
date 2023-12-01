@@ -1,34 +1,36 @@
 import Language from "../modelUno/LanguagesSkillUno";
+//const moduleUrl = new URL(import.meta.url);
+//const imageUrl = new URL('../../../assets/img/language/pyth.png', moduleUrl).pathname;
 
 
 //FOTOS DE  software development, web, alguna de data ciencia
 const languageInformations: {[id: string]: Language} = {
     "python": {
-        imageUrl: "/images/hard_skills/languages/pyth.png",
+        imageUrl: "./images/hard_skills/languages/pyth.png",
+        //imageUrl: imageUrl,
         name: "Python",
         color: "#3572a5",
         link: "https://en.wikipedia.org/wiki/Python_(programming_language)",
-        logoUrl: "/images/hard_skills/languages/pyt.png",
+        logoUrl: "./images/hard_skills/languages/pyt.png",
         tabs: ["Software Development", "Data Science"],
         level: 2,
     },
     
     "javascript": {
         name: "Javascript",
-        imageUrl: "/images/hard_skills/languages/javaAgencia.png",
+        imageUrl: "./images/hard_skills/languages/javaAgencia.png",
         color: "#f1e05a",
         link: "https://en.wikipedia.org/wiki/JavaScript",
-        logoUrl: "/images/hard_skills/languages/java-blanco-fijo.png",
+        logoUrl: "./images/hard_skills/languages/java-blanco-fijo.png",
         tabs: ["Software Development", "Web"],
         level: 2,
     },
     "typescript": {
         name: "Typescript",
         color: "#2b7489",
-        imageUrl: "/images/hard_skills/languages/typescript.png",
+        imageUrl: "./images/hard_skills/languages/typescript.png",
         link: "https://en.wikipedia.org/wiki/TypeScript",
-        //logoUrl: "/images/hard_skills/languages/typescript.webp",
-        logoUrl: "/images/hard_skills/languages/type-f.png",
+        logoUrl: "./images/hard_skills/languages/type-f.png",
         tabs: ["Software Development", "Web"],
         level: 1,
     },
@@ -36,7 +38,7 @@ const languageInformations: {[id: string]: Language} = {
     "html": {
         name: "HTML",
         color: "#e34c26",
-        imageUrl: "/images/hard_skills/languages/html.png",
+        imageUrl: "./images/hard_skills/languages/html.png",
         link: "https://en.wikipedia.org/wiki/HTML",
         logoUrl: "/images/hard_skills/languages/ml.png",
         tabs: ["Software Development", "Web"],
@@ -45,9 +47,9 @@ const languageInformations: {[id: string]: Language} = {
     "css": {
         name: "CSS",
         color: "#563d7c",
-        imageUrl: "/images/hard_skills/languages/css.png",
+        imageUrl: "./images/hard_skills/languages/css.png",
         link: "https://en.wikipedia.org/wiki/CSS",
-        logoUrl: "/images/hard_skills/languages/c.png",
+        logoUrl: "./images/hard_skills/languages/c.png",
         tabs: ["Software Development", "Web"],
         level: 2,
     },
@@ -55,9 +57,9 @@ const languageInformations: {[id: string]: Language} = {
     "tailwind": {
         name: "Tailwind css",
         color: "#563d7c",
-        imageUrl: "/images/hard_skills/languages/tailwind-fijo.png",
+        imageUrl: "./images/hard_skills/languages/tailwind-fijo.png",
         link: "https://en.wikipedia.org/wiki/CSS",
-        logoUrl: "/images/hard_skills/languages/tail.png",
+        logoUrl: "./images/hard_skills/languages/tail.png",
         tabs: ["Software Development", "Web"],
         level: 2,
     },
@@ -69,8 +71,8 @@ const languageInformations: {[id: string]: Language} = {
         name: "SQL",
         color: "#ffffff",
         link: "https://en.wikipedia.org/wiki/SQL",
-        logoUrl: "/images/hard_skills/languages/sql-blanco-fij.png",
-        imageUrl: "/images/hard_skills/languages/sql.png",
+        logoUrl: "./images/hard_skills/languages/sql-blanco-fij.png",
+        imageUrl: "./images/hard_skills/languages/sql.png",
         tabs: ["Software Development", "Databases"],
         level: 2,
     },
