@@ -5,7 +5,6 @@ from rest_framework import permissions
 from rest_framework import status
 from django.shortcuts import get_object_or_404
 from apps.myprojects import serializers
-#from slugify import slugify
 from apps.myprojects.models import Project, Category, Tag, Authors, ViewCount
 from apps.myprojects.serializers import ProjectListSerializer, ProjectSerializer, CategorySerializer, TagSerializer, AuthorsSerializer, CreateSerializer
 
@@ -13,15 +12,20 @@ from apps.myprojects import models
 
 from apps.user.models import User
 from apps.user.serializers import UserSerializer
-#from rest_framework import generic
+
 
 from .pagination import SmallSetPagination, MediumSetPagination, LargeSetPagination
+from rest_framework.permissions import AllowAny
+
+
 
 
 # Create your views here.
 class ProjectListView(APIView):
+    authentication_classes = []  # Desactiva la autenticación
+    permission_classes = [AllowAny]  # Permite el acceso a cualquier usuario
     serializer_classes = serializers.ProjectListSerializer
-    permission_classes = (permissions.AllowAny,)
+    
 
     def get(self, request, format=None):
         if Project.projectobjects.all().exists():
@@ -41,8 +45,10 @@ class ProjectListView(APIView):
 
 
 class ProjectDetailView(APIView):
+    authentication_classes = []  
+    permission_classes = [AllowAny]  
     serializer_classes = serializers.ProjectSerializer
-    permission_classes = (permissions.AllowAny,)
+   
 
     def get(self, request, slug, format=None):
         if Project.objects.filter(slug=slug).exists():
@@ -81,21 +87,7 @@ class ProjectDetailView(APIView):
 
 
 
-def post(self, request):
-        user_serialized = UserSerializer(request.user)
-        payload={
-            **request.data,
-            **user_serialized.data}
-        print(payload)
-        serializer_event = ProjectSerializer(data=request.data)
 
-        if serializer_event.is_valid(raise_exception=True):
-          print(serializer_event.validated_data)
-        serializer_event.save(author=request.user)
-        print(serializer_event.save(author=request.user))
-        return Response(serializer_event.data, status=status.HTTP_201_CREATED)
-        print(serializer_event.errors)
-        return Response(serializer_event.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 
