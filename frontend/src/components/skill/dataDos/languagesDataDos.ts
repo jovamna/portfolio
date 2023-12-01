@@ -1,13 +1,12 @@
 import Language from "../modelUno/LanguagesSkillUno";
-//const moduleUrl = new URL(import.meta.url);
-//const imageUrl = new URL('../../../assets/img/language/pyth.png', moduleUrl).pathname;
+
 
 
 //FOTOS DE  software development, web, alguna de data ciencia
 const languageInformations: {[id: string]: Language} = {
     "python": {
-        imageUrl: "./images/hard_skills/languages/pyth.png",
-        //imageUrl: imageUrl,
+        //imageUrl: "./images/hard_skills/languages/pyth.png",
+        imageUrl: window.location.origin + '/pyth.png',
         name: "Python",
         color: "#3572a5",
         link: "https://en.wikipedia.org/wiki/Python_(programming_language)",
