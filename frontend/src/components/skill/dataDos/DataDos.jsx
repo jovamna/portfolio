@@ -1,12 +1,12 @@
 import Language from "../modelUno/LanguagesSkillUno";
-
-
+//import pythImage  from '../../../assets/img/languages/pyth.png';
+import React from 'react';  // Asegúrate de importar React si no lo has hecho ya
 
 //FOTOS DE  software development, web, alguna de data ciencia
-const languageInformations: {[id: string]: Language} = {
+const languageInformations= {
     "python": {
-        //imageUrl: "./images/hard_skills/languages/pyth.png",
-        imageUrl: window.location.origin + '/pyth.png',
+        imageUrl: "./images/hard_skills/languages/pyth.png",
+        //imageUrl:pythImage,
         name: "Python",
         color: "#3572a5",
         link: "https://en.wikipedia.org/wiki/Python_(programming_language)",

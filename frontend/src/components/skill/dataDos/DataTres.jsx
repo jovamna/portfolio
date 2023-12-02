@@ -1,11 +1,11 @@
-
-import languageInformations from "./languageDataDos";
+import React from 'react';  // Asegúrate de importar React si no lo has hecho ya
+import languageInformations from "./languagesDataDos";
 import { getOnlySkillsOrLanguagesByKey, SkillOrLanguage } from "../modelUno/SkillOrLanguage";
 
 
 
 //INCLUDE ICONS FROM LANGUAGES DATA IN HARDSKILLDATA
-const hardSkillData: SkillOrLanguage[] = [
+const hardSkillData= [
 
 
     // LANGUAGE SOFTWARE DEVELOPMENT

@@ -3,7 +3,7 @@ import { skillsTabData } from '../modelUno/MenuSkillUno';
 import  hardSkillData  from  "../dataDos/languageDataTres";
 import { ImageIcon } from '../icons/index';
 import styled from 'styled-components';
-
+import React from 'react';
 
 
 
