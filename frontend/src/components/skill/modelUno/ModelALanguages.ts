@@ -1,4 +1,4 @@
-import { SkillTab } from "./MenuSkillUno";
+import { SkillTab } from "./ModelMenu";
 
 export type Level = 1 | 2 | 3; // "initiated" | "intermediate" | "expert";
 
@@ -12,18 +12,16 @@ export default interface Language {
     level: Level;
 }
 
+
 export const getOnlyLanguages = (languages: (Language | undefined)[]) => {
-    return languages.filter(item => item) as Language[];
+    return languages.filter(Boolean) as Language[];
 };
+
 
 export const getOnlyLanguagesByKey = (keys: string[], map: {[id: string]: Language}) => {
-    const languages: (Language | undefined)[] = [];
-    keys.forEach(key => {
-        languages.push(map[key]);
-    })
-    return languages.filter(item => item) as Language[];
+    const languages = keys.map(key => map[key]);
+    return languages.filter(Boolean) as Language[];
 };
-
 
 
 

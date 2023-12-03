@@ -1,6 +1,6 @@
 import { Tab, TabPanel } from '../tabs/buttonDinamico';
-import { skillsTabData } from '../modelUno/MenuSkillUno';
-import  hardSkillData  from  "../dataDos/languageDataTres";
+import { skillsTabData } from '../modelUno/ModelMenu';
+import  hardSkillData  from  "../dataDos/dataLanguageTres";
 import { ImageIcon } from '../icons/index';
 import styled from 'styled-components';
 import React from 'react';

@@ -1,4 +1,4 @@
-import Language, {Level} from "./LanguagesSkillUno";
+import Language, {Level} from "./ModelLanguagesUno";
 
 //MENU DEL SEGMENTO DE SKILLS
 export const skillsTabData = [
@@ -22,4 +22,4 @@ interface Skill {
     level?: Level;
 };
 
-//export type SkillOrLanguage = Skill | Language;
+export type SkillOrLanguage = Skill | Language;
