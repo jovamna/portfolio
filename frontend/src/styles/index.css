@@ -1497,7 +1497,7 @@ width: 100%;
 
 
 
-@media only screen and (min-width: 360px) and (max-width: 640px) {
+@media only screen and (min-width: 360px) and (max-width: 667px) {
 
   html,
 body
@@ -1550,6 +1550,7 @@ body
  .navbar{
   width: 100%;
   height: 38px;
+
 
  }
 
@@ -2453,6 +2454,179 @@ width: 60%;
 
 }
 
+
+
+
+/*IPHONE 12 PRO*/
+@media only screen and (min-width: 390px) and (max-width: 844px) {
+
+  html,
+body
+ { /* Cambia #root por el id de tu contenedor principal si es diferente */
+  height: 100%;
+  width: 100%;
+  margin-bottom: 4rem;
+  padding: 0;
+}
+  html {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    font-family: Nunito, sans-serif, ui-sans-serif, system-ui;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+}
+    
+ 
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    /*overflow: hidden;*/
+  }
+
+
+
+
+  
+
+
+    /*BOTON ARRIBA*/
+    #topButton{
+      margin-right: -20px;
+      }
+    
+    /*NEWSLETTER*/
+    .boton-newsletter{
+     margin-left: -20px;
+    }
+    
+
+/*IMPORTANTE PARA PONER A ALTURA DEL
+   NAVBAR DEL MOVIL*/
+     /*#303535  #333636*/
+ .navbar{
+  width: 100%;
+  height: 38px;
+ }
+
+ .home{
+  padding-top: 1px;
+
+ }
+
+ .home-images .hover-image{
+  padding-top: 1px;
+  
+ }
+
+ /*pagina about*/
+ .about{
+  padding-top: 12px;
+ }
+
+ .letra-dise{
+  width: 120px;
+  left: -46px;
+ 
+ }
+
+
+ /*CONTAINER DE ABOUT ME, DESCRIBIENDOME*/
+ .subcontainer-about-movil{
+  margin-bottom: 25px;
+  padding-left: 12px;
+  padding-right: 12px;
+
+ }
+
+ .subcontainer-about-movil h1{
+  margin-top: 20px;
+ }
+
+
+  /*PAGINA SKILL*/
+  .skill-dos{
+   border-radius: 0%;
+   margin-bottom: 15px;
+   background-color: #ffffff;
+  }
+
+  /*container general del card y el details*/
+  .skill-card-movil{
+    height: 420px;
+  }
+ /*subcontainer general del card y el details*/
+  .skill-card-movil-img-title{
+    height: 100%;
+  }
+
+   /*CONTAINER DE LA CHICA DEVELOPER*/
+  .skill-container-images{
+    max-height: 240px;
+   
+  }
+
+  .skill-container-description{
+    margin-top: 40px;
+    height: 120px;
+    
+  }
+
+ /*table entera de iconos pagina skill*/
+ .skills-page-movil{
+  height: 350px;
+
+ }
+
+ .tab__content .skill-logo-img{
+  width: 45px;
+ } 
+
+ /*pagina github*/
+ .project-movil-card {
+  width: 100%;
+ }
+
+  /*SUBCONTAINER GENERAL DEL TODO EL CONTENIDO GITHUB*/
+ .project-movil{
+  width: 95%;
+  height: auto;
+
+ }
+
+
+ .project-row-movil{
+  margin: auto;
+ }
+  /*container del project card 2*/
+ .project-home{
+  width: 310px;
+  height: auto;
+  margin: auto;
+  padding-left: 6px;
+  padding-right: 6px;
+ }
+
+ /*imagen de la pagina de github*/
+ .project-img-movil{
+  max-width: 300px;
+  height: 100px;
+  margin-left: 40px;
+ }
+
+ .project-img-movil img{
+  height: 100px;
+ 
+  background-color: aqua;
+ }
+
+
+
+}
 
 
 @media only screen and (min-width: 641px) and (max-width: 667px) {

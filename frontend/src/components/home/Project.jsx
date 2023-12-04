@@ -1,6 +1,12 @@
 import ProjectHome from '../myproject/ProjectHome';
 import projec from "../../assets/img/home/projec.jpg";
+import gi from "../../assets/img/home/gi.jpg";
+import ga from "../../assets/img/home/ga.jpg";
+import ge from "../../assets/img/home/ge.jpg";
+import go from "../../assets/img/home/go.jpg";
+
 import { BiChevronsUp } from "react-icons/bi";
+import { generatePath } from 'react-router-dom';
 
  
 
@@ -19,12 +25,15 @@ function Project() {
 
     return (
 
-      <div className='project h-[100%] w-[100%] py-8 flex items-center justify-center'>
+      <div className='project h-[100%] w-[100%]  items-center justify-center'>
+
+              
+             {/*CONTAINER GENERAL modificar en movil a 95%*/}
             <div className="project-movil  flex flex-col isolate bg-neutral-600 w-[95%] mx-auto sm:rounded-3xl">
          
           
              {/* DIV DE COLORES DE FONDO Y GENERAL DE TODO EL CONTENIDO*/}
-            <div className="project-movil-colores flex relative isolate overflow-hidden  px-6 pt-16  sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-10 lg:px-1 lg:pt-0 mb-[65px]">
+            <div className="project-movil-colores flex relative isolate overflow-hidden w-[100%]  px-6 pt-16  sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-10 lg:px-1 lg:pt-0 mb-[65px]">
                   <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 1024 1024"
@@ -48,8 +57,10 @@ function Project() {
                    </svg>
 
 
-                  <div className='project-row-movil flex flex-row w-[98%] h-[100%] mx-auto '>  
-                     <div className="flex flex-col w-8/12 px-4   lg:mx-0  lg:py-3">
+                  <div className='project-row-movil flex flex-row w-[92%] h-[100%] mx-auto justify-between'> 
+
+                      {/*DOS CARDS GITHUB */}
+                     <div className="flex flex-col w-[75%] lg:mx-0 lg:py-3 ">
 
                           <h2 className="underline underline-offset-8  text-3xl font-bold text-center tracking-tight text-white sm:text-4xl  md:text-center mt-8">
                           Mis Projectos de GitHub
@@ -64,19 +75,18 @@ function Project() {
                  
                       <ProjectHome className="project-home "/>
             
-              </div>
+                     </div>
 
 
-
-            <div className="project-img-movil relative h-80 lg:mt-6">
-              <img
-                className="absolute top-0 left-0 w-[57rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10"
-                src={projec}
-                alt="App screenshot"
-                width={1824}
-                height={1080}
-              />
-            </div>
+                      {/*IMAGEN DEL COSTADO DE LOS GTHUBS */}
+                     <div className="project-img-movil flex flex-col lg:mt-6 w-[25%] pt-[10px]">
+                        <img
+                        className=" left-0 rounded-md bg-white/5  w-[100%] h-[95%] ring-1 ring-white/10"
+                        src={go}
+                        alt="App screenshot"
+                     
+                        />
+                     </div>
 
 
 

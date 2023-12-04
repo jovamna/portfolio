@@ -23,7 +23,7 @@ import "../../styles/index.css";
 
   
     return(
-        <div className="project-home w-[97%] py-4  px-4 bg-neutral-800 opacity-90">
+        <div className="project-home flex flex-row justify-between w-[88%] py-4  px-4 bg-neutral-800 opacity-90">
 
 
             {
