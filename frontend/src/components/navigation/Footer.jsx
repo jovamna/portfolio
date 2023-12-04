@@ -89,7 +89,9 @@ function Footer() {
                   <ul role="list" className="mt-4 space-y-4">
                     {navigation.blog.map((item) => (
                       <li key={item.name}>
-                        <a href={item.href} className="text-sm text-white hover:text-gray-400">
+                        <a 
+                        href={item.href} 
+                        className="text-sm text-white hover:text-gray-400">
                           {item.name}
                         </a>
                       </li>
@@ -154,7 +156,7 @@ function Footer() {
 
 
          {/*PIE DEL FOOTER*/}
-       <div className="flex flex-col flex-item-center  border-t border-gray-200  md:flex md:items-center md:justify-between">
+       <div className="footer-pie flex flex-col flex-item-center  border-t border-gray-200  md:flex md:items-center md:justify-between">
 
        <div className="movil-footer-social flex mt-6">    
               <ul className="movil-footer-social-ul flex flex-row ">

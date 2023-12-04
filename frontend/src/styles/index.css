@@ -1843,7 +1843,7 @@ body
 
 .greeting-texto p{
   font-size: 0.56em;
-  line-height: 12px;
+  line-height: 10px;
 }
 
 /*fin greetings*/
@@ -2510,8 +2510,41 @@ body
      /*#303535  #333636*/
  .navbar{
   width: 100%;
-  height: 38px;
+  height: 41px;
+  margin: auto;
+  background-color: #ffffff;
  }
+
+ .navbar-menu{
+  width: 100%;
+  margin: auto;
+  height: 41px;
+  background-color: #ffffff;
+ }
+ .navbar-logo{
+  width: 100%;
+  margin: auto;
+  height: 41px;
+  background-color: #fff;
+ }
+
+ .menu-movil{
+  height: 41px;
+  background-color: #ffffff;
+ }
+
+  .icon-search-bihome{
+    display: flex;
+    flex-direction: row; 
+  }
+
+  .icon-search{
+    margin-top: 8px;
+  }
+
+  .icon-bihome{
+    margin-top: 8px;
+  }
 
  .home{
   padding-top: 1px;
@@ -2520,7 +2553,14 @@ body
 
  .home-images .hover-image{
   padding-top: 1px;
-  
+ }
+
+ .greeting-texto{
+  height: 180px;
+ }
+
+ .texto-animado{
+  width: 100%;
  }
 
  /*pagina about*/
@@ -2538,8 +2578,8 @@ body
  /*CONTAINER DE ABOUT ME, DESCRIBIENDOME*/
  .subcontainer-about-movil{
   margin-bottom: 25px;
-  padding-left: 12px;
-  padding-right: 12px;
+  padding-left: 18px;
+  padding-right: 18px;
 
  }
 
@@ -2609,6 +2649,7 @@ body
   margin: auto;
   padding-left: 6px;
   padding-right: 6px;
+  margin-left: 12px;
  }
 
  /*imagen de la pagina de github*/
@@ -2620,9 +2661,26 @@ body
 
  .project-img-movil img{
   height: 100px;
- 
-  background-color: aqua;
  }
+
+ /*.movil-footer-tres-menus-uno{
+  
+ }*/
+
+ .movil-footer-tres-menus-uno h3{
+  text-align: center;
+ }
+
+ .movil-footer-tres-menus-uno ul li {
+  text-align: center;
+ 
+ }
+
+ .footer-pie{
+  margin-bottom: 15px;
+ }
+
+
 
 
 

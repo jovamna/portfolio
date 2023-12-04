@@ -122,17 +122,17 @@ function Navbar({
 
   return (
      //{/* CONTAINER PRINCIPAL 1 DEL NAVBAR DEL PC Y MOVIL  sm:px-6 */}
-    <div className="navbar z-index fixed w-full  opacity-95 mx-auto max-w-7xl px-4 lg:px-8">
+    <div className="navbar z-index fixed w-full  bg-white opacity-95 mx-auto max-w-7xl px-4 lg:px-8">
 
     {/* CONTAINER GUIA ENGLOBA MENU GRANDE Y MENU MOVIL*/}
-    <Popover className="navbar-menu relative bg-white">
+    <Popover className="navbar-menu  bg-white">
 
 
    
           
          {/* 1 CONTAINER PRINCIPAL CONTIENE DEL MENU DE PANTLLA INCLUYE SOLO EL BOTON ICONO DEL MENU MOVIL QUE ESTA OCULTO */}
          {/*IMPORTANTE EN EL CSS INDEX PONER LA ALTURA HEIGHT 50 con py-7 EL MENU SE HACE MAS LARGO*/}
-         <div className="navbar-logo flex items-center justify-between md:justify-start w-full h-[3rem]">
+         <div className="navbar-logo bg-white flex items-center justify-between md:justify-start w-full h-[3rem]">
 
          
              {/*LOGO DEL MENU ORDENADOR Y MOVIL sm:w-20 md:w-24 lg:w-32 */}
@@ -154,11 +154,11 @@ function Navbar({
         
            {/*ICONO MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL */}
            {/*MOVIL ICONO CASA QUE ABRE EL MENU ESCONDIDO ICONO-1LADO DERECHO*/}
-           <div className=" menu-movil md:hidden h-[2.5em] flex flex-row items-center justify-end w-[65%]">
+           <div className=" menu-movil md:hidden h-[2.5em]  bg-white flex flex-row items-center justify-end w-[65%]">
                  
 
 
-               <Popover.Button className=" icon-search-bihome flex flex-row justify-end items-center hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-0 focus:ring-inset focus:ring-indigo-500 h-[2.5em] w-[26%] ">
+               <Popover.Button className="icon-search-bihome flex flex-row justify-end items-center hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-0 focus:ring-inset focus:ring-indigo-500 h-[2.5em] w-[26%] ">
                <span className="sr-only">Open menu</span>
 
 

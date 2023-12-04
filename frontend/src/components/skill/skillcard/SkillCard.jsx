@@ -142,7 +142,7 @@ export default function SkillCard() {
 
 
   return (
-    <CardWrapper className="skill-card-movil w-[100%] h-[30rem]   shadow-2xl ">
+    <CardWrapper className="skill-card-movil w-[100%] h-[30rem]">
 
           {/* CONTAINER DEL TEXTO DEVELOPER ,  backgroundColor:"rgb(115 115 115)"*/}
          <CardContainer className="skill-card-movil-img-title bg-neutral-500 w-[100%] h-[30rem]"
@@ -159,7 +159,7 @@ export default function SkillCard() {
                 <CircleWrapper  className="skillcard-container-fondo overflow-hidden  rounded-tl-2xl rounded-tr-2xl " >
                    <Circle className=" rounded-tl-2xl rounded-tr-2xl overflow-hidden">
                     
-                          <img className="skillcard-img-circle w-[100%] h-[20px]" 
+                          <img className="skillcard-img-circle w-[100%] h-[20px] ml-[40px]" 
                           onLoad={handleImageLoad} 
                           src={skillFond} 
                           alt="skillFond" 
