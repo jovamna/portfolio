@@ -684,7 +684,8 @@ SOFTWARE DEVELOPMENT, WEB, DATABASE DATACIENCIA ETC*/
 
 
 /*GALAXY-FOLF*/
-@media only screen and (min-width: 280px) and (max-width: 359px) {
+/*@media only screen and (min-width: 280px) and (max-width: 653px) {*/
+@media only screen and (min-width: 280px) and (max-width: 653px) {
   html,
 body
  { /* Cambia #root por el id de tu contenedor principal si es diferente */
@@ -712,6 +713,18 @@ body
     width: 100%;
     /*overflow: hidden;*/
   }
+
+  /*PAGINA DE ENTRADA INICO PORTAFOLIO JOVAMNA*/
+  .logo-init-img{
+    width: 120px;
+    height: 40px;
+  }
+
+  .portfolio-init{
+    font-size: 1em;
+  }
+
+    
 
 
   .tab-menu {
@@ -750,8 +763,35 @@ body
    }
   
    .navbar-menu{
+    display: flex;
+    flex-direction: row;
+   right: 8px;
     width: 100%;
+    height: 30px;
    }
+
+   .navbar-logo{
+    width: 100%;
+    height: 30px;
+   }
+
+   .logo{
+    width: 35%;
+    height: 30px;
+   }
+
+   .logo img{
+    width: 100%;
+    height: 30px;
+   
+  }
+
+  .menu-movil{
+    width: 60%;
+    height: 30px;
+   
+  }
+
    /*NAVBAR DEL PORTAFOLIO*/
   
   
@@ -762,7 +802,7 @@ body
       max-width: 100%;
       height: 35px;
       margin: auto;
-    
+     background-color: blueviolet;
     }
   
     .navbar-logo-menu .logo{
@@ -770,13 +810,310 @@ body
       height: 35px;
    
     }
-  
-    .logo img{
-      padding-top: 2px;
-      width: 90%;
-      height: 30px;
+
+
+      /*GREETING PORTADA PRINCIPAL*/
+  .home{
+    padding-top: 20px;
+ 
+   }
+
+   .home .hover-image{
+    padding-top: 20px;
+   }
+
+   /*PAGINA GREETINGS*/
+   .greeting-texto{
+    width: 92px;
+    height: 110px;
+    top: 70px;
+    left: 10px;
+
+  }
+
+  .texto-animado-developer{
+    font-size: 0.52em;
+    line-height: 8px;
+  }
+
+
+  .texto-animado{
+    width: 90px;
+    font-size: 0.45em;
+    line-height: 8px;
+    margin-top: 4px;
+  }
+
+  .greeting-texto img{
+    width: 12px;
+  }
+
+
+    .container-about-tres{
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      padding-left: 0px;
+      padding-right: 0px;
+      padding-top: 0px;
+    
+    }
+
+    .container-about-dos{
+      width: 94%;
+      display: flex;
+      padding-left: 0px;
+      padding-right: 0px;
+      padding-top: 0px;
+      flex-direction: column;
+      margin: auto;
+      margin-bottom: 30px;
      
     }
+
+    .subcontainer-about-movil{
+      width: 100%;
+    }
+
+    .subcontainer-about-movil h1{
+      font-size: 1.4em;
+
+    }
+
+    .subcontainer-about-movil h2{
+      font-size: 0.8em;
+
+    }
+
+    .subcontainer-about-movil-img{
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      justify-items: start;
+
+    }
+
+
+ 
+  
+  .skill-item p{
+  font-size: 0.9em;
+  }
+  
+  .letra-dise{
+    top: 80px;
+    left: -120px;
+    width: 85px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .slide{
+    font-size: 0.4em;
+    text-align: center;
+    padding-bottom: 24px;
+  }
+  
+ 
+  /*PAGINA SKILL*/
+  .skill-tres{
+    display: flex;
+    flex-direction: column;
+    padding-top: 0px;
+    
+  }
+
+  .skill-dos{
+    display: flex;
+    flex-direction: column;
+    
+  }
+
+  /*DE LA PAGINA SKILL-CARD*/
+  .skill-card-movil{
+    margin-bottom: 15px;
+  }
+
+  .skills-page-movil{
+    width: 100%;
+    height: 350px;
+
+  }
+
+  .skills-page-movil h1{
+    font-size: 1.5em;
+  
+  }
+
+  /*.skill-menu{
+   
+  }*/
+
+
+  
+  /*LU LI letras softw, web, databa, tools*/
+
+  
+.container-general-tab{
+  height: 265px;
+   
+  }
+
+  .container-general-tab ul{
+    height: 69px;
+  }
+
+  .container-general-tab li{
+    height: 52px;
+ 
+  }
+   
+  /*TITULOS DEL MENU SKILL*/
+  .container-general-tab li .tab-button{
+    font-size: 0.7em;
+    height: 42px;
+    margin: auto;
+    line-height: 14px;
+
+    }
+  
+   
+
+    /*container de los iconos de los skills*/
+    .tab__content{
+      height: 180px;
+  
+    }
+  
+
+  .tab__content .skill-logo-img {
+    width: 80%;
+
+  }
+
+  .tab__content .skill-letra-img{
+    width: 70%;
+
+  }
+  
+  
+
+    /*RESPONSIVE DE LOS GITHUB E IMAGEN*/
+  /*SUBCONTAINER 1 DE LA PAGINA PROJECT*/
+  .project-movil{
+   width: 100%;
+   height: 1250px;
+ }
+ /*SUBCONTAINER IMPORTANTE DEL PROJECT-MOVIL DE LA PAGINA PROJECT IMPORTANTE*/
+ .project-tercero{
+   height: 1250px;
+   max-height: 100%;
+ }
+ 
+ /*SUBCONTAINER 2 DE LA PAGINA PROJECT*/
+ .project-row-movil{
+   width: 100%;
+   height:100%;
+   margin-top: -60px;
+   margin-left: -29px;
+ }
+ 
+    /*CONTAINER PRINCIPAL DE LA PAGINA PROJECTHOME*/
+    /*PAGINA DE LISTADO DE LOS GITHUBS*/
+    .project-home{
+     width: 260px;
+    height: 920px;
+    max-height: 100%;
+   }
+ 
+  /*SUBCONTAINER DE PROJECTHOME NARANJA*/
+  .home-project{
+   display: grid;
+   width: 260px;
+   height: 100%;
+  
+ }
+ 
+ 
+   /*CONTAINER PRINCIPAL DEL PROJECTCARD DEL GITHUB */
+   /*ESTE ES SOLO UN GITHUB ES EL ESPACIO BLANCO*/
+ 
+   /*SUBCONTAINER DE PROJECT-MOVIL-CARD*/
+  /*ES EL ESPACIO  NARANJA COGE 2 GITHUBS*/
+   .card-project{
+     width: 235px;
+    height: 100%;
+  }
+ 
+    /*SUBCONTAINER DE CARD-POJECT PRIMER CUADRO*/
+     /*CONTainer general del contenido del cardgithub*/
+   .project-movil-card{
+     width: 230px;
+     height:100%;
+
+   }
+ 
+   /*IMAGEN DEL ICONO GITHUB*/
+   .project-card img{
+     margin-left: -100px;
+   }
+ 
+    /*SUBCONTAINER DE CARD-POJECT SEGUNDO CUADRO*/
+    .authors{
+     width: 235px;
+     height: 70px;
+   }
+ 
+ 
+ /*IMAGEN COSTADO DE LOS GITHUBS*/
+ .project-row-movil h2{
+  font-size: 1.3em;
+
+ }
+
+ .ver-mis-projectos a{
+  font-size: 0.9em;
+ }
+
+
+ .project-img-movil{
+  left: 70px;
+  top: 40px;
+  width: 120px;
+  height: 150px;
+  
+  }
+ 
+  .project-img-movil img{
+    width: 120px;
+    height: 150px;
+   }
+
+   .div-languages{
+    width: 100%;
+
+   }
+
+   .project-card-title-description .languages{
+    font-size: 0.8em;
+
+   }
+
+   .d-authors{
+    width: 44%;
+    
+   }
+
+   .d-authors p{
+    font-size: 0.7em;
+   }
+ 
+ /* FIN RESPONSIVE DE LOS GITHUB E IMAGEN*/
+/*................*/
+    
+  
     .movil-lupa-bihome{
       display: flex;
       flex-direction: row;
@@ -972,93 +1309,7 @@ body
 
 
   
- /*GREETING PORTADA PRINCIPAL*/
-  .home{
-   padding-top: 51px;
-
-  }
-   /*RESPONSIVE DE LOS GITHUB E IMAGEN*/
- /*SUBCONTAINER 1 DE LA PAGINA PROJECT*/
- .project-movil{
-  width: 100%;
-  height: 1250px;
-}
-/*SUBCONTAINER IMPORTANTE DEL PROJECT-MOVIL DE LA PAGINA PROJECT IMPORTANTE*/
-.project-tercero{
-  height: 1250px;
-  max-height: 100%;
-}
-
-/*SUBCONTAINER 2 DE LA PAGINA PROJECT*/
-.project-row-movil{
-  width: 100%;
-  height:100%;
-  margin-top: -60px;
-  margin-left: -29px;
-}
-
-   /*CONTAINER PRINCIPAL DE LA PAGINA PROJECTHOME*/
-   /*PAGINA DE LISTADO DE LOS GITHUBS*/
-   .project-home{
-    width: 260px;
-   height: 920px;
-   max-height: 100%;
-  }
-
- /*SUBCONTAINER DE PROJECTHOME NARANJA*/
- .home-project{
-  display: grid;
-  width: 260px;
-  height: 100%;
  
-}
-
-
-  /*CONTAINER PRINCIPAL DEL PROJECTCARD DEL GITHUB */
-  /*ESTE ES SOLO UN GITHUB ES EL ESPACIO BLANCO*/
-  .project-movil-card{
-    width: 250px;
-    height: 100%;
-  }
-
-  /*SUBCONTAINER DE PROJECT-MOVIL-CARD*/
- /*ES EL ESPACIO  NARANJA COGE 2 GITHUBS*/
-  .card-project{
-    width: 235px;
-   height: 100%;
- }
-
-   /*SUBCONTAINER DE CARD-POJECT PRIMER CUADRO*/
-    /*CONTIENE EL TITULO LA DESCRIPTION ETC*/
-  .project-card{
-    width: 235px;
-    height:82%;
-  }
-
-  /*IMAGEN DEL ICONO GITHUB*/
-  .project-card img{
-    margin-left: -100px;
-  }
-
-   /*SUBCONTAINER DE CARD-POJECT SEGUNDO CUADRO*/
-   .authors{
-    width: 235px;
-    height: 70px;
-  }
-
-
-/*IMAGEN COSTADO DE LOS GITHUBS*/
-.project-img-movil{
- left: 70px;
- top: 40px;
- width: 120px;
- }
-
- .project-img-movil img{
-  width: 350px;
-  }
-
-/* FIN RESPONSIVE DE LOS GITHUB E IMAGEN*/
 
 .container-general-chat{
   width: 100%;
@@ -1148,40 +1399,81 @@ width: 100%;
 }
 
 
+/*FOOTER*/
+.movil-footer{
+  width: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
 
-.movil-form{
+}
+
+/*¿No quieres perderte nada? Suscríbete a los boletines*/
+.movil-suscribe-text{
+  font-size: 0.9em;
+ }
+
+
+/*.footer-suscribe{
+  background-color: brown;
+}*/
+
+
+.footer-form-suscribe{
   display: flex;
   flex-direction: row;
   width: 100%;
  }
 
- .movil-suscribe-text{
-  font-size: 0.8em;
+ .input-footer-suscribe{
+ width: 70%;
+
  }
 
- .movil-button-suscribe {
-  font-size: 0.6em;
-  padding-left: 2px;
-  padding-right: 2px;
-  }
+ .boton-footer-suscribe{
+  width: 28%;
+ }
+
+ .footer-suscribe-bo{
+  width: 65%;
+ }
+
+ .footer-suscribe-enviar{
+  font-size: 0.7em;
+
+ }
+
+
+  /*BOLITA BAILARINA*/
+ .newsletter-animation{
+  margin-left: 50px;
+ }
+
+
 
   .movil-footer-tres-menus{
     display: grid;
     grid-column: fr fr fr ;
-    gap: 2px;
-   justify-content: center;
-   width: 99.5%;
-   
+    gap: 1px;
+   width: 100%;
+   padding-left: 4px;
+   padding-right: 0px;
+   margin: auto;
+   margin-bottom: 20px;
    }
 
+   .movil-footer-tres-menus-uno {
+    padding-left: 0px;
+    padding-right: 0px;
+   }
+  
+
    .movil-footer-tres-menus-uno h3{
-    margin-left: -9px;
-    font-size: 0.8em;
+    font-size: 0.7em;
+  
    }
   
    .movil-footer-tres-menus-uno a{
-    margin-left: -9px;
-    font-size: 0.8em;
+    font-size: 0.7em;
    }
 
    
@@ -1199,65 +1491,6 @@ width: 100%;
   margin-top: 10px;
 }
   
-
-/*INICIO PAGINA ABOUT*/
-.container-about-movil{
-display: flex;
-flex-direction: column;
-width: 100%;
-padding-top: 12px;
-}
-
-.container-about-movil .subcontainer-about-movil{
-width: 100%;
-}
-
-.container-about-movil h1{
-font-size: 1.5em;
-}
-
-.container-about-movil p{
-font-size: 0.9em;
-}
-
-
-
-.container-about-movil .subcontainer-about-movil-img {
-width: 80%;
-margin: auto;
-}
-
-
-
-/*PAGINA SKILL*/
-.container-general-tab  .tab-menu{
-height: 65px;
-
-}
-
-
-/*LU LI letras softw, web, databa, tools*/
-.tab-menu li{
-  height: 52px;
- 
-}
-
-.tab-menu li .tab-button{
-    font-size: 0.9em;
-    height: 42px;
-    margin: auto;
-    line-height: 19px;
-  }
-
-  .tab-button:hover{
-    font-size: 0.905em;
-
-  }
-
-.skill-movil{
-  display: flex;
-  flex-direction: column;
-}
 
 
 }

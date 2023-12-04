@@ -1,4 +1,4 @@
-import Language, {Level} from "./ModelLanguagesUno";
+import Language, {Level} from "./ModelALanguages";
 
 //MENU DEL SEGMENTO DE SKILLS
 export const skillsTabData = [

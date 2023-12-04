@@ -69,7 +69,7 @@ function Footer() {
           
           {/*CONTAINER SUSCRIPTION*/}
           
-              <SubscribeForm/>
+              <SubscribeForm className="footer-suscribe"/>
          
           {/*FIN CONTAINER SUSCRIPTION*/}
 

@@ -11,7 +11,7 @@ const Logo= () => {
 
 <div className="logo-container fade-in-entry ">
      
-     <img src={jova} width={240}  height={240} alt="Logo" /> <h2 className='text-3xl text-bold '>Portafolio </h2> 
+     <img className="logo-init-img" src={jova} width={240}  height={240} alt="Logo" /> <h2 className='portfolio-init text-3xl text-bold '>Portafolio </h2> 
    </div>
   
 

@@ -51,16 +51,16 @@ function Project() {
                   <div className='project-row-movil flex flex-row w-[98%] h-[100%] mx-auto '>  
                      <div className="flex flex-col w-8/12 px-4   lg:mx-0  lg:py-3">
 
-                      <h2 className="underline underline-offset-8  text-3xl font-bold text-center tracking-tight text-white sm:text-4xl  md:text-center mt-8">
-                      Mis Projectos de GitHub
-                      </h2>
-                      <br />
+                          <h2 className="underline underline-offset-8  text-3xl font-bold text-center tracking-tight text-white sm:text-4xl  md:text-center mt-8">
+                          Mis Projectos de GitHub
+                          </h2>
+                          <br />
 
-                      <div className='flex justify-center items-center mb-4'>
-                      <a href="/myproject" className="text-base md:text-center text-center font-semibold leading-7 text-white hover:text-gray-400">
-                      Ver todos mis Projectos <span aria-hidden="true">→</span>
-                      </a>
-                      </div>
+                          <div className='ver-mis-projectos flex justify-center items-center mb-4'>
+                           <a href="/myproject" className="text-base md:text-center text-center font-semibold leading-7 text-white hover:text-gray-400">
+                           Ver todos mis Projectos <span aria-hidden="true">→</span>
+                            </a>
+                           </div>
                  
                       <ProjectHome className="project-home "/>
             

@@ -69,7 +69,7 @@ export default function About() {
                    </h2>
 
 
-                   <div className="skill-item ">
+                   <div className="skill-item">
                    {skillsSection.skills.map((skill, index) => (
                     <p className="text-gray-300 mb-2" key={index}>
                     {skill.text}
@@ -105,7 +105,7 @@ export default function About() {
                    }}
                    >
          
-                  <div dangerouslySetInnerHTML={{ __html: slide.text }} />
+                  <div className="slide" dangerouslySetInnerHTML={{ __html: slide.text }} />
                   </motion.div>
                  ))}
 

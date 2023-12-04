@@ -48,11 +48,11 @@ const SkillsPage = () => {
 
        
           {/*CONTAINER GENERAL DEl MENU Y LOS ICONOS  */}
-          {/*TabPanel es el menu */}
+          {/*TabPanel TITULOS DEL MENU BUSCAR EN LA PAGINA  tabs/buttonDinamico*/}
           <Tab>
 
          {skillsTabData.map((tabTitle, tabIndex) => {
-         return <TabPanel  
+         return <TabPanel 
          title={tabTitle} 
          key={tabIndex}> {/*PAGINA buttonDinamico tab__content container de los iconos*/}
 
@@ -63,19 +63,19 @@ const SkillsPage = () => {
                   {/*SkillItem ES EL ESTILO DE LOS ICONOS DOCKER, GITHUB, DJANGO, RECAT, ETC */}
                   {hardSkillData.filter(value => {return value.tabs.includes(tabTitle)
                    }).map((skill, skillIndex) => {
-                      return  <SkillItem  
+                      return  <SkillItem  className='letra-menu'
                               key={skillIndex} 
                               href={skill.link} 
                               target="_blank" 
                               rel="noreferrer" 
                               title={skill.name}
                               >
-                                   <ImageIcon 
+                                   <ImageIcon className='skill-logo-img'
                                    height={40} 
                                    src={skill.logoUrl} 
                                    alt={`${skill.name} icon`} 
                                    />
-                                   <ImageIcon 
+                                   <ImageIcon className='skill-letra-img'
                                    height={28} 
                                    src={skill.imageUrl} 
                                    alt={`${skill.name} icon`} 

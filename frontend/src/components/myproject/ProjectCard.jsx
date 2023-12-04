@@ -40,7 +40,7 @@ function ProjectCard(data){
                  
 
                   <p
-                    className="px-2 mt-[15px] text-sm dark:text-dark-txt text-center  text-zinc-700 tracking-wide font-light"
+                    className="languages px-2 mt-[15px] text-sm dark:text-dark-txt text-center  text-zinc-700 tracking-wide font-light"
                     dangerouslySetInnerHTML={{
                     __html:
                     project.description && DOMPurify.sanitize(project.description.length) > 99
@@ -61,24 +61,24 @@ function ProjectCard(data){
 
 
                 
-                  <div className='flex flex-row items-center mb-[5px]'>
+                  <div className='div-languages flex flex-row items-center mb-[5px]'>
                   <p className="languages text-xs font-semibold text-gray-900 text-center">
                   Languages:
                   </p>
 
-                  <p className="px-2 text-sm truncate w-[240px]" >
+                  <p className="languages px-2 text-sm truncate w-[240px]" >
                  { project.category + ","},
                                </p>  
 
                
                   </div>
 
-                  <div className='flex flex-row items-center'>
+                  <div className='div-languages flex flex-row items-center'>
                   <p className="languages text-xs font-bold text-gray-900 text-center">
                   Keywords: 
                   </p>
                   
-                  <p className="px-2 text-sm truncate w-[240px]" >
+                  <p className="languages px-2 text-sm truncate w-[240px]" >
                  { project.tags + ","},
                                </p>  
 
@@ -98,7 +98,7 @@ function ProjectCard(data){
              <div className="project-card-authors bg-zinc-300  rounded-lg items-center mt-2 py-4 px-2 h-[74px]">
 
                 {/*CONTAINER GENERAL DE AUTRORES Y DATA CON ICONO */}
-                <div className='flex flex-row'>
+                <div className='div-languages flex flex-row'>
                  {/*SOLO EL ICONO */}
                  <div className="flex-shrink-0 w-[2.2rem]">    
                    <img
@@ -113,11 +113,11 @@ function ProjectCard(data){
 
                       {/*CONTAINER DE AUTHORS Y NOMBRES*/}
                        <div className="flex flex-row  w-[99%]">
-                          <p className="w-[21%] text-xs font-bold text-gray-900">
+                          <p className="languages w-[21%] text-xs font-bold text-gray-900">
                           authors: 
                           </p>
-                          <div className=' w-[78%] '>
-                            <p className="text-gray-900 dark:text-white tracking-tight text-sm truncate w-[99%] sm:text-sm" dangerouslySetInnerHTML={{
+                          <div className='d-authors w-[78%] '>
+                            <p className="languages text-gray-900 dark:text-white tracking-tight text-sm truncate w-[99%] sm:text-sm" dangerouslySetInnerHTML={{
                                    __html:
                                    project.authors && DOMPurify.sanitize(project.authors.length) > 20
                                     ? DOMPurify.sanitize(project.authors.slice(0, 50)) 

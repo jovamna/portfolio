@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState} from "react";
-import { motion, useMotionValue, useTransform } from "framer-motion";
+import {useMotionValue, useTransform } from "framer-motion";
 
 
 
