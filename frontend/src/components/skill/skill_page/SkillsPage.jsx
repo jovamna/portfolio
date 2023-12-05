@@ -36,12 +36,12 @@ const SkillItem = styled.a`
 
 const SkillsPage = () => {
     return <>
-
-      <div className="skills-page-movil w-[74%] h-[30rem]  mx-auto  sm:py-6 shadow-2xl sm:rounded-3xl bg-neutral-500 mr-2"
+              {/* bg-neutral-500 shadow-2xl*/}
+      <div className="skills-page-movil w-[74%] h-[30rem]  mx-auto  sm:py-6  sm:rounded-3xl  mr-2"
       >
 
            {/*H1 VA CON CSS  .skills-page h1 */}
-           <h1 className='underline underline-offset-8 font-mono text-5xl font-bold text-center tracking-tight text-white sm:text-4xl  md:text-center mb-[20px]'>
+           <h1 className='underline underline-offset-8 text-5xl font-bold text-center tracking-tight text-white sm:text-4xl  md:text-center mb-[20px]'>
            Skills
            </h1>
 

@@ -1,19 +1,34 @@
-import Language from "../modelUno/LanguagesSkillUno";
-import pytImage  from '../../../assets/img/hard_skills/languages/pyt.png';
-import pythImage from '../../../assets/img/hard_skills/languages/pyth.png';
-import javImage  from '../../../assets/img/hard_skills/languages/javaAgencia.png';
-import javhImage from '../../../assets/img/hard_skills/languages/java-blanco-fijo.png';
-import typImage  from '../../../assets/img/hard_skills/languages/typescript.png';
-import typhImage from '../../../assets/img/hard_skills/languages/type-f.png';
-import htmImage  from '../../../assets/img/hard_skills/languages/html.png';
-import hthImage from '../../../assets/img/hard_skills/languages/ml.png';
-import cssImage  from '../../../assets/img/hard_skills/languages/css.png';
-import csshImage from '../../../assets/img/hard_skills/languages/c.png';
-import tailImage  from '../../../assets/img/hard_skills/languages/tailwind-fijo.png';
-import tailhImage from '../../../assets/img/hard_skills/languages/tail.png';
-import sqlImage  from '../../../assets/img/hard_skills/languages/sql-blanco-fij.png';
-import sqlhImage from '../../../assets/img/hard_skills/languages/sql.png';
 
+import Language from "../modelUno/ModelALanguages";
+import pytImage  from '../../../assets/img/hard_skills/languages/pyt.png';
+//import pythImage from '../../../assets/img/hard_skills/languages/pyth.png';
+import pytbImage from '../../../assets/img/hard_skills/languages/pyblanco.png';
+
+
+//import javImage  from '../../../assets/img/hard_skills/languages/javaAgencia.png';
+import javhImage from '../../../assets/img/hard_skills/languages/java-blanco-fijo.png';
+import javbImage from '../../../assets/img/hard_skills/languages/javblanco.png';
+
+//import typImage  from '../../../assets/img/hard_skills/languages/typescript.png';
+import typhImage from '../../../assets/img/hard_skills/languages/type-f.png';
+import typbImage from '../../../assets/img/hard_skills/languages/typeblanco.png';
+
+//import htmImage  from '../../../assets/img/hard_skills/languages/html.png';
+import hthImage from '../../../assets/img/hard_skills/languages/ml.png';
+import htbImage from '../../../assets/img/hard_skills/languages/htblanco.png';
+
+
+//import cssImage  from '../../../assets/img/hard_skills/languages/css.png';
+import csshImage from '../../../assets/img/hard_skills/languages/c.png';
+import cssbImage from '../../../assets/img/hard_skills/languages/csblanco.png';
+
+//import tailImage  from '../../../assets/img/hard_skills/languages/tailwind-fijo.png';
+import tailhImage from '../../../assets/img/hard_skills/languages/tail.png';
+import tailbImage from '../../../assets/img/hard_skills/languages/tailblanco.png';
+
+import sqlImage  from '../../../assets/img/hard_skills/languages/sql-blanco-fij.png';
+//import sqlhImage from '../../../assets/img/hard_skills/languages/sql.png';
+import sqlbImage from '../../../assets/img/hard_skills/languages/sqlblanco.png';
 
 
 
@@ -21,7 +36,7 @@ import sqlhImage from '../../../assets/img/hard_skills/languages/sql.png';
 
 const languageInformations: {[id: string]: Language} = {
     "python": {
-        imageUrl:pythImage,
+        imageUrl:pytbImage,
         name: "Python",
         color: "#3572a5",
         link: "https://en.wikipedia.org/wiki/Python_(programming_language)",
@@ -32,7 +47,7 @@ const languageInformations: {[id: string]: Language} = {
     
     "javascript": {
         name: "Javascript",
-        imageUrl: javImage,
+        imageUrl: javbImage,
         color: "#f1e05a",
         link: "https://en.wikipedia.org/wiki/JavaScript",
         logoUrl: javhImage,
@@ -42,7 +57,7 @@ const languageInformations: {[id: string]: Language} = {
     "typescript": {
         name: "Typescript",
         color: "#2b7489",
-        imageUrl: typImage ,
+        imageUrl: typbImage,
         link: "https://en.wikipedia.org/wiki/TypeScript",
         logoUrl: typhImage ,
         tabs: ["Software Development", "Web"],
@@ -52,7 +67,7 @@ const languageInformations: {[id: string]: Language} = {
     "html": {
         name: "HTML",
         color: "#e34c26",
-        imageUrl: htmImage,
+        imageUrl: htbImage,
         link: "https://en.wikipedia.org/wiki/HTML",
         logoUrl: hthImage,
         tabs: ["Software Development", "Web"],
@@ -61,7 +76,7 @@ const languageInformations: {[id: string]: Language} = {
     "css": {
         name: "CSS",
         color: "#563d7c",
-        imageUrl: cssImage,
+        imageUrl: cssbImage,
         link: "https://en.wikipedia.org/wiki/CSS",
         logoUrl: csshImage,
         tabs: ["Software Development", "Web"],
@@ -71,7 +86,7 @@ const languageInformations: {[id: string]: Language} = {
     "tailwind": {
         name: "Tailwind css",
         color: "#563d7c",
-        imageUrl: tailImage,
+        imageUrl: tailbImage,
         link: "https://en.wikipedia.org/wiki/CSS",
         logoUrl: tailhImage,
         tabs: ["Software Development", "Web"],
@@ -84,7 +99,7 @@ const languageInformations: {[id: string]: Language} = {
         color: "#ffffff",
         link: "https://en.wikipedia.org/wiki/SQL",
         logoUrl:  sqlImage,
-        imageUrl:  sqlhImage,
+        imageUrl:  sqlbImage,
         tabs: ["Software Development", "Databases"],
         level: 2,
     },

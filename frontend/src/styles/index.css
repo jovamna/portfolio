@@ -2578,8 +2578,8 @@ body
  /*CONTAINER DE ABOUT ME, DESCRIBIENDOME*/
  .subcontainer-about-movil{
   margin-bottom: 25px;
-  padding-left: 18px;
-  padding-right: 18px;
+  padding-left: 20px;
+  padding-right: 20px;
 
  }
 
@@ -2592,7 +2592,7 @@ body
   .skill-dos{
    border-radius: 0%;
    margin-bottom: 15px;
-   background-color: #ffffff;
+  
   }
 
   /*container general del card y el details*/
@@ -2663,6 +2663,25 @@ body
   height: 100px;
  }
 
+ /*.bloglist-blogcard-grid{
+  background-color: burlywood;
+ }*/
+
+  .responsive-altura-img-blog{
+    height: 200px;
+
+  }
+ .blog-image{
+  height: 200px;
+
+ }
+
+ .blog-image img{
+  height: 200px;
+
+ }
+
+
  /*.movil-footer-tres-menus-uno{
   
  }*/
@@ -2679,6 +2698,7 @@ body
  .footer-pie{
   margin-bottom: 15px;
  }
+
 
 
 

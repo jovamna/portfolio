@@ -21,12 +21,13 @@ width: 270px;
 /*SUBCONTAINER PRINCIPAL  GRIS*/
 /*--PARTE BAJA DONDE ESTA ESTA LA FRASE*/
 /*margin-top baja el card del dibujo*/
+/* box-shadow: 0 2px 7px 1px rgba(31, 31, 31, 0.2);*/ 
 const CardContainer = styled(motion.div)`
   width: 260px;
   display: flex;
   flex-direction: column;
   border-radius: 25px;
-  box-shadow: 0 2px 7px 1px rgba(31, 31, 31, 0.2);
+ 
   color: #fff;
   position: relative;
   cursor: grab;
@@ -143,12 +144,12 @@ export default function SkillCard() {
 
   return (
     <CardWrapper className="skill-card-movil w-[100%] h-[30rem]">
-
+          {/*bg-neutral-500 */}
           {/* CONTAINER DEL TEXTO DEVELOPER ,  backgroundColor:"rgb(115 115 115)"*/}
-         <CardContainer className="skill-card-movil-img-title bg-neutral-500 w-[100%] h-[30rem]"
+         <CardContainer className="skill-card-movil-img-title  w-[100%] h-[30rem]"
            style={{ x, y, rotateX, rotateY, z: 100 }}
            drag
-           dragElastic={0.16}
+           //dragElastic={0.16}
            dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
            whileTap={{ cursor: "grabbing" }}
            >
@@ -159,12 +160,11 @@ export default function SkillCard() {
                 <CircleWrapper  className="skillcard-container-fondo overflow-hidden  rounded-tl-2xl rounded-tr-2xl " >
                    <Circle className=" rounded-tl-2xl rounded-tr-2xl overflow-hidden">
                     
-                          <img className="skillcard-img-circle w-[100%] h-[20px] ml-[40px]" 
+                      <img className="skillcard-img-circle w-[100%] h-[20px] ml-[40px]" 
                           onLoad={handleImageLoad} 
                           src={skillFond} 
                           alt="skillFond" 
-                          />
-               
+                           />
                    </Circle >
 
                 </CircleWrapper>

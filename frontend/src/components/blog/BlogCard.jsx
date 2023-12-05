@@ -42,7 +42,7 @@ function BlogCard(data){
     
         if (post.thumbnail && !post.video) {
             return (
-                   <div className="relative flex flex-col justify-center items-center h-[40vh] h-[40%] ">
+                   <div className="blog-image relative flex flex-col justify-center items-center h-[40vh] h-[40%] ">
                    {/* <div className="img-blog w-full min-h-60 lg:h-60 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:aspect-none">*/}
                    <span aria-hidden="true" className="absolute inset-x-0 bottom-0 w-2/3 bg-gradient-to-t from-gray-200 opacity-50" />
                    <img src={thumbnailUrl} 
@@ -55,7 +55,7 @@ function BlogCard(data){
                  src={videoUrl} 
                  controls width="100%" 
                  //height="auto" 
-                 className="w-[100%] h-[40vh] h-[40%] inset-0 object-cover z-0 "
+                 className="blog-image w-[100%] h-[40vh] h-[40%] inset-0 object-cover z-0 "
                  onError={(e) => {
                    console.error("Error al cargar el video:", e.target.error);
                    }}
@@ -66,7 +66,7 @@ function BlogCard(data){
                  src={videoUrl} 
                  controls width="100%" 
                  //height="auto" 
-                 className="bg-gray-200  w-[100%] h-[40vh] h-[40%] inset-0 object-cover z-0 " 
+                 className="blog-image  bg-gray-200  w-[100%] h-[40vh] h-[40%] inset-0 object-cover z-0 " 
                  />;
 
         } else {

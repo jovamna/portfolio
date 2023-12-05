@@ -47,8 +47,8 @@ export default function About() {
  <div className= "about h-[100%] w-[100%] flex items-center justify-center pt-8">
 
 
-
-      <div className="container-about-tres max-w-[95%]  flex flex-col bg-neutral-600 mx-auto isolate  sm:rounded-3xl px-8 pt-12">
+   {/*bg-neutral-600 */}
+      <div className="container-about-tres max-w-[95%] bg-neutral-600 flex flex-col  mx-auto isolate  sm:rounded-3xl px-8 pt-12">
 
 
 
@@ -63,7 +63,7 @@ export default function About() {
                    </h1>
 
                    <h2
-                   className="text-center underline underline-offset-4 mb-8 font-extrabold"
+                   className="text-center text-gray-100 underline underline-offset-4 mb-8 font-extrabold"
                    >
                    {skillsSection.subTitle}
                    </h2>
@@ -71,7 +71,7 @@ export default function About() {
 
                    <div className="skill-item">
                    {skillsSection.skills.map((skill, index) => (
-                    <p className="text-gray-300 mb-2" key={index}>
+                    <p className="text-gray-200 mb-2" key={index}>
                     {skill.text}
                     </p>
                      ))}

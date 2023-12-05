@@ -20,7 +20,7 @@ export default function Skill() {
 
     <div  className='skill h-[100%] w-[100%] py-8 flex items-center justify-center'>
 
-
+   {/*bg-neutral-600 */}
        <div className="skill-tres bg-neutral-600 flex flex-col isolate  mx-auto isolate shadow-2xl  sm:rounded-3xl m-flex-columns  justify-between  items-center w-[95%]  pt-[50px]">
  
       

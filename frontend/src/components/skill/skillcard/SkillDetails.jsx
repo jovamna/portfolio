@@ -34,7 +34,7 @@ const SmallText = styled.span`
 /*DESCRIPTION*/ /*text-transform: uppercase; /*color: #000;*/
 const MediumText = styled.span`
 
-  font-size: 1em;
+  font-size: 0.9em;
   letter-spacing: normal;
   line-height: 20px;
   margin-top:8px;
@@ -48,12 +48,13 @@ const MediumText = styled.span`
 export function SkillDetails(_props) {
   return (
     <DetailsContainer className="skill-container-description h-[9rem]" >
+       {/*font-serif font-line */}
+      <SmallText className="skill-detail-small-movil  underline underline-offset-8"><h1>Developer Full Stack</h1></SmallText>
 
-      <SmallText className="skill-detail-small-movil font-serif underline underline-offset-8"><h1>Developer Full Stack</h1></SmallText>
-
+      {/*text-neutral-900 */} {/*font-serif font-line */}
       <SpacedHorizontalContainer>
-        <MediumText className="skill-detail-medium-movil font-serif font-line text-neutral-900"><p>Django RestFramework como Backend y React como Frontend
-          Nivel Basico 1 | Nivel Intermedio 2 | Nivel Experto 3 </p>
+        <MediumText className="skill-detail-medium-movil text-white "><p>Django RestFramework como Backend y React como Frontend
+        Basico 1 | Intermedio 2 | Experto 3 </p>
         </MediumText>
       </SpacedHorizontalContainer>
 

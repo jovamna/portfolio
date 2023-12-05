@@ -7,6 +7,8 @@ import { useState, useEffect, Fragment } from 'react';
 //import { useState } from 'react';
 import { NavLink,  Navigate } from "react-router-dom";
 import jova from "../../assets/img/logo/jova.png";
+import prob from "../../assets/img/logo/prob.png";
+import pro from "../../assets/img/logo/pro.png";
 import "../../styles/index.css";
 import { connect } from "react-redux"
 import { get_blog_list } from "../../redux/actions/blog";
@@ -95,6 +97,13 @@ function Navbar({
   user,
   }) {
 
+    useEffect(()=>{
+      get_blog_list()
+      search_blog(term)
+    }, [])
+
+
+
 
 
   const [currentRoute, setCurrentRoute] = useState('home'); // Establece el valor inicial en 'home' o en el valor que desees que esté activo por defecto
@@ -140,7 +149,7 @@ function Navbar({
              <div className="logo w-[26.7%] h-[3rem] inline-flex">
             <a href="/">
             <img className="w-[160px] h-[52px]"
-            src={jova}
+            src={pro}
             alt="logo"
             //width={150}
             //height={350}
@@ -481,12 +490,7 @@ function Navbar({
                            <SearchFormBox className=""  />}  
                            </div>}
 
-                           <div className='w-full  justify-center bg-violet-400   px-2 py-8 '>
-                           { window.location.pathname==='/search/:term'?<>
-                           </>
-                           :
-                           <SearchFormBox className=""  />}  
-                           </div>
+                        
                            {/*FIN CAJA DEL SEARCH */}
 
                           {/*3 CONTAINER DEL MOVIL DE LA NAVEGACION y SEARCH*/}
