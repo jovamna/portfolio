@@ -31,15 +31,15 @@ function BlogList({
     
     return(
         //bg-neutal-50 COLOR FONDO PARA EL SEGMENTO DE LOS CARDS POST LIST ESTA EN BLOG
-        <div className="pt-10 relative max-w-7xl mx-auto  px-4 sm:px-6  lg:px-8">
+        <div className="pt-10 max-w-7xl mx-auto  px-4 sm:px-6  lg:px-8">
             {
             blog_list ?
             <>
             {/* <div className="relative px-4 sm:px-6  lg:px-8">*/}
 
                   
-                     {/*EN ESE DIV ES SOLO GR DE TODOS LOS POSTS SE PONE PADDNG BOTOM PARA SEPARAR TODOS LOS POSTS DE LA PAGINATION pb-16 */}
-                     <div className="bloglist-blogcard-grid max-w-lg mx-auto grid gap-12 lg:grid-cols-3 lg:max-w-none ">
+                     {/*POSTS CON GRID,  GAP PARA ESPACIO HORIZONTAL X, O VERTICAL Y LOS POSTS DE LA PAGINATION pb-16 */}
+                     <div className="bloglist-blogcard-grid max-w-lg mx-auto grid gap-12 lg:grid-cols-3 gap-y-2 lg:max-w-none ">
                         {
                         blog_list.map(post=>(
                             <BlogCard 

@@ -59,7 +59,7 @@ body
 }
 
 
-
+  
 
 
   .hover-image {
@@ -2578,8 +2578,8 @@ body
  /*CONTAINER DE ABOUT ME, DESCRIBIENDOME*/
  .subcontainer-about-movil{
   margin-bottom: 25px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 21px;
+  padding-right: 16px;
 
  }
 
@@ -2664,8 +2664,14 @@ body
  }
 
  /*.bloglist-blogcard-grid{
-  background-color: burlywood;
+
+ }
+
+ .responsive-altura-blogcard{
+
  }*/
+
+
 
   .responsive-altura-img-blog{
     height: 200px;
@@ -2680,6 +2686,29 @@ body
   height: 200px;
 
  }
+
+/*BLOG POST*/
+
+ .movil-portada-subcaja{
+  width: 100%;
+  height: 200px;
+ }
+
+ .movil-portada-subcaja img{
+  width: 100%;
+  height: 100%;
+ }
+
+
+
+ .movil-video-portada{
+  width: 100%;
+  height: 200px;
+ }
+
+ 
+
+
 
 
  /*.movil-footer-tres-menus-uno{

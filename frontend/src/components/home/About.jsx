@@ -71,7 +71,7 @@ export default function About() {
 
                    <div className="skill-item">
                    {skillsSection.skills.map((skill, index) => (
-                    <p className="text-gray-200 mb-2" key={index}>
+                    <p className="first-letter:text-teal-400  first-letter:float-left first-letter:pr-1 first-letter:font-medium first-letter:font-mono first-letter:text-4xl first-letter:italic first-letter:leading-3 text-gray-200 mb-2" key={index}>
                     {skill.text}
                     </p>
                      ))}
@@ -82,7 +82,7 @@ export default function About() {
                {/*SEGUNDA COLUMNA IMAGEN */}
                <div className="subcontainer-about-movil-img flex flex-col justify-end items-end w-[40%]">
 
-                  <div  className="letra-dise text-white text-[0.7em] hover:text-orange-400">
+                  <div  className="letra-dise text-white text-[0.7em] hover:text-teal-400">
                
 
                    {slides.map((slide, index) => (

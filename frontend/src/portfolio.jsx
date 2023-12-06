@@ -39,22 +39,22 @@ const socialMediaLinks = {
   display: true // Set true to display this section, defaults to false
 };
 
-// Skills Section
+// Skills Section ⚡ ⚡⚡ 
 
 const skillsSection = {
   title: "Acerca de mí.",
   subTitle: "DESARROLLADOR FULL STACK APASIONADA POR EXPLORAR TODAS LAS TECNOLOGÍAS",
   skills: [
     {
-      text: "⚡ Soy un desarrollador junior full stack apasionado por explorar diversas tecnologías y construir soluciones completas. Mi enfoque principal radica en el desarrollo de backend utilizando Django para implementar APIs potentes, sistemas de autenticación seguros y gestión eficiente de bases de datos. Con habilidades sólidas en el desarrollo de aplicaciones web, puedo ofrecer lógica de servidor robusta y eficiente, facilitando la gestión y el mantenimiento del backend de un sitio web",
+      text: " Soy un desarrollador junior full stack apasionado por explorar diversas tecnologías y construir soluciones completas. Mi enfoque principal radica en el desarrollo de backend utilizando Django para implementar APIs potentes, sistemas de autenticación seguros y gestión eficiente de bases de datos. Con habilidades sólidas en el desarrollo de aplicaciones web, puedo ofrecer lógica de servidor robusta y eficiente, facilitando la gestión y el mantenimiento del backend de un sitio web",
       className: "skill-item"
     },
     {
-      text: "⚡ En el ámbito del frontend, he dominado HTML, CSS y estoy avanzando en el uso de React para crear interfaces de usuario atractivas y altamente interactivas. Aunque mi pasión reside principalmente en el backend, mi experiencia en el frontend me permite diseñar y desarrollar interfaces de usuario sofisticadas que mejoran significativamente la experiencia del usuario.",
+      text: " En el ámbito del frontend, he dominado HTML, CSS y estoy avanzando en el uso de React para crear interfaces de usuario atractivas y altamente interactivas. Aunque mi pasión reside principalmente en el backend, mi experiencia en el frontend me permite diseñar y desarrollar interfaces de usuario sofisticadas que mejoran significativamente la experiencia del usuario.",
       className: "skill-item"
     },
     {
-      text: "⚡ Además, he trabajado en la integración de diversos servicios de terceros, incluyendo AWS y Digital Ocean, para mejorar la escalabilidad y el rendimiento de las aplicaciones. Si bien mi experiencia actual se centra en tecnologías específicas, mi entusiasmo por aprender y crecer en el campo del desarrollo web y la implementación de soluciones innovadoras es inquebrantable.",
+      text: "Además, he trabajado en la integración de diversos servicios de terceros, incluyendo AWS y Digital Ocean, para mejorar la escalabilidad y el rendimiento de las aplicaciones. Si bien mi experiencia actual se centra en tecnologías específicas, mi entusiasmo por aprender y crecer en el campo del desarrollo web y la implementación de soluciones innovadoras es inquebrantable.",
       className: "skill-item"
     }
   ],

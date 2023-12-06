@@ -81,7 +81,7 @@ const SkillsPage = () => {
                                    alt={`${skill.name} icon`} 
                                    />
 
-                                   <span className='mb-6'>
+                                   <span className='mb-6 text-white'>
                                    {/*{skill.name}&nbsp;*/}
                                    <sup>{skill.level}</sup>
                                    </span>

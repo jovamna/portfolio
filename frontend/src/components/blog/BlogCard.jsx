@@ -47,27 +47,37 @@ function BlogCard(data){
                    <span aria-hidden="true" className="absolute inset-x-0 bottom-0 w-2/3 bg-gradient-to-t from-gray-200 opacity-50" />
                    <img src={thumbnailUrl} 
                    alt="post" 
-                   className="w-[100%] h-[40vh] h-[40%] inset-0 object-cover z-0 "/>
+                   className="w-[100%] h-[40vh] inset-0 object-cover z-0 "/>
                    </div>
                    );
         } else if (post.video&& !post.thumbnail) {//para el border radious de izquierda y derecha del top className="rounded-t-2xl"
-          return <video 
+          return <div className="bg-green-400 h-[55%]"  >
+               <video 
                  src={videoUrl} 
                  controls width="100%" 
                  //height="auto" 
-                 className="blog-image w-[100%] h-[40vh] h-[40%] inset-0 object-cover z-0 "
+                 className="blog-image w-[100%] h-[40vh]  inset-0 object-cover z-0 "
                  onError={(e) => {
                    console.error("Error al cargar el video:", e.target.error);
                    }}
                  />;
 
+          </div>
+       
+
         } else if (post.thumbnail && post.video) {
-          return <video 
+
+          return <div className="bg-green-400 h-[55%] ">
+             <video 
                  src={videoUrl} 
                  controls width="100%" 
                  //height="auto" 
-                 className="blog-image  bg-gray-200  w-[100%] h-[40vh] h-[40%] inset-0 object-cover z-0 " 
+                 className="blog-image bg-gray-200  w-[100%] h-[40vh] inset-0 object-cover z-0 " 
                  />;
+
+
+          </div>
+         
 
         } else {
                 // Si no hay imagen ni video, no se muestra nada
@@ -82,10 +92,10 @@ function BlogCard(data){
       return (
               <>
               {post ? (
-                     <div className="responsive-altura-blogcard h-[100%] flex flex-col hover:bg-gray-100 hover:opacity-90 opacity-100 border-b-2 border-zinc-300 pb-6">
+                     <div className="responsive-altura-blogcard h-[100%] flex flex-col hover:bg-gray-100 hover:opacity-90 opacity-100 border-b-2 border-zinc-300">
                      
                         {/*1 CONTAINER DE IIMAGEN O VIDEO*/}
-                        <div className="responsive-altura-img-blog h-[62%] mb-8">   
+                        <div className="responsive-altura-img-blog h-[55%]">   
                         {renderMedia()}
                         </div>
                             
@@ -112,11 +122,10 @@ function BlogCard(data){
                             
                           
                                  {/*POST LA CATEGORIA */}
-                                 <div className=" flex  items-center justify-center">
+                                 <div className=" flex items-center justify-center">
                                      <Link 
                                      to={`/categories/${post.category.slug}`} 
                                      className="inline-block"
-                                  
                                      >
 
                                      {/*QUITAR SI SE QUIERE  padding izq y derech px-3 py-0.5*/}
