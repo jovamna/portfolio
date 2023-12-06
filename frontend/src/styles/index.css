@@ -30,6 +30,21 @@ body
     /*overflow: hidden;*/
   }
 
+  
+.cookie{
+  position: fixed;
+  z-index: 1500;
+  bottom: 20px;
+  right: 0;
+  left: 0;
+}
+
+.movil-footer {
+  position: relative; /* Asegúrate de que el footer tenga posición */
+  z-index: 100;
+}
+
+
 
 /* Agrega estilos CSS para el ToastContainer en FullWidthLayout */
 .Toastify__toast-body {
@@ -366,14 +381,6 @@ button:hover .newsletter-animation {
 }
 
 
-
-.cookie{
-  position: fixed;
-  z-index: 1100;
-  bottom: 20px;
-  right: 0;
-  left: 0;
-}
 
 
 
@@ -1495,7 +1502,152 @@ width: 100%;
 
 }
 
+@media only screen and (min-width: 360px) and (max-width: 740px) {
+  .cookie{
+    max-width: 98%;
+    margin: auto;
+    padding-top: 12px;
+    z-index: 100;
+  }
 
+  .cookie-consent{
+    max-width: 100%;
+    padding: 0px 0px 0px 4px;
+  }
+
+  .cookie-buttons{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cookie-button-aceptar{
+   padding-left: 0px;
+   padding-right: 0px;
+  }
+
+  .cookie-button-configurar{
+    padding-left: 0px;
+    padding-right: 0px;
+   }
+  /*SUBCONTAINER 1 DE LA PAGINA PROJECT*/
+  .project-movil{
+    width: 95%;
+    height: 1000px;
+  }
+
+  .project-movil-colores{
+    width: 95%;
+  }
+  /*SUBCONTAINER IMPORTANTE DEL PROJECT-MOVIL DE LA PAGINA PROJECT IMPORTANTE*/
+  .project-tercero{
+  
+    max-height: 100%;
+  }
+  
+  /*SUBCONTAINER 2 DE LA PAGINA PROJECT*/
+  .project-row-movil{
+    width: 90%;
+    height:100%;
+    margin-top: -60px;
+   margin: auto;
+   margin-left: 30px;
+  }
+  
+     /*CONTAINER PRINCIPAL DE LA PAGINA PROJECTHOME*/
+     /*PAGINA DE LISTADO DE LOS GITHUBS*/
+     .project-home{
+      width: 200px;
+     height: 680px;
+     max-height: 100%;
+    }
+  
+   /*SUBCONTAINER DE PROJECTHOME NARANJA*/
+   .home-project{
+    display: grid;
+    width: 190px;
+    height: 100%;
+   
+  }
+  
+  
+    /*CONTAINER PRINCIPAL DEL PROJECTCARD DEL GITHUB */
+    /*ESTE ES SOLO UN GITHUB ES EL ESPACIO BLANCO*/
+  
+    /*SUBCONTAINER DE PROJECT-MOVIL-CARD*/
+   /*ES EL ESPACIO  NARANJA COGE 2 GITHUBS*/
+    .card-project{
+      width: 185px;
+     height: 100%;
+   }
+  
+     /*SUBCONTAINER DE CARD-POJECT PRIMER CUADRO*/
+      /*CONTainer general del contenido del cardgithub*/
+    .project-movil-card{
+      width: 185px;
+      height:100%;
+ 
+    }
+  
+    /*IMAGEN DEL ICONO GITHUB*/
+    .project-card img{
+      margin-left: -100px;
+    }
+  
+     /*SUBCONTAINER DE CARD-POJECT SEGUNDO CUADRO*/
+     .authors{
+      width: 235px;
+      height: 70px;
+    }
+  
+  
+  /*IMAGEN COSTADO DE LOS GITHUBS*/
+  .project-row-movil h2{
+   font-size: 1.3em;
+ 
+  }
+ 
+  .ver-mis-projectos a{
+   font-size: 0.9em;
+  }
+ 
+ 
+  .project-img-movil{
+   left: 70px;
+   top: 40px;
+   width: 120px;
+   height: 150px;
+   
+   }
+  
+   .project-img-movil img{
+     width: 120px;
+     height: 150px;
+    }
+ 
+    .div-languages{
+     width: 100%;
+ 
+    }
+ 
+    .project-card-title-description .languages{
+     font-size: 0.8em;
+ 
+    }
+ 
+    .d-authors{
+     width: 44%;
+     
+    }
+ 
+    .d-authors p{
+     font-size: 0.7em;
+    }
+  
+  /* FIN RESPONSIVE DE LOS GITHUB E IMAGEN*/
+
+
+
+}
 
 @media only screen and (min-width: 360px) and (max-width: 667px) {
 
@@ -1527,6 +1679,34 @@ body
     /*overflow: hidden;*/
   }
 
+  .cookie{
+    max-width: 98%;
+    margin: auto;
+    padding-top: 12px;
+    z-index: 100;
+  }
+
+  .cookie-consent{
+    max-width: 100%;
+    padding: 0px 0px 0px 4px;
+  }
+
+  .cookie-buttons{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cookie-button-aceptar{
+   padding-left: 0px;
+   padding-right: 0px;
+  }
+
+  .cookie-button-configurar{
+    padding-left: 0px;
+    padding-right: 0px;
+   }
+    
+
 
 
 
@@ -1549,15 +1729,14 @@ body
      /*#303535  #333636*/
  .navbar{
   width: 100%;
-  height: 38px;
+  height: 40px;
 
 
  }
 
  .navbar-menu{
   width: 100%;
-  height: 38px;
-
+  height: 40px;
  }
  /*NAVBAR DEL PORTAFOLIO*/
 
@@ -1565,12 +1744,12 @@ body
     display: flex;
     align-items: flex-end;
     height: 40px;
-
+   
   }
 
   .navbar-logo .logo{
       width: 35%;
-      height: 34px;
+      height: 38px;
       margin-top: 25px;
       align-items: flex-end;
   }
@@ -1600,13 +1779,21 @@ body
     
     }
 
-    /*lupa casa*/
-.menu-movil{
+    /*menu del movil lupa casa*/
+  .menu-movil{
   display: flex;
     align-items: flex-end;
-    height: 38px;
+    height: 40px;
+  }
 
+.menu-movil .icon-search{
+  margin-top: 9px;
 }
+
+.menu-movil .icon-bihome{
+  margin-top: 9px;
+}
+
 
 
    .container-movil-login-registro {
@@ -1810,7 +1997,7 @@ body
   .home-image img{
     width: 100%;
     height: auto; 
-    margin-top: 30px;
+  margin-top: 5px;
   }
 
 
@@ -1822,16 +2009,15 @@ body
 
 .greeting-texto{
   top:86px;
-  left:26px;
+  left:22px;
   width: 110px;
   height: 130px;
-  
 }
 
 .greeting-texto h1{
   font-size: 0.67em;
  
-  line-height: 24px;
+  line-height: 16px;
 }
 
 .greeting-texto h2{
@@ -1843,8 +2029,10 @@ body
 
 .greeting-texto p{
   font-size: 0.56em;
-  line-height: 10px;
+  line-height: 8px;
+  width: 110px;
 }
+
 
 /*fin greetings*/
 
@@ -1854,6 +2042,7 @@ body
 /*INICIO PAGINA ABOUT*/
 .about{
   height: 100%;
+  padding-top: 10px;
 }
 
 
@@ -1863,6 +2052,7 @@ body
    margin: auto;
     width: 100%;
     height: 100%; 
+   
   
   }
 
@@ -1871,7 +2061,7 @@ body
     flex-direction: column;
      margin: auto;
       width: 100%;
-   
+    
       height: auto; 
       margin-bottom: 40px;
     
@@ -1883,9 +2073,11 @@ body
 
   .subcontainer-about-movil h1{
     font-size: 1.3em;
-
+  margin-top: 20px;
   }
   .subcontainer-about-movil h2{
+    padding-left: 9px;
+    padding-right: 9px;
     font-size: 0.9em;
 
   }
@@ -1894,32 +2086,38 @@ body
 
   }
 
+  .skill-item{
+    padding-left: 16px;
+    padding-right: 15px;
+  }
+
+
   .subcontainer-about-movil-img{
     display: flex;
     flex-direction: column;
     justify-content: center;
    align-items: center;
     width: 100%;
-
-  
   }
   
 
   .subcontainer-about-movil-img img{
     width: 85%;
     height: 85%; 
-  margin-top: -60px;
+    margin-top: -18px;
   }
   
   .letra-dise{
-    top: 35px;
-    right: 4px;
+    width: 110px;
+    top: 70px;
+    left: -43px;
   }
 
   .letra-dise p{
     font-size: 0.6em;
   }
 
+  
   /*FIN COMPONENTE ABOUT*/
 
   
@@ -2052,8 +2250,11 @@ body
  .project-movil{
   display: flex;
   flex-direction: column;
-  width: 100%;
-  
+  width: 94.2%;
+  height: auto;
+ padding-top: 0px;
+ padding-left: 0px;
+  padding-right: 0px;
 }
 /*SUBCONTAINER IMPORTANTE DEL PROJECT-MOVIL DE LA PAGINA PROJECT*/
 .project-movil-colores{
@@ -2061,11 +2262,25 @@ body
   flex-direction: column;
   width: 100%;
   height: auto;
+  padding-top: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 /*SUBCONTAINER 2 DE LA PAGINA PROJECT*/
 .project-row-movil{
   height: auto;
+  max-width: 300px;
+  margin-top: -170px;
+  margin: auto;
+}
+
+.project-row-movil h2{
+  font-size: 1.3em;
+}
+
+.project-card-title-description{
+  padding-bottom: 8px;
 }
 
 /*IMAGEN COSTADO DE LOS GITHUBS*/
@@ -2076,10 +2291,10 @@ body
 /*CONTAINER PRINCIPAL DE PROJECTHOME MARRON OSCURO*/
    /*CONTIENE AL PROJECTCARD*/
    .project-home{
-    width: 350px;
+    width: 280px;
    padding-left: 4px;
    padding-right: 4px;
-   margin-left: -40px;
+   margin-left: 10px;
   }
 
  /*SUBCONTAINER DE PROJECTHOME NARANJA*/
@@ -2100,8 +2315,8 @@ body
   .project-movil-card{
     display: flex;
     flex-direction: column;
-    width: 100%;
-    width: 345px;
+
+    width: 272px;
   }
 
    /*COMPONENTE CURRICULUM*/
@@ -2118,7 +2333,32 @@ body
 
   .contacto{
     height: 100%;
-    
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+ 
+  }
+
+  .subcontainer-contact {
+  width: 96%;
+  padding-left: 0px;
+  padding-right: 0px;
+  }
+
+  .contacto-row{
+    max-width: 10%;
+    max-width: 450px;
+  }
+
+  .contacto-row p{
+   font-size: 0.9em;
+   line-height: 16px;
+  }
+
+  .container-contacto-form{
+    width: 100%;
+    padding-left: 2px;
+    padding-right: 2px;
   }
   
   .movil-footer{
@@ -2157,23 +2397,27 @@ body
   gap: 4px;
  justify-content: center;
  width: 98%;
+ margin: auto;
+ margin-bottom: 10px;
  }
 
  
  .movil-footer-tres-menus-uno h3{
-  margin-left: -18px;
+
   font-size: 0.9em;
  }
 
- .movil-footer-tres-menus-uno a{
-  margin-left: -18px;
+ .movil-footer-tres-menus-uno li a{
+  font-size: 0.8em;
+  text-align: center;
  }
 
   /*FOOTER PIE SOCIAL Y DERECHOS DE AUTOR*/
  .movil-footer-social-ul{
   margin: auto;
   margin-top: -6px;
- 
+  margin-bottom: 10px;
+  
  }
 
   .movil-footer-pie{
@@ -2185,8 +2429,10 @@ body
 
   .movil-footer-pie-p{
     margin: auto;
-    font-size: 0.8em;
+    font-size: 0.7em;
     margin-top: 10px;
+    margin: auto;
+    margin-bottom: 12px;
   }
 
   
@@ -2488,10 +2734,35 @@ body
     /*overflow: hidden;*/
   }
 
+  .cookie{
+    max-width: 98%;
+    margin: auto;
+    padding-top: 12px;
+    z-index: 100;
+  }
 
+  .cookie-consent{
+    max-width: 100%;
+    padding: 0px 0px 0px 4px;
+  }
 
+  .cookie-buttons{
+    display: flex;
+    flex-direction: column;
+  }
 
-  
+  .cookie-button-aceptar{
+   padding-left: 0px;
+   padding-right: 0px;
+   margin-bottom: 5px;
+  }
+
+  .cookie-button-configurar{
+    padding-left: 0px;
+    padding-right: 0px;
+   }
+ 
+
 
 
     /*BOTON ARRIBA*/
@@ -2510,50 +2781,50 @@ body
      /*#303535  #333636*/
  .navbar{
   width: 100%;
-  height: 41px;
+  height: 40px;
   margin: auto;
-  background-color: #ffffff;
  }
 
+  /*menu solo de la pantalla grande*/
  .navbar-menu{
   width: 100%;
   margin: auto;
-  height: 41px;
-  background-color: #ffffff;
+  height: 40px;
  }
+
+ /*menu completo del movil*/
  .navbar-logo{
   width: 100%;
   margin: auto;
-  height: 41px;
-  background-color: #fff;
+  height: 40px;
+ 
  }
-
+ /*container solo de search y bihome*/
  .menu-movil{
-  height: 41px;
-  background-color: #ffffff;
+  height: 40px;
+  
  }
 
   .icon-search-bihome{
     display: flex;
     flex-direction: row; 
+;
   }
 
   .icon-search{
     margin-top: 8px;
+    
   }
 
   .icon-bihome{
     margin-top: 8px;
+    
   }
 
  .home{
-  padding-top: 1px;
-
+  padding-top: 20px;
  }
 
- .home-images .hover-image{
-  padding-top: 1px;
- }
 
  .greeting-texto{
   height: 180px;
@@ -2578,13 +2849,28 @@ body
  /*CONTAINER DE ABOUT ME, DESCRIBIENDOME*/
  .subcontainer-about-movil{
   margin-bottom: 25px;
-  padding-left: 21px;
-  padding-right: 16px;
-
+  
  }
 
  .subcontainer-about-movil h1{
   margin-top: 20px;
+  
+  padding-left: 16px;
+  padding-right: 16px;
+
+ }
+
+ 
+ .subcontainer-about-movil h2{
+  padding-left: 16px;
+  padding-right: 16px;
+ }
+
+ 
+ .subcontainer-about-movil .skill-item{
+  padding-left: 12px;
+  padding-right: 10px;
+
  }
 
 
@@ -2641,15 +2927,15 @@ body
 
  .project-row-movil{
   margin: auto;
+  
  }
   /*container del project card 2*/
  .project-home{
-  width: 310px;
+  width: 300px;
   height: auto;
   margin: auto;
-  padding-left: 6px;
-  padding-right: 6px;
-  margin-left: 12px;
+ 
+  
  }
 
  /*imagen de la pagina de github*/
@@ -2661,6 +2947,10 @@ body
 
  .project-img-movil img{
   height: 100px;
+ }
+
+ .project-h-title h2{
+  margin-top: 16px;
  }
 
  /*.bloglist-blogcard-grid{
@@ -2726,6 +3016,7 @@ body
 
  .footer-pie{
   margin-bottom: 15px;
+
  }
 
 

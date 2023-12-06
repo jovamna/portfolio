@@ -149,7 +149,7 @@ const handleScrollToTop = () => {
 
       <main className="isolate">
         {/*CONTAINER DEL TITULO Y DEL FORMULARIO */}
-        <div className=" flex flex-col relative px-6 lg:px-8 max-w-[95%]  mx-auto rounded-lg">
+        <div className=" subcontainer-contact  flex flex-col relative px-6 lg:px-8 max-w-[95%]  mx-auto rounded-lg">
         
             <div className="text-center ">
                <h1 className="text-4xl underline underline-offset-4 font-bold tracking-tight text-sans text-gray-900  sm:text-6xl">
@@ -160,7 +160,7 @@ const handleScrollToTop = () => {
             
             
              {/*CONTAINER 1 DE RIGHT Y LEFT*/}
-             <div className="relative max-w-7xl mx-auto lg:grid lg:grid-cols-5">
+             <div className="contacto-row relative max-w-7xl mx-auto lg:grid lg:grid-cols-5">
 
                  {/*CONTAINER 2 IZQUIERDA LEFT */}
                  <div className="py-8 px-4 sm:px-6 lg:col-span-2 lg:px-8 lg:py-8 xl:pr-12">
@@ -221,8 +221,8 @@ const handleScrollToTop = () => {
 
                   </div>
                         {/*FIN SUBCONTAINER 2 */}
-              </div>
-              {/*FIN CONTIANER 2 IZQUIERDA LEFT*/}
+                 </div>
+                  {/*FIN CONTIANER 2 IZQUIERDA LEFT*/}
 
 
 
@@ -232,7 +232,7 @@ const handleScrollToTop = () => {
 
 
               {/*CONTAINER 2 RIGHT FORM*/}
-                <div className="py-8 px-4 sm:px-6 lg:col-span-3 lg:py-8 lg:px-8 xl:pl-12">
+                <div className="container-contacto-form py-8 px-4 sm:px-6 lg:col-span-3 lg:py-8 lg:px-8 xl:pl-12">
                   <div className="max-w-lg mx-auto lg:max-w-none">
 
                     <form 

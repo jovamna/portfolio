@@ -60,7 +60,7 @@ function Project() {
                   <div className='project-row-movil flex flex-row w-[92%] h-[100%] mx-auto justify-between'> 
 
                       {/*DOS CARDS GITHUB */}
-                     <div className="flex flex-col w-[75%] lg:mx-0 lg:py-3 ">
+                     <div className="project-h-title flex flex-col w-[75%] lg:mx-0 lg:py-3 ">
 
                           <h2 className="underline underline-offset-8  text-3xl font-bold text-center tracking-tight text-white sm:text-4xl  md:text-center mt-8">
                           Mis Projectos de GitHub

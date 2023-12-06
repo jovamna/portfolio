@@ -28,8 +28,9 @@ function Home() {
     { component: <Project />, isNavbar: false },
     { component: <Cv />, isNavbar: false },
     { component: <Contact />, isNavbar: false },
-    { component: <CookieConsent />, isNavbar: false },
+    
     { component: <Footer />, isNavbar: false },
+    { component: <CookieConsent />, isNavbar: false },
   ];
 
   const [visibleComponents, setVisibleComponents] = useState([]);

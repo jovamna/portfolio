@@ -109,12 +109,12 @@ const CookieConsent= () => {
         <>
            {/*CONTAINER GENERAL DEL AVISO DE COOKIES Y SUS BOTONES*/}
           {showBanner && (
-          <div className="bg-orange-500  ">
+          <div className="cookie bg-orange-500">
           <div className="cookie flex flex-col mx-auto isolate bg-black max-w-[60%] items-center py-12 px-12">
 
             
                {/*CONTAINER DEL AVISO DE COOKIE */}
-              <div className="cookie-consent shadow-2xl sm:rounded-3xl  ">
+              <div className="cookie-consent shadow-2xl sm:rounded-3xl">
               <p className='text-white text-xs '>
               Este sitio web utiliza cookies para mejorar su experiencia.
               Puedes aceptar todas las cookies o gestionar tus preferencias en el panel de configuración. Consulta más información en <a href ="/politica-cookies" className='underline underline-offset-4'>Política de cookies.</a>
@@ -122,14 +122,14 @@ const CookieConsent= () => {
               </div>
 
                {/*DIVS DE LOS BOTONES */}
-              <div className='flex flex-row mt-6 w-[100%] justify-between'>
+              <div className='cookie-buttons flex flex-row mt-6 w-[100%] justify-between'>
               <button 
-              className='text-white text-xs rounded border-2 border-white px-28 py-2 '
+              className='cookie-button-aceptar text-white text-xs rounded border-2 border-white px-28 py-2 '
               onClick={handleAccept}>
                Aceptar Todas
                </button>
                <button 
-               className='text-black bg-white text-xs rounded border-2 border-white px-28 py-2'
+               className='cookie-button-configurar text-black bg-white text-xs rounded border-2 border-white px-28 py-2'
                onClick={handleConfigure}>
                Configurar Cookies
                </button>

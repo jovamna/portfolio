@@ -58,12 +58,12 @@ const navigation = {
   
 function Footer() {
     return (
-      <footer className="movil-footer bg-neutral-700 min-h-full opacity-95 items-center content-center mt-8"  aria-labelledby="footer-heading">
+      <footer className="movil-footer bg-neutral-700 min-h-full opacity-95 items-center content-center mt-8"  >
         <h2 id="footer-heading" className="sr-only">
           Footer
         </h2>
 
-         <div className=" flex flex-col max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8">
+         <div className="flex flex-col max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8">
          {/* <div className="xl:grid xl:grid-cols-3 xl:gap-8">*/}
 
           
