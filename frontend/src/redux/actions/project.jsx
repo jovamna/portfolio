@@ -27,7 +27,7 @@ export const get_project_list = () => async dispatch => {
         }
     };
     try{
-        const res = await axios.get(`${URL}/project/projects`, config);
+        const res = await axios.get(`${URL}/api/project/projects`, config);
         console.log(res)
         if (res.status === 200) {
             dispatch({
