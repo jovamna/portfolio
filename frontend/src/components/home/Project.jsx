@@ -1,8 +1,4 @@
 import ProjectHome from '../myproject/ProjectHome';
-import projec from "../../assets/img/home/projec.jpg";
-import gi from "../../assets/img/home/gi.jpg";
-import ga from "../../assets/img/home/ga.jpg";
-import ge from "../../assets/img/home/ge.jpg";
 import go from "../../assets/img/home/go.jpg";
 
 import { BiChevronsUp } from "react-icons/bi";

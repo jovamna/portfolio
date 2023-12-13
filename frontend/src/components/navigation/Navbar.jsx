@@ -7,7 +7,7 @@ import { useState, useEffect, Fragment } from 'react';
 //import { useState } from 'react';
 import { NavLink,  Navigate } from "react-router-dom";
 import jova from "../../assets/img/logo/jova.png";
-import prob from "../../assets/img/logo/prob.png";
+
 import pro from "../../assets/img/logo/pro.png";
 import "../../styles/index.css";
 import { connect } from "react-redux"
