@@ -116,8 +116,8 @@ ROOT_URLCONF = 'core.urls'
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
-    "https://www.jovamnamedina.com",
-   
+    'https://www.jovamnamedina.com',
+    'https://jovamnamedina.com',
 ]
 
 CORS_ORIGIN_WHITELIST = [
@@ -125,7 +125,8 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:8000',
     'http://127.0.0.1:5173',
     'http://127.0.0.1:8000',
-    "https://www.jovamnamedina.com",
+    'https://www.jovamnamedina.com',
+    'https://jovamnamedina.com',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -133,7 +134,8 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8000',
     'http://127.0.0.1:5173',
     'http://127.0.0.1:8000',
-    "https://www.jovamnamedina.com",
+    'https://www.jovamnamedina.com',
+    'https://jovamnamedina.com',
 ]
 
 CSRF_CONFIG_DOMAIN = "jovamnamedina.com"
