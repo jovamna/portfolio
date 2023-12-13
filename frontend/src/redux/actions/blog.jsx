@@ -30,7 +30,7 @@ export const get_blog_list = () => async dispatch => {
     };
 
     try{
-        const res = await axios.get(`${URL}/api/blog/list`, config);
+        const res = await axios.get(`${URL}/blog/list`, config);
         console.log(res)
 
         if (res.status === 200) {
