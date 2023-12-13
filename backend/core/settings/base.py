@@ -116,8 +116,8 @@ ROOT_URLCONF = 'core.urls'
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
-    'https://www.foodingemotion.com',
-    'http://104.248.82.51',
+    "https://www.jovamnamedina.com",
+   
 ]
 
 CORS_ORIGIN_WHITELIST = [
@@ -125,7 +125,7 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:8000',
     'http://127.0.0.1:5173',
     'http://127.0.0.1:8000',
-    'http://104.248.82.51',
+    "https://www.jovamnamedina.com",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -133,17 +133,16 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8000',
     'http://127.0.0.1:5173',
     'http://127.0.0.1:8000',
-    'http://104.248.82.51',
+    "https://www.jovamnamedina.com",
 ]
 
-CSRF_CONFIG_DOMAIN = "foodingemotion.com"
+CSRF_CONFIG_DOMAIN = "jovamnamedina.com"
 
 if not DEBUG:
     ALLOWED_HOSTS = [
-        ".foodingemotion.com",
-        "foodingemotion.com",
-        "www.foodingemotion.com",
-        "104.248.82.51",
+        ".jovamnamedina.com",
+        "jovamnamedina.com",
+        "www.jovamnamedina.com",
     ]
     CORS_ORIGIN_WHITELIST = env.list('CORS_ORIGIN_WHITELIST_DEPLOY')
     CSRF_TRUSTED_ORIGINS = env.list('CORS_TRUSTED_ORIGIN_DEPLOY')
