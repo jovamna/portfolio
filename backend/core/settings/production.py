@@ -6,10 +6,10 @@ from .jwt import *
 
 # Configuración específica para el entorno de producción
 
-DEBUG = True
+DEBUG = False
 
 # Configuración de la base de datos para producción (por ejemplo, PostgreSQL)
-ALLOWED_HOSTS = ['localhost', 'jovamnamedina.com', 'www.jovamnamedina.com']
+ALLOWED_HOSTS = ['localhost', 'jovamnamedina.com', 'www.jovamnamedina.com', '104.248.82.51']
 
 
 SECRET_KEY=os.environ.get('SECRET_KEY')
