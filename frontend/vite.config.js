@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react-swc';
 
 export default defineConfig({
   plugins: [react(),],
-  base: process.env.NODE_ENV === 'production' ? '/' : '/',
+  base: process.env.NODE_ENV === 'production' ? '/frontend/' : '/',
   build: {
     minify: 'terser',
     terserOptions: {
