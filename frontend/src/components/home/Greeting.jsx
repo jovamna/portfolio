@@ -20,17 +20,18 @@ function Greeting() {
               {/*  */}
                
               <div className="home-images h-[100%] ">
+                <div className="greeting-image">
                 <motion.div className='home-image' initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
                 <LazyImage src={portadaFinalTres} alt="portada" className="base-image"/>
                 <LazyImage src={portadaFinalDos} alt="portada"  className="hover-image absolute" />
                  {/* </div>*/}
                 </motion.div>
-          
+                </div>
 
                 {/* /End replace 👋 */}
                 <div className='greeting-texto absolute top-[180px] left-[70px] w-[380px] h-[440px] '>
                  <h1 className='texto-animado-developer font-mono font-extrabold text-3xl '>
-                  Hola Soy Jovamna   <span className="wave-emoji"><img src ={greetingMano} width={35}/></span>
+                  Hola Soy Jovamna <span className="wave-emoji"><img src ={greetingMano} width={35} className="manito"/></span>
                   </h1>
                   <h2 className='texto-animado-developer font-mono font-extrabold text-2xl leading-6 '>
                   Developer FullStack

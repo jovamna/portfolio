@@ -60,9 +60,11 @@ export const Tab = (props) => {
                   {/* CON EL CAMBIO AL HACER CLIK CAMBIA DE COLOR EL MENU ACTIVO**/}
               
 
-                    <button style={{ color: index === activeTab ? "#FFFFFF" : "#000000" }} className="tab-button">
-                  {value.title}
-                </button>
+                      <button 
+                      style={{ color: index === activeTab ? "#FFFFFF" : "#000000" }} 
+                      className="tab-button">
+                       {value.title}
+                      </button>
                 </li>
               );
             })}

@@ -109,7 +109,7 @@ const CookieConsent= () => {
         <>
            {/*CONTAINER GENERAL DEL AVISO DE COOKIES Y SUS BOTONES*/}
           {showBanner && (
-          <div className="cookie bg-orange-500">
+          <div className="cookie-general bg-orange-500">
           <div className="cookie flex flex-col mx-auto isolate bg-black max-w-[60%] items-center py-12 px-12">
 
             

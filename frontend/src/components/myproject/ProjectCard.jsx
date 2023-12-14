@@ -19,13 +19,13 @@ function ProjectCard(data){
              <div className="project-card-title-description px-4 h-[280px] pt-[15px] flex flex-col items-center w-full rounded-lg border-white  bg-zinc-300">
                   {/*ICONO DE GITHUB */}
                   <div className='flex justify-end items-end'>
-                    <div className='w-[26%]'>
-                    <img
-                   className=" h-[30px] w-[310px]  "
-                   src={github}
-                   alt="github"
-                   />
-                    </div>
+                     <div className='w-[26%]'>
+                      <img
+                      className=" h-[30px] w-[310px]  "
+                       src={github}
+                       alt="github"
+                        />
+                      </div>
                   </div>
                   {/*FIN ICONO DE GITHUB */}
 

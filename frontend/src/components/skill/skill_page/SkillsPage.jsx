@@ -48,7 +48,8 @@ const SkillsPage = () => {
 
        
           {/*CONTAINER GENERAL DEl MENU Y LOS ICONOS  */}
-          {/*TabPanel TITULOS DEL MENU BUSCAR EN LA PAGINA  tabs/buttonDinamico*/}
+          {/*TabPanel TITULOS MENU BUSCAR EN  tabs/buttonDinamico*/}
+           {/*Tab SOFTWARE DEVELOPMENT, WEB, DATABASES, DATQ CIENCIA, TOOLS  tabs/buttonDinamico*/}
           <Tab>
 
          {skillsTabData.map((tabTitle, tabIndex) => {

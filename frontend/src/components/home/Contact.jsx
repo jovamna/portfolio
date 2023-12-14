@@ -163,7 +163,7 @@ const handleScrollToTop = () => {
              <div className="contacto-row relative max-w-7xl mx-auto lg:grid lg:grid-cols-5">
 
                  {/*CONTAINER 2 IZQUIERDA LEFT */}
-                 <div className="py-8 px-4 sm:px-6 lg:col-span-2 lg:px-8 lg:py-8 xl:pr-12">
+                 <div className="contacto-izquierda py-8 px-4 sm:px-6 lg:col-span-2 lg:px-8 lg:py-8 xl:pr-12">
                     {/*SUBCONTAINER 2 */}
                     <div className="max-w-lg mx-auto">
 

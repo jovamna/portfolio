@@ -731,7 +731,42 @@ body
     font-size: 1em;
   }
 
+    .cookie-general{
+      display: flex;
+      bottom: 0px;
     
+    }
+  .cookie{
+    max-width: 100%;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 8px;
+    padding-bottom: 12px;
+ 
+  }
+  .cookie-consent{
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+  
+  }
+
+  .cookie-buttons{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cookie-button-aceptar{
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-bottom: 8px;
+  }
+
+  .cookie-button-configurar{
+    padding-left: 0px;
+    padding-right: 0px;
+
+  }
 
 
   .tab-menu {
@@ -750,6 +785,7 @@ body
   display: flex;
   flex-direction: column;
   margin: auto;
+  
 }
 
   /*CHATBOT*/
@@ -855,6 +891,10 @@ body
     width: 12px;
   }
 
+  /*about*/
+  .about{
+    padding-top: 12px;
+  }
 
     .container-about-tres{
       display: flex;
@@ -884,11 +924,12 @@ body
 
     .subcontainer-about-movil h1{
       font-size: 1.4em;
-
+      margin-top: 8px;
+     margin-bottom: 8px;
     }
 
     .subcontainer-about-movil h2{
-      font-size: 0.8em;
+      font-size: 0.7em;
 
     }
 
@@ -901,7 +942,10 @@ body
     }
 
 
- 
+  .skill-item{
+    padding-left: 6px;
+    padding-right: 4px;
+  }
   
   .skill-item p{
   font-size: 0.9em;
@@ -925,17 +969,20 @@ body
   
  
   /*PAGINA SKILL*/
+
+  
   .skill-tres{
     display: flex;
     flex-direction: column;
     padding-top: 0px;
-    
+    height: auto;
   }
 
   .skill-dos{
     display: flex;
     flex-direction: column;
-    
+    padding-top: 0px;
+    height: auto;
   }
 
   /*DE LA PAGINA SKILL-CARD*/
@@ -945,8 +992,7 @@ body
 
   .skills-page-movil{
     width: 100%;
-    height: 350px;
-
+    height: auto;
   }
 
   .skills-page-movil h1{
@@ -958,36 +1004,38 @@ body
    
   }*/
 
-
-  
   /*LU LI letras softw, web, databa, tools*/
 
   
 .container-general-tab{
   height: 265px;
-   
   }
 
   .container-general-tab ul{
     height: 69px;
+    width: 100%;
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap; /* Evita el salto de línea */
+   
   }
 
   .container-general-tab li{
-    height: 52px;
- 
+    height: 42px;
+   
   }
    
   /*TITULOS DEL MENU SKILL*/
   .container-general-tab li .tab-button{
-    font-size: 0.7em;
+    font-size: 0.9em;
     height: 42px;
     margin: auto;
     line-height: 14px;
-
+    padding-left: 5px;
+     padding-right: 5px;
+ 
     }
   
-   
-
     /*container de los iconos de los skills*/
     .tab__content{
       height: 180px;
@@ -995,44 +1043,48 @@ body
     }
   
 
-  .tab__content .skill-logo-img {
+    .tab__content .skill-logo-img {
     width: 80%;
+    }
 
-  }
 
-  .tab__content .skill-letra-img{
+    .tab__content .skill-letra-img{
     width: 70%;
-
-  }
+    }
   
-  
-
     /*RESPONSIVE DE LOS GITHUB E IMAGEN*/
   /*SUBCONTAINER 1 DE LA PAGINA PROJECT*/
   .project-movil{
-   width: 100%;
-   height: 1250px;
+   width: 95%;
+   margin: auto;
+   padding-left: 0px;
+   padding-right: 0px;
+   padding-bottom: 0px;
+   height: auto;
+   padding-top: 0px;
  }
- /*SUBCONTAINER IMPORTANTE DEL PROJECT-MOVIL DE LA PAGINA PROJECT IMPORTANTE*/
- .project-tercero{
-   height: 1250px;
-   max-height: 100%;
+
+ /*importante*/
+ .project-movil-colores{
+  width: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
  }
  
  /*SUBCONTAINER 2 DE LA PAGINA PROJECT*/
  .project-row-movil{
    width: 100%;
    height:100%;
-   margin-top: -60px;
-   margin-left: -29px;
+   margin: auto;
  }
  
     /*CONTAINER PRINCIPAL DE LA PAGINA PROJECTHOME*/
     /*PAGINA DE LISTADO DE LOS GITHUBS*/
     .project-home{
      width: 260px;
-    height: 920px;
     max-height: 100%;
+    margin: auto;
    }
  
   /*SUBCONTAINER DE PROJECTHOME NARANJA*/
@@ -1061,10 +1113,16 @@ body
      height:100%;
 
    }
+
+   .project-card-title-description{
+    height: auto;
+   }
  
    /*IMAGEN DEL ICONO GITHUB*/
-   .project-card img{
-     margin-left: -100px;
+   .project-card-title-description img{
+    width: 100%;
+    height: 100%;
+     margin-left: 10px;
    }
  
     /*SUBCONTAINER DE CARD-POJECT SEGUNDO CUADRO*/
@@ -1100,7 +1158,7 @@ body
 
    .div-languages{
     width: 100%;
-
+  margin-bottom: 12px;
    }
 
    .project-card-title-description .languages{
@@ -1119,7 +1177,37 @@ body
  
  /* FIN RESPONSIVE DE LOS GITHUB E IMAGEN*/
 /*................*/
+/*.contacto{
+
+}*/
+
+ .subcontainer-contact{
+  padding-left: 0px;
+  padding-right: 0px;
+
+ }
+    /*CONTACTO*/
+    .contacto-row{
+      padding-left: 0px;
+      padding-right: 0px;
     
+    }
+    .contacto-izquierda{
+      padding-left: 5px;
+      padding-right: 5px;
+
+    }
+
+     /*div del form*/
+    .container-contacto-form{
+      padding-left: 4px;
+      padding-right: 4px;
+    
+    }
+
+
+
+    /**/
   
     .movil-lupa-bihome{
       display: flex;
@@ -1498,10 +1586,12 @@ width: 100%;
   margin-top: 10px;
 }
   
-
-
 }
 
+
+
+
+/*samsung galaxi s8*/
 @media only screen and (min-width: 360px) and (max-width: 740px) {
   .cookie{
     max-width: 98%;
@@ -1529,46 +1619,74 @@ width: 100%;
     padding-left: 0px;
     padding-right: 0px;
    }
+
+   /*componente about*/
+   .subcontainer-about-movil h2{
+    font-size: 0.7em;
+
+   }
+
+   /*componente skill*/
+   .skill-card-movil{
+    margin-top: 12px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+
+   }
+
+   .tab__content .skill-logo-img{
+    width: 59%;
+    height: 75%;
+  
+   }
+
+   .tab-menu li {
+    padding-left: 0.8px;
+    padding-right: 0.8px;
+
+   }
+
+
+   .tab-menu li .tab-button{
+    font-size: 0.94em;
+    
+   }
+
+
   /*SUBCONTAINER 1 DE LA PAGINA PROJECT*/
   .project-movil{
     width: 95%;
-    height: 1000px;
+    height: auto;
+    padding-left: 0px;
+    padding-right: 0px;
   }
 
   .project-movil-colores{
-    width: 95%;
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
   }
   /*SUBCONTAINER IMPORTANTE DEL PROJECT-MOVIL DE LA PAGINA PROJECT IMPORTANTE*/
-  .project-tercero{
-  
-    max-height: 100%;
-  }
-  
+
   /*SUBCONTAINER 2 DE LA PAGINA PROJECT*/
   .project-row-movil{
-    width: 90%;
+    width: 100%;
     height:100%;
-    margin-top: -60px;
    margin: auto;
-   margin-left: 30px;
+   padding-left: 0px;
+   padding-right: 0px;
   }
   
      /*CONTAINER PRINCIPAL DE LA PAGINA PROJECTHOME*/
      /*PAGINA DE LISTADO DE LOS GITHUBS*/
      .project-home{
-      width: 200px;
-     height: 680px;
-     max-height: 100%;
+      width: 100%;
+     height: auto;
+     padding-left: 0px;
+     padding-right: 0px;
     }
   
-   /*SUBCONTAINER DE PROJECTHOME NARANJA*/
-   .home-project{
-    display: grid;
-    width: 190px;
-    height: 100%;
-   
-  }
-  
+
   
     /*CONTAINER PRINCIPAL DEL PROJECTCARD DEL GITHUB */
     /*ESTE ES SOLO UN GITHUB ES EL ESPACIO BLANCO*/
@@ -1585,7 +1703,6 @@ width: 100%;
     .project-movil-card{
       width: 185px;
       height:100%;
- 
     }
   
     /*IMAGEN DEL ICONO GITHUB*/
@@ -1633,6 +1750,11 @@ width: 100%;
      font-size: 0.8em;
  
     }
+
+    /*.project-card-authors{
+      background: #3A9EA5;
+    }*/
+  
  
     .d-authors{
      width: 44%;
@@ -1652,14 +1774,14 @@ width: 100%;
 @media only screen and (min-width: 360px) and (max-width: 667px) {
 
   html,
-body
- { /* Cambia #root por el id de tu contenedor principal si es diferente */
+  body
+  { /* Cambia #root por el id de tu contenedor principal si es diferente */
   height: 100%;
   width: 100%;
   margin-bottom: 4rem;
   padding: 0;
-}
-  html {
+   }
+   html {
     line-height: 1.5;
     -webkit-text-size-adjust: 100%;
     -moz-tab-size: 4;
@@ -1706,12 +1828,6 @@ body
     padding-right: 0px;
    }
     
-
-
-
-
-  
-
 
     /*BOTON ARRIBA*/
     #topButton{
@@ -1839,11 +1955,7 @@ body
     width: 90%;
     margin: auto;
     height: 40px;
-    
   }
-
-  
-
 
 
 
@@ -2061,7 +2173,6 @@ body
     flex-direction: column;
      margin: auto;
       width: 100%;
-    
       height: auto; 
       margin-bottom: 40px;
     
@@ -2078,7 +2189,7 @@ body
   .subcontainer-about-movil h2{
     padding-left: 9px;
     padding-right: 9px;
-    font-size: 0.9em;
+    
 
   }
   .subcontainer-about-movil p{
@@ -2141,25 +2252,31 @@ body
     display: flex;
     flex-direction: column;
     height: 100%;
+    padding-left: 0px;
+  padding-right: 0px;
   }
 
   .skill-dos{
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100%;
+    height: auto;
+    padding-left: 0px;
+   padding-right: 0px;
+    margin-bottom: 12px;
 
   }
 
  .skill-card-movil{
   height: 60vh;
-  margin-bottom: 20px;
+  padding-left: 0px;
+  padding-right: 0px;
  }
 
  
 /* background-color: #767679;*/
 .skill-card-movil-img-title {
-  width: 450px;
+  width: 100%;
   margin: auto;
   height: 100%;
  }
@@ -2197,7 +2314,8 @@ body
   /*TABLERO DEL SKILLS MENU E ICONOS*/
 .skills-page-movil{
     width:100%;
-    height: 52vh;
+    height: auto;
+    margin-top: 2px;
 
   }
 
@@ -2215,9 +2333,7 @@ body
   /*UL*/
 
    .tab-menu li{
-
     font-size: 0.8em;
-   
    }
 
   .tab-button:hover{
@@ -3812,7 +3928,7 @@ margin-top: -4px;
 }
 
 
-
+/*SURFACE DUO*/
 @media only screen and (min-width: 540px) and (max-width: 720px) {
   
 
@@ -3827,6 +3943,32 @@ margin-top: -4px;
     margin-bottom: 24px;
    
   }
+ .greeting-texto{
+  width: 35%;
+  top: 95px;
+  left: 27px;
+ }
+
+ .greeting-texto h1{
+ width: 70%;
+ font-size: 0.88em;
+ }
+
+ .greeting-texto h2{
+  width: 60%;
+  font-size: 0.8em;
+  line-height: 18px;
+ }
+
+ 
+
+
+ .greeting-texto p{
+  width: 85%;
+  font-size: 0.6em;
+  letter-spacing: 0.4px;
+  line-height: 10px;
+ }
 
 
   /*POST BLOG*/
@@ -3867,36 +4009,45 @@ margin-top: -4px;
 /*RESPONSIVE DE LOS GITHUB E IMAGEN*/
  /*SUBCONTAINER 1 DE LA PAGINA PROJECT*/
  .project-movil{
-  width: 100%;
-  height: 1100px;
+  width: 95%;
+  margin: auto;
+  height: auto;
+  padding-left: 0px;
+  padding-right: 0px;
 }
-/*SUBCONTAINER IMPORTANTE DEL PROJECT-,OVIL DE LA PAGINA PROJECT*/
-.project-tercero{
-  height: 1100px;
-  max-height: 100%;
+/*ES LO MISMO QUE EL DE ABAJO SUBCONTAINER 2 DE LA PAGINA PROJECT*/
+.project-movil-colores {
+  width: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 /*SUBCONTAINER 2 DE LA PAGINA PROJECT*/
 .project-row-movil{
-  width: 100%;
+  max-width: 100%;
   height:100%;
-  margin-top: -60px;
-  margin-left: -20px;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin: auto;
 }
 
    /*CONTAINER PRINCIPAL DE LA PAGINA PROJECTHOME*/
    /*PAGINA DE LISTADO DE LOS GITHUBS*/
    .project-home{
-    width: 345px;
-   height: 920px;
-   max-height: 100%;
+   width: 100%;
+   height: auto;
+   margin: auto;
+   margin-left: 55px;
+   margin-top: 8px;
   }
 
  /*SUBCONTAINER DE PROJECTHOME*/
- .home-project{
+ .project-home-subcontainer{
   display: grid;
-  width: 335px;
+  width: 98%;
   height: 100%;
+  margin: auto;
+  
 }
 
 
@@ -3924,6 +4075,7 @@ margin-top: -4px;
     margin-left: -30px;
   }
 
+  
    /*SUBCONTAINER DE CARD-POJECT SEGUNDO CUADRO*/
    .authors{
     width: 315px;
@@ -3934,12 +4086,50 @@ margin-top: -4px;
 /*IMAGEN COSTADO DE LOS GITHUBS*/
 .project-img-movil{
  left: 70px;
- top: 40px;
 
  }
 /* FIN RESPONSIVE DE LOS GITHUB E IMAGEN*/
 
+/*SKILLS*/
+/*.skill-tres{
+  background-color: chocolate;
 }
+
+.skill-dos{
+  background-color: cadetblue;
+}*/
+
+/*COMPONENTE SKILL*/
+.skill-card-movil{
+  margin-top: 16px;
+  margin-bottom: 0px;
+
+}
+
+.container-general-tab li .tab-button{
+  font-size: 0.9em;
+
+}
+
+/*.skills-page-movil{
+ 
+  background-color: chartreuse;
+}*/
+
+.tab__content .skill-logo-img{
+
+  width: 51%;
+  height: 75%;
+}
+
+.tab__content .skill-letra-img{
+
+  width: 60%;
+}
+/*FINAL SURFACE DUO*/
+
+}
+
 
 
 
@@ -4160,9 +4350,9 @@ margin-top: -4px;
 
   
   /*COMPONENT GREETINGS*/
-  .home{
-    margin-top: 18px;
-  }
+  /*.home{
+    padding-top: 98px;
+  }*/
   .greeting-texto{
     left: 34px;
     height: 220px;
@@ -4543,8 +4733,75 @@ margin-top: -4px;
 
 /*surface duo pantalla grande*/
 @media only screen and (min-width: 912px) and (max-width: 1368px) {
+  html,
+body
+ { /* Cambia #root por el id de tu contenedor principal si es diferente */
+  height: 100%;
+  width: 100%;
+  margin-bottom: 4rem;
+  padding: 0;
+}
+  html {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    font-family: Nunito, sans-serif, ui-sans-serif, system-ui;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+}
+    
+ 
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    /*overflow: hidden;*/
+  }
 
  
+
+  .navbar{
+    width: 100%;
+    height: 62px;
+   
+    }
+
+    .navbar-logo{
+      height: 55px;
+      margin: auto;
+    
+    }
+
+    
+    
+    .home{
+      display: flex;
+    
+    }
+  
+    
+    .greeting-texto{
+      display: flex;
+      flex-direction: column;
+      width: 31%;
+      padding-left: 0px;
+      padding-right: 0px;
+
+    }
+ 
+
+    .greeting-texto .texto-animado-developer{
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      padding-left: 0px;
+      padding-right: 0px;
+      
+    }
+  
 
 }
 
