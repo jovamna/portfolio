@@ -20,7 +20,7 @@ function Cv() {
 
            <div className="px-4 py-2 sm:px-6">
           <h3 className="text-xl font-medium  text-white">Infomacion Curricular</h3>
-          <p className="mt-1 max-w-2xl text-sm text-gray-900">Detalles Personales</p>
+          <p className="mt-1 max-w-2xl text-sm text-gray-200">Detalles Personales</p>
            </div>
 
 

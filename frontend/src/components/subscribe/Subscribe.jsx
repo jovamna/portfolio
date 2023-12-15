@@ -50,7 +50,7 @@ const SubscribeForm = () => {
         {/*text-gray-400 */}
         <div className='movil-suscribe-text-div flex flex-col w-[100%] items-center justify-center'>
             <label 
-            className="movil-suscribe-text text-gray-400 mb-4 text-2xl  text-center font-mono font-thin"  
+            className="movil-suscribe-text text-gray-100 mb-4 text-2xl  text-center font-mono font-thin"  
             htmlFor="email">
             ¿No quieres perderte nada? Suscríbete a los boletines
             </label>

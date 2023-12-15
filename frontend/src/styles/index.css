@@ -845,7 +845,7 @@ body
       max-width: 100%;
       height: 35px;
       margin: auto;
-     background-color: blueviolet;
+    
     }
   
     .navbar-logo-menu .logo{
@@ -2818,7 +2818,7 @@ width: 60%;
 
 
 
-
+/*rosado*/
 /*IPHONE 12 PRO*/
 @media only screen and (min-width: 390px) and (max-width: 844px) {
 
@@ -2958,7 +2958,7 @@ body
  .letra-dise{
   width: 120px;
   left: -46px;
- 
+ top: 50px;
  }
 
 
@@ -2970,7 +2970,6 @@ body
 
  .subcontainer-about-movil h1{
   margin-top: 20px;
-  
   padding-left: 16px;
   padding-right: 16px;
 
@@ -2987,6 +2986,18 @@ body
   padding-left: 12px;
   padding-right: 10px;
 
+ }
+
+ .subcontainer-about-movil-img {
+  padding-top: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+ 
+ }
+
+ .subcontainer-about-movil-img img{
+  margin-top: -40px;
+  padding-top: 0px;
  }
 
 
@@ -3112,11 +3123,6 @@ body
   height: 200px;
  }
 
- 
-
-
-
-
  /*.movil-footer-tres-menus-uno{
   
  }*/
@@ -3136,28 +3142,22 @@ body
  }
 
 
-
-
-
-
 }
 
 
+/*amarillo*/
 @media only screen and (min-width: 641px) and (max-width: 667px) {
+
+
   #topButton{
     margin-right: -20px;
     }
-  
-  
-  
+
     /*CHATBOT*/
     .chat-container{
       width: 80%;
      margin-right: -22px;
     }
-  
-
-
 
  /*navbar projcet*/
  .container-movil-login-registro{
@@ -3715,8 +3715,11 @@ margin-top: -4px;
 
 }
 
+
+/*rojo*/
 @media only screen and (min-width: 668px) and (max-width: 719px) {
-  
+ 
+
   
   .logo-movil{
     width: 100%;
@@ -3930,19 +3933,33 @@ margin-top: -4px;
 
 /*SURFACE DUO*/
 @media only screen and (min-width: 540px) and (max-width: 720px) {
-  
-
+  .navbar{
+    max-width: 100%;
+ 
+  }
 
   .navbar-menu{
+  
     width: 100%;
-   }
+  }
+  .navbar-logo{
+    max-width: 100%;
 
+  }
+
+ 
+.logo img{
+  width: 100%;
+}
+  
   /*navbar projcet*/
   .movil-uno{
     width: 100%;
     margin-bottom: 24px;
-   
   }
+
+ 
+
  .greeting-texto{
   width: 35%;
   top: 95px;
@@ -3969,7 +3986,26 @@ margin-top: -4px;
   letter-spacing: 0.4px;
   line-height: 10px;
  }
+    /*about*/
+    .subcontainer-about-movil-img{
 
+      padding-top: 0px;
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+
+    .subcontainer-about-movil-img img{
+      padding-top: 0px;
+    margin-top: -70px;
+    }
+
+    .letra-dise{
+      top: 80px;
+      width: 150px;
+      height: 70px;
+      left: -60px;
+   
+    }
 
   /*POST BLOG*/
   .movil-form{
@@ -3985,11 +4021,10 @@ margin-top: -4px;
    }
 
    /*FOOTER PIE SOCIAL Y DERECHOS DE AUTOR*/
- .movil-footer-social-ul{
-  margin: auto;
-  margin-top: -6px;
- 
- }
+   .movil-footer-social-ul{
+    margin: auto;
+    margin-top: -6px;
+   }
 
   .movil-footer-pie{
     width: 99.4%;
@@ -4054,26 +4089,12 @@ margin-top: -4px;
   /*CONTAINER PRINCIPAL DEL PROJECTCARD DEL GITHUB */
   /*ESTE ES SOLO UN GITHUB ES EL ESPACIO BLANCO*/
   .project-movil-card{
-    width: 330px;
+    width: 100%;
     height: 100%;
+ 
   }
 
-  /*SUBCONTAINER DE PROJECT-MOVIL-CARD*/
-  .card-project{
-    width: 320px;
-   height: 100%;
- }
 
-   /*SUBCONTAINER DE CARD-POJECT PRIMER CUADRO*/
-  .project-card{
-    width: 315px;
-    height:80%;
-  }
-
-  /*IMAGEN DEL ICONO GITHUB*/
-  .project-card img{
-    margin-left: -30px;
-  }
 
   
    /*SUBCONTAINER DE CARD-POJECT SEGUNDO CUADRO*/
@@ -4132,12 +4153,97 @@ margin-top: -4px;
 
 
 
-
+/*YA ESTA*/
 @media only screen and (min-width: 721px) and (max-width: 767px) {
+  .navbar-logo{
+    background-color: #8a1170;
+  }
+
+ .hover-image{
+   top:20px;
+  }
+
+  .greeting-texto{
+    top: 120px;
+    left: 26px;
+    width: 35%;
+    height: 60%;
+   
+
+  }
+
+  .greeting-texto h1{
+    font-size: 1.3em;
+  }
+
+  .greeting-texto h2{
+    font-size: 1.1em;
+
+  }
+
+  .greeting-texto p{
+    margin-top: 2px;
+    font-size: 1em;
+    line-height: 16px;
+  }
+
+
+
+
+  .container-about-tres{
+    display: flex;
+    flex-direction: column;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .container-about-dos{
+    display: flex;
+    flex-direction: column;
+    padding-left: 0px;
+    padding-right: 0px;
+   width: 100%;
+  }
+
+  .subcontainer-about-movil{
+    width: 100%;
+    
+  }
+
+   /**/
+  .container-about-dos .subcontainer-about-movil-img{
+   width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    margin-top: -24px;
+  
+  }
+
+  .subcontainer-about-movil-img img{
+    max-width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+   
+  }
+
+  .letra-dise{
+    width:220px;
+    top: 180px;
+    left: -290px;
+  }
+  
   
      /*fin navbar oprafolio*/
    /*PAGINA SKILLS*/
     /*PAGINA SKILLS*/
+    .skill-dos{
+      display: flex;
+      flex-direction: column;
+    }
+
+
   .skills-main-div {
     width: 100%;
     margin: auto;
@@ -4307,8 +4413,10 @@ margin-top: -4px;
 
 
 
-/*ipad mini */
+/*ipad mini VERDE*/
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
+
+ 
 
   .logo{
     display: flex;
@@ -4353,6 +4461,19 @@ margin-top: -4px;
   /*.home{
     padding-top: 98px;
   }*/
+
+
+  .hover-image {
+    position:  absolute;
+    top: 20px;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  
+
+
+
   .greeting-texto{
     left: 34px;
     height: 220px;
@@ -4402,14 +4523,47 @@ margin-top: -4px;
   }
 
   .letra-dise{
-    width: 260px;
-    right: 270px;
-    top: 166px;
+    width: 230px;
+    left: -310px;
+    top: 180px;
+  
   }
 
-
-  
   /*PAGINA SKILLS*/
+  .skill-card-movil{
+    height: 480px;
+ 
+  }
+
+  .skill-card-movil-img-title{
+    height: 470px;
+  
+  }
+
+  .skill-container-images{
+   max-height: 390px;
+   
+  }
+
+  .skillcard-container-fondo{
+    max-height: 390px;
+    
+  }
+
+  .skillcard-container-fondo img{
+    width: 100%;
+    
+  }
+
+  .skillcard-container-developer img{
+    margin-top: 1px;
+   
+  }
+
+  .skill-container-description{
+    margin-top: 10px;
+  
+  }
 
   .skill-dos{
     display: flex;
@@ -4417,11 +4571,7 @@ margin-top: -4px;
   }
   
 
-  /*PAGINA SKILLCARD*/
-
-  .skill-card-movil .skill-card-movil-img-title{
-   height: 99.9%;
-  }
+ 
 
 
   /*TABLERO DEL SKILLS MENU E ICONOS*/
@@ -4481,22 +4631,18 @@ margin-top: -4px;
   /*RESPONSIVE DE LOS GITHUB E IMAGEN*/
   /*SUBCONTAINER 1 DE LA PAGINA PROJECT*/
   .project-movil{
-    width: 100%;
+    width: 95.1%;
   }
  
 
    /*CONTAINER PRINCIPAL DE LA PAGINA PROJECTHOME*/
    /*PAGINA DE LISTADO DE LOS GITHUBS*/
   .project-home{
- 
     width: 400px;
-   
   }
 
   .project-home-subcontainer{
-  
     width: 370px;
-   
   }
 
 
@@ -4510,9 +4656,6 @@ margin-top: -4px;
      }
  
    /*SUBCONTAINER DE PROJECT-MOVIL-CARD*/
- 
- 
- 
    .project-card-title-description{
      padding-bottom: 10px;
    }
@@ -4536,7 +4679,7 @@ margin-top: -4px;
           /*SUBCONTAINER 2 DE LA PAGINA PROJECT*/
   .project-img-movil{
     left: 60px;
-    background-color: rgb(177, 110, 22);
+
    }
    .project-img-movil img{
     top: 50px;
@@ -4731,7 +4874,7 @@ margin-top: -4px;
 
 }
 
-/*surface duo pantalla grande*/
+
 @media only screen and (min-width: 912px) and (max-width: 1368px) {
   html,
 body

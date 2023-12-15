@@ -168,7 +168,7 @@ const handleScrollToTop = () => {
                     <div className="max-w-lg mx-auto">
 
                        <h2 className="text-2xl font-gilroy-black tracking-tight text-gray-900 sm:text-3xl">
-                       Contáctame
+                     
                        </h2>
                        <p className="mt-3 text-lg leading-6 text-gray-500">
                         Para consultar cualquier duda o información escribir en este formulario, responderé en la mayor brevedad posible, Muchas gracias.
