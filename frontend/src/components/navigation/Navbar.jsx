@@ -163,7 +163,7 @@ function Navbar({
         
            {/*ICONO MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL */}
            {/*MOVIL ICONO CASA QUE ABRE EL MENU ESCONDIDO ICONO-1LADO DERECHO*/}
-           <div className=" menu-movil md:hidden h-[2.5em]  bg-white flex flex-row items-center justify-end w-[65%]">
+           <div className="menu-movil md:hidden h-[2.5em]  bg-white flex flex-row items-center justify-end w-[65%]">
                  
 
 
