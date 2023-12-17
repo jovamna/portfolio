@@ -1,26 +1,34 @@
-import blogPort from "../../assets/img/portadas/blogPort.mp4";
+import blogVid from "../../assets/img/portadas/blogVid.mp4";
 import CategoriesBlogHeader from "./CategoriesBlogHeader";
 import ResetPasswordSuccess from '../auth//ResetPasswordSuccess'; 
-
+import React, { useState } from 'react';
 
 function Header(){
-    return (
-        <>
-        <div className="portada-blog w-[100%] h-[500px] flex flex-col  ">
-              { /* <div className="portada-blog fullscreen relative h-screen ">*/}
-            <video
-                autoPlay
-                loop
-                muted
-                className="portada-blog-video object-cover h-[100%] z-0"
-            >
+
+    const [videoLoaded, setVideoLoaded] = useState(false);
+
+const handleVideoLoad = () => {
+  setVideoLoaded(true);
+};
+
+return (
+  <>
+    <div className={`portada-blog ${videoLoaded ? 'loaded' : ''} w-[100%] h-[500px] flex flex-col`}>
+      <video
+        autoPlay
+        loop
+        muted
+        className={`portada-blog-video object-cover h-[100%] z-0 ${videoLoaded ? 'loaded' : ''}`}
+        onLoadedData={handleVideoLoad}
+      >
                 <source 
-                src={blogPort} 
+                src={blogVid} 
+                //src={`blogVideo#t=1,10`}
                 type="video/mp4" 
-                autoPlay
-                loop
-                muted
-                duration="10" // Cambia este valor a la duración deseada en segundos
+                //autoPlay
+                //loop
+                //muted
+                //duration="10" // Cambia este valor a la duración deseada en segundos
                  className="object-cover z-0 "
                
                 />
@@ -45,9 +53,7 @@ function Header(){
               </div>
 
          
-              </>
-
-
+</>
 
     );
 }

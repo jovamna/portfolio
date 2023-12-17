@@ -28,8 +28,8 @@ function Home() {
     { component: <Project />, isNavbar: false },
     { component: <Cv />, isNavbar: false },
     { component: <Contact />, isNavbar: false },
-    
     { component: <Footer />, isNavbar: false },
+
     { component: <CookieConsent />, isNavbar: false },
   ];
 

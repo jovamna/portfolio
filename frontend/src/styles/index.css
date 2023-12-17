@@ -34,7 +34,7 @@ body
 .cookie{
   position: fixed;
   z-index: 1500;
-  bottom: 20px;
+  bottom: 6px;
   right: 0;
   left: 0;
 }
@@ -44,7 +44,10 @@ body
   z-index: 100;
 }
 
+/*VIDEO DE LA PORTADA BLOG*/
 
+
+/*Fin*/
 
 /* Agrega estilos CSS para el ToastContainer en FullWidthLayout */
 .Toastify__toast-body {
@@ -691,7 +694,6 @@ SOFTWARE DEVELOPMENT, WEB, DATABASE DATACIENCIA ETC*/
 
 
 /*GALAXY-FOLF*/
-/*@media only screen and (min-width: 280px) and (max-width: 653px) {*/
 @media only screen and (min-width: 280px) and (max-width: 653px) {
   html,
 body
@@ -700,7 +702,8 @@ body
   width: 100%;
   margin-bottom: 4rem;
   padding: 0;
-}
+  }
+
   html {
     line-height: 1.5;
     -webkit-text-size-adjust: 100%;
@@ -710,7 +713,7 @@ body
     font-family: Nunito, sans-serif, ui-sans-serif, system-ui;
     font-feature-settings: normal;
     font-variation-settings: normal;
-}
+   }
     
  
   .wrapper {
@@ -731,46 +734,43 @@ body
     font-size: 1em;
   }
 
-    .cookie-general{
-      display: flex;
-      bottom: 0px;
-    
-    }
+  .cookie-general{
+  display: flex;
+  bottom: 0px;
+  }
+
   .cookie{
-    max-width: 100%;
-    padding-left: 12px;
-    padding-right: 12px;
-    padding-top: 8px;
-    padding-bottom: 12px;
- 
+  max-width: 100%;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 8px;
+  padding-bottom: 12px;
   }
   .cookie-consent{
-    width: 100%;
-    padding-left: 0px;
-    padding-right: 0px;
-  
+  width: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
   }
 
   .cookie-buttons{
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
   }
 
   .cookie-button-aceptar{
-    padding-left: 0px;
-    padding-right: 0px;
-    margin-bottom: 8px;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-bottom: 8px;
   }
 
   .cookie-button-configurar{
-    padding-left: 0px;
-    padding-right: 0px;
-
+  padding-left: 0px;
+  padding-right: 0px;
   }
 
 
   .tab-menu {
-    overflow-x: auto;
+  overflow-x: auto;
   }
 
   /*BOTON ARRIBA*/
@@ -780,37 +780,36 @@ body
 
 
 
-.project-pagina{
+  .project-pagina{
   width: 100%;
   display: flex;
   flex-direction: column;
   margin: auto;
-  
-}
+  }
 
   /*CHATBOT*/
   .chat-container{
-    width: 90%;
+  width: 90%;
    margin-right: -14px;
   }
 
 
 
   .navbar-project-movil-popover{
-   max-width: 100%;
+  max-width: 100%;
   }
 
 
   .navbar{
-    width: 100%;
-   }
+  width: 100%;
+  }
   
-   .navbar-menu{
-    display: flex;
-    flex-direction: row;
-   right: 8px;
-    width: 100%;
-    height: 30px;
+  .navbar-menu{
+  display: flex;
+  flex-direction: row;
+  right: 8px;
+  width: 100%;
+  height: 30px;
    }
 
    .navbar-logo{
@@ -824,41 +823,36 @@ body
    }
 
    .logo img{
-    width: 100%;
-    height: 30px;
-   
+  width: 100%;
+  height: 30px;
   }
 
   .menu-movil{
-    width: 60%;
-    height: 30px;
-   
+  width: 60%;
+  height: 30px;
   }
 
    /*NAVBAR DEL PORTAFOLIO*/
   
   
-     /*IMPORTANTE PARA PONER A ALTURA DEL
-     NAVBAR DEL MOVIL*/
-     .navbar-logo-menu{
-      width: 500px;
-      max-width: 100%;
-      height: 35px;
-      margin: auto;
-    
-    }
+  /*IMPORTANTE PARA PONER A ALTURA DEL
+ NAVBAR DEL MOVIL*/
+  .navbar-logo-menu{
+  width: 500px;
+  max-width: 100%;
+  height: 35px;
+  margin: auto;
+  }
   
-    .navbar-logo-menu .logo{
-      width: 70%;
-      height: 35px;
-   
-    }
+  .navbar-logo-menu .logo{
+  width: 70%;
+  height: 35px;
+  }
 
 
       /*GREETING PORTADA PRINCIPAL*/
   .home{
     padding-top: 20px;
- 
    }
 
    .home .hover-image{
@@ -866,45 +860,43 @@ body
    }
 
    /*PAGINA GREETINGS*/
-   .greeting-texto{
-    width: 92px;
-    height: 110px;
-    top: 70px;
-    left: 10px;
-
+  .greeting-texto{
+  width: 92px;
+  height: 110px;
+  top: 70px;
+  left: 10px;
   }
 
   .texto-animado-developer{
-    font-size: 0.52em;
-    line-height: 8px;
+  font-size: 0.52em;
+  line-height: 8px;
   }
 
 
   .texto-animado{
-    width: 90px;
-    font-size: 0.45em;
-    line-height: 8px;
-    margin-top: 4px;
+  width: 90px;
+  font-size: 0.45em;
+  line-height: 8px;
+  margin-top: 4px;
   }
 
   .greeting-texto img{
-    width: 12px;
+  width: 12px;
   }
 
   /*about*/
   .about{
-    padding-top: 12px;
+  padding-top: 12px;
   }
 
-    .container-about-tres{
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      padding-left: 0px;
-      padding-right: 0px;
-      padding-top: 0px;
-    
-    }
+  .container-about-tres{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+  }
 
     .container-about-dos{
       width: 94%;
@@ -930,7 +922,6 @@ body
 
     .subcontainer-about-movil h2{
       font-size: 0.7em;
-
     }
 
     .subcontainer-about-movil-img{
@@ -1017,12 +1008,10 @@ body
     width: 100%;
     overflow-x: auto;
     white-space: nowrap; /* Evita el salto de línea */
-   
   }
 
   .container-general-tab li{
     height: 42px;
-   
   }
    
   /*TITULOS DEL MENU SKILL*/
@@ -1032,8 +1021,7 @@ body
     margin: auto;
     line-height: 14px;
     padding-left: 5px;
-     padding-right: 5px;
- 
+    padding-right: 5px;
     }
   
     /*container de los iconos de los skills*/
@@ -1072,12 +1060,12 @@ body
   padding-top: 0px;
  }
  
- /*SUBCONTAINER 2 DE LA PAGINA PROJECT*/
- .project-row-movil{
+   /*SUBCONTAINER 2 DE LA PAGINA PROJECT*/
+  .project-row-movil{
    width: 100%;
    height:100%;
    margin: auto;
- }
+   }
  
     /*CONTAINER PRINCIPAL DE LA PAGINA PROJECTHOME*/
     /*PAGINA DE LISTADO DE LOS GITHUBS*/
@@ -1092,8 +1080,7 @@ body
    display: grid;
    width: 260px;
    height: 100%;
-  
- }
+    }
  
  
    /*CONTAINER PRINCIPAL DEL PROJECTCARD DEL GITHUB */
@@ -1104,14 +1091,13 @@ body
    .card-project{
      width: 235px;
     height: 100%;
-  }
+    }
  
     /*SUBCONTAINER DE CARD-POJECT PRIMER CUADRO*/
      /*CONTainer general del contenido del cardgithub*/
    .project-movil-card{
      width: 230px;
      height:100%;
-
    }
 
    .project-card-title-description{
@@ -1148,7 +1134,6 @@ body
   top: 40px;
   width: 120px;
   height: 150px;
-  
   }
  
   .project-img-movil img{
@@ -1158,7 +1143,7 @@ body
 
    .div-languages{
     width: 100%;
-  margin-bottom: 12px;
+    margin-bottom: 12px;
    }
 
    .project-card-title-description .languages{
@@ -1202,7 +1187,6 @@ body
     .container-contacto-form{
       padding-left: 4px;
       padding-right: 4px;
-    
     }
 
 
@@ -1268,12 +1252,9 @@ body
 
   .movil-redaccion-blog-post h1{
     font-size: 2.1em;
-
   }
  
   /*FIN POST MOVIL*/
-
-
 
 /*REVIEWS*/
 /*container para crera review*/
@@ -1360,10 +1341,8 @@ body
 .review-like-submit-movil{
   display: flex;
   flex-direction: row;
-
   width: 400px;
   margin: auto;
-
 }
 
 
@@ -1380,17 +1359,14 @@ body
 /*CONTAINER GENERAL DE LAS RESEÑAS*/
 .reviews-movil{
   width: 93%;
-
 }
 
 .reviews-movil h1{
   font-size: 1.4em;
-
 }
 /*RESEÑA INIDIVIDUAL*/
 .reviews-review-movil{
   width: 100%;
-
 }
 
 .reviews-review-movil img{
@@ -1402,9 +1378,6 @@ body
  margin-top: -4px;
 }
 
-
-  
- 
 
 .container-general-chat{
   width: 100%;
@@ -1587,8 +1560,6 @@ width: 100%;
 }
   
 }
-
-
 
 
 /*samsung galaxi s8*/
@@ -1814,7 +1785,6 @@ width: 100%;
 }
 
 
-/*rosado*/
 /*IPHONE 12 PRO*/
 @media only screen and (min-width: 390px) and (max-width: 844px) {
 
@@ -2207,10 +2177,58 @@ position: absolute;
 
 }
 
+/*SAMSUNG GALAXY A51/71*/
+@media only screen and (min-width: 412px) and (max-width: 914px) {
+
+.greeting-texto{
+  width: 30.4%;
+
+}
+
+.project{
+width: 100%;
+}
+
+.project-movil{
+width: 95%;
+padding-left: 0px;
+padding-right: 0px;
+}
+
+.project-movil .project-movil-colores{
+width: 100%;
+padding-left: 0px;
+padding-right: 0px;
+}
+
+.project-movil .project-row-movil{
+  width: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+/*componente project-home*/
+.project-home{
+  max-width: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+}
 
 
+.project-home .project-home-subcontainer{
+  width: 96%;
+  padding-left: 0px;
+  padding-right: 0px;
 
+}
 
+.project-img-movil{
+  width: 50px;
+  height: 60px;
+
+}
+
+}
 
 /*SURFACE DUO*/
 @media only screen and (min-width: 540px) and (max-width: 720px) {
@@ -2432,13 +2450,9 @@ position: absolute;
 
 }
 
-
-
-/*YA ESTA*/
+/*YA ESTA rosado BORRAR*/
 @media only screen and (min-width: 721px) and (max-width: 767px) {
-  .navbar-logo{
-    background-color: #8a1170;
-  }
+ 
 
  .hover-image{
    top:20px;
@@ -3189,10 +3203,6 @@ position: absolute;
 }
 
 }
-
-
-
-
 
 
 /*IPAD PRO*/

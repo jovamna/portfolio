@@ -145,7 +145,7 @@ const CookieConsent= () => {
    
          {/*CONTAINER GENERAL DE LA CONFIGURACION DE COOKIES */}
          {showConfig && (
-          <div className="bg-orange-500">
+          <div className="container-general-cookie">
            <div className=" cookie flex flex-row h-[25rem] p-[30px] mx-auto isolate bg-white border-black border-2 max-w-[70%] items-center py-4">
            
       
@@ -312,8 +312,8 @@ const CookieConsent= () => {
                       Permitir todas
                       </button>
                    
-                      </div>
-                       {/*BOTONES PERMITIRI Y CERRAR */}
+                   </div>
+                  {/*BOTONES PERMITIRI Y CERRAR */}
 
 
                </div>
