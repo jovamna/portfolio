@@ -444,130 +444,6 @@ button:hover .newsletter-animation {
 
 
 
-/*PARA DISPLAY LOTTIE */
-.sk-circle {
-  margin: 100px auto;
-  width: 40px;
-  height: 40px;
-  position: relative;
-}
-.sk-circle .sk-child {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-.sk-circle .sk-child:before {
-  content: "";
-  display: block;
-  margin: 0 auto;
-  width: 15%;
-  height: 15%;
-  background-color: red;
-  border-radius: 100%;
-  -webkit-animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;
-  animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;
-}
-.sk-circle .sk-circle2 {
-  -webkit-transform: rotate(30deg);
-  -ms-transform: rotate(30deg);
-  transform: rotate(30deg);
-}
-.sk-circle .sk-circle3 {
-  -webkit-transform: rotate(60deg);
-  -ms-transform: rotate(60deg);
-  transform: rotate(60deg);
-}
-.sk-circle .sk-circle4 {
-  -webkit-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  transform: rotate(90deg);
-}
-.sk-circle .sk-circle5 {
-  -webkit-transform: rotate(120deg);
-  -ms-transform: rotate(120deg);
-  transform: rotate(120deg);
-}
-.sk-circle .sk-circle6 {
-  -webkit-transform: rotate(150deg);
-  -ms-transform: rotate(150deg);
-  transform: rotate(150deg);
-}
-.sk-circle .sk-circle7 {
-  -webkit-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  transform: rotate(180deg);
-}
-.sk-circle .sk-circle8 {
-  -webkit-transform: rotate(210deg);
-  -ms-transform: rotate(210deg);
-  transform: rotate(210deg);
-}
-.sk-circle .sk-circle9 {
-  -webkit-transform: rotate(240deg);
-  -ms-transform: rotate(240deg);
-  transform: rotate(240deg);
-}
-.sk-circle .sk-circle10 {
-  -webkit-transform: rotate(270deg);
-  -ms-transform: rotate(270deg);
-  transform: rotate(270deg);
-}
-.sk-circle .sk-circle11 {
-  -webkit-transform: rotate(300deg);
-  -ms-transform: rotate(300deg);
-  transform: rotate(300deg);
-}
-.sk-circle .sk-circle12 {
-  -webkit-transform: rotate(330deg);
-  -ms-transform: rotate(330deg);
-  transform: rotate(330deg);
-}
-.sk-circle .sk-circle2:before {
-  -webkit-animation-delay: -1.1s;
-  animation-delay: -1.1s;
-}
-.sk-circle .sk-circle3:before {
-  -webkit-animation-delay: -1s;
-  animation-delay: -1s;
-}
-.sk-circle .sk-circle4:before {
-  -webkit-animation-delay: -0.9s;
-  animation-delay: -0.9s;
-}
-.sk-circle .sk-circle5:before {
-  -webkit-animation-delay: -0.8s;
-  animation-delay: -0.8s;
-}
-.sk-circle .sk-circle6:before {
-  -webkit-animation-delay: -0.7s;
-  animation-delay: -0.7s;
-}
-.sk-circle .sk-circle7:before {
-  -webkit-animation-delay: -0.6s;
-  animation-delay: -0.6s;
-}
-.sk-circle .sk-circle8:before {
-  -webkit-animation-delay: -0.5s;
-  animation-delay: -0.5s;
-}
-.sk-circle .sk-circle9:before {
-  -webkit-animation-delay: -0.4s;
-  animation-delay: -0.4s;
-}
-.sk-circle .sk-circle10:before {
-  -webkit-animation-delay: -0.3s;
-  animation-delay: -0.3s;
-}
-.sk-circle .sk-circle11:before {
-  -webkit-animation-delay: -0.2s;
-  animation-delay: -0.2s;
-}
-.sk-circle .sk-circle12:before {
-  -webkit-animation-delay: -0.1s;
-  animation-delay: -0.1s;
-}
 
 @-webkit-keyframes sk-circleBounceDelay {
   0%,
@@ -795,76 +671,134 @@ body
 
 
 
-  .navbar-project-movil-popover{
-  max-width: 100%;
-  }
-
-
+ /*NAVBAR*/
   .navbar{
-  width: 100%;
+    width: 100%;
+    height: 40px;
+  
   }
   
-  .navbar-menu{
+  .navbar .navbar-menu{
   display: flex;
   flex-direction: row;
-  right: 8px;
   width: 100%;
-  height: 30px;
+  height: 36px;
+  margin-top: 3px;
+
    }
 
-   .navbar-logo{
+   .navbar-menu .navbar-logo{
     width: 100%;
-    height: 30px;
+    height: 36px;
+ 
    }
 
-   .logo{
-    width: 35%;
-    height: 30px;
-   }
-
-   .logo img{
-  width: 100%;
-  height: 30px;
+ 
+ 
+   /*navbar del projecto*/
+  .navbar-project-movil{
+   width: 100%;
+   height: 40px;
   }
 
-  .menu-movil{
-  width: 60%;
-  height: 30px;
-  }
+  .navbar-project-movil-popover{
+   width: 100%;
+   height: 36px;
+   padding-left: 0px;
+   padding-right: 0px;
+   margin-top: 3px;
+    }
 
-   /*NAVBAR DEL PORTAFOLIO*/
+    .navbar-logo{
+      width: 100%;
+      height: 36px;
+      padding-left: 0px;
+      padding-right: 0px;
+     }
   
+     .logo{
+      width: 30%;
+      height: 36px;
+     }
   
-  /*IMPORTANTE PARA PONER A ALTURA DEL
- NAVBAR DEL MOVIL*/
-  .navbar-logo-menu{
-  width: 500px;
-  max-width: 100%;
-  height: 35px;
-  margin: auto;
-  }
+     .logo img{
+    width: 100%;
+    height: auto;
+    }
   
-  .navbar-logo-menu .logo{
-  width: 70%;
-  height: 35px;
-  }
+     /*menu del movil*/
+    .menu-movil{
+      width: 70%;
+      height: 36px;
+      padding-left: 0px;
+      padding-right: 0px;
+      }
 
 
-      /*GREETING PORTADA PRINCIPAL*/
-  .home{
-    padding-top: 20px;
-   }
+      /*container cuando no hay nadie activo*/
+      .container-movil-login-registro{
+        height: 36px;
+      }
 
-   .home .hover-image{
-    padding-top: 20px;
-   }
+
+  /* container cuando esta activo el user*/
+      .user-activo{
+        width: 40%;
+        height: 36px;
+        padding-left: 0px;
+        padding-right: 0px;
+      }
+
+     .user-activo .hola-button{
+        max-width: 80%;
+        height: 36px;
+      }
+
+      .hola-button .hola{
+        margin-top: 10px;
+        font-size: 0.5em;
+      }
+
+      .hola-button .hola-bola{
+        margin-top: 10px;
+        margin-left: -2px;
+      }
+
+      .icon-search-bihome{
+        height: 36px;
+        width: 28%;
+      }
+    
+      .icon-search{
+        width: 50px;
+        margin-top: 10px;
+      }
+
+      .icon-bihome{
+        width: 50px;
+        margin-top: 10px;
+      }
+      
 
    /*PAGINA GREETINGS*/
+
+   .base-image{
+    position: relative;
+    padding-top: 28px;
+   }
+
+   .hover-image{
+    position: absolute;
+    padding-top: 28px;
+   }
+
+
+
   .greeting-texto{
   width: 92px;
   height: 110px;
   top: 70px;
-  left: 10px;
+  left: 15px;
   }
 
   .texto-animado-developer{
@@ -915,13 +849,13 @@ body
     }
 
     .subcontainer-about-movil h1{
-      font-size: 1.4em;
+      font-size: 1.2em;
       margin-top: 8px;
      margin-bottom: 8px;
     }
 
     .subcontainer-about-movil h2{
-      font-size: 0.7em;
+      font-size: 0.6em;
     }
 
     .subcontainer-about-movil-img{
@@ -939,14 +873,30 @@ body
   }
   
   .skill-item p{
-  font-size: 0.9em;
+  font-size: 0.8em;
+
   }
   
-  .letra-dise{
-    top: 80px;
-    left: -120px;
-    width: 85px;
-    height: 40px;
+  .subcontainer-about-movil-img{
+    width: 100%;
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .subcontainer-about-movil-img img{
+    width: 100%;
+    margin-top: -30px;
+    padding-top: 0px;
+  
+  }
+
+
+  .subcontainer-about-movil-img .letra-dise{
+    top: 40px;
+    left: -115px;
+    width: 90px;
+    height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -956,6 +906,7 @@ body
     font-size: 0.4em;
     text-align: center;
     padding-bottom: 24px;
+   
   }
   
  
@@ -972,23 +923,42 @@ body
   .skill-dos{
     display: flex;
     flex-direction: column;
-    padding-top: 0px;
     height: auto;
   }
 
   /*DE LA PAGINA SKILL-CARD*/
   .skill-card-movil{
-    margin-bottom: 15px;
+    width: 90%;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin: auto;
+    margin-bottom: 10px;
+  
   }
-
+  /*subcontainer general del card y el details*/
+  .skill-card-movil-img-title{
+    width: 100%;
+    height: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
   .skills-page-movil{
     width: 100%;
     height: auto;
   }
 
+  .skill-detail-small-movil h1{
+    font-size: 0.99em;
+ 
+  }
+
+  .skill-detail-medium-movil p{
+    font-size: 0.96em;
+  }
+
+  /*titulo skills*/
   .skills-page-movil h1{
-    font-size: 1.5em;
-  
+  font-size: 1.5em;
   }
 
   /*.skill-menu{
@@ -1003,9 +973,10 @@ body
   }
 
   .container-general-tab ul{
-    height: 69px;
+    height: 55px;
     width: 100%;
     width: 100%;
+    margin-bottom: 12px;
     overflow-x: auto;
     white-space: nowrap; /* Evita el salto de línea */
   }
@@ -1193,27 +1164,36 @@ body
 
     /**/
   
-    .movil-lupa-bihome{
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      height: 35px;
-      width: 30%;
-       }
-  
-       .movil-lupa-bihome .search{
-       width: 35px;
-       height: 20px;
-       }
-       .casa{
-        height: 25px;
-       }
-
-  .bihome-movil-navbarproject {
-    margin-right: -12px;
+    
+  /*BLOG */
+  .portada-blog{
+    width: 100%;
+    height: 250px;
   }
 
-  /*BLOG */
+.error-message{
+    width: 100%;
+    height: 250px;
+  }
+
+  .error-message h1{
+    font-size: 1.2em;
+  }
+
+  .error-message p a{
+    font-size: 0.9em;
+  }
+
+  .responsive-altura-blogcard{
+    height: auto;
+  }
+
+  .blog-image{
+    height: 160px;
+  }
+
+
+
   /*BLOG POST*/
   /*CONTAINER DE LA IMAGEN Y VIDEO*/
   .movil-portada{
@@ -1564,6 +1544,114 @@ width: 100%;
 
 /*samsung galaxi s8*/
 @media only screen and (min-width: 360px) and (max-width: 740px) {
+  .navbar-project-movil{
+    height: 40px;
+    width: 100%;
+  }
+
+  /*CONTAINER TOTAL*/
+  .navbar-project-movil-popover{
+    width: 100%;
+    height: 36px;
+    margin-top: 4px;
+  }
+
+    /*CONTAINER TOTAL*/
+  .navbar-logo{
+    width: 100%;
+    height:36px;
+  
+  }
+
+  .navbar-logo .logo{
+    width: 30%;
+    height: 36px;
+
+  }
+
+  .logo img{
+    width: 75%;
+ height: auto;
+  
+  }
+
+  .menu-movil{
+    height: 36px;
+  }
+
+  .container-movil-login-registro{
+    width: 44%;
+    height: 36px;
+    margin-right: 10px;
+  }
+
+  .container-movil-login-registro img{
+    margin-top: 15px;
+   }
+
+  .container-movil-login-registro p{
+   font-size: 0.8em;
+   margin-top: 15px;
+  }
+
+
+  .menu-movil .user-activo{
+    height: 36px;
+    max-width: 45%;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-right: 20px;
+    
+  }
+
+  .user-activo .hola-button{
+    width: 100%;
+    height: 36px;
+    padding-left: 0px;
+    padding-right: 0px;
+    display: flex;
+    flex-direction: row;
+  }
+
+   /*letra*/
+   .hola-button .hola {
+    max-width: 80%;
+   font-size: 0.5em;
+   display: inline-block;
+   margin-top: 11px;
+  }
+
+    /*icono bola saltarina*/
+   .hola-button .hola-bola {
+    max-width: 20%;
+    font-size: 0.4em;
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: -14px;
+    }
+
+    .icon-search-bihome{
+      height: 36px;
+      padding-left: 0px;
+      padding-right: 0px;
+   
+    }
+
+    .icon-search{
+      margin-top: 10px;
+    
+    }
+
+    .icon-bihome{
+      margin-top: 10px;
+  
+    }
+
+
+
+
+
+/*FIN NAVBAR*/
 
   .greeting-texto{
     width: 31%;
@@ -1628,12 +1716,23 @@ width: 100%;
     }
 
    /*componente skill*/
-   .skill-card-movil{
-    margin-top: 12px;
-    margin-bottom: 0px;
-    padding-bottom: 0px;
+    /*container general del card y el details*/
+  .skill-card-movil{
+    width: 90%;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin: auto;
+  
+  }
+ /*subcontainer general del card y el details*/
+  .skill-card-movil-img-title{
+    width: 100%;
+    height: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
 
-   }
+   /*CONTAINER DE las 2 imagenes*/
 
    .tab__content .skill-logo-img{
     width: 59%;
@@ -1779,9 +1878,17 @@ width: 100%;
     }
   
   /* FIN RESPONSIVE DE LOS GITHUB E IMAGEN*/
+ .responsive-altura-blogcard{
+  height: auto;
+ }
 
+ .responsive-altura-img-blog{
+  height: 160px;
+ }
 
-
+ .responsive-altura-img-blog img{
+ height: 160px;
+ }
 }
 
 
@@ -1865,36 +1972,33 @@ width: 100%;
      /*#303535  #333636*/
  .navbar{
   width: 100%;
-  height: 41px;
+  height: 43px;
   margin: auto;
- 
  }
 
   /*menu solo de la pantalla grande*/
- .navbar-menu{
+ .navbar .navbar-menu{
   width: 100%;
-  margin: auto;
   height: 40px;
-
+  padding-left: 0px;
+  padding-right: 0px;
  }
 
  /*menu completo del movil*/
- .navbar-logo{
+ .navbar-menu .navbar-logo{
   width: 100%;
   height: 40px;
 
  }
 
- .logo{
-  display: flex;
-  justify-items: flex-end;
+ .navbar-menu .logo{
+  width: 25%;
   height: 40px;
-
  }
-
- .logo img{
-  margin-top: 8px;
+ .navbar .logo img{
   width: 100%;
+  height: 40px;
+ 
  }
  /*container solo de search y bihome*/
  .menu-movil{
@@ -1919,6 +2023,97 @@ width: 100%;
     margin-top: 12px;
  
   }
+
+
+
+  .navbar-project-movil{
+    height: 43px;
+  }
+
+  /*CONTAINER TOTAL*/
+  .navbar-project-movil-popover{
+    height: 40px;
+    width: 100%;
+  
+   
+  }
+
+    /*CONTAINER TOTAL*/
+  .navbar-logo{
+    height: 40px;
+    width: 100%;
+
+  }
+
+  .logo{
+    width: 25%;
+    max-height: 40px;
+  }
+  .logo img{
+    width: 100%;
+    height: 40px;
+    margin: auto;
+  }
+
+  .menu-movil{
+    height: 40px;
+  }
+
+  .container-movil-login-registro{
+    width: 44%;
+    height: 40px;
+    margin-right: 10px;
+  }
+
+  .container-movil-login-registro img{
+    margin-top: 15px;
+   }
+
+  .container-movil-login-registro p{
+   font-size: 0.8em;
+   margin-top: 15px;
+  }
+
+
+  .menu-movil .user-activo{
+    height: 40px;
+    width: 36%;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-right: 20px;
+  
+  }
+
+  .user-activo .hola-button{
+    height: 40px;
+    padding-left: 0px;
+    padding-right: 0px;
+    display: flex;
+    flex-direction: row;
+  }
+
+   /*letra*/
+   .hola-button .hola {
+    max-width: 80%;
+   font-size: 0.7em;
+   display: inline-block;
+   margin-top: 16px;
+  }
+
+    /*icono bola saltarina*/
+   .hola-button .hola-bola {
+    max-width: 20%;
+    font-size: 0.4em;
+    display: inline-block;
+    margin-top: 15px;
+    margin-left: -10px;
+    }
+
+
+
+
+
+
 
 
 .base-image{
@@ -2008,31 +2203,30 @@ position: absolute;
   
   }
 
+  
+
   /*container general del card y el details*/
   .skill-card-movil{
-    max-height: 100%;
-   margin-top: 20px;
+    width: 90%;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin: auto;
+  
   }
  /*subcontainer general del card y el details*/
   .skill-card-movil-img-title{
+    width: 100%;
     height: 100%;
-
+    padding-left: 0px;
+    padding-right: 0px;
   }
 
    /*CONTAINER DE las 2 imagenes*/
-  .skill-container-images{
-    max-height: 100%;
   
-  }
 
 
 
-
-  .skill-card-movil-img-title .skill-container-description{
-  
-    height: 120px;
-   
-  }
+ 
 
  /*table entera de iconos pagina skill*/
  .skills-page-movil{
@@ -2228,7 +2422,182 @@ padding-right: 0px;
 
 }
 
+.skill-card-movil{
+  width: 83%;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin: auto;
+  margin-bottom: 10px;
+
 }
+/*subcontainer general del card y el details*/
+.skill-card-movil-img-title{
+  width: 100%;
+  height: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+}
+
+
+
+/*IPHONE 14 PRO MAX*/
+@media only screen and (min-width: 430px) and (max-width: 932px) {
+
+
+  .navbar-project-movil{
+    height: 42px;
+  }
+
+  /*CONTAINER TOTAL*/
+  .navbar-project-movil-popover{
+    height: 40px;
+  }
+
+    /*CONTAINER TOTAL*/
+  .navbar-logo{
+    width: 100%;
+    height: 40px;
+  }
+
+  .logo{
+    width: 25%;
+    height: 40px;
+  }
+
+  .logo img{
+    width: 100%;
+    height: auto;
+    margin: auto;
+  }
+
+  .menu-movil{
+    height: 40px;
+  }
+
+  .container-movil-login-registro{
+    width: 44%;
+    height: 40px;
+    margin-right: 10px;
+  }
+
+  .container-movil-login-registro img{
+    margin-top: 15px;
+   }
+
+  .container-movil-login-registro p{
+   font-size: 0.8em;
+   margin-top: 15px;
+  }
+
+
+  .menu-movil .user-activo{
+    height: 40px;
+    width: 33%;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-right: 20px;
+  }
+
+  .user-activo .hola-button{
+    height: 40px;
+    padding-left: 0px;
+    padding-right: 0px;
+    display: flex;
+    flex-direction: row;
+  }
+
+   /*letra*/
+   .hola-button .hola {
+    max-width: 80%;
+   font-size: 0.7em;
+   display: inline-block;
+   margin-top: 16px;
+  }
+
+    /*icono bola saltarina*/
+   .hola-button .hola-bola {
+    max-width: 20%;
+    font-size: 0.4em;
+    display: inline-block;
+    margin-top: 15px;
+    margin-left: -10px;
+    }
+
+
+
+  .greeting-texto{
+    width: 29%;
+    top: 92px;
+    left: 36px;
+  
+  }
+
+  /*compnente about*/
+
+  .subcontainer-about-movil-img .letra-dise{
+    top: 68px;
+   left: -180px;
+   width: 140px;
+ 
+  }
+
+  /*PAGINA MYPROJECTS*/
+  .project-pagina{
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+
+  /*.project-column-1{
+  }*/
+
+
+  .project-pagina .project-column-2{
+    max-width: 100%;
+    margin: auto;
+
+  }
+
+  /*componente skill*/
+  .skill-card-movil{
+    width: 80%;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin: auto;
+  
+  }
+
+  .skill-card-movil-img-title{
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+  
+  }
+
+
+  /*.project-column-3{
+   
+  }*/
+
+  .portada-blog{
+    height: 415px;
+  }
+
+   /*VA CON portada-blog*/
+  .error-message{
+    height: 415px;
+  }
+
+
+
+
+}
+
+
+
+
 
 /*SURFACE DUO*/
 @media only screen and (min-width: 540px) and (max-width: 720px) {
@@ -2238,23 +2607,32 @@ padding-right: 0px;
   }
 
   .navbar-menu{
-  
+    height: 40px;
     width: 100%;
   }
   .navbar-logo{
     max-width: 100%;
+    height: 40px;
+  }
 
+  .logo{
+    height: 40px;
   }
 
  
 .logo img{
   width: 100%;
+  height: 40px;
 }
   
   /*navbar projcet*/
   .movil-uno{
     width: 100%;
     margin-bottom: 24px;
+  }
+
+  .navbar-project-movil{
+    height: 43px;
   }
 
  
@@ -2298,11 +2676,11 @@ padding-right: 0px;
     margin-top: -70px;
     }
 
-    .letra-dise{
+    .subcontainer-about-movil-img  .letra-dise{
       top: 80px;
       width: 150px;
       height: 70px;
-      left: -60px;
+      left: -230px;
    
     }
 
@@ -2420,11 +2798,24 @@ padding-right: 0px;
 }*/
 
 /*COMPONENTE SKILL*/
-.skill-card-movil{
-  margin-top: 16px;
-  margin-bottom: 0px;
+ /*container general del card y el details*/
+ .skill-card-movil{
+  width: 60%;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin: auto;
+  margin-bottom: 10px;
 
 }
+/*subcontainer general del card y el details*/
+.skill-card-movil-img-title{
+  width: 100%;
+  height: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+ /*CONTAINER DE las 2 imagenes*/
 
 .container-general-tab li .tab-button{
   font-size: 0.9em;
@@ -2736,9 +3127,6 @@ padding-right: 0px;
 
 /*  IPAD MINI*/
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
-
- 
-
   .logo{
     display: flex;
     justify-content: flex-start;
@@ -2851,40 +3239,28 @@ padding-right: 0px;
   }
 
   /*PAGINA SKILLS*/
-  .skill-card-movil{
-    height: 480px;
+   /*container general del card y el details*/
+   .skill-card-movil{
+    width: 50%;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin: auto;
  
   }
-
+ /*subcontainer general del card y el details*/
   .skill-card-movil-img-title{
-    height: 470px;
-  
-  }
-
-  .skill-container-images{
-   max-height: 390px;
-   
-  }
-
-  .skillcard-container-fondo{
-    max-height: 390px;
-    
-  }
-
-  .skillcard-container-fondo img{
     width: 100%;
-    
+    height: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
   }
 
-  .skillcard-container-developer img{
-    margin-top: 1px;
-   
-  }
+   /*CONTAINER DE las 2 imagenes*/
 
-  .skill-container-description{
-    margin-top: 10px;
+
   
-  }
+
+  
 
   .skill-dos{
     display: flex;
@@ -3308,6 +3684,11 @@ max-width: 98%;
 
 }
 
+.skill-dos{
+  display: flex;
+  flex-direction: row;
+}
+
 }
 
 /* SURFACE PRO 7*/
@@ -3420,6 +3801,10 @@ margin-top: 10px;
 
   .project-img-movil{
     margin-left: 20px;
+  }
+  .skill-dos{
+    display: flex;
+    flex-direction: row;
   }
 
 

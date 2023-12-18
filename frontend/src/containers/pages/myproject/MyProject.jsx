@@ -35,11 +35,10 @@ function MyProject({
            <Header />
 
 
-           <div className="project-pagina mx-auto w-[94%] flex flex-row">
+           <div className="project-pagina mx-auto w-[100%] flex flex-row ">
 
                {/*PRIMERA COLUMNA */}
                <div className="project-column-1 w-[18%] pr-4">
-        
                </div>
 
                {/*SEGUNDA COLUMNA */}
@@ -54,6 +53,7 @@ function MyProject({
             
                  {/*TERCERA COLUMA FIJA */}
                  <div className="project-column-3 w-[18%] pl-4">
+
                   </div>
       
       

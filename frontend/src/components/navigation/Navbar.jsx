@@ -133,8 +133,8 @@ function Navbar({
      //{/* CONTAINER PRINCIPAL 1 DEL NAVBAR DEL PC Y MOVIL  sm:px-6 */}
     <div className="navbar z-index fixed w-full  bg-white opacity-95 mx-auto max-w-7xl px-4 lg:px-8">
 
-    {/* CONTAINER GUIA ENGLOBA MENU GRANDE Y MENU MOVIL*/}
-    <Popover className="navbar-menu  bg-white">
+      {/* CONTAINER GUIA ENGLOBA MENU GRANDE Y MENU MOVIL*/}
+      <Popover className="navbar-menu  bg-white">
 
 
    
@@ -148,7 +148,7 @@ function Navbar({
              {/*PARA QUE EL ICONO SE CENTRE inline-flex items-center w-1/4*/}
              <div className="logo w-[26.7%] h-[3rem] inline-flex">
             <a href="/">
-            <img className="w-[160px] h-[52px]"
+            <img className="w-[160px] h-[52px] mt-[5px]"
             src={pro}
             alt="logo"
             //width={150}

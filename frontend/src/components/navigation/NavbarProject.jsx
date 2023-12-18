@@ -22,6 +22,7 @@ import { search_blog, search_blog_page } from "../../redux/actions/blog";
 import { useParams } from "react-router-dom";
 import LoadingCard from "../loaders/LoadingCard";//usado en return--renderBlogList
 import jova from "../../assets/img/logo/jova.png";
+import pro from "../../assets/img/logo/pro.png";
 import loginUser from "../../assets/img/users/loginUser.png";
 
 
@@ -99,12 +100,12 @@ function NavbarProject({
   //DASHBOARD Y LOGOUT
   const authLinks = (
   <Menu>
-   <div className='user-activo w-[13%] flex flex-row justify-around px-3 h-[2rem]'>
+      <div className='user-activo w-[13%] flex flex-row justify-around px-3 h-[2rem]'>
    
       <Menu.Button className="hola-button flex flex-row justify-around justify-center items-center focus:outline-none w-[100%] h-[1.6rem]">
            <span className='hola w-[70%] inline-block  text-neutral-950 font-semibold hover:text-gray-600 font-sans text-xs'>
             Hola {user && user.first_name}
-            </span> <span className="newsletter-animation  inset-0 flex text-black  ml-[2px] mt-[4px] text-[0.5rem] text-center">
+            </span> <span className="hola-bola newsletter-animation  inset-0 flex text-black  ml-[2px] mt-[4px] text-[0.5rem] text-center">
             ⚪
             </span> 
       </Menu.Button>
@@ -262,8 +263,8 @@ const guestLinks = (
                
                <span className="sr-only">Portafolio Jovamna Medina</span>
                <NavLink to= "/">
-               <img className="w-[160px] h-[52px]"
-               src={jova}
+               <img className="w-[160px] h-[52px] mt-[5px]"
+               src={pro}
                alt="logo"
                //width={150}
                //height={350}
@@ -276,7 +277,7 @@ const guestLinks = (
  
         {/*MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL */}
         {/*ICONO QUE SE VE SOLO EN MOVIL Y ESTA DENTRO DEL CONTAINER DEL PC. -my-2 -mr-2 rounded-md*/}
-        <div className=" menu-movil md:hidden h-[2.5em] flex flex-row items-center justify-end w-[65%]">
+        <div className="menu-movil md:hidden h-[2.5em] flex flex-row items-center justify-end w-[65%]">
                 {/*LOGIN Y LOGOUT LOGIN Y LOGOUT */} 
          
                {
@@ -529,7 +530,7 @@ const guestLinks = (
                          <div className=" ">
                          <img 
                          className="h-8 w-auto"
-                         src={jova}
+                         src={pro}
                          alt="logo"
                          width={150}
                          height={50}
