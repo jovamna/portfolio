@@ -1553,7 +1553,7 @@ width: 100%;
   .navbar-project-movil-popover{
     width: 100%;
     height: 36px;
-    margin-top: 4px;
+ 
   }
 
     /*CONTAINER TOTAL*/
@@ -2445,41 +2445,78 @@ padding-right: 0px;
 /*IPHONE 14 PRO MAX*/
 @media only screen and (min-width: 430px) and (max-width: 932px) {
 
-
-  .navbar-project-movil{
-    height: 42px;
+   /*container gral del menu home A*/
+  .navbar{
+    height: 43px;
+    width: 100%;
   }
 
-  /*CONTAINER TOTAL*/
-  .navbar-project-movil-popover{
+      /*container gral del menu home A*/
+  .navbar .navbar-menu{
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
     height: 40px;
+  }
+
+  /**container gral del menu blog B*/
+  .navbar-project-movil{
+    width: 100%;
+    height: 43px;
+  }
+
+  /*CONTAINER TOTAL B*/
+  .navbar-project-movil .navbar-project-movil-popover{
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+    height: 40px;
+  
   }
 
     /*CONTAINER TOTAL*/
   .navbar-logo{
     width: 100%;
     height: 40px;
+    padding-top: 0px;
   }
 
-  .logo{
+  .navbar .logo{
     width: 25%;
     height: 40px;
+    padding-top: 0px;
   }
 
-  .logo img{
+  .navbar-project-movil .logo{
+    width: 25%;
+    height: 40px;
+    padding-top: 0px;
+  }
+
+
+  .navbar .logo img{
     width: 100%;
-    height: auto;
+    height: 40px;
     margin: auto;
   }
 
+  .navbar-project-movil .logo img{
+    width: 100%;
+    height: 40px;
+    margin: auto;
+  }
+
+
   .menu-movil{
     height: 40px;
+ 
   }
 
   .container-movil-login-registro{
     width: 44%;
     height: 40px;
     margin-right: 10px;
+
   }
 
   .container-movil-login-registro img{
@@ -2498,6 +2535,7 @@ padding-right: 0px;
     padding-left: 0px;
     padding-right: 0px;
     margin-right: 20px;
+   
   }
 
   .user-activo .hola-button{
@@ -2511,20 +2549,30 @@ padding-right: 0px;
    /*letra*/
    .hola-button .hola {
     max-width: 80%;
-   font-size: 0.7em;
+   font-size: 0.5em;
    display: inline-block;
    margin-top: 16px;
   }
 
     /*icono bola saltarina*/
    .hola-button .hola-bola {
-    max-width: 20%;
-    font-size: 0.4em;
+    max-width: 15%;
+    font-size: 0.3em;
     display: inline-block;
-    margin-top: 15px;
-    margin-left: -10px;
+    margin-top: 16px;
+    margin-left: -8px;
     }
 
+   /*componnete grreting*/
+   .base-image{
+    position: relative;
+     top: -4px;
+   }
+
+   .hover-image{
+    position: absolute;
+     top: -4px;
+   }
 
 
   .greeting-texto{
@@ -2582,12 +2630,12 @@ padding-right: 0px;
   }*/
 
   .portada-blog{
-    height: 415px;
+    height: 360px;
   }
 
    /*VA CON portada-blog*/
   .error-message{
-    height: 415px;
+    height: 360px;
   }
 
 

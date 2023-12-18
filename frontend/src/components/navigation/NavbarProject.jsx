@@ -248,7 +248,7 @@ const guestLinks = (
     <>
    <div className="navbar-project-movil z-index fixed w-full bg-white opacity-95 mx-auto max-w-7xl px-4 lg:px-8 ">
       {/*POPOVER PRINCIPAL */}
-      <Popover className="navbar-project-movil-popover relative">
+      <Popover className="navbar-project-movil-popover ">
 
 
         {/* 1 CONTAINER PRINCIPAL 1 DEL NAVBAR DEL PC Y  MENU MOVIL ESCONDIDO*/}
