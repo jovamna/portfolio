@@ -11,6 +11,7 @@ from apps.contacts.sitemaps import NewsletterSitemap
 
 
 
+
 sitemaps = {
     'blog': BlogPostSitemap,
     'projects': ProjectSitemap,
@@ -29,8 +30,8 @@ urlpatterns = [
     path('docs/', include_docs_urls(title='Portfolio API')),
     path('api/chatbot/', include('apps.chatbot.urls')),
     path('api/contacts/', include('apps.contacts.urls')),
-    path('admin/', admin.site.urls),
-     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    path(settings.ADMIN_URL, admin.site.urls),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
   
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
