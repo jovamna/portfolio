@@ -21,8 +21,8 @@ SECRET_KEY=os.environ.get('SECRET_KEY')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-
-
+#seo
+SITE_ID = 1
 # Application definition
 
 DJANGO_APPS = [
@@ -32,6 +32,9 @@ DJANGO_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites', #seo
+    'django.contrib.sitemaps', #seo
+  
 ]
 
 PROJECT_APPS = [

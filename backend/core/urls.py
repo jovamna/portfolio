@@ -4,6 +4,20 @@ from django.views.generic import TemplateView
 from django.conf.urls.static import static
 from django.conf import settings
 from rest_framework.documentation import include_docs_urls
+from django.contrib.sitemaps.views import sitemap
+from apps.blog.sitemaps import BlogPostSitemap
+from apps.myprojects.sitemaps import ProjectSitemap
+from apps.contacts.sitemaps import NewsletterSitemap
+
+
+
+sitemaps = {
+    'blog': BlogPostSitemap,
+    'projects': ProjectSitemap,
+    'newsletter': NewsletterSitemap,
+}
+
+
 
 
 urlpatterns = [
@@ -16,6 +30,7 @@ urlpatterns = [
     path('api/chatbot/', include('apps.chatbot.urls')),
     path('api/contacts/', include('apps.contacts.urls')),
     path('admin/', admin.site.urls),
+     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
   
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

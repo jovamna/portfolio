@@ -47,6 +47,7 @@ User = get_user_model()
 
 
 class UsersListView(APIView):
+    
     def get(self, request, format=None):
         users = User.objects.all()
         serializer = UserSerializer(users, many=True)
