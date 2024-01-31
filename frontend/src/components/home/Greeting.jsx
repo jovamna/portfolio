@@ -29,7 +29,7 @@ function Greeting() {
                 </div>
 
                 {/* /End replace 👋 */}
-                <div className='greeting-texto absolute top-[180px] left-[70px] w-[380px] h-[440px] '>
+                <div className='greeting-texto absolute top-[170px] left-[80px] w-[360px] h-[440px]'>
                  <h1 className='texto-animado-developer font-mono font-extrabold text-3xl '>
                   Hola Soy Jovamna <span className="wave-emoji"><img src ={greetingMano} width={35} className="manito"/></span>
                   </h1>
