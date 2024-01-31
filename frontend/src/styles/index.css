@@ -2837,7 +2837,6 @@ padding-right: 0px;
 
     /*about*/
     .subcontainer-about-movil-img{
-
       padding-top: 0px;
       padding-left: 0px;
       padding-right: 0px;
@@ -2845,14 +2844,14 @@ padding-right: 0px;
 
     .subcontainer-about-movil-img img{
       padding-top: 0px;
-    margin-top: -70px;
+     margin-top: -70px;
     }
 
     .subcontainer-about-movil-img  .letra-dise{
-      top: 120px;
+      top: 132px;
       width: 220px;
       height: 110px;
-      left: -295px;
+      left: -320px;
     }
 
 
@@ -2868,11 +2867,53 @@ padding-right: 0px;
 
     .skill-dos{
       flex-direction: column;
+      margin-top: 10px;
+    
     }
 
     .skills-page-movil{
       width: 100%;
     }
+
+
+
+     /*CONTAINER DE las 2 imagenes*/
+     .tab__content{
+      display: grid;
+      margin-top: 20px;
+
+     }
+
+   .tab__content .skill-logo-img{
+    max-width: 45px;
+    height: 100%;
+   }
+
+   .tab__content img{
+    max-width: 60px;
+    height: 100%;
+   }
+
+    /*uL MENU*/
+    .container-general-tab .tab-menu  {
+    height: 54px;
+    margin-bottom: 14px;
+   }
+
+
+   .tab-menu li {
+    padding-left: 0.8px;
+    padding-right: 0.8px;
+
+   }
+
+
+   .tab-menu li .tab-button{
+    font-size: 0.94em;
+  
+   }
+
+
 
 
 
@@ -3216,6 +3257,13 @@ padding-right: 0px;
     height: 40%;
    }
 
+  .tab__content .skill-logo-img{
+    width: 40%;
+    height: 80%;
+ 
+   }
+   
+   
 
  
   /*Fin Pagina Skill*/
