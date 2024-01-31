@@ -78,15 +78,27 @@ body
 
 
   
+.home-images{
+  top: 0px
+}
 
+.home-images .greeting-images-dos{
+  top:0px
+}
 
-  .hover-image {
+  .home-images .hover-image {
     position:  absolute;
     top: 0px;
     left: 0;
     opacity: 0;
     transition: opacity 0.5s ease;
   }
+
+  .home-images .home-image{
+    top: 0px;
+    position: relative;
+  }
+
   
   .home-image:hover .hover-image {
     opacity: 1;
@@ -781,16 +793,26 @@ body
       
 
    /*PAGINA GREETINGS*/
-
-   .base-image{
-    position: relative;
-    padding-top: 28px;
-   }
-
-   .hover-image{
-    position: absolute;
-    padding-top: 28px;
-   }
+   .home-images{
+    margin-top: 20px
+  }
+  
+  .home-images .greeting-images-dos{
+    top:0px
+  }
+  
+    .home-images .hover-image {
+      position:  absolute;
+      top: 0px;
+      left: 0;
+      
+    }
+  
+    .home-images .home-image{
+      top: 0px;
+      position: relative;
+    }
+  
 
 
 
@@ -1648,7 +1670,24 @@ width: 100%;
     }
 
 
-
+    .home-images{
+      top: 0px
+    }
+    
+    .home-images .greeting-images-dos{
+      top:0px
+    }
+    
+      .home-images .hover-image {
+        position:  absolute;
+        top: 0px;
+      
+      }
+    
+      .home-images .home-image{
+        top: 0px;
+        position: relative;
+      }
 
 
 /*FIN NAVBAR*/
@@ -1892,7 +1931,7 @@ width: 100%;
 }
 
 
-/*IPHONE 12 PRO*/
+/*IPHONE 12 PRO vigilar*/
 @media only screen and (min-width: 390px) and (max-width: 844px) {
 
   html,
@@ -2111,22 +2150,24 @@ width: 100%;
 
 
 
-
-
-
-
-
-.base-image{
-top: 1px;
-left: 0;
-position: relative;
-}
-
-.hover-image{
-top: 1px;
-left: 0;
-position: absolute;
-}
+    .home-images{
+      top: 0px
+    }
+    
+    .home-images .greeting-images-dos{
+      top:0px
+    }
+    
+      .home-images .hover-image {
+        position:  absolute;
+        top: 0px;
+      
+      }
+    
+      .home-images .home-image{
+        top: 0px;
+        position: relative;
+      }
 
 
  .greeting-texto{
@@ -2134,7 +2175,6 @@ position: absolute;
   width: 32%;
   left: 30px;
   top: 80px;
-
  }
 
  .texto-animado{
@@ -2221,12 +2261,7 @@ position: absolute;
     padding-right: 0px;
   }
 
-   /*CONTAINER DE las 2 imagenes*/
-  
-
-
-
- 
+   
 
  /*table entera de iconos pagina skill*/
  .skills-page-movil{
@@ -2307,14 +2342,6 @@ position: absolute;
     width: 50px;
    }
   
- /*.bloglist-blogcard-grid{
-
- }
-
- .responsive-altura-blogcard{
-
- }*/
-
 
 
   .responsive-altura-img-blog{
@@ -2371,13 +2398,56 @@ position: absolute;
 
 }
 
-/*SAMSUNG GALAXY A51/71*/
-@media only screen and (min-width: 412px) and (max-width: 914px) {
+/*SAMSUNG GALAXY A51/71 vigilar*/
+/*SAMSUN GALAXY S20 ULTRA*/
+@media only screen and (min-width: 412px) and (max-width: 915px) {
 
-.greeting-texto{
-  width: 30.4%;
+ /*PAGINA GREETINGS*/
+  /*componnete grreting*/
+  .home-images{
+    top: 0px
+  }
+  
+  .home-images .greeting-images-dos{
+    top:0px
+  }
+  
+    .home-images .hover-image {
+      position:  absolute;
+      top: 0px;
+    
+    }
+  
+    .home-images .home-image{
+      top: 0px;
+      position: relative;
+    }
 
+
+
+ .greeting-texto{
+ width: 38%;
+ height: 380px;
+ top: 70px;
+ left: 20px;
+ }
+
+.texto-animado-developer{
+font-size: 0.52em;
+line-height: 8px;
 }
+
+
+.texto-animado{
+width: 82%;
+font-size: 0.45em;
+line-height: 8px;
+margin-top: 9px;
+}
+
+
+
+
 
 .project{
 width: 100%;
@@ -2439,6 +2509,9 @@ padding-right: 0px;
 }
 
 }
+
+
+
 
 
 
@@ -2563,23 +2636,31 @@ padding-right: 0px;
     margin-left: -8px;
     }
 
-   /*componnete grreting*/
-   .base-image{
-    position: relative;
-     top: -4px;
-   }
-
-   .hover-image{
-    position: absolute;
-     top: -4px;
-   }
+  
+  
 
 
   .greeting-texto{
     width: 29%;
-    top: 92px;
+    top: 78px;
     left: 36px;
   
+  }
+
+  .greeting-texto h1{
+    line-height: 15px;
+    font-size: 0.78em;
+  }
+
+  .greeting-texto h2{
+ 
+    font-size: 0.72em;
+  }
+
+  .texto-animado{
+    margin-top: 10px;
+    font-size: 0.62em;
+    line-height: 10px;
   }
 
   /*compnente about*/
@@ -2647,7 +2728,7 @@ padding-right: 0px;
 
 
 
-/*SURFACE DUO*/
+/*SURFACE DUO mi movil*/
 @media only screen and (min-width: 540px) and (max-width: 720px) {
   .navbar{
     max-width: 100%;
@@ -2683,11 +2764,32 @@ padding-right: 0px;
     height: 43px;
   }
 
- 
+  .home-images{
+    top: 0px
+  }
+  
+  .home-images .greeting-images-dos{
+    top:0px
+  }
+  
+    .home-images .hover-image {
+      position:  absolute;
+      top: 0px;
+      left: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+  
+    .home-images .home-image{
+      top: 0px;
+      position: relative;
+    }
+  
+  
 
  .greeting-texto{
   width: 35%;
-  top: 95px;
+  margin-top: 65px;
   left: 27px;
  }
 
@@ -2697,20 +2799,44 @@ padding-right: 0px;
  }
 
  .greeting-texto h2{
-  width: 60%;
-  font-size: 0.8em;
-  line-height: 18px;
+  width: 90%;
+  font-size: 0.86em;
+  line-height: 23px;
  }
 
- 
+
+ .greeting-texto .texto-animado{
+  width: 88%;
+ margin-top: 6px;
+ font-size: 0.78em;
+ line-height: 18px;
+}
 
 
- .greeting-texto p{
-  width: 85%;
-  font-size: 0.6em;
-  letter-spacing: 0.4px;
-  line-height: 10px;
- }
+
+ .container-about-tres{
+  display: flex;
+  flex-direction: column;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.container-about-dos{
+  display: flex;
+  flex-direction: column;
+  padding-left: 0px;
+  padding-right: 0px;
+ width: 100%;
+}
+
+.subcontainer-about-movil{
+  width: 100%;
+  
+}
+
+ /**/
+
+
     /*about*/
     .subcontainer-about-movil-img{
 
@@ -2731,6 +2857,27 @@ padding-right: 0px;
       left: -230px;
    
     }
+
+
+    .skill{
+      display: flex;
+      width: 100%;
+    }
+
+    .skill-tres{
+      display: flex;
+      flex-direction: column;
+    }
+
+    .skill-dos{
+      flex-direction: column;
+    }
+
+    .skills-page-movil{
+      width: 100%;
+    }
+
+
 
   /*POST BLOG*/
   .movil-form{
@@ -2889,16 +3036,36 @@ padding-right: 0px;
 
 }
 
-/*YA ESTA rosado BORRAR*/
-@media only screen and (min-width: 721px) and (max-width: 767px) {
+
+
+/*COMPLICADO EL TEXTO-ANIMADO DE RSPONSIVE*/
+@media only screen and (min-width: 721px) and (max-width: 768px) {
  
 
- .hover-image{
-   top:20px;
+  .home-images{
+    top: 0px
   }
+  
+  .home-images .greeting-images-dos{
+    margin-top:10px
+  }
+  
+    .home-images .hover-image {
+      position:  absolute;
+      top: 0px;
+      left: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+  
+    .home-images .home-image{
+      top: 0px;
+      position: relative;
+    }
+  
 
   .greeting-texto{
-    top: 120px;
+    top: 110px;
     left: 26px;
     width: 35%;
     height: 60%;
@@ -2906,8 +3073,9 @@ padding-right: 0px;
 
   }
 
-  .greeting-texto h1{
-    font-size: 1.3em;
+  .greeting-texto .texto-animado-developer{
+    font-size: 1.2em;
+    line-height: 22px;
   }
 
   .greeting-texto h2{
@@ -2915,14 +3083,15 @@ padding-right: 0px;
 
   }
 
-  .greeting-texto p{
-    margin-top: 2px;
-    font-size: 1em;
-    line-height: 16px;
+ 
+ 
+  .greeting-texto .texto-animado{
+    width: 98%;
+   margin-top: 12px;
+   font-size: 1em;
+   line-height: 16px;
   }
-
-
-
+  
 
   .container-about-tres{
     display: flex;
@@ -3145,34 +3314,6 @@ padding-right: 0px;
 }
 
 
-/*  IPAD AIR*/
-@media only screen and (min-width: 820px) and (max-width: 1180px) {
-.navbar{
-  height: 58px;
-
-}
-
-.navbar-logo{
-  height: 57px;
-
-}
-
-.logo{
-  height: 55px;
-
-}
-
-.logo img{
-  width: 60%;
-}
-
-.menu-movil{
-  height: 50px;
-
-}
-
-}
-
 /*  IPAD MINI*/
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
   .logo{
@@ -3219,15 +3360,30 @@ padding-right: 0px;
     padding-top: 98px;
   }*/
 
+    
 
-  .hover-image {
+/*PAGINA GREETINGS*/
+.home-images{
+  top: 0px
+}
+
+.home-images .greeting-images-dos{
+  margin-top: 10px
+}
+
+  .home-images .hover-image {
     position:  absolute;
-    top: 20px;
+    top: 0px;
     left: 0;
     opacity: 0;
     transition: opacity 0.5s ease;
   }
-  
+
+  .home-images .home-image{
+    top: 0px;
+    position: relative;
+  }
+
 
 
 
@@ -3235,7 +3391,7 @@ padding-right: 0px;
     left: 34px;
     height: 220px;
     width: 240px;
-    top: 120px;
+    top: 100px;
   }
 
   .greeting-texto h1{
@@ -3251,6 +3407,11 @@ padding-right: 0px;
   .greeting-texto p{
     font-size: 0.94em;
     line-height: 17px;
+  }
+
+  .texto-animado{
+    width: 98%;
+  
   }
 
 
@@ -3628,30 +3789,132 @@ padding-right: 0px;
 
 }
 
+@media only screen and (min-width: 768px) and (max-width: 820px) {
+  .home-images{
+    top: 0px
+  }
+  
+  .home-images .greeting-images-dos{
+    top:0px
+  }
+  
+    .home-images .hover-image {
+      position:  absolute;
+      top: 0px;
+      left: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+  
+    .home-images .home-image{
+      top: 0px;
+      position: relative;
+    }
+  
+  
+
+}
+
+/*  IPAD AIR*/
+@media only screen and (min-width: 820px) and (max-width: 1180px) {
+.navbar{
+  height: 58px;
+
+}
+
+.navbar-logo{
+  height: 57px;
+
+}
+
+.logo{
+  height: 55px;
+
+}
+
+.logo img{
+  width: 60%;
+}
+
+.menu-movil{
+  height: 50px;
+
+}
+
+ /*PAGINA GREETINGS*/
+ /*PAGINA GREETINGS*/
+ /*PAGINA GREETINGS*/
+ .home-images{
+  top: 0px
+}
+
+.home-images .greeting-images-dos{
+  top:0px
+}
+
+  .home-images .hover-image {
+    position:  absolute;
+    top: 0px;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .home-images .home-image{
+    top: 21px;
+    position: relative;
+  }
+
+
+
+
+
+  .greeting-texto{
+    height: 330px;
+  }
+
+
+
+}
+
 
 /*IPAD PRO*/
 @media only screen and (min-width: 1024px) and (max-width: 1366px) {
-.hover-image {
-  position:  absolute;
-  top: 0px;
-  left: 0;
-  opacity: 0;
-  transition: opacity 0.5s ease;
+
+  /*PAGINA GREETINGS*/
+ .home-images{
+  top: 0px
 }
 
-.home-image:hover .hover-image {
-  opacity: 1;
+.home-images .greeting-images-dos{
+  top:0px
 }
 
-.greeting-texto{
+  .home-images .hover-image {
+    position:  absolute;
+    top: 0px;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .home-images .home-image{
+    top: 21px;
+    position: relative;
+  }
+
+
+
+
+  .greeting-texto{
   top: 165px;
   left: 50px;
   height: 410px;
-  width: 310px;
-}
+  width: 280px;
+  }
 
 
-.subcontainer-about-movil-img .letra-dise{
+  .subcontainer-about-movil-img .letra-dise{
   top: 140px;
   left: -180px;
    display: block;
@@ -3821,7 +4084,7 @@ margin-top: 10px;
 
   .hover-image {
     position:  absolute;
-    top: 15px;
+    top: 23.6px;
     left: 0;
     opacity: 0;
     transition: opacity 0.5s ease;
@@ -3829,7 +4092,7 @@ margin-top: 10px;
 
   .base-image{
     position:  relative;
-    top: 15px;
+    top: 0px;
     left: 0;
 
   }

@@ -20,8 +20,8 @@ function Greeting() {
               {/*  */}
                
               <div className="home-images h-[100%] ">
-                <div className="greeting-images-dos">
-                <motion.div className='home-image' initial={{ opacity: 0, y: 0 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
+                <div className="greeting-images-dos bg-red-300">
+                <motion.div className='home-image  bg-yellow-400' initial={{ opacity: 0, y: 0 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
                 <LazyImage src={portadaFinalTres} alt="portada" className="base-image"/>
                 <LazyImage src={portadaFinalDos} alt="portada"  className="hover-image" />
                  {/* </div>*/}
