@@ -1,0 +1,504 @@
+# Archivos y carpetas específicos de Django
+/backend/db.sqlite3
+/backend/__pycache__
+/backend/myvenv/
+# Archivo de base de datos
+
+
+
+### Django ###
+*.log
+*.pot
+*.pyc
+__pycache__/
+*.py[cod]
+*$py.class
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+
+
+# If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
+# in your Git repository. Update and uncomment the following line accordingly.
+backend/staticfiles/
+backend/media/
+backend/node_modules/
+Byte-compiled / optimized / DLL files
+# Ignorar la carpeta 'media'
+/media/
+# Ignorar la carpeta 'media'
+/staticfiles/
+
+
+### Django.Python Stack ###
+# Byte-compiled / optimized / DLL files
+*.py[cod]
+*$py.class
+
+
+# Otros archivos generados automáticamente
+# Carpetas de prueba de Django
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+
+# Archivos locales de desarrollo
+*.log
+
+# environ
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+.DS_Store
+
+# dotenv environment variable files
+.env.development.local
+.env.test.local
+.env.production.local
+# Archivo de entorno local (si lo tienes)
+.env.local
+
+
+# Backup files # 
+*.bak 
+
+
+# http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
+[Bb]in
+[Ii]nclude
+[Ll]ib
+[Ll]ib64
+[Ll]ocal
+[Ss]cripts
+pyvenv.cfg
+pip-selfcheck.json
+
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+.history
+ #mivisual studio code
+**/.vscode/
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+### VirtualEnv ###
+# Virtualenv
+
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+.ionide
+
+
+# Archivo de configuración local (si lo tienes)
+/local_settings.py
+
+#mi settings 
+development.py
+settings/development.py
+
+# Ignorar archivos y carpetas de pruebas de Django
+/backend/tests/
+/backend/test_*.py
+/backend/*_test.py
+# Ignorar archivos test.py en todas las aplicaciones
+**/test.py
+**/tests.py
+
+
+
+requirements/base.txt
+requirements/development.txt
+backend/requirements/base.txt
+backend/requirements/development.txt
+backend/equirements.txt
+
+
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# IPython Notebook
+.ipynb_checkpoints
+
+# Rope project settings
+.ropeproject
+.idea/
+data/
+
+
+
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Translations
+*.mo
+*.pot
+
+
+
+
+# Django stuff:
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+
+
+# SageMath parsed files
+*.sage.py
+
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+
+
+# End of https://www.toptal.com/developers/gitignore/api/django
+
+# Thumbnails
+._*
+Thumbs.db
+
+# sftp configuration file 
+sftp-config.json 
+
+# Package control specific files Package 
+Control.last-run 
+Control.ca-list 
+Control.ca-bundle 
+Control.system-ca-bundle 
+GitHub.sublime-settings 
+
+
+
+ 
+#rREACT
+# Ignorar la carpeta de construcción
+/dist/
+
+# Ignorar la carpeta de archivos públicos
+/public/
+# Carpeta de compilación de React
+/frontend/build/
+/frontend/dist/
+# Archivos de dependencias y módulos generados
+node_modules/
+build/
+dist/
+
+frontend/node_modules/
+frontend/build/
+frontend/dist/
+
+
+
+# Archivo de registro (si lo tienes)
+npm-debug.log
+
+# Archivos de respaldo de editor
+*~
+
+
+# Created by https://www.toptal.com/developers/gitignore/api/react
+# Edit at https://www.toptal.com/developers/gitignore?templates=react
+
+### react ###
+.DS_*
+*.log
+logs
+**/*.backup.*
+**/*.back.*
+
+node_modules
+bower_components
+
+*.sublime*
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+
+### Node ###
+# Logs
+logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+psd
+thumb
+sketch
+
+# End of https://www.toptal.com/developers/gitignore/api/react
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+
+
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Directory for instrumented libs generated by jscoverage/JSCover
+lib-cov
+
+# Coverage directory used by tools like istanbul
+coverage
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-task-files)
+.grunt
+
+# Bower dependency directory (https://bower.io/)
+bower_components
+
+# node-waf configuration
+.lock-wscript
+
+# Compiled binary addons (https://nodejs.org/api/addons.html)
+build/Release
+
+
+# Snowpack dependency directory (https://snowpack.dev/)
+web_modules/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+
+
+# parcel-bundler cache (https://parceljs.org/)
+.parcel-cache
+
+
+# Nuxt.js build / generate output
+.nuxt
+dist
+
+# Gatsby files
+.cache/
+# Comment in the public line in if your project uses Gatsby and not Next.js
+# https://nextjs.org/blog/next-9-1#public-directory-support
+# public
+
+
+# vuepress v2.x temp and cache directory
+.temp
+
+# Docusaurus cache and generated files
+.docusaurus
+
+# Serverless directories
+.serverless/
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+# TernJS port file
+.tern-port
+
+# yarn v2
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+### Node Patch ###
+# Serverless Webpack directories
+.webpack/
+
+# Optional stylelint cache
+
+# SvelteKit build / generate output
+.svelte-kit
+
+
+# ruff
+.ruff_cache/
+
+# LSP config files
+pyrightconfig.json
+
+### react ###
+.DS_*
+**/*.backup.*
+**/*.back.*
+
+

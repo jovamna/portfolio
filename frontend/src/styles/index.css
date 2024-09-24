@@ -1,0 +1,4204 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body
+ { /* Cambia #root por el id de tu contenedor principal si es diferente */
+  height: 100%;
+  width: 100%;
+  margin-bottom: 4rem;
+  padding: 0;
+}
+  html {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    font-family: Nunito, sans-serif, ui-sans-serif, system-ui;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+}
+    
+ 
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    /*overflow: hidden;*/
+  }
+
+  
+.cookie{
+  position: fixed;
+  z-index: 1500;
+  bottom: 6px;
+  right: 0;
+  left: 0;
+}
+
+.movil-footer {
+  position: relative; /* Asegúrate de que el footer tenga posición */
+  z-index: 100;
+}
+
+/*VIDEO DE LA PORTADA BLOG*/
+
+
+/*Fin*/
+
+/* Agrega estilos CSS para el ToastContainer en FullWidthLayout */
+.Toastify__toast-body {
+  color: rgb(30, 31, 32);
+  font-size: 0.9em;
+  padding: 10px;
+  width: 100%;
+  font-weight: 400;
+} 
+
+
+
+
+.Toastify__toast--success {
+  background: #F0F9FA !important;
+
+  border: 1px solid #3A9EA5 !important;
+  border-radius: 50px !important;
+}
+
+.Toastify__toast--error {
+  background: #F0F9FA !important;
+  background-size: 50px 50px; /* Ajusta el tamaño de la imagen de fondo */
+  border: 1px solid #3A9EA5 !important;
+  border-radius: 50px !important;
+ 
+}
+
+
+  
+.home-images{
+  top: 0px
+}
+
+.home-images .greeting-images-dos{
+  top:0px
+}
+
+  .home-images .hover-image {
+    position:  absolute;
+    top: 0px;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .home-images .home-image{
+    top: 0px;
+    position: relative;
+  }
+
+  
+  .home-image:hover .hover-image {
+    opacity: 1;
+  }
+
+  /*greetings*/
+  .texto-animado {
+    position: relative;
+    animation-name: moveToRight;
+    animation-duration: 1s;
+  }
+
+  @keyframes moveToRight {
+  0% {
+      opacity: 0;
+      left: -10000px;
+  }
+  100% {
+      opacity: 1;
+      left: 0;
+  }
+}
+
+/*fin ggreetings*/
+  
+ 
+  .navbar{
+    position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff; /* Ajusta el color de fondo según sea necesario */
+  z-index: 1000; 
+  }
+
+  /*PAGINA HOME*/
+  .fade-in {
+    opacity: 0;
+    animation: fadeInAnimation 1s ease forwards;
+  }
+  
+  @keyframes fadeInAnimation {
+    to {
+      opacity: 1;
+    }
+  }
+
+/*fin home*/
+ 
+/*ABOU IMPORTANTE PARA EL SLIDER DE TEXTO*/
+.subcontainer-about-movil-img .letra-dise{
+ top: 140px;
+  right:200px;
+  display: block;
+  width: 175px;
+  height: 85px;
+  overflow: hidden;
+  position: relative;
+}
+
+
+
+
+
+
+.semicirculo {
+  height: 48px;
+  width: 100px;
+  background-color: white;
+  border-radius: 50% / 100% 100% 0 0;
+}
+.semicirculo-contacto {
+  height: 48px;
+  width: 100px;
+  border-radius: 50% / 100% 100% 0 0;
+}
+
+.icon-centre {
+  transition: transform 0.3s ease;
+}
+
+.icon-centre:hover {
+  transform: translateY(-5px);
+  color: rgb(92, 109, 109);
+}
+
+
+/*LOGO INCIANDO*/
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  animation: fadeIn 2s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Aplicar la animación de desvanecimiento al ocultar el logo */
+.logo-container.hide {
+  animation: fadeOut 1s;
+}
+
+
+
+
+
+.wave-emoji {
+  animation-duration: 1.8s;
+  animation-iteration-count: infinite;
+  animation-name: wave;
+  display: inline-block;
+  transform-origin: 70% 70%;
+}
+
+@keyframes wave {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(-10deg);
+  }
+  20% {
+    transform: rotate(12deg);
+  }
+  30% {
+    transform: rotate(-10deg);
+  }
+  40% {
+    transform: rotate(9deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+
+
+.logo .img-jova{
+  height: 52px;
+  width: 160px;
+  }
+
+.hide {
+  display: none;
+}
+
+.review-scroll::-webkit-scrollbar {
+  /*width: 0px;*/
+  width: 2px;
+  background-color: white
+}
+
+.review-scroll::-webkit-scrollbar-track {
+  background: white;
+}
+
+.review-scroll::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 20px;
+  border: 1px solid white;
+}
+
+
+
+.nav-item:hover {
+    color: grey;
+    cursor: pointer;
+  }
+.nav-item{
+    color: black;
+}
+.z-index{
+  z-index: 200;
+}
+
+.container-blogpost-tres-columnas {
+  display: flex;
+}
+
+.blogpost-column-1,
+.blogpost-column-3 {
+  width: 20%;
+  padding-top: 80px;
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  max-height: 50vh;
+}
+
+/*max-height: 80vh; /* Ajusta la altura máxima según tus necesidades */
+.blogpost-column-2 {
+  width: 60%;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  /*scrollbar-width: thin;
+  scrollbar-color: blue orange;*/
+}
+
+/* Works on Chrome, Edge, and Safari */
+.blogpost-column-2::-webkit-scrollbar {
+  /*width: 0px;*/
+  width: 2px;
+  background-color: white
+}
+
+.blogpost-column-2::-webkit-scrollbar-track {
+  background: white;
+}
+
+.blogpost-column-2::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 20px;
+  border: 1px solid white;
+}
+
+
+.project-column-1,
+.project-column-3 {
+ 
+  padding-top: 80px;
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  max-height: 50vh;
+}
+
+/*max-height: 80vh; /* Ajusta la altura máxima según tus necesidades */
+.project-column-2 {
+
+  padding: 4px;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  /*scrollbar-width: thin;
+  scrollbar-color: blue orange;*/
+}
+
+/* Works on Chrome, Edge, and Safari */
+.project-column-2::-webkit-scrollbar {
+  /*width: 0px;*/
+  width: 2px;
+  background-color: white
+}
+
+.project-column-2::-webkit-scrollbar-track {
+  background: white;
+}
+
+.project-column-2::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 20px;
+  border: 1px solid white;
+}
+
+/* NEWSKLETTER SUSCRIBE EN FOOTER CSS para la animación de rebote */
+/* Agrega estas clases al archivo de estilos CSS */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+button:hover .newsletter-animation {
+  animation: bounce 0.5s ease infinite;
+}
+
+.reset-password{
+  margin-top: -70px;
+}
+
+
+
+
+
+.chat-container{
+  scrollbar-width: thin;
+  scrollbar-color: blue orange;
+}
+
+/* Works on Chrome, Edge, and Safari */
+.chat-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-container::-webkit-scrollbar-track {
+  background: orange;
+}
+
+.chat-container::-webkit-scrollbar-thumb {
+  background-color: blue;
+  border-radius: 20px;
+  border: 2px solid orange;
+}
+
+
+
+
+/*--No estoy usando BOTON SUBE ARRIBA--  */
+#topButtongf {
+  visibility: hidden;
+  position: fixed;
+  bottom: 130px;
+  right: 32px;
+  z-index: 99;
+  border: 2px solid #e2cbcb; /*NONE*/
+  outline: none;
+  background-color: rgb(221, 221, 202);
+  color: white;
+  cursor: pointer;
+  padding: 1px;
+  border-radius: 15px;
+  font-size: 25px;
+}
+
+#topButtonlf:hover {
+  background-color: rgb(133, 118, 118);
+  transition: all ease-in-out 0.2s;
+}
+
+
+.top{
+  color: #000;
+  font-size: 1.6em;
+}
+
+.top:hover{
+  color: #fff;
+}
+
+
+
+
+@-webkit-keyframes sk-circleBounceDelay {
+  0%,
+  80%,
+  100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  40% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+@keyframes sk-circleBounceDelay {
+  0%,
+  80%,
+  100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  40% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+/*WORK*/
+.hover{
+  color: #000;
+  font-weight: bold;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-style: oblique;
+  font-size: 1.1em;
+}
+.hover:hover{
+  cursor: pointer;
+  text-decoration: underline;
+  color:rgb(133, 118, 118);
+}
+
+
+.description{
+  color: #4D5656;
+  font-size: 1em;
+}
+
+
+.keywords{
+  font-size: 1em;
+  font-weight: lighter;
+  color: #4D5656;
+}
+
+
+
+/*antiquewhite*/
+.about-center{
+ color: #fff;
+padding-top: 20px;
+}
+
+
+/*PAGINA SKILLS*/
+
+
+.refresh{
+  padding: 16px;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 14px;
+  width: 240px;
+  height: 290px;
+  top: 10px;
+  right: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+
+
+/*CONTENEDOR SECUNDARIO DONDE ESTA EL MENU 
+SOFTWARE DEVELOPMENT, WEB, DATABASE DATACIENCIA ETC*/
+/* padding: 1px 1px 4px 1px;*/
+.tab-menu li .tab-button{
+  display: inline-block; /* Convertir el botón en un elemento inline-block */
+  position: relative; 
+  width: 100%;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1em;
+  font-weight: 800;
+  transform: scale(0.9);
+  transition: all 250ms ease;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  text-align: center;
+  margin: auto;
+  height: 50px;
+}
+
+
+
+.navbar-project{
+  border: none;
+  width: 95%;
+  margin: auto;
+}
+
+
+
+
+/*PROJECT-CARD*/
+.keywords{
+  font-size: 1em;
+  height: 70px;
+}
+
+
+
+
+
+/*GALAXY-FOLF*/
+@media only screen and (min-width: 280px) and (max-width: 653px) {
+  html,
+body
+ { /* Cambia #root por el id de tu contenedor principal si es diferente */
+  height: 100%;
+  width: 100%;
+  margin-bottom: 4rem;
+  padding: 0;
+  }
+
+  html {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    font-family: Nunito, sans-serif, ui-sans-serif, system-ui;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+   }
+    
+ 
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    /*overflow: hidden;*/
+  }
+
+  /*PAGINA DE ENTRADA INICO PORTAFOLIO JOVAMNA*/
+  .logo-init-img{
+    width: 120px;
+    height: 40px;
+  }
+
+  .portfolio-init{
+    font-size: 1em;
+  }
+
+  .cookie-general{
+  display: flex;
+  bottom: 0px;
+  }
+
+  .cookie{
+  max-width: 100%;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 8px;
+  padding-bottom: 12px;
+  }
+  .cookie-consent{
+  width: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+  }
+
+  .cookie-buttons{
+  display: flex;
+  flex-direction: column;
+  }
+
+  .cookie-button-aceptar{
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-bottom: 8px;
+  }
+
+  .cookie-button-configurar{
+  padding-left: 0px;
+  padding-right: 0px;
+  }
+
+
+  .tab-menu {
+  overflow-x: auto;
+  }
+
+  /*BOTON ARRIBA*/
+  #topButton{
+  margin-right: -14px;
+  }
+
+
+
+  .project-pagina{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  }
+
+  /*CHATBOT*/
+  .chat-container{
+  width: 90%;
+   margin-right: -14px;
+  }
+
+
+
+ /*NAVBAR*/
+  .navbar{
+    width: 100%;
+    height: 40px;
+  
+  }
+  
+  .navbar .navbar-menu{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 36px;
+  margin-top: 3px;
+
+   }
+
+   .navbar-menu .navbar-logo{
+    width: 100%;
+    height: 36px;
+ 
+   }
+
+ 
+ 
+   /*navbar del projecto*/
+  .navbar-project-movil{
+   width: 100%;
+   height: 40px;
+  }
+
+  .navbar-project-movil-popover{
+   width: 100%;
+   height: 36px;
+   padding-left: 0px;
+   padding-right: 0px;
+   margin-top: 3px;
+    }
+
+    .navbar-logo{
+      width: 100%;
+      height: 36px;
+      padding-left: 0px;
+      padding-right: 0px;
+     }
+  
+     .logo{
+      width: 30%;
+      height: 36px;
+     }
+  
+     .logo img{
+    width: 100%;
+    height: auto;
+    }
+  
+     /*menu del movil*/
+    .menu-movil{
+      width: 70%;
+      height: 36px;
+      padding-left: 0px;
+      padding-right: 0px;
+      }
+
+
+      /*container cuando no hay nadie activo*/
+      .container-movil-login-registro{
+        height: 36px;
+      }
+
+
+  /* container cuando esta activo el user*/
+      .user-activo{
+        width: 40%;
+        height: 36px;
+        padding-left: 0px;
+        padding-right: 0px;
+      }
+
+     .user-activo .hola-button{
+        max-width: 80%;
+        height: 36px;
+      }
+
+      .hola-button .hola{
+        margin-top: 10px;
+        font-size: 0.5em;
+      }
+
+      .hola-button .hola-bola{
+        margin-top: 10px;
+        margin-left: -2px;
+      }
+
+      .icon-search-bihome{
+        height: 36px;
+        width: 28%;
+      }
+    
+      .icon-search{
+        width: 50px;
+        margin-top: 10px;
+      }
+
+      .icon-bihome{
+        width: 50px;
+        margin-top: 10px;
+      }
+      
+
+   /*PAGINA GREETINGS*/
+   .home-images{
+    margin-top: 20px
+  }
+  
+  .home-images .greeting-images-dos{
+    top:0px
+  }
+  
+    .home-images .hover-image {
+      position:  absolute;
+      top: 0px;
+      left: 0;
+      
+    }
+  
+    .home-images .home-image{
+      top: 0px;
+      position: relative;
+    }
+  
+
+
+
+  .greeting-texto{
+  width: 92px;
+  height: 110px;
+  top: 70px;
+  left: 15px;
+  }
+
+  .texto-animado-developer{
+  font-size: 0.52em;
+  line-height: 8px;
+  }
+
+
+  .texto-animado{
+  width: 90px;
+  font-size: 0.45em;
+  line-height: 8px;
+  margin-top: 4px;
+  }
+
+  .greeting-texto img{
+  width: 12px;
+  }
+
+  /*about*/
+  .about{
+  padding-top: 12px;
+  }
+
+  .container-about-tres{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+  }
+
+    .container-about-dos{
+      width: 94%;
+      display: flex;
+      padding-left: 0px;
+      padding-right: 0px;
+      padding-top: 0px;
+      flex-direction: column;
+      margin: auto;
+      margin-bottom: 30px;
+     
+    }
+
+    .subcontainer-about-movil{
+      width: 100%;
+    }
+
+    .subcontainer-about-movil h1{
+      font-size: 1.2em;
+      margin-top: 8px;
+     margin-bottom: 8px;
+    }
+
+    .subcontainer-about-movil h2{
+      font-size: 0.6em;
+    }
+
+    .subcontainer-about-movil-img{
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      justify-items: start;
+
+    }
+
+
+  .skill-item{
+    padding-left: 6px;
+    padding-right: 4px;
+  }
+  
+  .skill-item p{
+  font-size: 0.8em;
+
+  }
+  
+  .subcontainer-about-movil-img{
+    width: 100%;
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .subcontainer-about-movil-img img{
+    width: 100%;
+    margin-top: -30px;
+    padding-top: 0px;
+  
+  }
+
+
+  .subcontainer-about-movil-img .letra-dise{
+    top: 40px;
+    left: -115px;
+    width: 90px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .slide{
+    font-size: 0.4em;
+    text-align: center;
+    padding-bottom: 24px;
+   
+  }
+  
+ 
+  /*PAGINA SKILL*/
+
+  
+  .skill-tres{
+    display: flex;
+    flex-direction: column;
+    padding-top: 0px;
+    height: auto;
+  }
+
+  .skill-dos{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
+
+  /*DE LA PAGINA SKILL-CARD*/
+  .skill-card-movil{
+    width: 90%;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin: auto;
+    margin-bottom: 10px;
+  
+  }
+  /*subcontainer general del card y el details*/
+  .skill-card-movil-img-title{
+    width: 100%;
+    height: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .skills-page-movil{
+    width: 100%;
+    height: auto;
+  }
+
+  .skill-detail-small-movil h1{
+    font-size: 0.99em;
+ 
+  }
+
+  .skill-detail-medium-movil p{
+    font-size: 0.96em;
+  }
+
+  /*titulo skills*/
+  .skills-page-movil h1{
+  font-size: 1.5em;
+  }
+
+  /*.skill-menu{
+   
+  }*/
+
+  /*LU LI letras softw, web, databa, tools*/
+
+  
+.container-general-tab{
+  height: 265px;
+  }
+
+  .container-general-tab ul{
+    height: 55px;
+    width: 100%;
+    width: 100%;
+    margin-bottom: 12px;
+    overflow-x: auto;
+    white-space: nowrap; /* Evita el salto de línea */
+  }
+
+  .container-general-tab li{
+    height: 42px;
+  }
+   
+  /*TITULOS DEL MENU SKILL*/
+  .container-general-tab li .tab-button{
+    font-size: 0.9em;
+    height: 42px;
+    margin: auto;
+    line-height: 14px;
+    padding-left: 5px;
+    padding-right: 5px;
+    }
+  
+    /*container de los iconos de los skills*/
+    .tab__content{
+      height: 180px;
+  
+    }
+  
+
+    .tab__content .skill-logo-img {
+    width: 80%;
+    }
+
+
+    .tab__content .skill-letra-img{
+    width: 70%;
+    }
+  
+    /*RESPONSIVE DE LOS GITHUB E IMAGEN*/
+  /*SUBCONTAINER 1 DE LA PAGINA PROJECT*/
+  .project-movil{
+   width: 95%;
+   margin: auto;
+   padding-left: 0px;
+   padding-right: 0px;
+   padding-bottom: 0px;
+   height: auto;
+   padding-top: 0px;
+ }
+
+ /*importante*/
+ .project-movil-colores{
+  width: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+ }
+ 
+   /*SUBCONTAINER 2 DE LA PAGINA PROJECT*/
+  .project-row-movil{
+   width: 100%;
+   height:100%;
+   margin: auto;
+   }
+ 
+    /*CONTAINER PRINCIPAL DE LA PAGINA PROJECTHOME*/
+    /*PAGINA DE LISTADO DE LOS GITHUBS*/
+    .project-home{
+     width: 260px;
+    max-height: 100%;
+    margin: auto;
+   }
+ 
+  /*SUBCONTAINER DE PROJECTHOME NARANJA*/
+  .home-project{
+   display: grid;
+   width: 260px;
+   height: 100%;
+    }
+ 
+ 
+   /*CONTAINER PRINCIPAL DEL PROJECTCARD DEL GITHUB */
+   /*ESTE ES SOLO UN GITHUB ES EL ESPACIO BLANCO*/
+ 
+   /*SUBCONTAINER DE PROJECT-MOVIL-CARD*/
+  /*ES EL ESPACIO  NARANJA COGE 2 GITHUBS*/
+   .card-project{
+     width: 235px;
+    height: 100%;
+    }
+ 
+    /*SUBCONTAINER DE CARD-POJECT PRIMER CUADRO*/
+     /*CONTainer general del contenido del cardgithub*/
+   .project-movil-card{
+     width: 230px;
+     height:100%;
+   }
+
+   .project-card-title-description{
+    height: auto;
+   }
+ 
+   /*IMAGEN DEL ICONO GITHUB*/
+   .project-card-title-description img{
+    width: 100%;
+    height: 100%;
+     margin-left: 10px;
+   }
+ 
+    /*SUBCONTAINER DE CARD-POJECT SEGUNDO CUADRO*/
+    .authors{
+     width: 235px;
+     height: 70px;
+   }
+ 
+ 
+ /*IMAGEN COSTADO DE LOS GITHUBS*/
+ .project-row-movil h2{
+  font-size: 1.3em;
+
+ }
+
+ .ver-mis-projectos a{
+  font-size: 0.9em;
+ }
+
+
+ .project-img-movil{
+  left: 70px;
+  top: 40px;
+  width: 120px;
+  height: 150px;
+  }
+ 
+  .project-img-movil img{
+    width: 120px;
+    height: 150px;
+   }
+
+   .div-languages{
+    width: 100%;
+    margin-bottom: 12px;
+   }
+
+   .project-card-title-description .languages{
+    font-size: 0.8em;
+
+   }
+
+   .d-authors{
+    width: 44%;
+    
+   }
+
+   .d-authors p{
+    font-size: 0.7em;
+   }
+ 
+ /* FIN RESPONSIVE DE LOS GITHUB E IMAGEN*/
+/*................*/
+/*.contacto{
+
+}*/
+
+ .subcontainer-contact{
+  padding-left: 0px;
+  padding-right: 0px;
+
+ }
+    /*CONTACTO*/
+    .contacto-row{
+      padding-left: 0px;
+      padding-right: 0px;
+    
+    }
+    .contacto-izquierda{
+      padding-left: 5px;
+      padding-right: 5px;
+
+    }
+
+     /*div del form*/
+    .container-contacto-form{
+      padding-left: 4px;
+      padding-right: 4px;
+    }
+
+
+
+    /**/
+  
+    
+  /*BLOG */
+  .portada-blog{
+    width: 100%;
+    height: 250px;
+  }
+
+.error-message{
+    width: 100%;
+    height: 250px;
+  }
+
+  .error-message h1{
+    font-size: 1.2em;
+  }
+
+  .error-message p a{
+    font-size: 0.9em;
+  }
+
+  .responsive-altura-blogcard{
+    height: auto;
+  }
+
+  .blog-image{
+    height: 160px;
+  }
+
+
+
+  /*BLOG POST*/
+  /*CONTAINER DE LA IMAGEN Y VIDEO*/
+  .movil-portada{
+    display: flex;
+    flex-direction: column;
+    max-width: 359px;
+    max-height:350px;
+  }
+
+  /*CONTAINER DE LA IMAGEN*/
+  .movil-portada-subcaja{
+    max-width: 359px;
+    max-height: 350px;
+  }
+  .movil-portada-subcaja img{
+    max-width: 359px;
+    max-height:350px;
+    top: 40px;
+   }
+
+  .movil-video-portada {
+    max-height:350px;
+   }
+
+   /*CONTAINER DE LA CATGEORIA TITULO DESCRIPTION DEL BLOG-POST*/
+  .movil-redaccion-blog-post{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+   
+  }
+
+  .movil-redaccion-blog-post p{
+    font-size: 0.9em;
+  }
+
+  .movil-redaccion-blog-post h1{
+    font-size: 2.1em;
+  }
+ 
+  /*FIN POST MOVIL*/
+
+/*REVIEWS*/
+/*container para crera review*/
+.review-title-form-like-movil{
+  width: 100%;
+}
+
+.review-hearts-form{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  justify-items: center;
+}
+
+/*CONTAINER DELOS HEARTS Y BOTON*/
+.review-hearts-movil{
+  width: 70%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 2PX;
+}
+
+/*BOTON MOSTRAR TODOS*/
+.review-heart-button{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+
+.review-heart-cinco{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+
+.review-heart-cuatro{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+
+
+.review-heart-tres{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+
+
+.review-heart-cinco{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+
+
+.review-heart-dos{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+
+.review-heart-uno{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+
+
+.review-form-movil{
+  width: 100%;
+}
+
+.review-like-submit-movil{
+  display: flex;
+  flex-direction: row;
+  width: 400px;
+  margin: auto;
+}
+
+
+.review-like p{
+  margin-right: 9px;
+}
+
+.review-button-form-movil{
+  width: 100%;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+/*CONTAINER GENERAL DE LAS RESEÑAS*/
+.reviews-movil{
+  width: 93%;
+}
+
+.reviews-movil h1{
+  font-size: 1.4em;
+}
+/*RESEÑA INIDIVIDUAL*/
+.reviews-review-movil{
+  width: 100%;
+}
+
+.reviews-review-movil img{
+  width: 9.6%;
+}
+
+.reviews-review-button-movil{
+  width: 90%;
+ margin-top: -4px;
+}
+
+
+.container-general-chat{
+  width: 100%;
+}
+
+
+/*BLOG*/
+.container-blogpost-tres-columnas {
+  display: flex;
+  flex-direction: column;
+}
+
+.blogpost-column-1 {
+  display: none;
+}
+
+.blogpost-column-2 {
+  width: 100%;
+  padding: 20px;
+  overflow-y: hidden;
+}
+
+.blogpost-column-2  .movil-redaccion-blog-post {
+  max-width: 359px;
+}
+
+
+
+.blogpost-column-3 {
+  width: 100%;
+  padding-top: 80px;
+  box-sizing: border-box;
+  top: 0;
+}
+
+
+.movil-redaccion-blog-post{
+  width: 100%;
+  margin: auto;
+ 
+}
+
+.movil-redaccion-blog-post h1{
+  font-size: 1.2em;
+}
+
+
+.blogpost-aviso-a-no-authenticados{
+  width: 100%;
+
+}
+.blogpost-aviso-a-no-authenticados h1{
+  font-size: 0.9em;
+}
+
+.review-heart-title{
+  display: flex;
+  flex-direction: column;
+}
+
+.review-form-movil {
+width: 100%;
+}
+
+/*container de like y submt*/
+.review-like-submit{
+  width: 100%;
+}
+
+.review-like{
+  margin-left: -25px;
+  width: 50%;
+}
+
+.review-like p{
+  padding-left: 5px;
+ 
+}
+
+.review-button-form-movil{
+  width: 50%;
+}
+
+/*COMENTARIOS REVIEWS*/
+.reviews-movil h1{
+  font-size: 1.1em;
+}
+
+
+/*FOOTER*/
+.movil-footer{
+  width: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+
+}
+
+/*¿No quieres perderte nada? Suscríbete a los boletines*/
+.movil-suscribe-text{
+  font-size: 0.9em;
+ }
+
+
+/*.footer-suscribe{
+  background-color: brown;
+}*/
+
+
+.footer-form-suscribe{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+ }
+
+ .input-footer-suscribe{
+ width: 70%;
+
+ }
+
+ .boton-footer-suscribe{
+  width: 28%;
+ }
+
+ .footer-suscribe-bo{
+  width: 65%;
+ }
+
+ .footer-suscribe-enviar{
+  font-size: 0.7em;
+
+ }
+
+
+  /*BOLITA BAILARINA*/
+ .newsletter-animation{
+  margin-left: 50px;
+ }
+
+
+
+  .movil-footer-tres-menus{
+    display: grid;
+    grid-column: fr fr fr ;
+    gap: 1px;
+   width: 100%;
+   padding-left: 4px;
+   padding-right: 0px;
+   margin: auto;
+   margin-bottom: 20px;
+   }
+
+   .movil-footer-tres-menus-uno {
+    padding-left: 0px;
+    padding-right: 0px;
+   }
+  
+
+   .movil-footer-tres-menus-uno h3{
+    font-size: 0.7em;
+  
+   }
+  
+   .movil-footer-tres-menus-uno a{
+    font-size: 0.7em;
+   }
+
+   
+ .movil-footer-pie{
+  width: 99.4%;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.movil-footer-pie-p{
+  margin: auto;
+  font-size: 0.8em;
+  margin-top: 10px;
+}
+  
+}
+
+
+/*samsung galaxi s8*/
+@media only screen and (min-width: 360px) and (max-width: 740px) {
+  .navbar-project-movil{
+    height: 40px;
+    width: 100%;
+  }
+
+  /*CONTAINER TOTAL*/
+  .navbar-project-movil-popover{
+    width: 100%;
+    height: 36px;
+ 
+  }
+
+    /*CONTAINER TOTAL*/
+  .navbar-logo{
+    width: 100%;
+    height:36px;
+  
+  }
+
+  .navbar-logo .logo{
+    width: 30%;
+    height: 36px;
+
+  }
+
+  .logo img{
+    width: 75%;
+ height: auto;
+  
+  }
+
+  .menu-movil{
+    height: 36px;
+  }
+
+  .container-movil-login-registro{
+    width: 44%;
+    height: 36px;
+    margin-right: 10px;
+  }
+
+  .container-movil-login-registro img{
+    margin-top: 15px;
+   }
+
+  .container-movil-login-registro p{
+   font-size: 0.8em;
+   margin-top: 15px;
+  }
+
+
+  .menu-movil .user-activo{
+    height: 36px;
+    max-width: 45%;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-right: 20px;
+    
+  }
+
+  .user-activo .hola-button{
+    width: 100%;
+    height: 36px;
+    padding-left: 0px;
+    padding-right: 0px;
+    display: flex;
+    flex-direction: row;
+  }
+
+   /*letra*/
+   .hola-button .hola {
+    max-width: 80%;
+   font-size: 0.5em;
+   display: inline-block;
+   margin-top: 11px;
+  }
+
+    /*icono bola saltarina*/
+   .hola-button .hola-bola {
+    max-width: 20%;
+    font-size: 0.4em;
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: -14px;
+    }
+
+    .icon-search-bihome{
+      height: 36px;
+      padding-left: 0px;
+      padding-right: 0px;
+   
+    }
+
+    .icon-search{
+      margin-top: 10px;
+    
+    }
+
+    .icon-bihome{
+      margin-top: 10px;
+  
+    }
+
+
+    .home-images{
+      top: 0px
+    }
+    
+    .home-images .greeting-images-dos{
+      top:0px
+    }
+    
+      .home-images .hover-image {
+        position:  absolute;
+        top: 0px;
+      
+      }
+    
+      .home-images .home-image{
+        top: 0px;
+        position: relative;
+      }
+
+
+/*FIN NAVBAR*/
+
+  .greeting-texto{
+    width: 31%;
+    height: 170px;
+    top: 70px;
+    left: 26px;
+ 
+  }
+
+  .cookie{
+    max-width: 98%;
+    margin: auto;
+    padding-top: 12px;
+    z-index: 100;
+  }
+
+  .cookie-consent{
+    max-width: 100%;
+    padding: 0px 0px 0px 4px;
+  }
+
+  .cookie-buttons{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cookie-button-aceptar{
+   padding-left: 0px;
+   padding-right: 0px;
+  }
+
+  .cookie-button-configurar{
+    padding-left: 0px;
+    padding-right: 0px;
+   }
+
+   /*componente about*/
+   .subcontainer-about-movil h2{
+    font-size: 0.7em;
+
+   }
+
+   .subcontainer-about-movil-img{
+    max-width: 100%;
+
+   }
+
+   .subcontainer-about-movil-img img{
+    max-width: 100%;
+    padding: 0px 0px 0px 0px;
+    margin-top: -40px;
+   }
+
+
+
+   .subcontainer-about-movil-img .letra-dise{
+      width: 110px;
+      height: 50px;
+      top: 58px;
+      left: -150px;
+      
+    }
+
+   /*componente skill*/
+    /*container general del card y el details*/
+  .skill-card-movil{
+    width: 90%;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin: auto;
+  
+  }
+ /*subcontainer general del card y el details*/
+  .skill-card-movil-img-title{
+    width: 100%;
+    height: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+   /*CONTAINER DE las 2 imagenes*/
+
+   .tab__content .skill-logo-img{
+    width: 59%;
+    height: 75%;
+  
+   }
+
+    /*uL MENU*/
+    .container-general-tab .tab-menu  {
+    height: 54px;
+    margin-bottom: 14px;
+   }
+
+
+   .tab-menu li {
+    padding-left: 0.8px;
+    padding-right: 0.8px;
+
+   }
+
+
+   .tab-menu li .tab-button{
+    font-size: 0.94em;
+    
+   }
+
+
+  /*SUBCONTAINER 1 DE LA PAGINA PROJECT*/
+  .project{
+   width: 100%;
+  }
+  .project-movil{
+    width: 95%;
+    height: auto;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .project-movil .project-movil-colores{
+    max-width: 92%;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin: auto;
+  }
+  /*SUBCONTAINER IMPORTANTE DEL PROJECT-MOVIL DE LA PAGINA PROJECT IMPORTANTE*/
+
+  /*SUBCONTAINER 2 DE LA PAGINA PROJECT*/
+  .project-movil .project-row-movil{
+    width: 100%;
+    height:100%;
+   margin: auto;
+   padding-left: 0px;
+   padding-right: 0px;
+  }
+
+  .project-row-movil .project-h-title{
+    width: 100%;
+    height:100%;
+    margin: auto;
+  }
+  
+     /*CONTAINER PRINCIPAL DE LA PAGINA PROJECTHOME*/
+     /*PAGINA DE LISTADO DE LOS GITHUBS*/
+     .project-home{
+      width: 100%;
+     height: auto;
+     padding-left: 0px;
+     padding-right: 0px;
+    }
+  
+    .project-home .project-home-subcontainer{
+      width: 96%;
+      height: auto;
+      padding-left: 0px;
+      padding-right: 0px;
+      margin: auto;
+    }
+
+  
+  
+     /*SUBCONTAINER DE CARD-POJECT PRIMER CUADRO*/
+      /*CONTainer general del contenido del cardgithub COLOR BLANCO*/
+      .project-home-subcontainer .project-movil-card{
+      width: 100%;
+      height:100%;
+    }
+  
+    
+  
+     /*SUBCONTAINER DE CARD-POJECT SEGUNDO CUADRO*/
+     .authors{
+      width: 235px;
+      height: 70px;
+    }
+  
+  
+  /*IMAGEN COSTADO DE LOS GITHUBS*/
+  .project-row-movil h2{
+   font-size: 1.3em;
+ 
+  }
+ 
+  .ver-mis-projectos a{
+   font-size: 0.9em;
+  }
+ 
+ 
+  .project-img-movil{
+   left: 70px;
+   top: 40px;
+   width: 40px;
+   height: 90px;
+   
+   }
+  
+   .project-img-movil img{
+     width: 40px;
+     height: 90px;
+    }
+ 
+    .div-languages{
+     width: 100%;
+ 
+    }
+ 
+    .project-card-title-description .languages{
+     font-size: 0.8em;
+ 
+    }
+
+    /*.project-card-authors{
+      background: #3A9EA5;
+    }*/
+  
+ 
+    .d-authors{
+     width: 44%;
+     
+    }
+ 
+    .d-authors p{
+     font-size: 0.7em;
+    }
+  
+  /* FIN RESPONSIVE DE LOS GITHUB E IMAGEN*/
+ .responsive-altura-blogcard{
+  height: auto;
+ }
+
+ .responsive-altura-img-blog{
+  height: 160px;
+ }
+
+ .responsive-altura-img-blog img{
+ height: 160px;
+ }
+}
+
+
+/*IPHONE 12 PRO vigilar*/
+@media only screen and (min-width: 390px) and (max-width: 844px) {
+
+  html,
+  body
+ { /* Cambia #root por el id de tu contenedor principal si es diferente */
+  height: 100%;
+  width: 100%;
+  margin-bottom: 4rem;
+  padding: 0;
+  }
+
+
+  html {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    font-family: Nunito, sans-serif, ui-sans-serif, system-ui;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+   }
+    
+ 
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    /*overflow: hidden;*/
+  }
+
+  .cookie{
+    max-width: 98%;
+    margin: auto;
+    padding-top: 12px;
+    z-index: 100;
+  }
+
+  .cookie-consent{
+    max-width: 100%;
+    padding: 0px 0px 0px 4px;
+  }
+
+  .cookie-buttons{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cookie-button-aceptar{
+   padding-left: 0px;
+   padding-right: 0px;
+   margin-bottom: 5px;
+  }
+
+  .cookie-button-configurar{
+    padding-left: 0px;
+    padding-right: 0px;
+   }
+ 
+
+
+
+    /*BOTON ARRIBA*/
+    #topButton{
+      margin-right: -20px;
+      }
+    
+    /*NEWSLETTER*/
+    .boton-newsletter{
+     margin-left: -20px;
+    }
+    
+
+/*IMPORTANTE PARA PONER A ALTURA DEL
+   NAVBAR DEL MOVIL*/
+     /*#303535  #333636*/
+ .navbar{
+  width: 100%;
+  height: 43px;
+  margin: auto;
+ }
+
+  /*menu solo de la pantalla grande*/
+ .navbar .navbar-menu{
+  width: 100%;
+  height: 40px;
+  padding-left: 0px;
+  padding-right: 0px;
+ }
+
+ /*menu completo del movil*/
+ .navbar-menu .navbar-logo{
+  width: 100%;
+  height: 40px;
+
+ }
+
+ .navbar-menu .logo{
+  width: 25%;
+  height: 40px;
+ }
+ .navbar .logo img{
+  width: 100%;
+  height: 40px;
+ 
+ }
+ /*container solo de search y bihome*/
+ .menu-movil{
+  height: 40px;
+ }
+
+  .icon-search-bihome{
+    height: 40px;
+    display: flex;
+    flex-direction: row; 
+
+  }
+
+  .icon-search{
+    width: 45px;
+    margin-top: 12px;
+
+  }
+
+  .icon-bihome{
+    width: 48px;
+    margin-top: 12px;
+ 
+  }
+
+
+
+  .navbar-project-movil{
+    height: 43px;
+  }
+
+  /*CONTAINER TOTAL*/
+  .navbar-project-movil-popover{
+    height: 40px;
+    width: 100%;
+  
+   
+  }
+
+    /*CONTAINER TOTAL*/
+  .navbar-logo{
+    height: 40px;
+    width: 100%;
+
+  }
+
+  .logo{
+    width: 25%;
+    max-height: 40px;
+  }
+  .logo img{
+    width: 100%;
+    height: 40px;
+    margin: auto;
+  }
+
+  .menu-movil{
+    height: 40px;
+  }
+
+  .container-movil-login-registro{
+    width: 44%;
+    height: 40px;
+    margin-right: 10px;
+  }
+
+  .container-movil-login-registro img{
+    margin-top: 15px;
+   }
+
+  .container-movil-login-registro p{
+   font-size: 0.8em;
+   margin-top: 15px;
+  }
+
+
+  .menu-movil .user-activo{
+    height: 40px;
+    width: 36%;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-right: 20px;
+  
+  }
+
+  .user-activo .hola-button{
+    height: 40px;
+    padding-left: 0px;
+    padding-right: 0px;
+    display: flex;
+    flex-direction: row;
+  }
+
+   /*letra*/
+   .hola-button .hola {
+    max-width: 80%;
+   font-size: 0.7em;
+   display: inline-block;
+   margin-top: 16px;
+  }
+
+    /*icono bola saltarina*/
+   .hola-button .hola-bola {
+    max-width: 20%;
+    font-size: 0.4em;
+    display: inline-block;
+    margin-top: 15px;
+    margin-left: -10px;
+    }
+
+
+
+    .home-images{
+      top: 0px
+    }
+    
+    .home-images .greeting-images-dos{
+      top:0px
+    }
+    
+      .home-images .hover-image {
+        position:  absolute;
+        top: 0px;
+      
+      }
+    
+      .home-images .home-image{
+        top: 0px;
+        position: relative;
+      }
+
+
+ .greeting-texto{
+  height: 180px;
+  width: 32%;
+  left: 30px;
+  top: 80px;
+ }
+
+ .texto-animado{
+  width: 100%;
+ }
+
+ /*pagina about*/
+ .about{
+  padding-top: 12px;
+ }
+
+ 
+
+ /*CONTAINER DE ABOUT ME, DESCRIBIENDOME*/
+ /*.subcontainer-about-movil{
+
+ }*/
+
+ .subcontainer-about-movil h1{
+  margin-top: 20px;
+  padding-left: 16px;
+  padding-right: 16px;
+
+ }
+
+ 
+ .subcontainer-about-movil h2{
+  padding-left: 16px;
+  padding-right: 16px;
+ }
+
+ 
+ .subcontainer-about-movil .skill-item{
+  padding-left: 12px;
+  padding-right: 10px;
+
+ }
+
+ .subcontainer-about-movil-img {
+  padding-top: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  width: 100%;
+  height: auto;
+
+ }
+
+ .subcontainer-about-movil-img img{
+  margin-top: -51px;
+  width: 100%;
+ }
+
+ .subcontainer-about-movil-img .letra-dise{
+  width: 131px;
+  height: 60px;
+  left: -161px;
+  top: 59px;
+ }
+
+
+
+  /*PAGINA SKILL*/
+  .skill-dos{
+   border-radius: 0%;
+   margin-bottom: 15px;
+  
+  }
+
+  
+
+  /*container general del card y el details*/
+  .skill-card-movil{
+    width: 90%;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin: auto;
+  
+  }
+ /*subcontainer general del card y el details*/
+  .skill-card-movil-img-title{
+    width: 100%;
+    height: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+   
+
+ /*table entera de iconos pagina skill*/
+ .skills-page-movil{
+  height: auto;
+ }
+
+
+ /*UL*/
+ .tab-menu{
+  max-height: 56px;
+  margin-bottom: 10px;
+ }
+
+ .tab__content .skill-logo-img{
+  width: 45px;
+ } 
+
+ /*pagina github*/
+ .project-movil-card {
+  width: 100%;
+ }
+
+
+ .project{
+  width: 100%;
+ }
+  /*SUBCONTAINER GENERAL DEL TODO EL CONTENIDO GITHUB*/
+ .project-movil{
+  width: 95%;
+  height: auto;
+
+ }
+
+  /*container del project card 2*/
+ .project-home{
+  max-width: 100%;
+  height: auto;
+  margin: auto;
+ }
+
+ .project-home .project-home-subcontainer{
+  width: 100%;
+ }
+ 
+  /*row*/
+  .project-movil .project-movil-colores{
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+    }
+
+
+ .project-row-movil{
+  max-width: 100%;
+ }
+
+
+
+ .project-row-movil .project-h-title{
+  max-width: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin: auto;
+ }
+
+ .project-h-title h2{
+  margin-top: 16px;
+ }
+
+  /*imagen de la pagina de github*/
+  .project-img-movil{
+    height: 100px;
+    width: 50px;
+   }
+  
+   .project-img-movil img{
+    height: 100px;
+    width: 50px;
+   }
+  
+
+
+  .responsive-altura-img-blog{
+    height: 200px;
+
+  }
+ .blog-image{
+  height: 200px;
+
+ }
+
+ .blog-image img{
+  height: 200px;
+
+ }
+
+/*BLOG POST*/
+
+ .movil-portada-subcaja{
+  width: 100%;
+  height: 200px;
+ }
+
+ .movil-portada-subcaja img{
+  width: 100%;
+  height: 100%;
+ }
+
+
+
+ .movil-video-portada{
+  width: 100%;
+  height: 200px;
+ }
+
+ /*.movil-footer-tres-menus-uno{
+  
+ }*/
+
+ .movil-footer-tres-menus-uno h3{
+  text-align: center;
+ }
+
+ .movil-footer-tres-menus-uno ul li {
+  text-align: center;
+ 
+ }
+
+ .footer-pie{
+  margin-bottom: 15px;
+
+ }
+
+
+}
+
+/*SAMSUNG GALAXY A51/71 vigilar*/
+/*SAMSUN GALAXY S20 ULTRA*/
+@media only screen and (min-width: 412px) and (max-width: 915px) {
+
+ /*PAGINA GREETINGS*/
+  /*componnete grreting*/
+  .home-images{
+    top: 0px
+  }
+  
+  .home-images .greeting-images-dos{
+    top:0px
+  }
+  
+    .home-images .hover-image {
+      position:  absolute;
+      top: 0px;
+    
+    }
+  
+    .home-images .home-image{
+      top: 0px;
+      position: relative;
+    }
+
+
+
+ .greeting-texto{
+ width: 38%;
+ height: 380px;
+ top: 70px;
+ left: 20px;
+ }
+
+.texto-animado-developer{
+font-size: 0.52em;
+line-height: 8px;
+}
+
+
+.texto-animado{
+width: 82%;
+font-size: 0.45em;
+line-height: 8px;
+margin-top: 9px;
+}
+
+
+
+
+
+.project{
+width: 100%;
+}
+
+.project-movil{
+width: 95%;
+padding-left: 0px;
+padding-right: 0px;
+}
+
+.project-movil .project-movil-colores{
+width: 100%;
+padding-left: 0px;
+padding-right: 0px;
+}
+
+.project-movil .project-row-movil{
+  width: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+/*componente project-home*/
+.project-home{
+  max-width: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+
+.project-home .project-home-subcontainer{
+  width: 96%;
+  padding-left: 0px;
+  padding-right: 0px;
+
+}
+
+.project-img-movil{
+  width: 50px;
+  height: 60px;
+
+}
+
+.skill-card-movil{
+  width: 83%;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin: auto;
+  margin-bottom: 10px;
+
+}
+/*subcontainer general del card y el details*/
+.skill-card-movil-img-title{
+  width: 100%;
+  height: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+}
+
+
+
+
+
+
+/*IPHONE 14 PRO MAX*/
+@media only screen and (min-width: 430px) and (max-width: 932px) {
+
+   /*container gral del menu home A*/
+  .navbar{
+    height: 43px;
+    width: 100%;
+  }
+
+      /*container gral del menu home A*/
+  .navbar .navbar-menu{
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+    height: 40px;
+  }
+
+  /**container gral del menu blog B*/
+  .navbar-project-movil{
+    width: 100%;
+    height: 43px;
+  }
+
+  /*CONTAINER TOTAL B*/
+  .navbar-project-movil .navbar-project-movil-popover{
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+    height: 40px;
+  
+  }
+
+    /*CONTAINER TOTAL*/
+  .navbar-logo{
+    width: 100%;
+    height: 40px;
+    padding-top: 0px;
+  }
+
+  .navbar .logo{
+    width: 25%;
+    height: 40px;
+    padding-top: 0px;
+  }
+
+  .navbar-project-movil .logo{
+    width: 25%;
+    height: 40px;
+    padding-top: 0px;
+  }
+
+
+  .navbar .logo img{
+    width: 100%;
+    height: 40px;
+    margin: auto;
+  }
+
+  .navbar-project-movil .logo img{
+    width: 100%;
+    height: 40px;
+    margin: auto;
+  }
+
+
+  .menu-movil{
+    height: 40px;
+ 
+  }
+
+  .container-movil-login-registro{
+    width: 44%;
+    height: 40px;
+    margin-right: 10px;
+
+  }
+
+  .container-movil-login-registro img{
+    margin-top: 15px;
+   }
+
+  .container-movil-login-registro p{
+   font-size: 0.8em;
+   margin-top: 15px;
+  }
+
+
+  .menu-movil .user-activo{
+    height: 40px;
+    width: 33%;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-right: 20px;
+   
+  }
+
+  .user-activo .hola-button{
+    height: 40px;
+    padding-left: 0px;
+    padding-right: 0px;
+    display: flex;
+    flex-direction: row;
+  }
+
+   /*letra*/
+   .hola-button .hola {
+    max-width: 80%;
+   font-size: 0.5em;
+   display: inline-block;
+   margin-top: 16px;
+  }
+
+    /*icono bola saltarina*/
+   .hola-button .hola-bola {
+    max-width: 15%;
+    font-size: 0.3em;
+    display: inline-block;
+    margin-top: 16px;
+    margin-left: -8px;
+    }
+
+  
+  
+
+
+  .greeting-texto{
+    width: 29%;
+    top: 78px;
+    left: 36px;
+  
+  }
+
+  .greeting-texto h1{
+    line-height: 15px;
+    font-size: 0.78em;
+  }
+
+  .greeting-texto h2{
+ 
+    font-size: 0.72em;
+  }
+
+  .texto-animado{
+    margin-top: 10px;
+    font-size: 0.62em;
+    line-height: 10px;
+  }
+
+  /*compnente about*/
+
+  .subcontainer-about-movil-img .letra-dise{
+    top: 68px;
+   left: -180px;
+   width: 140px;
+ 
+  }
+
+  /*PAGINA MYPROJECTS*/
+  .project-pagina{
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+
+  /*.project-column-1{
+  }*/
+
+
+  .project-pagina .project-column-2{
+    max-width: 100%;
+    margin: auto;
+
+  }
+
+  /*componente skill*/
+  .skill-card-movil{
+    width: 80%;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin: auto;
+  
+  }
+
+  .skill-card-movil-img-title{
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+  
+  }
+
+
+  /*.project-column-3{
+   
+  }*/
+
+  .portada-blog{
+    height: 360px;
+  }
+
+   /*VA CON portada-blog*/
+  .error-message{
+    height: 360px;
+  }
+
+
+
+
+}
+
+
+
+
+
+/*SURFACE DUO mi movil*/
+@media only screen and (min-width: 540px) and (max-width: 720px) {
+  .navbar{
+    max-width: 100%;
+ 
+  }
+
+  .navbar-menu{
+    height: 40px;
+    width: 100%;
+  }
+  .navbar-logo{
+    max-width: 100%;
+    height: 40px;
+  }
+
+  .logo{
+    height: 40px;
+  }
+
+ 
+.logo img{
+  width: 100%;
+  height: 40px;
+}
+  
+  /*navbar projcet*/
+  .movil-uno{
+    width: 100%;
+    margin-bottom: 24px;
+  }
+
+  .navbar-project-movil{
+    height: 43px;
+  }
+
+  .home-images{
+    top: 0px
+  }
+  
+  .home-images .greeting-images-dos{
+    margin-top: 18px;
+  }
+  
+    .home-images .hover-image {
+      position:  absolute;
+      top: 0px;
+      left: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+  
+    .home-images .home-image{
+      top: 0px;
+      position: relative;
+    }
+  
+  
+
+ .greeting-texto{
+  width: 35%;
+  margin-top: 30px;
+  left: 40px;
+ }
+
+ .greeting-texto h1{
+ width: 70%;
+ font-size: 0.88em;
+ }
+
+ .greeting-texto h2{
+  width: 90%;
+  font-size: 0.86em;
+  line-height: 23px;
+ }
+
+
+ .greeting-texto .texto-animado{
+  width: 88%;
+ margin-top: 6px;
+ font-size: 0.78em;
+ line-height: 18px;
+}
+
+
+
+ .container-about-tres{
+  display: flex;
+  flex-direction: column;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.container-about-dos{
+  display: flex;
+  flex-direction: column;
+  padding-left: 0px;
+  padding-right: 0px;
+ width: 100%;
+}
+
+.subcontainer-about-movil{
+  width: 100%;
+  
+}
+
+ /**/
+
+
+    /*about*/
+    .subcontainer-about-movil-img{
+      padding-top: 0px;
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+
+    .subcontainer-about-movil-img img{
+      padding-top: 0px;
+     margin-top: -70px;
+    }
+
+    .subcontainer-about-movil-img  .letra-dise{
+      top: 132px;
+      width: 220px;
+      height: 110px;
+      left: -320px;
+    }
+
+
+    .skill{
+      display: flex;
+      width: 100%;
+    }
+
+    .skill-tres{
+      display: flex;
+      flex-direction: column;
+    }
+
+    .skill-dos{
+      flex-direction: column;
+      margin-top: 10px;
+    
+    }
+
+    .skills-page-movil{
+      width: 100%;
+    }
+
+
+
+     /*CONTAINER DE las 2 imagenes*/
+     .tab__content{
+      display: grid;
+      margin-top: 20px;
+
+     }
+
+   .tab__content .skill-logo-img{
+    max-width: 45px;
+    height: 100%;
+   }
+
+   .tab__content img{
+    max-width: 60px;
+    height: 100%;
+   }
+
+    /*uL MENU*/
+    .container-general-tab .tab-menu  {
+    height: 54px;
+    margin-bottom: 14px;
+   }
+
+
+   .tab-menu li {
+    padding-left: 0.8px;
+    padding-right: 0.8px;
+
+   }
+
+
+   .tab-menu li .tab-button{
+    font-size: 0.94em;
+  
+   }
+
+
+
+
+
+  /*POST BLOG*/
+  .movil-form{
+    width: 80%;
+   }
+
+   .movil-suscribe-text{
+    font-size: 1.4em;
+  }
+
+   .movil-button-suscribe{
+    font-size: 1em;
+   }
+
+   /*FOOTER PIE SOCIAL Y DERECHOS DE AUTOR*/
+   .movil-footer-social-ul{
+    margin: auto;
+    margin-top: -6px;
+   }
+
+  .movil-footer-pie{
+    width: 99.4%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+  }
+
+  .movil-footer-pie-p{
+    margin: auto;
+    font-size: 1em;
+    margin-top: 20px;
+  }
+
+
+ 
+/*RESPONSIVE DE LOS GITHUB E IMAGEN*/
+ /*SUBCONTAINER 1 DE LA PAGINA PROJECT*/
+ .project-movil{
+  width: 95%;
+  margin: auto;
+  height: auto;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+/*ES LO MISMO QUE EL DE ABAJO SUBCONTAINER 2 DE LA PAGINA PROJECT*/
+.project-movil-colores {
+  width: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+/*SUBCONTAINER 2 DE LA PAGINA PROJECT*/
+.project-row-movil{
+  max-width: 100%;
+  height:100%;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin: auto;
+}
+
+   /*CONTAINER PRINCIPAL DE LA PAGINA PROJECTHOME*/
+   /*PAGINA DE LISTADO DE LOS GITHUBS*/
+   .project-home{
+   width: 100%;
+   height: auto;
+   margin: auto;
+   margin-left: 55px;
+   margin-top: 8px;
+  }
+
+ /*SUBCONTAINER DE PROJECTHOME*/
+ .project-home-subcontainer{
+  display: grid;
+  width: 98%;
+  height: 100%;
+  margin: auto;
+  
+}
+
+
+  /*CONTAINER PRINCIPAL DEL PROJECTCARD DEL GITHUB */
+  /*ESTE ES SOLO UN GITHUB ES EL ESPACIO BLANCO*/
+  .project-movil-card{
+    width: 100%;
+    height: 100%;
+ 
+  }
+
+
+
+  
+   /*SUBCONTAINER DE CARD-POJECT SEGUNDO CUADRO*/
+   .authors{
+    width: 315px;
+    height: 72px;
+  }
+
+
+/*IMAGEN COSTADO DE LOS GITHUBS*/
+.project-img-movil{
+ left: 70px;
+
+ }
+/* FIN RESPONSIVE DE LOS GITHUB E IMAGEN*/
+
+/*SKILLS*/
+/*.skill-tres{
+  background-color: chocolate;
+}
+
+.skill-dos{
+  background-color: cadetblue;
+}*/
+
+/*COMPONENTE SKILL*/
+ /*container general del card y el details*/
+ .skill-card-movil{
+  width: 60%;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin: auto;
+  margin-bottom: 10px;
+
+}
+/*subcontainer general del card y el details*/
+.skill-card-movil-img-title{
+  width: 100%;
+  height: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+ /*CONTAINER DE las 2 imagenes*/
+
+.container-general-tab li .tab-button{
+  font-size: 0.9em;
+
+}
+
+/*.skills-page-movil{
+ 
+  background-color: chartreuse;
+}*/
+
+.tab__content .skill-logo-img{
+
+  width: 51%;
+  height: 75%;
+}
+
+.tab__content .skill-letra-img{
+
+  width: 60%;
+}
+/*FINAL SURFACE DUO*/
+
+}
+
+
+
+/*COMPLICADO EL TEXTO-ANIMADO DE RSPONSIVE*/
+@media only screen and (min-width: 721px) and (max-width: 768px) {
+ 
+
+  .home-images{
+    top: 0px
+  }
+  
+  .home-images .greeting-images-dos{
+    margin-top:10px
+  }
+  
+    .home-images .hover-image {
+      position:  absolute;
+      top: 0px;
+      left: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+  
+    .home-images .home-image{
+      top: 0px;
+      position: relative;
+    }
+  
+
+  .greeting-texto{
+    top: 110px;
+    left: 26px;
+    width: 35%;
+    height: 60%;
+   
+
+  }
+
+  .greeting-texto .texto-animado-developer{
+    font-size: 1.2em;
+    line-height: 22px;
+  }
+
+  .greeting-texto h2{
+    font-size: 1.1em;
+
+  }
+
+ 
+ 
+  .greeting-texto .texto-animado{
+    width: 98%;
+   margin-top: 12px;
+   font-size: 1em;
+   line-height: 16px;
+  }
+  
+
+  .container-about-tres{
+    display: flex;
+    flex-direction: column;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .container-about-dos{
+    display: flex;
+    flex-direction: column;
+    padding-left: 0px;
+    padding-right: 0px;
+   width: 100%;
+  }
+
+  .subcontainer-about-movil{
+    width: 100%;
+    
+  }
+
+   /**/
+  .container-about-dos .subcontainer-about-movil-img{
+   width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    margin-top: -24px;
+  
+  }
+
+  .subcontainer-about-movil-img img{
+    max-width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+   
+  }
+
+  .letra-dise{
+    width:220px;
+    top: 180px;
+    left: -290px;
+  }
+  
+  
+     /*fin navbar oprafolio*/
+   /*PAGINA SKILLS*/
+    /*PAGINA SKILLS*/
+    .skill-dos{
+      display: flex;
+      flex-direction: column;
+    }
+
+
+  .skills-main-div {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+   padding-top: 0.2px;
+   padding-bottom: 0.2px;
+  }
+
+  /*PAGINA SKILLCARD*/
+  .skills-main-div .skill-card-movil{
+    width: 100%;
+    margin: auto;
+    padding-top: 10px;
+    padding-bottom: 8px;
+    background-color: rgb(115 115 115);
+  }
+
+  .skill-card-movil .skill-card-movil-img-title{
+   height: 99.9%;
+  }
+
+
+  /*TABLERO DEL SKILLS MENU E ICONOS*/
+  .skills-page-movil{
+    width: 100%;
+    margin-top: 4px;
+    height: 440px;
+  max-height: 100%;
+
+  }
+
+  .skills-page-movil h1{
+    font-size: 1.9em;
+    margin-bottom: 10px;
+  }
+
+  
+ /*PAGINA BUTTON DINAMICO*/
+ .container-general-tab{
+  padding-right: 4px;
+  padding-left: 2px;
+ 
+ }
+  /*UL*/
+  .tab-menu{
+    width: 100%;
+    
+   }
+
+   .tab-menu li{
+    height: 65px;
+    font-size: 0.9em;
+      margin-left: 3px;
+   }
+
+  .tab-button:hover{
+    font-size: 0.905em;
+    }
+
+
+  /*PAGINA BUTTON DINAMICO y Skills Page*/
+  /*CONTAINER DE LOS ICONOS DE LOS TABS*/
+  .tab__content{
+    margin-top: 4px;
+    }
+   /*Iconos del TabPanel*/
+  .tab__content img{
+    width: 30%;
+    height: 40%;
+   }
+
+  .tab__content .skill-logo-img{
+    width: 40%;
+    height: 80%;
+ 
+   }
+   
+   
+
+ 
+  /*Fin Pagina Skill*/
+
+  .movil-suscribe-text{
+    font-size: 1.5em;
+  }
+
+  /*POST BLOG*/
+  .movil-form{
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+
+   }
+
+    /*FOOTER PIE SOCIAL Y DERECHOS DE AUTOR*/
+ .movil-footer-social-ul{
+  margin: auto;
+  margin-top: -6px;
+ 
+ }
+
+  .movil-footer-pie{
+    width: 99.4%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+  }
+
+  .movil-footer-pie-p{
+    margin: auto;
+    font-size: 0.8em;
+    margin-top: 10px;
+  }
+
+  /*PAGINA ABOUT*/
+  .container-about-movil{
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 3px;
+  }
+
+   .container-about-movil .subcontainer-about-movil{
+    width: 54%;
+    }
+
+  .subcontainer-about-movil h1{
+   font-size: 2em;
+  }
+
+  .subcontainer-about-movil p{
+    font-size: 1em;
+  }
+   
+
+
+  .subcontainer-about-movil-img{
+  width: 45%;
+  padding-right: 18px;
+  }
+
+  .subcontainer-about-movil-img img{
+  width: 90%;
+  height: 80%;
+  }
+   
+
+
+   /*CHATBOT*/
+   .container-general-chat{
+    width: 65%;
+  }
+
+  /*CHATBOT*/
+  .chat-container{
+   margin-right: -8.8px;
+    width: 50%;
+
+  }
+
+  /*PAGINA TOP*/
+  #topButton{
+   margin-right: -12px;
+  }
+  .blogpost-column-2 {
+    width: 100%;
+    padding: 20px;
+    overflow-y: hidden;
+  }
+  
+
+}
+
+
+/*  IPAD MINI*/
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .logo{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+
+  }
+  .logo img{
+    max-width: 100%;
+   height: 75%;
+  }
+
+  .menu-movil{
+    width: 70%;
+   
+  }
+
+ 
+   .user-activo{
+    width: 20%;
+  
+   }
+
+   .hola{
+    width: 100%;
+   }
+
+
+  .container-movil-login-registro{
+    width: 20%;
+    height: 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-around;
+   
+  }
+
+  
+  /*COMPONENT GREETINGS*/
+  /*.home{
+    padding-top: 98px;
+  }*/
+
+    
+
+/*PAGINA GREETINGS*/
+.home-images{
+  top: 0px
+}
+
+.home-images .greeting-images-dos{
+  margin-top: 10px
+}
+
+  .home-images .hover-image {
+    position:  absolute;
+    top: 0px;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .home-images .home-image{
+    top: 0px;
+    position: relative;
+  }
+
+
+
+
+  .greeting-texto{
+    left: 60px;
+    height: 220px;
+    width: 240px;
+    top: 170px;
+  }
+
+  .greeting-texto h1{
+    font-size: 1.2em;
+    line-height: 32px;
+  }
+
+  .greeting-texto h2{
+    font-size: 1em;
+    line-height: 4px;
+  }
+
+  .greeting-texto p{
+    font-size: 0.94em;
+    line-height: 17px;
+  }
+
+  .texto-animado{
+    width: 98%;
+  
+  }
+
+
+
+  /*fin navbar oprafolio*/
+
+  /*PAGINA ABOUT*/
+  .container-about-dos{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .subcontainer-about-movil{
+    width: 100%;
+  }
+
+  .subcontainer-about-movil-img{
+    width: 100%;
+   margin-top: -40px;
+  }
+
+  .subcontainer-about-movil-img img{
+    width: 90%;
+    margin: auto;
+
+  }
+
+  .subcontainer-about-movil-img .letra-dise{
+    width: 240px;
+    left: -370px;
+    top: 200px;
+  }
+
+  /*PAGINA SKILLS*/
+   /*container general del card y el details*/
+   .skill-card-movil{
+    width: 50%;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin: auto;
+ 
+  }
+ /*subcontainer general del card y el details*/
+  .skill-card-movil-img-title{
+    width: 100%;
+    height: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+   /*CONTAINER DE las 2 imagenes*/
+
+
+  
+
+  
+
+  .skill-dos{
+    display: flex;
+    flex-direction: column;
+  }
+  
+
+ 
+
+
+  /*TABLERO DEL SKILLS MENU E ICONOS*/
+  .skills-page-movil{
+    width: 100%;
+    margin-top: 20px;
+    height: 440px;
+  max-height: 100%;
+
+  }
+
+  .skills-page-movil h1{
+    font-size: 1.9em;
+    margin-bottom: 10px;
+  }
+
+  
+ /*PAGINA BUTTON DINAMICO*/
+ .container-general-tab{
+  padding-right: 4px;
+  padding-left: 2px;
+ 
+ }
+  /*UL*/
+  .tab-menu{
+    width: 100%;
+    
+   }
+
+   .tab-menu li{
+    height: 65px;
+    font-size: 0.9em;
+      margin-left: 3px;
+   }
+
+  .tab-button:hover{
+    font-size: 0.905em;
+    }
+
+
+  /*PAGINA BUTTON DINAMICO y Skills Page*/
+  /*CONTAINER DE LOS ICONOS DE LOS TABS*/
+  .tab__content{
+    margin-top: 4px;
+    }
+   /*Iconos del TabPanel*/
+  .tab__content img{
+    width: 30%;
+    height: 40%;
+   }
+
+
+ 
+  /*Fin Pagina Skill*/
+
+
+  /*RESPONSIVE DE LOS GITHUB E IMAGEN*/
+  /*SUBCONTAINER 1 DE LA PAGINA PROJECT*/
+  .project-movil{
+    width: 95%;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+ 
+
+   /*CONTAINER PRINCIPAL DE LA PAGINA PROJECTHOME*/
+   /*PAGINA DE LISTADO DE LOS GITHUBS*/
+  .project-home{
+    width: 100%;
+  }
+
+  .project-home-subcontainer{
+   
+    width: 100%;
+  }
+
+
+  /*CONTAINER PRINCIPAL DEL PROJECTCARD DEL GITHUB */
+    /*ESTE ES SOLO UN GITHUB ES EL ESPACIO BLANCO*/
+    .project-movil-card{
+      height: 100%;
+     width:100%;
+
+    
+     }
+ 
+   /*SUBCONTAINER DE PROJECT-MOVIL-CARD*/
+   .project-card-title-description{
+     padding-bottom: 10px;
+   }
+   
+  .project-movil-colores{
+    width: 100%;
+    height:100%;
+    padding-left: 0px;
+    padding-right: 0px;
+
+  }
+   /*COMPONENTE PROJECT ES EL CONTAINER QUE CONTENE GITHUBS Y IMAGEN COSTADO*/
+  .project-row-movil{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height:100%;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .project-row-movil h2{
+    font-size: 1.6em;
+  }
+
+     /*IMAGEN COSTADO DE LOS GITHUBS*/
+          /*SUBCONTAINER 2 DE LA PAGINA PROJECT*/
+  .project-img-movil{
+    left: 60px;
+
+   }
+   .project-img-movil img{
+    top: 50px;
+     width: 410px;
+     height: 430px;
+   }
+   /*FIN RESPONSIVE DE LOS GITHUB E IMAGEN*/
+
+  /*CONTAINER PRINCIPAL DEL PROJECTCARD DEL GITHUB */
+  /*ESTE ES SOLO UN GITHUB ES EL ESPACIO BLANCO*/
+  /*pagina myprojecxt*/
+
+
+
+
+  .project-list{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+   
+  }
+  
+  .project-pagina{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+   
+  }
+  
+  .project-column-1{
+    width: 94%;
+    margin: auto;
+  }
+
+  .project-column-2{
+    width: 94%;
+    margin: auto;
+  }
+  .project-column-3{
+    width: 94%;
+    margin: auto;
+  }
+  
+  
+    
+
+     /*SUBCONTAINER DE CARD-POJECT SEGUNDO CUADRO*/
+
+
+
+
+
+   
+  .movil-suscribe{
+    height: 130px;
+  }
+
+  .movil-suscribe-text{
+    font-size: 1.1em;
+   }
+   
+    .movil-form{
+     display: flex;
+     flex-direction: row;
+     width: 100%;
+    
+    }
+   
+    .movil-button-suscribe {
+    font-size: 0.8em;
+    padding-left: 2px;
+    padding-right: 2px;
+    }
+   
+   
+    .movil-footer-tres-menus{
+     display: grid;
+     grid-column: fr fr fr ;
+     gap: 4px;
+    justify-content: center;
+    width: 98%;
+    }
+   
+    
+    .movil-footer-tres-menus-uno h3{
+     font-size: 0.9em;
+    }
+   
+   
+  .movil-form{
+  display: flex;
+  flex-direction: row;
+  width: 70%;
+   }
+
+
+   .movil-footer-social-ul{
+    margin: auto;
+   }
+
+   .movil-footer-pie{
+    width: 99.4%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-top: 10px;
+  }
+
+  .movil-footer-pie-p{
+    margin: auto;
+    font-size: 0.8em;
+    margin-top: 10px;
+  }
+  
+  
+    /*CHATBOT*/
+  .container-general-chat{
+    width: 65%;
+  }
+
+  /*CHATBOT*/
+  .chat-container{
+   margin-right: -8.8px;
+    width: 50%;
+
+  }
+
+  /*PAGINA TOP*/
+  #topButton{
+   margin-right: -12px;
+  }
+
+ .responsive-altura-blogcard {
+  max-width: 1000px;
+  width: 100%;
+ }
+
+ .bloglist-blogcard-grid {
+  max-width: 1000px;
+  width: 100%;
+ }
+
+ .responsive-blogcard-title-excerpt{
+  margin-top: 30px;
+  
+  }
+
+ .responsive-blogcard-title-excerpt h1{
+ font-size: 1.4em;
+ 
+ }
+
+ 
+
+ /*BLOG*/
+.container-blogpost-tres-columnas {
+  display: flex;
+  flex-direction: column;
+}
+
+.blogpost-column-1 {
+  display: none;
+}
+
+.blogpost-column-2 {
+  width: 100%;
+  padding: 20px;
+  overflow-y: hidden;
+}
+
+
+.blogpost-column-3 {
+  width: 100%;
+  padding-top: 80px;
+  box-sizing: border-box;
+  top: 0;
+}
+
+.movil-redaccion-blog-post h1{
+  font-size: 1.6em;
+}
+
+.blogpost-aviso-a-no-authenticados{
+  width: 100%;
+
+}
+
+
+.review-hearts-form{
+  width: 100%;
+}
+
+}
+
+@media only screen and (min-width: 768px) and (max-width: 820px) {
+  .home-images{
+    top: 0px
+  }
+  
+  .home-images .greeting-images-dos{
+    top:0px
+  }
+  
+    .home-images .hover-image {
+      position:  absolute;
+      top: 0px;
+      left: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+  
+    .home-images .home-image{
+      top: 0px;
+      position: relative;
+    }
+  
+  
+
+}
+
+/*  IPAD AIR*/
+@media only screen and (min-width: 820px) and (max-width: 1180px) {
+.navbar{
+  height: 58px;
+
+}
+
+.navbar-logo{
+  height: 57px;
+
+}
+
+.logo{
+  height: 55px;
+
+}
+
+.logo img{
+  width: 60%;
+}
+
+.menu-movil{
+  height: 50px;
+
+}
+
+ /*PAGINA GREETINGS*/
+ /*PAGINA GREETINGS*/
+ /*PAGINA GREETINGS*/
+ .home-images{
+  top: 0px
+}
+
+.home-images .greeting-images-dos{
+  top:0px
+}
+
+  .home-images .hover-image {
+    position:  absolute;
+    top: 0px;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .home-images .home-image{
+    top: 21px;
+    position: relative;
+  }
+
+
+
+
+
+  
+
+
+}
+
+
+/*IPAD PRO*/
+@media only screen and (min-width: 1024px) and (max-width: 1366px) {
+
+  /*PAGINA GREETINGS*/
+ .home-images{
+  top: 0px
+}
+
+.home-images .greeting-images-dos{
+  top:0px
+}
+
+  .home-images .hover-image {
+    position:  absolute;
+    top: 0px;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .home-images .home-image{
+    top: 21px;
+    position: relative;
+  }
+
+
+
+
+  .greeting-texto{
+  top: 165px;
+  left: 50px;
+  height: 410px;
+  width: 280px;
+  }
+
+
+  .subcontainer-about-movil-img .letra-dise{
+  top: 120px;
+  left: -175px;
+   display: block;
+  width: 140px;
+   height: 65px;
+   overflow: hidden;
+   position: relative;
+   font-size: 0.5em;
+ }
+ 
+ 
+ .container-about-dos{
+  display: flex;
+  flex-direction: row;
+ } 
+
+/*componente project todo el contenido*/
+.project{
+  width: 100%;
+}
+/*col*/
+.project-movil{
+  padding-left: 0px;
+  padding-right: 0px;
+
+}
+
+/*CONTAINER ROW 1*/
+.project-movil .project-movil-colores{
+  width: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+
+}
+
+
+/*CONTAINER ROW 1*/
+.project-movil .project-row-movil{
+max-width: 98%;
+  padding-left: 0px;
+  padding-right: 0px;
+
+}
+
+.project-h-title{
+  width: 80%;
+
+}
+/*component project-homer container de los cards de githubs*/
+.project-home{
+  max-width: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+ 
+}
+
+ .project-home .project-home-subcontainer{
+  max-width: 100%;
+  display: flex;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+/*component del project card*/
+.project-movil-card{
+
+  max-width: 100%;
+}
+
+
+
+.project-card-title-description{
+  width: 100%;
+}
+
+/*componente project de home*/
+.project-img-movil{
+  margin-left: 18px;
+
+}
+
+.skill-dos{
+  display: flex;
+  flex-direction: row;
+}
+
+}
+
+/* SURFACE PRO 7*/
+@media only screen and (min-width: 912px) and (max-width: 1368px) {
+  html,
+body
+ { /* Cambia #root por el id de tu contenedor principal si es diferente */
+  height: 100%;
+  width: 100%;
+  margin-bottom: 4rem;
+  padding: 0;
+}
+  html {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    font-family: Nunito, sans-serif, ui-sans-serif, system-ui;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+}
+    
+ 
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    /*overflow: hidden;*/
+  }
+
+ .cookie-general{
+  width: 100%;
+ }
+
+ .cookie-general .cookie{
+   max-width: 70%;
+    right: 0;
+    left: 0;
+  }
+  
+  .cookie-button-configurar {
+    margin-left: 16px;
+  }
+
+.navbar{
+  height: 62px;
+ 
+}
+
+.navbar-logo{
+  height: 60px;
+ 
+}
+
+.logo{
+  height: 60px;
+ 
+}
+
+.menu-movil{
+  height: 60px;
+ 
+}
+
+.menu-movil .icon-search{
+width: 32px;
+height: 31px;
+margin-top: 10px;
+
+}
+
+.menu-movil .icon-bihome{
+  width: 32px;
+height: 30px;
+margin-top: 10px;
+
+}
+
+
+
+  .hover-image {
+    position:  absolute;
+    top: 23.6px;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .base-image{
+    position:  relative;
+    top: 0px;
+    left: 0;
+
+  }
+
+  .greeting-texto{
+    width: 33%;
+    height: 434px;
+    left: 55px;
+    top: 160px;
+ 
+  }
+  
+  .greeting-texto .texto-animado{
+    width: 82%;
+    font-size: 1em;
+  }
+
+  .project-img-movil{
+    margin-left: 20px;
+  }
+  .skill-dos{
+    display: flex;
+    flex-direction: row;
+  }
+
+
+}
+
+
+
+
+
+/*@media only screen and (min-width: 980px) and (max-width: 1170px) {
+  .navbar-logo-menu {
+    background-color: rgb(178, 237, 100);
+  }
+
+
+    .movil-lupa-bihome{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 40px;
+    width: 40%;
+   align-items: end;
+   justify-content: end;
+   visibility: visible;
+  background-color: #1c0081;
+     }
+}*/
+
+/*RESPONSIVE TAILWIND CSS */
+/*max-sm	@media not all and (min-width: 640px) { ... }
+max-md	@media not all and (min-width: 768px) { ... }
+max-lg	@media not all and (min-width: 1024px) { ... }
+max-xl	@media not all and (min-width: 1280px) { ... }
+max-2xl	@media not all and (min-width: 1536px) { ... }*/
+
+/*
+
+Breakpoint prefix	Minimum width	CSS
+sm	640px	@media (min-width: 640px) { ... }
+md	768px	@media (min-width: 768px) { ... }
+lg	1024px	@media (min-width: 1024px) { ... }
+xl	1280px	@media (min-width: 1280px) { ... }
+2xl	1536px	@media (min-width: 1536px) { ... }
+*/
