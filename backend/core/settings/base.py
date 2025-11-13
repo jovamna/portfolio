@@ -20,7 +20,8 @@ SECRET_KEY=os.environ.get('SECRET_KEY')
 
 
 #ADMIN_URL = env('ADMIN_URL', default='notadmin123/')
-ADMIN_URL = env('ADMIN_URL')
+SECRET_ADMIN_URL=env('SECRET_ADMIN_URL')
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
