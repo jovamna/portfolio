@@ -11,7 +11,7 @@ export default defineConfig({
         drop_console: true, 
       },
     },
-    chunkSizeWarningLimit: 1000, 
+    chunkSizeWarningLimit: 2000,  ///AQUI ERA 1000
  
 
     rollupOptions: {
@@ -23,6 +23,12 @@ export default defineConfig({
         },
       },
     },
+     // Reduce el uso de memoria durante la compilación , NO ESTABA
+    cssMinify: true,
   },
     
 });
+
+
+//EJECUTAR ESTO AL COMPILAR EN PRODUCTION
+//NODE_OPTIONS="--max-old-space-size=2048" npm run build

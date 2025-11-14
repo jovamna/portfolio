@@ -9,42 +9,34 @@ from rest_framework.permissions import AllowAny
 
 
 class ListCategoriesView(APIView):
-    authentication_classes = []  # Desactiva la autenticación
-    permission_classes = [AllowAny]  # Permite el acceso a cualquier usuario
+    authentication_classes = []
+    permission_classes = [AllowAny]
 
     def get(self, request, format=None):
-        if Category.objects.all().exists():
-            categories = Category.objects.all()
+        categories = Category.objects.select_related('parent').all()
 
-            result = []
+        result = []
 
-            for category in categories:
-                if not category.parent:
-                    item = {}
-                    item['slug'] = category.slug
-                    item['name'] = category.name
-                    # Verifica si la imagen (thumbnail) está presente antes de obtener la URL
-                if category.thumbnail:
-                    item['thumbnail'] = category.thumbnail.url
-                else:
-                    item['thumbnail'] = None
+        # 1. Filtrar solo categorías padre
+        parents = [cat for cat in categories if cat.parent is None]
 
-                item['sub_categories'] = []
+        for parent in parents:
+            item = {
+                'slug': parent.slug,
+                'name': parent.name,
+                'thumbnail': parent.thumbnail.url if parent.thumbnail else None,
+                'sub_categories': []
+            }
 
-                for cat in categories:
-                    sub_item = {}
-                    if cat.parent and cat.parent.slug== category.slug:
-                        sub_item['slug'] = cat.slug
-                        sub_item['name'] = cat.name
+            # 2. Subcategorías
+            for cat in categories:
+                if cat.parent and cat.parent.slug == parent.slug:
+                    item['sub_categories'].append({
+                        'slug': cat.slug,
+                        'name': cat.name,
+                        'thumbnail': cat.thumbnail.url if cat.thumbnail else None,
+                    })
 
-                        # Verifica si la imagen (thumbnail) está presente antes de obtener la URL
-                        if cat.thumbnail:
-                            sub_item['thumbnail'] = cat.thumbnail.url
-                        else:
-                            sub_item['thumbnail'] = None
-
-                        item['sub_categories'].append(sub_item)
-
-                result.append(item)
+            result.append(item)
 
         return Response({'categories': result}, status=status.HTTP_200_OK)
