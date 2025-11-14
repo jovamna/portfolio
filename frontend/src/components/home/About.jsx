@@ -4,7 +4,7 @@ import { motion} from "framer-motion";
 import React from "react";
 import { BiChevronsUp } from "react-icons/bi";
 import "../../styles/index.css";
-import aboutPro from '../../assets/img/home/aboutPro.png';
+import aboutProfe from '../../assets/img/home/aboutProfe.png';
 import { useEffect, useState } from "react";
 
 
@@ -85,7 +85,7 @@ export default function About() {
                   <div  className="letra-dise text-white text-[0.7em] hover:text-teal-400">
                
 
-                   {slides.map((slide, index) => (
+                   {/*slides.map((slide, index) => (
                    <motion.div
                    key={slide.id}
                    className="slide"
@@ -107,7 +107,7 @@ export default function About() {
          
                   <div className="slide" dangerouslySetInnerHTML={{ __html: slide.text }} />
                   </motion.div>
-                 ))}
+                 ))*/}
 
                   </div>
 
@@ -115,7 +115,7 @@ export default function About() {
 
                   <img
                   className=""
-                  src={aboutPro}
+                  src={aboutProfe}
                   alt="programmer"
                   />
                </div>

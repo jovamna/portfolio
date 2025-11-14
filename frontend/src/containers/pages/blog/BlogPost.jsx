@@ -144,16 +144,42 @@ function BlogPost({
        
     <FullWidthLayout>
 
-          <Helmet>
-          {
-          post ?
-          <title>                  
-          {post.title} | Portafolio, Blog | Jovamna Medina
-          </title>
-            :
-          <LoadingCard/>
-          }
-           </Helmet>
+          
+
+
+           <Helmet>
+  {post ? (
+    <>
+      {/* 1. Título Dinámico (Ya lo tienes) */}
+      <title>{post.title} | Portafolio, Blog | Jovamna Medina</title>
+
+      {/* 2. Meta Descripción y Keywords */}
+      <meta name="description" content={post.summary} />
+      <meta name="keywords" content={post.tags.join(', ')} />
+
+      {/* 3. Canonical URL */}
+      <link rel="canonical" href={`https://www.jovamnamedina.com/blog/post/${post.slug}`} />
+
+      {/* 4. Open Graph (Redes Sociales) */}
+      <meta property="og:title" content={post.title} />
+      <meta property="og:description" content={post.summary} />
+      <meta property="og:url" content={`https://www.jovamnamedina.com/blog/post/${post.slug}`} />
+      <meta property="og:image" content={post.featuredImageURL} />
+      <meta property="og:type" content="article" />
+
+      {/* 5. Twitter Cards */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={post.title} />
+      <meta name="twitter:description" content={post.summary} />
+      <meta name="twitter:image" content={post.featuredImageURL} />
+    </>
+  ) : (
+    <LoadingCard />
+  )}
+</Helmet>
+
+
+
 
 
 

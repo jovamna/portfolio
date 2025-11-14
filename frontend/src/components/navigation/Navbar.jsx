@@ -6,9 +6,13 @@ import { DiGithubBadge } from "react-icons/di";
 import { useState, useEffect, Fragment } from 'react';
 //import { useState } from 'react';
 import { NavLink,  Navigate } from "react-router-dom";
-import jova from "../../assets/img/logo/jova.png";
 
+import jova from "../../assets/img/logo/jova.png";
 import pro from "../../assets/img/logo/pro.png";
+import logo from "../../assets/img/logo/logo.png";
+
+
+
 import "../../styles/index.css";
 import { connect } from "react-redux"
 import { get_blog_list } from "../../redux/actions/blog";
@@ -148,8 +152,8 @@ function Navbar({
              {/*PARA QUE EL ICONO SE CENTRE inline-flex items-center w-1/4*/}
              <div className="logo w-[26.7%] h-[3rem] inline-flex">
             <a href="/">
-            <img className="w-[160px] h-[52px] mt-[5px]"
-            src={pro}
+            <img className="w-[130px] h-[55px] mt-[5px]"
+            src={logo}
             alt="logo"
             //width={150}
             //height={350}
@@ -257,15 +261,7 @@ function Navbar({
             C.V.
           </Link>
                  */}
-          <Link
-           className={`nav-item hover:bg-neutral-100 hover:text-violet-700 text-neutral-600 font-semibold border-b-2 border-transparent hover:border-violet-700  h-[100%]  inline-block px-3 py-4 ${currentRoute === 'contacto' ? 'bg-neutral-300' : ''}`}
-           to="contacto"
-           spy={true}
-           smooth={true}
-           duration={500}
-           >
-           Contacto
-         </Link>
+          
      
 
    
@@ -276,6 +272,17 @@ function Navbar({
              <NavLink to= "/blog" className="nav-item hover:bg-neutral-100 hover:text-violet-700 text-neutral-600 font-semibold border-b-2 border-transparent hover:border-violet-700 inline-block px-3 py-4 ">
              <span className="py-2">Blog</span>
              </NavLink>
+
+
+             <Link
+           className={`nav-item hover:bg-neutral-100 hover:text-violet-700 text-neutral-600 font-semibold border-b-2 border-transparent hover:border-violet-700  h-[100%]  inline-block px-3 py-4 ${currentRoute === 'contacto' ? 'bg-neutral-300' : ''}`}
+           to="contacto"
+           spy={true}
+           smooth={true}
+           duration={500}
+           >
+           Contacto
+         </Link>
 
         
 
@@ -464,7 +471,7 @@ function Navbar({
                          <div className=" ">
                          <img 
                          className="h-8 w-auto"
-                         src={jova}
+                         src={logo}
                          alt="logo"
                          width={150}
                          height={50}

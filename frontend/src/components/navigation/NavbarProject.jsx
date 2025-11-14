@@ -22,7 +22,7 @@ import { search_blog, search_blog_page } from "../../redux/actions/blog";
 import { useParams } from "react-router-dom";
 import LoadingCard from "../loaders/LoadingCard";//usado en return--renderBlogList
 import jova from "../../assets/img/logo/jova.png";
-import pro from "../../assets/img/logo/pro.png";
+import logo from "../../assets/img/logo/logo.png";
 import loginUser from "../../assets/img/users/loginUser.png";
 
 
@@ -263,8 +263,8 @@ const guestLinks = (
                
                <span className="sr-only">Portafolio Jovamna Medina</span>
                <NavLink to= "/">
-               <img className="w-[160px] h-[52px] mt-[5px]"
-               src={pro}
+              <img className="w-[130px] h-[55px] mt-[5px]"
+               src={logo}
                alt="logo"
                //width={150}
                //height={350}
@@ -324,15 +324,15 @@ const guestLinks = (
                   Home
                   </NavLink>
 
-                  <NavLink className="nav-item hover:bg-neutral-100 hover:text-violet-700 border-b-2 border-transparent hover:border-violet-700 inline-block px-3 h-[2rem] text-neutral-600 font-semibold" to={`/myproject`} >
-                  MyProjects
-                  </NavLink>
+                
 
                   <NavLink to= "/blog" className="nav-item  text-neutral-600 font-semibold hover:bg-neutral-100 hover:text-violet-700 border-b-2 border-transparent hover:border-violet-700 inline-block px-3 h-[2rem]">
                   <span className="ml-6 "
                   >Blog
                   </span>
                   </NavLink>
+
+                 
 
 
               
@@ -530,7 +530,7 @@ const guestLinks = (
                          <div className=" ">
                          <img 
                          className="h-8 w-auto"
-                         src={pro}
+                         src={logo}
                          alt="logo"
                          width={150}
                          height={50}

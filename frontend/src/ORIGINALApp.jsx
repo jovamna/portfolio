@@ -36,45 +36,34 @@ function App() {
 
     <HelmetProvider>
 
-      <Helmet>
-  {/* 1. Títulos y Metadatos Principales */}
-  <title>Jovamna Medina | Full Stack Dev & Arte Digital con IA + Photoshop</title>
+       <Helmet>
+        <title> Portafolio Developer FullStack, Blog | Jovamna Medina</title>
+        <meta name="description" content="Portafolo Developer FullStack, software, Creacion de Páginas Webs, Apis, Diseño Web." />
+        <meta name="keywords" content='Portafolo Developer FullStack, software, creacion de paginas webs, apis.' />
+        <meta name="robots" content='all' />
+        <link rel="canonical" href="https://www.jovamnamedina.com/" />
+        <meta name="author" content='Jovamna Medina' />
+        <meta name="publisher" content='Jovamna Medina' />
 
-  <meta 
-    name="description" 
-    content="Portafolio de Jovamna Medina: Developer Full Stack (Django/React) y creadora de imágenes digitales con IA, editadas a mano en Photoshop. E-commerce propio de arte digital." 
-  />
-  
-  <meta 
-    name="keywords" 
-    content="Full Stack Developer, Django, React, E-commerce, Arte Digital, IA Generativa, Photoshop, Imágenes Digitales, Diseño Personalizado, Web Development" 
-  />
-  
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://www.jovamnamedina.com/" />
-  <meta name="author" content="Jovamna Medina" />
-  <meta name="publisher" content="Jovamna Medina" />
-  <link rel="icon" type="image/png" href="favicon.ico" sizes="16x16" />
+        <link rel="icon" type="image/png" href="favicon.ico" sizes="16x16" />
 
-  {/* 2. Open Graph (Facebook, LinkedIn, etc.) */}
-  <meta property="og:title" content="Jovamna Medina | Full Stack & Arte Digital con IA" />
-  <meta 
-  property="og:description" 
-  content="Desarrollo e-commerce full stack y creo imágenes digitales únicas con IA + edición en Photoshop. Visita mi tienda: https://muckas-store.com" 
-/>
-  <meta property="og:url" content="https://www.jovamnamedina.com/" />
-  <meta property="og:image" content="https://bafybeicwrhxloesdlojn3bxyjqnxgsagtd4sl53a7t4cn4vfe2abmybzua.ipfs.w3s.link/lightbnuilbg.jpg" />
-  <meta property="og:type" content="website" />
+        {/* Social Media Tags */}
+        <meta property="og:title" content='J.M. | Portafolio, Blog' />
+        <meta property="og:description" content='Portafolio Developer FullStack, software, Creacion de Páginas Webs, Apis, Diseño Web.' />
+        <meta property="og:url" content="https://www.jovamnamedina.com/" />
+        <meta property="og:image" content='https://bafybeicwrhxloesdlojn3bxyjqnxgsagtd4sl53a7t4cn4vfe2abmybzua.ipfs.w3s.link/lightbnuilbg.jpg' />
 
-  {/* 3. Twitter Cards */}
-  <meta name="twitter:title" content="Jovamna Medina | Full Stack + Arte Digital IA" />
-  <meta
-  name="twitter:description"
-  content="Full Stack Dev que crea su propio e-commerce y vende arte digital hecho con IA + Photoshop. Tienda: https://muckas-store.com"
-/>
-  <meta name="twitter:image" content="https://bafybeicwrhxloesdlojn3bxyjqnxgsagtd4sl53a7t4cn4vfe2abmybzua.ipfs.w3s.link/lightbnuilbg.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
-</Helmet>
+        <meta name="twitter:title" content='J.M. | Portafolio, Blog' />
+        <meta
+            name="twitter:description"
+            content='Portafolio Developer FullStack, software, Creacion de Páginas Webs, Apis, Diseño Web.'
+        />
+        <meta name="twitter:image" content='https://bafybeicwrhxloesdlojn3bxyjqnxgsagtd4sl53a7t4cn4vfe2abmybzua.ipfs.w3s.link/lightbnuilbg.jpg' />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
+    
+
+
 
      {/*RUTAS DEL PROJECTO */}
 
@@ -82,7 +71,7 @@ function App() {
         <Router>
 
         <div>
-        {/*showLogo ? <Logo /> :   */   }
+        {showLogo ? <Logo /> : 
   
 
 
@@ -115,7 +104,7 @@ function App() {
 
 
 
-  
+       }
       </div>
        
         </Router>

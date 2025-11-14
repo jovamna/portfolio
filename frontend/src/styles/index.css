@@ -822,14 +822,14 @@ body
   }
 
   .texto-animado-developer{
-  font-size: 0.52em;
+  font-size: 0.42em;
   line-height: 8px;
   }
 
 
   .texto-animado{
   width: 90px;
-  font-size: 0.45em;
+  font-size: 0.40em;
   line-height: 8px;
   margin-top: 4px;
   }
@@ -2657,7 +2657,7 @@ padding-right: 0px;
 
   .texto-animado{
     margin-top: 10px;
-    font-size: 0.62em;
+    font-size: 0.45em;
     line-height: 10px;
   }
 
@@ -3361,6 +3361,40 @@ padding-right: 0px;
 
 /*  IPAD MINI*/
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
+  html,
+body
+ { /* Cambia #root por el id de tu contenedor principal si es diferente */
+  height: 100%;
+  width: 100%;
+  margin-bottom: 4rem;
+  padding: 0;
+  }
+
+  html {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    font-family: Nunito, sans-serif, ui-sans-serif, system-ui;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+  }
+    
+ li{
+  list-style:none;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+    /*overflow: hidden;*/
+  }
+
   .logo{
     display: flex;
     justify-content: flex-start;
@@ -3376,7 +3410,28 @@ padding-right: 0px;
     width: 70%;
    
   }
+   
+  .ipad-greeting{
+    top: 110px;
+    width: 250px;
+   
+  }
 
+  .ipad-pro{
+  margin-top: 40px;
+ }
+  .texto-animado-developer{
+   font-size: 0.9em;
+    width: 240px;
+    line-height: 1em;
+    
+  }
+
+   .texto-animado{
+    width: 300px;
+    font-size: 0.68em;
+    line-height: 1.2em;
+   }
  
    .user-activo{
     width: 20%;
@@ -3920,7 +3975,7 @@ padding-right: 0px;
 
 
 /*IPAD PRO*/
-@media only screen and (min-width: 1024px) and (max-width: 1366px) {
+@media only screen and (min-width: 1024px) and (max-width: 1270px) {
 
   /*PAGINA GREETINGS*/
  .home-images{
@@ -3947,13 +4002,20 @@ padding-right: 0px;
 
 
 
-  .greeting-texto{
-  top: 165px;
-  left: 50px;
-  height: 410px;
-  width: 280px;
+ 
+ .ipad-pro{
+  margin-top: 80px;
+ }
+  .texto-animado-developer{
+    width: 300px;
+   
+
   }
 
+   .texto-animado{
+    width: 300px;
+    font-size: 0.8em;
+   }
 
   .subcontainer-about-movil-img .letra-dise{
   top: 120px;
