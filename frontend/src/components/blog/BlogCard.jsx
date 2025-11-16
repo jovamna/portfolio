@@ -144,7 +144,7 @@ function BlogCard(data){
                                  className="block"
                                  >
                                  <div
-                                  className="px-2 mt-2 text-sm dark:text-dark-txt text-center  text-zinc-700 tracking-wide font-light"
+                                  className="oswald-muckas px-2 mt-2 text-sm dark:text-dark-txt text-center  text-zinc-700 tracking-wide font-light"
                                    dangerouslySetInnerHTML={{
                                    __html:
                                   post.excerpt && DOMPurify.sanitize(post.excerpt.length) > 80
@@ -161,7 +161,7 @@ function BlogCard(data){
                                     to={`/blog/post/${post.slug}`} 
                                     className="block"
                                     >
-                                    <p className="text-xs text-zinc-500 italic hover:opacity-75">Leer mas</p>
+                                    <p className="lg:text-base kaushan text-sm text-zinc-700 font-extrabold hover:opacity-75">Leer mas</p>
                                    </Link>
                                   </div>
  

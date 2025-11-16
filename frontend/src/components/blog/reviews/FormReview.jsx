@@ -262,7 +262,7 @@ function FormReview({
 
 
            <div className='w-[98%] flex flex-col items-center'>
-       
+    
             {/*TITLE DEL REVIEW */}
             <div className="py-2 w-full  border-b-2 border-black hover:border-zinc-400 items-center mb-2 ">
      
@@ -357,9 +357,8 @@ function FormReview({
               {/*CONTAINER DE LOS HEARTS BOTON PARA MOSTRAR ESTRELLAS */}
              <div className='review-hearts-movil w-[60%] py-2 '>                   
                 <button
-                className='review-heart-button btn btn-primary btn-sm  font-semibold font-mono text-xl py-2 '
-                onClick={getReviews}
-                >
+                className='review-heart-button btn btn-primary btn-sm  font-semibold font-mono lg:text-xl text-sm py-2 '
+                onClick={getReviews}>
                 Mostrar todas las Reseñas 
                 </button>
 

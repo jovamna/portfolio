@@ -14,6 +14,7 @@ import moment from "moment";
 import DOMPurify from 'dompurify'
 import Alert from "../../../components/Alert"
 import autorblog from '../../../assets/img/users/autorblog.jpg';
+import enviarlo from '../../../assets/img/users/enviarlo.png';
 import vistas from '../../../assets/img/vistas.png';
 import "../../../styles/index.css";
 import { Helmet } from 'react-helmet-async';
@@ -40,7 +41,7 @@ function BlogPost({
 
     //URL PARA LAS IMAGENES QUE ESTAN EN LA CARPETA MEDIA LOCALIZEN EN LA CARPETA DEL BACKEND
     if (!post) {
-     return <div>Cargando...</div>;
+     return <div> </div>;
    }
 
    const URL =
@@ -249,7 +250,7 @@ function BlogPost({
               {/* EXCERPT*/}
               <div className=" z-10 max-w-lg max-w-prose mx-auto">                     
               { /*span title sm:text-4xl*/}
-                  <h2 className="kaushan blog-detail-title block tracking-wide text-center font-normal tracking-tight text-neutral-600  lg:text-xl mt-[20px]">
+                  <h2 className="kaushan blog-detail-title block tracking-wide text-center font-normal tracking-tight text-neutral-700  lg:text-xl text-base mt-[20px]">
                   {post.excerpt}
                   </h2>   
               </div>
@@ -258,14 +259,14 @@ function BlogPost({
 
 
                 {/**PRIMERA IMAGEN */}
-              <div className="movil-portada flex  lg:[700px] items-center justify-center mx-auto">
+              <div className="flex  lg:[700px] items-center justify-center mx-auto">
                 {renderMedia()}
               </div>
 
 
                
             {/*DESCRIPTION prose prose-indigo prose-lg*/}
-            <div className="roboto-condensed-muckas mt-6   text-gray-800  font-gilroy-regular">
+            <div className="roboto-condensed-muckas mt-6   text-neutral-700 lg:text-lg ">
                 <p className="dangerouslySetInnerHTML={{ __html: richTextFieldContent }">
                 {post.description}
                 </p>
@@ -274,7 +275,7 @@ function BlogPost({
                    
 
              {/**SEGUNDA IMAGEN */}
-            <div className="flex items-center justify-center mt-6 lg:[700px] text-gray-500 mx-auto font-gilroy-regular bg-red-500">
+            <div className="flex items-center justify-center mt-6 lg:[700px] mx-auto ">
                 {post.image && (
                 <img
                   src={imageUrl}
@@ -287,11 +288,11 @@ function BlogPost({
 
 
               {/*CONTENT Y HEART prose prose-indigo prose-lg*/}
-              <div className="roboto-condensed-muckas mt-6  text-gray-800  font-gilroy-regular ">
+              <div className="roboto-condensed-muckas mt-6  text-neutral-700 lg:text-lg  ">
                 <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content)}} />
               </div>
 
-              
+            
 
               {/*CATEGORIA*/}
               <span className="block text-xs font-mono text-orange-400 text-center my-[50px] font-bold tracking-wide uppercase">
@@ -304,17 +305,23 @@ function BlogPost({
                <div className='flex flex-row w-[100%] py-4 mx-auto bg-neutral-100'>
                <div className='flex flex-row w-[68%] items-center '>
                   <img 
-                  src={autorblog}
+                  src={enviarlo}
                    width={50}
                    height={40}
                    className='rounded-full border border-zinc-400 px-[4px] py-[4px] ml-[9px] mr-[12px] outline outline-offset-2 outline-gray-400'
                    />    
-                   <p className="font-gilroy-regular text-neutral-950 text-base font-bold">
+                   <div className="flex flex-col">
+                    <p className="cherish text-neutral-900 lg:text-xl  text-xs md:text-basefont-bold">
                     {post.author}
                   </p>
+                  <p className="kaushan text-neutral-900 lg:text-base  text-xs md:text-base font-bold">
+                     {new Date(post.published).toLocaleDateString("es-ES")}
+                  </p> 
+
+                   </div>
+                   
                </div>
  
-
 
 
                 <div className=' w-[16%] flex justify-end items-center '>
