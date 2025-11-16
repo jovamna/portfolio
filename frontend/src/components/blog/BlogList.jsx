@@ -39,7 +39,7 @@ function BlogList({
 
                   
                      {/*POSTS CON GRID,  GAP PARA ESPACIO HORIZONTAL X, O VERTICAL Y LOS POSTS DE LA PAGINATION pb-16 */}
-                     <div className="bloglist-blogcard-grid max-w-lg mx-auto grid gap-12 lg:grid-cols-3 gap-y-2 lg:max-w-none ">
+                     <div className="bloglist-blogcard-grid max-w-lg mx-auto grid gap-12 lg:grid-cols-3 md:grid-cols-2 gap-y-2 lg:max-w-none ">
                         {
                         blog_list.map(post=>(
                             <BlogCard 

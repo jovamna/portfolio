@@ -1,0 +1,26 @@
+{
+  "name": "Muckas Store | AI Digital Art",
+  "short_name": "Muckas Store",
+  "description": "Imágenes digitales IA por jovme. Arte único.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/src/assets/img/logo/logo.png", // Usa la ruta de tu logo/icono principal google
+      "sizes": "1000x1000",
+      "type": "image/png"
+    },
+    {
+      "src": "/favi.png", // Icono estándar para móviles
+      "sizes": "600x1200",
+      "type": "image/png"
+    },
+    {
+      "src": "/favi.png", // Icono grande para Splash Screen
+      "sizes": "600x1200",
+      "type": "image/png"
+    }
+  ]
+}

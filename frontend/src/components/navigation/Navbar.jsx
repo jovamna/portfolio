@@ -145,14 +145,14 @@ function Navbar({
           
          {/* 1 CONTAINER PRINCIPAL CONTIENE DEL MENU DE PANTLLA INCLUYE SOLO EL BOTON ICONO DEL MENU MOVIL QUE ESTA OCULTO */}
          {/*IMPORTANTE EN EL CSS INDEX PONER LA ALTURA HEIGHT 50 con py-7 EL MENU SE HACE MAS LARGO*/}
-         <div className="navbar-logo bg-white flex items-center justify-between md:justify-start w-full h-[3rem]">
+          <div className="navbar-logo flex items-center justify-between md:justify-start w-full h-[3em]">
 
          
              {/*LOGO DEL MENU ORDENADOR Y MOVIL sm:w-20 md:w-24 lg:w-32 */}
              {/*PARA QUE EL ICONO SE CENTRE inline-flex items-center w-1/4*/}
-             <div className="logo w-[26.7%] h-[3rem] inline-flex">
+              <div className="flex logo w-[26.7%] h-[2.5em]">
             <a href="/">
-            <img className="w-[130px] h-[55px] mt-[5px]"
+            <img className="image-logo lg:h-[65px] flex"
             src={logo}
             alt="logo"
             //width={150}

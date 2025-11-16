@@ -63,7 +63,7 @@ function Blog({
 
 
 
-           <div className=" ">
+           <div className="wrapper ">
                <Header />
        
                 <div className="reset-password z-50 absolute w-[40%] max-auto">

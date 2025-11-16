@@ -42,12 +42,12 @@ function BlogCard(data){
     
         if (post.thumbnail && !post.video) {
             return (
-                   <div className="blog-image relative flex flex-col justify-center items-center h-[40vh] h-[40%] ">
+                   <div className="blog-image relative flex flex-col justify-center items-center h-[40vh] ">
                    {/* <div className="img-blog w-full min-h-60 lg:h-60 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:aspect-none">*/}
-                   <span aria-hidden="true" className="absolute inset-x-0 bottom-0 w-2/3 bg-gradient-to-t from-gray-200 opacity-50" />
+                   
                    <img src={thumbnailUrl} 
                    alt="post" 
-                   className="w-[100%] h-[40vh] inset-0 object-cover z-0 "/>
+                   className="w-[100%] object-cover z-0 "/>
                    </div>
                    );
         } else if (post.video&& !post.thumbnail) {//para el border radious de izquierda y derecha del top className="rounded-t-2xl"
@@ -92,24 +92,24 @@ function BlogCard(data){
       return (
               <>
               {post ? (
-                     <div className="responsive-altura-blogcard h-[100%] flex flex-col hover:bg-gray-100 hover:opacity-90 opacity-100 border-b-2 border-zinc-300">
+                     <div className="responsive-altura-blogcard  flex flex-col hover:bg-gray-100 hover:opacity-90 opacity-100 border-b-2 border-zinc-300">
                      
                         {/*1 CONTAINER DE IIMAGEN O VIDEO*/}
-                        <div className="responsive-altura-img-blog h-[55%]">   
+                        <div className=" responsive-altura-img-blog">   
                         {renderMedia()}
                         </div>
                             
 
 
                          {/*2 CONTAINER DE TITULO EXRCEPT LEER MAS--*/}
-                         <div className="relative responsive-blogcard-title-excerpt h-[38%] ">
+                         <div className=" flex flex-col relative responsive-blogcard-title-excerpt  lg:mt-[10px] ">
 
                               {/*POST TITULO  QUITAR SI SE QUIERE  padding izq y derech px-4 */}
                               <Link 
                               to={`/blog/post/${post.slug}`} 
                               className="block px-2"
                               >
-                               <h1 className="text-center font-extrabold text-gray-900 dark:text-white tracking-tight text-xl sm:text-xl  md:text-center" dangerouslySetInnerHTML={{
+                               <h1 className=" kaushan text-center font-extrabold text-gray-900 dark:text-white tracking-wide lg:text-2xl sm:text-xl  md:text-center" dangerouslySetInnerHTML={{
                                    __html:
                                   post.excerpt && DOMPurify.sanitize(post.title.length) > 50
                                     ? DOMPurify.sanitize(post.title.slice(0, 50)) 
@@ -128,25 +128,8 @@ function BlogCard(data){
                                      className="inline-block"
                                      >
 
-                                     {/*QUITAR SI SE QUIERE  padding izq y derech px-3 py-0.5*/}
-                                     <span
-                                     className={`${
-                                      post.category.name === "Relatos"
-                                      ? "bg-green-100 text-green-700"
-                                      : post.category.name === "Machine Learning"
-                                      ? "bg-rose-100 text-rose-700"
-                                      : post.category.name === "Misterios"
-                                      ? "bg-blue-100 text-blue-700"
-                                      : post.category.name === "Inteligencia Artificial"
-                                      ? "bg-blue-100 text-fuchsia-500"
-                                      : post.category.name === "Diseño"
-                                      ? "bg-yellow-100 text-yellow-700"
-                                      : post.category.name === "Historietas"
-                                      ? "bg-violet-100 text-violet-700"
-
-                                      : "bg-gray-100 text-gray-700 hover:bg-green-200"
-                                      } inline-flex  px-3 py-0.5 rounded-full  text-xs font-gilroy-medium tracking-wide`}
-                                       >
+                                    
+                                      <span>
                                       {post.category.name}
                                       </span>
 

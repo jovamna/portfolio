@@ -30,10 +30,10 @@ function Greeting() {
 
                 {/* /End replace 👋 */}
                 <div className='ipad-greeting absolute lg:top-[170px] lg:left-[50px] lg:w-[400px] lg:h-[440px] md:top-[80px] md:w-[390px] top-[50px] w-[110px] left-[20px] h-[170px]'>
-                 <h1 className='texto-animado-developer ipad-pro font-mono font-extrabold text-3xl '>
-                  Hola Soy Jovamna <span className="wave-emoji"><img src ={greetingMano} width={35} className="manito w-[10px]"/></span>
+                 <h1 className='texto-animado-developer ipad-pro kaushan tracking-wide font-normal text-3xl text-neutral-900 '>
+                  Hola Soy Jovamna <span className="wave-emoji"><img src ={greetingMano} width={35} className="manito lg:w-[30px] w-[10px]"/></span>
                   </h1>
-                  <h2 className='texto-animado-developer font-mono font-extrabold lg:text-2xl text-base lg:leading-6 md:leading-2'>
+                  <h2 className='texto-animado-developer kaushan tracking-wide font-normal lg:text-2xl text-base lg:leading-6 md:leading-2 text-neutral-900'>
                   fusiono programación Fullstack con arte digital impulsado por IA.
                   </h2>
 
@@ -42,7 +42,7 @@ function Greeting() {
                  </p>*/}
 
 
-                 <p className='texto-animado font-mono lg:text-lg leading-6 mt-[20px]'>
+                 <p className='texto-animado roboto-condensed-muckas text-neutral-800 font-light lg:text-lg leading-6 mt-[20px]'>
                  
 
 Transformo ideas en soluciones tecnológicas completas, usando mi base en la programación Full Stack y la integración estratégica de la Inteligencia Artificial para construir experiencias digitales que van desde software personalizado hasta proyectos de E-commerce.

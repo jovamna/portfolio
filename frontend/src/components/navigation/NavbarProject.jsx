@@ -252,18 +252,18 @@ const guestLinks = (
 
 
         {/* 1 CONTAINER PRINCIPAL 1 DEL NAVBAR DEL PC Y  MENU MOVIL ESCONDIDO*/}
-           <div className="navbar-logo flex items-center justify-between md:justify-start w-full h-[3rem]">
+           <div className="navbar-logo flex items-center justify-between md:justify-start w-full h-[3em]">
 
 
 
 
                {/*PARA QUE EL ICONO SE CENTRE inline-flex items-center */}
                {/*LOGO DEL MENU DE NAVEGACION ORDENADORY MOVIL */}
-               <div className="logo w-[26.7%] h-[3rem] inline-flex">
+               <div className="flex logo w-[26.7%] h-[2.5em]">
                
                <span className="sr-only">Portafolio Jovamna Medina</span>
                <NavLink to= "/">
-              <img className="w-[130px] h-[55px] mt-[5px]"
+              <img className="image-logo lg:h-[65px] flex"
                src={logo}
                alt="logo"
                //width={150}

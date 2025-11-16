@@ -64,11 +64,12 @@ function BlogPost({
     const renderMedia = () => {
       if (post.thumbnail && !post.video) {
         return (
-                 <div className="movil-portada-subcaja relative w-[100%] h-[400px] mb-4">
+                 <div className="movil-portada-subcaja lg:w-[700px] ">
                  <img 
                  src={thumbnailUrl} 
+                 
                  alt="post"  
-                 className="object-cover h-[100%] z-0"
+                 className="object-contain w-[100%]"
                  />
                  </div>
                );
@@ -104,11 +105,11 @@ function BlogPost({
           // Aquí se muestra solo el video, pero puedes cambiar el orden o mostrar ambos si lo deseas
           return (
                  <>
-                 <div className=" w-[100%] h-[400px] aspect-w-1 aspect-h-1 lg:[66%] lg:aspect-none rounded-md overflow-hidden group-hover:opacity-75 bg-gray-200  movil-portada-subcaja">
+                 <div className=" w-[100%]  aspect-w-1 aspect-h-1 lg:[100%] lg:aspect-none rounded-md overflow-hidden group-hover:opacity-75 movil-portada-subcaja">
                      <img 
                      src={thumbnailUrl} 
                      alt="post"  
-                     className="object-cover h-[100%] inset-0 z-0"
+                     className="object-contain w-[100%] inset-0 z-0"
                      />
                  </div>
 
@@ -155,7 +156,9 @@ function BlogPost({
 
       {/* 2. Meta Descripción y Keywords */}
       <meta name="description" content={post.summary} />
-      <meta name="keywords" content={post.tags.join(', ')} />
+      <meta name="keywords" content={`${post.title}, ${post.summary}`} />
+
+      <meta name="keywords" content={post?.tags?.join(', ') || ''}/>
 
       {/* 3. Canonical URL */}
       <link rel="canonical" href={`https://www.jovamnamedina.com/blog/post/${post.slug}`} />
@@ -185,16 +188,16 @@ function BlogPost({
 
 
 
-            {/*PORTADA DEL POST DETAIL*/}
-            {
+            {/*PORTADA DEL POST DETAIL fullscreen-bg inset-0 object-cover*/}
+            {/*
             post ?
-              <div className="movil-portada relative pt-12 fullscreen-bg inset-0 object-cover z-0 relative mb-4">
+              <div className="movil-portada relative pt-12  z-0 relative mb-4">
                 {renderMedia()}
               </div>
 
                :
               <LoadingCard/>
-             }
+             */}
           
           {/*FIN DE LA PORTADA DEL POST DETAIL*/}
 
@@ -213,7 +216,7 @@ function BlogPost({
   
 
 
-    <div className="container-blogpost-tres-columnas px-8">
+    <div className="flex container-blogpost-tres-columnas px-8 pt-[70px]">
 
         {/*COLUMNA LATERAL */}
         <div className="blogpost-column-1 ">
@@ -232,24 +235,37 @@ function BlogPost({
             //CONTAINER DE CATEGORIA TITULO DESCRPITON
             //prose prose-indigo prose-lg 
             <div className="movil-redaccion-blog-post relative text-gray-500 mx-auto font-gilroy-regular">
-              {/*CATEGORIA*/}
-              <span className="block text-xs font-mono text-orange-400 text-center font-bold tracking-wide uppercase">
-              {post.category.name}
-              </span>
+              
 
 
               {/* TITULO*/}
               <div className=" z-10 max-w-lg max-w-prose mx-auto">                     
               { /*span title sm:text-4xl*/}
-                  <h1 className="blog-detail-title block font-mono text-center font-semibold tracking-tight text-gray-900 underline underline-offset-4 text-5xl leading-tight">
-                  {post.excerpt}
+                  <h1 className="kaushan blog-detail-title block tracking-wide text-center font-semibold tracking-tight text-neutral-900 underline underline-offset-4 lg:text-5xl leading-tight">
+                  {post.title}
                   </h1>   
+              </div>
+
+              {/* EXCERPT*/}
+              <div className=" z-10 max-w-lg max-w-prose mx-auto">                     
+              { /*span title sm:text-4xl*/}
+                  <h2 className="kaushan blog-detail-title block tracking-wide text-center font-normal tracking-tight text-neutral-600  lg:text-xl mt-[20px]">
+                  {post.excerpt}
+                  </h2>   
+              </div>
+
+
+
+
+                {/**PRIMERA IMAGEN */}
+              <div className="movil-portada flex  lg:[700px] items-center justify-center mx-auto">
+                {renderMedia()}
               </div>
 
 
                
-            {/*DESCRIPTION*/}
-            <div className="mt-6 prose prose-indigo prose-lg text-gray-500 mx-auto font-gilroy-regular">
+            {/*DESCRIPTION prose prose-indigo prose-lg*/}
+            <div className="roboto-condensed-muckas mt-6   text-gray-800  font-gilroy-regular">
                 <p className="dangerouslySetInnerHTML={{ __html: richTextFieldContent }">
                 {post.description}
                 </p>
@@ -257,25 +273,30 @@ function BlogPost({
             {/*imageUrl*/}
                    
 
-
-            <div className="mt-6 prose prose-indigo prose-lg text-gray-500 mx-auto font-gilroy-regular bg-red-500">
+             {/**SEGUNDA IMAGEN */}
+            <div className="flex items-center justify-center mt-6 lg:[700px] text-gray-500 mx-auto font-gilroy-regular bg-red-500">
                 {post.image && (
                 <img
                   src={imageUrl}
-                  width={700}
-                  height={300}
+                  
                   alt={post.title}
-                  className=""
+                  className="w-[100%] object-contain"
                   />
                  )}
             </div>
 
 
-              {/*CONTENT Y HEART*/}
-              <div className="mt-6 prose prose-indigo prose-lg text-gray-500 mx-auto font-gilroy-regular ">
+              {/*CONTENT Y HEART prose prose-indigo prose-lg*/}
+              <div className="roboto-condensed-muckas mt-6  text-gray-800  font-gilroy-regular ">
                 <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content)}} />
               </div>
 
+              
+
+              {/*CATEGORIA*/}
+              <span className="block text-xs font-mono text-orange-400 text-center my-[50px] font-bold tracking-wide uppercase">
+              {post.category.name}
+              </span>
 
           
                      
@@ -293,6 +314,9 @@ function BlogPost({
                   </p>
                </div>
  
+
+
+
                 <div className=' w-[16%] flex justify-end items-center '>
                      <p> 💛 {post.total_hearts}</p>
                 </div>
@@ -304,6 +328,9 @@ function BlogPost({
                   />
                   <p className='mr-[4px]'> {post.views}</p>
                   </div> 
+
+
+                  
  
                 </div>
                   
