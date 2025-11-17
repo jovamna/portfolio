@@ -1,19 +1,21 @@
-from django.shortcuts import render, get_object_or_404
 from apps.category.models import Category
-
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework import permissions
-
 from django.db.models.query_utils import Q
-
-from .models import Post, PostViewCount
-from apps.reviews.models import Review
 from .serializers import PostSerializer, PostListSerializer
 from .pagination import SmallSetPagination, MediumSetPagination
 from django.db.models import Sum
 from rest_framework.permissions import AllowAny
+from django.core.cache import cache
+from django.shortcuts import get_object_or_404
+from .models import Post, PostViewCount
+from apps.reviews.models import  Review
+
+
+
+
+
 
 import logging
 
@@ -64,11 +66,51 @@ class BlogListCategoryView(APIView):
 
 
 
-
 class PostDetailView(APIView):
+    authentication_classes = []  # Desactiva autenticación
+    permission_classes = [AllowAny]  # Permite acceso a cualquiera
+
+    CACHE_TIMEOUT = 60 * 15  # 15 minutos
+
+    def get(self, request, post_slug, format=None):
+        cache_key = f'post_{post_slug}'  # clave única para caché
+        cached_response = cache.get(cache_key)
+
+        if cached_response:
+            # Devuelve la respuesta cacheada
+            return Response(cached_response, status=status.HTTP_200_OK)
+
+        # Si no está en caché, buscamos en la DB
+        post = get_object_or_404(Post, slug=post_slug)
+
+        # Calcula total de hearts
+        total_hearts = Review.objects.filter(post=post).aggregate(
+            total_hearts=Sum('hearts')
+        )['total_hearts'] or 0
+
+        serializer = PostSerializer(post)
+        serialized_data = serializer.data
+        serialized_data['total_hearts'] = total_hearts
+
+        # Contar views por IP
+        ip = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR')).split(',')[-1].strip()
+        if not PostViewCount.objects.filter(post=post, ip_address=ip).exists():
+            PostViewCount.objects.create(post=post, ip_address=ip)
+            post.views += 1
+            post.save(update_fields=['views'])
+
+        response_data = {'post': serialized_data}
+
+        # Guardar la respuesta en caché
+        cache.set(cache_key, response_data, self.CACHE_TIMEOUT)
+
+        return Response(response_data, status=status.HTTP_200_OK)
+
+
+class ORIGINALPostDetailView(APIView):
     authentication_classes = []  # Desactiva la autenticación
     permission_classes = [AllowAny]  # Permite el acceso a cualquier usuario
-
+ 
     def get(self, request, post_slug,format=None):
         #print(post_slug)
         #print(f"Received request for post_slug: {post_slug}")

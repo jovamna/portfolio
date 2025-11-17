@@ -2,8 +2,11 @@ from django.db import models
 import uuid
 from django.utils import timezone
 from apps.category.models import Category
-from apps.chatbot.models import ChatMessage
+#from apps.chatbot.models import ChatMessage
 from tinymce.models import HTMLField  # Asegúrate de que tienes tinymce instalado
+import os
+from django.dispatch import receiver
+
 
 
 def blog_directory_path(instance, filename):
@@ -61,8 +64,6 @@ class Post(models.Model):
         return ''
     
 
-
-    
     def get_view_count(self):
         views = PostViewCount.objects.filter(post=self).count()
         return views
@@ -74,6 +75,38 @@ class Post(models.Model):
     @staticmethod
     def popular_posts(num_posts):
         return Post.objects.filter(status='published').order_by('-views')[:num_posts]
+    
+    
+# 1) Borrar archivo cuando se borra un Post
+@receiver(models.signals.post_delete, sender=Post)
+def auto_delete_files_on_delete(sender, instance, **kwargs):
+    fields = ['image', 'thumbnail', 'video']
+    for field in fields:
+        file = getattr(instance, field)
+        if file and file.name and os.path.isfile(file.path):
+            os.remove(file.path)
+
+
+# 2) Borrar archivo viejo cuando se cambia por uno nuevo
+@receiver(models.signals.pre_save, sender=Post)
+def auto_delete_old_file_on_change(sender, instance, **kwargs):
+    if not instance.pk:
+        return
+
+    try:
+        old_post = Post.objects.get(pk=instance.pk)
+    except Post.DoesNotExist:
+        return
+
+    fields = ['image', 'thumbnail', 'video']
+    for field in fields:
+        old_file = getattr(old_post, field)
+        new_file = getattr(instance, field)
+
+        if old_file and old_file != new_file:
+            if os.path.isfile(old_file.path):
+                os.remove(old_file.path)
+
 
     
 

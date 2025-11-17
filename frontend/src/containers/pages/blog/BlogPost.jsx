@@ -266,7 +266,7 @@ function BlogPost({
 
                
             {/*DESCRIPTION prose prose-indigo prose-lg*/}
-            <div className="roboto-condensed-muckas mt-6   text-neutral-700 lg:text-lg ">
+            <div className="oswald-muckas   mt-6   text-neutral-600 lg:text-lg ">
                 <p className="dangerouslySetInnerHTML={{ __html: richTextFieldContent }">
                 {post.description}
                 </p>
@@ -288,7 +288,7 @@ function BlogPost({
 
 
               {/*CONTENT Y HEART prose prose-indigo prose-lg*/}
-              <div className="roboto-condensed-muckas mt-6  text-neutral-700 lg:text-lg  ">
+              <div className="oswald-muckas mt-6  text-neutral-600 lg:text-lg  ">
                 <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content)}} />
               </div>
 
@@ -311,10 +311,10 @@ function BlogPost({
                    className='rounded-full border border-zinc-400 px-[4px] py-[4px] ml-[9px] mr-[12px] outline outline-offset-2 outline-gray-400'
                    />    
                    <div className="flex flex-col">
-                    <p className="cherish text-neutral-900 lg:text-xl  text-xs md:text-basefont-bold">
+                    <p className="oswald-muckas text-neutral-900 lg:text-lg  text-xs md:text-basefont-bold">
                     {post.author}
                   </p>
-                  <p className="kaushan text-neutral-900 lg:text-base  text-xs md:text-base font-bold">
+                  <p className="oswald-muckas text-neutral-900 lg:text-sm  text-xs md:text-base font-bold">
                      {new Date(post.published).toLocaleDateString("es-ES")}
                   </p> 
 

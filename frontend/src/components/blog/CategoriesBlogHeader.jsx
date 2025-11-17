@@ -33,7 +33,7 @@ function CategoriesBlogList ({
             <div className="ul-categories-blog inline-flex space-x-4 xl:space-x-8 pr-2">
 
 
-                <Link 
+                {/*<Link 
                 to='/blog'
                 className={`${location.pathname === '/blog' ? "text-orange-500 bg-white":"text-gray-900 hover:text-orange-500 border border-gray-100 hover:border-gray-200"} mt-[15px] px-6   rounded-md text-lg font-regular`}>
                                         
@@ -41,7 +41,7 @@ function CategoriesBlogList ({
                     <span className="blog-header-category-name relative z-2 text-center text-xl font-mono font-bold text-black italic">
                           All
                     </span>
-                </Link>
+                </Link>*/}
 
 
 
@@ -54,10 +54,9 @@ function CategoriesBlogList ({
                     >
                     
 
-                      {/* NOMBRE DE LA CATEGORÍA h-2/3 */}
-                      <span aria-hidden="true" className="absolute z-0 inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-gray-800 opacity-50 " />
+                     
 
-                      <span className="blog-header-category-name relative z-2 text-center text-xl font-mono font-bold text-black italic mt-4 ">
+                      <span className="blog-header-category-name relative z-2 text-center lg:text-base text-xs oswald-muckas text-neutral-600 font-bold text-black italic mt-4 ">
                         {category.name}
                       </span>
 

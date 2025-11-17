@@ -43,7 +43,7 @@ const socialMediaLinks = {
 
 const skillsSection = {
   title: "Acerca de mí.",
-  subTitle: "DESARROLLADOR FULL STACK APASIONADA POR EXPLORAR TODAS LAS TECNOLOGÍAS",
+  //subTitle: "DESARROLLADOR FULL STACK APASIONADA POR EXPLORAR TODAS LAS TECNOLOGÍAS",
   skills: [
     {
       text: "Developer Full Stack enfocada en la Ingeniería de Soluciones y la Automatización. Mi base técnica es sólida: me especializo en el desarrollo de Backend con Django para crear APIs potentes, sistemas de autenticación robustos y una gestión eficiente de bases de datos.",

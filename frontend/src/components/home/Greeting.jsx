@@ -29,23 +29,21 @@ function Greeting() {
                 </div>
 
                 {/* /End replace 👋 */}
-                <div className='ipad-greeting absolute lg:top-[170px] lg:left-[50px] lg:w-[400px] lg:h-[440px] md:top-[80px] md:w-[390px] top-[50px] w-[110px] left-[20px] h-[170px]'>
+                <div className='ipad-greeting absolute lg:top-[200px] lg:left-[50px] lg:w-[400px] lg:h-[440px] md:top-[80px] md:w-[390px] top-[60px] w-[110px] left-[30px] h-[170px]'>
                  <h1 className='texto-animado-developer ipad-pro kaushan tracking-wide font-normal text-3xl text-neutral-900 '>
                   Hola Soy Jovamna <span className="wave-emoji"><img src ={greetingMano} width={35} className="manito lg:w-[30px] w-[10px]"/></span>
                   </h1>
-                  <h2 className='texto-animado-developer kaushan tracking-wide font-normal lg:text-2xl text-base lg:leading-6 md:leading-2 text-neutral-900'>
+                { /* <h2 className='texto-animado-developer kaushan tracking-wider font-normal lg:text-lg text-base lg:leading-8 md:leading-2 text-neutral-900'>
                   fusiono programación Fullstack con arte digital impulsado por IA.
-                  </h2>
+                  </h2>*/}
 
-                 {/*<p className='texto-animado font-mono text-xl leading-6 mt-[20px]'>
-                 Transformo tus ideas en soluciones tecnologicas, creando experiencias digitales a través de mi pasión por la programación FullStack
-                 </p>*/}
+                 {/*roboto-condensed-muckas */}
 
 
-                 <p className='texto-animado roboto-condensed-muckas text-neutral-800 font-light lg:text-lg leading-6 mt-[20px]'>
+                 <p className='texto-animado kaushan tracking-widest text-neutral-900 font-light lg:text-base leading-6 mt-[6px]'>
                  
 
-Transformo ideas en soluciones tecnológicas completas, usando mi base en la programación Full Stack y la integración estratégica de la Inteligencia Artificial para construir experiencias digitales que van desde software personalizado hasta proyectos de E-commerce.
+Transformo ideas en soluciones tecnológicas, usando mi base en la programación Full Stack y la integración estratégica de la Inteligencia Artificial para construir experiencias digitales.
                  </p>
 
 

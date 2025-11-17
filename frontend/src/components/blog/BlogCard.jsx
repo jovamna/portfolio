@@ -109,7 +109,7 @@ function BlogCard(data){
                               to={`/blog/post/${post.slug}`} 
                               className="block px-2"
                               >
-                               <h1 className=" kaushan text-center font-extrabold text-gray-900 dark:text-white tracking-wide lg:text-2xl sm:text-xl  md:text-center" dangerouslySetInnerHTML={{
+                               <h1 className=" oswald-muckas  text-center font-extrabold text-black dark:text-white tracking-wider lg:text-2xl sm:text-xl  md:text-center" dangerouslySetInnerHTML={{
                                    __html:
                                   post.excerpt && DOMPurify.sanitize(post.title.length) > 50
                                     ? DOMPurify.sanitize(post.title.slice(0, 50)) 
@@ -129,7 +129,7 @@ function BlogCard(data){
                                      >
 
                                     
-                                      <span>
+                                      <span className="lg:text-xs text-xs">
                                       {post.category.name}
                                       </span>
 
@@ -144,7 +144,7 @@ function BlogCard(data){
                                  className="block"
                                  >
                                  <div
-                                  className="oswald-muckas px-2 mt-2 text-sm dark:text-dark-txt text-center  text-zinc-700 tracking-wide font-light"
+                                  className="oswald-muckas px-2 mt-2 text-sm dark:text-dark-txt text-center  text-neutral-700 tracking-wide font-light"
                                    dangerouslySetInnerHTML={{
                                    __html:
                                   post.excerpt && DOMPurify.sanitize(post.excerpt.length) > 80
