@@ -338,9 +338,10 @@ body
 
 
 .nav-item:hover {
-    color: grey;
-    cursor: pointer;
-  }
+  color: grey;
+  cursor: pointer;
+}
+
 .nav-item{
     color: black;
 }

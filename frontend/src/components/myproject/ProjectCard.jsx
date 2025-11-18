@@ -53,7 +53,7 @@ function ProjectCard(data){
                                     to={`/myproject/project/${project.slug}`} 
                                     className="block"
                                     >
-                    <p className='lg:text-xs text-xs md:text-xs text-gray-600'>leer mas</p>
+                    <p className='lg:text-sm text-xs md:text-xs text-gray-600'>leer mas</p>
                     
                     </Link>
                     
@@ -72,16 +72,60 @@ function ProjectCard(data){
                 
                  
 
-                  <div className='div-languages flex flex-row '>
-                  <p className="languages text-xs font-bold text-gray-900 text-center">
-                  Keywords: 
-                  </p>
-                  
-                  <p className="languages px-2 text-sm truncate" >
-                 { project.tags + ""},
-                               </p>  
+                 {/**TAGS MEJOR DISEÑADOS */}
+                 <div className='div-languages flex flex-row items-center space-x-2 overflow-hidden'>
+    
+    <p className="languages text-xs font-bold text-gray-900 flex-shrink-0">
+        Keywords:
+    </p>
 
-                  </div>
+    {/* Definimos el límite de tags a mostrar */}
+    {/* Puedes ajustar este número (3) según el espacio disponible */}
+    {project.tags.slice(0, 3).length > 0 && (
+        <div className="flex flex-row flex-wrap gap-1 flex-1 overflow-hidden h-6">
+        
+            {/* 1. Mapeamos solo los primeros 3 tags */}
+            {project.tags.slice(0, 3).map((tag, index) => (
+                <span 
+                    key={index}
+                    className="
+                        px-2 py-0.5 
+                        text-xs font-medium 
+                        bg-blue-100 text-blue-800 
+                        rounded-full 
+                        flex-shrink-0 
+                        whitespace-nowrap
+                    "
+                >
+                    {tag}
+                </span>
+            ))}
+            
+            {/* 2. Verificamos si hay tags ocultos y mostramos el contador */}
+            {project.tags.length > 3 && (
+                <span 
+                    className="
+                        px-2 py-0.5 
+                        text-xs font-bold 
+                        bg-gray-200 text-gray-600 
+                        rounded-full 
+                        flex-shrink-0 
+                        whitespace-nowrap
+                    "
+                >
+                    +{project.tags.length - 3} más
+                </span>
+            )}
+
+        </div>
+    )}
+</div>
+
+
+
+
+                 {/**FIN TAGS MEJOR DIEÑADOS */}
+
 
             
                 

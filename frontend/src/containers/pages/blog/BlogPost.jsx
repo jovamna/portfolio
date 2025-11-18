@@ -242,7 +242,7 @@ function BlogPost({
               {/* TITULO*/}
               <div className=" z-10 max-w-lg max-w-prose mx-auto">                     
               { /*span title sm:text-4xl*/}
-                  <h1 className="kaushan blog-detail-title block tracking-wide text-center font-semibold tracking-tight text-neutral-900 underline underline-offset-4 lg:text-5xl leading-tight">
+                  <h1 className="kaushan blog-detail-title block tracking-wide text-center font-semibold tracking-tight text-neutral-900 underline underline-offset-8 lg:text-5xl leading-tight">
                   {post.title}
                   </h1>   
               </div>
@@ -301,7 +301,7 @@ function BlogPost({
 
           
                      
-                     {/*autor border-t-2 border-zinc-200*/}
+                     {/*AUHOR Y FECHA border-t-2 border-zinc-200*/}
                <div className='flex flex-row w-[100%] py-4 mx-auto bg-neutral-100'>
                <div className='flex flex-row w-[68%] items-center '>
                   <img 

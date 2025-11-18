@@ -36,16 +36,16 @@ const solutions = [
     icon: BiHome,
   },
   {
-    name: 'MyProjects',
-    description: 'Lista de repositorios en Github.',
-    href: '/myproject',
-    icon: DiGithubBadge ,
-  },
-  {
     name: 'Blog',
     description: 'Articulos sobre los avances en tecnología',
     href: '/blog',
     icon: MdArticle,
+  },
+   {
+    name: 'MyProjects',
+    description: 'Lista de repositorios en Github.',
+    href: '/myproject',
+    icon: DiGithubBadge ,
   },
   
 
@@ -179,6 +179,7 @@ const guestLinks = (
             />
             </Link>
             </div>
+
             <div className=' '>
             <Link to="/login" className="nav-item hover:text-gray-500 lg:text-sm sm:text-xs text-neutral-600 font-semibold">
               <p className=''>
@@ -198,8 +199,8 @@ const guestLinks = (
   // lista de posts
   const renderBlogList = (blog_list) => {
     return (
-      <div className="mt-4 bg-black w-[100%] px-4">
-          <h3 className="text-sm underline underline-offset-4 pt-4   text-white">
+      <div className="mt-4 bg-white w-[100%] px-4">
+          <h3 className="text-sm underline underline-offset-4 pt-4   text-black">
             Publicaciones Recientes:
             </h3>
            
@@ -213,7 +214,7 @@ const guestLinks = (
                className="block"
                >
 
-               <p  className='hover:bg-gray-500 text-sm text-white truncate ..'>
+               <p className='hover:bg-gray-500 text-sm text-black truncate ..'>
               {post.excerpt && post.excerpt
               .split(' ') // Dividir el texto en palabras NO FUNCIONO
               .slice(0, 20) // Seleccionar las primeras 20 palabras NO FUNCIONO
@@ -223,7 +224,7 @@ const guestLinks = (
              {/*console.log(post.excerpt)*/}
              {/*console.log("Valor de post.excerpt:", post.excerpt)*/}
         
-          <p className='text-white hover:bg-gray-500   hover:text-orange-500'>
+          <p className='text-black hover:bg-gray-500   hover:text-orange-500'>
             leer mas
             </p>
 
@@ -555,7 +556,7 @@ const guestLinks = (
               
 
 
-                           <div className='w-[94%] mx-auto justify-center px-2 py-8 border-b border-neutral-500 bg-black'>
+                           <div className='w-[94%] mx-auto justify-center px-2 py-8 border-b border-neutral-500 bg-white'>
                            { window.location.pathname==='/search/:term'?<>
                            </>
                            :
@@ -588,10 +589,10 @@ const guestLinks = (
                            <a
                            key={item.name}
                            href={item.href}
-                           className="-m-3 flex items-center p-3 border-b border-neutral-500 bg-black hover:bg-gray-500"
+                           className="-m-3 flex items-center p-3 border-b border-neutral-500 bg-white hover:bg-gray-500"
                            >
-                           <item.icon className="h-6 w-6 flex-shrink-0 text-white hover:text-orange-500 " aria-hidden="true" />
-                           <span className="ml-3 text-sm font-semibold text-white hover:text-orange-500">
+                           <item.icon className="h-6 w-6 flex-shrink-0 text-black hover:text-orange-500 " aria-hidden="true" />
+                           <span className="ml-3 text-sm font-semibold text-black hover:text-orange-500">
                             {item.name} 
                             </span>
                             </a>
@@ -609,7 +610,7 @@ const guestLinks = (
                              {/*FUNCTION  POSTS DE BLOG DEL MENU OCULTO*/}
                        {/*MENU HIDDEN EN PANTALLA GRANDE  RECIENTES POSTS DE PROJECTS */}    
                               {/* USE EL COMPONENTE BLOG-LIST E HICE UNA FUNCTION DE RENDERIZADO ARRIBA DE TODO*/}
-                              <div className="w-[94%] mx-auto  text-sm">
+                              <div className="w-[94%] mx-auto  text-sm bg-white">
                               {blog_list ? (
                               <>
                               {renderBlogList(blog_list)} {/* Llama a la función para renderizar la lista */}
@@ -618,8 +619,8 @@ const guestLinks = (
                               <LoadingCard />
                               )}
                               {/* ENLACE A LA PAGINA DE TODOS LOS POSTS DE GITHUB */}
-                              <div className="pb-4 bg-black px-4">
-                                <a href="/blog" className="text-sm font-medium text-yellow-400 hover:text-orange-500">
+                              <div className="pb-4 bg-white px-4">
+                                <a href="/blog" className="text-sm font-medium text-indigo-600  hover:text-orange-500">
                                   Ver todos los posts
                                   <span aria-hidden="true"> &rarr;</span>
                                   </a>

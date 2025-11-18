@@ -93,7 +93,7 @@ function ProjectPost({get_project, project}){
                      {project ?(
                         <div>
                       <div className="flex justify-center items-center"> 
-                        <h1 className="kaushan text-center lg:text-2xl text-lg font-extrabold">
+                        <h1 className="kaushan text-center lg:text-3xl text-lg font-extrabold underline underline-offset-8">
                              {project.title}
 
                         </h1>
@@ -137,10 +137,46 @@ function ProjectPost({get_project, project}){
 
                       <div className="mt-4">
                         <p className="text.base font-extrabold">Tags:</p>
-                        <p>
-                            {project.tags}
-                        </p>
+                       
                         </div>
+
+
+
+                   
+                 <div className='div-languages mt-[10px] flex flex-col items-center space-x-2 overflow-hidden w-[30%]'>
+    
+                 
+
+                  {/* Contenedor de Tags: Usamos flex-1 y overflow-hidden para la truncaCión */}
+                  <div className="flex flex-row flex-wrap gap-1 flex-1 overflow-hidden h-6">
+    
+                  {/* Mapeamos el array de tags para renderizar cada uno */}
+          {
+            project.tags.map((tag, index) => (
+                <span 
+                    key={index}
+                    className="
+                        px-2 py-0.5 
+                        text-xs font-medium 
+                        bg-blue-100 text-blue-800 
+                        rounded-full 
+                        flex-shrink-0 
+                        whitespace-nowrap
+                    "
+                >
+                    {tag}
+                </span>
+            ))
+        }
+
+                  </div>
+
+                 </div>
+
+
+
+
+
 
                       </div>
 

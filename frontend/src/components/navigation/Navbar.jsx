@@ -37,16 +37,16 @@ const solutions = [
     icon: BiHome,
   },
   {
-    name: 'MyProjects',
-    description: 'Lista de repositorios en Github.',
-    href: '/myproject',
-    icon: DiGithubBadge,
-  },
-  {
     name: 'Blog',
     description: 'Articulos sobre los avances en tecnología',
     href: '/blog',
     icon: MdArticle,
+  },
+  {
+    name: 'MyProjects',
+    description: 'Lista de repositorios en Github.',
+    href: '/myproject',
+    icon: DiGithubBadge,
   },
 
   
@@ -125,6 +125,49 @@ function Navbar({
    const [isSearchOpen, setIsSearchOpen] = useState(false);
 
 
+// lista de posts
+  const renderBlogList = (blog_list) => {
+    return (
+      <div className="mt-4 bg-white w-[100%] px-4">
+          <h3 className="text-sm underline underline-offset-4 pt-4   text-black">
+            Publicaciones Recientes:
+            </h3>
+           
+          <ul role="list" className="">
+              
+         
+            {blog_list.slice(0, blog_list.length > 2 ? 2 : blog_list.length).map(post => (
+               <li key={post.slug} className="py-2">   
+                <Link 
+               to={`/blog/post/${post.slug}`} 
+               className="block"
+               >
+
+               <p className='hover:bg-gray-500 text-sm text-black truncate ..'>
+              {post.excerpt && post.excerpt
+              .split(' ') // Dividir el texto en palabras NO FUNCIONO
+              .slice(0, 20) // Seleccionar las primeras 20 palabras NO FUNCIONO
+              .join(' ') // Volver a unir las palabras en un solo texto NO FUNCIONO
+              }
+             </p>
+             {/*console.log(post.excerpt)*/}
+             {/*console.log("Valor de post.excerpt:", post.excerpt)*/}
+        
+          <p className='text-black hover:bg-gray-500   hover:text-orange-500'>
+            leer mas
+            </p>
+
+            </Link>
+
+            </li>
+           
+            ))}
+           </ul>
+      
+           </div>
+
+            )
+    }
 
 
 
@@ -490,7 +533,7 @@ function Navbar({
 
 
                             {/*CAJA DEL SEARCH */}
-                          {  <div className='w-full  justify-center bg-violet-400   px-2 py-8 '>
+                          {  <div className='w-full  justify-center bg-white   px-2 py-8 '>
                            { window.location.pathname==='/search/:term'?<>
                            </>
                            :
@@ -501,7 +544,7 @@ function Navbar({
                            {/*FIN CAJA DEL SEARCH */}
 
                           {/*3 CONTAINER DEL MOVIL DE LA NAVEGACION y SEARCH*/}
-                           <div className="w-[95%] mx-auto   pt-6">
+                           <div className="w-[95%] mx-auto bg-white pt-6">
                       
 
                            <nav className="grid gap-y-6">
@@ -509,10 +552,10 @@ function Navbar({
                            <a
                            key={item.name}
                            href={item.href}
-                           className="-m-3 flex items-center rounded-md p-3 hover:bg-violet-500 bg-violet-400  border-b border-white"
+                           className="-m-3 flex items-center rounded-md p-3 hover:bg-violet-500 bg-white  border-b border-white"
                            >
-                           <item.icon className="h-6 w-6 flex-shrink-0 text-white" aria-hidden="true" />
-                           <span className="ml-3 text-sm font-semibold text-stone-900">
+                           <item.icon className="h-6 w-6 flex-shrink-0 text-black" aria-hidden="true" />
+                           <span className="ml-3 text-sm font-semibold text-black">
                             {item.name} 
                             </span>
                             </a>
@@ -536,32 +579,15 @@ function Navbar({
 
 
                              {/*FUNCTION  POSTS DE BLOG DEL MENU OCULTO*/}
-                   <div className="bg-neutral-700 px-4">
-                      {
-                      blog_list ?
-                      <>
-                        <div className="mt-4">
-                          <h3 className="text-sm font-semibold underline underline-offset-4 pt-4 text-gray-400">
-                          Publicaciones Recientes:
-                          </h3>
-                          <ul role="list" className="mt-2 space-y-4">
-                            <li className="py-2">
-                              {
-                                blog_list.slice(0, blog_list.length > 2 ? 2 : blog_list.length).map(post => (
-                                  <BlogListNavbar 
-                                  key={post.excerpt} 
-                                  data={post} 
-                                 
-                                  />
-                                ))
-                            }
-                            </li>
-                         </ul>
-                        </div>
-                       </>
-                       :
-                     <LoadingCard/>   
-                     }
+                   <div className="bg-white px-4">
+                      {blog_list ? (
+                              <>
+                              {renderBlogList(blog_list)} {/* Llama a la función para renderizar la lista */}
+                              </>
+                              ) : (
+                              <LoadingCard />
+                   
+                     )}
                      {/*ULTIMOS POSTS DE GITHUB  DEL MENU OCULTO*/}
 
                         {/*ENLACE A LA PAGINA DE TODOS LOS POSTS DE GITHUB*/}
