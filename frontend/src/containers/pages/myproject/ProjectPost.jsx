@@ -7,7 +7,7 @@ import DOMPurify from 'dompurify'
 import LoadingCard from "../../../components/loaders/LoadingCard";
 import "../../../styles/index.css";
 import { Helmet } from 'react-helmet-async';
-
+import { GiFastForwardButton } from "react-icons/gi";
 
 
 
@@ -80,7 +80,7 @@ function ProjectPost({get_project, project}){
 
             <div className="wrapper w-full min-h-screen">
 
-                <div className="flex lg:flex-row  flex-col md:flex-col px-8 w-full lg:pt-[90px] mb-[10px] pt-[70px] px-4">
+                <div className="flex lg:flex-row  flex-col md:flex-col  w-full lg:pt-[90px] mb-[10px] pt-[70px] px-4">
 
                     {/*COLUMNA LATERAL */}
                     <div className="column-1 flex lg:w-[10%] w-[100%]">
@@ -106,17 +106,45 @@ function ProjectPost({get_project, project}){
                       </div>
 
                       <div className="mt-4"> 
-                        <span className="flex flex-row">
-                            <p className="font-extrabold mr-[8px]">
-                            Enlace al Projecto en GitHub:
-                            </p>
-                            <p>
-                                {project.url}
-                            </p>
-                        </span>
+                        
+
+                  <a 
+                  href ={project.url} 
+                  target="_blank"  // **Recomendado:** Abre el enlace en una nueva pestaña
+                  rel="noopener noreferrer" // **Recomendado:** Por seguridad y rendimiento
+                  className ="hover:text-gray-500" >
+                  <p className="flex flex-row text-xs text-center font-semibold text-gray-900 mb-4 hover:text-blue-500">
+                  LINK AL PROJECTO &nbsp; <GiFastForwardButton className='text-blue-700 hover:text-blue-300 text-xl font-extrabold'/>
+                  </p>
+                  </a>
 
 
                       </div>
+
+
+
+                       {/**IMPORTANTE PARA URL */}
+                      {/*<span className="flex flex-col">
+                            <p className="lg:text-base text-xs font-extrabold mr-[8px]">
+                            Enlace al Projecto en GitHub:
+                            </p>
+                          
+                                <a 
+                         href={project.url} 
+                         target="_blank"  // **Recomendado:** Abre el enlace en una nueva pestaña
+                         rel="noopener noreferrer" // **Recomendado:** Por seguridad y rendimiento
+                         className="
+                          text-xs 
+                         overflow-hidden 
+                          text-ellipsis 
+                        whitespace-nowrap*/}  {/*Necesario** para que truncate funcione 
+                         block */} {/* **Necesario** para que ocupe espacio y aplique overflow 
+                        text-blue-600 hover:text-blue-800 hover:underline //* Estilos de enlace 
+                        ">*/}
+                       {/*{project.url*/}
+                         {/*</a> </span>*/}
+
+
 
 
                       <div className="mt-4">
@@ -135,17 +163,14 @@ function ProjectPost({get_project, project}){
 
                       </div>
 
-                      <div className="mt-4">
-                        <p className="text.base font-extrabold">Tags:</p>
-                       
-                        </div>
+                    
 
 
 
                    
-                 <div className='div-languages mt-[10px] flex flex-col items-center space-x-2 overflow-hidden w-[30%]'>
+                 <div className='div-languages mt-[10px] flex flex-col overflow-hidden w-[30%]'>
     
-                 
+                 <p className="text.base font-extrabold">Tags:</p>
 
                   {/* Contenedor de Tags: Usamos flex-1 y overflow-hidden para la truncaCión */}
                   <div className="flex flex-row flex-wrap gap-1 flex-1 overflow-hidden h-6">
@@ -158,7 +183,7 @@ function ProjectPost({get_project, project}){
                     className="
                         px-2 py-0.5 
                         text-xs font-medium 
-                        bg-blue-100 text-blue-800 
+                        bg-blue-100 text-blue-700 
                         rounded-full 
                         flex-shrink-0 
                         whitespace-nowrap

@@ -61,9 +61,9 @@ function ProjectCard(data){
                
 
                  
-                  <a href ={project.url} className ="hover:text-gray-500" >
+                  <a href ={project.url} className ="hover:text-gray-500 mt-[20px]" >
                   <p className="flex flex-row text-xs text-center font-semibold text-gray-900 mb-4 hover:text-blue-300">
-                  LINK AL PROJECTO &nbsp; <GiFastForwardButton className='text-blue-400 hover:text-blue-300 text-xl font-extrabold'/>
+                  LINK AL PROJECTO &nbsp; <GiFastForwardButton className='text-blue-700 hover:text-blue-300 text-xl font-extrabold'/>
                   </p>
                   </a>
                 

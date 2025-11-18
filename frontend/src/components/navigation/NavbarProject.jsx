@@ -333,6 +333,12 @@ const guestLinks = (
                   </span>
                   </NavLink>
 
+                  <NavLink to= "/myproject" className="nav-item  text-neutral-600 font-semibold hover:bg-neutral-100 hover:text-violet-700 border-b-2 border-transparent hover:border-violet-700 inline-block px-3 h-[2rem]">
+                  <span className="ml-6">
+                    MyProjects
+                  </span>
+                  </NavLink>
+
                  
 
 
