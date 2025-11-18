@@ -2,6 +2,7 @@ import github from '../../assets/img/projects/github.png';
 import autor from '../../assets/img/users/autor.png';
 import DOMPurify from "dompurify";
 import { GiFastForwardButton } from "react-icons/gi";
+import {Link} from "react-router-dom";
 //import "../../assets/styles/index.css";
 
 
@@ -31,7 +32,7 @@ function ProjectCard(data){
 
 
                   {/*TITULO DEL CARD DE GITHUB */}
-                  <p className="title text-center font-bold text-xl text-gray-900 mt-2 underline underline-offset-4 uppercase font-mono">
+                  <p className="title text-center font-bold lg:text-xl text-sm text-gray-900 mt-2 underline underline-offset-4 uppercase font-mono">
                 
                   {project.title.slice(0,15) }
                   {/*console.log(project)*/}
@@ -48,12 +49,20 @@ function ProjectCard(data){
                    : project.description && DOMPurify.sanitize(project.description),
                     }}
                     />
+                    <Link 
+                                    to={`/myproject/project/${project.slug}`} 
+                                    className="block"
+                                    >
+                    <p className='lg:text-xs text-xs md:text-xs text-gray-600'>leer mas</p>
+                    
+                    </Link>
+                    
                
                
 
                  
                   <a href ={project.url} className ="hover:text-gray-500" >
-                  <p className="flex flex-row text-sm text-center font-semibold text-gray-900 text-center mb-4 hover:text-blue-300">
+                  <p className="flex flex-row text-xs text-center font-semibold text-gray-900 mb-4 hover:text-blue-300">
                   LINK AL PROJECTO &nbsp; <GiFastForwardButton className='text-blue-400 hover:text-blue-300 text-xl font-extrabold'/>
                   </p>
                   </a>
@@ -61,25 +70,15 @@ function ProjectCard(data){
 
 
                 
-                  <div className='div-languages flex flex-row items-center mb-[5px]'>
-                  <p className="languages text-xs font-semibold text-gray-900 text-center">
-                  Languages:
-                  </p>
+                 
 
-                  <p className="languages px-2 text-sm truncate w-[240px]" >
-                 { project.category + ","},
-                               </p>  
-
-               
-                  </div>
-
-                  <div className='div-languages flex flex-row items-center'>
+                  <div className='div-languages flex flex-row '>
                   <p className="languages text-xs font-bold text-gray-900 text-center">
                   Keywords: 
                   </p>
                   
-                  <p className="languages px-2 text-sm truncate w-[240px]" >
-                 { project.tags + ","},
+                  <p className="languages px-2 text-sm truncate" >
+                 { project.tags + ""},
                                </p>  
 
                   </div>
@@ -114,7 +113,7 @@ function ProjectCard(data){
                       {/*CONTAINER DE AUTHORS Y NOMBRES*/}
                        <div className="flex flex-row  w-[99%]">
                           <p className="languages w-[21%] text-xs font-bold text-gray-900">
-                          authors: 
+                          author: 
                           </p>
                           <div className='d-authors w-[78%] '>
                             <p className="languages text-gray-900 dark:text-white tracking-tight text-sm truncate w-[99%] sm:text-sm" dangerouslySetInnerHTML={{
@@ -129,11 +128,14 @@ function ProjectCard(data){
 
 
 
-                      <div className=" flex space-x-1 text-sm text-gray-500">
-                      <time className='w-[4rem] text-xs font-bold text-gray-900'>date</time>
+                      {/*<div className=" flex space-x-1 ">
+                      <time className='w-[4rem] lg:text-xs md:text-xs text-xs font-light text-gray-500'>
+                        
+                         {new Date(project.published).toLocaleDateString("es-ES")}
+                        </time>
                       <span aria-hidden="true">&middot;</span>
-                      <span>read time</span>
-                      </div>
+                     
+                      </div>*/}
                {/*FIN ML-3 */}
                  </div>
 

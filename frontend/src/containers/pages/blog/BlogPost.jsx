@@ -215,9 +215,9 @@ function BlogPost({
 
 
   
+           <div className="wrapper w-full min-h-screen">
 
-
-    <div className="flex container-blogpost-tres-columnas px-8 pt-[70px]">
+        <div className="flex flex-row container-blogpost-tres-columnas px-8 pt-[70px]">
 
         {/*COLUMNA LATERAL */}
         <div className="blogpost-column-1 ">
@@ -374,11 +374,11 @@ function BlogPost({
 
         </div>
 
+         </div>
 
 
 
-
-        <Top/>
+        
        
       </FullWidthLayout>
 

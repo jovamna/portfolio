@@ -35,14 +35,14 @@ function MyProject({
            <Header />
 
 
-           <div className="project-pagina mx-auto w-[100%] flex flex-row ">
+           <div className="project-pagina mx-auto w-[100%] flex lg:flex-row flex-col px-2">
 
                {/*PRIMERA COLUMNA */}
-               <div className="project-column-1 w-[18%] pr-4">
+               <div className="project-column-1 lg:w-[10%] pr-4">
                </div>
 
                {/*SEGUNDA COLUMNA */}
-               <div className="project-column-2 w-[64%] px-0">
+               <div className="project-column-2 lg:w-[80%] px-0">
                 
                <ProjectList 
                  get_project_list_page={get_project_list_page}
@@ -52,7 +52,7 @@ function MyProject({
                 </div>
             
                  {/*TERCERA COLUMA FIJA */}
-                 <div className="project-column-3 w-[18%] pl-4">
+                 <div className="project-column-3 lg:w-[10%] pl-4">
 
                   </div>
       

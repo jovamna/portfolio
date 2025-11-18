@@ -30,6 +30,9 @@ body
     /*overflow: hidden;*/
   }
 
+
+
+
   
 .cookie{
   position: fixed;
@@ -132,7 +135,7 @@ body
 }
 
 
-  
+  /*PORTADA PRINCIPAL*/
 .home-images{
   top: 0px
 }
@@ -177,11 +180,10 @@ body
   }
 }
 
-/*fin ggreetings*/
-  
- 
+
+  /*fin greetings*/
   .navbar{
-    position: fixed;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -201,9 +203,8 @@ body
     }
   }
 
-/*fin home*/
- 
-/*ABOU IMPORTANTE PARA EL SLIDER DE TEXTO*/
+  /*fin home*/
+ /*ABOUT IMPORTANTE PARA EL SLIDER DE TEXTO*/
 .subcontainer-about-movil-img .letra-dise{
  top: 140px;
   right:200px;
@@ -215,16 +216,14 @@ body
 }
 
 
-
-
-
-
 .semicirculo {
   height: 48px;
   width: 100px;
   background-color: white;
   border-radius: 50% / 100% 100% 0 0;
 }
+
+
 .semicirculo-contacto {
   height: 48px;
   width: 100px;
@@ -629,6 +628,30 @@ SOFTWARE DEVELOPMENT, WEB, DATABASE DATACIENCIA ETC*/
   font-size: 1em;
   height: 70px;
 }
+.movil-footer{
+ 
+  bottom: 0;
+ left: 0;
+  width: 100%;
+ 
+}
+
+
+
+/* FINNNNNNNNNNNN */
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

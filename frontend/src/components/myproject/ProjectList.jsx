@@ -40,7 +40,7 @@ import SmallSetPaginationProject from "../pagination/SmallSetPaginationProject";
                 
             
   
-       <div className="project-list-grid mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-2 lg:max-w-none  py-4 px-0 ">
+       <div className="project-list-grid mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 lg:max-w-none  py-4 px-0 ">
 
        
       

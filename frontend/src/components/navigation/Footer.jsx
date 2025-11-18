@@ -58,7 +58,7 @@ const navigation = {
   
 function Footer() {
     return (
-      <footer className="movil-footer bg-neutral-700 min-h-full opacity-95 items-center content-center mt-8">
+      <footer className="w-full  bottom-0 p-4  bg-neutral-700 opacity-95 ">
         <h2 id="footer-heading" className="sr-only">
           Footer
         </h2>

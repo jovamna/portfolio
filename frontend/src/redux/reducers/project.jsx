@@ -46,7 +46,7 @@ export default function project(state = initialState, action) {
         case GET_PROJECT_SUCCESS:
             return {
                 ...state,
-                project: project,
+                project: payload.project,
             }
         case GET_PROJECT_FAIL:
             return{
