@@ -1,6 +1,7 @@
 import ProjectHome from '../myproject/ProjectHome';
 import go from "../../assets/img/home/go.jpg";
 
+
 import { BiChevronsUp } from "react-icons/bi";
 import { generatePath } from 'react-router-dom';
 
@@ -53,7 +54,7 @@ function Project() {
             </svg>
 
             {/* 1 DIV ROW IGUAL AL DE COLORES DE FONDO Y GRAL DEL CONTENIDO*/}
-            <div className='project-row-movil flex flex-row w-[92%] h-[100%] mx-auto justify-between'> 
+            <div className='project-row-movil flex flex-row w-[92%] mx-auto justify-between'> 
 
                       {/*DOS CARDS GITHUB */}
                      <div className="project-h-title flex flex-col w-[75%] lg:mx-0 lg:py-3 ">
@@ -75,9 +76,9 @@ function Project() {
 
 
                       {/*IMAGEN DEL COSTADO DE LOS GTHUBS */}
-                     <div className="project-img-movil flex flex-col lg:mt-6 w-[25%] pt-[10px]">
+                     <div className="project-img-movil flex flex-col lg:mt-6 w-[25%] ">
                         <img
-                        className=" left-0 rounded-md bg-white/5  w-[100%] h-[95%] ring-1 ring-white/10"
+                        className=" left-0 rounded-md bg-white/5  w-[100%]  ring-1 ring-white/10"
                         src={go}
                         alt="App screenshot"
                      

@@ -3,7 +3,7 @@ import { SkillDetails } from "./SkillDetails";
 import { useState } from "react";
 import styled from "styled-components";
 import skillPro from "../../../assets/img/home/skillPro.png";
-import skillFond from "../../../assets/img/home/skillFond.jpg";
+import skillFond1 from "../../../assets/img/home/skillFond1.jpg";
 
 
 
@@ -162,7 +162,7 @@ export default function SkillCard() {
                     
                       <img className="skillcard-img-circle w-[100%] rounded-lg" 
                           onLoad={handleImageLoad} 
-                          src={skillFond} 
+                          src={skillFond1} 
                           alt="skillFond" 
                            />
                    </Circle >
