@@ -122,16 +122,17 @@ body
 .roboto-condensed-muckas {
   font-family: "Roboto Condensed", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 600;
-  font-style: normal;
+  font-weight: 400;
+  font-style: light;
 }
 
 
 .oswald-muckas {
   font-family: "Oswald", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 500;
-  font-style: normal;
+  font-weight: 300;
+  font-style: light;
+  letter-spacing: 1px;
 }
 
 

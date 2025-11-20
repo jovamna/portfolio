@@ -28,10 +28,11 @@ class Post(models.Model):
     blog_uuid = models.UUIDField(default=uuid.uuid4, unique=True)
     title = models.CharField(max_length=90)
     slug = models.SlugField(unique=True)
-    thumbnail = models.ImageField(upload_to=blog_directory_path, blank=True, null=True)
-    video = models.FileField(upload_to=blog_directory_path, blank=True, null=True)
     excerpt = models.CharField(max_length=140, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
+    thumbnail = models.ImageField(upload_to=blog_directory_path, blank=True, null=True)
+    video = models.FileField(upload_to=blog_directory_path, blank=True, null=True)
+    narrative = HTMLField(blank=True, null=True)
     image = models.ImageField(upload_to=blog_directory_path, blank=True, null=True)
     content = HTMLField(blank=True, null=True)  # Usando HTMLField para TinyMCE
     author =  models.CharField(max_length=255, blank=True, null=True)

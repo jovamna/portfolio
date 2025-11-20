@@ -255,23 +255,26 @@ function BlogPost({
                   </h2>   
               </div>
 
+    
+            {/*DESCRIPTION prose prose-indigo prose-lg*/}
+            <div className="oswald-muckas mt-6 text-neutral-700 lg:text-lg whitespace-pre-line">
+              {post.description}
+           </div>
 
+            {/*imageUrl*/}
 
 
                 {/**PRIMERA IMAGEN */}
-              <div className="flex  lg:[700px] items-center justify-center mx-auto">
+              <div className="flex  lg:[700px] items-center justify-center mx-auto mt-[8px]">
                 {renderMedia()}
               </div>
 
+               {/**PRIMER CONTENT */}
+              <div
+              className="oswald-muckas mt-6 text-neutral-800 lg:text-lg"
+              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.narrative) }}
+           />
 
-               
-            {/*DESCRIPTION prose prose-indigo prose-lg*/}
-            <div className="oswald-muckas   mt-6   text-neutral-600 lg:text-lg ">
-                <p className="dangerouslySetInnerHTML={{ __html: richTextFieldContent }">
-                {post.description}
-                </p>
-            </div>
-            {/*imageUrl*/}
                    
 
              {/**SEGUNDA IMAGEN */}
@@ -287,10 +290,12 @@ function BlogPost({
             </div>
 
 
-              {/*CONTENT Y HEART prose prose-indigo prose-lg*/}
-              <div className="oswald-muckas mt-6  text-neutral-600 lg:text-lg  ">
-                <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content)}} />
-              </div>
+              {/*SEGUNDO CONTENT*/}
+
+              <div
+              className="oswald-muckas mt-6  text-neutral-800 lg:text-lg"
+              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
+           />
 
             
 

@@ -53,6 +53,8 @@ function App() {
     <meta property="og:description" content="Desarrollo e-commerce full stack y creo imágenes digitales únicas con IA + edición en Photoshop. Visita mi tienda: https://muckas-store.com" />
     <meta property="og:url" content="https://www.jovamnamedina.com/" />
     <meta property="og:image" content="https://www.jovamna.medina/twitter.png"/>
+    <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
     <meta property="og:type" content="website" />
 
     {/* 3. Twitter Cards */}

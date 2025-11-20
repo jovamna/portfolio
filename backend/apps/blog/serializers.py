@@ -17,6 +17,7 @@ class PostSerializer(serializers.ModelSerializer):
             'thumbnail',
             'video',
             'description',
+            'narrative',
             'excerpt',
             'image',
             'content',

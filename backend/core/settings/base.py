@@ -64,13 +64,27 @@ THIRD_PARTY_APPS = [
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
 
 #pip install django-tinymce
+
 TINYMCE_DEFAULT_CONFIG = {
     'theme': 'silver',
-    'height': 400,
+    'height': 500,
     'menubar': False,
     'plugins': 'lists link image preview code',
-    'toolbar': 'undo redo | styleselect | bold italic | alignleft aligncenter alignright | link image | code',
+    'toolbar': (
+        'undo redo | '
+        'styleselect | '
+        'bold italic underline | '
+        'alignleft aligncenter alignright | '
+        'bullist numlist | '
+        'link image | '
+        'code'
+    ),
+    # Menú desplegable con tipos de texto (títulos)
+    'block_formats': 'Párrafo=p; Título 1=h1; Título 2=h2; Título 3=h3',
 }
+
+
+
 
 
 LOGGING = {

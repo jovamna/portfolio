@@ -8,7 +8,7 @@ class PostAdmin(admin.ModelAdmin):
     list_display = ('id', 'title' , 'slug', 'category', 'published')
     list_display_links = ('id',  )
     list_filter = ('author', 'category')
-    search_fields = ('content', )
+    search_fields = ('content', 'narrative',)
     list_per_page = 25
 
 
