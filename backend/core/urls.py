@@ -7,7 +7,6 @@ from rest_framework.documentation import include_docs_urls
 from django.contrib.sitemaps.views import sitemap
 from apps.blog.sitemaps import BlogPostSitemap
 from apps.myprojects.sitemaps import ProjectSitemap
-from apps.contacts.sitemaps import NewsletterSitemap
 from core.settings.base import SECRET_ADMIN_URL
 
 
@@ -16,7 +15,6 @@ from core.settings.base import SECRET_ADMIN_URL
 sitemaps = {
     'blog': BlogPostSitemap,
     'projects': ProjectSitemap,
-    'newsletter': NewsletterSitemap,
 }
 
 

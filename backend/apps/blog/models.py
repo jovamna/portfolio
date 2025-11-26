@@ -38,7 +38,9 @@ class Post(models.Model):
     author =  models.CharField(max_length=255, blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     published = models.DateTimeField(default=timezone.now)
+    related_products = models.ManyToManyField("self", blank=True, verbose_name='Productos relacionados', symmetrical=False)
     status = models.CharField(max_length=10, choices=options, default='draft')
+    updated_at = models.DateTimeField(auto_now=True)
     views = models.IntegerField(default=0, blank=True, verbose_name="Vistas")
     objects =  models.Manager()  # default manager el manager que siempre se usa
     post_objects = PostObjects()  # custom manager

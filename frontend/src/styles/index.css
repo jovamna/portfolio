@@ -356,7 +356,7 @@ body
 
 .blogpost-column-1,
 .blogpost-column-3 {
-  width: 15%;
+  width: 10%;
   padding-top: 80px;
   box-sizing: border-box;
   position: sticky;
@@ -366,8 +366,8 @@ body
 
 /*max-height: 80vh; /* Ajusta la altura máxima según tus necesidades */
 .blogpost-column-2 {
-  width: 70%;
-  padding: 20px;
+  width: 80%;
+  padding: 10px;
   box-sizing: border-box;
   overflow-y: scroll;
   /*scrollbar-width: thin;
@@ -2711,6 +2711,10 @@ body
  
   }
 
+  .blogpost-column-2{
+    width: 100%;
+  }
+
   .container-movil-login-registro{
     width: 44%;
     height: 40px;
@@ -4400,6 +4404,96 @@ margin-top: 10px;
 
 
 }
+
+
+
+@media only screen and (min-width: 2160px) {
+    /* **Estilos específicos para 4K (3840px y más)** */
+
+ 
+
+   
+
+    
+
+    .ipad-greeting{
+      width: 500px;
+      margin-left: 230px;
+      margin-top: 200px;
+      
+    }
+}
+
+@media only screen and (min-width: 2560px) {
+    /* **Estilos específicos para 4K (3840px y más)** */
+
+   
+.base-image{
+    width: 100%;
+    height: 1470px;
+    object-fit: cover;
+  
+   }
+
+   .hover-image{
+    width: 100%;
+    height: 1470px;
+    object-fit: cover;
+   }
+
+   .home-images{
+    height: 1470px;
+   }
+   
+
+    .ipad-greeting{
+      width: 500px;
+      margin-left: 300px;
+      margin-top: 200px;
+     
+    }
+}
+
+@media only screen and (min-width: 3840px) {
+    /* **Estilos específicos para 4K (3840px y más)** */
+
+   .base-image{
+    width: 100%;
+    height: 2080px;
+    object-fit: cover;
+  
+   }
+
+   .hover-image{
+    width: 100%;
+    height: 2080px;
+    object-fit: cover;
+   }
+
+   .home-images{
+    height: 2080px;
+   }
+
+   
+    .ipad-greeting{
+      display: block;
+      margin-left: 370px;
+    }
+
+      .ipad-greeting h1{
+    font-size: 3em;
+    }
+
+      .ipad-greeting p{
+      font-size: 1.4em;
+    }
+
+    .texto-animado-developer{
+      width: 100%;
+    }
+
+}
+
 
 
 

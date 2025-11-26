@@ -45,7 +45,7 @@ return (
             </h1>
             <p className="border-gray-300 border-2 text-white font-bold py-2 px-4 rounded">
             <a href="/" className="hover:text-gray-400">
-            HISTORIAS PARA CONTAR
+            AI & Code Chronicles
             </a>
             </p>
             </div>

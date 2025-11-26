@@ -8,6 +8,6 @@ class ProjectSitemap(Sitemap):
 
     def items(self):
         return Project.objects.all()
-
-    def lastmod(self, obj):
-        return obj.updated_at
+    
+    def location(self, obj):
+        return f'/myproject/project/{obj.slug}'

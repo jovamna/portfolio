@@ -2,7 +2,6 @@ import LoadingCard from "../../../components/loaders/LoadingCard";
 import FullWidthLayout from "../../../hocs/FullWidthLayout";
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
 import axios from "axios"
 import { setAlert } from "../../../redux/actions/alert";
 import { get_blog } from "../../../redux/actions/blog";
@@ -18,7 +17,7 @@ import enviarlo from '../../../assets/img/users/enviarlo.png';
 import vistas from '../../../assets/img/vistas.png';
 import "../../../styles/index.css";
 import { Helmet } from 'react-helmet-async';
-
+import { Link, useParams} from "react-router-dom";
 
 
 function BlogPost({
@@ -26,7 +25,9 @@ function BlogPost({
     post,
     get_reviews,
     setAlert,
-    title
+    title,
+    currentPost,
+    allPosts
 }){
     const params = useParams()
     const slug = params.slug
@@ -37,7 +38,7 @@ function BlogPost({
         window.scrollTo(0,0)
         get_blog(slug)
         get_reviews(slug)   
-    },[])
+    },[slug])
 
     //URL PARA LAS IMAGENES QUE ESTAN EN LA CARPETA MEDIA LOCALIZEN EN LA CARPETA DEL BACKEND
     if (!post) {
@@ -217,17 +218,17 @@ function BlogPost({
   
            <div className="wrapper w-full min-h-screen">
 
-        <div className="flex flex-row container-blogpost-tres-columnas px-8 pt-[70px]">
+        <div className="flex lg:flex-row xl:flex-row flex-col container-blogpost-tres-columnas px-2 pt-[70px]">
 
         {/*COLUMNA LATERAL */}
-        <div className="blogpost-column-1 ">
+        <div className="blogpost-column-1 w-[100%]">
         </div>
         {/*FIN COLUMNA LATERAL */}
 
 
 
         {/*COLUMNA CENTRO */}
-        <div className="blogpost-column-2">
+        <div className="blogpost-column-2 w-[100%] px-0">
         {/*POST DETAIL TITULO, DESCRIPTION, IMAGE, CONTENT*/}
         {
           post ?
@@ -257,7 +258,7 @@ function BlogPost({
 
     
             {/*DESCRIPTION prose prose-indigo prose-lg*/}
-            <div className="oswald-muckas mt-6 text-neutral-700 lg:text-lg whitespace-pre-line">
+            <div className="oswald-muckas mt-6 text-black lg:text-lg whitespace-pre-line">
               {post.description}
            </div>
 
@@ -271,7 +272,7 @@ function BlogPost({
 
                {/**PRIMER CONTENT */}
               <div
-              className="oswald-muckas mt-6 text-neutral-800 lg:text-lg"
+              className="oswald-muckas mt-6 text-black lg:text-lg"
               dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.narrative) }}
            />
 
@@ -292,12 +293,35 @@ function BlogPost({
 
               {/*SEGUNDO CONTENT*/}
 
-              <div
-              className="oswald-muckas mt-6  text-neutral-800 lg:text-lg"
+             <div
+              className="oswald-muckas mt-6  text-black lg:text-lg"
               dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
            />
 
-            
+              {/**PRODUCTOS RELACIONADOS */}
+                 <div className="lg:mt-[2px] md:w-[100%] lg:w-[100%] w-[100%]">
+                  {/* Mostrar título solo si hay relacionados */}
+                  {post.related_products?.length > 0 && (
+                    <h3 className="oswald-muckas mb-[4px] font-semibold lg:text-lg text-black text-base underline underline-offset-8">
+                      Posts relacionados
+                      </h3>
+                    )}
+                    {/* Listado de productos relacionados */}
+                    {post.related_products.map((rp) => (
+                      <div key={rp.slug} className="lg:mt-[20px] mt-[10px]">
+                        <Link to={`/blog/post/${rp.slug}`}>
+                        <h4 className="hover:underline cursor-pointer text-sm lg:text-sm text-black">
+                          - { rp.title}
+                        </h4>
+                        </Link>
+                      </div>
+                    ))}
+                 </div>
+                 {/**FIN PRODUCTOS RELACIONADOS */}
+
+
+
+
 
               {/*CATEGORIA*/}
               <span className="block text-xs font-mono text-orange-400 text-center my-[50px] font-bold tracking-wide uppercase">
@@ -372,7 +396,7 @@ function BlogPost({
   
 
              {/*COLUMNA LATERAL */}
-             <div className="blogpost-column-3 px-2 ">
+             <div className="blogpost-column-3 w-[100%]">
             
              </div>
 
