@@ -1,5 +1,3 @@
-import NavbarProject from "../../../components/navigation/NavbarProject";
-import Footer from "../../../components/navigation/Footer";
 import "../../../styles/index.css";
 
 import BlogList from "../../../components/blog/BlogList";
@@ -71,14 +69,14 @@ function Blog({
                 </div>
 
                   {/*max-w-lg limita el ancho y lo pone a lado left*/}
-                 <div className="segmento-header-categoria  relative inset-x-0  top-[0] bottom-10 bg-opacity-50  w-[100%] text-white   z-10">
+                 <div className="segmento-header-categoria  inset-x-0  top-0 bg-opacity-50  w-[100%] text-white z-10">
             
                  <CategoriesBlogHeader />
                  </div>
 
 
                  {/*el violet son nombres de la pagination*/}
-                 <div className="blog-list-top">
+                 <div className="blog-list-top flex-1 py-2">
                  <BlogList 
                  get_blog_list_page={get_blog_list_page} 
                  blog_list={blog_list&&blog_list} 

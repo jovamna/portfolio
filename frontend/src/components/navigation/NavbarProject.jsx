@@ -181,7 +181,7 @@ const guestLinks = (
             </div>
 
             <div className=' '>
-            <Link to="/login" className="nav-item hover:text-gray-500 lg:text-sm sm:text-xs text-neutral-600 font-semibold">
+            <Link to="/login" className="nav-item hover:text-gray-500 lg:text-sm sm:text-xs text-xs text-neutral-600 font-semibold">
               <p className=''>
               Inicia sesion 
               </p>
@@ -247,24 +247,24 @@ const guestLinks = (
   return (
    
     <>
-   <div className="navbar-project-movil z-index fixed w-full bg-white opacity-95 mx-auto max-w-7xl px-4 lg:px-8 ">
+   <div className="navbar-project-movil z-index fixed w-full bg-white opacity-95 px-4 lg:px-8 ">
       {/*POPOVER PRINCIPAL */}
-      <Popover className="navbar-project-movil-popover ">
+      <Popover className="navbar-project-movil-popover bg-white lg:h-[3.5em] xl:h-[3.7em] h-[3.5em]">
 
 
         {/* 1 CONTAINER PRINCIPAL 1 DEL NAVBAR DEL PC Y  MENU MOVIL ESCONDIDO*/}
-           <div className="navbar-logo flex items-center justify-between md:justify-start w-full h-[3em]">
+           <div className="navbar-logo flex items-center justify-between md:justify-start w-full h-[3.5em]">
 
 
 
 
                {/*PARA QUE EL ICONO SE CENTRE inline-flex items-center */}
                {/*LOGO DEL MENU DE NAVEGACION ORDENADORY MOVIL */}
-               <div className="flex logo w-[26.7%] h-[2.5em]">
+               <div className="flex logo w-[26.7%] h-[2.5em] ">
                
                <span className="sr-only">Portafolio Jovamna Medina</span>
                <NavLink to= "/">
-              <img className="image-logo lg:h-[65px] flex"
+               <img className="image-logo lg:h-[60px] flex"
                src={logo}
                alt="logo"
                //width={150}
@@ -278,7 +278,7 @@ const guestLinks = (
  
         {/*MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL */}
         {/*ICONO QUE SE VE SOLO EN MOVIL Y ESTA DENTRO DEL CONTAINER DEL PC. -my-2 -mr-2 rounded-md*/}
-        <div className="menu-movil md:hidden h-[2.5em] flex flex-row items-center justify-end w-[65%]">
+        <div className="menu-movil md:hidden h-[2.5em] flex flex-row  justify-end w-[65%] ">
                 {/*LOGIN Y LOGOUT LOGIN Y LOGOUT */} 
          
                {
@@ -293,17 +293,23 @@ const guestLinks = (
 
 
                 {/*BOTON LUPA DEL BUSCADOR */}
-              
-                   <MagnifyingGlassIcon className="icon-search h-[20px] w-[20px] text-zinc-800 hover:text-gray-400 mr-4 " aria-hidden="true" />
+                <div className="search-movil">
+                   <MagnifyingGlassIcon className="icon-search h-[20px] w-[20px]  text-zinc-800 hover:text-gray-400" aria-hidden="true" />
+
+                </div>
+                  
                 
                 {/* FIN BUSCADOR */}
-
               
-                 <BiHome className={classNames(
+                 <div>
+                   <BiHome className={classNames(
                         open ? 'text-zinc-800' : 'text-zinc-600',
                         'h-[22px] w-[22px] group-hover:text-gray-500  icon-bihome'
                       )}
                       aria-hidden="true"/>
+
+                 </div>
+                
                 
 
 

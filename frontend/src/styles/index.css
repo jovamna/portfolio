@@ -356,8 +356,6 @@ body
 
 .blogpost-column-1,
 .blogpost-column-3 {
-  width: 10%;
-  padding-top: 80px;
   box-sizing: border-box;
   position: sticky;
   top: 0;
@@ -366,8 +364,6 @@ body
 
 /*max-height: 80vh; /* Ajusta la altura máxima según tus necesidades */
 .blogpost-column-2 {
-  width: 80%;
-  padding: 10px;
   box-sizing: border-box;
   overflow-y: scroll;
   /*scrollbar-width: thin;
@@ -765,9 +761,9 @@ body
   .navbar{
     width: 100%;
     height: 40px;
-  
   }
   
+  /*nNAVBAR DE HOME*/
   .navbar .navbar-menu{
   display: flex;
   flex-direction: row;
@@ -780,54 +776,60 @@ body
    .navbar-menu .navbar-logo{
     width: 100%;
     height: 36px;
- 
    }
 
- 
+ /*FIN NAVBAR DE HOME*/
  
    /*navbar del projecto*/
   .navbar-project-movil{
    width: 100%;
-   height: 40px;
+   height: 44px;
+  padding-left: 4px;
+   padding-right: 4px;
+  
   }
 
-  .navbar-project-movil-popover{
+  .navbar-project-movil .navbar-project-movil-popover{
    width: 100%;
-   height: 36px;
-   padding-left: 0px;
-   padding-right: 0px;
+   height: 40px;
    margin-top: 3px;
     }
 
-    .navbar-logo{
+   .navbar-project-movil-popover .navbar-logo{
       width: 100%;
-      height: 36px;
-      padding-left: 0px;
-      padding-right: 0px;
+      height: 40px;
+      
      }
   
-     .logo{
+    .navbar-project-movil-popover .logo{
       width: 30%;
-      height: 36px;
+      height: 40px;
      }
   
-     .logo img{
+    .navbar-project-movil-popover .logo img{
     width: 100%;
     height: auto;
     }
   
      /*menu del movil*/
-    .menu-movil{
-      width: 70%;
-      height: 36px;
-      padding-left: 0px;
-      padding-right: 0px;
+       .navbar-project-movil-popover .menu-movil{
+        display: flex;
+        flex-direction: row;
+        justify-items: flex-start;
+        align-items: flex-start;
+        width: 70%;
+        height: 36px;
+        padding-left: 0px;
+        padding-right: 0px;
       }
 
 
       /*container cuando no hay nadie activo*/
-      .container-movil-login-registro{
-        height: 36px;
+  .navbar-project-movil-popover .menu-movil .container-movil-login-registro{
+    display: inline-flex;
+    width: 50%;
+    height: 36px;
+    align-items: center;
       }
 
 
@@ -854,9 +856,12 @@ body
         margin-left: -2px;
       }
 
-      .icon-search-bihome{
+     .navbar-project-movil-popover  .menu-movil .icon-search-bihome{
         height: 36px;
-        width: 28%;
+        width: 40%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
       }
     
       .icon-search{
@@ -2007,6 +2012,15 @@ width: 100%;
  height: 160px;
  }
 }
+/*IPHONE SE*/
+@media only screen and (min-width: 375px) {
+
+   .navbar-project-movil-popover .logo img{
+    width: 70%;
+   }
+ 
+}
+
 
 
 /*IPHONE 12 PRO vigilar*/
@@ -3547,7 +3561,7 @@ body
   .wrapper {
     display: flex;
     flex-direction: column;
-    min-height: 100svh;
+    min-height: 100vh;
     width: 100%;
     padding-left: 0px;
     padding-right: 0px;
@@ -3955,13 +3969,11 @@ body
   }
 
  .responsive-altura-blogcard {
-  max-width: 1000px;
-  width: 100%;
+
  }
 
  .bloglist-blogcard-grid {
-  max-width: 1000px;
-  width: 100%;
+ 
  }
 
  .responsive-blogcard-title-excerpt{
@@ -4114,7 +4126,7 @@ body
     .wrapper {
       display: flex;
       flex-direction: column;
-      min-height: 100svh;
+      min-height: 100vh;
       width: 100%;
       /*overflow: hidden;*/
     }
@@ -4261,10 +4273,6 @@ body
 }
 
 
-/*BLOG LIST*/
-.responsive-blogcard-title-excerpt{
-  margin-top: -30px;
-}
 
 /*BLOG DETAIL*/
 
@@ -4331,17 +4339,17 @@ body
   }
 
 .navbar{
-  height: 62px;
- 
+  height: 3.5em;
+
 }
 
 .navbar-logo{
-  height: 60px;
+  height: 3.3em;
  
 }
 
 .logo{
-  height: 60px;
+  height: 3.4em;
  
 }
 
@@ -4351,16 +4359,16 @@ body
 }
 
 .menu-movil .icon-search{
-width: 32px;
-height: 31px;
-margin-top: 10px;
+width: 28px;
+height: 28px;
+
 
 }
 
 .menu-movil .icon-bihome{
-  width: 32px;
-height: 30px;
-margin-top: 10px;
+  width: 28px;
+height: 28px;
+
 
 }
 
@@ -4411,23 +4419,21 @@ margin-top: 10px;
     /* **Estilos específicos para 4K (3840px y más)** */
 
  
-
-   
-
-    
-
     .ipad-greeting{
       width: 500px;
       margin-left: 230px;
       margin-top: 200px;
-      
     }
+
+     /*BLOGPOST*/
+    .movil-redaccion-blog-post .parrafo{
+  font-size: 1.4em;
+     }
+
 }
 
 @media only screen and (min-width: 2560px) {
-    /* **Estilos específicos para 4K (3840px y más)** */
 
-   
 .base-image{
     width: 100%;
     height: 1470px;
@@ -4452,10 +4458,15 @@ margin-top: 10px;
       margin-top: 200px;
      
     }
+
+     /*BLOGPOST*/
+    .movil-redaccion-blog-post .parrafo{
+  font-size: 1.4em;
+     }
+
 }
 
 @media only screen and (min-width: 3840px) {
-    /* **Estilos específicos para 4K (3840px y más)** */
 
    .base-image{
     width: 100%;
@@ -4475,8 +4486,10 @@ margin-top: 10px;
    }
 
    
-    .ipad-greeting{
+    .home-images .ipad-greeting{
       display: block;
+      max-width: 750px;
+      width: 100%;
       margin-left: 370px;
     }
 
@@ -4485,12 +4498,25 @@ margin-top: 10px;
     }
 
       .ipad-greeting p{
-      font-size: 1.4em;
+      font-size: 1.8em;
     }
 
     .texto-animado-developer{
       width: 100%;
     }
+
+    .responsive-blogcard-title-excerpt h1{
+      font-size: 3em;
+    }
+      /*la description del post*/
+     .responsive-blogcard-title-excerpt .excerpt{
+      font-size: 2em;
+     }
+
+     /*BLOGPOST*/
+    .movil-redaccion-blog-post .parrafo{
+  font-size: 1.4em;
+     }
 
 }
 

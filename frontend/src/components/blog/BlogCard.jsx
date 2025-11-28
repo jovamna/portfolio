@@ -28,63 +28,58 @@ function BlogCard(data){
  
     console.log(URL);
 
-  
     const videoUrl = `${URL}${post.video}`;
     const thumbnailUrl = `${URL}${post.thumbnail}`;
   
+    //*md:aspect-[4/3] /* iPad vertical */lg:aspect-[16/9] /* pantallas grandes */
 
+  // Función para renderizar el componente de imagen o video
+  const renderMedia = () => {
+  // Solo IMAGEN
+  if (post.thumbnail && !post.video) {
+    return (
+      <div className="w-full overflow-hidden aspect-[16/9] sm:aspect-[16/9] md:aspect-[4/3] lg:aspect-[16/9]">
 
-    
+        <img 
+          src={thumbnailUrl}
+          alt="post"
+          className="w-full h-full object-cover"
+        />
+      </div>
+    );
+  }
 
+  // Solo VIDEO
+  if (post.video && !post.thumbnail) {
+    return (
+      <div className="w-full aspect-video overflow-hidden bg-black">
+        <video
+          src={videoUrl}
+          controls
+          className="w-full h-full object-cover"
+          onError={(e) => console.error("Error al cargar el video:", e.target.error)}
+        />
+      </div>
+    );
+  }
 
-    // Función para renderizar el componente de imagen o video
-    const renderMedia = () => {
-    
-        if (post.thumbnail && !post.video) {
-            return (
-                   <div className="blog-image relative flex flex-col justify-center items-center h-[40vh] ">
-                   {/* <div className="img-blog w-full min-h-60 lg:h-60 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:aspect-none">*/}
-                   
-                   <img src={thumbnailUrl} 
-                   alt="post" 
-                   className="w-[100%] object-cover z-0 "/>
-                   </div>
-                   );
-        } else if (post.video&& !post.thumbnail) {//para el border radious de izquierda y derecha del top className="rounded-t-2xl"
-          return <div className="bg-green-400 h-[55%]"  >
-               <video 
-                 src={videoUrl} 
-                 controls width="100%" 
-                 //height="auto" 
-                 className="blog-image w-[100%] h-[40vh]  inset-0 object-cover z-0 "
-                 onError={(e) => {
-                   console.error("Error al cargar el video:", e.target.error);
-                   }}
-                 />;
+  // VIDEO + THUMBNAIL → prioriza el video
+  if (post.thumbnail && post.video) {
+    return (
+      <div className="w-full aspect-video overflow-hidden bg-black">
+        <video
+          src={videoUrl}
+          controls
+          className="w-full h-full object-cover"
+        />
+      </div>
+    );
+  }
 
-          </div>
-       
+  // Nada
+  return null;
+};
 
-        } else if (post.thumbnail && post.video) {
-
-          return <div className="bg-green-400 h-[55%] ">
-             <video 
-                 src={videoUrl} 
-                 controls width="100%" 
-                 //height="auto" 
-                 className="blog-image bg-gray-200  w-[100%] h-[40vh] inset-0 object-cover z-0 " 
-                 />;
-
-
-          </div>
-         
-
-        } else {
-                // Si no hay imagen ni video, no se muestra nada
-                return null;
-                }
-                   
-      };
           //FIN Función para renderizar el componente de imagen o video       
              
 
@@ -92,24 +87,24 @@ function BlogCard(data){
       return (
               <>
               {post ? (
-                     <div className="responsive-altura-blogcard  flex flex-col hover:bg-gray-100 hover:opacity-90 opacity-100 border-b-2 border-zinc-300">
+                     <div className="responsive-altura-blogcard  flex lg:flex-col flex-row bg-neutral-300 hover:bg-gray-100 hover:opacity-90 opacity-100 border-b-2 border-zinc-300 lg:py-4 py-2">
                      
                         {/*1 CONTAINER DE IIMAGEN O VIDEO*/}
-                        <div className=" responsive-altura-img-blog">   
+                        <div className=" responsive-altura-img-blog aspect-video lg:w-full w-[60%] overflow-hidden">   
                         {renderMedia()}
                         </div>
                             
 
 
                          {/*2 CONTAINER DE TITULO EXRCEPT LEER MAS--*/}
-                         <div className=" flex flex-col relative responsive-blogcard-title-excerpt  lg:mt-[10px] ">
+                         <div className=" flex flex-col relative responsive-blogcard-title-excerpt lg:w-full w-[40%] lg:mt-[10px] ">
 
                               {/*POST TITULO  QUITAR SI SE QUIERE  padding izq y derech px-4 */}
                               <Link 
                               to={`/blog/post/${post.slug}`} 
                               className="block px-2"
                               >
-                               <h1 className=" oswald-muckas  text-center font-extrabold text-black dark:text-white tracking-wider lg:text-2xl sm:text-xl  md:text-center" dangerouslySetInnerHTML={{
+                               <h1 className=" oswald-muckas  text-center font-extrabold text-black dark:text-white tracking-wider lg:text-xl text-xs sm:text-xl  md:text-center" dangerouslySetInnerHTML={{
                                    __html:
                                   post.excerpt && DOMPurify.sanitize(post.title.length) > 50
                                     ? DOMPurify.sanitize(post.title.slice(0, 50)) 
@@ -122,14 +117,14 @@ function BlogCard(data){
                             
                           
                                  {/*POST LA CATEGORIA */}
-                                 <div className=" flex items-center justify-center">
+                                 <div className=" flex items-center justify-center ">
                                      <Link 
                                      to={`/categories/${post.category.slug}`} 
                                      className="inline-block"
                                      >
 
                                     
-                                      <span className="lg:text-xs text-xs">
+                                      <span className="lg:text-xs text-[0.5em]">
                                       {post.category.name}
                                       </span>
 
@@ -143,25 +138,28 @@ function BlogCard(data){
                                  to={`/blog/post/${post.slug}`} 
                                  className="block"
                                  >
-                                 <div
-                                  className="oswald-muckas px-2 mt-2 text-sm dark:text-dark-txt text-center  text-neutral-700 tracking-wide font-light"
+                                 <p
+                                  className="oswald-muckas excerpt  px-2 mt-2 text-[0.8em] dark:text-dark-txt text-center  text-neutral-700 tracking-wide font-light"
                                    dangerouslySetInnerHTML={{
                                    __html:
-                                  post.excerpt && DOMPurify.sanitize(post.excerpt.length) > 80
-                                    ? DOMPurify.sanitize(post.excerpt.slice(0, 80)) + "..."
+                                  post.excerpt && DOMPurify.sanitize(post.excerpt.length) > 50
+                                    ? DOMPurify.sanitize(post.excerpt.slice(0, 50)) + "..."
                                     : post.excerpt && DOMPurify.sanitize(post.excerpt),
                                    }}
                                  />
                                   </Link>
+
+
+
                   
                        
                    
-                                  <div className=" flex items-center justify-center pb-4">
+                                  <div className=" flex items-center justify-center">
                                     <Link 
                                     to={`/blog/post/${post.slug}`} 
                                     className="block"
                                     >
-                                    <p className="lg:text-base kaushan text-sm text-zinc-700 font-extrabold hover:opacity-75">Leer mas</p>
+                                    <p className="lg:text-base kaushan text-[0.7em] text-zinc-700 font-extrabold hover:opacity-75">Leer mas</p>
                                    </Link>
                                   </div>
  

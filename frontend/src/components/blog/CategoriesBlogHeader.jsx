@@ -56,9 +56,9 @@ function CategoriesBlogList ({
 
                      
 
-                      <span className="blog-header-category-name relative z-2 text-center lg:text-base text-xs oswald-muckas  font-bold text-black italic mt-4 ">
+                      <p className="blog-header-category-name relative z-2 text-center lg:text-base text-xs oswald-muckas  font-bold text-black italic ">
                         {category.name}
-                      </span>
+                      </p>
 
 
 

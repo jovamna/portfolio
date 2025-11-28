@@ -175,7 +175,7 @@ function Footer() {
              
             <div className="movil-footer-pie mt-4 lg:py-2">   
               <p className="movil-footer-pie-p  text-sm text-gray-400 md:mt-0 md:order-1">
-              &copy; 2023 Portfolio Jovamna Medina , Inc. All rights reserved.
+              &copy; 2025 Portfolio Jovamna Medina , Inc. All rights reserved.
              </p>
             </div>
       </div>

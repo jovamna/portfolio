@@ -30,43 +30,32 @@ function BlogList({
 
     
     return(
-        //bg-neutal-50 COLOR FONDO PARA EL SEGMENTO DE LOS CARDS POST LIST ESTA EN BLOG
-        <div className="pt-10 max-w-7xl mx-auto  px-4 sm:px-6  lg:px-8">
-            {
-            blog_list ?
-            <>
-            {/* <div className="relative px-4 sm:px-6  lg:px-8">*/}
+   
+      <div className=" w-full px-4 sm:px-6 lg:px-8">
+          {
+          blog_list ?
+          <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {blog_list.map(post => (
+               <BlogCard key={post.slug} data={post} />
+            ))}
+          </div>  
+          
+    
 
-                  
-                     {/*POSTS CON GRID,  GAP PARA ESPACIO HORIZONTAL X, O VERTICAL Y LOS POSTS DE LA PAGINATION pb-16 */}
-                     <div className="bloglist-blogcard-grid max-w-lg mx-auto grid gap-12 lg:grid-cols-3 md:grid-cols-2 gap-y-2 lg:max-w-none ">
-                        {
-                        blog_list.map(post=>(
-                            <BlogCard 
-                            key={post.slug} 
-                            data={post}/>
-                        ))
-                        }
-                     </div>
-
-                    <SmallSetPaginationBlog 
-                        get_blog_list_page={get_blog_list_page} 
-                        blog_list={blog_list} 
-                        count={count}
-                        next={next}
-                        previous={previous}
-                        />
-                
+      <SmallSetPaginationBlog 
+        get_blog_list_page={get_blog_list_page} 
+        blog_list={blog_list} 
+        count={count}
+        next={next}
+        previous={previous}/>
 
 
-
-          {  /* </div>*/}
-            </>
-            :
-            <LoadingFullWidth/>
-            }
-        </div>
-
+    </>
+    :
+    <LoadingFullWidth />
+  }
+</div>
 
 
 

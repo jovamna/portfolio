@@ -3,9 +3,9 @@ from rest_framework.pagination import PageNumberPagination
 #PAGINATTION DEL BLOG
 class SmallSetPagination(PageNumberPagination):
     page_query_param = 'p'
-    page_size = 6
+    page_size = 16
     page_size_query_param = 'page_size'
-    max_page_size = 6
+    max_page_size = 16
 
 
 class MediumSetPagination(PageNumberPagination):

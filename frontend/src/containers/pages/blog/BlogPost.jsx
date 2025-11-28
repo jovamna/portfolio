@@ -66,7 +66,7 @@ function BlogPost({
     const renderMedia = () => {
       if (post.thumbnail && !post.video) {
         return (
-                 <div className="movil-portada-subcaja lg:w-[700px] ">
+                 <div className="movil-portada-subcaja lg:w-full ">
                  <img 
                  src={thumbnailUrl} 
                  
@@ -218,22 +218,25 @@ function BlogPost({
   
            <div className="wrapper w-full min-h-screen">
 
+       
+
+            
+
         <div className="flex lg:flex-row xl:flex-row flex-col container-blogpost-tres-columnas px-2 pt-[70px]">
+        
 
         {/*COLUMNA LATERAL */}
-        <div className="blogpost-column-1 w-[100%]">
+        <div className="blogpost-column-1 w-[100%] lg:w-[18%]">
         </div>
         {/*FIN COLUMNA LATERAL */}
 
 
 
         {/*COLUMNA CENTRO */}
-        <div className="blogpost-column-2 w-[100%] px-0">
+        <div className="blogpost-column-2 w-[100%] lg-[64%] px-0">
         {/*POST DETAIL TITULO, DESCRIPTION, IMAGE, CONTENT*/}
         {
           post ?
-
-          
             //CONTAINER DE CATEGORIA TITULO DESCRPITON
             //prose prose-indigo prose-lg 
             <div className="movil-redaccion-blog-post relative text-gray-500 mx-auto font-gilroy-regular">
@@ -256,23 +259,26 @@ function BlogPost({
                   </h2>   
               </div>
 
+
+                 {/**PRIMERA IMAGEN */}
+              <div className="flex  items-center justify-center mx-auto mt-[8px]">
+                {renderMedia()}
+              </div>
+
+
     
             {/*DESCRIPTION prose prose-indigo prose-lg*/}
-            <div className="oswald-muckas mt-6 text-black lg:text-lg whitespace-pre-line">
+            <div className="oswald-muckas parrafo mt-6 text-black lg:text-lg  whitespace-pre-line">
               {post.description}
            </div>
 
             {/*imageUrl*/}
 
 
-                {/**PRIMERA IMAGEN */}
-              <div className="flex  lg:[700px] items-center justify-center mx-auto mt-[8px]">
-                {renderMedia()}
-              </div>
-
+             
                {/**PRIMER CONTENT */}
               <div
-              className="oswald-muckas mt-6 text-black lg:text-lg"
+              className="oswald-muckas parrafo mt-6 text-black lg:text-lg"
               dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.narrative) }}
            />
 
@@ -294,7 +300,7 @@ function BlogPost({
               {/*SEGUNDO CONTENT*/}
 
              <div
-              className="oswald-muckas mt-6  text-black lg:text-lg"
+              className="oswald-muckas parrafo mt-6  text-black lg:text-lg"
               dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
            />
 
@@ -396,7 +402,7 @@ function BlogPost({
   
 
              {/*COLUMNA LATERAL */}
-             <div className="blogpost-column-3 w-[100%]">
+             <div className="blogpost-column-3 w-[100%] lg:w-[18%] ">
             
              </div>
 

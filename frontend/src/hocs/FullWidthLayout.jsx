@@ -24,11 +24,14 @@ const FullWidthLayout = (props) => {
       
 
     return (
-        <div>
+        <div className="min-h-screen flex flex-col">
             <NavbarProject/>
-           
-            {props.children}
-            <Footer/>
+             <main className="flex-1 flex flex-col">
+              {props.children}
+
+             </main>
+            
+            <Footer className="mt-auto"/>
         </div>
     );
 };

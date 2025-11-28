@@ -178,24 +178,24 @@ function Navbar({
 
   return (
      //{/* CONTAINER PRINCIPAL 1 DEL NAVBAR DEL PC Y MOVIL  sm:px-6 */}
-    <div className="navbar z-index fixed w-full  bg-white opacity-95 mx-auto max-w-7xl px-4 lg:px-8">
+    <div className="navbar z-index fixed w-full  lg:w-full xl:w-[100%] bg-white opacity-95 px-4 lg:px-8">
 
       {/* CONTAINER GUIA ENGLOBA MENU GRANDE Y MENU MOVIL*/}
-      <Popover className="navbar-menu  bg-white">
+      <Popover className="navbar-menu  bg-white lg:h-[3.5em] xl:h-[3.7em] h-[3.5em]">
 
 
    
           
          {/* 1 CONTAINER PRINCIPAL CONTIENE DEL MENU DE PANTLLA INCLUYE SOLO EL BOTON ICONO DEL MENU MOVIL QUE ESTA OCULTO */}
          {/*IMPORTANTE EN EL CSS INDEX PONER LA ALTURA HEIGHT 50 con py-7 EL MENU SE HACE MAS LARGO*/}
-          <div className="navbar-logo flex items-center justify-between md:justify-start w-full h-[3em]">
+          <div className="navbar-logo flex items-center justify-between md:justify-start w-full h-[3.5em]">
 
          
              {/*LOGO DEL MENU ORDENADOR Y MOVIL sm:w-20 md:w-24 lg:w-32 */}
              {/*PARA QUE EL ICONO SE CENTRE inline-flex items-center w-1/4*/}
               <div className="flex logo w-[26.7%] h-[2.5em]">
             <a href="/">
-            <img className="image-logo lg:h-[65px] flex"
+            <img className="image-logo lg:h-[60px] flex"
             src={logo}
             alt="logo"
             //width={150}

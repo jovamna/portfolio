@@ -6,7 +6,7 @@ import {BellIcon} from '@heroicons/react/24/outline'
 
 function SmallSetPaginationBlog({get_blog_list_page, blog_list, count}){
   const [active, setActive] = useState(1);
-  const [listingsPerPage, setListingsPerPage] = useState(6);
+  const [listingsPerPage, setListingsPerPage] = useState(16);
   const [currentPage, setCurrentPage] = useState(1);
 
   const visitPage = (page) => {
@@ -26,7 +26,7 @@ function SmallSetPaginationBlog({get_blog_list_page, blog_list, count}){
   };
 
   const next_number = () => {window.scrollTo(0, 0);
-    if (currentPage !== Math.ceil(blog_list.length/3)) {
+    if (currentPage !== Math.ceil(count / listingsPerPage)) {
         setCurrentPage(currentPage+1);
         setActive(currentPage+1);
         get_blog_list_page(currentPage+1)
