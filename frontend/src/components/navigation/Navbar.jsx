@@ -78,12 +78,12 @@ function BlogListNavbar(data){
         <>
             <NavLink 
             to={`/blog/post/${post.slug}`} 
-            className="block "
+            className="block pb-2 mt-2"
             >
-                <p className='truncate text-gray-200 text-sm hover:text-black hover:bg-white '>
-                " {post.excerpt}" 
+                <p className='truncate text-black text-sm hover:text-black hover:bg-white '>
+                 {post.excerpt}
                 </p>
-                <p className='text-gray-100 text-xs hover:text-black hover:bg-white mb-4'>leer mas</p>
+                  <p className='text-black hover:bg-gray-500 text-sm  hover:text-orange-500'>leer mas</p>
             </NavLink>   
           </>
        )
@@ -127,47 +127,47 @@ function Navbar({
 
 // lista de posts
   const renderBlogList = (blog_list) => {
-    return (
-      <div className="bg-white w-[100%] px-4">
-          <h3 className="text-sm underline underline-offset-4 pt-4 text-black font-extrabold">
-            Publicaciones Recientes:
-            </h3>
+      return (
+        <div className="bg-white px-4 w-[100%]">
+            <h3 className="text-sm underline underline-offset-4 pt-4 text-black font-extrabold">
+              Publicaciones Recientes:
+              </h3>
+             
+            <ul role="list" className="">
+                
            
-          <ul role="list" className="">
-              
-         
-            {blog_list.slice(0, blog_list.length > 2 ? 2 : blog_list.length).map(post => (
-               <li key={post.slug} className="py-2">   
-                <Link 
-               to={`/blog/post/${post.slug}`} 
-               className="block"
-               >
-
-               <p className='hover:bg-gray-500 text-sm text-black truncate ..'>
-              {post.excerpt && post.excerpt
-              .split(' ') // Dividir el texto en palabras NO FUNCIONO
-              .slice(0, 20) // Seleccionar las primeras 20 palabras NO FUNCIONO
-              .join(' ') // Volver a unir las palabras en un solo texto NO FUNCIONO
-              }
-             </p>
-             {/*console.log(post.excerpt)*/}
-             {/*console.log("Valor de post.excerpt:", post.excerpt)*/}
+              {blog_list.slice(0, blog_list.length > 2 ? 2 : blog_list.length).map(post => (
+                 <li key={post.slug} className="py-2">   
+                  <NavLink 
+                 to={`/blog/post/${post.slug}`} 
+                 className="block"
+                 >
+  
+                 <p className='hover:bg-gray-500 text-sm text-black truncate ..'>
+                {post.excerpt && post.excerpt
+                .split(' ') // Dividir el texto en palabras NO FUNCIONO
+                .slice(0, 20) // Seleccionar las primeras 20 palabras NO FUNCIONO
+                .join(' ') // Volver a unir las palabras en un solo texto NO FUNCIONO
+                }
+               </p>
+               {/*console.log(post.excerpt)*/}
+               {/*console.log("Valor de post.excerpt:", post.excerpt)*/}
+          
+            <p className='text-black hover:bg-gray-500 text-sm  hover:text-orange-500'>
+              leer mas
+              </p>
+  
+              </NavLink>
+  
+              </li>
+             
+              ))}
+             </ul>
         
-          <p className='text-black hover:bg-gray-500 text-sm  hover:text-orange-500'>
-            leer mas
-            </p>
-
-            </Link>
-
-            </li>
-           
-            ))}
-           </ul>
-      
-           </div>
-
-            )
-    }
+             </div>
+  
+              )
+      }
 
 
 
@@ -415,10 +415,10 @@ function Navbar({
                          <a
                          key={item.name}
                          href={item.href}
-                         className="-m-3 flex items-start rounded-lg hover:bg-gray-50"
+                          className="-m-3 flex items-start rounded-lg hover:bg-gray-50 border-b-2 border-neutral-400"
                          >
                          <item.icon className="h-6 w-6 flex-shrink-0 text-white" aria-hidden="true" />
-                         <div className="ml-4">
+                         <div className="">
                             <p className="text-base font-medium text-gray-900">{item.name}</p>
                             <p className="mt-1 text-sm text-gray-600">{item.description}</p>
                          </div>
@@ -430,16 +430,16 @@ function Navbar({
 
 
                    {/*FUNCTION  POSTS DE BLOG DEL MENU OCULTO*/}
-                   <div className="bg-neutral-700 px-4">
+                   <div className="bg-white px-4">
                       {
                       blog_list ?
                       <>
-                        <div className="">
-                          <h3 className="text-base font-semibold underline underline-offset-4 pt-4 text-gray-400">
-                          Recent Posts
+                        <div className="px-4">
+                        <h3 className="text-sm underline underline-offset-4 pt-4 text-black font-extrabold">
+                         Publicaciones Recientes:
                           </h3>
-                          <ul role="list" className="mt-2 space-y-4">
-                            <li>
+                          <ul role="list" className="">
+                            <li className=''>
                               {
                                 blog_list.slice(0, blog_list.length > 2 ? 2 : blog_list.length).map(post => (
                                   <BlogListNavbar 
@@ -457,9 +457,9 @@ function Navbar({
                      {/*ULTIMOS POSTS DE GITHUB  DEL MENU OCULTO*/}
 
                         {/*ENLACE A LA PAGINA DE TODOS LOS POSTS DE GITHUB*/}
-                        <div className="mt-2 text-sm pb-4">
-                                <a href="/blog" className="font-medium text-indigo-600 hover:text-indigo-500">
-                          View all posts
+                         <div className="text-sm pb-4 px-4">
+                          <a href="/blog" className="font-medium text-indigo-600 hover:text-indigo-500">
+                          Ver todos los posts
                          <span aria-hidden="true"> &rarr;</span>
                          </a>
                        </div>

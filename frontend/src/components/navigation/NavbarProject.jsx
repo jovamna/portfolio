@@ -429,15 +429,15 @@ const guestLinks = (
                          <div className="overflow-hidden  [10rem] rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
 
                             {/* MENU ESCONDIDO PANTALLA GRANDE, HOME, MYPROJECTS*/}
-                            <div className="relative grid sm:gap-12 sm:p-8">
+                            <div className="relative grid sm:gap-12 p-8">
                             {solutions.map((item) => (
                             <a
                             key={item.name}
                             href={item.href}
-                            className="-m-3 flex items-start rounded-lg hover:bg-gray-50"
+                            className="-m-3 flex items-start rounded-lg hover:bg-gray-50 border-b-2 border-neutral-400"
                             >
                             <item.icon className="h-6 w-6 flex-shrink-0 text-white" aria-hidden="true" />
-                             <div className="ml-4">
+                             <div className=" ">
                              <p className="text-base font-medium text-gray-900">{item.name}</p>
                              <p className="mt-1 text-sm text-gray-600">{item.description}</p>
                              </div>
@@ -452,7 +452,7 @@ const guestLinks = (
 
                               {/*MENU HIDDEN EN PANTALLA GRANDE  RECIENTES POSTS DE PROJECTS */}    
                               {/* USE EL COMPONENTE BLOG-LIST E HICE UNA FUNCTION DE RENDERIZADO ARRIBA DE TODO*/}
-                              <div className="bg-neutral-700 px-4 ">
+                              <div className="white px-4 ">
                               {blog_list ? (
                               <>
                               {renderBlogList(blog_list)} {/* Llama a la función para renderizar la lista */}
@@ -461,9 +461,9 @@ const guestLinks = (
                               <LoadingCard />
                               )}
                               {/* ENLACE A LA PAGINA DE TODOS LOS POSTS DE GITHUB */}
-                              <div className="text-sm pb-4 ">
+                              <div className="text-sm pb-4 px-4">
                                 <a href="/blog" className="font-medium text-indigo-600 hover:text-indigo-500">
-                                  View all posts
+                                  Ver todos los posts
                                   <span aria-hidden="true"> &rarr;</span>
                                   </a>
                                   </div>
