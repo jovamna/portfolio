@@ -128,8 +128,8 @@ function Navbar({
 // lista de posts
   const renderBlogList = (blog_list) => {
     return (
-      <div className="mt-4 bg-white w-[100%] px-4">
-          <h3 className="text-sm underline underline-offset-4 pt-4   text-black">
+      <div className="bg-white w-[100%] px-4">
+          <h3 className="text-sm underline underline-offset-4 pt-4 text-black font-extrabold">
             Publicaciones Recientes:
             </h3>
            
@@ -153,7 +153,7 @@ function Navbar({
              {/*console.log(post.excerpt)*/}
              {/*console.log("Valor de post.excerpt:", post.excerpt)*/}
         
-          <p className='text-black hover:bg-gray-500   hover:text-orange-500'>
+          <p className='text-black hover:bg-gray-500 text-sm  hover:text-orange-500'>
             leer mas
             </p>
 
@@ -406,7 +406,7 @@ function Navbar({
                  leaveTo="opacity-0 translate-y-1"
                  >
                  <Popover.Panel 
-                 className="absolute top-12 w-screen bg-violet-400 max-w-md right-0 transform translate-x-1/12 px-2 sm:px-0">
+                 className="absolute top-12 w-screen bg-white max-w-md right-0 transform translate-x-1/12 px-2 sm:px-0">
                 
                  <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                   {/*MENU: HOME, MYPROJECT Y BLOG DEL MENU OCULTO*/}
@@ -434,7 +434,7 @@ function Navbar({
                       {
                       blog_list ?
                       <>
-                        <div className="mt-4">
+                        <div className="">
                           <h3 className="text-base font-semibold underline underline-offset-4 pt-4 text-gray-400">
                           Recent Posts
                           </h3>
@@ -501,9 +501,9 @@ function Navbar({
 
            {/*SECTION DEL MENU ESCONDIDO DEL MOVIL */}
            {/*CONTAINER GENERAL DEL MENU ESCONDIDO */}
-           <Popover.Panel focus className="navbar-movil-desplegable bg-white absolute inset-x-0 top-0 origin-top-right  transform p-2 transition md:hidden">
+           <Popover.Panel focus className="navbar-movil-desplegable bg-white absolute inset-x-0 top-0 origin-top-right py-2 transform transition md:hidden">
               {/*CONTAINER2 GENERAL DEL MENU ESCONDIDO */}
-              <div className="divide-y-2 divide-gray-50 rounded-lg  shadow-lg ring-1 ring-black ring-opacity-5">
+              <div className="divide-y-2 divide-gray-50 rounded-lg  shadow-lg ring-1 ring-black ring-opacity-5 bg-white">
 
                  {/*1 CONTAINER GENERAL DEL LOGO SEARCH Y MENU HIDDEN  COLUMN DE OPCIONES MYPROJECT,BLOG*/}
                  <div className=" pb-8">
@@ -533,7 +533,7 @@ function Navbar({
 
 
                             {/*CAJA DEL SEARCH */}
-                          {  <div className='w-full  justify-center bg-white   px-2 py-8 '>
+                          {  <div className='w-[94%] mx-auto justify-center px-2 py-8 border-b border-neutral-500 bg-white'>
                            { window.location.pathname==='/search/:term'?<>
                            </>
                            :
@@ -544,7 +544,7 @@ function Navbar({
                            {/*FIN CAJA DEL SEARCH */}
 
                           {/*3 CONTAINER DEL MOVIL DE LA NAVEGACION y SEARCH*/}
-                           <div className="w-[95%] mx-auto bg-white pt-6">
+                           <div className="w-[100%] mx-auto pt-6 ">
                       
 
                            <nav className="grid gap-y-6">
@@ -552,10 +552,10 @@ function Navbar({
                            <a
                            key={item.name}
                            href={item.href}
-                           className="-m-3 flex items-center rounded-md p-3 hover:bg-violet-500 bg-white  border-b border-white"
+                           className="flex items-center px-4 border-b border-neutral-500 rounded-md p-3 hover:bg-neutral-200 bg-white"
                            >
-                           <item.icon className="h-6 w-6 flex-shrink-0 text-black" aria-hidden="true" />
-                           <span className="ml-3 text-sm font-semibold text-black">
+                           <item.icon className="h-6 w-6 flex-shrink-0 text-black hover:text-orange-500" aria-hidden="true" />
+                           <span className="ml-3 text-sm font-semibold text-black hover:text-orange-500">
                             {item.name} 
                             </span>
                             </a>
@@ -579,7 +579,7 @@ function Navbar({
 
 
                              {/*FUNCTION  POSTS DE BLOG DEL MENU OCULTO*/}
-                   <div className="bg-white px-4">
+                   <div className="w-[100%] mx-auto bg-white">
                       {blog_list ? (
                               <>
                               {renderBlogList(blog_list)} {/* Llama a la función para renderizar la lista */}
@@ -591,7 +591,7 @@ function Navbar({
                      {/*ULTIMOS POSTS DE GITHUB  DEL MENU OCULTO*/}
 
                         {/*ENLACE A LA PAGINA DE TODOS LOS POSTS DE GITHUB*/}
-                        <div className="text-sm pb-4">
+                        <div className="text-sm pb-4 px-4">
                                 <a href="/blog" className="text-sm font-medium hover:text-orange-500 text-indigo-600 ">
                           Ver todos los posts
                          <span aria-hidden="true"> &rarr;</span>
