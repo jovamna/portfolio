@@ -14,6 +14,11 @@ ALLOWED_HOSTS = ['localhost', 'jovamnamedina.com', 'www.jovamnamedina.com', '104
 
 SECRET_KEY=os.environ.get('SECRET_KEY')
 
+
+#seo
+SITE_ID = 2
+# Application definition
+
 DATABASES = {
     "default" : env.db("DATABASE_URL", default="postgres:///portfolio"),
 }
@@ -33,3 +38,7 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 # Otras configuraciones específicas de producción
+
+
+
+#FRONTEND_URL = "https://www.jovamnamedina.com"

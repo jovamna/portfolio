@@ -1,0 +1,104 @@
+{% load static %}
+{% load vite_tags %}
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#000000">
+
+    <!-- SEO básico -->
+    <title>{{ seo_title|default:"Jovamna Medina| Portfolio profesional de Desarrollo Web Full Stack" }}</title>
+    <meta name="description" content="{{ seo_description|default:'Portfolio profesional de Desarrollo Web Full Stack. arquitectura de software, interfaces interactivas y optimización de e-commerce.' }}">
+    <meta name="robots" content="{{ seo_robots|default:'index,follow' }}">
+
+    <!-- Canonical -->
+  
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    <!-- Open Graph -->
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:type" content="{{ og_type|default:'website' }}">
+    <meta property="og:site_name" content="{{ SITE_NAME|default:'Jovamna Medina' }}">
+    <meta property="og:title" content="{{ og_title|default:seo_title|default:'Jovamna Medina| Portfolio profesional de Desarrollo Web Full Stack' }}">
+    <meta property="og:description" content="{{ og_description|default:seo_description|default:'Portfolio profesional de Desarrollo Web Full Stack. arquitectura de software, interfaces interactivas y optimización de e-commerce.' }}">
+    <meta property="og:image:alt" content="{{ og_image_alt|default:seo_title|default:'Jovamna Medina| Portfolio profesional de Desarrollo Web Full Stack' }}">
+
+    <meta property="og:url" content="{{ canonical_url }}">
+    <!--meta property="og:image" content="https://www.jovamnamedina.com/custom-static/images/google.png"-->
+    <meta property="og:image" content="{{ seo_image }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+
+
+
+
+
+    <!-- Twitter Cards <meta name="twitter:image" content="https://www.jovamnamedina.com/custom-static/images/x.jpg">-->
+    <meta name="twitter:card" content="summary_large_image">
+    {% if twitter_site %}
+    <meta name="twitter:site" content="{{ twitter_site }}">
+    {% endif %}
+    <meta name="twitter:title" content="{{ twitter_title|default:seo_title|default:'Jovamna Medina' }}">
+    <meta name="twitter:description" content="{{ twitter_description|default:seo_description|default:'Jovamna Medina | Full Stack Developer, Django & React,  & AI' }}">
+   
+    
+    <meta name="twitter:image" content="{{ seo_image }}">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link 
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" 
+      rel="stylesheet"
+    >
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json">
+
+
+<!-- Keywords -->
+    <meta name="keywords" content="{{ seo_keywords }}">
+
+    <!-- Preload & Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://www.jovamnamedina.com">
+
+    <!-- JSON-LD Structured Data (Muy Importante) -->
+    {% if jsonld_organization %}
+        <script type="application/ld+json">{{ jsonld_organization|safe }}</script>
+    {% endif %}
+    {% if jsonld_website %}
+        <script type="application/ld+json">{{ jsonld_website|safe }}</script>
+    {% endif %}
+    {% if jsonld_primary %}
+        <script type="application/ld+json">{{ jsonld_primary|safe }}</script>
+    {% endif %}
+    {% if jsonld_breadcrumbs %}
+        <script type="application/ld+json">{{ jsonld_breadcrumbs|safe }}</script>
+    {% endif %}
+
+
+
+
+
+
+ 
+
+    {% vite_asset_tags 'index.html' %}
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+</html>
+
+
+
+
+
+

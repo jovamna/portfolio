@@ -1,5 +1,6 @@
 from django.contrib.sitemaps import Sitemap
 from .models import Project
+from django.conf import settings
 
 
 class ProjectSitemap(Sitemap):
@@ -9,5 +10,9 @@ class ProjectSitemap(Sitemap):
     def items(self):
         return Project.objects.all()
     
+ 
     def location(self, obj):
-        return f'/myproject/project/{obj.slug}'
+        return f"/myproject/project/{obj.slug}/"
+        
+    def lastmod(self, obj):
+        return obj.published

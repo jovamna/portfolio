@@ -26,9 +26,7 @@ SECRET_ADMIN_URL=env('SECRET_ADMIN_URL')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-#seo
-SITE_ID = 1
-# Application definition
+
 
 DJANGO_APPS = [
     'django.contrib.admin',

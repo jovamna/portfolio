@@ -1,4 +1,0 @@
-User-agent: *
-Disallow: /admin/
-Allow: /static/
-Sitemap: https://jovamnamedina.com/sitemap.xml
