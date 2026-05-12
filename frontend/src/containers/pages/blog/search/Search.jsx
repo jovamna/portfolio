@@ -1,15 +1,15 @@
-import Footer from "../../../../components/navigation/Footer"
-import NavbarProject from "../../../../components/navigation/NavbarProject"
+
+
 import FullWidthLayout from "../../../../hocs/FullWidthLayout"
 import { useEffect, useState } from "react"
 import { connect } from "react-redux";
 import {search_blog, search_blog_page } from "../../../../redux/actions/blog";
-
 import { useParams } from "react-router-dom";
 import BlogListSearchDos from "../../../../components/blog/search/BlogListSearchDos";
 import BlogCardSearchUno from "../../../../components/blog/search/BlogCardSearchUno";
 import SmallSetPaginationSearch from "../../../../components/pagination/SmallSetPaginationSearch";
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+
+
 
 
 
@@ -36,19 +36,31 @@ function Search({
         search_blog(term)
     },[])
 
+
+
+     /**SEO */
+      useEffect(() => {
+        // 1. Cambiamos el título de la pestaña
+        document.title = "Search | Jovamna Medina - Full Stack Developer";
+        
+        // 2. Actualizamos la meta-descripción (opcional pero recomendado)
+        let metaDescription = document.querySelector('meta[name="description"]');
+        if (metaDescription) {
+            metaDescription.content = "Explora artículos sobre desarrollo web, Django, React y arte digital en el blog oficial de Jovamna Medina.";
+         }
+    }, []);
+
+
+
+
+
+
+
     return(
         
        <FullWidthLayout>
 
-          <Helmet> 
-          <title>                  
-          {term} | Portafolio, Blog | Jovamna Medina
-          </title>
-           </Helmet>
-
-
-
-
+         
 
            
            <div className="pt-24">

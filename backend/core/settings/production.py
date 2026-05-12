@@ -15,8 +15,8 @@ ALLOWED_HOSTS = ['localhost', 'jovamnamedina.com', 'www.jovamnamedina.com', '104
 SECRET_KEY=os.environ.get('SECRET_KEY')
 
 
-#seo
-SITE_ID = 2
+#seo NECESRAIO DEJARLO EN 1
+SITE_ID = 1
 # Application definition
 
 DATABASES = {

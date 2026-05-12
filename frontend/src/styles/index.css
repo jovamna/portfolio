@@ -1,6 +1,16 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+
+
+
+
+/* Mantenemos tu diseño de la primera letra intacto */
+.skill-item p::first-letter {
+    font-family: var(--font-kaushan) !important;
+    @apply text-violet-800 text-5xl font-bold float-left mr-3;
+    /* He usado @apply para que use las nuevas clases de la v4 */
+}
+
 
 html,
 body
@@ -136,6 +146,39 @@ body
 }
 
 
+/*SIN FRAMER PARA GREETINGS REMPLAZADO POR CSS*/
+/* Animación de entrada suave */
+.home-image {
+  opacity: 0;
+  animation: fadeIn 1.2s ease forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Opcional: animación un poco más elegante */
+.animate-fadeIn {
+  opacity: 0;
+  animation: fadeInUp 1.4s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/*FIN DE SIN FRAMER PARA GREETINGS*/
+
   /*PORTADA PRINCIPAL*/
 .home-images{
   top: 0px
@@ -188,7 +231,6 @@ body
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #ffffff; /* Ajusta el color de fondo según sea necesario */
   z-index: 1000; 
   }
 
@@ -343,9 +385,11 @@ body
   cursor: pointer;
 }
 
-.nav-item{
+/*.nav-item{
     color: black;
-}
+}*/
+
+
 .z-index{
   z-index: 200;
 }
@@ -1032,44 +1076,7 @@ body
   }
 
   /*DE LA PAGINA SKILL-CARD*/
-  .skill-card-movil{
-    width: 90%;
-    padding-left: 0px;
-    padding-right: 0px;
-    margin: auto;
-    margin-bottom: 10px;
   
-  }
-  /*subcontainer general del card y el details*/
-  .skill-card-movil-img-title{
-    width: 100%;
-    height: 100%;
-    padding-left: 0px;
-    padding-right: 0px;
-  }
-  .skills-page-movil{
-    width: 100%;
-    height: auto;
-  }
-
-  .skill-detail-small-movil h1{
-    font-size: 0.99em;
- 
-  }
-
-  .skill-detail-medium-movil p{
-    font-size: 0.96em;
-  }
-
-  /*titulo skills*/
-  .skills-page-movil h1{
-  font-size: 1.5em;
-  }
-
-  /*.skill-menu{
-   
-  }*/
-
   /*LU LI letras softw, web, databa, tools*/
 
   
@@ -1143,20 +1150,7 @@ body
    margin: auto;
    }
  
-    /*CONTAINER PRINCIPAL DE LA PAGINA PROJECTHOME*/
-    /*PAGINA DE LISTADO DE LOS GITHUBS*/
-    .project-home{
-     width: 260px;
-    max-height: 100%;
-    margin: auto;
-   }
- 
-  /*SUBCONTAINER DE PROJECTHOME NARANJA*/
-  .home-project{
-   display: grid;
-   width: 260px;
-   height: 100%;
-    }
+    
  
  
    /*CONTAINER PRINCIPAL DEL PROJECTCARD DEL GITHUB */
@@ -2285,80 +2279,11 @@ width: 100%;
 
  }*/
 
- .subcontainer-about-movil h1{
-  margin-top: 20px;
-  padding-left: 16px;
-  padding-right: 16px;
-
- }
-
  
- .subcontainer-about-movil h2{
-  padding-left: 16px;
-  padding-right: 16px;
- }
-
- 
- .subcontainer-about-movil .skill-item{
-  padding-left: 12px;
-  padding-right: 10px;
-
- }
-
- .subcontainer-about-movil-img {
-  padding-top: 0px;
-  padding-left: 0px;
-  padding-right: 0px;
-  width: 100%;
-  height: auto;
-
- }
-
- .subcontainer-about-movil-img img{
-  margin-top: -51px;
-  width: 100%;
- }
-
- .subcontainer-about-movil-img .letra-dise{
-  width: 131px;
-  height: 60px;
-  left: -161px;
-  top: 59px;
- }
 
 
 
-  /*PAGINA SKILL*/
-  .skill-dos{
-   border-radius: 0%;
-   margin-bottom: 15px;
-  
-  }
 
-  
-
-  /*container general del card y el details*/
-  .skill-card-movil{
-    width: 90%;
-    padding-left: 0px;
-    padding-right: 0px;
-    margin: auto;
-  
-  }
- /*subcontainer general del card y el details*/
-  .skill-card-movil-img-title{
-    width: 100%;
-    height: 100%;
-    padding-left: 0px;
-    padding-right: 0px;
-  }
-
-   
-
- /*table entera de iconos pagina skill*/
- .skills-page-movil{
-  height: auto;
- }
 
 
  /*UL*/
@@ -3630,31 +3555,6 @@ body
   
   
  /*PAGINA GREETINGS*/
-  .home-images{
-  top: 0px
-   }
-
-   .home-images .greeting-images-dos{
-  margin-top: 10px
-   }
-
-  .home-images .hover-image {
-    position:  absolute;
-    top: 0px;
-    left: 0;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-  }
-
-  .home-images .home-image{
-    top: 0px;
-    position: relative;
-  }
-
-
-   .manito{
-    width: 18px;
-   }
 
   .greeting-texto{
     left: 60px;
@@ -3691,64 +3591,6 @@ body
     display: flex;
     flex-direction: column;
     width: 100%;
-  }
-
-  .subcontainer-about-movil{
-    width: 100%;
-  }
-
-  .subcontainer-about-movil-img{
-    width: 100%;
-   margin-top: -40px;
-  }
-
-  .subcontainer-about-movil-img img{
-    width: 90%;
-    margin: auto;
-
-  }
-
-  .subcontainer-about-movil-img .letra-dise{
-    width: 240px;
-    left: -370px;
-    top: 200px;
-  }
-
-  /*PAGINA SKILLS*/
-   /*container general del card y el details*/
-   .skill-card-movil{
-    width: 50%;
-    padding-left: 0px;
-    padding-right: 0px;
-    margin: auto;
- 
-  }
- /*subcontainer general del card y el details*/
-  .skill-card-movil-img-title{
-    width: 100%;
-    height: 100%;
-    padding-left: 0px;
-    padding-right: 0px;
-  }
-
-   /*CONTAINER DE las 2 imagenes*/
-
-  .skill-dos{
-    display: flex;
-    flex-direction: column;
-  }
-  
-   /*TABLERO DEL SKILLS MENU E ICONOS*/
-  .skills-page-movil{
-    width: 100%;
-    margin-top: 20px;
-    height: 440px;
-    max-height: 100%;
-   }
-
-  .skills-page-movil h1{
-    font-size: 1.9em;
-    margin-bottom: 10px;
   }
 
   
@@ -3968,13 +3810,7 @@ body
    margin-right: -12px;
   }
 
- .responsive-altura-blogcard {
-
- }
-
- .bloglist-blogcard-grid {
  
- }
 
  .responsive-blogcard-title-excerpt{
   margin-top: 30px;

@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import DOMPurify from 'dompurify'
 import LoadingCard from "../../../components/loaders/LoadingCard";
 import "../../../styles/index.css";
-import { Helmet } from 'react-helmet-async';
+
 import { GiFastForwardButton } from "react-icons/gi";
 
 
@@ -37,45 +37,95 @@ function ProjectPost({get_project, project}){
 
 
 
+
+    {/**SEO */}
+
+{/** SEO INICIO **/}
+  useEffect(() => {
+    if (project) {
+      // 1. Título dinámico con tu Stack
+      document.title = `${project.title} | Proyecto Full Stack | Jovamna Medina`;
+
+      // 2. Meta descripción limpia (usando la función cleanDescription que ya tienes arriba)
+      let metaDescription = document.querySelector('meta[name="description"]');
+      if (!metaDescription) {
+        metaDescription = document.createElement('meta');
+        metaDescription.name = 'description';
+        document.head.appendChild(metaDescription);
+      }
+      metaDescription.content = cleanDescription;
+
+      // 3. Meta tags: Open Graph y Twitter
+      const metaTags = [
+        { property: 'og:title', content: `${project.title} | Jovamna Medina - Dev` },
+        { property: 'og:description', content: cleanDescription },
+        { property: 'og:image', content: project.image || 'https://www.jovamnamedina.com/og-image-tech.png' },
+        { property: 'og:type', content: 'article' },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:label1', content: 'Tecnologías' },
+        { name: 'twitter:data1', content: tags || 'Django, React, Redux' }
+      ];
+
+      metaTags.forEach(({ property, name, content }) => {
+        const attribute = property ? `meta[property="${property}"]` : `meta[name="${name}"]`;
+        let metaTag = document.querySelector(attribute);
+        if (!metaTag) {
+          metaTag = document.createElement('meta');
+          if (property) metaTag.setAttribute('property', property);
+          if (name) metaTag.setAttribute('name', name);
+          document.head.appendChild(metaTag);
+        }
+        metaTag.content = content || '';
+      });
+
+      // 4. JSON-LD (Cambiado a 'project-post' y usando variables correctas)
+      let scriptJsonLd = document.querySelector('script[data-schema="project-post"]');
+      if (!scriptJsonLd) {
+        scriptJsonLd = document.createElement('script');
+        scriptJsonLd.type = 'application/ld+json';
+        scriptJsonLd.setAttribute('data-schema', 'project-post');
+        document.head.appendChild(scriptJsonLd);
+      }
+
+      scriptJsonLd.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'CreativeWork', // Para proyectos es mejor CreativeWork o SoftwareSourceCode
+        'headline': project.title,
+        'description': cleanDescription,
+        'image': project.image || 'https://www.jovamnamedina.com/logo.png',
+        'author': {
+          '@type': 'Person',
+          'name': 'Jovamna Medina',
+          'jobTitle': 'Full Stack Developer',
+          'knowsAbout': ['Django', 'React', 'Redux', 'Python', 'PostgreSQL']
+        },
+        'publisher': {
+          '@type': 'Organization',
+          'name': 'Jovamna Medina Dev'
+        },
+        'mainEntityOfPage': {
+          '@type': 'WebPage',
+          '@id': `https://jovamnamedina.com/myproject/project/${project.slug}`
+        }
+      });
+    }
+  }, [project, cleanDescription]); // Dependencia corregida a project
+  {/** FIN SEO **/}
+
+
+{/**FIN SEO */}
+
+
+
+
+
+
+
     return(
      
         <FullWidthLayout>
 
-            {/* ⭐️ POSICIÓN CORRECTA DEL HELMET ⭐️ */}
-            <Helmet>
-                {/* Título de la página */}
-                <title>{title}</title>
-                
-                {/* Meta Description para SEO */}
-                <meta name="description" content={cleanDescription} />
-
-                {/* Meta Keywords */}
-                <meta name="keywords" content={tags} />
-
-                {/* Enlaces canónicos (Buena práctica de SEO) */}
-                <link rel="canonical" href={`https://jovamnamedina.com/myproject/project/${projSlug}`} />
-
-                {/* Open Graph (OG) Tags para redes sociales (Facebook, LinkedIn) */}
-                <meta property="og:title" content={title} />
-                <meta property="og:description" content={cleanDescription} />
-                <meta property="og:type" content="article" />
-                <meta property="og:url" content={`https://jovamnamedina.com/myproject/project/${projSlug}`} />
-                {/* <meta property="og:image" content={project.image_url} /> <-- Si tienes una imagen */}
-
-                {/* Twitter Card Tags */}
-                <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content={title} />
-                <meta name="twitter:description" content={cleanDescription} />
-                {/* <meta name="twitter:image" content={project.image_url} /> */}
-
-            </Helmet>
-                   
-
-
-
-
-
-
+      
    
 
             <div className="wrapper w-full min-h-screen">

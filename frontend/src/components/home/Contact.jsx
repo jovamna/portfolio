@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react"
 import { Switch } from '@headlessui/react'
 import { Link } from "react-router-dom"
-import { EnvelopeIcon, PhoneArrowDownLeftIcon} from '@heroicons/react/24/solid'   //@heroicons/react/24/outline
-import contactMail from "../../assets/img/contactMail.webp";
+import { EnvelopeIcon, PhoneArrowDownLeftIcon} from '@heroicons/react/24/solid';   //@heroicons/react/24/outline
+import contact from "../../assets/img/contact.png";
 import axios from 'axios';
 import { BiChevronsUp } from "react-icons/bi";
 import "../../styles/index.css";
@@ -152,7 +152,7 @@ const handleScrollToTop = () => {
         <div className=" subcontainer-contact  flex flex-col relative px-6 lg:px-8 max-w-[95%]  mx-auto rounded-lg">
         
             <div className="text-center ">
-               <h1 className="text-4xl underline underline-offset-4 font-bold tracking-tight text-sans text-gray-900  sm:text-6xl">
+               <h1 className="kaushan text-4xl underline underline-offset-4 font-bold tracking-tight text-sans text-gray-900  sm:text-6xl">
                 Contacto
                </h1>
                <div className="relative ">
@@ -170,7 +170,7 @@ const handleScrollToTop = () => {
                        <h2 className="text-2xl font-gilroy-black tracking-tight text-gray-900 sm:text-3xl">
                      
                        </h2>
-                       <p className="mt-3 text-lg leading-6 text-gray-500">
+                       <p className="kaushan mt-3 text-lg  text-black">
                         Para consultar cualquier duda o información escribir en este formulario, responderé en la mayor brevedad posible, Muchas gracias.
                         </p>
 
@@ -180,7 +180,7 @@ const handleScrollToTop = () => {
                         <dt className="sr-only">Postal address</dt>
                         <dd>
                           {/*<p>20, 1-1 Calle San Joan</p>*/}
-                          <p className="">Mollet del Vallés, C.P. 08100, Spain</p>
+                          <p className="kaushan text-black">Mollet del Vallés, C.P. 08100, Spain</p>
                         </dd>
                       </div>
                      
@@ -188,7 +188,7 @@ const handleScrollToTop = () => {
                         <dt className="sr-only">Email</dt>
                         <dd className="flex flex-row justify-center">
                           <EnvelopeIcon className="flex-shrink-0 h-6 w-6 text-gray-400" aria-hidden="true" />
-                          <span className="ml-3">jocoderina@gmail.com</span>
+                          <span className="kaushan text-black ml-3">jocoderina@gmail.com</span>
                         </dd>
                       </div>
                     </dl>
@@ -198,8 +198,8 @@ const handleScrollToTop = () => {
                 
 
                     <div className=" mx-auto ">
-                      <img className="w-[200px] h-[190px] mx-auto mt-[16px]"
-                      src={contactMail}
+                      <img className="w-full h-full object-contain"
+                      src={contact}
                       alt="logo"
                       />
                     </div>
@@ -387,7 +387,7 @@ const handleScrollToTop = () => {
                         :
                         <button
                           type="submit"
-                          className="float-right inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-gilroy-medium rounded-full text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                          className="float-right inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-gilroy-medium rounded-full text-white bg-black hover:bg-violet-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                         >
                           Submit
                         </button>

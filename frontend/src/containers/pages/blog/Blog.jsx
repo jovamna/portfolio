@@ -9,8 +9,11 @@ import { get_blog_list_category, get_blog_list, get_blog_list_page } from "../..
 import { get_categories } from "../../../redux/actions/categories";
 import { useParams } from "react-router-dom"
 import ResetPasswordSuccess from '../../../components/auth//ResetPasswordSuccess'; 
-import { Helmet } from 'react-helmet-async';
 import CategoriesBlogHeader from "../../../components/blog/CategoriesBlogHeader";
+
+
+
+
 
 function Blog({
     categories,
@@ -45,6 +48,22 @@ function Blog({
       //console.log(import.meta.env.VITE_REACT_API_URL)
 
 
+      /**SEO */
+      useEffect(() => {
+  // 1. Cambiamos el título de la pestaña
+  document.title = "Blog | Jovamna Medina - Full Stack Developer";
+
+  // 2. Actualizamos la meta-descripción (opcional pero recomendado)
+  let metaDescription = document.querySelector('meta[name="description"]');
+  if (metaDescription) {
+    metaDescription.content = "Explora artículos sobre desarrollo web, Django, React y arte digital en el blog oficial de Jovamna Medina.";
+  }
+
+  // Al ser la página general del blog, no solemos necesitar un JSON-LD 
+  // tan complejo como el del post individual, con esto basta.
+}, []);
+
+
      
 
 
@@ -52,11 +71,7 @@ function Blog({
         
         <FullWidthLayout>
 
-           <Helmet> 
-          <title>                  
-          Blog | Jovamna Medina
-          </title>
-           </Helmet>
+        
 
 
 

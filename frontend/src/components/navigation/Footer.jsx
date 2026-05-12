@@ -16,7 +16,7 @@ const props = {
 
 const navigation = {
     blog: [
-      { name: 'Marketing', href: 'https://www.foodingemotions.com' },
+      { name: 'Marketing', href: 'https://www.jovamnamedina.com' },
       { name: 'Analytics', href: '#' },
      
     ],
@@ -58,7 +58,7 @@ const navigation = {
   
 function Footer() {
     return (
-      <footer className="w-full  bottom-0 p-4  bg-neutral-700 opacity-95 ">
+      <footer className="w-full  bottom-0 p-4  bg-black opacity-95 ">
         <h2 id="footer-heading" className="sr-only">
           Footer
         </h2>
@@ -175,7 +175,7 @@ function Footer() {
              
             <div className="movil-footer-pie mt-4 lg:py-2">   
               <p className="movil-footer-pie-p  text-sm text-gray-400 md:mt-0 md:order-1">
-              &copy; 2025 Portfolio Jovamna Medina , Inc. All rights reserved.
+              &copy; 2026 Portfolio Jovamna Medina , Inc. All rights reserved.
              </p>
             </div>
       </div>

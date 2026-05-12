@@ -1,14 +1,15 @@
-import ProjectHome from '../myproject/ProjectHome';
-import go from "../../assets/img/home/go.jpg";
 
-
+import gitfinal from "../../assets/img/home/gitfinal.png";
+import ProjectCard from "../myproject/ProjectCard"
+import { get_project_list} from "../../redux/actions/project";
 import { BiChevronsUp } from "react-icons/bi";
 import { generatePath } from 'react-router-dom';
+import { useEffect } from "react"
+import { connect } from "react-redux"
+import LoadingCard from "../loaders/LoadingCard"
 
- 
 
-
-function Project() {
+function Project({  get_project_list, project_list}) {
   const handleScrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -17,51 +18,57 @@ function Project() {
   };
  
 
+    useEffect(()=>
+    {
+        get_project_list()
+
+    },[])  
 
 
 
     return (
               
-      <div className='project h-[100%] w-[100%]  items-center justify-center'>{/*CONTAINER GRAL*/}
+      <div className='project h-[100%] w-[100%] items-center justify-center'>{/*CONTAINER GRAL*/}
 
 
-
+  <h2 className="kaushan underline underline-offset-8 lg:text-5xl text-3xl font-bold text-center tracking-tight text-black sm:text-4xl  md:text-center mt-8">
+                          Mis Projectos de GitHub
+                          </h2>
 
 
           {/*CONTAINER DIV COLUMNA total del contenido modificar en movil a 95%*/}
-          <div className="project-movil  flex flex-col isolate bg-neutral-600 w-[95%] mx-auto sm:rounded-3xl">
+          <div className="project-movil  flex flex-col isolate lg:w-[100%]  max-w-[95%] mx-auto  sm:rounded-3xl">
               {/* 1 DIV ROW COLORES DE FONDO Y GRAL DEL CONTENIDO*/}
-              <div className="project-movil-colores flex relative isolate overflow-hidden w-[100%]  px-6 pt-16  sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-10 lg:px-1 lg:pt-0 mb-[65px]">
-              <svg
-              xmlns="http://www.w3.org/2000/svg"
-             viewBox="0 0 1024 1024"
-             className="absolute top-[20px] left-1/2 -z-10 h-[80vh] w-[64rem] -translate-y-1/2 sm:left-full sm:-ml-80 lg:left-1/2 lg:ml-0 lg:translate-y-0 lg:-translate-x-1/2" aria-hidden="true"
-             >
-            <circle cx={512} cy={512} r={512} fill="url(#759c1415-0410-454c-8f7c-9a820de03641)" fillOpacity="0.7" />
-            <defs>
-            <radialGradient
-            id="759c1415-0410-454c-8f7c-9a820de03641"
-            cx={0}
-            cy={0}
-            r={1}
-            gradientUnits="userSpaceOnUse"
-            gradientTransform="translate(512 512) rotate(90) scale(512)"
-            >
-            <stop stopColor="#7775D6" />
-            <stop offset={1} stopColor="#E935C1" stopOpacity={0} />
-            </radialGradient>
-            </defs>
-            </svg>
 
-            {/* 1 DIV ROW IGUAL AL DE COLORES DE FONDO Y GRAL DEL CONTENIDO*/}
-            <div className='project-row-movil flex flex-row w-[92%] mx-auto justify-between'> 
 
-                      {/*DOS CARDS GITHUB */}
-                     <div className="project-h-title flex flex-col w-[75%] lg:mx-0 lg:py-3 ">
 
-                          <h2 className="underline underline-offset-8  text-3xl font-bold text-center tracking-tight text-white sm:text-4xl  md:text-center mt-8">
-                          Mis Projectos de GitHub
-                          </h2>
+
+
+
+            {/* CONTAINER DE LAS 2 COLUMNAS*/}
+            <div className='flex lg:flex-row lg:w-[100%]  flex-col w-[92%] mx-auto justify-between'> 
+
+                    
+
+
+                      {/*PRIMERA COLUMNA IMAGEN IMAGEN DEL COSTADO DE LOS GTHUBS */}
+                     <div className=" flex mx-auto lg:mt-6 mt-[20px] w-[70%] lg:w-[30%]">
+                        <img
+                        className=" w-full h-full object-contain"
+                        src={gitfinal}
+                        alt="App screenshot"
+                     
+                        />
+                     </div>
+
+
+
+
+
+                       {/*SEGUNDA COLUMNA LOS CARD DE LOS GITHUB DOS CARDS GITHUB */}
+                     <div className="project-h-title flex flex-col lg:w-[70%] w-[100%] lg:mx-0 ">
+
+                        
                           <br />
 
                           <div className='ver-mis-projectos flex justify-center items-center mb-4'>
@@ -70,27 +77,64 @@ function Project() {
                             </a>
                            </div>
                  
-                      <ProjectHome className="project-home "/>
+                       <div className="project-home flex lg:flex-row flex-col lg:justify-between lg:px-12">
+
+
+                     {
+                     project_list ?
+              
+                       <>
+               
+                
+                  
+                        {/*CONTAINER NARANJA QUE ALOJA A LOS 2 GITHUBS */}
+                        <div className="project-home-subcontainer  grid gap-5 lg:grid-cols-2 md:grid-cols-2 lg:max-w-none max-w-lg mx-auto  ">
+                            
+                            {
+                               
+
+                                  project_list.slice(0, project_list.length > 2 ? 2 : project_list.length).map(project => (
+                                      <ProjectCard key={project.slug} data={project} />
+                                    ))
+                                  
+                                  
+
+
+
+                            }
+                        </div>     
+               
+
+              
+
+
+
+
+                </>
+                :
+                <LoadingCard/>
+              
+               
+            }
+
+            </div>
             
                      </div>
 
 
-                      {/*IMAGEN DEL COSTADO DE LOS GTHUBS */}
-                     <div className="project-img-movil flex flex-col lg:mt-6 w-[25%] ">
-                        <img
-                        className=" left-0 rounded-md bg-white/5  w-[100%]  ring-1 ring-white/10"
-                        src={go}
-                        alt="App screenshot"
-                     
-                        />
-                     </div>
 
 
 
-                 </div>
 
 
-             </div>
+
+
+
+
+            </div>
+
+
+          
              {/*fin container general del contenido y el de colores*/}
 
 
@@ -120,4 +164,16 @@ function Project() {
     )
   }
 
-export default Project;
+
+
+
+
+const mapStateToProps = state => ({
+    project_list: state.project.project_list,
+   
+})
+
+export default connect(mapStateToProps,{
+    get_project_list,
+   
+})(Project)

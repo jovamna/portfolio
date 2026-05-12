@@ -1,8 +1,13 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
+import tailwindcss from '@tailwindcss/vite'; // <-- Importa esto
+
 
 export default defineConfig({
-  plugins: [react(),],
+  plugins: [
+    react(),
+    tailwindcss(), // <-- Añade esto aquí
+  ],
   base: process.env.NODE_ENV === 'production' ? '/' : '/',
   build: {
     minify: 'terser',

@@ -13,7 +13,7 @@ function ProjectCard(data){
     return (
         <>
 
-       <div className="project-movil-card flex flex-col rounded-lg  opacity-90 shadow-lg overflow-hidden pb-2 pt-[5px] bg-white h-[350px] px-[5px] ">
+       <div className="project-movil-card border b-4 border-black flex flex-col rounded-lg  opacity-90 shadow-lg overflow-hidden pb-2 pt-[5px] bg-white h-[350px] px-[5px] ">
    
        
              {/*CONTAINER 1 DE ICONO DE GITHUB TITLE. DESCRIPTION bg-zinc-300*/}

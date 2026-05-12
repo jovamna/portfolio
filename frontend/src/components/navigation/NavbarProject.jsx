@@ -21,7 +21,7 @@ import Alert from '../../components/Alert'
 import { search_blog, search_blog_page } from "../../redux/actions/blog";
 import { useParams } from "react-router-dom";
 import LoadingCard from "../loaders/LoadingCard";//usado en return--renderBlogList
-import jova from "../../assets/img/logo/jova.png";
+
 import logo from "../../assets/img/logo/logo.png";
 import loginUser from "../../assets/img/users/loginUser.png";
 

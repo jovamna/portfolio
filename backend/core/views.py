@@ -197,7 +197,7 @@ def build_base_context(request):
 
     return {
         'seo_title': "Jovamna Medina | Full Stack Developer & AI",
-        'seo_description': "Portfolio profesional de Jovamna Medina. Especialista en Django, React, Python y soluciones con Inteligencia Artificial.",
+        'seo_description': "Portfolio profesional de Jovamna Medina. Developer en Django, React, Python y soluciones con Inteligencia Artificial.",
         'seo_keywords': "django developer, react developer, full stack python, inteligencia artificial, ai specialist, portafolio developer",
         'seo_robots': 'index,follow',
         'canonical_url': build_absolute_url(request.path),
@@ -328,15 +328,6 @@ def breadcrumb_json_ld(breadcrumbs):
     }
 
 
-# Robots y Sitemap (mejorados)
-#def robots_txt(request):
-   # frontend = getattr(settings, 'FRONTEND_URL', 'https://www.jovamnamedina.com')
-   # content = f"""User-agent: *
-#Disallow: /admin/
-#Disallow: /api/
-#Sitemap: {frontend}/sitemap.xml"""
-    #return HttpResponse(content, content_type="text/plain")
-
 
 
 def robots_txt(request):
@@ -350,6 +341,10 @@ def robots_txt(request):
         f"Sitemap: {frontend_url}/sitemap.xml",
     ]
     return HttpResponse("\n".join(lines), content_type="text/plain")
+
+
+
+
 
 
 

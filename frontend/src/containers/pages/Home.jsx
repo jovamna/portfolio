@@ -1,4 +1,4 @@
-import FullWidthLayout from "../../hocs/FullWidthLayout"
+
 import Greeting from '../../components/home/Greeting';
 import About from '../../components/home/About';
 import Project from '../../components/home/Project';
@@ -12,10 +12,11 @@ import ChatBot from  '../../components/chatbot/ChatBot';
 import Navbar from "../../components/navigation/Navbar";
 import Footer from "../../components/navigation/Footer";
 import CookieConsent from '../../components/cookies/CookieConsent';
-import NavbarProject from "../../components/navigation/NavbarProject";
 import "../../styles/index.css";
 import error from '../../assets/img/error.jpg';
 import { useEffect, useState } from 'react';
+
+
 
 
 

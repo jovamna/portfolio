@@ -2,12 +2,9 @@ import { connect } from "react-redux";
 import FullWidthLayout from "../../../hocs/FullWidthLayout";
 import ProjectList from "../../../components/myproject/ProjectList";
 import Header from "../../../components/myproject/Header";
-import NavbarProject from "../../../components/navigation/NavbarProject";
-import Footer from "../../../components/navigation/Footer";
-import LoadingCard from "../../../components/loaders/LoadingCard"
-
+import { useEffect } from "react";
 import { get_project_list, get_project_list_page } from "../../../redux/actions/project";
-import { Helmet} from 'react-helmet-async';
+
 
 
 
@@ -20,6 +17,25 @@ function MyProject({
     get_project_list_page,
   
 }){
+
+
+    
+          /**SEO */
+          useEffect(() => {
+      // 1. Cambiamos el título de la pestaña
+      document.title = "Mis Projectos en GItHub| Jovamna Medina - Full Stack Developer";
+    
+      // 2. Actualizamos la meta-descripción (opcional pero recomendado)
+      let metaDescription = document.querySelector('meta[name="description"]');
+      if (metaDescription) {
+        metaDescription.content = "Explora artículos sobre desarrollo web, Django, React y arte digital en el blog oficial de Jovamna Medina.";
+      }
+    
+      // Al ser la página general del blog, no solemos necesitar un JSON-LD 
+      // tan complejo como el del post individual, con esto basta.
+    }, []);
+    
+    
    
 
 
@@ -27,10 +43,7 @@ function MyProject({
     return(
      
         <FullWidthLayout>
-            
-           <Helmet> 
-           <title> Projectos en GitHub | Portafolio Developer FullStack, Blog | Jovamna Medina</title>
-           </Helmet>
+       
 
            <Header />
 

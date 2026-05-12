@@ -7,8 +7,7 @@ import { useState, useEffect, Fragment } from 'react';
 //import { useState } from 'react';
 import { NavLink,  Navigate } from "react-router-dom";
 
-import jova from "../../assets/img/logo/jova.png";
-import pro from "../../assets/img/logo/pro.png";
+
 import logo from "../../assets/img/logo/logo.png";
 
 
@@ -178,10 +177,10 @@ function Navbar({
 
   return (
      //{/* CONTAINER PRINCIPAL 1 DEL NAVBAR DEL PC Y MOVIL  sm:px-6 */}
-    <div className="navbar z-index fixed w-full  lg:w-full xl:w-[100%] bg-white opacity-95 px-4 lg:px-8">
+    <div className="navbar z-index fixed w-full  lg:w-full xl:w-[100%] opacity-95 px-4 lg:px-8 bg-white ">
 
       {/* CONTAINER GUIA ENGLOBA MENU GRANDE Y MENU MOVIL*/}
-      <Popover className="navbar-menu  bg-white lg:h-[3.5em] xl:h-[3.7em] h-[3.5em]">
+      <Popover className="navbar-menu  lg:h-[3.5em] xl:h-[3.7em] h-[3.5em]">
 
 
    
@@ -193,7 +192,7 @@ function Navbar({
          
              {/*LOGO DEL MENU ORDENADOR Y MOVIL sm:w-20 md:w-24 lg:w-32 */}
              {/*PARA QUE EL ICONO SE CENTRE inline-flex items-center w-1/4*/}
-              <div className="flex logo w-[26.7%] h-[2.5em]">
+              <div className="flex logo w-[26.7%] h-[2.5em] pt-[4px]">
             <a href="/">
             <img className="image-logo lg:h-[60px] flex"
             src={logo}
@@ -210,7 +209,7 @@ function Navbar({
         
            {/*ICONO MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL */}
            {/*MOVIL ICONO CASA QUE ABRE EL MENU ESCONDIDO ICONO-1LADO DERECHO*/}
-           <div className="menu-movil md:hidden h-[2.5em]  bg-white flex flex-row items-center justify-end w-[65%]">
+           <div className="menu-movil md:hidden h-[2.5em] flex flex-row items-center justify-end w-[65%]">
                  
 
 
@@ -251,7 +250,7 @@ function Navbar({
   
 
           <Link
-           className={`nav-item hover:bg-neutral-100 hover:text-violet-700 text-neutral-600 font-semibold border-b-2 border-transparent hover:border-violet-700  h-[100%]  inline-block px-3 py-4 ${currentRoute === 'home' ? 'bg-neutral-300 text-white' : ''}`}
+           className={`nav-item hover:bg-neutral-100 hover:text-violet-700 text-black font-semibold border-b-2 border-transparent hover:border-violet-700  h-[100%]  inline-block px-3 py-4 ${currentRoute === 'home' ? 'bg-neutral-300 text-white' : ''}`}
            to="home"
            spy={true}
            smooth={true}
@@ -263,7 +262,7 @@ function Navbar({
           
 
          <Link
-           className={`nav-item hover:bg-neutral-100 hover:text-violet-700 text-neutral-600 font-semibold border-b-2 border-transparent hover:border-violet-700  h-[100%]  inline-block px-3 py-4 ${currentRoute === 'about' ? 'bg-neutral-300 text-white' : ''}`}
+           className={`nav-item hover:bg-neutral-100 hover:text-violet-700  text-black  font-semibold border-b-2 border-transparent hover:border-violet-700  h-[100%]  inline-block px-3 py-4 ${currentRoute === 'about' ? 'bg-neutral-300 text-white' : ''}`}
            to="about"
            spy={true}
            smooth={true}
@@ -274,7 +273,7 @@ function Navbar({
 
 
          <Link
-           className={`nav-item hover:bg-neutral-100 hover:text-violet-700 text-neutral-600 font-semibold border-b-2 border-transparent hover:border-violet-700  h-[100%]  inline-block px-3 py-4 ${currentRoute === 'skill' ? 'bg-neutral-300 text-white' : ''}`}
+           className={`nav-item hover:bg-neutral-100 hover:text-violet-700  text-black  font-semibold border-b-2 border-transparent hover:border-violet-700  h-[100%]  inline-block px-3 py-4 ${currentRoute === 'skill' ? 'bg-neutral-300 text-white' : ''}`}
            to="skill"
            spy={true}
            smooth={true}
@@ -287,7 +286,7 @@ function Navbar({
        
           
          <Link
-           className={`nav-item hover:bg-neutral-100 hover:text-violet-700 text-neutral-600 font-semibold border-b-2 border-transparent hover:border-violet-700  h-[100%]  inline-block px-3 py-4 ${currentRoute === 'project' ? 'bg-neutral-300 text-white' : ''}`}
+           className={`nav-item hover:bg-neutral-100 hover:text-violet-700  text-black  font-semibold border-b-2 border-transparent hover:border-violet-700  h-[100%]  inline-block px-3 py-4 ${currentRoute === 'project' ? 'bg-neutral-300 text-white' : ''}`}
            to="project"
            spy={true}
            smooth={true}
@@ -296,7 +295,7 @@ function Navbar({
            MyProjects
          </Link>
 
-          {/*<Link className="nav-item hover:bg-neutral-100 hover:text-violet-700 text-neutral-600 font-semibold border-b-2 border-transparent hover:border-violet-700 inline-block px-3 py-4"
+          {/*<Link className="nav-item hover:bg-neutral-100 hover:text-violet-700 text-white font-semibold border-b-2 border-transparent hover:border-violet-700 inline-block px-3 py-4"
            to='curriculum' 
            smooth={true} 
            //offset={-20}
@@ -312,13 +311,13 @@ function Navbar({
                         
 
              {/* BLOG BLOG BLOG BLOG BLOG BLOG BLOG MENU MENU MENU BLOG BLOG BLOG BLOG */}
-             <NavLink to= "/blog" className="nav-item hover:bg-neutral-100 hover:text-violet-700 text-neutral-600 font-semibold border-b-2 border-transparent hover:border-violet-700 inline-block px-3 py-4 ">
+             <NavLink to= "/blog" className="nav-item hover:bg-neutral-100 hover:text-violet-700  text-black  font-semibold border-b-2 border-transparent hover:border-violet-700 inline-block px-3 py-4 ">
              <span className="py-2">Blog</span>
              </NavLink>
 
 
              <Link
-           className={`nav-item hover:bg-neutral-100 hover:text-violet-700 text-neutral-600 font-semibold border-b-2 border-transparent hover:border-violet-700  h-[100%]  inline-block px-3 py-4 ${currentRoute === 'contacto' ? 'bg-neutral-300' : ''}`}
+           className={`nav-item hover:bg-neutral-100 hover:text-violet-700  text-black  font-semibold border-b-2 border-transparent hover:border-violet-700  h-[100%]  inline-block px-3 py-4 ${currentRoute === 'contacto' ? 'bg-neutral-300' : ''}`}
            to="contacto"
            spy={true}
            smooth={true}
@@ -335,7 +334,7 @@ function Navbar({
              onClick={() => {
              setIsSearchOpen(!isSearchOpen);
              }}
-            className="text-base font-medium text-gray-500 hover:text-gray-900"
+            className="text-base font-medium text-white hover:text-gray-900"
              >
             {isSearchOpen ? (
             <FiX className="h-5 w-5 ml-10 text-zinc-500 hover:text-gray-400" aria-hidden="true" />
@@ -379,7 +378,7 @@ function Navbar({
               <>
 
                  <Popover.Button
-                 className={classNames(open ? 'text-gray-900' : 'text-gray-500',
+                 className={classNames(open ? 'text-gray-900' : 'text-white',
                  'group inline-flex items-center rounded-md  text-base font-medium focus:outline-none focus:ring-0'
                  )}>
 
@@ -503,13 +502,13 @@ function Navbar({
            {/*CONTAINER GENERAL DEL MENU ESCONDIDO */}
            <Popover.Panel focus className="navbar-movil-desplegable bg-white absolute inset-x-0 top-0 origin-top-right py-2 transform transition md:hidden">
               {/*CONTAINER2 GENERAL DEL MENU ESCONDIDO */}
-              <div className="divide-y-2 divide-gray-50 rounded-lg  shadow-lg ring-1 ring-black ring-opacity-5 bg-white">
+              <div className="divide-y-2 divide-gray-50 rounded-lg  shadow-lg ring-1 ring-black ring-opacity-5">
 
                  {/*1 CONTAINER GENERAL DEL LOGO SEARCH Y MENU HIDDEN  COLUMN DE OPCIONES MYPROJECT,BLOG*/}
                  <div className=" pb-8">
 
                         {/*2 CONTAINER DEL ICONO DEL LOGO Y HOME */}
-                        <div className="flex items-center justify-between  px-4">
+                        <div className="flex items-center justify-between  px-4 ">
                          {/*ICONO LOGO DEL MENU HIDDEN */}
                          <div className=" ">
                          <img 
@@ -533,7 +532,7 @@ function Navbar({
 
 
                             {/*CAJA DEL SEARCH */}
-                          {  <div className='w-[94%] mx-auto justify-center px-2 py-8 border-b border-neutral-500 bg-white'>
+                          {  <div className='w-[94%] mx-auto justify-center px-2 py-8 border-b border-neutral-500 '>
                            { window.location.pathname==='/search/:term'?<>
                            </>
                            :
@@ -552,7 +551,7 @@ function Navbar({
                            <a
                            key={item.name}
                            href={item.href}
-                           className="flex items-center px-4 border-b border-neutral-500 rounded-md p-3 hover:bg-neutral-200 bg-white"
+                           className="flex items-center px-4 border-b border-neutral-500 rounded-md p-3 hover:bg-neutral-200 "
                            >
                            <item.icon className="h-6 w-6 flex-shrink-0 text-black hover:text-orange-500" aria-hidden="true" />
                            <span className="ml-3 text-sm font-semibold text-black hover:text-orange-500">

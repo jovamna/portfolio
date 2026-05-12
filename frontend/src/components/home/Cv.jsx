@@ -16,10 +16,12 @@ function Cv() {
 
   return (
     <div  className='curriculum h-[100%] w-[100%] flex  py-8 flex justify-center items-center'>
-       <div className="cv overflow-hidden bg-neutral-600 sm:rounded-3xl max-w-[94.7%] mx-auto max-w-7xl  px-4 sm:px-6 lg:px-8">
+       <div className="cv overflow-hidden sm:rounded-3xl max-w-[94.7%] mx-auto max-w-7xl  px-4 sm:px-6 lg:px-8">
 
            <div className="px-4 py-2 sm:px-6">
-          <h3 className="text-xl font-medium  text-white">Infomacion Curricular</h3>
+          <h3 className="kaushan text-xl lg:text-5xl font-extrabold text-black text-center underline underline-offset-8 ">
+            Infomacion Curricular
+            </h3>
           <p className="mt-1 max-w-2xl text-sm text-gray-200">Detalles Personales</p>
            </div>
 
@@ -30,27 +32,27 @@ function Cv() {
 
              <div className="bg-white pt-[12px] ">
           <div className="bg-gray-50 px-4 mt-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500 bg-neutral-200">Full name</dt>
+            <dt className="text-sm font-medium text-black bg-neutral-400">Full name</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 bg-neutral-200">Jovamna Medina</dd>
           </div>
 
           <div className="bg-gray-50  px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500 bg-neutral-200">Application for</dt>
+            <dt className="text-sm font-medium text-black  bg-neutral-400">Application for</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 bg-neutral-200">Backend Developer</dd>
           </div>
 
           <div className="bg-gray-50 px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500 bg-neutral-200">Email address</dt>
+            <dt className="text-sm font-medium text-black  bg-neutral-400">Email address</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 bg-neutral-200">jocoderina@gmail.com</dd>
           </div>
 
           <div className="bg-white px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500 bg-neutral-200">Salary expectation</dt>
+            <dt className="text-sm font-medium text-black  bg-neutral-400">Salary expectation</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 bg-neutral-200">Según convenio</dd>
           </div>
 
           <div className="bg-gray-50 px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500 bg-neutral-200">About</dt>
+            <dt className="text-sm font-medium text-black  bg-neutral-400">About</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 bg-neutral-200">
             💎 I am passionate about Full Stack development in Python with Django Rest Framework and javascript, I have basic notions in react, redux
             <br/>

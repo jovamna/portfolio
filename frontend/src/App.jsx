@@ -13,9 +13,9 @@ import PoliticaCookies from './containers/pages/PoliticaCookies'
 import Signup from './containers/auth/Signup';
 import Login from './containers/auth/Login';
 import Dashboard from './containers/auth/Dashboard';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+
 import "./styles/index.css";
-import jova from "./assets/img/logo/jova.png";
+
 import { useEffect, useState } from 'react';
 import Logo from './containers/inicio/Logo';
 
@@ -24,20 +24,47 @@ import Logo from './containers/inicio/Logo';
 function App() {
   const [showLogo, setShowLogo] = useState(true);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowLogo(false);
-    }, 3000); // Ajusta el tiempo en milisegundos a la cantidad de tiempo que desees mostrar el logo
+  //useEffect(() => {
+  //  const timer = setTimeout(() => {
+  //    setShowLogo(false);
+ //   }, 3000); // Ajusta el tiempo en milisegundos a la cantidad de tiempo que desees mostrar el logo
 
-    return () => clearTimeout(timer);
-  }, []);
+ //   return () => clearTimeout(timer);
+
+
+
+ // }, []);
+
+
+
+
+
+
+
+
+
+  //useEffect(() => {
+    // 2. Aquí manejas el título principal de forma nativa
+  //  document.title = "Portafolio Oficial de Jovamna Medina | Full Stack Developer & Arte Digital";
+    
+    // Si quieres cambiar el meta description dinámicamente:
+  //  const metaDesc = document.querySelector('meta[name="description"]');
+  //  if (metaDesc) {
+ //     metaDesc.setAttribute("content", "Portafolio oficial de Jovamna Medina: Full Stack Developer especializada en Django/React.");
+ //   }
+
+  //  const timer = setTimeout(() => {
+  //    setShowLogo(false);
+  //  }, 3000);
+
+  //  return () => clearTimeout(timer);
+ // }, [])
+
+
 
   return (
 
-    <HelmetProvider>
-
-     
-  <Helmet>
+    <>
     {/* 1. Títulos y Metadatos Principales */}
     <title>Portafolio Oficial de Jovamna Medina | Full Stack Developer & Arte Digital</title>
     <meta name="description" content="Portafolio oficial de Jovamna Medina: Full Stack Developer especializada en Django/React y creadora de arte digital con IA + Photoshop." />
@@ -54,7 +81,7 @@ function App() {
     <meta property="og:url" content="https://www.jovamnamedina.com/" />
     <meta property="og:image" content="https://www.jovamna.medina/twitter.png"/>
     <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
+   <meta property="og:image:height" content="630" />
     <meta property="og:type" content="website" />
 
     {/* 3. Twitter Cards */}
@@ -63,35 +90,18 @@ function App() {
     <meta name="twitter:image" content="https://www.jovamna.medina/twitter.png" />
     <meta name="twitter:card" content="summary_large_image" />
 
-    {/* 4. JSON-LD Schema.org */}
-    <script type="application/ld+json">
-      {`
-        {
-          "@context": "https://schema.org",
-          "@type": "Person",
-          "name": "Jovamna Medina",
-          "url": "https://www.jovamnamedina.com",
-          "sameAs": [
-            "https://www.linkedin.com/in/jovamna",
-            "https://x.com/FullStackmed",
-            "https://www.instagram.com/muckas.ai/"
-          ],
-          "jobTitle": "Full Stack Developer & Digital Artist",
-          "worksFor": {
-            "@type": "Organization",
-            "name": "Jovamna Medina Projects"
-          }
-        }
-      `}
-    </script>
-  </Helmet>
+    
+
+
+
+
 
      {/*RUTAS DEL PROJECTO */}
 
       <Provider store={store}>
         <Router>
 
-        <div>
+   
         {/*showLogo ? <Logo /> :   */   }
   
 
@@ -126,13 +136,13 @@ function App() {
 
 
   
-      </div>
+
        
         </Router>
       </Provider>
 
-
-      </HelmetProvider>
+    </>
+   
  
   );
 }

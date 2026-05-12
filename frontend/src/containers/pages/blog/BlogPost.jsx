@@ -16,7 +16,6 @@ import autorblog from '../../../assets/img/users/autorblog.jpg';
 import enviarlo from '../../../assets/img/users/enviarlo.png';
 import vistas from '../../../assets/img/vistas.png';
 import "../../../styles/index.css";
-import { Helmet } from 'react-helmet-async';
 import { Link, useParams} from "react-router-dom";
 
 
@@ -139,6 +138,83 @@ function BlogPost({
     };
 
 
+{/**SEO */}
+
+useEffect(() => {
+    if (post) {
+      // 1. Título con palabras clave (Keywords)
+      document.title = `${post.title} | Jovamna Medina - Full Stack Django & React`;
+
+      // 2. Descripción técnica para Google
+      let metaDescription = document.querySelector('meta[name="description"]');
+      if (!metaDescription) {
+        metaDescription = document.createElement('meta');
+        metaDescription.name = 'description';
+        document.head.appendChild(metaDescription);
+      }
+      // Combinamos el título del post con tus habilidades principales
+      metaDescription.content = `${post.title}. Articulo de Jovamna Medina, Full Stack Developer experta en Django, React y Redux.`;
+
+      // 3. Meta tags: Open Graph y Twitter
+      const metaTags = [
+        { property: 'og:title', content: `${post.title} | Jovamna Medina - Dev Django/React` },
+        { property: 'og:description', content: `Explora este post de Jovamna Medina, especialista en desarrollo Full Stack con Django, React y Redux.` },
+        { property: 'og:image', content: post.image || 'https://www.jovamnamedina.com/og-image-tech.png' },
+        { property: 'og:type', content: 'article' },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:label1', content: 'Tech Stack' }, // Dato extra para Twitter
+        { name: 'twitter:data1', content: 'Django, React, Redux, PostgreSQL' }
+      ];
+
+      metaTags.forEach(({ property, name, content }) => {
+        const attribute = property ? `meta[property="${property}"]` : `meta[name="${name}"]`;
+        let metaTag = document.querySelector(attribute);
+        if (!metaTag) {
+          metaTag = document.createElement('meta');
+          if (property) metaTag.setAttribute('property', property);
+          if (name) metaTag.setAttribute('name', name);
+          document.head.appendChild(metaTag);
+        }
+        metaTag.content = content || '';
+      });
+
+      // 4. JSON-LD (Esto le fascina a Google)
+      let scriptJsonLd = document.querySelector('script[data-schema="blog-post"]');
+      if (!scriptJsonLd) {
+        scriptJsonLd = document.createElement('script');
+        scriptJsonLd.type = 'application/ld+json';
+        scriptJsonLd.setAttribute('data-schema', 'blog-post');
+        document.head.appendChild(scriptJsonLd);
+      }
+
+      scriptJsonLd.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        'headline': post.title,
+        'author': {
+          '@type': 'Person',
+          'name': 'Jovamna Medina',
+          'jobTitle': 'Full Stack Developer',
+          'knowsAbout': ['Django', 'React', 'Redux', 'Python', 'JavaScript', 'SQL'] // <-- ¡Esto es SEO puro!
+        },
+        'publisher': {
+          '@type': 'Organization',
+          'name': 'Jovamna Medina Dev',
+          'logo': {
+            '@type': 'ImageObject',
+            'url': 'https://www.jovamnamedina.com/logo.png'
+          }
+        },
+        'mainEntityOfPage': {
+          '@type': 'WebPage',
+          '@id': `https://www.jovamnamedina.com/blog/post/${post.slug}`
+        }
+      });
+    }
+  }, [post]);
+
+
+{/**FIN SEO */}
 
      
 
@@ -148,42 +224,6 @@ function BlogPost({
     <FullWidthLayout>
 
           
-
-
-           <Helmet>
-  {post ? (
-    <>
-      {/* 1. Título Dinámico (Ya lo tienes) */}
-      <title>{post.title} | Portafolio, Blog | Jovamna Medina</title>
-
-      {/* 2. Meta Descripción y Keywords */}
-      <meta name="description" content={post.summary} />
-      <meta name="keywords" content={`${post.title}, ${post.summary}`} />
-
-      <meta name="keywords" content={post?.tags?.join(', ') || ''}/>
-
-      {/* 3. Canonical URL */}
-      <link rel="canonical" href={`https://www.jovamnamedina.com/blog/post/${post.slug}`} />
-
-      {/* 4. Open Graph (Redes Sociales) */}
-      <meta property="og:title" content={post.title} />
-      <meta property="og:description" content={post.summary} />
-      <meta property="og:url" content={`https://www.jovamnamedina.com/blog/post/${post.slug}`} />
-      <meta property="og:image" content={post.featuredImageURL} />
-      <meta property="og:type" content="article" />
-
-      {/* 5. Twitter Cards */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={post.title} />
-      <meta name="twitter:description" content={post.summary} />
-      <meta name="twitter:image" content={post.featuredImageURL} />
-    </>
-  ) : (
-    <LoadingCard />
-  )}
-</Helmet>
-
-
 
 
 
