@@ -12,14 +12,15 @@
     <meta name="description" content="{{ seo_description|default:'Portfolio profesional de Desarrollo Web Full Stack. arquitectura de software, interfaces interactivas y optimización de e-commerce.' }}">
     <meta name="robots" content="{{ seo_robots|default:'index,follow' }}">
 
+
+        <!-- Canonical -->
+    <link rel="canonical" href="{{ canonical_url|default:request.build_absolute_uri }}">
+
     <!--------------------GOOGLE--------->
-    <meta name="image" content="https://jovamnamedina.com/custom-static/images/googleweb.jpg">
 
 
-    <!-- Canonical -->
+
   
-    <link rel="canonical" href="{{ canonical_url }}">
-
 
 
 
@@ -30,11 +31,10 @@
     <meta property="og:title" content="{{ og_title|default:seo_title|default:'Jovamna Medina| Portfolio profesional de Desarrollo Web Full Stack' }}">
     <meta property="og:description" content="{{ og_description|default:seo_description|default:'Portfolio profesional de Desarrollo Web Full Stack. arquitectura de software, interfaces interactivas y optimización de e-commerce.' }}">
     <meta property="og:image:alt" content="{{ og_image_alt|default:seo_title|default:'Jovamna Medina| Portfolio profesional de Desarrollo Web Full Stack' }}">
-    <meta property="og:url" content="{{ canonical_url }}">
-    <!--meta property="og:image" content="https://www.jovamnamedina.com/custom-static/images/google.png"   <meta property="og:image" content="{{ seo_image }}">-->
-    <meta property="og:image" content="https://jovamnamedina.com/custom-static/images/facebookweb.jpg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="{{ canonical_url|default:request.build_absolute_uri }}">
+    <meta property="og:image" content="{{ seo_image }}">-->
+    <meta name="image" content="https://jovamnamedina.com/custom-static/images/googleweb.jpg">
+
 
 
 
@@ -70,22 +70,46 @@
 
     <!-- Preload & Performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="dns-prefetch" href="https://www.jovamnamedina.com">
+    <link rel="dns-prefetch" href="https://jovamnamedina.com">
 
     <!-- JSON-LD Structured Data (Muy Importante) -->
-    {% if jsonld_organization %}
-        <script type="application/ld+json">{{ jsonld_organization|safe }}</script>
-    {% endif %}
-    {% if jsonld_website %}
-        <script type="application/ld+json">{{ jsonld_website|safe }}</script>
-    {% endif %}
-    {% if jsonld_primary %}
-        <script type="application/ld+json">{{ jsonld_primary|safe }}</script>
-    {% endif %}
-    {% if jsonld_breadcrumbs %}
-        <script type="application/ld+json">{{ jsonld_breadcrumbs|safe }}</script>
-    {% endif %}
+    
 
+
+
+
+
+
+
+
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Jovamna Medina",
+  "url": "https://jovamnamedina.com",
+  "jobTitle": "Full Stack Developer",
+  "description": "Desarrolladora Full Stack especializada en Django y React. Arquitectura de software y arte digital.",
+  "sameAs": [
+    "https://github.com/jovamna",
+    "https://www.linkedin.com/in/jovamna-medina/"
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "url": "https://jovamnamedina.com",
+  "name": "Jovamna Medina Portfolio",
+  "author": {
+    "@type": "Person",
+    "name": "Jovamna Medina"
+  }
+}
+</script>
 
 
 
