@@ -148,7 +148,7 @@ target/
 # Rope project settings
 .ropeproject
 .idea/
-data/
+
 
 
 
