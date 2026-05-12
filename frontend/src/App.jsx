@@ -77,7 +77,7 @@ function App() {
   <meta property="og:title" content="Jovamna Medina | Full Stack & Arte Digital con IA" />
   <meta property="og:description" content="Desarrollo e-commerce full stack y creo imágenes digitales únicas con IA + edición en Photoshop. Visita mi tienda." />
   <meta property="og:url" content="https://jovamnamedina.com/" /> {/* Sin WWW */}
-  <meta property="og:image" content="https://jovamnamedina.com/googleweb.jpg"/> {/* Corregido el punto extra */}
+  <meta property="og:image" content="https://jovamnamedina.com/custom-static/images/googleweb.jpg"/> {/* Corregido el punto extra */}
 
   <meta property="og:type" content="website" />
 
@@ -85,7 +85,7 @@ function App() {
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Jovamna Medina | Full Stack + Arte Digital IA" />
   <meta name="twitter:description" content="Full Stack Dev que crea su propio e-commerce y vende arte digital hecho con IA + Photoshop." />
-  <meta name="twitter:image" content="https://jovamnamedina.com/twitter.png" /> {/* Corregido el punto extra */}
+  <meta name="twitter:image" content="https://jovamnamedina.com/custom-static/images/facebookweb.jpg" /> {/* Corregido el punto extra */}
 
     
 
