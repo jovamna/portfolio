@@ -62,16 +62,51 @@ function Home() {
     return () => clearInterval(interval);
   }, [components, currentComponentIndex]);
 
+
+
+
+  useEffect(() => {
+  document.title = "Jovamna Medina | Full Stack Developer";
+  
+  let metaDescription = document.querySelector('meta[name="description"]');
+  if (metaDescription) {
+    metaDescription.content = "Bienvenido al Portfolio de Jovamna Medina, donde el desarrollo web y el arte digital se encuentran.";
+  }
+}, []);
+
+
+
+
+
+
   return (
     <>
-      <div className="wrapper">
-        {visibleComponents.map((item, index) => (
-          <div key={index} id={`component-${index}`} className={item.isNavbar ? '' : 'fade-in'}>
-            
+      <div className="wrapper ">
+
+   
+
+          
+          {visibleComponents.map((item, index) => (
+          <div 
+            key={index} 
+            id={`component-${index}`} 
+            // Aquí 'flex p-2' siempre se aplica, y lo demás depende de la condición
+            //className={`flex p-2 ${item.isNavbar ? 'bg-blue-500' : 'bg-red-500 fade-in'}`}
+            className={` ${item.isNavbar ? '' : 'fade-in'}`}>
             {item.component}
           </div>
-        ))}
+          ))}
         <ChatBot />
+
+
+ 
+
+
+
+
+
+
+
       </div>
     </>
   );

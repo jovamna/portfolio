@@ -18,35 +18,45 @@ export default function Skill() {
 
   return (
 
-    <div  className='skill h-[100%] w-[100%] py-8 flex items-center justify-center'>
+    <div  className='skill 
+    h-[100%] w-[100%]  
+    flex items-center justify-center 
+    py-4 md:py-[30px] lg:py-[40px] 2xl:py-[40px]'>
 
-   {/*bg-neutral-600 */}
-       <div className="skill-tres  flex flex-col isolate  mx-auto isolate shadow-2xl  sm:rounded-3xl m-flex-columns  justify-between  items-center w-[95%]  ">
+        {/*bg-neutral-600 */}
+        <div className="skill-tres  
+        flex flex-col isolate  mx-auto isolate  m-flex-columns  
+        justify-between  items-center lg:w-[100%]  w-[100%] h-[100%] max-w-[95%] mx-auto px-2">
+
+              
+
  
-      
                  {/*H1 VA CON CSS  .skills-page h1 */}
-                 <h1 className='kaushan underline underline-offset-8 lg:text-5xl text-4xl font-bold text-center tracking-tight text-black sm:text-4xl  md:text-center mb-[20px]'>
+                 <h1 className='kaushan 
+                 underline underline-offset-8 
+                 lg:text-5xl text-4xl font-bold text-center tracking-tight 
+                 text-black sm:text-4xl  md:text-center
+                  mb-[30px] lg:mb-[40px] 2xl:mb-[40px]'>
                  Skills
                  </h1>
       
-      
-
-          <div className="skill-dos flex flew-row  rounded-3xl sm:rounded-3xl  justify-between  justify-center items-center  w-[98%] mb[65px]  py-2">
-       
-         
-             <SkillsPage className="skills-page-movil"/>
-             <SkillCard />
-
-
-          </div>
+                 <div className="flex lg:flex-row 
+                 lg:w-[100%] w-[100%] 2xl:w-[100%] 2xl:h-[100%] xl:h-[100%]
+                 flex-col justify-between  lg:justify-between
+                  justify-center items-center py-4 ">
+                   <SkillsPage className="skills-page-movil"/>
+                   <SkillCard />
+                 </div>
      
 
 
 
 
 
-
-          <div className="top-center-skill flex flex-col justifiy-center mx-auto items-center w-full h-[40px]">
+           {/**BOTON ARRIBA */}
+          <div className="top-center-skill 
+          flex flex-col justifiy-center mx-auto items-center 
+          mt-[30px] md:mt-[40px] lg:mt-[40px] 2xl-mt-[50px]">
             <button className="semicirculo"
             onClick={handleScrollToTop}  
             >

@@ -177,33 +177,39 @@ function Navbar({
 
   return (
      //{/* CONTAINER PRINCIPAL 1 DEL NAVBAR DEL PC Y MOVIL  sm:px-6 */}
-    <div className=" z-index fixed w-full  lg:w-full xl:w-[100%] opacity-95 px-4 lg:px-8 bg-white ">
+    <div className="z-index fixed 
+    w-full lg:w-full xl:w-[100%]  
+    sm:h-[60px] md:h-[60px] bg-white opacity-95">
 
       {/* CONTAINER GUIA ENGLOBA MENU GRANDE Y MENU MOVIL*/}
-      <Popover className="navbar-menu  lg:h-[3.5em] xl:h-[3.7em] h-[3.5em]">
+      <Popover className="flex w-[100%] 
+      h-[48px] md:h-[60px] sm:h-[60px] lg:h-[3.5em] xl:h-[3.7em] 2xl:h-[5em] 
+      md:py-0">
+
 
           
          {/* 1 CONTAINER PRINCIPAL CONTIENE DEL MENU DE PANTLLA INCLUYE SOLO EL BOTON ICONO DEL MENU MOVIL QUE ESTA OCULTO */}
-         {/*IMPORTANTE EN EL CSS INDEX PONER LA ALTURA HEIGHT 50 con py-7 EL MENU SE HACE MAS LARGO*/}
-          <div className="navbar-logo flex items-center justify-between md:justify-start w-full h-[3.5em]">
+         {/*IMPORTANTE EN EL CSS INDEX PONER LA ALTURA HEIGHT 50  navbar-logo con py-7 EL MENU SE HACE MAS LARGO*/}
+          <div className="flex flex-row md:flex 
+          w-[100%] lg:w-[100%] xl:w-[100%] 2xl:w-[100%]
+          h-[48px]  sm:h-[60px]  md:h-[60px] 
+          px-2 lg:px-8">
 
-         
 
 
-
-
-             {/*LOGO DEL MENU ORDENADOR Y MOVIL sm:w-20 md:w-24 lg:w-32 */}
-             {/*PARA QUE EL ICONO SE CENTRE inline-flex items-center w-1/4*/}
-              <div className="flex logo w-[26.7%] h-[2.5em]">
-            <a href="/">
-            <img className="image-logo lg:h-[60px] flex"
-            src={logo}
-            alt="logo"
-            //width={150}
-            //height={350}
-            />
-            </a>
-             </div>
+             {/*LOGO DEL nav ORDENADOR Y MOVIL sm:w-20 md:w-24 lg:w-32 */}
+             {/*PARA QUE EL ICONO SE CENTRE inline-flex items-center  logo    w-1/4*/}
+              <div className="flex justify-start 
+               w-[38%] lg:w-[21%] 
+               h-[48px] md:h-[60px] sm:h-[60px] lg:h-[60px]">
+                 <NavLink to= "/">
+                    <img className="image-logo w-full h-full md:h-full md:w-full lg:h-[60px] object-contain"
+                    src={logo}
+                    alt="logo"
+                           
+                    />
+                </NavLink>
+              </div>
              {/*FIN LOGO DEL MENU ORDENADOR Y MOVIL*/} 
 
 
@@ -211,27 +217,37 @@ function Navbar({
         
            {/*ICONO MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL */}
            {/*MOVIL ICONO CASA QUE ABRE EL MENU ESCONDIDO ICONO-1LADO DERECHO*/}
-           <div className="menu-movil md:hidden h-[2.5em] flex flex-row items-center justify-end w-[65%]">
+           <div className=" 
+           lg:hidden xl:hidden 2xl:hidden 
+           h-[48px] md:h-[70px] md:w-[65%] 
+           flex flex-row justify-end w-[65%]">
                  
 
 
-               <Popover.Button className="icon-search-bihome flex flex-row justify-end items-center hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-0 focus:ring-inset focus:ring-indigo-500 h-[2.5em] w-[26%] ">
+               <Popover.Button className="icon-search-bihome 
+               flex flex-row justify-end items-center 
+               hover:bg-gray-100 hover:text-gray-500 
+               focus:outline-none 
+               h-[2.5em] w-[60%]">
                <span className="sr-only">Open menu</span>
 
 
                 {/*BOTON LUPA DEL BUSCADOR */}
-              
-                   <MagnifyingGlassIcon className="icon-search h-[20px] w-[20px] text-zinc-800 hover:text-gray-400 mr-4 " aria-hidden="true" />
-                
+                  <div className=" flex w-[26%]">
+                   <MagnifyingGlassIcon className="icon-search 
+                   h-[20px] w-[20px] 
+                   text-zinc-800 
+                   hover:text-gray-400 " aria-hidden="true" />
+                 </div>
                 {/* FIN BUSCADOR */}
 
-              
-                 <BiHome className={classNames(
+                <div className="w-[26%] flex">
+                   <BiHome className={classNames(
                         open ? 'text-zinc-800' : 'text-zinc-600',
                         'h-[22px] w-[22px] group-hover:text-gray-500  icon-bihome'
                       )}
                       aria-hidden="true"/>
-                
+                </div>
 
 
                </Popover.Button>
@@ -241,18 +257,24 @@ function Navbar({
 
 
 
-
-
-
-
            {/*MENU PANTALLA GRANDE */}     
            {/*IMPORTANTE ml-44 PARA MOVER A LADO DERECHO EN MENU */}
-           <Popover.Group as="nav" className="navbar-portfolio-pc hidden h-[3rem] w-[80%]  flex justify-between md:flex">
+           <Popover.Group as="nav" className="
+           hidden md:hidden
+           lg:w-[80%] xl:w-[80%] 2xl:w-[80%]
+            lg:flex lg:flex-row justify-between items-center justify-center 
+            lg:block xl:block 2xl:block space-x-11
+            md:flex">
 
   
 
+           <div className='lg:w-[85%] xl:w-[80%] 2xl:w-[82%] inline-flex space-x-8'>
+
           <Link
-           className={`nav-item hover:bg-neutral-100 hover:text-violet-700 text-black font-semibold border-b-2 border-transparent hover:border-violet-700  h-[100%]  inline-block px-3 py-4 ${currentRoute === 'home' ? 'bg-neutral-300 text-white' : ''}`}
+           className={`nav-item hover:bg-neutral-100 
+            hover:text-violet-700 text-black font-semibold 
+            border-b-2 border-transparent hover:border-violet-700  
+            h-[100%]  inline-block px-3 py-4 ${currentRoute === 'home' ? 'bg-neutral-300 text-white' : ''}`}
            to="home"
            spy={true}
            smooth={true}
@@ -330,8 +352,16 @@ function Navbar({
 
         
 
+          </div>
+
+
+
+
+
+        <div className='inline-flex justify-between justify-end lg:w-[15%]'>
+
             {/* BUSCADOR */}
-            <div className='flex space-x-10'>
+            <div className='inline-flex lg:w-[86%]'>
             <button
              onClick={() => {
              setIsSearchOpen(!isSearchOpen);
@@ -358,30 +388,20 @@ function Navbar({
               </div>
              </div>
              </div>            
-    {/* FIN BUSCADOR */}
+            {/* FIN BUSCADOR */}
 
 
 
-
-
-
-
-
-
-
-
-
-              
 
          
              {/* MENU DESLIZANTE*/}
-             <Popover className="relative flex justify-end">
+             <Popover className="inline-flex lg:w-[14%] justify-end">
              {({ open }) => (
               <>
 
                  <Popover.Button
                  className={classNames(open ? 'text-gray-900' : 'text-white',
-                 'group inline-flex items-center rounded-md  text-base font-medium focus:outline-none focus:ring-0'
+                 'group inline-flex  rounded-md  text-base font-medium focus:outline-none focus:ring-0'
                  )}>
 
                 
@@ -477,6 +497,11 @@ function Navbar({
              {/* FIN MENU DESLIZANTE BLOG MENU PANTALLA GRANDE TITULO ICONO DEL*/}
              {/* FINAL BLOG BLOG BLOG BLOG BLOG BLOG BLOG MENU MENU MENU BLOG BLOG BLOG BLOG */}
       
+      </div>
+
+
+
+
            </Popover.Group>
          </div>
           {/*FIN SUBCONTAINER PRINCIPAL CONTIENE DEL MENU DE PANTALLA */}

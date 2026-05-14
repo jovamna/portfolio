@@ -12,13 +12,34 @@ const handleVideoLoad = () => {
 };
 
 return (
-  <>
-    <div className={`portada-blog ${videoLoaded ? 'loaded' : ''} w-[100%] h-[500px] flex flex-col`}>
-      <video
+     <>
+        <div className={` ${videoLoaded ? 'loaded' : ''} w-[100%] h-[390px] sm:h-[590px] md:h-[650px]
+               lg:h-[600px]
+               2xl:h-[800px] 2xl:w-[100%] overflow-hidden lg:w-[100%] flex flex-row`}>
+
+
+
+         
+
+            
+            <div className=" bg-opacity-50 bg-black text-white p-8 w-[40%] inset-0 flex flex-col justify-center items-center z-10 ">
+
+            <h1 className="text-4xl underline underline-offset-4 font-bold tracking-tight text-sans text-white pt-16 sm:text-6xl mb-2 text-center">
+            Blog
+            </h1>
+            <p className="border-gray-300 border-2 text-white font-bold py-2 px-4 rounded">
+            <a href="/" className="hover:text-gray-400">
+            AI & Code Chronicles
+            </a>
+            </p>
+            </div>
+
+       <div className="w-[60%]">
+         <video
         autoPlay
         loop
         muted
-        className={`portada-blog-video object-cover h-[100%] z-0 ${videoLoaded ? 'loaded' : ''}`}
+        className={` w-full h-full object-cover z-0 ${videoLoaded ? 'loaded' : ''}`}
         onLoadedData={handleVideoLoad}
       >
                 <source 
@@ -37,25 +58,16 @@ return (
 
 
 
-            
-            <div className="error-message bg-opacity-50 bg-black text-white p-8 max-w-lg absolute inset-0 flex flex-col justify-center items-center z-10 h-[500px] ">
+       </div>
+              
 
-            <h1 className="text-4xl underline underline-offset-4 font-bold tracking-tight text-sans text-white pt-16 sm:text-6xl mb-2 text-center">
-            Blog
-            </h1>
-            <p className="border-gray-300 border-2 text-white font-bold py-2 px-4 rounded">
-            <a href="/" className="hover:text-gray-400">
-            AI & Code Chronicles
-            </a>
-            </p>
-            </div>
   
-              </div>
+        </div>
 
          
-</>
+    </>
 
     );
-}
+ }
 
 export default Header

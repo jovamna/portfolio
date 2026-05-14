@@ -9,13 +9,13 @@ import hardSkillData from "./data/data";
 
 const SkillsPage = () => {
   return (
-    <div className="skills-page-movil w-full h-auto mx-auto sm:py-6 sm:rounded-3xl mr-2">
+    <div className="lg:w-[80%] w-full  2xl:w-[75%] 2xl:h-[620px]">
       <Tab>
         {skillsTabData.map((tabTitle, tabIndex) => (
           <TabPanel title={tabTitle} key={tabIndex}>
             
             {/* Grid de iconos */}
-            <div className='tab__content grid grid-cols-4 w-full gap-4'>
+            <div className='tab__content grid grid-cols-4 w-full 2xl:w-full gap-4'>
               
               {hardSkillData
                 .filter(value => value.tabs.includes(tabTitle))
@@ -28,7 +28,7 @@ const SkillsPage = () => {
                     target="_blank"
                     rel="noreferrer"
                     title={skill.name}
-                    className="group  flex flex-col items-center gap-[2px] text-center bg-yellow-400/10 transition-all duration-250"
+                    className="group  flex flex-col items-center gap-[2px] text-center transition-all duration-250"
                   >
                     {/* Efecto Scale: Usamos la clase 'group-hover' para que la imagen escale cuando pases el mouse por el enlace */}
                     <img 

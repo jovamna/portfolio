@@ -61,7 +61,7 @@ export default function blog(state = initialState, action) {
         case GET_BLOG_SUCCESS:
             return {
                 ...state,
-                post: payload.post
+                post: payload
             }
         case GET_BLOG_FAIL:
             return {

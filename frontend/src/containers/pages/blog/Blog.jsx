@@ -50,18 +50,18 @@ function Blog({
 
       /**SEO */
       useEffect(() => {
-  // 1. Cambiamos el título de la pestaña
-  document.title = "Blog | Jovamna Medina - Full Stack Developer";
+       // 1. Cambiamos el título de la pestaña
+       document.title = "Blog | Jovamna Medina - Full Stack Developer";
 
-  // 2. Actualizamos la meta-descripción (opcional pero recomendado)
-  let metaDescription = document.querySelector('meta[name="description"]');
-  if (metaDescription) {
-    metaDescription.content = "Explora artículos sobre desarrollo web, Django, React y arte digital en el blog oficial de Jovamna Medina.";
-  }
+       // 2. Actualizamos la meta-descripción (opcional pero recomendado)
+       let metaDescription = document.querySelector('meta[name="description"]');
+       if (metaDescription) {
+       metaDescription.content = "Explora artículos sobre desarrollo web, Django, React y arte digital en el blog oficial de Jovamna Medina.";
+       }
 
-  // Al ser la página general del blog, no solemos necesitar un JSON-LD 
-  // tan complejo como el del post individual, con esto basta.
-}, []);
+      // Al ser la página general del blog, no solemos necesitar un JSON-LD 
+      // tan complejo como el del post individual, con esto basta.
+      }, []);
 
 
      
@@ -76,7 +76,7 @@ function Blog({
 
 
 
-           <div className="wrapper ">
+           <div className="wrapper">
                <Header />
        
                 <div className="reset-password z-50 absolute w-[40%] max-auto">

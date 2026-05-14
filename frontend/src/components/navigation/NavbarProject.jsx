@@ -94,109 +94,9 @@ function NavbarProject({
       // Redirige al usuario a la página de inicio u otra página después del logout
       navigate('/blog'); 
   };
-  
 
 
-  //DASHBOARD Y LOGOUT
-  const authLinks = (
-  <Menu>
-      <div className='user-activo w-[13%] flex flex-row justify-around px-3 h-[2rem]'>
-   
-      <Menu.Button className="hola-button flex flex-row justify-around justify-center items-center focus:outline-none w-[100%] h-[1.6rem]">
-           <span className='hola w-[70%] inline-block  text-neutral-950 font-semibold hover:text-gray-600 font-sans text-xs'>
-            Hola {user && user.first_name}
-            </span> <span className="hola-bola newsletter-animation  inset-0 flex text-black  ml-[2px] mt-[4px] text-[0.5rem] text-center">
-            ⚪
-            </span> 
-      </Menu.Button>
-  
-
-
-   
-      <Menu.Items 
-      className="origin-top-right absolute right-0 mt-[32.6px] w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-
-        <div className="py-1">
-          <Menu.Item>
-            {({ active }) => (
-              <Link
-                to="/profile"
-                className={classNames(
-                  active ? 'bg-gray-500 text-white' : 'text-zinc-600 font-semibold',
-                  'block px-4 py-2 text-sm'
-                )}
-              >
-                Profile
-              </Link>
-            )}
-          </Menu.Item>
-                
-          {/*FORM DE LOGOUT */}
-          <form method="POST" action="/blog">
-            <Menu.Item>
-              {({ active }) => (
-                <button
-                  onClick={() => {
-                    console.log('Logout button clicked'); // Agrega un console.log aquí
-                    handleLogout();
-                  }}
-                  className={classNames(
-                    active ? 'bg-gray-500 text-white' : 'text-zinc-600 font-semibold',
-                    'block w-full text-left px-4 py-2 text-sm'
-                  )}
-                >
-                  Sign out
-                </button>
-              )}
-            </Menu.Item>
-          </form>
-        </div>
-
-
-
-
-
-      </Menu.Items>
-      </div>
-  </Menu>
-)
-
-
-
-
-//INICIAR SESION O REGISTRARSE
-const guestLinks = (
-  <Fragment>
-
-    <div className='container-movil-login-registro w-[12.7%] flex flex-row justify-around h-[1.8rem]'>
-         <div className=' '>
-            <Link to="/login">
-            <img className="hover:text-gray-500"
-            src={loginUser}
-            alt="login"
-            width={20}
-            height={10}
-            />
-            </Link>
-            </div>
-
-            <div className=' '>
-            <Link to="/login" className="nav-item hover:text-gray-500 lg:text-sm sm:text-xs text-xs text-neutral-600 font-semibold">
-              <p className=''>
-              Inicia sesion 
-              </p>
-           </Link>
-           </div>
-          
-    </div>
-
-  </Fragment>
-)
-
-
-
-
-  // lista de posts
+   // lista de posts
   const renderBlogList = (blog_list) => {
     return (
       <div className="bg-white px-4 w-[100%]">
@@ -244,36 +144,159 @@ const guestLinks = (
 
 
 
+
+
+
+
+
+  
+
+
+  //CODIGO PARA LOS ICONOS DE USUARIOS ACTIVOSDASHBOARD Y LOGOUT
+  const authLinks = (
+  <Menu>
+      <div className='w-[13%] lg:w-[18%] flex flex-row h-[2rem]'>
+   
+      <Menu.Button className="hola-button flex flex-row justify-around justify-center items-center focus:outline-none w-[100%] h-[1.6rem]">
+           <span className='hola w-[70%] inline-block  text-neutral-950 font-semibold hover:text-gray-600 font-sans text-xs'>
+            Hola {user && user.first_name}
+            </span> <span className="hola-bola newsletter-animation  inset-0 flex text-black  ml-[2px] mt-[4px] text-[0.5rem] text-center">
+            ⚪
+            </span> 
+      </Menu.Button>
+  
+
+
+   
+      <Menu.Items 
+      className="origin-top-right 
+      absolute right-0 
+      w-56 rounded-md shadow-lg 
+      bg-white ring-1 ring-black 
+      ring-opacity-5 focus:outline-none">
+
+        <div className="">
+          <Menu.Item>
+            {({ active }) => (
+              <Link
+                to="/profile"
+                className={classNames(
+                  active ? 'bg-gray-500 text-white' : 'text-zinc-600 font-semibold',
+                  'block text-sm'
+                )}
+              >
+                Profile
+              </Link>
+            )}
+          </Menu.Item>
+                
+          {/*FORM DE LOGOUT */}
+          <form method="POST" action="/blog">
+            <Menu.Item>
+              {({ active }) => (
+                <button
+                  onClick={() => {
+                    console.log('Logout button clicked'); // Agrega un console.log aquí
+                    handleLogout();
+                  }}
+                  className={classNames(
+                    active ? 'bg-gray-500 text-white' : 'text-zinc-600 font-semibold',
+                    'block w-full text-left px-2 py-2 text-sm'
+                  )}
+                >
+                  Sign out
+                </button>
+              )}
+            </Menu.Item>
+          </form>
+        </div>
+
+
+
+
+
+      </Menu.Items>
+      </div>
+  </Menu>
+)
+
+
+
+
+
+//INICIAR SESION O REGISTRARSE
+const guestLinks = (
+  <Fragment>
+
+    <div className='flex items-center justify-center md:w-[100%] lg:w-[100%] w-[100%] h-[2.5em] lg:h-[3.5em]'>
+
+         <div className='inline-flex  items-center justify-center  w-[30%] md:w-[30%] lg:w-[50%] lg:h-[3.5em] h-[2.5em]'>
+            <Link to="/login">
+            <img className="hover:text-gray-500 w-[26px] h-[24px] lg:w-[30px] lg:h-[28px]"
+            src={loginUser}
+            alt="login"
+           
+            />
+            </Link>
+        </div>
+
+        <div className='inline-flex items-center justify-center w-[70%] md-w-[70%] lg:w-[50%] h-[2.5em] lg:h-[3.5em] '>
+              <p className=' hover:text-gray-500 lg:text-sm sm:text-xs text-xs text-neutral-600 font-semibold'>
+            <Link to="/login" className="">
+          
+              Inicia sesion 
+            
+           </Link>
+             </p>
+        </div>
+          
+    </div>
+
+  </Fragment>
+)
+
+
+
+
+ 
+
+
+
+
+
     
   return (
    
-    <>
-   <div className="navbar-project-movil z-index fixed w-full bg-white opacity-95 px-4 lg:px-8 ">
-      {/*POPOVER PRINCIPAL */}
-      <Popover className=" bg-white lg:h-[3.5em] xl:h-[3.7em] h-[3.5em]">
+     <>
+    <div className="z-index fixed 
+    w-full md:w-full lg:w-full xl:w-[100%] 
+    lg:h-[60px] opacity-95 bg-white">
+
+       {/*POPOVER PRINCIPAL */}
+       <Popover className=" 
+       lg:h-[60px] sm:h-[60px] md:h-[60px] 
+       lg:w-[100%] xl:h-[60px] h-[48px]">
 
 
         {/* 1 CONTAINER PRINCIPAL 1 DEL NAVBAR DEL PC Y  MENU MOVIL ESCONDIDO*/}
-           <div className="navbar-logo flex items-center justify-between md:justify-start w-full h-[3.5em]">
+           <div className="flex flex-row items-center justify-center md:flex 
+          w-[100%] lg:w-[100%] xl:-[100%] 2xl:-[100%]
+          h-[48px]  sm:h-[60px]  md:h-[60px] lg:h-[60px] 
+          px-2 lg:px-8">
 
-
-
-
-
-
-
-
-               {/*PARA QUE EL ICONO SE CENTRE inline-flex items-center */}
-               {/*LOGO DEL MENU DE NAVEGACION ORDENADORY MOVIL */}
-               <div className="flex logo w-[26.7%] h-[2.5em] ">
+             
+               {/*LOGO DEL NAV DE NAVEGACION ORDENADORY MOVIL */}
+               <div className="inline-flex 
+               justify-start 
+               w-[38%] lg:w-[21%] 
+               h-[48px] md:h-[60px] sm:h-[60px] lg:h-[60px]">
                
                <span className="sr-only">Portafolio Jovamna Medina</span>
                <NavLink to= "/">
-               <img className="image-logo lg:h-[60px] flex"
+               <img className="image-logo w-full h-full md:h-full md:w-full lg:h-[60px] object-contain"
                src={logo}
                alt="logo"
-               //width={150}
-               //height={350}
+           
                />
                </NavLink>
                </div>
@@ -283,30 +306,45 @@ const guestLinks = (
  
         {/*MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL */}
         {/*ICONO QUE SE VE SOLO EN MOVIL Y ESTA DENTRO DEL CONTAINER DEL PC. -my-2 -mr-2 rounded-md*/}
-        <div className="menu-movil md:hidden h-[2.5em] flex flex-row  justify-end w-[65%] ">
-                {/*LOGIN Y LOGOUT LOGIN Y LOGOUT */} 
-         
-               {
-               isAuthenticated ? authLinks:guestLinks
-               }
-              
+        <div className=" lg:hidden xl:hidden 2xl:hidden 
+        h-[48px] sm:h-[60px]  md:h-[60px]  
+        flex flex-row w-[62%] 
+        justify-center items-center md:space-x-20 ">
+                   {/*LOGIN Y LOGOUT LOGIN Y LOGOUT */} 
+
+                   <div className="inline-flex py-2 md:py-2 w-[60%] h-[48px] sm:h-[60px] md:h-[60px] md:w-[30%]">
+                       {
+                      isAuthenticated ? authLinks:guestLinks
+                      }
+            
+                   </div>
+               
                 {/*FIN LOGIN Y LOGOUT LOGIN Y LOGOUT */}   
 
-
-               <Popover.Button className=" icon-search-bihome flex flex-row justify-end items-center hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-0 focus:ring-inset focus:ring-indigo-500 h-[2.5em] w-[26%] ">
+                {/**BLOQUE DE LUPA Y BIHOME DESLIZANTE */}
+               <Popover.Button className="icon-search-bihome 
+               flex flex-row justify-end  items-center 
+               hover:bg-gray-100 hover:text-gray-500 md:h-[60px] sm:h-[60px]
+               focus:outline-none h-[2.5em] w-[40%] md-w-[20%]">
                <span className="sr-only">Open menu</span>
 
 
                 {/*BOTON LUPA DEL BUSCADOR */}
-                <div className="search-movil">
-                   <MagnifyingGlassIcon className="icon-search h-[20px] w-[20px]  text-zinc-800 hover:text-gray-400" aria-hidden="true" />
+                <div className=" inline-flex w-[60%] md:h-[60px] sm:h-[60px] md-[30%] justify-center items-center">
+                   <MagnifyingGlassIcon className="icon-search 
+                   h-[20px] w-[20px]  
+                   text-zinc-800 
+                   hover:text-gray-400" aria-hidden="true" />
 
                 </div>
-                  
-                
                 {/* FIN BUSCADOR */}
-              
-                 <div>
+
+
+
+
+
+
+                 <div className="w-[40%] md:w-[10%] inline-flex md:h-[60px] sm:h-[60px] justify-center items-center">
                    <BiHome className={classNames(
                         open ? 'text-zinc-800' : 'text-zinc-600',
                         'h-[22px] w-[22px] group-hover:text-gray-500  icon-bihome'
@@ -319,6 +357,8 @@ const guestLinks = (
 
 
                </Popover.Button>
+
+
         </div>
         {/*FIN MOVIL MENU MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL */}
 
@@ -330,7 +370,17 @@ const guestLinks = (
 
               {/*CONTAINER DEL MENU PANTALLA GRANDE DONDE ESTA HOME, MYPROJECTS Y BLOG */}
               {/*IMPORTANTE ml-44 PARA MOVER A LADO DERECHO EN MENU */}
-              <Popover.Group as="nav" className="hidden justify-between w-4/5  h-[3rem] md:flex py-4">
+              <Popover.Group as="nav" 
+              className="hidden lg:flex items-center justify-between 
+              w-[79%] h-full lg:h-[60px] 
+              lg:block">
+
+
+                
+
+                      {/**SEGUNDO BLOQUE AQUI ESTA EL PROBLEMA QUE ESTE DIV SE QUEDA ABAJO DEL DIV GENERAL*/}
+                      {/** <div className="inline-flex lg:w-[70%] lg:h-[60px] bg-teal-400">*/}
+                 <div className="flex items-center h-full lg:w-[60%]">
          
                   <NavLink to= "/" className="nav-item hover:bg-neutral-100 hover:text-violet-700 border-b-2 border-transparent hover:border-violet-700 inline-block px-3 h-[2rem] text-neutral-600 font-semibold">
                   Home
@@ -349,24 +399,24 @@ const guestLinks = (
                     MyProjects
                   </span>
                   </NavLink>
-
+                 </div>
                  
 
-
-              
+                {/**TERCER BLOQUE ULTIMO E PARTES BUSCADOR USUARIO BIHOME*/}
+                <div className="flex justify-center items-center lg:w-[40%] h-full">
              
-            {/* BUSCADOR */}
-            <div  className='flex space-x-10  h-[2rem] pb-6'>
+                 {/* BUSCADOR */}
+                 <div  className='inline-flex  lg:w-[10%] flex justify-end items-center lg:h-[56px]'>
                 <button
                 onClick={() => {
                 setIsSearchOpen(!isSearchOpen);
                  }}
-                className="text-base font-medium text-gray-500 hover:text-gray-900"
+                className="text-base font-medium text-gray-700 hover:text-gray-900"
                 >
                 {isSearchOpen ? (
                 <FiX className="h-5 w-5 ml-10 text-zinc-500 hover:text-gray-400" aria-hidden="true" />
                  ) : (
-                <MagnifyingGlassIcon className="h-5 w-5 ml-10 text-zinc-500 hover:text-gray-400" aria-hidden="true" />
+                <MagnifyingGlassIcon className="h-5 w-5 ml-10 text-zinc-700 hover:text-gray-700" aria-hidden="true" />
                 )}
                 </button>
               <div
@@ -384,16 +434,20 @@ const guestLinks = (
 
             
                 {/* LOGIN INICIAR SESION */}
-           
-                {
+               <div className="lg:w-[50%] lg:h-[60px] inline-flex">
+                  {
                 isAuthenticated ? authLinks:guestLinks
                 }
+
+
+               </div>
+              
               
 
             
                  {/*ICONO DEL BLOG EN PANTALLA GRANDE*/}
                  {/* BLOG BLOG CON MENU DESLIZANTE rounded-md */}
-                 <Popover className="relative flex justify-end items-center">
+                 <Popover className="inline-flex  lg:w-[10%] flex justify-end items-center lg:h-[56px]">
                   {({ open }) => (
                   <>
 
@@ -488,7 +542,7 @@ const guestLinks = (
                  </Popover>
                  {/* FIN MENU BLOG ICONO EN PANTALLA GRANDE*/}
 
-
+                </div>
 
               </Popover.Group>
 
@@ -498,6 +552,25 @@ const guestLinks = (
           </div>
      
         {/* FIN CONTAINER PRINCIPAL 1 DEL NAVBAR DEL PC Y MOVIL*/}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -563,7 +636,14 @@ const guestLinks = (
                           <span className='text-neutral-800 text-lg hover:text-orange-500'> X</span>
                          
                          
+                      
+                      
                           </Popover.Button>
+
+
+
+
+                          
                          </div>
                          </div>
                            {/*2 FIN CONTAINER DEL ICONO DEL LOGO Y HOME */}
@@ -691,3 +771,5 @@ export default connect(mapStateToProps,{
   get_blog_list,
   load_user,
 })(NavbarProject)
+
+

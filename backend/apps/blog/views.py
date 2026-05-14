@@ -99,42 +99,16 @@ class PostDetailView(APIView):
             post.views += 1
             post.save(update_fields=['views'])
 
-        response_data = {'post': serialized_data}
+        #response_data = {'post': serialized_data}
+        response_data = serialized_data
 
         # Guardar la respuesta en caché
         cache.set(cache_key, response_data, self.CACHE_TIMEOUT)
 
         return Response(response_data, status=status.HTTP_200_OK)
+    
 
 
-class ORIGINALPostDetailView(APIView):
-    authentication_classes = []  # Desactiva la autenticación
-    permission_classes = [AllowAny]  # Permite el acceso a cualquier usuario
- 
-    def get(self, request, post_slug,format=None):
-        #print(post_slug)
-        #print(f"Received request for post_slug: {post_slug}")
-        post = get_object_or_404(Post, slug=post_slug)
-        # Calcula el total de hearts sumando los valores de hearts de todas las revisiones asociadas a la publicación
-        total_hearts = Review.objects.filter(post=post).aggregate(total_hearts=Sum('hearts'))['total_hearts'] or 0
-        serializer = PostSerializer(post)
-        serialized_data = serializer.data
-        serialized_data['total_hearts'] = total_hearts  # Asigna el total de hearts al campo total_hearts
-        #print(f"Serialized data: {serialized_data}")
-        address = request.META.get('HTTP_X_FORWARDED_FOR')
-        if address:
-            ip = address.split(',')[-1].strip()
-        else:
-                ip = request.META.get('REMOTE_ADDR')
-
-        if not PostViewCount.objects.filter(post=post, ip_address=ip):
-                view = PostViewCount(post=post,ip_address=ip)
-                view.save()
-                post.views += 1
-                post.save()
-
-        return Response({'post':serializer.data}, status=status.HTTP_200_OK)
-   
 
     
 

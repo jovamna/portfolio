@@ -41,6 +41,7 @@
     "redux-thunk": "^2.4.2",
     "smooth-scrollbar": "^8.8.4",
     "styled-components": "^6.0.4",
+    "swiper": "^12.1.4",
     "tailwind-scrollbar-hide": "^1.1.7"
   },
   "devDependencies": {

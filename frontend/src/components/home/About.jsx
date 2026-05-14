@@ -37,97 +37,67 @@ export default function About() {
   return (
 
  
+   <div className="about
+    h-[100%] w-[100%] flex items-center justify-center
+    py-4 md:py-[30px] lg:py-[40px] 2xl:py-[40px]">
 
-   
+      <div className="container-about-tres max-w-[95%] 
+      flex flex-col mx-auto px-2">
 
- <div className= "about h-[100%] w-[100%] flex items-center justify-center pt-8">
-
-
-
-
-
-   {/*bg-neutral-600 */}
-
-      <div className="container-about-tres max-w-[95%] flex flex-col  mx-auto isolate  sm:rounded-3xl px-2 pt-8">
-
-
-
-            <h1
-
-                    className="kaushan underline underline-offset-8  lg:text-5xl text-4xl font-bold text-center tracking-tight text-black sm:text-4xl  md:text-center "
-
-                    >
-
+            <h1 className="kaushan 
+            underline underline-offset-8  
+            lg:text-5xl text-4xl 
+            font-bold text-center tracking-tight text-black 
+            sm:text-4xl  md:text-center
+            mb-[30px] lg:mb-[40px] 2xl:mb-[40px]">
                    {skillsSection.title}{" "}
-
-                   </h1>
-
-
-
+            </h1>
 
 
           {/*  DIV 2 COLUMNS ROW     shadow-2xl  */}
-
-          <div className="container-about-dos w-[100%] lg:w-[100%] flex flex-row isolate sm:rounded-3xl justify-center items-center mb-[20px]">
+          <div className="container-about-dos 
+          w-[100%] lg:w-[100%] 
+          flex flex-row isolate sm:rounded-3xl justify-center items-center mb-[20px]">
 
              
-
                  {/*SEGUNDA COLUMNA IMAGEN */}
-
-               <div className="w-[60%]  lg:w-[30%]">
-
-
-
-           
+                 <div className="w-[60%]  lg:w-[30%]">
 
                   <img
-
                   className="h-full w-full opacity-150"
-
                   src={aboutTransit}
-
                   alt="programmer"
-
                   />
-
-               </div>
-
-               {/*FIN SEGUNDA COLUMNA IMAGEN */}
+                 </div>
+                 {/*FIN SEGUNDA COLUMNA IMAGEN */}
 
              
 
                 {/*PRIMERA COLUMNA */}
-
                 <div className=" asubcontainer-about-movil flex flex-col lg:w-[72%] w-[100%] lg:px-8 px-2">
-
-                 
-
-                   <h2
-
-                   className="text-center text-black underline underline-offset-4 mb-8 font-extrabold"
-
-                   >
-
+                   <h2 className="text-center text-black underline underline-offset-4 mb-8 font-extrabold">
                    {skillsSection.subTitle}
-
                    </h2>
 
-
-
-
-
                    <div className="skill-item ">
-
-                   {skillsSection.skills.map((skill, index) => (
-
-                    <p className="first-letter:text-violet-800  kaushan first-letter:float-left  first-letter:font-bold first-letter:kaushan first-letter:text-4xl first-letter:italic first-letter:leading-3 tracking-wide text-black lg:text-xl font-medium lg:mb-[20px] mb-[16px]" key={index}>
-
-                    {skill.text}
-
-                    </p>
-
+                    {skillsSection.skills.map((skill, index) => (
+                      <p className="first-letter:text-violet-800 kaushan 
+                      first-letter:float-left  
+                      first-letter:font-bold 
+                      first-letter:text-4xl 
+                      first-letter:italic 
+                      first-letter:leading-3 
+                      leading-7 lg:leading-8
+                      tracking-wide 
+                      text-black 
+                      lg:text-xl 
+                      font-medium 
+                      lg:mb-[20px] 
+                      mb-[16px]" 
+                      key={index}>
+                         {skill.text}
+                      </p>
                      ))}
-
                    </div>
 
                 </div>
@@ -148,7 +118,9 @@ export default function About() {
 
           {/*BOTON SUBIR */}
 
-          <div className="top-center flex flex-col justifiy-center mx-auto items-center w-full h-[40px]">
+          <div className="top-center 
+          flex flex-col justifiy-center mx-auto 
+          items-center mt-[30px] md:mt-[40px] lg:mt-[40px] 2xl-mt-[50px]">
 
              <button className="semicirculo"
 

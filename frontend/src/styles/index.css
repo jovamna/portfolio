@@ -248,15 +248,6 @@ body
 
   /*fin home*/
  /*ABOUT IMPORTANTE PARA EL SLIDER DE TEXTO*/
-.subcontainer-about-movil-img .letra-dise{
- top: 140px;
-  right:200px;
-  display: block;
-  width: 175px;
-  height: 85px;
-  overflow: hidden;
-  position: relative;
-}
 
 
 .semicirculo {
@@ -654,13 +645,6 @@ SOFTWARE DEVELOPMENT, WEB, DATABASE DATACIENCIA ETC*/
   height: 50px;
 }
 
-
-
-.navbar-project{
-  border: none;
-  width: 95%;
-  margin: auto;
-}
 
 
 
@@ -1643,56 +1627,9 @@ width: 100%;
 
 /*samsung galaxi s8*/
 @media only screen and (min-width: 360px) and (max-width: 740px) {
-  .navbar-project-movil{
-    height: 40px;
-    width: 100%;
-  }
+  
 
-  /*CONTAINER TOTAL*/
-  .navbar-project-movil-popover{
-    width: 100%;
-    height: 36px;
  
-  }
-
-    /*CONTAINER TOTAL*/
-  .navbar-logo{
-    width: 100%;
-    height:36px;
-  
-  }
-
-  .navbar-logo .logo{
-    width: 30%;
-    height: 36px;
-
-  }
-
-  .logo img{
-    width: 75%;
- height: auto;
-  
-  }
-
-  .menu-movil{
-    height: 36px;
-  }
-
-  .container-movil-login-registro{
-    width: 44%;
-    height: 36px;
-    margin-right: 10px;
-  }
-
-  .container-movil-login-registro img{
-    margin-top: 15px;
-   }
-
-  .container-movil-login-registro p{
-   font-size: 0.8em;
-   margin-top: 15px;
-  }
-
 
   .menu-movil .user-activo{
     height: 36px;
@@ -2009,9 +1946,7 @@ width: 100%;
 /*IPHONE SE*/
 @media only screen and (min-width: 375px) {
 
-   .navbar-project-movil-popover .logo img{
-    width: 70%;
-   }
+   
  
 }
 
@@ -2808,20 +2743,7 @@ body
     height: 40px;
     width: 100%;
   }
-  .navbar-logo{
-    max-width: 100%;
-    height: 40px;
-  }
-
-  .logo{
-    height: 40px;
-  }
-
  
-.logo img{
-  width: 100%;
-  height: 40px;
-}
   
   /*navbar projcet*/
   .movil-uno{
@@ -3240,11 +3162,6 @@ body
    
   }
 
-  .letra-dise{
-    width:220px;
-    top: 180px;
-    left: -290px;
-  }
   
   
      /*fin navbar oprafolio*/
@@ -3493,27 +3410,10 @@ body
     /*overflow: hidden;*/
   }
 
-  .logo{
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-end;
 
-  }
-  .logo img{
-    max-width: 100%;
-   height: 75%;
-  }
 
-  .menu-movil{
-    width: 70%;
-   
-  }
-   
-  .ipad-greeting{
-    top: 110px;
-    width: 250px;
-   
-  }
+  
+
 
   .ipad-pro{
   margin-top: 40px;
@@ -3541,16 +3441,7 @@ body
    }
 
 
-  .container-movil-login-registro{
-    width: 20%;
-    height: 24px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    justify-content: space-around;
-   
-  }
+  
 
   
   
@@ -3641,14 +3532,6 @@ body
 
    /*CONTAINER PRINCIPAL DE LA PAGINA PROJECTHOME*/
    /*PAGINA DE LISTADO DE LOS GITHUBS*/
-  .project-home{
-    width: 100%;
-  }
-
-  .project-home-subcontainer{
-   
-    width: 100%;
-  }
 
 
     /*CONTAINER PRINCIPAL DEL PROJECTCARD DEL GITHUB */
@@ -3873,29 +3756,7 @@ body
 
 /*  IPAD AIR*/
 @media only screen and (min-width: 820px) and (max-width: 1180px) {
-.navbar{
-  height: 58px;
 
-}
-
-.navbar-logo{
-  height: 57px;
-
-}
-
-.logo{
-  height: 55px;
-
-}
-
-.logo img{
-  width: 60%;
-}
-
-.menu-movil{
-  height: 50px;
-
-}
 
  /*PAGINA GREETINGS*/
  /*PAGINA GREETINGS*/
@@ -3967,22 +3828,7 @@ body
       /*overflow: hidden;*/
     }
 
-    .navbar-logo{
-      display: flex;
-      height: 3.3rem;
-    }
-
-    .logo{
-    display: flex;
-    align-items: flex-start;
-    height: 3rem;
-    }
-    .logo .image-logo{
-      display: flex;
-      width: 140px;
-      height: 65px;
     
-    }
 
 
    /*PAGINA GREETINGS*/
@@ -4007,15 +3853,8 @@ body
     position: relative;
   }
 
-  .manito{
-    width: 20px;
-  }
-
+  
  
- .ipad-pro{
-  margin-top: 80px;
- }
-
   .texto-animado-developer{
     width: 300px;
   }
@@ -4025,16 +3864,7 @@ body
     font-size: 0.8em;
    }
 
-  .subcontainer-about-movil-img .letra-dise{
-   top: 120px;
-   left: -175px;
-   display: block;
-   width: 140px;
-   height: 65px;
-   overflow: hidden;
-   position: relative;
-   font-size: 0.5em;
-  }
+  
  
  .container-about-dos{
   display: flex;
@@ -4071,20 +3901,7 @@ body
   width: 80%;
 
 }
-/*component project-homer container de los cards de githubs*/
-.project-home{
-  max-width: 100%;
-  padding-left: 0px;
-  padding-right: 0px;
- 
-}
 
- .project-home .project-home-subcontainer{
-  max-width: 100%;
-  display: flex;
-  padding-left: 0px;
-  padding-right: 0px;
-}
 
 /*component del project card*/
 .project-movil-card{
@@ -4174,25 +3991,7 @@ body
     margin-left: 16px;
   }
 
-.navbar{
-  height: 3.5em;
 
-}
-
-.navbar-logo{
-  height: 3.3em;
- 
-}
-
-.logo{
-  height: 3.4em;
- 
-}
-
-.menu-movil{
-  height: 60px;
- 
-}
 
 .menu-movil .icon-search{
 width: 28px;
@@ -4203,9 +4002,7 @@ height: 28px;
 
 .menu-movil .icon-bihome{
   width: 28px;
-height: 28px;
-
-
+  height: 28px;
 }
 
 

@@ -13,11 +13,16 @@ function ProjectCard(data){
     return (
         <>
 
-       <div className="project-movil-card border b-4 border-black flex flex-col rounded-lg  opacity-90 shadow-lg overflow-hidden pb-2 pt-[5px] bg-white h-[350px] px-[5px] ">
+       <div className="project-movil-card border bg-white
+       b-4 border-black flex flex-col rounded-lg  opacity-90 shadow-lg 
+       overflow-hidden pb-2 pt-[5px]  h-[350px] 2xl:h-[600px] 2xl:w-[700px] px-[5px] ">
    
        
              {/*CONTAINER 1 DE ICONO DE GITHUB TITLE. DESCRIPTION bg-zinc-300*/}
-             <div className="project-card-title-description px-4 h-[280px] pt-[15px] flex flex-col items-center w-full rounded-lg border-white  bg-zinc-300">
+             <div className="project-card-title-description 
+             px-4 h-[280px] pt-[15px] flex flex-col items-center 
+             w-full rounded-lg border-white  bg-zinc-300 
+             2xl:h-[600px] 2xl:w-[700px]">
                   {/*ICONO DE GITHUB */}
                   <div className='flex justify-end items-end'>
                      <div className='w-[26%]'>

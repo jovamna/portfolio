@@ -40,21 +40,31 @@ export default function SkillCard() {
   };
 
   return (
-    <div className="lg:w-[24%] w-[45%] lg:h-[100%] h-[100%] mt-[60px] flex items-center justify-center [perspective:1000px]">
+    <div className="lg:w-[20%] w-[55%] md:w-[35%] 2xl:w-[25%]
+     lg:h-[100%] h-[100%] md:h-[100%]
+     lg:mt-0 mt-[60px]  md:mt-[20px]
+     flex items-center 
+     justify-center [perspective:1000px]">
       
       {/* CARD CONTAINER */}
       <div 
         ref={cardRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className="relative flex flex-col w-full h-[360px] lg:h-[390px] rounded-[25px] text-white cursor-grab transition-transform duration-100 ease-out shadow-2xl select-none overflow-hidden"
+        className="relative flex flex-col w-full 
+        h-[360px] lg:h-[390px] md:h-[380px] 2xl:h-[620px]
+        text-white cursor-grab transition-transform duration-100 
+        ease-out shadow-2xl select-none overflow-hidden"
       >
         
         {/* PRIMERO TOP SECTION (IMÁGENES) */}
-        <div className="lg:w-[100%] lg:h-[75%] relative w-full h-2/3 overflow-hidden rounded-t-[25px]">
+        <div className="relative 
+        lg:w-[100%] lg:h-[90%] md:h-[80%] 
+        w-full h-2/3 2xl-h-[95%]
+        overflow-hidden rounded-t-[25px]">
           {/* Círculo de Fondo */}
           <div className="absolute inset-0 overflow-hidden">
-             <div className="absolute w-full h-full top-0 right-[-25px] rounded-t-[4rem] overflow-hidden bg-green-400">
+             <div className="absolute w-full h-full top-0 right-[-25px] rounded-t-[4rem] overflow-hidden">
                 <img src={skillFond1} alt="fondo" className="h-full w-full object-cover" />
              </div>
           </div>
@@ -62,7 +72,10 @@ export default function SkillCard() {
           {/* Developer (Parallax) */}
           <div className="absolute inset-0 z-10 flex items-center justify-center">
             <div ref={developerRef} className="transition-transform duration-200 ease-out">
-              <img src={subelo} alt="Developer" className="w-auto h-auto select-none pointer-events-none" />
+              <img 
+              src={subelo} alt="Developer" 
+              className="w-auto h-auto select-none pointer-events-none 
+              2xl:w-[50%] 2xl:h-[60%]" />
             </div>
           </div>
         </div>
@@ -73,7 +86,7 @@ export default function SkillCard() {
 
 
         {/*SEGUNDO  BOTTOM SECTION (DETAILS FUSIONADOS) */}
-        <div className="lg:w-[100%] lg:h-[25%] flex-1 px-4 flex flex-col justify-center text-black">
+        <div className="lg:w-[100%] lg:h-[25%] md-h-[20%] flex-1 px-4 flex flex-col justify-center text-black">
           <div className="flex flex-col w-full">
             <span className="font-bold underline underline-offset-8">
               <h1 className="text-base">Developer Full Stack</h1>

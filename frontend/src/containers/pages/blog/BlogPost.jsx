@@ -19,6 +19,21 @@ import "../../../styles/index.css";
 import { Link, useParams} from "react-router-dom";
 
 
+
+// 2. CONFIGURACIÓN GLOBAL (Fuera de la función)
+const API_URL = import.meta.env.DEV 
+  ? "http://localhost:8000" 
+  : import.meta.env.VITE_REACT_API_URL;
+
+
+ const URL =
+   process.env.NODE_ENV === "production"
+     ? import.meta.env.VITE_REACT_API_URL
+     : "http://localhost:8000";
+ 
+   console.log(URL);
+
+
 function BlogPost({
     get_blog,
     post,
@@ -30,31 +45,111 @@ function BlogPost({
 }){
     const params = useParams()
     const slug = params.slug
+    //const { slug } = params;
 
 
-
+    // 3. HOOKS DE ESTADO Y EFECTO
     useEffect(()=>{
         window.scrollTo(0,0)
         get_blog(slug)
         get_reviews(slug)   
     },[slug])
 
-    //URL PARA LAS IMAGENES QUE ESTAN EN LA CARPETA MEDIA LOCALIZEN EN LA CARPETA DEL BACKEND
-    if (!post) {
-     return <div> </div>;
-   }
 
-   const URL =
-   process.env.NODE_ENV === "production"
-     ? import.meta.env.VITE_REACT_API_URL
-     : "http://localhost:8000";
- 
-   console.log(URL);
 
-    // Construir las URL completas utilizando la URL base de tu aplicación React
-    const imageUrl = `${URL}${post.image}`;
-    const videoUrl = `${URL}${post.video}`;
-    const thumbnailUrl = `${URL}${post.thumbnail}`;
+
+  
+
+    
+{/**SEO */}
+
+useEffect(() => {
+    if (post) {
+      // 1. Título con palabras clave (Keywords)
+      document.title = `${post.title} | Jovamna Medina - Full Stack Django & React`;
+
+      // 2. Descripción técnica para Google
+      let metaDescription = document.querySelector('meta[name="description"]');
+      if (!metaDescription) {
+        metaDescription = document.createElement('meta');
+        metaDescription.name = 'description';
+        document.head.appendChild(metaDescription);
+      }
+      // Combinamos el título del post con tus habilidades principales
+      metaDescription.content = `${post.title}. Articulo de Jovamna Medina, Full Stack Developer experta en Django, React y Redux.`;
+
+      // 3. Meta tags: Open Graph y Twitter
+      const metaTags = [
+        { property: 'og:title', content: `${post.title} | Jovamna Medina - Dev Django/React` },
+        { property: 'og:description', content: `Explora este post de Jovamna Medina, especialista en desarrollo Full Stack con Django, React y Redux.` },
+        { property: 'og:image', content: post.image || 'https://www.jovamnamedina.com/og-image-tech.png' },
+        { property: 'og:type', content: 'article' },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:label1', content: 'Tech Stack' }, // Dato extra para Twitter
+        { name: 'twitter:data1', content: 'Django, React, Redux, PostgreSQL' }
+      ];
+
+      metaTags.forEach(({ property, name, content }) => {
+        const attribute = property ? `meta[property="${property}"]` : `meta[name="${name}"]`;
+        let metaTag = document.querySelector(attribute);
+        if (!metaTag) {
+          metaTag = document.createElement('meta');
+          if (property) metaTag.setAttribute('property', property);
+          if (name) metaTag.setAttribute('name', name);
+          document.head.appendChild(metaTag);
+        }
+        metaTag.content = content || '';
+      });
+
+      // 4. JSON-LD (Esto le fascina a Google)
+      let scriptJsonLd = document.querySelector('script[data-schema="blog-post"]');
+      if (!scriptJsonLd) {
+        scriptJsonLd = document.createElement('script');
+        scriptJsonLd.type = 'application/ld+json';
+        scriptJsonLd.setAttribute('data-schema', 'blog-post');
+        document.head.appendChild(scriptJsonLd);
+      }
+
+      scriptJsonLd.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        'headline': post.title,
+        'author': {
+          '@type': 'Person',
+          'name': 'Jovamna Medina',
+          'jobTitle': 'Full Stack Developer',
+          'knowsAbout': ['Django', 'React', 'Redux', 'Python', 'JavaScript', 'SQL'] // <-- ¡Esto es SEO puro!
+        },
+        'publisher': {
+          '@type': 'Organization',
+          'name': 'Jovamna Medina Dev',
+          'logo': {
+            '@type': 'ImageObject',
+            'url': 'https://www.jovamnamedina.com/logo.png'
+          }
+        },
+        'mainEntityOfPage': {
+          '@type': 'WebPage',
+          '@id': `https://www.jovamnamedina.com/blog/post/${post.slug}`
+        }
+      });
+    }
+  }, [post]);
+
+
+{/**FIN SEO */}
+
+
+
+
+
+
+
+// 5. PREPARACIÓN DE DATOS (DATA DERIVATION)
+// Construir las URL completas utilizando la URL base de tu aplicación React
+    const imageUrl = `${URL}${post?.image}`; 
+    const videoUrl = `${URL}${post?.video}`;
+    const thumbnailUrl = `${URL}${post?.thumbnail}`;
     //FIN URL PARA LAS IMAGENES LOCALIZEN EN LA CARPETA BACKEND
 
  
@@ -138,83 +233,16 @@ function BlogPost({
     };
 
 
-{/**SEO */}
-
-useEffect(() => {
-    if (post) {
-      // 1. Título con palabras clave (Keywords)
-      document.title = `${post.title} | Jovamna Medina - Full Stack Django & React`;
-
-      // 2. Descripción técnica para Google
-      let metaDescription = document.querySelector('meta[name="description"]');
-      if (!metaDescription) {
-        metaDescription = document.createElement('meta');
-        metaDescription.name = 'description';
-        document.head.appendChild(metaDescription);
-      }
-      // Combinamos el título del post con tus habilidades principales
-      metaDescription.content = `${post.title}. Articulo de Jovamna Medina, Full Stack Developer experta en Django, React y Redux.`;
-
-      // 3. Meta tags: Open Graph y Twitter
-      const metaTags = [
-        { property: 'og:title', content: `${post.title} | Jovamna Medina - Dev Django/React` },
-        { property: 'og:description', content: `Explora este post de Jovamna Medina, especialista en desarrollo Full Stack con Django, React y Redux.` },
-        { property: 'og:image', content: post.image || 'https://www.jovamnamedina.com/og-image-tech.png' },
-        { property: 'og:type', content: 'article' },
-        { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:label1', content: 'Tech Stack' }, // Dato extra para Twitter
-        { name: 'twitter:data1', content: 'Django, React, Redux, PostgreSQL' }
-      ];
-
-      metaTags.forEach(({ property, name, content }) => {
-        const attribute = property ? `meta[property="${property}"]` : `meta[name="${name}"]`;
-        let metaTag = document.querySelector(attribute);
-        if (!metaTag) {
-          metaTag = document.createElement('meta');
-          if (property) metaTag.setAttribute('property', property);
-          if (name) metaTag.setAttribute('name', name);
-          document.head.appendChild(metaTag);
-        }
-        metaTag.content = content || '';
-      });
-
-      // 4. JSON-LD (Esto le fascina a Google)
-      let scriptJsonLd = document.querySelector('script[data-schema="blog-post"]');
-      if (!scriptJsonLd) {
-        scriptJsonLd = document.createElement('script');
-        scriptJsonLd.type = 'application/ld+json';
-        scriptJsonLd.setAttribute('data-schema', 'blog-post');
-        document.head.appendChild(scriptJsonLd);
-      }
-
-      scriptJsonLd.textContent = JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'BlogPosting',
-        'headline': post.title,
-        'author': {
-          '@type': 'Person',
-          'name': 'Jovamna Medina',
-          'jobTitle': 'Full Stack Developer',
-          'knowsAbout': ['Django', 'React', 'Redux', 'Python', 'JavaScript', 'SQL'] // <-- ¡Esto es SEO puro!
-        },
-        'publisher': {
-          '@type': 'Organization',
-          'name': 'Jovamna Medina Dev',
-          'logo': {
-            '@type': 'ImageObject',
-            'url': 'https://www.jovamnamedina.com/logo.png'
-          }
-        },
-        'mainEntityOfPage': {
-          '@type': 'WebPage',
-          '@id': `https://www.jovamnamedina.com/blog/post/${post.slug}`
-        }
-      });
-    }
-  }, [post]);
 
 
-{/**FIN SEO */}
+
+ //URL PARA LAS IMAGENES QUE ESTAN EN LA CARPETA MEDIA LOCALIZEN EN LA CARPETA DEL BACKEND
+    if (!post) {
+     return <div> </div>;
+   }
+
+
+
 
      
 
@@ -222,13 +250,6 @@ useEffect(() => {
 
        
     <FullWidthLayout>
-
-          
-
-
-
-
-
 
             {/*PORTADA DEL POST DETAIL fullscreen-bg inset-0 object-cover*/}
             {/*
@@ -245,22 +266,9 @@ useEffect(() => {
 
           
 
-          
-
-
-
-
-
-
-
-
-
   
            <div className="wrapper w-full min-h-screen">
 
-       
-
-            
 
         <div className="flex lg:flex-row xl:flex-row flex-col container-blogpost-tres-columnas px-2 pt-[70px]">
         
@@ -486,3 +494,16 @@ export default connect(mapStateToProps,{
 //npm update  //actualiza todo
 //npm uninstall bootstrap
 
+
+
+
+//case GET_BLOG_SUCCESS:
+    //return {
+    //   ...state,
+      //  pepita: payload // Guardamos los datos en una caja llamada 'pepita'
+    //}
+
+
+//const mapStateToProps = state => ({
+//    post: state.blog.pepita 
+//})
