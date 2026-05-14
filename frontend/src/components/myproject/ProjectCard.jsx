@@ -15,14 +15,14 @@ function ProjectCard(data){
 
        <div className="project-movil-card border bg-white
        b-4 border-black flex flex-col rounded-lg  opacity-90 shadow-lg 
-       overflow-hidden pb-2 pt-[5px]  h-[350px] 2xl:h-[600px] 2xl:w-[700px] px-[5px] ">
+       overflow-hidden pb-2 pt-[5px]  h-[350px] 2xl:h-[460px] 2xl:w-[400px] px-[5px] ">
    
        
              {/*CONTAINER 1 DE ICONO DE GITHUB TITLE. DESCRIPTION bg-zinc-300*/}
              <div className="project-card-title-description 
              px-4 h-[280px] pt-[15px] flex flex-col items-center 
              w-full rounded-lg border-white  bg-zinc-300 
-             2xl:h-[600px] 2xl:w-[700px]">
+             2xl:h-[460px] 2xl:w-[400px]">
                   {/*ICONO DE GITHUB */}
                   <div className='flex justify-end items-end'>
                      <div className='w-[26%]'>
@@ -66,7 +66,7 @@ function ProjectCard(data){
                
 
                  
-                  <a 
+                 <Link 
                   href ={project.url}
                   target="_blank"
                   rel="noopener noreferrer" 
@@ -74,7 +74,7 @@ function ProjectCard(data){
                   <p className="flex flex-row text-xs text-center font-semibold text-gray-900 mb-4 hover:text-blue-300">
                   LINK AL PROJECTO &nbsp; <GiFastForwardButton className='text-blue-700 hover:text-blue-300 text-xl font-extrabold'/>
                   </p>
-                  </a>
+                   </Link>
                 
 
 

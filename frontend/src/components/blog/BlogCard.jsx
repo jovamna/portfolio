@@ -99,12 +99,12 @@ function BlogCard(data){
                          {/*2 CONTAINER DE TITULO EXRCEPT LEER MAS--*/}
                          <div className=" flex flex-col relative responsive-blogcard-title-excerpt lg:w-full w-[40%] lg:mt-[10px] ">
 
-                              {/*POST TITULO  QUITAR SI SE QUIERE  padding izq y derech px-4 */}
+                              {/*POST TITULO  QUITAR SI SE QUIERE  oswald-muckas */}
                               <Link 
                               to={`/blog/post/${post.slug}`} 
                               className="block px-2"
                               >
-                               <h1 className=" oswald-muckas text-center font-extrabold text-black dark:text-white tracking-wider lg:text-xl text-xs sm:text-xl  md:text-center" dangerouslySetInnerHTML={{
+                               <h1 className="kaushan text-center font-bold text-black dark:text-white tracking-wider lg:text-2xl text-xs sm:text-xl  md:text-center" dangerouslySetInnerHTML={{
                                    __html:
                                   post.excerpt && DOMPurify.sanitize(post.title.length) > 50
                                     ? DOMPurify.sanitize(post.title.slice(0, 50)) 

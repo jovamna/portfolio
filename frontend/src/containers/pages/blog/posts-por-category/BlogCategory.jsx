@@ -33,106 +33,91 @@ function BlogCategory({
         /**SEO */
       {/**SEO */}
 
-useEffect(() => {
-    if (categorySlug) {
-      // 1. Título con palabras clave (Keywords)
-      document.title = `${post.title} | Jovamna Medina - Full Stack Django & React`;
+ useEffect(() => {
+  if (categorySlug) {
+    // Ponemos la primera letra en mayúscula para que se vea bien
+    const categoryName = categorySlug.charAt(0).toUpperCase() + categorySlug.slice(1);
+    
+    // 1. Título dinámico según la categoría
+    document.title = `Posts sobre ${categoryName} | Jovamna Medina - Full Stack Developer`;
 
-      // 2. Descripción técnica para Google
-      let metaDescription = document.querySelector('meta[name="description"]');
-      if (!metaDescription) {
-        metaDescription = document.createElement('meta');
-        metaDescription.name = 'description';
-        document.head.appendChild(metaDescription);
-      }
-      // Combinamos el título del post con tus habilidades principales
-      metaDescription.content = `${post.title}. Articulo de Jovamna Medina, Full Stack Developer experta en Django, React y Redux.`;
-
-      // 3. Meta tags: Open Graph y Twitter
-      const metaTags = [
-        { property: 'og:title', content: `${post.title} | Jovamna Medina - Dev Django/React` },
-        { property: 'og:description', content: `Explora este post de Jovamna Medina, especialista en desarrollo Full Stack con Django, React y Redux.` },
-        { property: 'og:image', content: post.image || 'https://www.jovamnamedina.com/og-image-tech.png' },
-        { property: 'og:type', content: 'article' },
-        { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:label1', content: 'Tech Stack' }, // Dato extra para Twitter
-        { name: 'twitter:data1', content: 'Django, React, Redux, PostgreSQL' }
-      ];
-
-      metaTags.forEach(({ property, name, content }) => {
-        const attribute = property ? `meta[property="${property}"]` : `meta[name="${name}"]`;
-        let metaTag = document.querySelector(attribute);
-        if (!metaTag) {
-          metaTag = document.createElement('meta');
-          if (property) metaTag.setAttribute('property', property);
-          if (name) metaTag.setAttribute('name', name);
-          document.head.appendChild(metaTag);
-        }
-        metaTag.content = content || '';
-      });
-
-      // 4. JSON-LD (Esto le fascina a Google)
-      let scriptJsonLd = document.querySelector('script[data-schema="blog-post"]');
-      if (!scriptJsonLd) {
-        scriptJsonLd = document.createElement('script');
-        scriptJsonLd.type = 'application/ld+json';
-        scriptJsonLd.setAttribute('data-schema', 'blog-post');
-        document.head.appendChild(scriptJsonLd);
-      }
-
-      scriptJsonLd.textContent = JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'BlogPosting',
-        'headline': post.title,
-        'author': {
-          '@type': 'Person',
-          'name': 'Jovamna Medina',
-          'jobTitle': 'Full Stack Developer',
-          'knowsAbout': ['Django', 'React', 'Redux', 'Python', 'JavaScript', 'SQL'] // <-- ¡Esto es SEO puro!
-        },
-        'publisher': {
-          '@type': 'Organization',
-          'name': 'Jovamna Medina Dev',
-          'logo': {
-            '@type': 'ImageObject',
-            'url': 'https://www.jovamnamedina.com/logo.png'
-          }
-        },
-        'mainEntityOfPage': {
-          '@type': 'WebPage',
-          '@id': `https://www.jovamnamedina.com/blog/post/${post.slug}`
-        }
-      });
+    // 2. Meta descripción
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.content = `Explora todos los artículos sobre ${categoryName} en el blog de Jovamna Medina. Tutoriales y consejos sobre desarrollo Full Stack.`;
     }
-  }, [post]);
 
+    // 3. Open Graph (Para redes sociales)
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.content = `Artículos de ${categoryName} - Jovamna Medina`;
+    
+    // IMPORTANTE: Para el listado de categoría, no solemos usar JSON-LD de "BlogPosting" 
+    // (ese es solo para el post solo). Para una categoría usamos "CollectionPage".
+    
+    let scriptJsonLd = document.querySelector('script[data-schema="blog-category"]');
+    if (!scriptJsonLd) {
+      scriptJsonLd = document.createElement('script');
+      scriptJsonLd.type = 'application/ld+json';
+      scriptJsonLd.setAttribute('data-schema', 'blog-category');
+      document.head.appendChild(scriptJsonLd);
+    }
+
+    scriptJsonLd.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      'name': `Categoría: ${categoryName}`,
+      'description': `Lista de artículos relacionados con ${categoryName}`,
+      'url': `https://www.jovamnamedina.com/category/${categorySlug}`
+    });
+  }
+}, [categorySlug]);
 
 {/**FIN SEO */}
 
 
 
-
+// Convertimos "django-rest" en "Django rest"
+const displayCategory = categorySlug ? categorySlug.replace(/-/g, ' ').charAt(0).toUpperCase() + categorySlug.slice(1).replace(/-/g, ' ') : '';
 
 
     return(
-        <>
+   
         <FullWidthLayout>
-        <div>
+
+          <div className="wrapper py-24">
+
+
+            <div className="w-full">
+
+              <h1 className="kaushan 
+            underline underline-offset-8  
+            lg:text-4xl text-3xl 
+            font-bold text-center tracking-tight text-neutral-800 
+            sm:text-4xl  md:text-center
+            mb-[30px] lg:mb-[40px] 2xl:mb-[40px]">
+   Artículos sobre: <span className="">{displayCategory}</span>
+</h1>
            
-            </div>
-
-
-
-            <Header/>
+            
             <BlogListCategory 
             get_blog_list_category_page={get_blog_list_category_page} 
             list_categories_blog={blog_list_category} 
             categorySlug={categorySlug} // Pasar el categorySlug como prop
             count={count&&count} 
             />
+
+     </div>
+
+          </div>
+
+
+        
+
+
+
          
       </FullWidthLayout>
-            </>
+         
         )
 }
 

@@ -263,18 +263,18 @@ function Navbar({
            hidden md:hidden
            lg:w-[80%] xl:w-[80%] 2xl:w-[80%]
             lg:flex lg:flex-row justify-between items-center justify-center 
-            lg:block xl:block 2xl:block space-x-11
+            
             md:flex">
 
   
-
-           <div className='lg:w-[85%] xl:w-[80%] 2xl:w-[82%] inline-flex space-x-8'>
+          <div className="flex items-center h-full lg:w-[82%] space-x-10">
+          
 
           <Link
            className={`nav-item hover:bg-neutral-100 
             hover:text-violet-700 text-black font-semibold 
             border-b-2 border-transparent hover:border-violet-700  
-            h-[100%]  inline-block px-3 py-4 ${currentRoute === 'home' ? 'bg-neutral-300 text-white' : ''}`}
+            h-[100%]  inline-block py-4 ${currentRoute === 'home' ? 'bg-neutral-300 text-white' : ''}`}
            to="home"
            spy={true}
            smooth={true}
@@ -286,7 +286,7 @@ function Navbar({
           
 
          <Link
-           className={`nav-item hover:bg-neutral-100 hover:text-violet-700  text-black  font-semibold border-b-2 border-transparent hover:border-violet-700  h-[100%]  inline-block px-3 py-4 ${currentRoute === 'about' ? 'bg-neutral-300 text-white' : ''}`}
+           className={`nav-item hover:bg-neutral-100 hover:text-violet-700  text-black  font-semibold border-b-2 border-transparent hover:border-violet-700  h-[100%]  inline-block  py-4 ${currentRoute === 'about' ? 'bg-neutral-300 text-white' : ''}`}
            to="about"
            spy={true}
            smooth={true}
@@ -297,7 +297,7 @@ function Navbar({
 
 
          <Link
-           className={`nav-item hover:bg-neutral-100 hover:text-violet-700  text-black  font-semibold border-b-2 border-transparent hover:border-violet-700  h-[100%]  inline-block px-3 py-4 ${currentRoute === 'skill' ? 'bg-neutral-300 text-white' : ''}`}
+           className={`nav-item hover:bg-neutral-100 hover:text-violet-700  text-black  font-semibold border-b-2 border-transparent hover:border-violet-700  h-[100%]  inline-block py-4 ${currentRoute === 'skill' ? 'bg-neutral-300 text-white' : ''}`}
            to="skill"
            spy={true}
            smooth={true}
@@ -310,7 +310,7 @@ function Navbar({
        
           
          <Link
-           className={`nav-item hover:bg-neutral-100 hover:text-violet-700  text-black  font-semibold border-b-2 border-transparent hover:border-violet-700  h-[100%]  inline-block px-3 py-4 ${currentRoute === 'project' ? 'bg-neutral-300 text-white' : ''}`}
+           className={`nav-item hover:bg-neutral-100 hover:text-violet-700  text-black  font-semibold border-b-2 border-transparent hover:border-violet-700  h-[100%]  inline-block py-4 ${currentRoute === 'project' ? 'bg-neutral-300 text-white' : ''}`}
            to="project"
            spy={true}
            smooth={true}
@@ -319,7 +319,7 @@ function Navbar({
            MyProjects
          </Link>
 
-          {/*<Link className="nav-item hover:bg-neutral-100 hover:text-violet-700 text-white font-semibold border-b-2 border-transparent hover:border-violet-700 inline-block px-3 py-4"
+          {/*<Link className="nav-item hover:bg-neutral-100 hover:text-violet-700 text-white font-semibold border-b-2 border-transparent hover:border-violet-700 inline-block py-4"
            to='curriculum' 
            smooth={true} 
            //offset={-20}
@@ -335,13 +335,13 @@ function Navbar({
                         
 
              {/* BLOG BLOG BLOG BLOG BLOG BLOG BLOG MENU MENU MENU BLOG BLOG BLOG BLOG */}
-             <NavLink to= "/blog" className="nav-item hover:bg-neutral-100 hover:text-violet-700  text-black  font-semibold border-b-2 border-transparent hover:border-violet-700 inline-block px-3 py-4 ">
+             <NavLink to= "/blog" className="nav-item hover:bg-neutral-100 hover:text-violet-700  text-black  font-semibold border-b-2 border-transparent hover:border-violet-700 inline-block py-4 ">
              <span className="py-2">Blog</span>
              </NavLink>
 
 
              <Link
-           className={`nav-item hover:bg-neutral-100 hover:text-violet-700  text-black  font-semibold border-b-2 border-transparent hover:border-violet-700  h-[100%]  inline-block px-3 py-4 ${currentRoute === 'contacto' ? 'bg-neutral-300' : ''}`}
+           className={`nav-item hover:bg-neutral-100 hover:text-violet-700  text-black  font-semibold border-b-2 border-transparent hover:border-violet-700  h-[100%]  inline-block py-4 ${currentRoute === 'contacto' ? 'bg-neutral-300' : ''}`}
            to="contacto"
            spy={true}
            smooth={true}
@@ -358,10 +358,10 @@ function Navbar({
 
 
 
-        <div className='inline-flex justify-between justify-end lg:w-[15%]'>
+              <div className="flex justify-center items-center lg:w-[15%] h-full">
 
             {/* BUSCADOR */}
-            <div className='inline-flex lg:w-[86%]'>
+            <div className=' lg:w-[86%]'>
             <button
              onClick={() => {
              setIsSearchOpen(!isSearchOpen);
@@ -395,7 +395,7 @@ function Navbar({
 
          
              {/* MENU DESLIZANTE*/}
-             <Popover className="inline-flex lg:w-[14%] justify-end">
+             <Popover className=" lg:w-[14%]">
              {({ open }) => (
               <>
 

@@ -89,9 +89,13 @@ function Project({  get_project_list, project_list}) {
                            <>
                
                 
-                  
+                           {/**  <div className="project-home-subcontainer  grid gap-5 lg:grid-cols-2 md:grid-cols-2 lg:max-w-none max-w-lg mx-auto  "> */}
                         {/*CONTAINER NARANJA QUE ALOJA A LOS 2 GITHUBS */}
-                        <div className="project-home-subcontainer  grid gap-5 lg:grid-cols-2 md:grid-cols-2 lg:max-w-none max-w-lg mx-auto  ">
+                        <div className="project-home-subcontainer 
+                        grid gap-8 md:gap-12 lg:gap-16 grid-cols-1 
+                        md:grid-cols-2 lg:max-w-7xl mx-auto px-4">
+
+                      
                             
                             {
                                

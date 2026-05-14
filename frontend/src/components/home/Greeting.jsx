@@ -42,7 +42,7 @@ function Greeting() {
                h-[420px] sm:h-[590px]
                md:h-[650px]
                lg:h-[820px]
-               2xl:h-[1500px] overflow-hidden">
+               2xl:h-[990px] overflow-hidden">
 
                   {/* ========================= */}
                   {/* PRIMER LAYOUT */}
@@ -95,8 +95,11 @@ function Greeting() {
 
                                 <h1 className="mt-2 lg:mt-6 text-[12px] sm:text-base md:text-xl lg:text-3xl 2xl:text-5xl  text-gray-300 lg:leading-relaxed">
                                   Django APIs · JWT Auth · Databases  
-                                  React Interfaces · UX Interactions  
+                                  React + Redux Interfaces · UX Interactions
                                   E-commerce + AI-powered workflows
+
+
+
                                </h1>
                          </div>
                      </div>
@@ -176,7 +179,7 @@ function Greeting() {
                       <div className="w-[40%] px-[16px]">
                           <h1 className="text-[14px] sm:text-base text-gray-300">
                           Django APIs · JWT Auth · Databases
-                          React Interfaces · UX Interactions
+                          React + Redux Interfaces · UX Interactions
                          </h1>
                       </div>
               

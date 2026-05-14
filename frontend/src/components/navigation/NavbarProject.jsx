@@ -228,11 +228,11 @@ function NavbarProject({
 const guestLinks = (
   <Fragment>
 
-    <div className='flex items-center justify-center md:w-[100%] lg:w-[100%] w-[100%] h-[2.5em] lg:h-[3.5em]'>
+    <div className='flex items-center justify-center md:w-[100%] lg:w-[100%] w-[100%] h-[40px] lg:h-[56px]'>
 
-         <div className='inline-flex  items-center justify-center  w-[30%] md:w-[30%] lg:w-[50%] lg:h-[3.5em] h-[2.5em]'>
+         <div className='inline-flex  items-center justify-center  w-[30%] md:w-[30%] lg:w-[50%] lg:h-[56px] h-[40px]'>
             <Link to="/login">
-            <img className="hover:text-gray-500 w-[26px] h-[24px] lg:w-[30px] lg:h-[28px]"
+            <img className="text-black hover:text-gray-500 w-[26px] h-[24px] lg:w-[28px] lg:h-[26px]"
             src={loginUser}
             alt="login"
            
@@ -240,8 +240,8 @@ const guestLinks = (
             </Link>
         </div>
 
-        <div className='inline-flex items-center justify-center w-[70%] md-w-[70%] lg:w-[50%] h-[2.5em] lg:h-[3.5em] '>
-              <p className=' hover:text-gray-500 lg:text-sm sm:text-xs text-xs text-neutral-600 font-semibold'>
+        <div className='inline-flex items-center justify-center w-[70%] md-w-[70%] lg:w-[50%] h-[40px] lg:h-[56px] '>
+              <p className=' hover:text-gray-500 lg:text-sm sm:text-xs text-xs text-black font-semibold'>
             <Link to="/login" className="">
           
               Inicia sesion 
@@ -382,19 +382,19 @@ const guestLinks = (
                       {/** <div className="inline-flex lg:w-[70%] lg:h-[60px] bg-teal-400">*/}
                  <div className="flex items-center h-full lg:w-[60%]">
          
-                  <NavLink to= "/" className="nav-item hover:bg-neutral-100 hover:text-violet-700 border-b-2 border-transparent hover:border-violet-700 inline-block px-3 h-[2rem] text-neutral-600 font-semibold">
+                  <NavLink to= "/" className="nav-item hover:bg-neutral-100 hover:text-violet-700 border-b-2 border-transparent hover:border-violet-700 inline-block px-3 h-[2rem] text-black font-semibold">
                   Home
                   </NavLink>
 
                 
 
-                  <NavLink to= "/blog" className="nav-item  text-neutral-600 font-semibold hover:bg-neutral-100 hover:text-violet-700 border-b-2 border-transparent hover:border-violet-700 inline-block px-3 h-[2rem]">
+                  <NavLink to= "/blog" className="nav-item  text-black font-semibold hover:bg-neutral-100 hover:text-violet-700 border-b-2 border-transparent hover:border-violet-700 inline-block px-3 h-[2rem]">
                   <span className="ml-6 "
                   >Blog
                   </span>
                   </NavLink>
 
-                  <NavLink to= "/myproject" className="nav-item  text-neutral-600 font-semibold hover:bg-neutral-100 hover:text-violet-700 border-b-2 border-transparent hover:border-violet-700 inline-block px-3 h-[2rem]">
+                  <NavLink to= "/myproject" className="nav-item text-black font-semibold hover:bg-neutral-100 hover:text-violet-700 border-b-2 border-transparent hover:border-violet-700 inline-block px-3 h-[2rem]">
                   <span className="ml-6">
                     MyProjects
                   </span>
@@ -411,12 +411,12 @@ const guestLinks = (
                 onClick={() => {
                 setIsSearchOpen(!isSearchOpen);
                  }}
-                className="text-base font-medium text-gray-700 hover:text-gray-900"
+                className="text-base font-medium text-black hover:text-gray-900"
                 >
                 {isSearchOpen ? (
-                <FiX className="h-5 w-5 ml-10 text-zinc-500 hover:text-gray-400" aria-hidden="true" />
+                <FiX className="h-5 w-5 ml-10text-blackhover:text-gray-400" aria-hidden="true" />
                  ) : (
-                <MagnifyingGlassIcon className="h-5 w-5 ml-10 text-zinc-700 hover:text-gray-700" aria-hidden="true" />
+                <MagnifyingGlassIcon className="h-5 w-5 ml-10 text-black hover:text-gray-700" aria-hidden="true" />
                 )}
                 </button>
               <div
@@ -462,7 +462,7 @@ const guestLinks = (
                        {/*ICONO DEL MENU BLOG IMPORTATE PARA QUE EL BIHOME NO ESTE AL LIMITE mr-[1px*/}
                        {/*ICONO IGLESIAS EN MENU PANTALLA GRANDE ICONO DEL BLOG */}
                      <HiOutlineLibrary
-                      className={classNames(open ? 'text-zinc-500' : 'text-zinc-500',
+                      className={classNames(open ? 'text-black' : 'text-black',
                      'h-6 w-6 hover:text-gray-400 '
                      )}
                      aria-hidden="true" 
