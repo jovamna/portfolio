@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import subelo from "../../assets/img/home/subelo.png";
+import developerDjangoReact from "../../assets/img/home/developerDjangoReact.png";
 import skillFond1 from "../../assets/img/home/skillFond1.jpg";
 
 
@@ -73,7 +73,7 @@ export default function SkillCard() {
           <div className="absolute inset-0 z-10 flex items-center justify-center">
             <div ref={developerRef} className="transition-transform duration-200 ease-out">
               <img 
-              src={subelo} alt="Developer" 
+              src={developerDjangoReact} alt="Developer Django React Postgres Redux" 
               className="w-auto h-auto select-none pointer-events-none 
               2xl:w-[50%] 2xl:h-[60%]" />
             </div>

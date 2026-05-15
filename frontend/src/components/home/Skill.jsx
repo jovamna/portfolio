@@ -25,8 +25,8 @@ export default function Skill() {
 
         {/*bg-neutral-600 */}
         <div className="skill-tres  
-        flex flex-col isolate  mx-auto isolate  m-flex-columns  
-        justify-between  items-center lg:w-[100%]  w-[100%] h-[100%] max-w-[95%] mx-auto px-2">
+        flex flex-col isolate  mx-auto isolate m-flex-columns  
+        justify-between  items-center lg:w-[100%]  w-[100%] h-[100%] max-w-[95%] mx-auto">
 
               
 
@@ -43,7 +43,7 @@ export default function Skill() {
                  <div className="flex lg:flex-row 
                  lg:w-[100%] w-[100%] 2xl:w-[100%] 2xl:h-[100%] xl:h-[100%]
                  flex-col justify-between  lg:justify-between
-                  justify-center items-center py-4 ">
+                  justify-center items-center py-4">
                    <SkillsPage className="skills-page-movil"/>
                    <SkillCard />
                  </div>

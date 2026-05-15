@@ -176,24 +176,28 @@ function Navbar({
 
 
   return (
-     //{/* CONTAINER PRINCIPAL 1 DEL NAVBAR DEL PC Y MOVIL  sm:px-6 */}
+    <>
+
+
+
+
+     {/* CONTAINER PRINCIPAL 1 DEL NAVBAR DEL PC Y MOVIL  sm:px-6 */}
     <div className="z-index fixed 
-    w-full lg:w-full xl:w-[100%]  
+    w-full lg:w-[100%] xl:w-[100%]  
     sm:h-[60px] md:h-[60px] bg-white opacity-95">
 
       {/* CONTAINER GUIA ENGLOBA MENU GRANDE Y MENU MOVIL*/}
-      <Popover className="flex w-[100%] 
-      h-[48px] md:h-[60px] sm:h-[60px] lg:h-[3.5em] xl:h-[3.7em] 2xl:h-[5em] 
-      md:py-0">
+      <Popover className=" lg:h-[60px] sm:h-[60px] md:h-[60px] 
+       lg:w-[100%] xl:h-[60px] h-[48px] lg:h-[56px] xl:h-[59px] 2xl:h-[80px]">
 
 
           
          {/* 1 CONTAINER PRINCIPAL CONTIENE DEL MENU DE PANTLLA INCLUYE SOLO EL BOTON ICONO DEL MENU MOVIL QUE ESTA OCULTO */}
          {/*IMPORTANTE EN EL CSS INDEX PONER LA ALTURA HEIGHT 50  navbar-logo con py-7 EL MENU SE HACE MAS LARGO*/}
           <div className="flex flex-row md:flex 
-          w-[100%] lg:w-[100%] xl:w-[100%] 2xl:w-[100%]
-          h-[48px]  sm:h-[60px]  md:h-[60px] 
-          px-2 lg:px-8">
+          w-[100%] lg:w-[95%] xl:w-[100%] 2xl:w-[100%]
+          h-[48px]  sm:h-[60px]  md:h-[60px] max-w-[95%]
+          mx-auto">
 
 
 
@@ -262,9 +266,8 @@ function Navbar({
            <Popover.Group as="nav" className="
            hidden md:hidden
            lg:w-[80%] xl:w-[80%] 2xl:w-[80%]
-            lg:flex lg:flex-row justify-between items-center justify-center 
-            
-            md:flex">
+            lg:flex lg:flex-row justify-between items-center
+            justify-center md:flex">
 
   
           <div className="flex items-center h-full lg:w-[82%] space-x-10">
@@ -648,6 +651,13 @@ function Navbar({
 
       </Popover>
     </div>
+
+
+
+
+
+</>
+
   )
 }
 

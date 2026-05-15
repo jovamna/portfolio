@@ -1,6 +1,6 @@
 import "../../styles/index.css";
-import uno from '../../assets/img/portadas/nuevo/uno.png';
-import dos from '../../assets/img/portadas/nuevo/dos.png';
+import developerFullStack from '../../assets/img/portadas/nuevo/developerFullStack.png';
+import fullStackDjangoReact from '../../assets/img/portadas/nuevo/fullStackDjangoReact.png';
 import React from 'react';
 import LazyImage from './LazyImage';
 
@@ -53,8 +53,8 @@ function Greeting() {
                      {/* IMAGEN */}
                     <div className="lg:w-1/2 w-[60%] 2xl:w-[55%] h-full flex justify-center">
                       <LazyImage
-                      src={uno}
-                      alt="imagen normal"
+                      src={developerFullStack}
+                      alt="developer-Full-Stack"
                       className="w-full h-full object-cover"/>
                       
                     </div>
@@ -110,8 +110,8 @@ function Greeting() {
                      transition-all duration-700 ease-in-out">
 
                       <LazyImage
-                      src={dos}
-                      alt="imagen hover"
+                      src={fullStackDjangoReact}
+                      alt="fullStack Django React Redux"
                       className="w-full h-full object-cover "/>
 
               
@@ -154,8 +154,8 @@ function Greeting() {
                   <div className="flex items-center justify-between h-[430px] sm:h-[590px]">
                      <div className="w-[60%] h-full">
                       <LazyImage
-                      src={uno}
-                      alt="imagen normal"
+                      src={developerFullStack}
+                      alt="developer Full Stack"
                       className="w-full h-full object-cover"
                       />
                      </div>
@@ -185,8 +185,8 @@ function Greeting() {
               
                       <div className="w-[60%] h-full">
                          <LazyImage
-                          src={dos}
-                          alt="imagen hover"
+                          src={fullStackDjangoReact}
+                          alt="fullStack Django React Redux"
                           className="w-full h-full object-cover"/>
                       </div>
                   </div>

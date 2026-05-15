@@ -5,7 +5,7 @@ import { BiChevronsUp } from "react-icons/bi";
 
 import "../../styles/index.css";
 
-import aboutTransit from '../../assets/img/home/aboutTransit.png';
+import desarrolladoraDjangoReact from '../../assets/img/home/desarrolladoraDjangoReact.png';
 
 import { useEffect, useState } from "react";
 
@@ -42,7 +42,7 @@ export default function About() {
     py-4 md:py-[30px] lg:py-[40px] 2xl:py-[40px]">
 
       <div className="container-about-tres max-w-[95%] 
-      flex flex-col mx-auto px-2">
+      flex flex-col mx-auto">
 
             <h1 className="kaushan 
             underline underline-offset-8  
@@ -56,8 +56,9 @@ export default function About() {
 
           {/*  DIV 2 COLUMNS ROW     shadow-2xl  */}
           <div className="container-about-dos 
-          w-[100%] lg:w-[100%] 
-          flex flex-row isolate sm:rounded-3xl justify-center items-center mb-[20px]">
+          w-[100%] lg:w-[100%] flex flex-row 
+          isolate sm:rounded-3xl justify-center 
+          items-center mb-[20px]">
 
              
                  {/*SEGUNDA COLUMNA IMAGEN */}
@@ -65,8 +66,8 @@ export default function About() {
 
                   <img
                   className="h-full w-full opacity-150"
-                  src={aboutTransit}
-                  alt="programmer"
+                  src={desarrolladoraDjangoReact}
+                  alt="programadora React Django Redux Postgres"
                   />
                  </div>
                  {/*FIN SEGUNDA COLUMNA IMAGEN */}

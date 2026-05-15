@@ -1,6 +1,7 @@
 import { BiRss } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { BiChevronsUp } from "react-icons/bi";
+import { H2Icon } from "@heroicons/react/24/solid";
 
 
 
@@ -16,13 +17,14 @@ function Cv() {
 
   return (
     <div  className='curriculum h-[100%] w-[100%] flex  py-8 flex justify-center items-center'>
-       <div className="cv overflow-hidden sm:rounded-3xl max-w-[94.7%] mx-auto max-w-7xl  px-4 sm:px-6 lg:px-8">
+       <div className="cv overflow-hidden sm:rounded-3xl max-w-[95%] mx-auto ">
 
-           <div className="px-4 py-2 sm:px-6">
-          <h3 className="kaushan text-xl lg:text-5xl font-extrabold text-black text-center underline underline-offset-8 ">
+           <div className="">
+          <h2 className="kaushan text-xl lg:text-5xl font-extrabold text-black text-center underline underline-offset-8 ">
             Infomacion Curricular
-            </h3>
-          <p className="mt-1 max-w-2xl text-sm text-gray-200">Detalles Personales</p>
+            </h2>
+          <p className="lg:mt-[60px]  mt-[30px] mt-1 max-w-2xl 
+          text-base text-zinc-800 font-bold ">Detalles Personales</p>
            </div>
 
 
@@ -31,14 +33,14 @@ function Cv() {
           <div className=" mb-[20px]">
 
              <div className="bg-white pt-[12px] ">
-          <div className="bg-gray-50 px-4 mt-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt className="text-sm font-medium text-black bg-neutral-400">Full name</dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 bg-neutral-200">Jovamna Medina</dd>
-          </div>
+             <div className="bg-gray-50 px-4 mt-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+             <dt className="text-sm font-medium text-black bg-neutral-400">Full name</dt>
+             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 bg-neutral-200">Jovamna Medina</dd>
+             </div>
 
           <div className="bg-gray-50  px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-sm font-medium text-black  bg-neutral-400">Application for</dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 bg-neutral-200">Backend Developer</dd>
+            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 bg-neutral-200">Full Stack Developer</dd>
           </div>
 
           <div className="bg-gray-50 px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -82,16 +84,23 @@ function Cv() {
                     <span className="ml-2 w-0 flex-1 truncate">resume_back_end_developer.pdf</span>
                   </div>
 
-                  <div className="ml-4 flex-shrink-0">
-                  <Link to="/files/myfile.pdf" target="_blank" download>Download</Link>
-                    {/*<a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                      Download
-                   </a>*/}
-                  </div>
-                </li>
+              
+                <div className="ml-4 flex-shrink-0">
+                {/* Usa la etiqueta <a> con el atributo download */}
+                  <a 
+                href="/files/jovamna.pdf" 
+                download="CV_Jovamna_Medina.pdf" 
+               className="font-medium text-indigo-600 hover:text-indigo-500"
+                 >
+                Download
+               </a>
+               </div>
+
+         </li>
 
 
 
+               {/*
                 <li className="flex items-center justify-between pl-3 pr-4 text-sm">
                   <div className="flex w-0 flex-1 items-center">
                     <BiRss className="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
@@ -99,11 +108,9 @@ function Cv() {
                   </div>
                   <div className="ml-4 flex-shrink-0">
                   <Link to="/files/myfile.pdf" target="_blank" download>Download</Link>
-                    {/*<a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                      Download
-                  </a>*/}
+                 
                   </div>
-                </li>
+                </li>*/}
 
 
               </ul>

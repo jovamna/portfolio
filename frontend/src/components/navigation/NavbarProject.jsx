@@ -279,10 +279,10 @@ const guestLinks = (
 
 
         {/* 1 CONTAINER PRINCIPAL 1 DEL NAVBAR DEL PC Y  MENU MOVIL ESCONDIDO*/}
-           <div className="flex flex-row items-center justify-center md:flex 
-          w-[100%] lg:w-[100%] xl:-[100%] 2xl:-[100%]
+           <div className="flex flex-row items-center justify-center md:flex mx-auto
+          w-[100%] lg:w-[95%] xl:-[100%] 2xl:-[100%]
           h-[48px]  sm:h-[60px]  md:h-[60px] lg:h-[60px] 
-          px-2 lg:px-8">
+           max-w-[95%] mx-auto">
 
              
                {/*LOGO DEL NAV DE NAVEGACION ORDENADORY MOVIL */}
@@ -754,6 +754,14 @@ const guestLinks = (
 
 
 <Alert/>
+
+
+
+
+
+
+
+
  </>
   )
 }

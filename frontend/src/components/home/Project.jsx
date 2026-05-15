@@ -1,12 +1,16 @@
 
-import gitfinal from "../../assets/img/home/gitfinal.png";
+
 import ProjectCard from "../myproject/ProjectCard"
 import { get_project_list} from "../../redux/actions/project";
 import { BiChevronsUp } from "react-icons/bi";
-import { generatePath } from 'react-router-dom';
 import { useEffect } from "react"
 import { connect } from "react-redux"
 import LoadingCard from "../loaders/LoadingCard"
+import djangoReactGithub from "../../assets/img/home/djangoReactGithub.png";
+
+
+
+
 
 
 function Project({  get_project_list, project_list}) {
@@ -38,7 +42,7 @@ function Project({  get_project_list, project_list}) {
              {/*CONTAINER DIV COLUMNA total del contenido modificar en movil a 95%*/}
              <div className="project-movil  
              flex flex-col isolate 
-             lg:w-[100%]  max-w-[95%] mx-auto px-2">
+             lg:w-[100%] max-w-[95%] mx-auto">
 
               
               <h2 className="kaushan 
@@ -54,14 +58,14 @@ function Project({  get_project_list, project_list}) {
               {/* 1 DIV ROW COLORES DE FONDO Y GRAL DEL CONTENIDO*/}
 
                  {/* CONTAINER DE LAS 2 COLUMNAS*/}
-                 <div className='flex lg:flex-row lg:w-[100%]  flex-col w-[92%] mx-auto justify-between'> 
+                 <div className='flex lg:flex-row lg:w-[100%]  flex-col w-[92%]  justify-between'> 
 
                       {/*PRIMERA COLUMNA IMAGEN IMAGEN DEL COSTADO DE LOS GTHUBS */}
-                     <div className=" flex mx-auto lg:mt-6 mt-[20px] w-[70%] lg:w-[30%] 2xl:w-[30%]">
+                     <div className=" flex mt-[20px] w-[70%] lg:w-[30%] 2xl:w-[30%]">
                         <img
                         className=" w-full h-full object-contain"
-                        src={gitfinal}
-                        alt="App screenshot"
+                        src={djangoReactGithub}
+                        alt="Jovamna Medina Full Stack Django React"
                      
                         />
                      </div>
@@ -83,46 +87,28 @@ function Project({  get_project_list, project_list}) {
                            <div className="project-home flex lg:flex-row flex-col lg:justify-between lg:px-12">
 
 
-                        {
-                         project_list ?
-              
-                           <>
+                               {
+                               project_list ?
+                               <>
                
-                
-                           {/**  <div className="project-home-subcontainer  grid gap-5 lg:grid-cols-2 md:grid-cols-2 lg:max-w-none max-w-lg mx-auto  "> */}
-                        {/*CONTAINER NARANJA QUE ALOJA A LOS 2 GITHUBS */}
-                        <div className="project-home-subcontainer 
-                        grid gap-8 md:gap-12 lg:gap-16 grid-cols-1 
-                        md:grid-cols-2 lg:max-w-7xl mx-auto px-4">
-
-                      
-                            
-                            {
-                               
-
+                              {/**  <div className="project-home-subcontainer  grid gap-5 lg:grid-cols-2 md:grid-cols-2 lg:max-w-none max-w-lg mx-auto  "> */}
+                              {/*CONTAINER NARANJA QUE ALOJA A LOS 2 GITHUBS */}
+                              <div className="project-home-subcontainer 
+                               grid gap-8 md:gap-12 lg:gap-16 grid-cols-1 
+                               md:grid-cols-2 lg:max-w-7xl mx-auto px-4">
+                     
+                                {
                                   project_list.slice(0, project_list.length > 2 ? 2 : project_list.length).map(project => (
                                       <ProjectCard key={project.slug} data={project} />
                                     ))
                                   
-                                  
-
-
-
-                            }
-                        </div>     
-               
-
+                               }
+                              </div>     
               
-
-
-
-
-                </>
-                :
-                <LoadingCard/>
-              
-               
-            }
+                              </>
+                                :
+                             <LoadingCard/>            
+                             }
 
                            </div>
             
