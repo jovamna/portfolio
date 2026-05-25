@@ -31,14 +31,14 @@ useEffect(() => {
   const metaTags = [
     { property: 'og:title', content: 'Calculadora de Escandallos Profesional Gratuita' },
     { property: 'og:description', content: 'Herramienta hostelera interactiva para calcular el coste real de platos, controlar mermas de ingredientes y asegurar el beneficio de tu negocio.' },
-    { property: 'og:image', content: 'https://www.jovamnamedina.com/og-image-escandallo.png' }, // 💡 Cambia esto por una captura bonita de tu app
+    { property: 'og:image', content: 'https://jovamnamedina.com/custom-static/images/googleweb.jpg' }, // 💡 Cambia esto por una captura bonita de tu app
     { property: 'og:type', content: 'website' },
-    { property: 'og:url', content: 'https://www.jovamnamedina.com/herramientas/calculadora-escandallos' }, // 💡 Pon la URL exacta de tu página
+    { property: 'og:url', content: 'https://jovamnamedina.com/' }, // 💡 Pon la URL exacta de tu página
 
     { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:title', content: 'Calculadora de Escandallos de Cocina | por Jovamna Medina' },
     { name: 'twitter:description', content: 'Controla el coste de tus recetas y la pérdida por merma con esta herramienta interactiva inteligente.' },
-    { name: 'twitter:image', content: 'https://www.jovamnamedina.com/og-image-escandallo.png' },
+    { name: 'twitter:image', content: 'https://jovamnamedina.com/custom-static/images/facebookweb.jpg' },
     { name: 'twitter:label1', content: 'Categoría' },
     { name: 'twitter:data1', content: 'Software de Gestión Hostelera / Gastronomía' }
   ];
@@ -76,7 +76,7 @@ let scriptJsonLd = document.querySelector('script[data-schema="cooking-app"]') a
     '@type': 'WebApplication', // 🔥 Le decimos a Google que esto es un software online
     name: 'Calculadora de Escandallos Inteligente',
     description: 'Aplicación web gratuita para realizar escandallos de cocina profesionales, calcular mermas en alimentos, mermas de dinero y porcentaje de Food Cost.',
-    url: 'https://www.jovamnamedina.com/herramientas/calculadora-escandallos',
+    url: 'https://jovamnamedina.com/escandallo',
     applicationCategory: 'BusinessApplication',
     operatingSystem: 'All',
     browserRequirements: 'Requires JavaScript. Requires HTML5.',
@@ -84,7 +84,7 @@ let scriptJsonLd = document.querySelector('script[data-schema="cooking-app"]') a
       '@type': 'Person',
       name: 'Jovamna Medina',
       jobTitle: 'Full Stack Developer',
-      url: 'https://www.jovamnamedina.com'
+      url: 'https://jovamnamedina.com/'
     },
     offers: {
       '@type': 'Offer',

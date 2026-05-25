@@ -18,8 +18,6 @@ import "./styles/index.css";
 
 import { useEffect, useState } from 'react';
 import Logo from './containers/inicio/Logo';
-
-//import Escandal from './containers/pages/Escandal';
 import Escandallo from './containers/pages/Escandallo';
 
 
@@ -70,7 +68,7 @@ function App() {
    <meta name="description" content="Portafolio oficial de Jovamna Medina: Full Stack Developer especializada en Django/React y creadora de arte digital con IA + Photoshop." />
    <meta name="keywords" content="Jovamna Medina, Portfolio, Full Stack Developer, Django, React, E-commerce, Arte Digital, IA Generativa, Photoshop, Imágenes Digitales, Diseño Personalizado, Web Development" />
    <meta name="robots" content="index, follow" />
-   <link rel="canonical" href="https://jovamnamedina.com/" /> {/* Sin WWW */}
+   <link rel="canonical" href="https://jovamnamedina.com/"/> {/* Sin WWW */}
    <meta name="author" content="Jovamna Medina" />
 
    {/* 2. Open Graph */}
@@ -118,19 +116,11 @@ function App() {
         <Route path="/myproject/project/:slug" element={<ProjectPost />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/search/:term" element={<Search />} />
-
         <Route path="/escandallo" element={<Escandallo/>} />
    
-     
-    
-   
-        
-        
         <Route path="/blog/post/:slug" element={<BlogPost/>} />
-       
         <Route path="/categories/:categorySlug" element={<BlogCategory/>} />
-        {/*<Route path="/blog/categories/:categorySlug" element={<BlogCategory/>} />*/}
-   
+      
         <Route path="/politica-cookies" element={<PoliticaCookies />} />
         {/*NO HAY RUTA PARA LAS CATEGORIAS, NO ES NECESARIO */}
          {/*LAS CATEGORIA ESTAN COMO CONPONENTE DENTRO DEL BLOG */}
