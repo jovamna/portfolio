@@ -1,15 +1,14 @@
-import { useEffect } from "react";
-import Scrollbar from 'smooth-scrollbar';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
-var options = {
-    damping:0.07,
+export default function SmoothScrollbar () {
+  // El hook useLocation nos avisa cada vez que la URL cambia (ej: de '/' a '/escandallo')
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    // ¡Aquí está el truco mágico! Forzamos al navegador a ir a la coordenada (0,0) arriba del todo
+    window.scrollTo(0, 0);
+  }, [pathname]); // Se ejecuta cada vez que cambia la ruta
+
+  return null; // No pinta nada en pantalla, trabaja en secreto en segundo plano
 }
-
-const Scroll = () => {
-    useEffect(()=>{
-        Scrollbar.init(document.getElementById('layout'), options);
-    },[])
-    return null
-}
-
-export default Scroll

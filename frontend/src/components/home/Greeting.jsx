@@ -54,7 +54,7 @@ function Greeting() {
                     <div className="lg:w-1/2 w-[60%] 2xl:w-[55%] h-full flex justify-center">
                       <LazyImage
                       src={developerFullStack}
-                      alt="developer-Full-Stack"
+                      alt="Jovamna Medina, Full Stack Developer especializada en Django y React"
                       className="w-full h-full object-cover"/>
                       
                     </div>
@@ -111,7 +111,7 @@ function Greeting() {
 
                       <LazyImage
                       src={fullStackDjangoReact}
-                      alt="fullStack Django React Redux"
+                      alt="Desarrolladora Full Stack creando APIs con Django"
                       className="w-full h-full object-cover "/>
 
               

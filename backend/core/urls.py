@@ -68,14 +68,6 @@ urlpatterns = [
 
 
 
-# Catch-all SPA: SIEMPRE AL FINAL
-#urlpatterns += [
-    #re_path(
-      #  r'^(?!api/|ckeditor5/|admin/|static/|media/|sitemap\.xml$|robots\.txt$).*$',
-       # spa_entrypoint,
-       # name='spa_fallback'
-  #  ),
-#]
 
 
 # Catch-all SPA

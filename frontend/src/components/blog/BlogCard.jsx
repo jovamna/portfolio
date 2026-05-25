@@ -42,7 +42,7 @@ function BlogCard(data){
 
         <img 
           src={thumbnailUrl}
-          alt="post"
+          alt="Desarrolladora Full Stack experta en Django y React. Arte digital único con IA y Photoshop."
           className="w-full h-full object-cover"
         />
       </div>

@@ -66,7 +66,7 @@ function BlogPost({
 useEffect(() => {
     if (post) {
       // 1. Título con palabras clave (Keywords)
-      document.title = `${post.title} | Jovamna Medina - Full Stack Django & React`;
+      document.title = `${post.title} | | Blog de Desarrollo Web | Jovamna Medina`;
 
       // 2. Descripción técnica para Google
       let metaDescription = document.querySelector('meta[name="description"]');
@@ -76,30 +76,44 @@ useEffect(() => {
         document.head.appendChild(metaDescription);
       }
       // Combinamos el título del post con tus habilidades principales
-      metaDescription.content = `${post.title}. Articulo de Jovamna Medina, Full Stack Developer experta en Django, React y Redux.`;
+       metaDescription.content = `${post.excerpt || post.title}. Aprende desarrollo web con Django, React y buenas prácticas Full Stack.`;
+   
+
 
       // 3. Meta tags: Open Graph y Twitter
       const metaTags = [
-        { property: 'og:title', content: `${post.title} | Jovamna Medina - Dev Django/React` },
-        { property: 'og:description', content: `Explora este post de Jovamna Medina, especialista en desarrollo Full Stack con Django, React y Redux.` },
+        { property: 'og:title', content: `${post.title} | Blog de Desarrollo Web` },
+        { property: 'og:description', content: post.excerpt || post.title },
         { property: 'og:image', content: post.image || 'https://www.jovamnamedina.com/og-image-tech.png' },
         { property: 'og:type', content: 'article' },
+        { property: 'og:url', content: `https://www.jovamnamedina.com/blog/post/${post.slug}` },
+
         { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:label1', content: 'Tech Stack' }, // Dato extra para Twitter
+        { name: 'twitter:title', content: `${post.title} | Jovamna Medina` },
+        { name: 'twitter:description', content: post.excerpt || post.title },
+        { name: 'twitter:image', content: post.image },
+        { name: 'twitter:label1', content: 'Tech Stack' },
         { name: 'twitter:data1', content: 'Django, React, Redux, PostgreSQL' }
       ];
 
+
+
+
+
       metaTags.forEach(({ property, name, content }) => {
-        const attribute = property ? `meta[property="${property}"]` : `meta[name="${name}"]`;
-        let metaTag = document.querySelector(attribute);
-        if (!metaTag) {
-          metaTag = document.createElement('meta');
-          if (property) metaTag.setAttribute('property', property);
-          if (name) metaTag.setAttribute('name', name);
-          document.head.appendChild(metaTag);
-        }
-        metaTag.content = content || '';
-      });
+      const selector = property
+        ? `meta[property="${property}"]`
+        : `meta[name="${name}"]`;
+
+      let tag = document.querySelector(selector);
+      if (!tag) {
+        tag = document.createElement("meta");
+        if (property) tag.setAttribute("property", property);
+        if (name) tag.setAttribute("name", name);
+        document.head.appendChild(tag);
+      }
+      tag.content = content;
+    });
 
       // 4. JSON-LD (Esto le fascina a Google)
       let scriptJsonLd = document.querySelector('script[data-schema="blog-post"]');
@@ -113,26 +127,35 @@ useEffect(() => {
       scriptJsonLd.textContent = JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'BlogPosting',
-        'headline': post.title,
-        'author': {
+        headline: post.title,
+        description: post.excerpt,
+        image: post.image ? `${URL}${post.image}` : undefined,
+        datePublished: post.published,
+        dateModified: post.updated || post.published,
+        author: {
           '@type': 'Person',
-          'name': 'Jovamna Medina',
-          'jobTitle': 'Full Stack Developer',
-          'knowsAbout': ['Django', 'React', 'Redux', 'Python', 'JavaScript', 'SQL'] // <-- ¡Esto es SEO puro!
+          name: 'Jovamna Medina',
+          jobTitle: 'Full Stack Developer',
+          knowsAbout: ['Django', 'React', 'Redux', 'Python', 'JavaScript', 'SQL']
         },
-        'publisher': {
+        publisher: {
           '@type': 'Organization',
-          'name': 'Jovamna Medina Dev',
-          'logo': {
+          name: 'Jovamna Medina Dev',
+          logo: {
             '@type': 'ImageObject',
-            'url': 'https://www.jovamnamedina.com/logo.png'
-          }
-        },
-        'mainEntityOfPage': {
-          '@type': 'WebPage',
-          '@id': `https://www.jovamnamedina.com/blog/post/${post.slug}`
-        }
-      });
+             url: 'https://www.jovamnamedina.com/logo.png'
+            }
+          },
+          mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': `https://www.jovamnamedina.com/blog/post/${post.slug}`
+          },
+          keywords: post.category?.name,
+          articleBody: post.content
+        });
+
+
+    
     }
   }, [post]);
 
@@ -154,84 +177,70 @@ useEffect(() => {
 
  
 
+    /* ============================================================
+     RENDER MEDIA
+  ============================================================ */
+
+
+  const renderMedia = () => {
+    if (post.thumbnail && !post.video) {
+      return (
+        <img
+          src={thumbnailUrl}
+          alt={post.title}
+          loading="lazy"
+          className="object-contain w-full"
+        />
+      );
+    }
+
+    if (post.video && !post.thumbnail) {
+      return (
+        <video
+          src={videoUrl}
+          className="object-cover w-full h-[400px]"
+          autoPlay
+          loop
+          muted
+          title={post.title}
+        />
+      );
+    }
+
+    if (post.thumbnail && post.video) {
+      return (
+        <>
+          <img
+            src={thumbnailUrl}
+            alt={post.title}
+            loading="lazy"
+            className="object-contain w-full mb-4"
+          />
+          <video
+            src={videoUrl}
+            className="object-cover w-full h-[400px]"
+            autoPlay
+            loop
+            muted
+            title={post.title}
+          />
+        </>
+      );
+    }
+
+    return null;
+  };
+
+  if (!post) return <div />;
+
+  /* ============================================================
+     RENDER PRINCIPAL
+  ============================================================ */
+
     
 
      //CODIGO pARA RENDERIZAR VIDEO O IMAGEN, SEGUN SEA INCLUIDO EN EL ADMIN DE DJANGO
-    const renderMedia = () => {
-      if (post.thumbnail && !post.video) {
-        return (
-                 <div className="movil-portada-subcaja lg:w-full ">
-                 <img 
-                 src={thumbnailUrl} 
-                 
-                 alt="post"  
-                 className="object-contain w-[100%]"
-                 />
-                 </div>
-               );
-
-
-
-        } else if (post.video && !post.thumbnail) {
-          // Renderizar el componente de video aquí
-          // Reemplaza 'video' con la propiedad de video en tu objeto 'post'
-          // Por ejemplo, si el video está almacenado en post.video_url:
-          return (
-            <div className=" w-[100%] h-[400px] mb-4">
-                 <video
-                 className="object-cover h-[100%] z-0 movil-video-portada"
-                 src={videoUrl}
-                 controlsList="nodownload nofullscreen" // Ocultar botón de reproducción
-                 width="100%"
-                 type="video/mp4"
-                 autoPlay
-                 loop
-                 muted
-                 duration="10" // Cambia este valor a la duración deseada en segundos
-                 onError={(e) => {
-                 console.error("Error al cargar el video:", e.target.error);
-                 }}
-                />
-                </div>
-                );
-
-
-        } else if (post.thumbnail && post.video) {
-          // Ambos están presentes, decide cuál mostrar o muestra ambos
-          // Aquí se muestra solo el video, pero puedes cambiar el orden o mostrar ambos si lo deseas
-          return (
-                 <>
-                 <div className=" w-[100%]  aspect-w-1 aspect-h-1 lg:[100%] lg:aspect-none rounded-md overflow-hidden group-hover:opacity-75 movil-portada-subcaja">
-                     <img 
-                     src={thumbnailUrl} 
-                     alt="post"  
-                     className="object-contain w-[100%] inset-0 z-0"
-                     />
-                 </div>
-
-                 <div className=" w-[100%] h-[400px] mb-4">
-                 <video
-                 className="object-cover h-[100%] inset-0 z-0 movil-video-portada"
-                 src={videoUrl}
-                 controlsList="nodownload nofullscreen" // Ocultar botón de reproducción
-                 width="100%"
-                 type="video/mp4"
-                 autoPlay
-                 loop
-                 muted
-                 duration="10" // Cambia este valor a la duración deseada en segundos
-                 />
-                 </div>
-                 </>
-                 );
-
-
-        } else {
-                // Si no hay imagen ni video, no se muestra nada
-                return null;
-               }
-    };
-
+    
 
 
 
@@ -287,7 +296,7 @@ useEffect(() => {
           post ?
             //CONTAINER DE CATEGORIA TITULO DESCRPITON
             //prose prose-indigo prose-lg 
-            <div className="movil-redaccion-blog-post relative text-gray-500 mx-auto font-gilroy-regular">
+            <div className="movil-redaccion-blog-post relative text-neutral-900  mx-auto ">
               
 
 
@@ -302,9 +311,9 @@ useEffect(() => {
               {/* EXCERPT*/}
               <div className=" z-10 max-w-lg max-w-prose mx-auto">                     
               { /*span title sm:text-4xl*/}
-                  <h2 className="kaushan blog-detail-title block tracking-wide text-center font-normal tracking-tight text-neutral-700  lg:text-xl text-base mt-[20px]">
+                  <p className="kaushan blog-detail-title block tracking-wide text-center font-normal tracking-tight text-neutral-700  lg:text-xl text-base mt-[20px]">
                   {post.excerpt}
-                  </h2>   
+                  </p>   
               </div>
 
 
@@ -314,18 +323,21 @@ useEffect(() => {
               </div>
 
 
-    
+              <h2 className="oswald-muckas text-xl font-semibold mt-10">
+                 Introducción
+              </h2>
+
             {/*DESCRIPTION prose prose-indigo prose-lg*/}
-            <div className="oswald-muckas parrafo mt-6 text-black lg:text-lg  whitespace-pre-line">
+            <p className="oswald-muckas parrafo mt-6 text-black lg:text-lg  whitespace-pre-line">
               {post.description}
-           </div>
+           </p>
 
             {/*imageUrl*/}
 
 
              
                {/**PRIMER CONTENT */}
-              <div
+              <section
               className="oswald-muckas parrafo mt-6 text-black lg:text-lg"
               dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.narrative) }}
            />
@@ -337,9 +349,9 @@ useEffect(() => {
                 {post.image && (
                 <img
                   src={imageUrl}
-                  
                   alt={post.title}
-                  className="w-[100%] object-contain"
+                  loading="lazy"
+                  className="w-full object-contain mt-6"
                   />
                  )}
             </div>
@@ -347,12 +359,12 @@ useEffect(() => {
 
               {/*SEGUNDO CONTENT*/}
 
-             <div
+             <section
               className="oswald-muckas parrafo mt-6  text-black lg:text-lg"
               dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
-           />
+              />
 
-              {/**PRODUCTOS RELACIONADOS */}
+              {/**POSTS RELACIONADOS */}
                  <div className="lg:mt-[2px] md:w-[100%] lg:w-[100%] w-[100%]">
                   {/* Mostrar título solo si hay relacionados */}
                   {post.related_products?.length > 0 && (
@@ -378,9 +390,9 @@ useEffect(() => {
 
 
               {/*CATEGORIA*/}
-              <span className="block text-xs font-mono text-orange-400 text-center my-[50px] font-bold tracking-wide uppercase">
+              <p className="block text-xs font-mono text-orange-400 text-center my-[50px] font-bold tracking-wide uppercase">
               {post.category.name}
-              </span>
+              </p>
 
           
                      
@@ -391,6 +403,7 @@ useEffect(() => {
                   src={enviarlo}
                    width={50}
                    height={40}
+                  alt={post.title}
                    className='rounded-full border border-zinc-400 px-[4px] py-[4px] ml-[9px] mr-[12px] outline outline-offset-2 outline-gray-400'
                    />    
                    <div className="flex flex-col">
@@ -414,8 +427,8 @@ useEffect(() => {
                   <div className=' w-[16%] flex justify-end items-center '>   
                   <img 
                   src={vistas}
-                  className=' w-[22px]  h-[14px] mr-[4px]'
-                  />
+                  alt={post.title}
+                  className=' w-[22px]  h-[14px] mr-[4px]'/>
                   <p className='mr-[4px]'> {post.views}</p>
                   </div> 
 

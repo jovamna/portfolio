@@ -13,11 +13,16 @@ import PoliticaCookies from './containers/pages/PoliticaCookies'
 import Signup from './containers/auth/Signup';
 import Login from './containers/auth/Login';
 import Dashboard from './containers/auth/Dashboard';
-
+import SmoothScrollbar from './components/SmoothScrollbar';
 import "./styles/index.css";
 
 import { useEffect, useState } from 'react';
 import Logo from './containers/inicio/Logo';
+
+//import Escandal from './containers/pages/Escandal';
+import Escandallo from './containers/pages/Escandallo';
+
+
 
 
 
@@ -34,11 +39,6 @@ function App() {
 
 
  // }, []);
-
-
-
-
-
 
 
 
@@ -92,7 +92,6 @@ function App() {
 
 
 
-
      {/*RUTAS DEL PROJECTO */}
 
       <Provider store={store}>
@@ -101,6 +100,7 @@ function App() {
    
         {/*showLogo ? <Logo /> :   */   }
   
+<SmoothScrollbar />
 
 
 
@@ -118,6 +118,13 @@ function App() {
         <Route path="/myproject/project/:slug" element={<ProjectPost />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/search/:term" element={<Search />} />
+
+        <Route path="/escandallo" element={<Escandallo/>} />
+   
+     
+    
+   
+        
         
         <Route path="/blog/post/:slug" element={<BlogPost/>} />
        

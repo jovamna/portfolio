@@ -14,8 +14,9 @@ function ProjectCard(data){
         <>
 
        <div className="project-movil-card border bg-white
-       b-4 border-black flex flex-col rounded-lg  opacity-90 shadow-lg 
-       overflow-hidden pb-2 pt-[5px]  h-[350px] 2xl:h-[460px] 2xl:w-[400px] px-[5px] ">
+       b-4 border-black flex flex-col rounded-lg  opacity-90 
+       shadow-lg overflow-hidden pb-2 pt-[5px]  h-[350px] 
+       2xl:h-[460px] 2xl:w-[400px] px-[5px] hover:-translate-y-1 hover:shadow-xl">
    
        
              {/*CONTAINER 1 DE ICONO DE GITHUB TITLE. DESCRIPTION bg-zinc-300*/}
@@ -37,16 +38,18 @@ function ProjectCard(data){
 
 
                   {/*TITULO DEL CARD DE GITHUB */}
-                  <p className="title text-center font-bold lg:text-xl text-sm text-gray-900 mt-2 underline underline-offset-4 uppercase font-mono">
+                  <h3 className="title text-center 
+                  font-bold lg:text-xl text-sm 
+                  text-gray-900 mt-2 capitalize">
                 
                   {project.title.slice(0,15) }
                   {/*console.log(project)*/}
-                  </p>
-
-                 
+                  </h3>
 
                   <p
-                    className="languages px-2 mt-[15px] text-sm dark:text-dark-txt text-center  text-zinc-700 tracking-wide font-light"
+                    className="languages px-2 mt-[15px] 
+                    text-sm dark:text-dark-txt text-center  
+                    text-zinc-700 tracking-wide font-light"
                     dangerouslySetInnerHTML={{
                     __html:
                     project.description && DOMPurify.sanitize(project.description.length) > 99
@@ -55,10 +58,11 @@ function ProjectCard(data){
                     }}
                     />
                     <Link 
-                                    to={`/myproject/project/${project.slug}`} 
-                                    className="block"
-                                    >
-                    <p className='lg:text-sm text-xs md:text-xs text-gray-600'>leer mas</p>
+                    to={`/myproject/project/${project.slug}`} 
+                    className="block">
+                    <p className='lg:text-sm text-xs md:text-xs text-gray-600'>
+                        leer mas
+                    </p>
                     
                     </Link>
                     
@@ -83,19 +87,18 @@ function ProjectCard(data){
 
                  {/**TAGS MEJOR DISEÑADOS */}
                  <div className='div-languages flex flex-row items-center space-x-2 overflow-hidden'>
-    
-    <p className="languages text-xs font-bold text-gray-900 flex-shrink-0">
-        Keywords:
-    </p>
+                    <p className="languages text-xs font-bold text-gray-900 flex-shrink-0">
+                        Keywords:
+                    </p>
 
-    {/* Definimos el límite de tags a mostrar */}
-    {/* Puedes ajustar este número (3) según el espacio disponible */}
-    {project.tags.slice(0, 3).length > 0 && (
-        <div className="flex flex-row flex-wrap gap-1 flex-1 overflow-hidden h-6">
+                    {/* Definimos el límite de tags a mostrar */}
+                    {/* Puedes ajustar este número (3) según el espacio disponible */}
+                   {project.tags.slice(0, 3).length > 0 && (
+                  <div className="flex flex-row flex-wrap gap-1 flex-1 overflow-hidden h-6">
         
-            {/* 1. Mapeamos solo los primeros 3 tags */}
-            {project.tags.slice(0, 3).map((tag, index) => (
-                <span 
+                    {/* 1. Mapeamos solo los primeros 3 tags */}
+                     {project.tags.slice(0, 3).map((tag, index) => (
+                     <span 
                     key={index}
                     className="
                         px-2 py-0.5 

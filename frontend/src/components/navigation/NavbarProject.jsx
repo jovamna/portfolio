@@ -41,6 +41,13 @@ const solutions = [
     href: '/blog',
     icon: MdArticle,
   },
+  {
+    name: 'Escandallo',
+    description: ' Diseñado para ayudar a digitalizar la gestión de pequeños negocios de hostelería de forma gratuita.',
+    href: '/escandallo',
+    icon: MdArticle,
+  },
+
    {
     name: 'MyProjects',
     description: 'Lista de repositorios en Github.',
@@ -48,8 +55,11 @@ const solutions = [
     icon: DiGithubBadge ,
   },
   
-
 ]
+
+
+
+
 
 
 function classNames(...classes) {
@@ -228,11 +238,11 @@ function NavbarProject({
 const guestLinks = (
   <Fragment>
 
-    <div className='flex items-center justify-center md:w-[100%] lg:w-[100%] w-[100%] h-[40px] lg:h-[56px]'>
+    <div className='flex items-center justify-end md:w-[100%] lg:w-[100%] w-[100%] h-[40px] lg:h-[56px]'>
 
-         <div className='inline-flex  items-center justify-center  w-[30%] md:w-[30%] lg:w-[50%] lg:h-[56px] h-[40px]'>
+         <div className='inline-flex  items-center justify-end  w-[30%] md:w-[30%] lg:w-[40%] lg:h-[56px] h-[40px]'>
             <Link to="/login">
-            <img className="text-black hover:text-gray-500 w-[26px] h-[24px] lg:w-[28px] lg:h-[26px]"
+            <img className="text-black hover:text-gray-500 w-[26px] h-[24px] "
             src={loginUser}
             alt="login"
            
@@ -240,7 +250,7 @@ const guestLinks = (
             </Link>
         </div>
 
-        <div className='inline-flex items-center justify-center w-[70%] md-w-[70%] lg:w-[50%] h-[40px] lg:h-[56px] '>
+        <div className='inline-flex items-center justify-end w-[70%] md-w-[70%] lg:w-[60%] h-[40px] lg:h-[56px] '>
               <p className=' hover:text-gray-500 lg:text-sm sm:text-xs text-xs text-black font-semibold'>
             <Link to="/login" className="">
           
@@ -309,7 +319,7 @@ const guestLinks = (
         <div className=" lg:hidden xl:hidden 2xl:hidden 
         h-[48px] sm:h-[60px]  md:h-[60px]  
         flex flex-row w-[62%] 
-        justify-center items-center md:space-x-20 ">
+        justify-center items-center md:space-x-20">
                    {/*LOGIN Y LOGOUT LOGIN Y LOGOUT */} 
 
                    <div className="inline-flex py-2 md:py-2 w-[60%] h-[48px] sm:h-[60px] md:h-[60px] md:w-[30%]">
@@ -394,11 +404,23 @@ const guestLinks = (
                   </span>
                   </NavLink>
 
+
+                   <NavLink to= "/escandallo" className="nav-item  text-black font-semibold hover:bg-neutral-100 hover:text-violet-700 border-b-2 border-transparent hover:border-violet-700 inline-block px-3 h-[2rem]">
+                  <span className="ml-6 "
+                  >Escandallo
+                  </span>
+                  </NavLink>
+
                   <NavLink to= "/myproject" className="nav-item text-black font-semibold hover:bg-neutral-100 hover:text-violet-700 border-b-2 border-transparent hover:border-violet-700 inline-block px-3 h-[2rem]">
                   <span className="ml-6">
                     MyProjects
                   </span>
                   </NavLink>
+
+
+
+
+
                  </div>
                  
 
@@ -406,7 +428,7 @@ const guestLinks = (
                 <div className="flex justify-center items-center lg:w-[40%] h-full">
              
                  {/* BUSCADOR */}
-                 <div  className='inline-flex  lg:w-[10%] flex justify-end items-center lg:h-[56px]'>
+                 <div  className='inline-flex  lg:w-[60%] flex justify-center items-center lg:h-[56px]'>
                 <button
                 onClick={() => {
                 setIsSearchOpen(!isSearchOpen);
@@ -434,7 +456,7 @@ const guestLinks = (
 
             
                 {/* LOGIN INICIAR SESION */}
-               <div className="lg:w-[50%] lg:h-[60px] inline-flex">
+               <div className="lg:w-[40%] lg:h-[60px] inline-flex">
                   {
                 isAuthenticated ? authLinks:guestLinks
                 }
@@ -445,101 +467,8 @@ const guestLinks = (
               
 
             
-                 {/*ICONO DEL BLOG EN PANTALLA GRANDE*/}
-                 {/* BLOG BLOG CON MENU DESLIZANTE rounded-md */}
-                 <Popover className="inline-flex  lg:w-[10%] flex justify-end items-center lg:h-[56px]">
-                  {({ open }) => (
-                  <>
-
-                     <Popover.Button
-                     className={classNames(
-                     open ? 'text-gray-900' : 'text-gray-500',
-                     'group inline-flex items-center hover:bg-gray-100 focus:outline-none '
-                     )}
-                     >
-
-
-                       {/*ICONO DEL MENU BLOG IMPORTATE PARA QUE EL BIHOME NO ESTE AL LIMITE mr-[1px*/}
-                       {/*ICONO IGLESIAS EN MENU PANTALLA GRANDE ICONO DEL BLOG */}
-                     <HiOutlineLibrary
-                      className={classNames(open ? 'text-black' : 'text-black',
-                     'h-6 w-6 hover:text-gray-400 '
-                     )}
-                     aria-hidden="true" 
-                     />
-                     </Popover.Button>
-
-
-
-                     {/*CONTAINER DEL MENU HIDDEN DE LA PANTALLA PC */}
-
-                    <Transition
-                    as={Fragment}
-                    enter="transition ease-out duration-200"
-                    enterFrom="opacity-0 translate-y-1"
-                    enterTo="opacity-100 translate-y-0"
-                    leave="transition ease-in duration-150"
-                    leaveFrom="opacity-100 translate-y-0"
-                    leaveTo="opacity-0 translate-y-1"
-                    >
-
-
-                       <Popover.Panel className="absolute top-[32px] w-screen bg-white  max-w-md right-0 transform translate-x-1/12 px-2 sm:px-0">
-                         <div className="overflow-hidden  [10rem] rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-
-                            {/* MENU ESCONDIDO PANTALLA GRANDE, HOME, MYPROJECTS*/}
-                            <div className="relative grid sm:gap-12 p-8">
-                            {solutions.map((item) => (
-                            <a
-                            key={item.name}
-                            href={item.href}
-                            className="-m-3 flex items-start rounded-lg hover:bg-gray-50 border-b-2 border-neutral-400"
-                            >
-                            <item.icon className="h-6 w-6 flex-shrink-0 text-white" aria-hidden="true" />
-                             <div className=" ">
-                             <p className="text-base font-medium text-gray-900">{item.name}</p>
-                             <p className="mt-1 text-sm text-gray-600">{item.description}</p>
-                             </div>
-                            </a>
-                            ))}
-                            </div>
-                            {/* FIN MENU ESCONDIDO PANTALLA GRANDE, HOME, MYPROJECTS*/}
-
-
-
-
-
-                              {/*MENU HIDDEN EN PANTALLA GRANDE  RECIENTES POSTS DE PROJECTS */}    
-                              {/* USE EL COMPONENTE BLOG-LIST E HICE UNA FUNCTION DE RENDERIZADO ARRIBA DE TODO*/}
-                              <div className="white px-4 ">
-                              {blog_list ? (
-                              <>
-                              {renderBlogList(blog_list)} {/* Llama a la función para renderizar la lista */}
-                              </>
-                              ) : (
-                              <LoadingCard />
-                              )}
-                              {/* ENLACE A LA PAGINA DE TODOS LOS POSTS DE GITHUB */}
-                              <div className="text-sm pb-4 px-4">
-                                <a href="/blog" className="font-medium text-indigo-600 hover:text-indigo-500">
-                                  Ver todos los posts
-                                  <span aria-hidden="true"> &rarr;</span>
-                                  </a>
-                                  </div>
-                              </div> 
-                              {/* FIN MENU ESCONDIDO PANTALLA GRANDE RECIENTES POSTS DE PROJECTS */}
-
-
-
-
-
-
-                         </div>
-                       </Popover.Panel>
-                    </Transition>
-                  </>
-                  )}
-                 </Popover>
+                 {/*AQUI ESTABA EL ICONO QUE MOSTRABA EL NABVAR ERA REDUNDANTE ICONO DEL BLOG EN PANTALLA GRANDE*/}
+               
                  {/* FIN MENU BLOG ICONO EN PANTALLA GRANDE*/}
 
                 </div>
@@ -558,41 +487,6 @@ const guestLinks = (
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         {/* 2 CONTAINER PRINCIPAL 2 MENU DEL MOVIL*/}
         <Transition
         as={Fragment}
@@ -605,97 +499,79 @@ const guestLinks = (
         >
 
            {/*SECTION DEL MENU ESCONDIDO DEL MOVIL */}
+
            {/*CONTAINER GENERAL DEL MENU ESCONDIDO */}
-           <Popover.Panel focus className="bg-white absolute inset-x-0 top-0 px-0 origin-top-right py-2 transform transition md:hidden">
+
+           <Popover.Panel className="absolute top-[0px] w-screen 
+           max-w-md right-0 transform translate-x-1/24 
+           px-2 sm:px-0 z-50 bg-white md:h-[100vh] h-[100vh]">
+              {/* <Popover.Panel focus className="bg-white absolute inset-x-0 top-0 px-0 origin-top-right py-2 transform transition md:hidden">*/}
               {/*CONTAINER2 GENERAL DEL MENU ESCONDIDO */}
-              <div className="divide-y-2 divide-gray-50 rounded-lg  shadow-lg ring-1 ring-black ring-opacity-5 bg-white">
+              <div className="">
 
 
-                 {/*1 CONTAINER GENERAL DEL LOGO SEARCH Y MENU HIDDEN  COLUMN DE OPCIONES MYPROJECT,BLOG*/}
-                 <div className="pb-8">
+                 {/* CONTAINER GENERAL DEL LOGO SEARCH Y MENU HIDDEN  COLUMN DE OPCIONES MYPROJECT,BLOG*/}
+                 <div className="pb-8 ">
 
 
-                        {/*2 CONTAINER DEL ICONO DEL LOGO Y HOME */}
-                        <div className="flex items-center justify-between  px-4">
-                         {/*ICONO LOGO DEL MENU HIDDEN */}
-                         <div className=" ">
-                         <img 
-                         className="h-8 w-auto"
-                         src={logo}
-                         alt="logo"
-                         width={150}
-                         height={50}
-                       />
-                         </div>
+                        {/*1 CONTAINER DEL LOGO DELETE 100% */}
+                        <div className="flex w-[100%] md:w-[100%] items-center px-4">
+                           {/*ICONO LOGO DEL MENU HIDDEN */}
+                           <div className="w-[78%] md:w-[80%]">
+                            <img 
+                            className="h-8 w-auto"
+                            src={logo}
+                            alt="logo"
+                            width={150}
+                            height={50}
+                            />
+                           </div>
 
-                         {/*ICONO DE HOME DEL LADO CONTRARIO A LOGO */}
-                         <div className="">
-                          <Popover.Button className="inline-flex items-center mt-2 justify-center  p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-0 focus:ring-inset ">
+                         {/*DELETE X DEL LADO CONTRARIO A LOGO */}
+                         <div className="w-[22%] md:w-[20%]">
+                          <Popover.Button className="inline-flex items-center mt-2 
+                          justify-center  p-2 text-gray-400 hover:bg-gray-100 
+                          hover:text-gray-500 focus:outline-none focus:ring-0 
+                          focus:ring-inset ">
                           <span className="sr-only">Close menu</span>
                           {/*ICONO  HOME DEL MENU HIDDEN */}
-                          <span className='text-neutral-800 text-lg hover:text-orange-500'> X</span>
-                         
-                         
-                      
-                      
+                          <span className='text-neutral-900 text-xl  hover:text-orange-500'> 
+                            X
+                          </span>
                           </Popover.Button>
-
-
-
-
-                          
                          </div>
+
+
+
                          </div>
-                           {/*2 FIN CONTAINER DEL ICONO DEL LOGO Y HOME */}
 
-
-
-              
-
-
-                           <div className='w-[94%] mx-auto justify-center px-2 py-8 border-b border-neutral-500 bg-white'>
+                           {/*2 CONTAINER SEARCH 100%*/}
+                           <div className='w-[94%] mx-auto justify-center px-2 py-2 border-b border-neutral-500 bg-white'>
                            { window.location.pathname==='/search/:term'?<>
                            </>
                            :
                            <SearchFormBox className=""  />}  
                            </div>
-               
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                           
-
-                          {/*3 CONTAINER DEL MOVIL DE LA NAVEGACION y SEARCH*/}
-                           <div className="w-[100%] mx-auto pt-6 ">
-                      
-
-                           <nav className="grid gap-y-6 ">
-                           {solutions.map((item) => (
-                           <a
-                           key={item.name}
-                           href={item.href}
-                           className="flex items-center border-b border-neutral-500 bg-white hover:bg-neutral-200 px-4 p-3"
-                           >
-                           <item.icon className="h-6 w-6 flex-shrink-0 text-black hover:text-orange-500 " aria-hidden="true" />
-                           <span className="ml-3 text-sm font-semibold text-black hover:text-orange-500">
-                            {item.name} 
-                            </span>
-                            </a>
-                            ))}
-                           </nav>
-                           </div>
+              
+                          {/*3 NAVEGACION BLOG ESCANDALLO HOME ETC  100%*/}
+                          <div className="relative grid gap-6 p-6 sm:gap-12 sm:p-8 bg-white">
+                         {solutions.map((item) => (
+                          <Link
+                          key={item.name}
+                          to={item.href} // 💡 Cambiamos 'href' por 'to'
+                          className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50 border-b border-gray-100 transition-colors duration-200"
+                          >
+                          {/* 💡 Cambiado text-white por text-neutral-700 para que el icono SE VEA */}
+                          <item.icon className="h-6 w-6 flex-shrink-0 text-neutral-700 mt-0.5" aria-hidden="true" />
+          
+                          <div className="ml-4">
+                          <p className="text-base font-semibold text-gray-900">{item.name}</p>
+                          <p className="mt-1 text-sm text-gray-500 leading-relaxed">{item.description}</p>
+                          </div>
+                         </Link>
+                          ))}
+                         </div>
+                         {/* FIN MENU DESLIZANTE */}
                            {/* 3 FIN CONTAINER DEL MOVIL DE LA NAVEGACION y SEARCH*/}
 
 
@@ -717,10 +593,10 @@ const guestLinks = (
                               )}
                               {/* ENLACE A LA PAGINA DE TODOS LOS POSTS DE GITHUB */}
                               <div className="pb-4 px-4">
-                                <a href="/blog" className="text-sm font-medium text-indigo-600  hover:text-orange-500">
+                                <Link to="/blog" className="text-sm font-medium text-indigo-600  hover:text-orange-500">
                                   Ver todos los posts
                                   <span aria-hidden="true"> &rarr;</span>
-                                  </a>
+                                  </Link>
                               </div>
                         </div> 
                               {/* FIN MENU ESCONDIDO PANTALLA GRANDE RECIENTES POSTS DE PROJECTS */}
@@ -781,3 +657,105 @@ export default connect(mapStateToProps,{
 })(NavbarProject)
 
 
+
+
+
+
+
+
+
+  //{/*<Popover className="inline-flex  lg:w-[10%] flex justify-end items-center lg:h-[56px]">
+         //         {({ open }) => (
+          //        <>
+
+           //          <Popover.Button
+           //          className={classNames(
+           //          open ? 'text-gray-900' : 'text-gray-500',
+           //          'group inline-flex items-center hover:bg-gray-100 focus:outline-none '
+             //        )}
+             //        >
+
+
+             
+             //          {/*ICONO IGLESIAS EN MENU PANTALLA GRANDE ICONO DEL BLOG */}
+                    // <HiOutlineLibrary
+               //       className={classNames(open ? 'text-black' : 'text-black',
+               //      'h-6 w-6 hover:text-gray-400 '
+                //     )}
+                //     aria-hidden="true" 
+                //     />
+                //     </Popover.Button>
+
+
+
+                     {/*CONTAINER DEL MENU HIDDEN DE LA PANTALLA PC */}
+
+                //    <Transition
+                //    as={Fragment}
+                //    enter="transition ease-out duration-200"
+                //    enterFrom="opacity-0 translate-y-1"
+                //    enterTo="opacity-100 translate-y-0"
+                //    leave="transition ease-in duration-150"
+                //    leaveFrom="opacity-100 translate-y-0"
+                //    leaveTo="opacity-0 translate-y-1"
+                //    >
+
+
+                //       <Popover.Panel className="absolute top-[32px] w-screen bg-white  max-w-md right-0 transform translate-x-1/12 px-2 sm:px-0">
+                //         <div className="overflow-hidden  [10rem] rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
+
+                //            {/* MENU ESCONDIDO PANTALLA GRANDE, HOME, MYPROJECTS*/}
+                 //           <div className="relative grid sm:gap-12 p-8">
+                 //           {solutions.map((item) => (
+                 //           <Link
+                 //           key={item.name}
+                 //           to={item.href} // 💡 Cambiamos 'href' por 'to'
+                  //          className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50 border-b border-gray-100 transition-colors duration-200"
+                  //          >
+                    //        {/* 💡 Cambiado text-white por text-neutral-700 para que el icono SE VEA */}
+                   //         <item.icon className="h-6 w-6 flex-shrink-0 text-neutral-700 mt-0.5" aria-hidden="true" />
+          
+                  //          <div className="ml-4">
+                  //          <p className="text-base font-semibold text-gray-900">{item.name}</p>
+                  //          <p className="mt-1 text-sm text-gray-500 leading-relaxed">{item.description}</p>
+                  //          </div>
+                  //         </Link>
+                  //          ))}
+                  //          </div>
+                   //         {/* FIN MENU ESCONDIDO PANTALLA GRANDE, HOME, MYPROJECTS*/}
+
+
+
+
+
+                     //         {/*MENU HIDDEN EN PANTALLA GRANDE  RECIENTES POSTS DE PROJECTS */}    
+                      //        {/* USE EL COMPONENTE BLOG-LIST E HICE UNA FUNCTION DE RENDERIZADO ARRIBA DE TODO*/}
+                      //        <div className="white px-4 ">
+                      //        {blog_list ? (
+                       //       <>
+                       //       {renderBlogList(blog_list)} {/* Llama a la función para renderizar la lista */}
+                        //      </>
+                      //        ) : (
+                      //        <LoadingCard />
+                       //       )}
+                       //       {/* ENLACE A LA PAGINA DE TODOS LOS POSTS DE GITHUB */}
+                       //       <div className="text-sm pb-4 px-4">
+                       //         <a href="/blog" className="font-medium text-indigo-600 hover:text-indigo-500">
+                        //          Ver todos los posts
+                        //          <span aria-hidden="true"> &rarr;</span>
+                        //          </a>
+                        //          </div>
+                        //      </div> 
+                        //      {/* FIN MENU ESCONDIDO PANTALLA GRANDE RECIENTES POSTS DE PROJECTS */}
+
+
+
+
+
+
+                //         </div>
+                 //      </Popover.Panel>
+                 //   </Transition>
+                //  </>
+                //  )}
+               //  </Popover>*/}
