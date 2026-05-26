@@ -180,38 +180,8 @@ body
 /*FIN DE SIN FRAMER PARA GREETINGS*/
 
   /*PORTADA PRINCIPAL*/
-.home-images{
-  top: 0px
-}
 
-.home-images .greeting-images-dos{
-  top:0px
-}
 
-  .home-images .hover-image {
-    position:  absolute;
-    top: 0px;
-    left: 0;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-  }
-
-  .home-images .home-image{
-    top: 0px;
-    position: relative;
-  }
-
-  
-  .home-image:hover .hover-image {
-    opacity: 1;
-  }
-
-  /*greetings*/
-  .texto-animado {
-    position: relative;
-    animation-name: moveToRight;
-    animation-duration: 1s;
-  }
 
   @keyframes moveToRight {
   0% {
@@ -433,6 +403,24 @@ body
   max-height: 50vh;
 }
 
+
+
+.overflow-y-chat{
+  padding: 2px;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: blue orange;
+}
+
+.overflow-y-chat::-webkit-scrollbar-thumb {
+  background-color: blue;
+  border-radius: 20px;
+  border: 2px solid orange;
+}
+
+
+
 /*max-height: 80vh; /* Ajusta la altura máxima según tus necesidades */
 .project-column-2 {
 
@@ -486,25 +474,7 @@ button:hover .newsletter-animation {
 
 
 
-.chat-container{
-  scrollbar-width: thin;
-  scrollbar-color: blue orange;
-}
 
-/* Works on Chrome, Edge, and Safari */
-.chat-container::-webkit-scrollbar {
-  width: 8px;
-}
-
-.chat-container::-webkit-scrollbar-track {
-  background: orange;
-}
-
-.chat-container::-webkit-scrollbar-thumb {
-  background-color: blue;
-  border-radius: 20px;
-  border: 2px solid orange;
-}
 
 
 

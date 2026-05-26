@@ -132,6 +132,12 @@ const [precioVenta, setPrecioVenta] = useState<number>(() => {
   return 15;
 });
 
+// Estado para abrir/cerrar el modal elegante
+const [modalOpen, setModalOpen] = useState<boolean>(false);
+// Estado para saber qué botón pulsó ('limpiar' o 'ejemplo')
+const [modalAction, setModalAction] = useState<'limpiar' | 'ejemplo' | null>(null);
+
+
 // Definimos la estructura de un ingrediente en TypeScript para aprender a usarlo bien
 interface Ingrediente {
   id: string;
@@ -146,11 +152,13 @@ const [ingredients, setIngredients] = useState<Ingrediente[]>(() => {
   const saved = localStorage.getItem('escandallo-data');
   if (saved) {
     const parsed = JSON.parse(saved);
-    if (parsed.ingredients && parsed.ingredients.length > 0) {
+    if (parsed.ingredients) { //aqui NO persiste el ejemplo 
       return parsed.ingredients;
     }
+    //if (parsed.ingredients && parsed.ingredients.length > 0) {
+      //return parsed.ingredients;
+    //}  // Si está vacío, cargamos tu ejemplo inicial por defecto
   }
-  // Si está vacío, cargamos tu ejemplo inicial por defecto
   return [
     {
       id: "ejemplo-1",
@@ -198,11 +206,6 @@ useEffect(() => {
   );
 }, [ingredients, namePlato, raciones, precioVenta]);
 
-
-
-
-
-
   // =========================
   // FILAS
   // =========================
@@ -243,6 +246,35 @@ useEffect(() => {
   };
 
 
+
+  const handleCargarEjemplo = () => {
+  // Reseteamos los estados a la Salsa Boloñesa
+  setNamePlato("Salsa Boloñesa Casera 🍝");
+  setRaciones(10);
+  setPrecioVenta(15);
+  setIngredients([
+    { id: "ejemplo-1", name: "Carne picada de ternera", pricePerKg: "8.50", grossWeight: "1.200", mermaKg: "0.000", usedWeight: "1.200" },
+    { id: "ejemplo-2", name: "Tomate triturado", pricePerKg: "2.10", grossWeight: "2.000", mermaKg: "0.100", usedWeight: "1.900" }
+  ]);
+  setModalOpen(false); // Cerramos el modal al terminar
+};
+
+
+const handleLimpiarTodo = () => {
+  // Limpiamos todo a cero
+  setNamePlato("");
+  setRaciones(0);
+  setPrecioVenta(0);
+  setIngredients([]);
+  setModalOpen(false); // Cerramos el modal al terminar
+};
+
+// Esta función es la que llamará el botón del Modal cuando el usuario haga clic en "Sí, confirmar"
+const handleConfirmarAccion = () => {
+  if (modalAction === 'ejemplo') handleCargarEjemplo();
+  if (modalAction === 'limpiar') handleLimpiarTodo();
+};
+
    //=============================================================
    //CALCULO HOSTELERO FALTANTE
    //Faltante bruto=(Cantidad neta requerida​)−Peso bruto comprado
@@ -264,6 +296,8 @@ const { calculatedRows, totales } = useMemo(() => {
   let totalGastoConReposicion = 0; 
   let totalRendimiento = 0;
   let totalCosteRealPorRacion = 0;
+  let totalPrecioVentaSugeridoSinIva = 0;
+  let totalPrecioVentaSugeridoConIva = 0;
 
   const rows = ingredients.map((row) => {
     const precioKg = Math.max(0, parseFloat(row.pricePerKg) || 0);
@@ -312,6 +346,9 @@ const { calculatedRows, totales } = useMemo(() => {
     // 8. Coste por ración final para ESTE ingrediente
     const nuevoCostePorRacion = raciones > 0 ? (costeRealTotal / raciones) : 0;
 
+    const precioVentaSugeridoSinIva= nuevoCostePorRacion / 0.30;
+    const precioVentaSugeridoConIva= precioVentaSugeridoSinIva * 1.10;
+
     // Acumuladores Globales
     totalCompra += costeTotalCompra;
     totalMermaDinero += dineroPerdidoPorMerma;
@@ -319,6 +356,8 @@ const { calculatedRows, totales } = useMemo(() => {
     totalCosteRealPorRacion += nuevoCostePorRacion;   
     totalGastoConReposicion += costeRealTotal;
     totalRendimiento += rendimiento;
+    totalPrecioVentaSugeridoSinIva += precioVentaSugeridoSinIva;
+    totalPrecioVentaSugeridoConIva += precioVentaSugeridoConIva;
 
 
     return {
@@ -353,6 +392,8 @@ const { calculatedRows, totales } = useMemo(() => {
       foodCost: foodCost.toFixed(2),
       totalGastoConReposicion: totalGastoConReposicion.toFixed(2),
       totalRendimiento: totalRendimiento.toFixed(2),
+      totalPrecioVentaSugeridoSinIva :totalPrecioVentaSugeridoSinIva.toFixed(2),
+      totalPrecioVentaSugeridoConIva :totalPrecioVentaSugeridoConIva.toFixed(2),
     }
   };
 }, [ingredients, raciones, precioVenta]);
@@ -478,16 +519,18 @@ const { calculatedRows, totales } = useMemo(() => {
     doc.setFont("helvetica", "normal");
     doc.text(`Compra Inicial: ${totales.totalCompra} EUR`, 20, currentY + 16);
     doc.text(`Gasto Final Total: ${totales.totalGastoConReposicion} EUR`, 20, currentY + 22);
-    doc.text(`Dinero Perdido (Mermas): -${totales.totalMermaDinero} EUR`, 20, currentY + 28);
-  
-    
+    doc.text(`P.V. Sugerido Sin Iva Final: ${totales.totalPrecioVentaSugeridoSinIva} EUR`, 20, currentY + 28);
+    doc.text(`P.V. Sugerido Con Iva Final: ${totales.totalPrecioVentaSugeridoConIva} EUR`, 20, currentY + 34);
+
+
+    doc.text(`Dinero Perdido (Mermas): -${totales.totalMermaDinero} EUR`, 110, currentY + 16);
     doc.setFont("helvetica", "bold");
-    doc.text(`Beneficio por Plato: ${totales.beneficio} EUR`, 110, currentY + 16);
-      doc.text(`Coste por Ración: ${totales.totalCosteRealPorRacion} EUR`, 110, currentY + 22);
+    doc.text(`Beneficio por Plato: ${totales.beneficio} EUR`, 110, currentY + 22);
+    doc.text(`Coste por Ración: ${totales.totalCosteRealPorRacion} EUR`, 110, currentY + 28);
     
     doc.setTextColor(251, 191, 36); // Amber
     doc.setFontSize(14);
-    doc.text(`Food Cost: ${totales.foodCost}%`, 110, currentY + 28);
+    doc.text(`Food Cost: ${totales.foodCost}%`, 110, currentY + 36);
 
     // ⭐ SECCIÓN TÉCNICA CORREGIDA (Calculada de forma interna y segura)
     currentY += 46; 
@@ -600,7 +643,7 @@ const { calculatedRows, totales } = useMemo(() => {
           onChange={(e) => setNamePlato(e.target.value)} // Pasamos el texto real que escribe el chef
           type="text"
           placeholder="Ej. Tarta de Queso, Paella de Marisco..."
-          className="w-full lg:p-4 p-2 border text-violet-800  rounded-2xl font-bold lg:text-lg md:text-lg text-base "
+          className="w-full lg:p-4 p-2 border text-mauve-600  rounded-2xl font-bold lg:text-lg md:text-lg text-base "
            />
          </div>
 
@@ -610,19 +653,30 @@ const { calculatedRows, totales } = useMemo(() => {
             N.º de Raciones
           </label>
           <input
-            type="number"
-            min="1"
-            value={raciones}
-            onChange={(e) =>
-              setRaciones(
-                Math.max(
-                  1,
-                  parseInt(e.target.value) || 1
-                )
-              )
+          type="number"
+          min="1"
+          // Si el estado es 0 (porque está borrando), pintamos vacío '' para que no se bloquee
+          value={raciones === 0 ? '' : raciones} 
+          onChange={(e) => {
+            const val = e.target.value;
+            // Si el usuario borra todo, dejamos el estado en 0 temporalmente para que pueda escribir
+            if (val === '') {
+              setRaciones(0);
+            } else {
+              // Si escribe, convertimos a número entero
+              setRaciones(parseInt(val, 10));
             }
-            className="w-full lg:p-4 p-2 border rounded-2xl lg:text-lg md:text-lg text-base text-base font-black"
-          />
+          }}
+          // EL TRUCO MAESTRO: Cuando el usuario hace clic fuera del input (onBlur), 
+          // si dejó un 0 o un vacío, lo obligamos a convertirse en 1 para proteger los cálculos de la cocina.
+          onBlur={() => {
+            if (raciones < 1) {
+              setRaciones(1);
+            }
+          }}
+          className="w-full lg:p-4 p-2 border rounded-2xl lg:text-lg md:text-lg text-base font-black"/>
+
+        
         </div>
 
         {/* PRECIO VENTA */}
@@ -740,9 +794,6 @@ const { calculatedRows, totales } = useMemo(() => {
               <div className='py-4 text-center text-neutral-900 font-bold'>{row.priceKgSinMerma} €</div>
             </td>
           </tr>
-
-
-
 
 
 
@@ -959,30 +1010,92 @@ const { calculatedRows, totales } = useMemo(() => {
 {/* ========================================== */}
 {/* 🚀 BOTONES DE ACCIÓN (MÓVIL Y PC) */}
 {/* ========================================== */}
-<div className="flex flex-col sm:flex-row gap-4 mt-6">
+ <div className="w-full flex flex-col lg:flex lg:flex-row justify-center items-center mt-2">
+
+
+  <div className=' inline-flex w-[100%] sm:w-[100%] justify-center sm:justify-center  px-2 py-2'>
   <button
     onClick={handleAddRow}
-    className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-2xl font-bold shadow-lg transition-colors text-center"
+    className="w-[90%] sm:w-[80%] lg:w-[100%] sm:mb-[6px] bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-2xl font-bold shadow-lg transition-colors text-center"
   >
     ➕ Añadir Ingrediente
   </button>
-  
+  </div>
+
+  <div className='inline-flex w-[100%] sm:w-[100%] justify-center sm:justify-center px-2  py-2 items-center'>
   <button
     onClick={exportarPDF}
-    className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-4 rounded-2xl font-bold shadow-lg transition-colors text-center"
+    className="w-[90%] sm:w-[80%]  sm:mb-[6px] lg:w-[100%] bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-4 rounded-2xl font-bold shadow-lg transition-colors text-center"
   >
     📥 Descargar Reporte PDF
   </button>
+  </div>
+
+  <div className='inline-flex w-[100%] sm:w-[100%]  justify-center sm:justify-center px-2 py-2 items-center'>
+  <button
+  onClick={() => { setModalAction('ejemplo'); setModalOpen(true); }}
+   className="w-[90%] sm:w-[80%]  sm:mb-[6px] lg:w-[100%] bg-mauve-500 hover:bg-blue-700 text-white px-2 py-4 rounded-2xl font-bold shadow-lg transition-colors text-center"
+  >
+  🔄 Cargar Receta de Ejemplo
+</button>
+  </div>
+
+ <div className='inline-flex w-[100%] sm:w-[100%] justify-center sm:justify-center px-2'>
+ <button
+  onClick={() => { setModalAction('limpiar'); setModalOpen(true); }}
+    className="w-[90%] sm:w-[80%] lg:w-[100%] bg-yellow-900  hover:bg-blue-700 text-white px-6 py-4 rounded-2xl font-bold shadow-lg transition-colors text-center"
+  >
+  🗑️ Limpiar Todo
+</button>
+</div>
 </div>
 
+{/**MESNAJE DE LOS BOTONES */}
+{modalOpen && (
+  <div className="fixed inset-0 z-50 
+  flex items-center justify-center lg:top-[35%] lg:left-[40%] 
+  bg-white w-[60%] h-[35%] top-[50%]  left-[18%]
+  sm:w-[50%] sm:h-[20%] sm:left-[26%]
+  lg:w-[30%] lg:h-[30%] bg-opacity-40 
+  backdrop-blur-sm animate-fade-in">
+    <div className="bg-white rounded-xl shadow-xl max-w-md w-full p-2 border border-gray-100 text-center">
+      {/* Icono de advertencia */}
+      <div className="mx-auto flex items-center justify-center h-10 w-10 rounded-full bg-amber-100 text-amber-600 mb-4">
+        ⚠️
+      </div>
+      
+      {/* Título dinámico según lo que haga el usuario */}
+      <h3 className="text-sm sm:text-base font-bold text-gray-900 mb-2">
+        {modalAction === 'ejemplo' ? '¿Cargar receta de ejemplo?' : '¿Limpiar todos los datos?'}
+      </h3>
+      
+      {/* Mensaje descriptivo */}
+      <p className="text-sm text-gray-500 mb-2">
+        {modalAction === 'ejemplo' 
+          ? 'Se borrará lo que tengas en pantalla para restaurar la Salsa Boloñesa inicial. Esta acción no se puede deshacer.' 
+          : 'Vas a vaciar por completo el escandallo actual. Perderás los ingredientes introducidos.'}
+      </p>
 
-
-
-
-
-
-
-
+      {/* Botones de acción del modal */}
+      <div className="flex space-x-2 justify-center">
+        <button
+          onClick={() => setModalOpen(false)}
+          className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-lg text-sm transition-colors"
+        >
+          Cancelar
+        </button>
+        <button
+          onClick={handleConfirmarAccion}
+          className={`px-4 py-2 text-white font-medium rounded-lg text-sm transition-colors ${
+            modalAction === 'ejemplo' ? 'bg-indigo-600 hover:bg-indigo-700' : 'bg-red-600 hover:bg-red-700'
+          }`}
+        >
+          Sí, confirmar
+        </button>
+      </div>
+    </div>
+  </div>
+)}
 
 
 
@@ -992,7 +1105,7 @@ const { calculatedRows, totales } = useMemo(() => {
 
 
       {/* RESUMEN */}
-   <div className="mt-10 bg-gradient-to-r from-gray-900 to-black text-white p-6 md:p-10 rounded-3xl shadow-2xl">
+   <div className="mt-6 bg-gradient-to-r from-gray-900 to-black text-white p-6 md:p-10 rounded-3xl shadow-2xl">
   <h2 className="lg:text-3xl md:text-4xl text-lg font-black text-center mb-10 text-amber-400">
     📊 RESUMEN DEL PLATO
   </h2>
@@ -1032,6 +1145,23 @@ const { calculatedRows, totales } = useMemo(() => {
       <p className="lg:text-4xl md:text-5xl text-2xl font-black mt-3 text-cyan-400">{totales.totalRendimiento}%</p>
     </div>
 
+    {/**=== FILA 3 PC, MOVILES */}
+    
+    <div className="bg-gray-800/40 p-5 rounded-2xl border border-gray-700/30">
+      <p className="text-green-400 text-lg">Precio Sugerido Sin Iva por Plato</p>
+      <p className="lg:text-4xl md:text-5xl text-2xl font-black mt-3 text-green-400">{totales.totalPrecioVentaSugeridoSinIva} €</p>
+    </div>
+
+    <div className="bg-gray-800/40 p-5 rounded-2xl border border-gray-700/30">
+      <p className="text-cyan-400 text-lg">Precio Sugerido Con Iva por Plato</p>
+      <p className="lg:text-4xl md:text-5xl text-2xl font-black mt-3 text-cyan-400">{totales.totalPrecioVentaSugeridoConIva}%</p>
+    </div>
+
+
+
+
+
+
   </div>
 
   {/* 👑 EL REY DE LAS MÉTRICAS: DESTACADO ABAJO EN GRANDE */}
@@ -1052,17 +1182,6 @@ const { calculatedRows, totales } = useMemo(() => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
   </div>
      </FullWidthLayout>
 
@@ -1070,3 +1189,27 @@ const { calculatedRows, totales } = useMemo(() => {
 
   );
 }
+
+
+
+
+
+
+
+
+
+
+  {/*INCORRECTO NO DEJA ELIMANR EL 1<input
+            type="number"
+            min="1"
+            value={raciones}
+            onChange={(e) =>
+              setRaciones(
+                Math.max(
+                  1,
+                  parseInt(e.target.value) || 1
+                )
+              )
+            }
+            className="w-full lg:p-4 p-2 border rounded-2xl lg:text-lg md:text-lg text-base text-base font-black"
+          />*/}
