@@ -24,7 +24,7 @@ from django.views.decorators.cache import cache_page
 # =========================
 
 def build_absolute_url(path=''):
-    base = getattr(settings, 'FRONTEND_URL', 'https://www.jovamnamedina.com').rstrip('/')
+    base = getattr(settings, 'FRONTEND_URL', 'https://jovamnamedina.com').rstrip('/')
     if not path:
         return base
     path = str(path).strip()
@@ -51,7 +51,7 @@ def get_best_image(obj):
                     return build_absolute_url(field_obj.url)
             except Exception:
                 continue
-    return build_absolute_url(getattr(settings, 'DEFAULT_OG_IMAGE', '/static/images/og-main.jpg'))
+    return build_absolute_url(getattr(settings, 'DEFAULT_OG_IMAGE', '/custom-static/images/facebookweb.jpg'))
 
 
 def category_chain(category):
@@ -80,13 +80,13 @@ def category_canonical_url(category):
 # =========================
 
 def organization_json_ld():
-    frontend_url = getattr(settings, 'FRONTEND_URL', 'https://www.jovamnamedina.com')
+    frontend_url = getattr(settings, 'FRONTEND_URL', 'https://jovamnamedina.com')
     return {
         "@context": "https://schema.org",
         "@type": "Person",                    # Cambiado a Person porque es portafolio personal
         "name": "Jovamna Medina",
         "url": frontend_url,
-        "image": build_absolute_url("/static/images/profile.jpg"),
+        "image": build_absolute_url("/custom-static/images/googleweb.jpg"),
         "sameAs": [
             "https://x.com/FullStackmed",
             "https://www.instagram.com/muckas.ai/",
@@ -99,7 +99,7 @@ def organization_json_ld():
 
 
 def website_json_ld():
-    frontend_url = getattr(settings, 'FRONTEND_URL', 'https://www.jovamnamedina.com')
+    frontend_url = getattr(settings, 'FRONTEND_URL', 'https://jovamnamedina.com')
     return {
         "@context": "https://schema.org",
         "@type": "WebSite",
@@ -177,7 +177,7 @@ def category_json_ld(category, canonical_url):
 
 
 def home_json_ld():
-    frontend_url = getattr(settings, 'FRONTEND_URL', 'https://www.jovamnamedina.com')
+    frontend_url = getattr(settings, 'FRONTEND_URL', 'https://jovamnamedina.com')
     return {
         "@context": "https://schema.org",
         "@type": "WebPage",
@@ -193,7 +193,7 @@ def home_json_ld():
 # =========================
 
 def build_base_context(request):
-    frontend_url = getattr(settings, 'FRONTEND_URL', 'https://www.jovamnamedina.com')
+    frontend_url = getattr(settings, 'FRONTEND_URL', 'https://jovamnamedina.com')
 
     return {
         'seo_title': "Jovamna Medina | Full Stack Developer & AI",
@@ -202,11 +202,8 @@ def build_base_context(request):
         'seo_robots': 'index,follow',
         'canonical_url': build_absolute_url(request.path),
         'og_type': 'website',
-        'seo_image': build_absolute_url("/static/images/og-main.jpg"),
+        'seo_image': f"{frontend_url}/custom-static/images/facebookweb.jpg",
         'twitter_card': 'summary_large_image',
-        
-        
-        
         'og_title': None,
         'og_description': None,
         'SITE_NAME': 'Jovamna Medina | Full Stack Developer & AI',
@@ -299,6 +296,43 @@ def spa_entrypoint(request):
             return render(request, 'index.html', context)
         except Post.DoesNotExist:
             pass
+        
+    # ==========================================
+    # HERRAMIENTA: ESCANDALLO GRATUITO
+    # ==========================================
+    if len(parts) >= 1 and parts[0] == 'escandallo':
+        canonical = build_absolute_url("escandallo")
+        
+        breadcrumbs = [
+            {'name': 'Inicio', 'url': build_absolute_url()},
+            {'name': 'Escandallo Gratuito para Hostelería', 'url': canonical}
+        ]
+
+        # Estructura Schema.org especializada para Herramientas/Aplicaciones Web
+        escandallo_json_ld = {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "Escandallo Gratuito para Hostelería | Jovamna Medina",
+            "description": "Calcula el costo de tus recetas, escandallos de cocina y gestiona los márgenes de ganancia de tu restaurante con esta herramienta online gratuita.",
+            "url": canonical,
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "All",
+            "browserRequirements": "Requires JavaScript. Requires HTML5.",
+            "author": organization_json_ld()
+        }
+
+        context.update({
+            'seo_title': "Escandallo Gratuito para Hostelería | Jovamna Medina",
+            'seo_description': "Herramienta online gratuita para hosteleros y cocineros. Calcula el coste de tus platos, gestiona mermas y optimiza el beneficio de tu restaurante.",
+            'seo_keywords': "escandallo gratis, escandallo cocina, calcular coste platos, plantilla escandallo, gestion restaurante, herramientas hosteleria",
+            'canonical_url': canonical,
+            'og_type': 'website',
+            'is_home_page': False,
+            'breadcrumbs': breadcrumbs,
+            'jsonld_primary': json.dumps(escandallo_json_ld, ensure_ascii=False),
+            'jsonld_breadcrumbs': json.dumps(breadcrumb_json_ld(breadcrumbs), ensure_ascii=False),
+        })
+        return render(request, 'index.html', context)
 
     # CATEGORÍAS
     # ... (mantengo lógica similar pero más limpia)
@@ -312,6 +346,11 @@ def spa_entrypoint(request):
     }, ensure_ascii=False)
 
     return render(request, 'index.html', context)
+
+
+
+
+
 
 
 def breadcrumb_json_ld(breadcrumbs):
@@ -330,21 +369,27 @@ def breadcrumb_json_ld(breadcrumbs):
 
 
 
+
 def robots_txt(request):
-    frontend_url = getattr(settings, 'FRONTEND_URL', 'https://www.jovamnamedina.com').rstrip('/')
+    # 1. Si no existe FRONTEND_URL en settings, usamos por defecto la versión SIN 'www'
+    frontend_url = getattr(settings, 'FRONTEND_URL', 'https://jovamnamedina.com').rstrip('/')
 
     lines = [
         "User-agent: *",
         "Disallow: /admin/",
+        
+        # Permitimos las APIs que React necesita para renderizar tus textos
+        "Allow: /api/blog/list",
+        "Allow: /api/project/projects",
+        
+        # Bloqueamos la búsqueda interna (adiós al error de 'undefined')
+        "Disallow: /api/blog/search", 
         "Disallow: /api/",
-       
+        
+        # El Sitemap ahora apuntará perfectamente a https://jovamnamedina.com/sitemap.xml
         f"Sitemap: {frontend_url}/sitemap.xml",
     ]
     return HttpResponse("\n".join(lines), content_type="text/plain")
-
-
-
-
 
 
 

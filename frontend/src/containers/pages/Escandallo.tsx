@@ -1,4 +1,4 @@
-
+   
 import React from 'react'; // Agrega esta línea arriba del todo
 import { useState, useMemo, useEffect } from 'react';
 import { jsPDF } from 'jspdf';
