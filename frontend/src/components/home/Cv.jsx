@@ -23,8 +23,9 @@ function Cv() {
           <h2 className="kaushan text-xl lg:text-5xl font-extrabold text-black text-center underline underline-offset-8 ">
             Infomacion Curricular
             </h2>
-          <p className="lg:mt-[60px]  mt-[30px] mt-1 max-w-2xl 
-          text-base text-zinc-800 font-bold ">Detalles Personales</p>
+            <p className="lg:mt-[60px]  mt-[30px] mt-1 max-w-2xl 
+          text-base text-zinc-800 font-bold ">Detalles Personales
+          </p>
            </div>
 
 
@@ -33,27 +34,27 @@ function Cv() {
           <div className=" mb-[20px]">
 
              <div className="bg-white pt-[12px] ">
-             <div className="bg-gray-50 px-4 mt-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+             <div className="bg-gray-50  mt-2 sm:grid sm:grid-cols-3 sm:gap-4 ">
              <dt className="text-sm font-medium text-black bg-neutral-400">Full name</dt>
              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 bg-neutral-200">Jovamna Medina</dd>
              </div>
 
-          <div className="bg-gray-50  px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <div className="bg-gray-50  py-4 sm:grid sm:grid-cols-3 sm:gap-4">
             <dt className="text-sm font-medium text-black  bg-neutral-400">Application for</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 bg-neutral-200">Full Stack Developer</dd>
           </div>
 
-          <div className="bg-gray-50 px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <div className="bg-gray-50 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
             <dt className="text-sm font-medium text-black  bg-neutral-400">Email address</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 bg-neutral-200">jocoderina@gmail.com</dd>
           </div>
 
-          <div className="bg-white px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <div className="bg-white py-4 sm:grid sm:grid-cols-3 sm:gap-4">
             <dt className="text-sm font-medium text-black  bg-neutral-400">Salary expectation</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 bg-neutral-200">Según convenio</dd>
           </div>
 
-          <div className="bg-gray-50 px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <div className="bg-gray-50 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
             <dt className="text-sm font-medium text-black  bg-neutral-400">About</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 bg-neutral-200">
             💎 I am passionate about Full Stack development in Python with Django Rest Framework and javascript, I have basic notions in react, redux
@@ -73,8 +74,8 @@ function Cv() {
 
 
              {/*ULTIMA PARTE */}
-             <div className="bg-white px-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 pb-[18px] rounded-bl-3xl rounded-br-2xl ">
-          <dt className="text-sm font-medium text-gray-500 bg-neutral-200">Attachments</dt>
+             <div className="bg-white sm:grid sm:grid-cols-3 sm:gap-4 pb-[18px] rounded-bl-3xl rounded-br-2xl ">
+          <dt className="text-sm font-medium text-gray-800 bg-neutral-200">Attachments</dt>
           <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 bg-neutral-200">
 
               <ul role="list" className="divide-y divide-gray-200 rounded-md border border-gray-200">

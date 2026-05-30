@@ -38,8 +38,13 @@ const solutions = [
     href: '/escandallo',
     icon: MdArticle,
   },
-
-   {
+  {
+    name: 'Tarifa-Luz',
+    description: 'Calcula el precio de tu tarifa de Luz.',
+    href: '/tarifa-luz',
+    icon: MdArticle,
+  },
+  {
     name: 'MyProjects',
     description: 'Lista de repositorios en Github.',
     href: '/myproject',
@@ -274,7 +279,7 @@ function Navbar({
            className={`nav-item hover:bg-neutral-100 
             hover:text-violet-700 text-black font-semibold 
             border-b-2 border-transparent hover:border-violet-700  
-            h-[100%]  inline-block py-4 ${currentRoute === 'home' ? 'bg-neutral-300 text-white' : ''}`}
+            h-[100%]  inline-block py-4 ${currentRoute === 'home' ? 'bg-neutral-300 text-violet-400' : ''}`}
            to="home"
            spy={true}
            smooth={true}
@@ -286,7 +291,7 @@ function Navbar({
           
 
          <Link
-           className={`nav-item hover:bg-neutral-100 hover:text-violet-700  text-black  font-semibold border-b-2 border-transparent hover:border-violet-700  h-[100%]  inline-block  py-4 ${currentRoute === 'about' ? 'bg-neutral-300 text-white' : ''}`}
+           className={`nav-item hover:bg-neutral-100 hover:text-violet-700  text-black  font-semibold border-b-2 border-transparent hover:border-violet-700  h-[100%]  inline-block  py-4 ${currentRoute === 'about' ? 'bg-neutral-300 text-violet-400' : ''}`}
            to="about"
            spy={true}
            smooth={true}
@@ -297,7 +302,7 @@ function Navbar({
 
 
          <Link
-           className={`nav-item hover:bg-neutral-100 hover:text-violet-700  text-black  font-semibold border-b-2 border-transparent hover:border-violet-700  h-[100%]  inline-block py-4 ${currentRoute === 'skill' ? 'bg-neutral-300 text-white' : ''}`}
+           className={`nav-item hover:bg-neutral-100 hover:text-violet-700  text-black  font-semibold border-b-2 border-transparent hover:border-violet-700  h-[100%]  inline-block py-4 ${currentRoute === 'skill' ? 'bg-neutral-300 text-violet-400'  : ''}`}
            to="skill"
            spy={true}
            smooth={true}
@@ -310,7 +315,7 @@ function Navbar({
        
           
          <Link
-           className={`nav-item hover:bg-neutral-100 hover:text-violet-700  text-black  font-semibold border-b-2 border-transparent hover:border-violet-700  h-[100%]  inline-block py-4 ${currentRoute === 'project' ? 'bg-neutral-300 text-white' : ''}`}
+           className={`nav-item hover:bg-neutral-100 hover:text-violet-700  text-black  font-semibold border-b-2 border-transparent hover:border-violet-700  h-[100%]  inline-block py-4 ${currentRoute === 'project' ? 'bg-neutral-300 text-violet-400' : ''}`}
            to="project"
            spy={true}
            smooth={true}

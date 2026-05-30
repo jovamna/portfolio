@@ -47,8 +47,13 @@ const solutions = [
     href: '/escandallo',
     icon: MdArticle,
   },
-
-   {
+  {
+    name: 'Tarifa-Luz',
+    description: 'Calcula el precio de tu tarifa de Luz.',
+    href: '/tarifa-luz',
+    icon: MdArticle,
+  },
+  {
     name: 'MyProjects',
     description: 'Lista de repositorios en Github.',
     href: '/myproject',
@@ -411,9 +416,9 @@ const guestLinks = (
                   </span>
                   </NavLink>
 
-                  <NavLink to= "/myproject" className="nav-item text-black font-semibold hover:bg-neutral-100 hover:text-violet-700 border-b-2 border-transparent hover:border-violet-700 inline-block px-3 h-[2rem]">
+                  <NavLink to= "/tarifa-luz" className="nav-item text-black font-semibold hover:bg-neutral-100 hover:text-violet-700 border-b-2 border-transparent hover:border-violet-700 inline-block px-3 h-[2rem]">
                   <span className="ml-6">
-                    MyProjects
+                    Tarifa-Luz
                   </span>
                   </NavLink>
 

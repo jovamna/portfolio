@@ -62,6 +62,15 @@ function Project({  get_project_list, project_list}) {
               </h2>
 
 
+             <div className='ver-mis-projectos flex justify-center items-center mb-4'>
+                           <Link to="/myproject" 
+                           className="text-base lg:text-xl md:text-center 
+                           text-center font-semibold 
+                           lg:leading-7 text-black hover:text-gray-400">
+                           Ver todos mis Projectos <span aria-hidden="true">→</span>
+                            </Link>
+                           </div>
+
 
               {/* 1 DIV ROW COLORES DE FONDO Y GRAL DEL CONTENIDO*/}
 
@@ -86,11 +95,7 @@ function Project({  get_project_list, project_list}) {
                      <div className="project-h-title flex flex-col lg:w-[70%] 2xl:w-[70%] w-[100%] lg:mx-0 ">
                             <br />
 
-                           <div className='ver-mis-projectos flex justify-center items-center mb-4'>
-                           <a href="/myproject" className="text-base md:text-center text-center font-semibold leading-7 text-black hover:text-gray-400">
-                           Ver todos mis Projectos <span aria-hidden="true">→</span>
-                            </a>
-                           </div>
+                           
                  
                          
 
@@ -117,10 +122,11 @@ function Project({  get_project_list, project_list}) {
         {/* 2. TARJETA ESTÁTICA DEL ESCANDALLO (Se adapta al diseño) */}
         <div className="flex flex-col 
         justify-between overflow-hidden 
-        rounded-2xl bg-zinc-300  p-4 shadow-lg 
-        border b-4 border-black 
+        rounded-2xl p-2 shadow-lg 
+        border b-4 border-black  bg-white
         transition-all duration-300 
         hover:-translate-y-1 hover:shadow-xl">
+          <div  className=" bg-zinc-300 py-4 md:py-8 lg:py-4">
           
           <div>
             {/* Cabecera de la Tarjeta */}
@@ -137,12 +143,18 @@ function Project({  get_project_list, project_list}) {
             </div>
 
             {/* Título y Descripción */}
+        
+              <Link 
+             to="/escandallo" 
+             className="">
             <h3 className="text-xl font-bold tracking-tight text-gray-900 mb-2">
               Calculadora de Escandallos Profesional Gratuita 🍳
             </h3>
             <p className="text-gray-600 text-sm leading-relaxed mb-2">
              Diseñado para ayudar a digitalizar la gestión de pequeños negocios de hostelería de forma gratuita. Calcula mermas en bruto, costes reales y la rentabilidad por ración.  Food Cost de restaurantes de forma profesional con persistencia de datos local.
             </p>
+            </Link>
+
           </div>
 
           {/* Botón de acción inferior */}
@@ -156,6 +168,9 @@ function Project({  get_project_list, project_list}) {
              Probar Herramienta →
             </Link>
           </div>
+
+           </div>
+
 
         </div>
 

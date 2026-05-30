@@ -17,6 +17,17 @@ useEffect(() => {
   // 1. Título estratégico con palabras clave de alta búsqueda (Keywords)
   document.title = "Calculadora de Escandallos para Hosteleria Gratis | Control de Mermas | Jovamna Medina";
 
+  const canonicalUrl = "https://jovamnamedina.com/escandallo"; 
+  
+  let canonicalTag = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+  if (!canonicalTag) {
+    canonicalTag = document.createElement('link') as HTMLLinkElement;
+    canonicalTag.rel = 'canonical';   // ✅
+    document.head.appendChild(canonicalTag);
+    }
+    canonicalTag.href = canonicalUrl;   // ✅
+
+
   // 2. Descripción técnica para Google (Lo que aparece en los resultados de búsqueda)
   let metaDescription = document.querySelector('meta[name="description"]');
   if (!metaDescription) {
