@@ -272,7 +272,7 @@ def spa_entrypoint(request):
     # BLOG POST
     if len(parts) >= 3 and parts[0] == 'blog' and parts[1] == 'post':
         try:
-            post = Post.postobjects.get(slug=parts[2])
+            post = Post.post_objects.get(slug=parts[2])
             canonical = build_absolute_url(f"blog/post/{post.slug}/")
             image = get_best_image(post)
 

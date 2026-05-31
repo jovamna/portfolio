@@ -21,9 +21,6 @@ import { Link, useParams} from "react-router-dom";
 
 
 // 2. CONFIGURACIÓN GLOBAL (Fuera de la función)
-const API_URL = import.meta.env.DEV 
-  ? "http://localhost:8000" 
-  : import.meta.env.VITE_REACT_API_URL;
 
 
  const URL =
