@@ -368,28 +368,57 @@ def breadcrumb_json_ld(breadcrumbs):
 
 
 
-
+# =========================
+# robots.txt
+# =========================
 
 def robots_txt(request):
-    # 1. Si no existe FRONTEND_URL en settings, usamos por defecto la versión SIN 'www'
     frontend_url = getattr(settings, 'FRONTEND_URL', 'https://jovamnamedina.com').rstrip('/')
 
     lines = [
         "User-agent: *",
-        "Disallow: /admin/",
         
-        # Permitimos las APIs que React necesita para renderizar tus textos
-        "Allow: /api/blog/list",
-        "Allow: /api/project/projects",
+        # ==========================================
+        # 🔴 BLOQUEOS DEL FRONTEND (Rutas de la SPA)
+        # ==========================================
+        "Disallow: /signup/",
+        "Disallow: /login/",
+        "Disallow: /profile/",
+     ,
+        # ==========================================
+        # 🔴 BLOQUEOS DEL BACKEND Y HERRAMIENTAS
+        # ==========================================
+        "Disallow: /admin/",         # Panel de Django (protegido por tu URL secreta)
         
-        # Bloqueamos la búsqueda interna (adiós al error de 'undefined')
+        # ==========================================
+        # 🔴 CONTROL TOTAL DE LAS APIs (Crawl Budget)
+        # ==========================================
+        # 🟢 PERMITIDOS: Lo que Google necesita leer para renderizar tus productos
+        "Allow: /api/project/",
+        "Allow: /api/blog/",
+        "Allow: /api/category/",
         "Disallow: /api/blog/search", 
-        "Disallow: /api/",
         
-        # El Sitemap ahora apuntará perfectamente a https://jovamnamedina.com/sitemap.xml
+        # 🔴 BLOQUEADOS: APIs de usuario, compras, procesos y utilidades privadas
+        "Disallow: /api/user/",
+        "Disallow: /api/chatbot/",
+        "Disallow: /api/contacts/",
+        "Disallow: /api/reviews/",
+        
+        # ==========================================
+        # 🔴 FILTROS Y CONTENIDO DUPLICADO
+        # ==========================================
+        # Bloquea URLs con signos de interrogación (búsquedas, ordenaciones, tracking)
+        "Disallow: /*?*", 
+        "Disallow: /*?search=",
+        # ==========================================
+        # 🗺️ MAPA DEL SITIO
+        # ==========================================
         f"Sitemap: {frontend_url}/sitemap.xml",
     ]
     return HttpResponse("\n".join(lines), content_type="text/plain")
+
+
 
 
 
