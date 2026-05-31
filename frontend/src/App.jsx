@@ -20,7 +20,6 @@ import { useEffect, useState } from 'react';
 import Logo from './containers/inicio/Logo';
 import Escandallo from './containers/pages/Escandallo';
 import Luz from './containers/pages/Luz';
-import PuebloDashboard from './containers/pages/PuebloDashboard';
 import Irpf from './containers/pages/Irpf';
 
 
@@ -123,7 +122,6 @@ function App() {
         <Route path="/calcula-irpf" element={<Irpf/>} />
         <Route path="/escandallo" element={<Escandallo/>} />
         <Route path="/tarifa-luz" element={<Luz/>} />
-        <Route path="/guia-mollet" element={<PuebloDashboard/>} />
         <Route path="/search/:term" element={<Search />} />
    
    

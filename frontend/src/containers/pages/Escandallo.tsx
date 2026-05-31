@@ -613,7 +613,9 @@ const { calculatedRows, totales } = useMemo(() => {
 
       <FullWidthLayout>
   
-        <div className="wrapper w-full min-h-screen lg:py-[90px] pt-[70px] pb-[50px] md:pt-[70px] md:pb-[50px]">
+        <div className="wrapper w-full min-h-screen 
+        lg:pt-[130px] lg:pb-[80px] pt-[70px] pb-[50px] 
+        md:pt-[70px] md:pb-[50px]">
 
         <div className="max-w-7xl mx-auto px-8">
 

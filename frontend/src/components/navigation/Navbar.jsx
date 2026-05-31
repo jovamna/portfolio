@@ -51,12 +51,6 @@ const solutions = [
     icon: MdArticle,
   },
   {
-    name: 'Guia-Mollet',
-    description: 'Guia de Ocio de Mollet del Vallés.',
-    href: '/guia-mollet',
-    icon: MdArticle,
-  },
-  {
     name: 'MyProjects',
     description: 'Lista de repositorios en Github.',
     href: '/myproject',

@@ -60,12 +60,6 @@ const solutions = [
     icon: MdArticle,
   },
   {
-    name: 'Guia-Mollet',
-    description: 'Guia de Ocio de Mollet del Vallés.',
-    href: '/guia-mollet',
-    icon: MdArticle,
-  },
-  {
     name: 'MyProjects',
     description: 'Lista de repositorios en Github.',
     href: '/myproject',
@@ -459,20 +453,6 @@ const guestLinks = (
                   </span>
                   </NavLink>
                   
-                  <NavLink to= "/guia-mollet" className="nav-item text-black 
-                  font-semibold hover:bg-neutral-100 hover:text-violet-700 
-                  border-b-2 border-transparent hover:border-violet-700 
-                  inline-block px-3 h-[2rem]
-                  lg:text-sm">
-                  <span className="ml-6">
-                   Guia/Mollet
-                  </span>
-                  </NavLink>
-
-
-
-
-
                  </div>
                  
 
