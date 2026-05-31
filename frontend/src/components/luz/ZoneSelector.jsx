@@ -13,7 +13,7 @@ export default function ZoneSelector({ active, onChange, disabled }) {
             aria-pressed={isActive}
             className={`px-4 py-2 text-xs font-semibold rounded-md transition-all duration-200 ${
               isActive
-                ? 'bg-blue-600 text-white shadow-sm'
+                ? 'bg-mauve-600 text-white shadow-sm'
                 : 'text-gray-600 hover:text-gray-900 hover:bg-gray-200/50 disabled:opacity-50'
             }`}
           >

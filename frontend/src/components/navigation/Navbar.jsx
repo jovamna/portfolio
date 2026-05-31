@@ -33,6 +33,12 @@ const solutions = [
     icon: MdArticle,
   },
   {
+    name: 'Cálculo del IRPF',
+    description: 'Herramienta útil para calcular el irpf.',
+    href: '/calcula-irpf',
+    icon: MdArticle,
+  },
+  {
     name: 'Escandallo',
     description: ' Diseñado para ayudar a digitalizar la gestión de pequeños negocios de hostelería de forma gratuita.',
     href: '/escandallo',
@@ -42,6 +48,12 @@ const solutions = [
     name: 'Tarifa-Luz',
     description: 'Calcula el precio de tu tarifa de Luz.',
     href: '/tarifa-luz',
+    icon: MdArticle,
+  },
+  {
+    name: 'Guia-Mollet',
+    description: 'Guia de Ocio de Mollet del Vallés.',
+    href: '/guia-mollet',
     icon: MdArticle,
   },
   {
@@ -432,16 +444,16 @@ function Navbar({
                  leaveTo="opacity-0 translate-y-1"
                  >
                  <Popover.Panel 
-                 className="absolute top-12 w-screen bg-white max-w-md right-0 transform translate-x-1/12 px-2 sm:px-0">
+                 className="absolute top-[60px] w-screen bg-white max-w-md right-0 transform translate-x-1/12 px-2 sm:px-0">
                 
                  <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                   {/*MENU: HOME, MYPROJECT Y BLOG DEL MENU OCULTO*/}
-                  <div className="relative grid sm:gap-12 sm:p-8">
+                  <div className="relative grid  sm:p-8">
                     {solutions.map((item) => (
                       <NavLink 
                       key={item.name}
                       to={item.href} // 💡 Cambiamos 'href' por 'to'
-                      className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50 
+                      className=" flex items-start rounded-lg p-2 hover:bg-gray-50 
                       border-b border-gray-100 transition-colors duration-200">
                       {/* 💡 Cambiado text-white por text-neutral-700 para que el icono SE VEA */}
                       <item.icon className="h-6 w-6 flex-shrink-0 text-neutral-700 mt-0.5" aria-hidden="true" />

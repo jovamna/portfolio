@@ -30,75 +30,73 @@ export default function Luz() {
 
   const hasData = Object.keys(data).length > 0;
 
+  // Efecto para actualizar el SEO de forma nativa sin librerías
+  useEffect(() => {
+    document.title = "Precio de la Luz Hoy por Horas | Panel de Control";
 
-
-// Efecto para actualizar el SEO de forma nativa sin librerías
-useEffect(() => {
-  // 1. Cambiar el título de la pestaña
-  document.title = "Precio de la Luz Hoy por Horas | Panel de Control";
-
-  const canonicalUrl = "https://jovamnamedina.com/tarifa-luz"; 
-  
-    // === CANONICAL (Importante para evitar duplicados) ===
-  let canonicalTag = document.querySelector('link[rel="canonical"]');
+    const canonicalUrl = "https://jovamnamedina.com/tarifa-luz"; 
+    
+    let canonicalTag = document.querySelector('link[rel="canonical"]');
     if (!canonicalTag) {
         canonicalTag = document.createElement('link');
         canonicalTag.rel = 'canonical';
         document.head.appendChild(canonicalTag);
-  }
-  canonicalTag.href = canonicalUrl;
+    }
+    canonicalTag.href = canonicalUrl;
 
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.setAttribute('name', 'description');
+      document.head.appendChild(metaDescription);
+    }
+    metaDescription.setAttribute('content', 'Consulta el precio de la luz hoy en España en tiempo real. Gráficos interactivos, mejores horas y calculadora de consumo.');
 
+    let metaOGTitle = document.querySelector('meta[property="og:title"]');
+    if (!metaOGTitle) {
+      metaOGTitle = document.createElement('meta');
+      metaOGTitle.setAttribute('property', 'og:title');
+      document.head.appendChild(metaOGTitle);
+    }
+    metaOGTitle.setAttribute('content', 'Precio de la Luz Hoy por Horas | React App');
 
-  // 2. Buscar o crear la etiqueta meta description
-  let metaDescription = document.querySelector('meta[name="description"]');
-  if (!metaDescription) {
-    metaDescription = document.createElement('meta');
-    metaDescription.setAttribute('name', 'description');
-    document.head.appendChild(metaDescription);
-  }
-  metaDescription.setAttribute('content', 'Consulta el precio de la luz hoy en España en tiempo real. Gráficos interactivos, mejores horas y calculadora de consumo.');
-
-  // 3. Buscar o crear la etiqueta Open Graph para redes sociales (LinkedIn, WhatsApp)
-  let metaOGTitle = document.querySelector('meta[property="og:title"]');
-  if (!metaOGTitle) {
-    metaOGTitle = document.createElement('meta');
-    metaOGTitle.setAttribute('property', 'og:title');
-    document.head.appendChild(metaOGTitle);
-  }
-  metaOGTitle.setAttribute('content', 'Precio de la Luz Hoy por Horas | React App');
-
-}, []); // Se ejecuta solo una vez cuando se monta la página de la luz
-
-
-
-
-
-
-
+  }, []);
 
   return (
     <FullWidthLayout>
-      <div className="w-full min-h-screen bg-gray-50/50 text-gray-800 pt-[80px] pb-[60px] md:pt-[100px] flex justify-center">
-        <main className="w-full max-w-5xl px-4 md:px-8 flex flex-col gap-6">
+         <div className="w-full min-h-screen 
+    bg-gray-50/50 text-gray-800 
+    pt-[140px] pb-[60px] flex justify-center">
+
+
+
+
+        <main className="w-full max-w-7xl px-4 md:px-8 flex flex-col gap-6">
           
           {/* Header Card */}
-          <div className="w-full p-6 bg-white rounded-xl border border-gray-100 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div className="w-full  
+           shadow-sm 
+          flex flex-col md:flex-row justify-between 
+          items-start md:items-center gap-4">
             <div>
-              <h1 className="text-2xl font-black text-gray-900 tracking-tight">Precio de la luz hoy</h1>
-              <p className="text-sm font-medium text-gray-400 capitalize mt-0.5">{today}</p>
+              <h1 className="kaushan tracking-wider 
+              lg:text-5xl  text-2xl font-black text-gray-900  
+              lg:py-4 flex items-center gap-2 underline underline-offset-8">
+                Precio de la luz hoy
+                </h1>
+              <p className="text-sm font-medium text-neutral-800 italic capitalize mt-0.5">{today}</p>
             </div>
             <ZoneSelector active={zone} onChange={setZone} disabled={loading} />
           </div>
 
-          {/* Demo notice */}
+          {/* Demo notice (Actualizado con la URL oficial de e·sios) */}
           {isDemo && (
             <div className="w-full p-4 bg-amber-50 border border-amber-200 rounded-xl text-sm text-amber-800 flex items-center gap-2" role="alert">
               <span>ℹ️</span> 
               <span>
-                Datos de ejemplo — la API real está disponible en{' '}
-                <a href="https://api.preciodelaluz.org" target="_blank" rel="noreferrer" className="font-semibold underline hover:text-amber-900">
-                  api.preciodelaluz.org
+                Datos de ejemplo — la información en tiempo real proviene de{' '}
+                <a href="https://ree.es" target="_blank" rel="noreferrer" className="font-semibold underline hover:text-amber-900">
+                  esios.ree.es
                 </a>
               </span>
             </div>
@@ -128,13 +126,13 @@ useEffect(() => {
             </div>
           )}
 
-          {/* Footer */}
-          <footer className="text-center text-[11px] font-medium text-gray-400 mt-4 py-4 border-t border-gray-100">
-            Datos PVPC ·{' '}
-            <a href="https://api.preciodelaluz.org" target="_blank" rel="noreferrer" className="hover:text-gray-600 underline">
-              api.preciodelaluz.org
+          {/* Footer (Actualizado con la fuente oficial) */}
+          <footer className="text-center text-[11px] font-medium text-gray-700 mt-4 py-4 border-t border-gray-100">
+            Datos oficiales PVPC obtenidos de{' '}
+            <a href="https://ree.es" target="_blank" rel="noreferrer" className="hover:text-gray-600 underline">
+              Sistema e·sios (REE)
             </a>{' '}
-            · Red Eléctrica de España · Precio de mercado sin impuestos
+            · Precio de mercado sin impuestos aplicados
           </footer>
 
         </main>

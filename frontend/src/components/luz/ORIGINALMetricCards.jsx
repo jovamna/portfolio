@@ -2,36 +2,17 @@ import { fmtCents, getPriceCategory, PRICE_LABELS } from '../../utils/priceUtils
 
 // Componente Card interno optimizado con Tailwind
 function Card({ label, value, textColorClass, badge }) {
-  // 🛠️ Truco mágico: Si el valor es un texto que contiene "c€/kWh", separamos el número de las letras
-  let displayValue = value;
-  let unitLabel = "";
-
-  if (typeof value === 'string' && value.includes('c€')) {
-    // Limpiamos el "c€/kWh" para quedarnos solo con el número (ej: "10.488")
-    displayValue = value.replace('c€/kWh', '').trim();
-    // Creamos nuestra etiqueta bonita en castellano
-    unitLabel = "céntimos / kWh";
-  }
-
   return (
     <div className="flex-1 min-w-[150px] p-4 bg-white rounded-xl border border-gray-100 shadow-sm flex flex-col gap-2">
-      <p className="text-xs font-medium text-gray-700 uppercase tracking-wider">{label}</p>
+      <p className="text-xs font-medium text-gray-500 uppercase tracking-wider">{label}</p>
       
-      {/* Contenedor del precio */}
-      <div className="flex flex-col items-start justify-end">
-        <p className={`text-2xl font-extrabold tracking-tight ${textColorClass || 'text-gray-900'}`}>
-          {displayValue ?? '—'}
-        </p>
-        {/* Si detectamos que era un precio, pintamos la palabra céntimos pequeña abajo */}
-        {unitLabel && (
-          <span className="text-[11px] font-semibold text-gray-600 uppercase tracking-wide mt-0.5">
-            {unitLabel}
-          </span>
-        )}
-      </div>
+      <p className={`text-2xl font-bold tracking-tight ${textColorClass || 'text-gray-900'}`}>
+        {value ?? '—'}
+      </p>
 
       {badge && (
-        <span className={`self-start mt-1 px-2.5 py-0.5 rounded-full text-xs font-semibold tracking-wide ${badge.bgClass} ${badge.textClass}`}>
+        <span className={`self-start mt-1 px-2.5 py-0.5 
+        rounded-full text-xs font-semibold tracking-wide ${badge.bgClass} ${badge.textClass}`}>
           {badge.text}
         </span>
       )}

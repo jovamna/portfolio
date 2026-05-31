@@ -42,6 +42,12 @@ const solutions = [
     icon: MdArticle,
   },
   {
+    name: 'Cálculo del IRPF',
+    description: 'Herramienta útil para calcular el irpf.',
+    href: '/calcula-irpf',
+    icon: MdArticle,
+  },
+  {
     name: 'Escandallo',
     description: ' Diseñado para ayudar a digitalizar la gestión de pequeños negocios de hostelería de forma gratuita.',
     href: '/escandallo',
@@ -54,6 +60,12 @@ const solutions = [
     icon: MdArticle,
   },
   {
+    name: 'Guia-Mollet',
+    description: 'Guia de Ocio de Mollet del Vallés.',
+    href: '/guia-mollet',
+    icon: MdArticle,
+  },
+  {
     name: 'MyProjects',
     description: 'Lista de repositorios en Github.',
     href: '/myproject',
@@ -61,7 +73,6 @@ const solutions = [
   },
   
 ]
-
 
 
 
@@ -245,7 +256,7 @@ const guestLinks = (
 
     <div className='flex items-center justify-end md:w-[100%] lg:w-[100%] w-[100%] h-[40px] lg:h-[56px]'>
 
-         <div className='inline-flex  items-center justify-end  w-[30%] md:w-[30%] lg:w-[40%] lg:h-[56px] h-[40px]'>
+         <div className='inline-flex  items-center justify-end  w-[30%] md:w-[30%] lg:w-[30%] lg:h-[56px] h-[40px]'>
             <Link to="/login">
             <img className="text-black hover:text-gray-500 w-[26px] h-[24px] "
             src={loginUser}
@@ -303,7 +314,7 @@ const guestLinks = (
                {/*LOGO DEL NAV DE NAVEGACION ORDENADORY MOVIL */}
                <div className="inline-flex 
                justify-start 
-               w-[38%] lg:w-[21%] 
+               w-[38%] lg:w-[13%] 
                h-[48px] md:h-[60px] sm:h-[60px] lg:h-[60px]">
                
                <span className="sr-only">Portafolio Jovamna Medina</span>
@@ -388,37 +399,73 @@ const guestLinks = (
               <Popover.Group as="nav" 
               className="hidden lg:flex items-center justify-between 
               w-[79%] h-full lg:h-[60px] 
-              lg:block">
+              lg:block lg:w-[85%]">
 
 
                 
 
                       {/**SEGUNDO BLOQUE AQUI ESTA EL PROBLEMA QUE ESTE DIV SE QUEDA ABAJO DEL DIV GENERAL*/}
                       {/** <div className="inline-flex lg:w-[70%] lg:h-[60px] bg-teal-400">*/}
-                 <div className="flex items-center h-full lg:w-[60%]">
+                 <div className="flex items-center h-full lg:w-[65%]">
          
-                  <NavLink to= "/" className="nav-item hover:bg-neutral-100 hover:text-violet-700 border-b-2 border-transparent hover:border-violet-700 inline-block px-3 h-[2rem] text-black font-semibold">
+                  <NavLink to= "/" className="nav-item hover:bg-neutral-100 
+                  hover:text-violet-700 border-b-2 border-transparent 
+                  hover:border-violet-700 inline-block 
+                  px-3 h-[2rem] text-black font-semibold
+                  lg:text-sm">
                   Home
                   </NavLink>
 
                 
 
-                  <NavLink to= "/blog" className="nav-item  text-black font-semibold hover:bg-neutral-100 hover:text-violet-700 border-b-2 border-transparent hover:border-violet-700 inline-block px-3 h-[2rem]">
+                  <NavLink to= "/blog" className="nav-item  
+                  text-black font-semibold hover:bg-neutral-100 
+                  hover:text-violet-700 border-b-2 border-transparent 
+                  hover:border-violet-700 inline-block px-3 h-[2rem]
+                  lg:text-sm">
                   <span className="ml-6 "
                   >Blog
                   </span>
                   </NavLink>
 
+                   <NavLink to= "/calcula-irpf" className="nav-item  
+                   text-black font-semibold hover:bg-neutral-100 
+                   hover:text-violet-700 border-b-2 border-transparent 
+                   hover:border-violet-700 inline-block px-3 h-[2rem]
+                   lg:text-sm">
+                  <span className="ml-6">
+                    Calculo-IRPF
+                  </span>
+                  </NavLink>
 
-                   <NavLink to= "/escandallo" className="nav-item  text-black font-semibold hover:bg-neutral-100 hover:text-violet-700 border-b-2 border-transparent hover:border-violet-700 inline-block px-3 h-[2rem]">
+
+                   <NavLink to= "/escandallo" className="nav-item  
+                   text-black font-semibold hover:bg-neutral-100 
+                   hover:text-violet-700 border-b-2 border-transparent 
+                   hover:border-violet-700 inline-block px-3 h-[2rem]
+                   lg:text-sm">
                   <span className="ml-6 "
                   >Escandallo
                   </span>
                   </NavLink>
 
-                  <NavLink to= "/tarifa-luz" className="nav-item text-black font-semibold hover:bg-neutral-100 hover:text-violet-700 border-b-2 border-transparent hover:border-violet-700 inline-block px-3 h-[2rem]">
+                  <NavLink to= "/tarifa-luz" className="nav-item text-black 
+                  font-semibold hover:bg-neutral-100 hover:text-violet-700 
+                  border-b-2 border-transparent hover:border-violet-700 
+                  inline-block px-3 h-[2rem]
+                  lg:text-sm">
                   <span className="ml-6">
                     Tarifa-Luz
+                  </span>
+                  </NavLink>
+                  
+                  <NavLink to= "/guia-mollet" className="nav-item text-black 
+                  font-semibold hover:bg-neutral-100 hover:text-violet-700 
+                  border-b-2 border-transparent hover:border-violet-700 
+                  inline-block px-3 h-[2rem]
+                  lg:text-sm">
+                  <span className="ml-6">
+                   Guia/Mollet
                   </span>
                   </NavLink>
 
@@ -430,10 +477,10 @@ const guestLinks = (
                  
 
                 {/**TERCER BLOQUE ULTIMO E PARTES BUSCADOR USUARIO BIHOME*/}
-                <div className="flex justify-center items-center lg:w-[40%] h-full">
+                <div className="flex justify-center items-center lg:w-[35%] h-full">
              
                  {/* BUSCADOR */}
-                 <div  className='inline-flex  lg:w-[60%] flex justify-center items-center lg:h-[56px]'>
+                 <div  className='inline-flex  lg:w-[50%] flex justify-center items-center lg:h-[56px]'>
                 <button
                 onClick={() => {
                 setIsSearchOpen(!isSearchOpen);
@@ -461,7 +508,7 @@ const guestLinks = (
 
             
                 {/* LOGIN INICIAR SESION */}
-               <div className="lg:w-[40%] lg:h-[60px] inline-flex">
+               <div className="lg:w-[45%] lg:h-[60px] inline-flex">
                   {
                 isAuthenticated ? authLinks:guestLinks
                 }

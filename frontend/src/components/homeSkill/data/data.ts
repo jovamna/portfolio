@@ -14,7 +14,7 @@ const hardSkillData: SkillOrLanguage[] = [
     {
         name: "Javascript",
         imageUrl: "/assets/img/hard_skills/languages/javnegro.png",
-        logoUrl: "/assets/img/hard_skills/languages/java-blanco-fijo.png",
+        logoUrl: "/assets/img/hard_skills/languages/java-negro-logo.png",
         link: "https://en.wikipedia.org/wiki/JavaScript",
         tabs: ["Software Development", "Web"],
     
