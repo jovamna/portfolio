@@ -384,7 +384,6 @@ def robots_txt(request):
         "Disallow: /signup/",
         "Disallow: /login/",
         "Disallow: /profile/",
-     ,
         # ==========================================
         # 🔴 BLOQUEOS DEL BACKEND Y HERRAMIENTAS
         # ==========================================
