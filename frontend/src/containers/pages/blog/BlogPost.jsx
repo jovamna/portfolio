@@ -248,6 +248,14 @@ useEffect(() => {
    }
 
 
+   // 1. Añade esta función helper arriba del todo de tu archivo (fuera del componente)
+  const quitarEtiquetasHTML = (textoString) => {
+    if (!textoString) return '';
+    // Esta expresión regular busca cualquier cosa entre < y > y la borra
+    return textoString.replace(/<\/?[^>]+(>|$)/g, "");
+  };
+
+
 
 
      
@@ -301,15 +309,17 @@ useEffect(() => {
               <div className=" z-10 max-w-lg max-w-prose mx-auto">                     
               { /*span title sm:text-4xl*/}
                   <h1 className="kaushan blog-detail-title block tracking-wide text-center font-semibold tracking-tight text-neutral-900 underline underline-offset-8 lg:text-5xl leading-tight">
-                  {post.title}
+                  
+                  {quitarEtiquetasHTML(post.title)}
                   </h1>   
               </div>
 
               {/* EXCERPT*/}
               <div className=" z-10 max-w-lg max-w-prose mx-auto">                     
               { /*span title sm:text-4xl*/}
-                  <p className="kaushan blog-detail-title block tracking-wide text-center font-normal tracking-tight text-neutral-700  lg:text-xl text-base mt-[20px]">
-                  {post.excerpt}
+                  <p className="roboto-condensed-muckas blog-detail-title block tracking-wide text-center font-normal tracking-tight text-neutral-700  lg:text-xl text-base mt-[20px]">
+            
+                  {quitarEtiquetasHTML(post.excerpt)}
                   </p>   
               </div>
 
@@ -320,22 +330,58 @@ useEffect(() => {
               </div>
 
 
-              <h2 className="oswald-muckas text-xl font-semibold mt-10">
+              <h2 className="roboto-condensed-muckas text-xl font-semibold mt-10">
                  Introducción
               </h2>
 
             {/*DESCRIPTION prose prose-indigo prose-lg*/}
-            <p className="oswald-muckas parrafo mt-6 text-black lg:text-lg  whitespace-pre-line">
-              {post.description}
+            <p 
+            className="roboto-condensed-muckas parrafo mt-6 text-black lg:text-lg  whitespace-pre-line
+          [&_.blog-cta-banner]:bg-neutral-50 [&_.blog-cta-banner]:border-2 [&_.blog-cta-banner]:border-dashed [&_.blog-cta-banner]:border-purple-600 [&_.blog-cta-banner]:p-6 [&_.blog-cta-banner]:rounded-2xl [&_.blog-cta-banner]:text-center [&_.blog-cta-banner]:my-8
+          [&_.banner-title]:text-lg [&_.banner-title]:font-bold [&_.banner-title]:text-neutral-900 [&_.banner-title]:m-0
+          [&_.banner-text]:text-sm [&_.banner-text]:text-neutral-600 [&_.banner-text]:mb-4
+          [&_.banner-button]:inline-block [&_.banner-button]:bg-purple-700 [&_.banner-button]:text-white [&_.banner-button]:px-6 [&_.banner-button]:py-2.5 [&_.banner-button]:rounded-xl [&_.banner-button]:font-bold [&_.banner-button]:no-underline [&_.banner-button]:text-sm
+          [&_.table-container]:overflow-x-auto [&_.table-container]:my-4
+          [&_table]:w-full [&_table]:text-left [&_table]:border-collapse [&_table]:border [&_table]:border-neutral-200 [&_table]:text-sm
+          [&_th]:bg-neutral-100 [&_th]:p-3 [&_th]:border [&_th]:border-neutral-200 [&_th]:font-semibold
+          [&_td]:p-3 [&_td]:border [&_td]:border-neutral-200
+          [&_li]:mt-2 [&_li]:text-zinc-900 
+          [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-neutral-900 [&_h2]:mt-8 [&_h2]:mb-4 [&_h2]:tracking-tight
+          [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-black [&_h3]:mt-6 [&_h3]:mb-3 [&_h3]:tracking-wide
+          [&_h4]:text-xl [&_h4]:font-semibold [&_h4]:text-purple-800 [&_h4]:mt-6 [&_h4]:mb-3 [&_h4]:tracking-wide
+          [&_h2]:mt-2 [&_h2]:font-bold [&_h2]:mb-2
+          [&_ul]:mt-2 [&_ul]:mb-4
+          [&_ol]:mb-4
+          [&_strong]:text-black [&_strong]:font-bold
+          "
+            >
+             {quitarEtiquetasHTML(post.description)}
            </p>
 
             {/*imageUrl*/}
 
 
              
-               {/**PRIMER CONTENT */}
+               {/**PRIMER CONTENT oswald-muckas parrafo*/}
               <section
-              className="oswald-muckas parrafo mt-6 text-black lg:text-lg"
+              className="roboto-condensed-muckas mt-6 text-black lg:text-lg
+          [&_.blog-cta-banner]:bg-neutral-50 [&_.blog-cta-banner]:border-2 [&_.blog-cta-banner]:border-dashed [&_.blog-cta-banner]:border-purple-600 [&_.blog-cta-banner]:p-6 [&_.blog-cta-banner]:rounded-2xl [&_.blog-cta-banner]:text-center [&_.blog-cta-banner]:my-8
+          [&_.banner-title]:text-lg [&_.banner-title]:font-bold [&_.banner-title]:text-neutral-900 [&_.banner-title]:m-0
+          [&_.banner-text]:text-sm [&_.banner-text]:text-neutral-600 [&_.banner-text]:mb-4
+          [&_.banner-button]:inline-block [&_.banner-button]:bg-purple-700 [&_.banner-button]:text-white [&_.banner-button]:px-6 [&_.banner-button]:py-2.5 [&_.banner-button]:rounded-xl [&_.banner-button]:font-bold [&_.banner-button]:no-underline [&_.banner-button]:text-sm
+          [&_.table-container]:overflow-x-auto [&_.table-container]:my-4
+          [&_table]:w-full [&_table]:text-left [&_table]:border-collapse [&_table]:border [&_table]:border-neutral-200 [&_table]:text-sm
+          [&_th]:bg-neutral-100 [&_th]:p-3 [&_th]:border [&_th]:border-neutral-200 [&_th]:font-semibold
+          [&_td]:p-3 [&_td]:border [&_td]:border-neutral-200
+          [&_li]:mt-2 [&_li]:text-zinc-900 
+          [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-neutral-900 [&_h2]:mt-8 [&_h2]:mb-4 [&_h2]:tracking-tight
+          [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-black [&_h3]:mt-6 [&_h3]:mb-3 [&_h3]:tracking-wide
+          [&_h4]:text-xl [&_h4]:font-semibold [&_h4]:text-purple-800 [&_h4]:mt-6 [&_h4]:mb-3 [&_h4]:tracking-wide
+          [&_h2]:mt-2 [&_h2]:font-bold [&_h2]:mb-2
+          [&_ul]:mt-2 [&_ul]:mb-4
+          [&_ol]:mb-4
+          [&_strong]:text-black [&_strong]:font-bold
+          "
               dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.narrative) }}
            />
 
@@ -356,10 +402,34 @@ useEffect(() => {
 
               {/*SEGUNDO CONTENT*/}
 
-             <section
-              className="oswald-muckas parrafo mt-6  text-black lg:text-lg"
-              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
-              />
+           
+
+              {/* SEGUNDO CONTENT (Enriquecido con TinyMCE) */}
+      <section
+           className="roboto-condensed-muckas mt-6 text-black lg:text-lg
+          [&_.blog-cta-banner]:bg-neutral-50 [&_.blog-cta-banner]:border-2 [&_.blog-cta-banner]:border-dashed [&_.blog-cta-banner]:border-purple-600 [&_.blog-cta-banner]:p-6 [&_.blog-cta-banner]:rounded-2xl [&_.blog-cta-banner]:text-center [&_.blog-cta-banner]:my-8
+          [&_.banner-title]:text-lg [&_.banner-title]:font-bold [&_.banner-title]:text-neutral-900 [&_.banner-title]:m-0
+          [&_.banner-text]:text-sm [&_.banner-text]:text-neutral-600 [&_.banner-text]:mb-4
+          [&_.banner-button]:inline-block [&_.banner-button]:bg-purple-700 [&_.banner-button]:text-white [&_.banner-button]:px-6 [&_.banner-button]:py-2.5 [&_.banner-button]:rounded-xl [&_.banner-button]:font-bold [&_.banner-button]:no-underline [&_.banner-button]:text-sm
+          [&_.table-container]:overflow-x-auto [&_.table-container]:my-4
+          [&_table]:w-full [&_table]:text-left [&_table]:border-collapse [&_table]:border [&_table]:border-neutral-200 [&_table]:text-sm
+          [&_th]:bg-neutral-100 [&_th]:p-3 [&_th]:border [&_th]:border-neutral-200 [&_th]:font-semibold
+          [&_td]:p-3 [&_td]:border [&_td]:border-neutral-200
+          [&_li]:mt-2 [&_li]:text-zinc-900 
+          [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-neutral-900 [&_h2]:mt-8 [&_h2]:mb-4 [&_h2]:tracking-tight
+          [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-black [&_h3]:mt-6 [&_h3]:mb-3 [&_h3]:tracking-wide
+          [&_h4]:text-xl [&_h4]:font-semibold [&_h4]:text-purple-800 [&_h4]:mt-6 [&_h4]:mb-3 [&_h4]:tracking-wide
+          [&_h2]:mt-2 [&_h2]:font-bold [&_h2]:mb-2
+          [&_ul]:mt-2 [&_ul]:mb-4
+          [&_ol]:mb-4
+          [&_strong]:text-black [&_strong]:font-bold
+          "
+        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
+      />
+
+
+
+
 
               {/**POSTS RELACIONADOS */}
                  <div className="lg:mt-[2px] md:w-[100%] lg:w-[100%] w-[100%]">

@@ -79,3 +79,5 @@ export function computeStats(data) {
 export function getSortedHours(data) {
   return Object.keys(data).sort();
 }
+
+//prices.reduce((calculadora, precioActual) => calculadora + precioActual, 0)

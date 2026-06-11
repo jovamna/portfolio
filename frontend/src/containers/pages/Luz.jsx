@@ -9,6 +9,8 @@ import FullWidthLayout from "../../hocs/FullWidthLayout";
 
 const REFRESH_EVERY_MS = 60 * 60 * 1000; // refrescar cada hora
 
+
+
 export default function Luz() {
   const [zone, setZone]   = useState('PCB');
   const { data, stats, loading, isDemo, fetchZone } = usePVPC();

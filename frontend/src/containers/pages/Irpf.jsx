@@ -88,22 +88,51 @@ export default function App() {
   const [values, setValues] = useState(DEFAULTS);
 
   const result = useMemo(() => {
-    const bruto = parseFloat(values.salarioBruto);
-    if (!bruto || bruto <= 0) return null;
+    const brutoInput = parseFloat(values.salarioBruto);
+    if (!brutoInput || brutoInput <= 0) return null;
+
+  const salarioAnual = values.salarioAnualReal || (values.salarioTipo === 'mensual' ? brutoInput * 12 : brutoInput);
+
+
+
+   // const bruto = parseFloat(values.salarioBruto);
+   // if (!bruto || bruto <= 0) return null;
+
+
+  return calcularRetencion({
+    salarioBruto: salarioAnual,           // ← Siempre pasamos el anual
+    //salarioBruto: bruto,
+    contrato: values.contrato,
+    edadTrabajador: Number(values.edadTrabajador),
+    hijosTotal: Number(values.hijosTotal),
+    hijosMenores3: Number(values.hijosMenores3),
+    ascendientes65: Number(values.ascendientes65),
+    ascendientes75: Number(values.ascendientes75),
+    discapacidad: Number(values.discapacidad),
+    pagas: Number(values.pagas),
+    ccaa: values.ccaa || 'media',        // ← Correcto
+  });
+}, [values]);
+
+
 
     // Nota: Asegúrate de tener importada la función calcularRetencion en tu archivo
-    return calcularRetencion({
-      salarioBruto:   bruto,
-      contrato:       values.contrato,
-      edadTrabajador: Number(values.edadTrabajador),
-      hijosTotal:     Number(values.hijosTotal),
-      hijosMenores3:  Number(values.hijosMenores3),
-      ascendientes65: Number(values.ascendientes65),
-      ascendientes75: Number(values.ascendientes75),
-      discapacidad:   Number(values.discapacidad),
-      pagas:          Number(values.pagas),
-    });
-  }, [values]);
+  //  return calcularRetencion({
+  //    salarioBruto:   bruto,
+  //    contrato:       values.contrato,
+  //    edadTrabajador: Number(values.edadTrabajador),
+   //   hijosTotal:     Number(values.hijosTotal),
+   //   hijosMenores3:  Number(values.hijosMenores3),
+  //    ascendientes65: Number(values.ascendientes65),
+  //    ascendientes75: Number(values.ascendientes75),
+  //    discapacidad:   Number(values.discapacidad),
+  //    pagas:          Number(values.pagas),
+  //  });
+  //}, [values]);
+
+
+
+
 
   return (
     <FullWidthLayout>
@@ -144,6 +173,8 @@ export default function App() {
           </button>
         </div>
 
+
+       {/**COLUMNA DEL COSTADO */}
         {/* Columna Derecha: Resultados (Sticky / Fijo en escritorio) */}
         <aside className="w-full lg:sticky lg:top-[100px] flex flex-col gap-3">
           <p className="kaushan tracking-wider underline underline-offset-8 lg:text-2xl text-xs font-bold text-black text-center  tracking-tight px-1">
@@ -155,18 +186,102 @@ export default function App() {
         </aside>
       </div>
 
+     
+
+
+    {/**CONTENIDO */}
+
+    <div>
+
+
+      <section className="max-w-4xl mx-auto px-4 py-12 text-gray-800 space-y-8">
+  
+  <header className="space-y-2">
+    <h2 className="text-2xl font-bold text-black tracking-tight underline underline-offset-8">
+      ¿Cómo calcular tu Sueldo Neto en España? Guía Paso a Paso
+    </h2>
+    <p className="text-sm text-gray-600 leading-relaxed">
+      Calcular el salario neto a partir del sueldo bruto anual puede parecer complejo debido a las retenciones del IRPF y las cotizaciones a la Seguridad Social. A continuación, te explicamos cómo funciona el algoritmo de nuestra <strong>calculadora de sueldo neto</strong> para que entiendas tu nómina mes a mes.
+    </p>
+  </header>
+
+  <hr className="border-gray-100" />
+
+  <article className="space-y-4">
+    <h3 className="text-lg font-semibold text-gray-900">
+      1. Cotizaciones a la Seguridad Social en la Nómina
+    </h3>
+    <p className="text-sm text-gray-600 leading-relaxed">
+      El primer descuento aplicable a tu salario bruto es la aportación a la Seguridad Social. Dependiendo de tu tipo de contrato, el porcentaje varía ligeramente:
+    </p>
+    <ul className="list-disc pl-5 text-sm text-gray-600 space-y-1">
+      <li><strong>Contrato Indefinido:</strong> Se aplica una retención del <strong>6,35%</strong> sobre la base de cotización.</li>
+      <li><strong>Contrato Temporal:</strong> La cuota asciende al <strong>6,40%</strong>.</li>
+    </ul>
+  </article>
+
+  <article className="space-y-4">
+    <h3 className="text-lg font-semibold text-gray-900">
+      2. El Mínimo Personal y Familiar: ¿Cuánto dinero está exento de IRPF?
+    </h3>
+    <p className="text-sm text-gray-600 leading-relaxed">
+      El impuesto sobre la renta es progresivo y protege las situaciones familiares particulares. El <strong>mínimo personal exento por defecto es de 5.550 €</strong> (cuantía que aumenta a partir de los 65 y 75 años). Además, tener hijos menores de 25 años a cargo o ascendientes que convivan contigo reduce la base imponible, haciendo que pagues menos impuestos mensuales.
+    </p>
+  </article>
+
+  <article className="space-y-4">
+    <h3 className="text-lg font-semibold text-gray-900">
+      3. Tramos de IRPF por Comunidad Autónoma
+    </h3>
+    <p className="text-sm text-gray-600 leading-relaxed">
+      El IRPF se divide en un tramo estatal y otro autonómico. Regiones como <strong>Madrid, Cataluña, Andalucía o la Comunidad Valenciana</strong> tienen escalas propias que hacen que el sueldo neto de un mismo salario bruto varíe según dónde residas. Nuestra calculadora aplica estas tablas de forma automática para ofrecerte el cálculo de retención mensual más preciso.
+    </p>
+  </article>
+
+  <div className="p-4 bg-blue-50/50 border border-blue-100 rounded-2xl text-xs text-blue-800 leading-relaxed">
+    <strong>💡 Consejo para trabajadores:</strong> Las retenciones reflejadas en esta herramienta emulan el cálculo mensual de tu empresa (Modelo 145). El ajuste definitivo de tus impuestos se realiza al año siguiente durante la campaña de la Declaración de la Renta.
+  </div>
+
+</section>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ {/* Footer */}
       {/* Footer */}
-      {/* Footer */}
-        <footer className="w-full max-w-5xl mt-16 px-4 text-center">
-          <div className="border-t border-gray-200 pt-8 text-xs text-gray-500">
+        <footer className="w-full max-w-5xl mt-4 px-4 text-center">
+          <div className="border-t border-gray-200 pt-2 text-xs text-gray-700">
             Cálculo orientativo según normativa IRPF 2026 · 
-            Hecho por{' '}
-            <a href="/" className="hover:text-gray-700 underline">
-              Jovamna Medina
-            </a>
+           
           </div>
         </footer>
+
+
+
+
+
     </main>
+
+
+
+
+
+
+
+
+
     </FullWidthLayout>
   );
 }

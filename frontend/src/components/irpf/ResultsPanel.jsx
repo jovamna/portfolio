@@ -20,6 +20,7 @@ function BigStat({ label, value, sub, textColorClass }) {
   );
 }
 
+
 // Componente auxiliar Row Mejorado
 function Row({ label, value, indent, highlight }) {
   return (
@@ -36,6 +37,8 @@ function Row({ label, value, indent, highlight }) {
   );
 }
 
+
+
 // ─── Componente Principal Mejorado ─────────────────────────────────────
 export default function ResultsPanel({ result }) {
   
@@ -49,6 +52,10 @@ export default function ResultsPanel({ result }) {
         <p className="text-sm text-gray-500 mt-2">
           El desglose aparecerá aquí
         </p>
+
+
+
+
       </div>
     );
   }
@@ -57,7 +64,7 @@ export default function ResultsPanel({ result }) {
     <div className="flex flex-col gap-8">
 
       {/* Métricas Principales */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:flex lg:flex-col">
         <BigStat
           label="Neto mensual estimado"
           value={fmtEur(result.netoMensual)}
@@ -80,7 +87,9 @@ export default function ResultsPanel({ result }) {
 
       {/* Barra de Distribución */}
       <div className="bg-white p-5 rounded-3xl border border-gray-100 shadow-sm">
-        <p className="text-xs font-semibold text-gray-500 mb-3">Distribución mensual</p>
+        <p className="text-xs font-semibold text-gray-500 mb-3">
+          Distribución mensual
+          </p>
         <div className="w-full h-4 rounded-2xl overflow-hidden bg-gray-100 flex shadow-inner">
           <div
             className="bg-emerald-500 transition-all duration-500"
@@ -110,41 +119,61 @@ export default function ResultsPanel({ result }) {
       </div>
 
       {/* Desglose Detallado */}
-      <details className="group bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-sm">
-        <summary className="flex justify-between items-center px-6 py-4 cursor-pointer hover:bg-gray-50 transition-colors">
-          <span className="font-semibold text-gray-700">Ver desglose completo del cálculo</span>
-          <span className="text-xl transition-transform group-open:rotate-180 text-gray-400">▼</span>
-        </summary>
+    {/* Desglose Detallado */}
+<details className="group bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-sm">
+  <summary className="flex justify-between items-center px-6 py-4 cursor-pointer hover:bg-gray-50 transition-colors">
+    <span className="font-semibold text-gray-700">Ver desglose completo del cálculo</span>
+    <span className="text-xl transition-transform group-open:rotate-180 text-gray-400">▼</span>
+  </summary>
 
-        <div className="px-6 pb-6 flex flex-col gap-4 border-t border-gray-100 pt-5">
-          <p className="uppercase text-xs font-bold text-gray-400 tracking-wider">Cálculo Anual Base</p>
-          
-          <Row label="Salario bruto anual" value={fmtEur(result.salarioBruto)} />
-          <Row label="− Cotización Seguridad Social" value={`−${fmtEur(result.cotizacionSS)}`} indent />
-          <Row label="− Gastos deducibles" value="−2.000,00 €" indent />
-          <Row label="= Rendimiento neto del trabajo" value={fmtEur(result.rendimientoNeto)} highlight />
+  <div className="px-6 pb-6 flex flex-col gap-4 border-t border-gray-100 pt-5">
+    <p className="uppercase text-xs font-bold text-gray-400 tracking-wider">Cálculo Anual Base</p>
+    
+    <Row label="Salario bruto anual" value={fmtEur(result.salarioBruto)} />
+    <Row label="− Cotización Seguridad Social" value={`−${fmtEur(result.cotizacionSS)}`} indent />
+    <Row label="− Gastos deducibles" value="−2.000,00 €" indent />
+    <Row label="= Rendimiento neto del trabajo" value={fmtEur(result.rendimientoNeto)} highlight />
 
-          <Row label="− Reducción por rendimientos del trabajo" value={`−${fmtEur(result.reduccionRendimientos)}`} indent />
-          <Row label="= Base para retención" value={fmtEur(result.baseRetencion)} highlight />
+    <Row 
+      label="− Reducción por rendimientos del trabajo" 
+      value={`−${fmtEur(result.reduccionRendimientos)}`} 
+      indent 
+    />
+    <Row 
+      label="= Base para retención" 
+      value={fmtEur(result.baseRetencion)} 
+      highlight 
+    />
 
-          <p className="uppercase text-xs font-bold text-gray-400 tracking-wider mt-4">Mínimo Personal y Familiar</p>
-          <Row label="Mínimo personal" value={fmtEur(result.minimoPersonal)} indent />
-          {result.minimoDescendientes > 0 && (
-            <Row label="Mínimo por descendientes" value={fmtEur(result.minimoDescendientes)} indent />
-          )}
-          {result.minimoAscendientes > 0 && (
-            <Row label="Mínimo por ascendientes" value={fmtEur(result.minimoAscendientes)} indent />
-          )}
-          {result.reduccionDiscap > 0 && (
-            <Row label="Reducción por discapacidad" value={fmtEur(result.reduccionDiscap)} indent />
-          )}
-          <Row label="Total mínimo personal y familiar" value={fmtEur(result.minimoTotal)} highlight />
+    {result.baseRetencion <= 0 && (
+      <p className="text-amber-600 text-sm mt-1 pl-6">
+        ⚠️ La base queda en 0 € → se aplica el tipo mínimo del 2%
+      </p>
+    )}
 
-          <p className="uppercase text-xs font-bold text-gray-400 tracking-wider mt-4">Resultado Final</p>
-          <Row label="Retención anual estimada" value={fmtEur(result.retencionAnual)} highlight />
-          <Row label="Tipo de retención efectivo" value={fmtPct(result.tipoRetencion)} highlight />
-        </div>
-      </details>
+    <p className="uppercase text-xs font-bold text-gray-400 tracking-wider mt-4">Mínimo Personal y Familiar</p>
+    <Row label="Mínimo personal" value={fmtEur(result.minimoPersonal)} indent />
+    {result.minimoDescendientes > 0 && (
+      <Row label="Mínimo por descendientes" value={fmtEur(result.minimoDescendientes)} indent />
+    )}
+    {result.minimoAscendientes > 0 && (
+      <Row label="Mínimo por ascendientes" value={fmtEur(result.minimoAscendientes)} indent />
+    )}
+    {result.reduccionDiscap > 0 && (
+      <Row label="Reducción por discapacidad" value={fmtEur(result.reduccionDiscap)} indent />
+    )}
+    <Row label="Total mínimo personal y familiar" value={fmtEur(result.minimoTotal)} highlight />
+
+    <p className="uppercase text-xs font-bold text-gray-400 tracking-wider mt-4">Otros datos</p>
+    <Row label="Comunidad Autónoma" value={result.ccaa?.toUpperCase() || 'MEDIA'} />
+
+    <p className="uppercase text-xs font-bold text-gray-800 tracking-wider underline underline-offset-8 mt-4">
+      Resultado Final
+    </p>
+    <Row label="Retención anual estimada" value={fmtEur(result.retencionAnual)} highlight />
+    <Row label="Tipo de retención efectivo" value={fmtPct(result.tipoRetencion)} highlight />
+  </div>
+</details>
 
       {/* Disclaimer */}
       <p className="text-xs leading-relaxed text-gray-500 bg-gray-50 p-5 rounded-2xl border border-gray-100">
@@ -159,6 +188,11 @@ export default function ResultsPanel({ result }) {
           calculador de la AEAT
         </a>.
       </p>
+
+
+      <p className="text-xs text-amber-600 font-medium">
+  ⚠️ Estimación orientativa 2026. No considera otras rentas ni reducciones autonómicas específicas.
+</p>
     </div>
   );
 }

@@ -1,5 +1,8 @@
 import { fmtCents, getPriceCategory, PRICE_LABELS } from '../../utils/priceUtils';
 
+
+
+
 // Componente Card interno optimizado con Tailwind
 function Card({ label, value, textColorClass, badge }) {
   // 🛠️ Truco mágico: Si el valor es un texto que contiene "c€/kWh", separamos el número de las letras

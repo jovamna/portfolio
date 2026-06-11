@@ -2,6 +2,7 @@ import { fmtCents } from '../../utils/priceUtils';
 
 export default function BestHours({ data }) {
   // Ordenamos de menor a mayor precio y tomamos las 3 mejores horas
+  
   const best = Object.entries(data)
     .sort((a, b) => a[1].price - b[1].price)
     .slice(0, 3);

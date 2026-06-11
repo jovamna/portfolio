@@ -13,7 +13,10 @@ function Counter({ label, hint, value, onChange, min = 0, max = 10 }) {
         )}
       </div>
 
-      <div className="flex items-center bg-white border border-gray-200 rounded-2xl p-1 shadow-sm hover:shadow focus-within:shadow-md focus-within:border-blue-500 transition-all h-[46px]">
+      <div className="flex items-center bg-white 
+      border border-gray-200 rounded-2xl p-1 shadow-sm 
+      hover:shadow focus-within:shadow-md focus-within:border-blue-500 
+      transition-all h-[46px]">
         <button
           type="button"
           onClick={() => onChange(Math.max(min, value - 1))}
@@ -63,26 +66,42 @@ export default function FamilyForm({ values, onChange }) {
     <section className="w-full p-8 bg-white 
     border-t border-b border-gray-500 
     hover:shadow-md transition-shadow flex flex-col gap-8">
-      <h2 className="text-lg font-bold text-black underline underline-offset-4 t tracking-tight">
+      <h2 className="text-lg font-bold text-black underline underline-offset-4 tracking-tight">
         Situación personal y familiar
       </h2>
 
-      {/* Hijos */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Counter
-          label="Hijos menores de 25 años"
-          hint="con rentas < 8.000 €/año"
-          value={values.hijosTotal}
-          onChange={handleHijosTotal}
-        />
-        <Counter
-          label="De esos, menores de 3 años"
-          hint="Mínimo adicional de 2.800 €"
-          value={values.hijosMenores3}
-          onChange={set('hijosMenores3')}
-          max={values.hijosTotal}
-        />
+
+      {/* Bloque Hijos */}
+      <div className="flex flex-col gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Counter
+            label="Hijos menores de 25 años"
+            hint="con rentas < 8.000 €/año"
+            value={values.hijosTotal}
+            onChange={handleHijosTotal}
+          />
+          <Counter
+            label="De esos, menores de 3 años"
+            hint="Mínimo adicional de 2.800 €"
+            value={values.hijosMenores3}
+            onChange={set('hijosMenores3')}
+            max={values.hijosTotal}
+          />
+        </div>
+
+        {/* NOTA FISCAL: Solo aparece si el usuario añade algún hijo */}
+        {values.hijosTotal > 0 && (
+          <div className="p-3 bg-blue-50/60 border border-blue-100 rounded-2xl flex gap-2 items-start transition-all animate-fadeIn">
+            <span className="text-blue-500 text-sm mt-0.5" aria-hidden="true">💡</span>
+            <p className="text-xs text-blue-800 font-medium leading-relaxed">
+              <strong>Info de nómina:</strong> En el cálculo de retenciones mensuales (Modelo 145), los hijos se computan al 100%. Si ambos progenitores trabajáis, el ajuste al 50% se aplicará posteriormente en vuestra Declaración de la Renta anual.
+            </p>
+          </div>
+        )}
       </div>
+
+
+
 
       {/* Ascendientes */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

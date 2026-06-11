@@ -308,7 +308,7 @@ const guestLinks = (
                {/*LOGO DEL NAV DE NAVEGACION ORDENADORY MOVIL */}
                <div className="inline-flex 
                justify-start 
-               w-[38%] lg:w-[13%] 
+               w-[38%] lg:w-[15%] 
                h-[48px] md:h-[60px] sm:h-[60px] lg:h-[60px]">
                
                <span className="sr-only">Portafolio Jovamna Medina</span>
@@ -323,41 +323,40 @@ const guestLinks = (
                {/*FIN LOGO DEL MENU DE NAVEGACION*/}  
              
   
- 
-        {/*MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL */}
-        {/*ICONO QUE SE VE SOLO EN MOVIL Y ESTA DENTRO DEL CONTAINER DEL PC. -my-2 -mr-2 rounded-md*/}
-        <div className=" lg:hidden xl:hidden 2xl:hidden 
-        h-[48px] sm:h-[60px]  md:h-[60px]  
-        flex flex-row w-[62%] 
-        justify-center items-center md:space-x-20">
-                   {/*LOGIN Y LOGOUT LOGIN Y LOGOUT */} 
+                    {/*MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL */}
+                    {/*ICONO QUE SE VE SOLO EN MOVIL Y ESTA DENTRO DEL CONTAINER DEL PC. -my-2 -mr-2 rounded-md*/}
+                    <div className=" lg:hidden xl:hidden 2xl:hidden 
+                      h-[48px] sm:h-[60px]  md:h-[60px]  
+                      flex flex-row w-[62%] 
+                      justify-center items-center md:space-x-20">
+                        {/*LOGIN Y LOGOUT LOGIN Y LOGOUT */} 
 
-                   <div className="inline-flex py-2 md:py-2 w-[60%] h-[48px] sm:h-[60px] md:h-[60px] md:w-[30%]">
-                       {
-                      isAuthenticated ? authLinks:guestLinks
-                      }
+                       <div className="inline-flex py-2 md:py-2 w-[60%] h-[48px] sm:h-[60px] md:h-[60px] md:w-[30%]">
+                         {
+                        isAuthenticated ? authLinks:guestLinks
+                         }
             
-                   </div>
+                       </div>
                
-                {/*FIN LOGIN Y LOGOUT LOGIN Y LOGOUT */}   
+                      {/*FIN LOGIN Y LOGOUT LOGIN Y LOGOUT */}   
 
-                {/**BLOQUE DE LUPA Y BIHOME DESLIZANTE */}
-               <Popover.Button className="icon-search-bihome 
-               flex flex-row justify-end  items-center 
-               hover:bg-gray-100 hover:text-gray-500 md:h-[60px] sm:h-[60px]
-               focus:outline-none h-[2.5em] w-[40%] md-w-[20%]">
-               <span className="sr-only">Open menu</span>
+                      {/**BLOQUE DE LUPA Y BIHOME DESLIZANTE */}
+                     <Popover.Button className="icon-search-bihome 
+                     flex flex-row justify-end  items-center 
+                     hover:bg-gray-100 hover:text-gray-500 md:h-[60px] sm:h-[60px]
+                     focus:outline-none h-[2.5em] w-[40%] md-w-[20%]">
+                     <span className="sr-only">Open menu</span>
 
 
-                {/*BOTON LUPA DEL BUSCADOR */}
-                <div className=" inline-flex w-[60%] md:h-[60px] sm:h-[60px] md-[30%] justify-center items-center">
-                   <MagnifyingGlassIcon className="icon-search 
-                   h-[20px] w-[20px]  
-                   text-zinc-800 
-                   hover:text-gray-400" aria-hidden="true" />
+                     {/*BOTON LUPA DEL BUSCADOR */}
+                    <div className=" inline-flex w-[60%] md:h-[60px] sm:h-[60px] md-[30%] justify-center items-center">
+                        <MagnifyingGlassIcon className="icon-search 
+                         h-[20px] w-[20px]  
+                         text-zinc-800 
+                         hover:text-gray-400" aria-hidden="true" />
 
-                </div>
-                {/* FIN BUSCADOR */}
+                     </div>
+                     {/* FIN BUSCADOR */}
 
 
 
@@ -379,12 +378,8 @@ const guestLinks = (
                </Popover.Button>
 
 
-        </div>
-        {/*FIN MOVIL MENU MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL */}
-
-
-
-
+                    </div>
+                    {/*FIN MOVIL MENU MOVIL MOVIL MOVIL MOVIL MOVIL MOVIL */}
 
 
 
