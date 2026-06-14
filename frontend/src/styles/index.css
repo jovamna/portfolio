@@ -136,12 +136,12 @@ body
   font-style: light;
 }
 
-
+/*font-weight: 300;
+  font-style: light;*/
 .oswald-muckas {
   font-family: "Oswald", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 300;
-  font-style: light;
+  
   letter-spacing: 1px;
 }
 
@@ -1428,8 +1428,7 @@ body
 }
 
 .blogpost-column-2 {
-  width: 100%;
-  padding: 20px;
+
   overflow-y: hidden;
 }
 
@@ -1913,6 +1912,8 @@ width: 100%;
  height: 160px;
  }
 }
+
+
 /*IPHONE SE*/
 @media only screen and (min-width: 375px) {
 
@@ -2178,16 +2179,6 @@ width: 100%;
  }
 
  
-
- /*CONTAINER DE ABOUT ME, DESCRIBIENDOME*/
- /*.subcontainer-about-movil{
-
- }*/
-
- 
-
-
-
 
 
 

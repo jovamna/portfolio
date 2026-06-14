@@ -95,8 +95,8 @@ const displayCategory = categorySlug ? categorySlug.replace(/-/g, ' ').charAt(0)
             font-bold text-center tracking-tight text-neutral-800 
             sm:text-4xl  md:text-center
             mb-[30px] lg:mb-[40px] 2xl:mb-[40px]">
-   Artículos sobre: <span className="">{displayCategory}</span>
-</h1>
+            Artículos sobre: <span className="">{displayCategory}</span>
+              </h1>
            
             
             <BlogListCategory 

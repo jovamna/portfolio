@@ -9,6 +9,12 @@ function classNames(...classes){
 
 
 }
+    const URL =
+    process.env.NODE_ENV === "production"
+     ? import.meta.env.VITE_REACT_API_URL
+     : "http://localhost:8000";
+ 
+    console.log(URL);
 
 
 
@@ -21,12 +27,6 @@ function BlogCard(data){
       return <div>Cargando...</div>;
     }
 
-    const URL =
-    process.env.NODE_ENV === "production"
-     ? import.meta.env.VITE_REACT_API_URL
-     : "http://localhost:8000";
- 
-    console.log(URL);
 
     const videoUrl = `${URL}${post.video}`;
     const thumbnailUrl = `${URL}${post.thumbnail}`;
@@ -42,7 +42,8 @@ function BlogCard(data){
 
         <img 
           src={thumbnailUrl}
-          alt="Desarrolladora Full Stack experta en Django y React. Arte digital único con IA y Photoshop."
+          alt={`${post?.title|| 'Jovamna Medina Desarrolladora Full Stack en Django y React.'}`}
+          loading="lazy"
           className="w-full h-full object-cover"
         />
       </div>
@@ -91,7 +92,11 @@ function BlogCard(data){
                      
                         {/*1 CONTAINER DE IIMAGEN O VIDEO*/}
                         <div className=" responsive-altura-img-blog aspect-video lg:w-full w-[60%] overflow-hidden">   
+                           <Link 
+                            to={`/blog/post/${post.slug}`} 
+                            className="block">
                         {renderMedia()}
+                        </Link>
                         </div>
                             
 

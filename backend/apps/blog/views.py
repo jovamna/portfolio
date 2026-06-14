@@ -11,7 +11,24 @@ from django.core.cache import cache
 from django.shortcuts import get_object_or_404
 from .models import Post, PostViewCount
 from apps.reviews.models import  Review
+from django.core.cache import cache
+from django.db.models import Sum, F
+from django.shortcuts import get_object_or_404
 
+
+#Entrar al VPS
+#ssh usuario@tu-servidor
+#2. Ir al proyecto
+#cd /ruta/de/tu/proyecto
+#3. Activar el entorno virtual
+#source venv/bin/activate
+
+#4. Abrir el shell de Django
+#python manage.py shell
+#5. Ejecutar los comandos
+#from blog.models import Post, PostViewCount
+#Luego:
+#PostViewCount.objects.all().delete()
 
 
 
@@ -67,6 +84,124 @@ class BlogListCategoryView(APIView):
 
 
 class PostDetailView(APIView):
+    authentication_classes = []
+    permission_classes = [AllowAny]
+
+    CACHE_TIMEOUT = 60 * 15  # 15 minutos
+
+    def get_client_ip(self, request):
+        """
+        Obtiene la IP real soportando:
+        - Cloudflare
+        - Reverse proxies
+        - Desarrollo local
+        """
+
+        ip = request.META.get("HTTP_CF_CONNECTING_IP")
+
+        if not ip:
+            x_forwarded = request.META.get("HTTP_X_FORWARDED_FOR")
+
+            if x_forwarded:
+                ip = x_forwarded.split(",")[0].strip()
+            else:
+                ip = request.META.get("REMOTE_ADDR")
+
+        return ip
+
+    def register_view(self, post, ip):
+        """
+        Registra una única visita por IP para este post.
+        Usa F() para evitar condiciones de carrera.
+        """
+
+        already_viewed = PostViewCount.objects.filter(
+            post=post,
+            ip_address=ip
+        ).exists()
+
+        if already_viewed:
+            return False
+
+        PostViewCount.objects.create(
+            post=post,
+            ip_address=ip
+        )
+
+        Post.objects.filter(pk=post.pk).update(
+            views=F("views") + 1
+        )
+
+        post.refresh_from_db(fields=["views"])
+
+        return True
+
+    def get_post_data(self, post):
+        """
+        Obtiene datos cacheados o los genera si no existen.
+        """
+
+        cache_key = f"post_{post.slug}"
+
+        data = cache.get(cache_key)
+
+        if data:
+            return data
+
+        total_hearts = (
+            Review.objects
+            .filter(post=post)
+            .aggregate(total_hearts=Sum("hearts"))
+            .get("total_hearts")
+            or 0
+        )
+
+        serializer = PostSerializer(post)
+
+        data = serializer.data
+        data["total_hearts"] = total_hearts
+
+        cache.set(
+            cache_key,
+            data,
+            self.CACHE_TIMEOUT
+        )
+
+        return data
+
+    def get(self, request, post_slug, format=None):
+
+        ip = self.get_client_ip(request)
+
+        post = get_object_or_404(
+            Post,
+            slug=post_slug
+        )
+
+        self.register_view(
+            post=post,
+            ip=ip
+        )
+        
+        post.refresh_from_db(fields=["views"])
+
+        data = self.get_post_data(post)
+  
+        # Actualizamos el contador de vistas para que siempre
+        # refleje el valor real de la base de datos.
+        data["views"] = post.views
+
+        return Response(
+            data,
+            status=status.HTTP_200_OK
+        )
+        
+        
+        
+        
+        
+
+class originalPostDetailView(APIView):
     authentication_classes = []  # Desactiva autenticación
     permission_classes = [AllowAny]  # Permite acceso a cualquiera
 

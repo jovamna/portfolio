@@ -6,7 +6,8 @@ from apps.category.models import Category
 from tinymce.models import HTMLField  # Asegúrate de que tienes tinymce instalado
 import os
 from django.dispatch import receiver
-
+    
+from django.db.models import Count
 
 
 def blog_directory_path(instance, filename):
@@ -71,9 +72,17 @@ class Post(models.Model):
         views = PostViewCount.objects.filter(post=self).count()
         return views
     
+
+
     @staticmethod
     def get_popular_posts():
-        return Post.objects.filter(status='published').annotate(view_count=PostViewCount('post_view_count')).order_by('-view_count')
+        return Post.objects.filter(status='published').annotate(
+            view_count=Count('post_view_count')  # Usamos Count sobre el related_name
+            ).order_by('-view_count')
+    
+    #@staticmethod
+    #def get_popular_posts():
+        #return Post.objects.filter(status='published').annotate(view_count=PostViewCount('post_view_count')).order_by('-view_count')
     
     @staticmethod
     def popular_posts(num_posts):

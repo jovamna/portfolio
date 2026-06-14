@@ -22,15 +22,15 @@ function CategoriesBlogList ({
  
 
     return(
-      <div className="container-blog-categorias h-16  xl:px-8 py-2">
+      <div className="container-blog-categorias h-16  xl:px-8 py-2 mb-2">
       
       
            {/* Agregamos un contenedor para la sección de categorías */}
       
           {/*IMPORTANTE OVERRFLOW-X-AUTO Agregamos un contenedor con overflow para permitir el desplazamiento horizontal en móviles */}
-          <div className="overflow-x-auto scroll py-2">
+          <div className="overflow-x-auto scroll py-2 w-[100%]">
              {/*UL */}
-            <div className="ul-categories-blog inline-flex space-x-4 xl:space-x-8 pr-2">
+            <div className="ul-categories-blog inline-flex space-x-4 xl:space-x-8 ">
 
 
                 {/*<Link 
@@ -50,15 +50,17 @@ function CategoriesBlogList ({
                     <Link
                       key={category.slug}
                       to={`/categories/${category.slug}`}
-                      className="li-categories-blog relative  rounded-lg b flex flex-col overflow-hidden hover:opacity-75 px-4"
+                      className="li-categories-blog relative rounded-lg 
+                      flex flex-col overflow-hidden hover:opacity-75 pl-2"
                     >
                     
 
                      
 
-                      <p className="blog-header-category-name relative z-2 text-center lg:text-base text-xs oswald-muckas  font-bold text-black italic ">
+                      <h2 className="blog-header-category-name  relative z-2 text-center 
+                      lg:text-base text-xs oswald-muckas  font-bold text-black">
                         {category.name}
-                      </p>
+                      </h2>
 
 
 

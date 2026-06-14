@@ -184,9 +184,9 @@ useEffect(() => {
       return (
         <img
           src={thumbnailUrl}
-          alt={post.title}
+          alt={`${post?.title|| 'Jovamna Medina Desarrolladora Full Stack en Django y React.'}`}
           loading="lazy"
-          className="object-contain w-full"
+          className="object-contain w-full lg:w-[60%]"
         />
       );
     }
@@ -211,7 +211,7 @@ useEffect(() => {
             src={thumbnailUrl}
             alt={post.title}
             loading="lazy"
-            className="object-contain w-full mb-4"
+            className="object-contain w-full mb-4 lg:w-[60%]"
           />
           <video
             src={videoUrl}
@@ -265,43 +265,27 @@ useEffect(() => {
        
     <FullWidthLayout>
 
-            {/*PORTADA DEL POST DETAIL fullscreen-bg inset-0 object-cover*/}
-            {/*
-            post ?
-              <div className="movil-portada relative pt-12  z-0 relative mb-4">
-                {renderMedia()}
-              </div>
-
-               :
-              <LoadingCard/>
-             */}
           
-          {/*FIN DE LA PORTADA DEL POST DETAIL*/}
-
-          
-
   
-           <div className="wrapper w-full min-h-screen">
+      <div className="wrapper w-full min-h-screen">
 
-
-        <div className="flex lg:flex-row xl:flex-row flex-col container-blogpost-tres-columnas px-2 pt-[70px]">
+        <div className="flex lg:flex-row xl:flex-row 
+        flex-col md:flex-col container-blogpost-tres-columnas  
+        pt-[70px]">
         
-
         {/*COLUMNA LATERAL */}
-        <div className="blogpost-column-1 w-[100%] lg:w-[18%]">
+        <div className="blogpost-column-1 hidden md:hidden lg:w-[12%] lg:block">
         </div>
         {/*FIN COLUMNA LATERAL */}
 
-
-
         {/*COLUMNA CENTRO */}
-        <div className="blogpost-column-2 w-[100%] lg-[64%] px-0">
+        <div className="blogpost-column-2 w-[100%] md:w-[100%] lg:w-[76%] max-auto">
         {/*POST DETAIL TITULO, DESCRIPTION, IMAGE, CONTENT*/}
         {
           post ?
             //CONTAINER DE CATEGORIA TITULO DESCRPITON
             //prose prose-indigo prose-lg 
-            <div className="movil-redaccion-blog-post relative text-neutral-900  mx-auto ">
+            <div className="relative text-neutral-900 flex flex-col lg:mx-auto">
               
 
 
@@ -324,13 +308,16 @@ useEffect(() => {
               </div>
 
 
-                 {/**PRIMERA IMAGEN */}
-              <div className="flex  items-center justify-center mx-auto mt-[8px]">
+            {/**PRIMERA IMAGEN IMAGEN IMAGEN IMAGEN IMAGEN IMAGEN IMAGEN */}
+              <div className="flex  items-center justify-center mx-auto mt-[8px] ">
                 {renderMedia()}
               </div>
 
 
-              <h2 className="roboto-condensed-muckas text-xl font-semibold mt-10">
+              {/**CONTENIDO CONTENIDO CONTENIDO CONTENIDO  CONTENIDO CONTENIDO*/}
+
+             <div className="flex flex-col lg:w-[100%] w-[100%] md:w-[100%] items-center px-4 md:px-0">
+              <h2 className="kaushan tracking-wide lg:text-2xl text-xl font-bold text-black mt-10">
                  Introducción
               </h2>
 
@@ -388,7 +375,7 @@ useEffect(() => {
                    
 
              {/**SEGUNDA IMAGEN */}
-            <div className="flex items-center justify-center mt-6 lg:[700px] mx-auto ">
+            <div className="flex items-center justify-center mt-6 lg:w-[400px] mx-auto ">
                 {post.image && (
                 <img
                   src={imageUrl}
@@ -402,10 +389,8 @@ useEffect(() => {
 
               {/*SEGUNDO CONTENT*/}
 
-           
-
               {/* SEGUNDO CONTENT (Enriquecido con TinyMCE) */}
-      <section
+            <section
            className="roboto-condensed-muckas mt-6 text-black lg:text-lg
           [&_.blog-cta-banner]:bg-neutral-50 [&_.blog-cta-banner]:border-2 [&_.blog-cta-banner]:border-dashed [&_.blog-cta-banner]:border-purple-600 [&_.blog-cta-banner]:p-6 [&_.blog-cta-banner]:rounded-2xl [&_.blog-cta-banner]:text-center [&_.blog-cta-banner]:my-8
           [&_.banner-title]:text-lg [&_.banner-title]:font-bold [&_.banner-title]:text-neutral-900 [&_.banner-title]:m-0
@@ -429,7 +414,7 @@ useEffect(() => {
 
 
 
-
+            </div>
 
               {/**POSTS RELACIONADOS */}
                  <div className="lg:mt-[2px] md:w-[100%] lg:w-[100%] w-[100%]">
@@ -530,7 +515,7 @@ useEffect(() => {
   
 
              {/*COLUMNA LATERAL */}
-             <div className="blogpost-column-3 w-[100%] lg:w-[18%] ">
+             <div className="blogpost-column-3 w-[100%] lg:w-[12%] ">
             
              </div>
 
