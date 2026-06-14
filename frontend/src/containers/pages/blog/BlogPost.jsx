@@ -285,14 +285,18 @@ useEffect(() => {
           post ?
             //CONTAINER DE CATEGORIA TITULO DESCRPITON
             //prose prose-indigo prose-lg 
-            <div className="relative text-neutral-900 flex flex-col lg:mx-auto">
+            <div className="relative text-neutral-900 flex flex-col lg:w-[100%]">
               
 
 
               {/* TITULO*/}
-              <div className=" z-10 max-w-lg max-w-prose mx-auto">                     
+              <div className=" z-10 mx-auto lg:pt-12 lg:pb-4 pb-2 px-4 md:px-4">                     
               { /*span title sm:text-4xl*/}
-                  <h1 className="kaushan blog-detail-title block tracking-wide text-center font-semibold tracking-tight text-neutral-900 underline underline-offset-8 lg:text-5xl leading-tight">
+                  <h1 className="kaushan blog-detail-title 
+                  block tracking-wide text-center font-semibold 
+                  tracking-tight text-neutral-900 lg:underline lg:underline-offset-8 
+                  underline underline-offset-4
+                  lg:text-3xl md:text-xl lg:leading-12 leading-8 md:leading-8">
                   
                   {quitarEtiquetasHTML(post.title)}
                   </h1>   

@@ -88,7 +88,10 @@ function BlogCard(data){
       return (
               <>
               {post ? (
-                     <div className="responsive-altura-blogcard  flex lg:flex-col flex-row bg-neutral-100 hover:bg-white hover:opacity-90 opacity-100 border-b-2 border-zinc-200 lg:py-4 py-2">
+                     <div className="responsive-altura-blogcard  
+                     flex lg:flex-col flex-row bg-neutral-100 hover:bg-white 
+                     hover:opacity-90 opacity-100 border-b-2 border-zinc-200 
+                     lg:py-4 py-2">
                      
                         {/*1 CONTAINER DE IIMAGEN O VIDEO*/}
                         <div className=" responsive-altura-img-blog aspect-video lg:w-full w-[60%] overflow-hidden">   
@@ -102,14 +105,19 @@ function BlogCard(data){
 
 
                          {/*2 CONTAINER DE TITULO EXRCEPT LEER MAS--*/}
-                         <div className=" flex flex-col relative responsive-blogcard-title-excerpt lg:w-full w-[40%] lg:mt-[10px] ">
+                         <div className=" flex flex-col relative 
+                         responsive-blogcard-title-excerpt lg:w-full 
+                         w-[40%] lg:mt-[10px] ">
 
                               {/*POST TITULO  QUITAR SI SE QUIERE  oswald-muckas */}
                               <Link 
                               to={`/blog/post/${post.slug}`} 
                               className="block px-2"
                               >
-                               <h1 className="kaushan text-center font-bold text-black dark:text-white tracking-wider lg:text-2xl text-xs sm:text-xl  md:text-center" dangerouslySetInnerHTML={{
+                               <h1 className="kaushan text-center font-bold 
+                               text-black dark:text-white tracking-wider 
+                               lg:text-lg text-xs sm:text-xl  
+                               md:text-center" dangerouslySetInnerHTML={{
                                    __html:
                                   post.excerpt && DOMPurify.sanitize(post.title.length) > 50
                                     ? DOMPurify.sanitize(post.title.slice(0, 50)) 

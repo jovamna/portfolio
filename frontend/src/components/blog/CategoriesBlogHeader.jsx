@@ -51,14 +51,13 @@ function CategoriesBlogList ({
                       key={category.slug}
                       to={`/categories/${category.slug}`}
                       className="li-categories-blog relative rounded-lg 
-                      flex flex-col overflow-hidden hover:opacity-75 pl-2"
-                    >
+                      flex flex-col overflow-hidden hover:opacity-75 pl-2">
                     
 
                      
 
                       <h2 className="blog-header-category-name  relative z-2 text-center 
-                      lg:text-base text-xs oswald-muckas  font-bold text-black">
+                      lg:text-sm text-xs oswald-muckas  font-bold text-black">
                         {category.name}
                       </h2>
 
