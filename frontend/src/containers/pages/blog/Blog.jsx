@@ -1,17 +1,17 @@
 import "../../../styles/index.css";
 
-import BlogList from "../../../components/blog/BlogList";
 import Header from "../../../components/blog/Header";
 import FullWidthLayout from "../../../hocs/FullWidthLayout";
 import { useEffect } from "react";
 import { connect } from "react-redux";
-import { get_blog_list_category, get_blog_list, get_blog_list_page } from "../../../redux/actions/blog";
+import { get_blog_list_category, get_blog_list } from "../../../redux/actions/blog";
 import { get_categories } from "../../../redux/actions/categories";
 import { useParams } from "react-router-dom"
 import ResetPasswordSuccess from '../../../components/auth//ResetPasswordSuccess'; 
 import CategoriesBlogHeader from "../../../components/blog/CategoriesBlogHeader";
-
-
+import LoadingCard from "../../../components/loaders/LoadingCard"
+import SmallSetPaginationBlog from "../../../components/pagination/SmallSetPaginationBlog"
+import BlogCard from "../../../components/blog//BlogCard"
 
 
 
@@ -19,30 +19,18 @@ function Blog({
     categories,
     get_categories,
     get_blog_list,
-    get_blog_list_page,
     blog_list,
-    get_blog_list_category,
-    get_blog_list_category_page,
- 
     count,
     next,
     previous,
     //posts,
 }){
     const params = useParams(); // Agrega esta línea para obtener el objeto params
+    const { categorySlug} = useParams();
 
     useEffect(() => {
-        const fetchData = async () => {
-          categories ? <></> : get_categories();
-          get_blog_list();
-          const categorySlug = params.categorySlug; // Reemplaza con el categorySlug adecuado
-          if (categorySlug) {
-                get_blog_list_category(categorySlug);
-            }
-       
-        };
-        fetchData();
-      }, [params]);
+        get_blog_list()
+      }, []);
 
 
       //console.log(import.meta.env.VITE_REACT_API_URL)
@@ -92,10 +80,44 @@ function Blog({
 
                  {/*el violet son nombres de la pagination*/}
                  <div className="blog-list-top flex-1 py-2">
-                 <BlogList 
-                 get_blog_list_page={get_blog_list_page} 
-                 blog_list={blog_list&&blog_list} 
-                 count={count&&count} />
+                 
+        <div>
+          
+            {
+                blog_list ?
+                <>
+                <div className="relative bg-gray-50 pb-8 px-4 sm:px-6 lg:pb-12 lg:px-8">
+                    <div className="absolute inset-0">
+                        <div className="bg-white h-1/3 sm:h-2/3" />
+                    </div>
+
+
+                    
+                    <div className="relative max-w-7xl mx-auto">
+                        
+                        <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
+                            {
+                                blog_list.map((post,index)=>(
+                                    <BlogCard 
+                                    key={post.slug}
+                                    data={post}
+                                    index={index}
+                                    />
+                                ))
+                            }
+                        </div>
+
+
+
+
+                             <SmallSetPaginationBlog count={count}/>
+                    </div>
+                </div>
+                </>
+                :
+                <LoadingCard/>
+            }
+        </div>
                  </div>
 
 
@@ -112,7 +134,8 @@ function Blog({
 
 const mapStateToProps = state =>({
     categories: state.categories.categories,
-    blog_list: state.blog.blog_list,
+    blog_list_category: state.blog.blog_list_category,
+    blog_list:state.blog.blog_list,
     count: state.blog.count,
     next: state.blog.next,
     previous: state.blog.previous,
@@ -121,6 +144,5 @@ const mapStateToProps = state =>({
 export default connect(mapStateToProps,{
     get_categories,
     get_blog_list,
-    get_blog_list_page,
     get_blog_list_category,
 })(Blog)

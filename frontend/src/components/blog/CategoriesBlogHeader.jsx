@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
 import { get_categories } from "../../redux/actions/categories"
-import { get_blog_list_category, get_blog_list, get_blog_list_page } from "../../redux/actions/blog"
+
 import { useParams } from "react-router-dom"
 
 
@@ -49,7 +49,8 @@ function CategoriesBlogList ({
                 ? categories.map((category) => (
                     <Link
                       key={category.slug}
-                      to={`/categories/${category.slug}`}
+                   
+                      to={`/blog/${category.slug}`}
                       className="li-categories-blog relative rounded-lg 
                       flex flex-col overflow-hidden hover:opacity-75 pl-2">
                     
@@ -63,16 +64,11 @@ function CategoriesBlogList ({
 
 
 
-                      {category.sub_categories.length > 0 && (
-                        <div>
-                          <h3>Subcategories:</h3>
-                          <ul>
-                            {category.sub_categories.map((subCategory) => (
-                              <li key={subCategory.slug}>{subCategory.name}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
+                     
+
+
+
+
                     </Link>
                   ))
                 : <></>}
@@ -93,3 +89,18 @@ const mapStateToProps = state =>({
 export default connect(mapStateToProps,{
     get_categories,
 })(CategoriesBlogList)
+
+
+
+
+
+ {/*category.sub_categories.length > 0 && (
+                        <div>
+                          <h3>Subcategories:</h3>
+                          <ul>
+                            {category.sub_categories.map((subCategory) => (
+                              <li key={subCategory.slug}>{subCategory.name}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )*/}

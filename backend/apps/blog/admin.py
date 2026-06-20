@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from .models import Post, PostViewCount
+from .models import Post, PostViewCount, PostSlugHistory
 
 
 class PostAdminForm(forms.ModelForm):
@@ -28,7 +28,11 @@ admin.site.register(PostViewCount)
 admin.site.register(Post, PostAdmin)
 
 
-
+@admin.register(PostSlugHistory)
+class PostSlugHistoryAdmin(admin.ModelAdmin):
+    # Esto es opcional, pero hace que la tabla se vea súper bonita y ordenada en el panel
+    list_display = ('old_slug',  'created_at')
+    search_fields = ('old_slug',)
 
 
 

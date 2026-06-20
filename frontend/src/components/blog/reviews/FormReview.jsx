@@ -35,13 +35,14 @@ import DOMPurify from 'dompurify';
 
 function FormReview({
    
+    postSlug,
     get_reviews,
     get_review,
     create_review,
     update_review,
     delete_review,
     review,
-    reviews,
+    reviews,  // ← Esto viene de Redux
     reviewId,
     review_id,
     filter_reviews,
@@ -50,8 +51,15 @@ function FormReview({
     login,
    }){
     const params = useParams()
-    const slug = params.slug
+  
     const [expandedComments, setExpandedComments] = useState({});
+    // ✅ CAMBIO IMPORTANTE: Usar postSlug o params.slug
+    const slug = postSlug || params.slug;  // ← ESTA ES LA LÍNEA QUE CAMBIA
+    
+    // ✅ LOG PARA VERIFICAR
+    console.log("🔍 FormReview - postSlug:", postSlug);
+    console.log("🔍 FormReview - params.slug:", params.slug);
+    console.log("🔍 FormReview - slug final:", slug);
 
     useEffect(() => {
       if (review_id) {
@@ -65,6 +73,13 @@ function FormReview({
     const [hearts, setHearts] = useState(0);
     const [comment, setComment] = useState('');
     const [title, setTitle] = useState('');
+
+
+    // Al inicio del componente, después de los hooks
+    console.log("🔍 FormReview - reviews:", reviews);
+    console.log("🔍 FormReview - typeof reviews:", typeof reviews);
+    console.log("🔍 FormReview - is array?", Array.isArray(reviews));
+    console.log("🔍 FormReview - length:", reviews?.length);
   
   
     //PARA CREAR EL REVIEW 
@@ -187,12 +202,36 @@ function FormReview({
         filter_reviews(slug, numHearts);
       };
   
-  
-      //GET REVIEWS
-      const getReviews = () => {
-      get_reviews(slug);
-      };
-      
+   // ============================================
+    // ✅ CARGAR REVIEWS CON REDUX (UN SOLO LUGAR)
+    // ============================================
+    useEffect(() => {
+        if (slug) {
+            console.log("🔄 Cargando reviews para:", slug);
+            get_reviews(slug);
+        }
+    }, [slug, get_reviews]);
+
+    // ============================================
+    // ✅ OBTENER TOTAL DE REVIEWS DESDE REDUX
+    // ============================================
+    // Ya no necesitas el useState ni el axios directo
+    // Usas los datos que vienen de Redux
+    const totalReviews = reviews?.length || 0;
+    
+    // O si tienes totalReviews en el estado de Redux:
+    // const totalReviews = useSelector(state => state.Reviews.totalReviews) || 0;
+
+    // ... resto de tu código (hearts, comment, title, etc.)
+    
+    // ============================================
+    // ✅ GET REVIEWS (ya no necesitas el axios directo)
+    // ============================================
+    const getReviews = () => {
+        get_reviews(slug);
+    };
+
+   
     
 
 
@@ -205,19 +244,6 @@ function FormReview({
 
 
 
-      const [totalReviews, setTotalReviews] = useState(0);
-      
-      useEffect(() => {
-        axios.get(`${import.meta.env.VITE_REACT_API_URL}/api/reviews/get-reviews/${slug}`)
-      .then((response) => {
-        setTotalReviews(response.data.total_reviews);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-      }, [slug]);
-
-   
   
   
   
@@ -589,10 +615,10 @@ function FormReview({
 
 
 const mapStateToProps = state =>({
-    reviews: state.Reviews.reviews,
-    alert:state.Alert.alert,
-    isAuthenticated: state.Auth.isAuthenticated,
-    
+    reviews: state.Reviews?.reviews || [],
+    totalReviews: state.Reviews?.totalReviews || 0,  // ← Añadir esto
+    alert: state.Alert?.alert,
+    isAuthenticated: state.Auth?.isAuthenticated || false,
 })
 
 export default connect(mapStateToProps,{

@@ -111,7 +111,7 @@ export const create_review = (slug, hearts, title, comment) => async dispatch=> 
         });
 
         try {
-            const res = await axios.post(`${URL}/api/reviews/create-review/${slug}`, body, config);
+            const res = await axios.post(`${URL}/api/reviews/create-review/${slug}/`, body, config);
             console.log(res)
 
             if (res.status === 201) {

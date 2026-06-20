@@ -1,24 +1,21 @@
 from django.shortcuts import render
 from apps.user.serializers import *
-
+from apps.user.serializers import CustomTokenObtainPairSerializer
 from rest_framework import generics, authentication, permissions
 from apps.user.models import User
-
-
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
-
 from rest_framework.exceptions import PermissionDenied
-
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from django.urls import reverse
-
+from rest_framework.permissions import AllowAny
 from django.db import connection
 
+from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.exceptions import ValidationError
 from datetime import datetime
 from django.http import JsonResponse, HttpResponse
@@ -30,6 +27,14 @@ from rest_framework_simplejwt.exceptions import TokenError, AuthenticationFailed
 from django.conf import settings
 import  jwt
 from django.shortcuts import redirect
+# views.py
+
+
+
+from rest_framework import status
+from django.contrib.auth.models import User
+
+from datetime import timedelta
 
 
 
@@ -39,10 +44,14 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-
-
-
 User = get_user_model()
+
+
+
+
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 
@@ -79,36 +88,12 @@ class CreateUserView(generics.CreateAPIView):
 
 
 
+# views.py - LoginView SIN SERIALIZER (más simple)
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer
 
 
 
-class LoginView(APIView):
-    def post(self, request):
-        if 'email' not in request.data or 'password' not in request.data:
-            return Response({'msg': 'Credentials missing'}, status=status.HTTP_400_BAD_REQUEST)
-
-        email = request.data['email']
-        password = request.data['password']
-
-        user = authenticate(request, email=email, password=password)
-
-        if user is not None:
-            login(request, user)
-
-            refresh = RefreshToken.for_user(user)
-            refresh.access_token.set_exp(lifetime=timedelta(minutes=700))  # Establecer vida útil del token de acceso
-            access_token = str(refresh.access_token)
-            refresh_token = str(refresh)
-
-            return Response({'msg': 'Login Success', 'access_token': access_token, 'refresh_token': refresh_token}, status=status.HTTP_200_OK)
-
-        return Response({'msg': 'Invalid Credentials'}, status=status.HTTP_401_UNAUTHORIZED)
-
-
-
-
-
-   
         
 
 

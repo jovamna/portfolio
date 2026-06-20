@@ -16,7 +16,9 @@ import autorblog from '../../../assets/img/users/autorblog.jpg';
 import enviarlo from '../../../assets/img/users/enviarlo.png';
 import vistas from '../../../assets/img/vistas.png';
 import "../../../styles/index.css";
-import { Link, useParams} from "react-router-dom";
+import { Link, useParams, useNavigate, Navigate  } from "react-router-dom";
+import ShareButton  from '../../../components/blog/ShareButton'
+
 
 
 
@@ -31,7 +33,7 @@ import { Link, useParams} from "react-router-dom";
    console.log(URL);
 
 
-function BlogPost({
+function PostDetail({
     get_blog,
     post,
     get_reviews,
@@ -41,19 +43,36 @@ function BlogPost({
     allPosts
 }){
     const params = useParams()
-    const slug = params.slug
-    //const { slug } = params;
+  
+    const { postSlug, slug} = useParams(); 
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
+    const [notFound, setNotFound] = useState(false);
+
+    console.log("🚀 BlogDetail SE MONTA");
+    console.log("📌 postSlug:", postSlug);
 
 
-    // 3. HOOKS DE ESTADO Y EFECTO
-    useEffect(()=>{
-        window.scrollTo(0,0)
-        get_blog(slug)
-        get_reviews(slug)   
-    },[slug])
+
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+    get_blog(postSlug, navigate);   // ← Pasamos navigate
+  }, [postSlug, get_blog, navigate]);
 
 
 
+  // ============================================
+      // EFECTO PARA REVIEWS
+      // ============================================
+      //useEffect(() => {
+      //    if (slug) {
+      //        get_reviews(slug);
+       //   }
+      //}, [slug, get_reviews]);
+  
+    
 
   
 
@@ -61,58 +80,63 @@ function BlogPost({
 {/**SEO */}
 
 useEffect(() => {
-    if (post) {
-      // 1. Título con palabras clave (Keywords)
-      document.title = `${post.title} | | Blog de Desarrollo Web | Jovamna Medina`;
+  if (post) {
+    // 1. Título con palabras clave (Keywords) - Corregido el "| |" extra
+    document.title = `${post.title} | Blog de Desarrollo Web | Jovamna Medina`;
 
-      // 2. Descripción técnica para Google
-      let metaDescription = document.querySelector('meta[name="description"]');
-      if (!metaDescription) {
-        metaDescription = document.createElement('meta');
-        metaDescription.name = 'description';
-        document.head.appendChild(metaDescription);
+    // 2. Enlace Canonical Dinámico (¡Nuevo!)
+    let linkCanonical = document.querySelector('link[rel="canonical"]');
+    if (!linkCanonical) {
+      linkCanonical = document.createElement('link');
+      linkCanonical.rel = 'canonical';
+      document.head.appendChild(linkCanonical);
+    }
+    // Usamos la misma URL dinámica del post (En tu anterior ejemplo usabas con "www", lo mantengo así aquí)
+    linkCanonical.href = `https://jovamnamedina.com/blog/post/${post.slug}`;
+
+    // 3. Descripción técnica para Google
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.name = 'description';
+      document.head.appendChild(metaDescription);
+    }
+    // Combinamos el título del post con tus habilidades principales
+    metaDescription.content = `${post.excerpt || post.title}. Aprende desarrollo web con Django, React y buenas prácticas Full Stack.`;
+
+    // 4. Meta tags: Open Graph y Twitter
+    const metaTags = [
+      { property: 'og:title', content: `${post.title} | Blog de Desarrollo Web` },
+      { property: 'og:description', content: post.excerpt || post.title },
+      { property: 'og:image', content: post.image || 'https://jovamnamedina.com/og-image-tech.png' },
+      { property: 'og:type', content: 'article' },
+      { property: 'og:url', content: `https://jovamnamedina.com/blog/post/${post.slug}` },
+
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:title', content: `${post.title} | Jovamna Medina` },
+      { name: 'twitter:description', content: post.excerpt || post.title },
+      { name: 'twitter:image', content: post.image || 'https://jovamnamedina.com/og-image-tech.png' }, // Añadido fallback por si acaso
+      { name: 'twitter:label1', content: 'Tech Stack' },
+      { name: 'twitter:data1', content: 'Django, React, Redux, PostgreSQL' }
+    ];
+
+    // Lógica para actualizar o crear los metaTags (asegúrate de tener esta parte abajo para que se apliquen)
+    metaTags.forEach(tag => {
+      const selector = tag.property 
+        ? `meta[property="${tag.property}"]` 
+        : `meta[name="${tag.name}"]`;
+      
+      let element = document.querySelector(selector);
+      if (!element) {
+        element = document.createElement('meta');
+        if (tag.property) element.setAttribute('property', tag.property);
+        if (tag.name) element.name = tag.name;
+        document.head.appendChild(element);
       }
-      // Combinamos el título del post con tus habilidades principales
-       metaDescription.content = `${post.excerpt || post.title}. Aprende desarrollo web con Django, React y buenas prácticas Full Stack.`;
-   
-
-
-      // 3. Meta tags: Open Graph y Twitter
-      const metaTags = [
-        { property: 'og:title', content: `${post.title} | Blog de Desarrollo Web` },
-        { property: 'og:description', content: post.excerpt || post.title },
-        { property: 'og:image', content: post.image || 'https://www.jovamnamedina.com/og-image-tech.png' },
-        { property: 'og:type', content: 'article' },
-        { property: 'og:url', content: `https://www.jovamnamedina.com/blog/post/${post.slug}` },
-
-        { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: `${post.title} | Jovamna Medina` },
-        { name: 'twitter:description', content: post.excerpt || post.title },
-        { name: 'twitter:image', content: post.image },
-        { name: 'twitter:label1', content: 'Tech Stack' },
-        { name: 'twitter:data1', content: 'Django, React, Redux, PostgreSQL' }
-      ];
-
-
-
-
-
-      metaTags.forEach(({ property, name, content }) => {
-      const selector = property
-        ? `meta[property="${property}"]`
-        : `meta[name="${name}"]`;
-
-      let tag = document.querySelector(selector);
-      if (!tag) {
-        tag = document.createElement("meta");
-        if (property) tag.setAttribute("property", property);
-        if (name) tag.setAttribute("name", name);
-        document.head.appendChild(tag);
-      }
-      tag.content = content;
+      element.content = tag.content;
     });
 
-      // 4. JSON-LD (Esto le fascina a Google)
+     // 4. JSON-LD (Esto le fascina a Google)
       let scriptJsonLd = document.querySelector('script[data-schema="blog-post"]');
       if (!scriptJsonLd) {
         scriptJsonLd = document.createElement('script');
@@ -140,25 +164,26 @@ useEffect(() => {
           name: 'Jovamna Medina Dev',
           logo: {
             '@type': 'ImageObject',
-             url: 'https://www.jovamnamedina.com/logo.png'
+             url: 'https://jovamnamedina.com/logo.png'
             }
           },
           mainEntityOfPage: {
             '@type': 'WebPage',
-            '@id': `https://www.jovamnamedina.com/blog/post/${post.slug}`
+            '@id': `https://jovamnamedina.com/blog/post/${post.slug}`
           },
           keywords: post.category?.name,
           articleBody: post.content
         });
 
 
-    
-    }
-  }, [post]);
+
+
+
+  }
+}, [post]); // Recuerda añadir [post] como dependencia si no lo tenías para que se ejecute al cambiar de artículo
 
 
 {/**FIN SEO */}
-
 
 
 
@@ -257,7 +282,6 @@ useEffect(() => {
 
 
 
-
      
 
     return(
@@ -337,13 +361,15 @@ useEffect(() => {
           [&_th]:bg-neutral-100 [&_th]:p-3 [&_th]:border [&_th]:border-neutral-200 [&_th]:font-semibold
           [&_td]:p-3 [&_td]:border [&_td]:border-neutral-200
           [&_li]:mt-2 [&_li]:text-zinc-900 
-          [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-neutral-900 [&_h2]:mt-8 [&_h2]:mb-4 [&_h2]:tracking-tight
-          [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-black [&_h3]:mt-6 [&_h3]:mb-3 [&_h3]:tracking-wide
+          [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-neutral-900 [&_h2]:mt-8 [&_h2]:mb-2 [&_h2]:tracking-tight
+          [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-black [&_h3]:mt-6 [&_h3]:mb-3 [&_h3]:tracking-wide
           [&_h4]:text-xl [&_h4]:font-semibold [&_h4]:text-purple-800 [&_h4]:mt-6 [&_h4]:mb-3 [&_h4]:tracking-wide
-          [&_h2]:mt-2 [&_h2]:font-bold [&_h2]:mb-2
+          [&_h5]:mt-2 [&_h5]:font-semibold [&_h5]:mb-2 [&_h5]:text-fuchsia-400
           [&_ul]:mt-2 [&_ul]:mb-4
           [&_ol]:mb-4
           [&_strong]:text-black [&_strong]:font-bold
+          [&_pre]:bg-neutral-900 [&_pre]:text-neutral-100 [&_pre]:p-4 [&_pre]:rounded-xl [&_pre]:my-6 [&_pre]:overflow-x-auto [&_pre]:font-mono [&_pre]:text-sm [&_pre]:leading-relaxed [&_pre]:shadow-sm
+          [&_code]:font-mono [&_code]:bg-neutral-100 [&_code]:text-purple-700 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-[0.9em] [&_pre_code]:bg-transparent [&_pre_code]:text-neutral-100 [&_pre_code]:p-0
           "
             >
              {quitarEtiquetasHTML(post.description)}
@@ -365,13 +391,15 @@ useEffect(() => {
           [&_th]:bg-neutral-100 [&_th]:p-3 [&_th]:border [&_th]:border-neutral-200 [&_th]:font-semibold
           [&_td]:p-3 [&_td]:border [&_td]:border-neutral-200
           [&_li]:mt-2 [&_li]:text-zinc-900 
-          [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-neutral-900 [&_h2]:mt-8 [&_h2]:mb-4 [&_h2]:tracking-tight
-          [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-black [&_h3]:mt-6 [&_h3]:mb-3 [&_h3]:tracking-wide
+          [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-neutral-900 [&_h2]:mt-8 [&_h2]:mb-2 [&_h2]:tracking-tight
+          [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-black [&_h3]:mt-6 [&_h3]:mb-3 [&_h3]:tracking-wide
           [&_h4]:text-xl [&_h4]:font-semibold [&_h4]:text-purple-800 [&_h4]:mt-6 [&_h4]:mb-3 [&_h4]:tracking-wide
-          [&_h2]:mt-2 [&_h2]:font-bold [&_h2]:mb-2
+          [&_h5]:mt-2 [&_h5]:font-semibold [&_h5]:mb-2 [&_h5]:text-fuchsia-400
           [&_ul]:mt-2 [&_ul]:mb-4
           [&_ol]:mb-4
           [&_strong]:text-black [&_strong]:font-bold
+          [&_pre]:bg-neutral-900 [&_pre]:text-neutral-100 [&_pre]:p-4 [&_pre]:rounded-xl [&_pre]:my-6 [&_pre]:overflow-x-auto [&_pre]:font-mono [&_pre]:text-sm [&_pre]:leading-relaxed [&_pre]:shadow-sm
+          [&_code]:font-mono [&_code]:bg-neutral-100 [&_code]:text-purple-700 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-[0.9em] [&_pre_code]:bg-transparent [&_pre_code]:text-neutral-100 [&_pre_code]:p-0
           "
               dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.narrative) }}
            />
@@ -405,13 +433,15 @@ useEffect(() => {
           [&_th]:bg-neutral-100 [&_th]:p-3 [&_th]:border [&_th]:border-neutral-200 [&_th]:font-semibold
           [&_td]:p-3 [&_td]:border [&_td]:border-neutral-200
           [&_li]:mt-2 [&_li]:text-zinc-900 
-          [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-neutral-900 [&_h2]:mt-8 [&_h2]:mb-4 [&_h2]:tracking-tight
-          [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-black [&_h3]:mt-6 [&_h3]:mb-3 [&_h3]:tracking-wide
+          [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-neutral-900 [&_h2]:mt-8 [&_h2]:mb-2 [&_h2]:tracking-tight
+          [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-black [&_h3]:mt-6 [&_h3]:mb-3 [&_h3]:tracking-wide
           [&_h4]:text-xl [&_h4]:font-semibold [&_h4]:text-purple-800 [&_h4]:mt-6 [&_h4]:mb-3 [&_h4]:tracking-wide
-          [&_h2]:mt-2 [&_h2]:font-bold [&_h2]:mb-2
+          [&_h5]:mt-2 [&_h5]:font-semibold [&_h5]:mb-2 [&_h5]:text-fuchsia-400
           [&_ul]:mt-2 [&_ul]:mb-4
           [&_ol]:mb-4
           [&_strong]:text-black [&_strong]:font-bold
+          [&_pre]:bg-neutral-900 [&_pre]:text-neutral-100 [&_pre]:p-4 [&_pre]:rounded-xl [&_pre]:my-6 [&_pre]:overflow-x-auto [&_pre]:font-mono [&_pre]:text-sm [&_pre]:leading-relaxed [&_pre]:shadow-sm
+          [&_code]:font-mono [&_code]:bg-neutral-100 [&_code]:text-purple-700 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-[0.9em] [&_pre_code]:bg-transparent [&_pre_code]:text-neutral-100 [&_pre_code]:p-0
           "
         dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
       />
@@ -445,15 +475,54 @@ useEffect(() => {
 
 
 
-              {/*CATEGORIA*/}
-              <p className="block text-xs font-mono text-orange-400 text-center my-[50px] font-bold tracking-wide uppercase">
-              {post.category.name}
-              </p>
+              
+          
+          
+               {/* Bloque de compartir emocional */}
+           
+        
+            
+             <div> 
+  {post?.title && (
+    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-zinc-50 rounded-xl p-4 border border-zinc-100 my-6">
+      <div className="flex flex-col">
+        <p className="text-sm font-semibold text-neutral-800 text-center sm:text-left">
+          ¿Te ha servido este artículo?
+        </p>
+        <p className="text-xs text-neutral-500 text-center sm:text-left mt-0.5">
+          Compártelo con otros desarrolladores y ayuda a crecer a la comunidad tech.
+        </p>
+      </div>
+
+      {/* Tu botón corregido y optimizado */}
+      <ShareButton 
+        title={`${post.title} | Blog Jovamna Medina`} 
+        text={`Te recomiendo este artículo sobre desarrollo web: "${post.title}"`} 
+        url={`https://jovamnamedina.com/blog/post/${post.slug}`} 
+      />
+    </div>
+  )}
+</div>
+
+
 
           
+              {/**SOLO CATEGORIA */}
+              {/*CATEGORIA*/}
+              <div className="">
+                <p className="block text-xs font-mono text-orange-400 my-[10px] font-bold tracking-wide uppercase">
+              {post.category.name}
+              </p>
+              </div>
+              
+
+
+              {/**FIN CATEGGORIA */}
+
                      
+                <div className="border-t border-gray-200 my-6" />
                      {/*AUHOR Y FECHA border-t-2 border-zinc-200*/}
-               <div className='flex flex-row w-[100%] py-4 mx-auto bg-neutral-100'>
+               <div className='flex flex-row w-[100%] py-4 mx-auto '>
                <div className='flex flex-row w-[68%] items-center '>
                   <img 
                   src={enviarlo}
@@ -471,8 +540,17 @@ useEffect(() => {
                   </p> 
 
                    </div>
-                   
+             
+
+
+
+
+
+                 
                </div>
+
+
+
  
 
 
@@ -499,6 +577,10 @@ useEffect(() => {
 
 
 
+
+
+
+
                </div>
 
            
@@ -510,12 +592,28 @@ useEffect(() => {
 
 
            {/*REVIEWS */}
-           <div className=" ">
-            <FormReview/>
+      
+    
+         <div className=" ">
+           <FormReview postSlug={postSlug} />
+         </div>
+
+
+
+
+
+           <div>
+            
            </div>
 
-             </div>
-              {/*FIN COLUMNA CENTRO */}
+
+
+
+
+        
+        
+        </div>
+        {/*FIN COLUMNA CENTRO */}
   
 
              {/*COLUMNA LATERAL */}
@@ -551,7 +649,7 @@ export default connect(mapStateToProps,{
     get_blog,
     get_reviews,
     setAlert,
-})(BlogPost)
+})(PostDetail)
 
 
 //INSTALE npm install dompurify

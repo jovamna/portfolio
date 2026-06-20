@@ -175,12 +175,12 @@ function NavbarProject({
   //CODIGO PARA LOS ICONOS DE USUARIOS ACTIVOSDASHBOARD Y LOGOUT
   const authLinks = (
   <Menu>
-      <div className='w-[13%] lg:w-[18%] flex flex-row h-[2rem]'>
+      <div className='w-[90%] lg:w-[100%] flex flex-row h-[2rem] items-center '>
    
       <Menu.Button className="hola-button flex flex-row justify-around justify-center items-center focus:outline-none w-[100%] h-[1.6rem]">
-           <span className='hola w-[70%] inline-block  text-neutral-950 font-semibold hover:text-gray-600 font-sans text-xs'>
+           <span className='hola  inline-block  text-neutral-950 font-semibold hover:text-gray-600 font-sans text-xs'>
             Hola {user && user.first_name}
-            </span> <span className="hola-bola newsletter-animation  inset-0 flex text-black  ml-[2px] mt-[4px] text-[0.5rem] text-center">
+            </span> <span className="hola-bola newsletter-animation  inset-0 flex text-black  ml-[4px] mt-[4px] text-[0.5rem] text-center">
             ⚪
             </span> 
       </Menu.Button>
@@ -483,7 +483,7 @@ const guestLinks = (
 
             
                 {/* LOGIN INICIAR SESION */}
-               <div className="lg:w-[45%] lg:h-[60px] inline-flex">
+               <div className="lg:w-[45%] lg:h-[60px] inline-flex items-center">
                   {
                 isAuthenticated ? authLinks:guestLinks
                 }

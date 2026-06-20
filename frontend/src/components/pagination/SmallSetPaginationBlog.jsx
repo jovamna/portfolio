@@ -1,107 +1,113 @@
-import { useState } from 'react';
+
 import {BellIcon} from '@heroicons/react/24/outline'
 
+import { useState, useEffect } from 'react';
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import { useSearchParams } from 'react-router-dom';
 
 
+function  SmallSetPaginationBlog({count}) {
+  const [searchParams, setSearchParams] = useSearchParams();
+ 
+  const currentPage = parseInt(searchParams.get('p') || '1', 10);
+  const [active, setActive] = useState(currentPage);
+  const listingsPerPage = 20;
 
-function SmallSetPaginationBlog({get_blog_list_page, blog_list, count}){
-  const [active, setActive] = useState(1);
-  const [listingsPerPage, setListingsPerPage] = useState(16);
-  const [currentPage, setCurrentPage] = useState(1);
+ 
+  const totalPages = Math.ceil(count / listingsPerPage);
 
-  const visitPage = (page) => {
-      // window.scrollTo(0, 0);
-      setCurrentPage(page);
-      setActive(page);
-      get_blog_list_page(page)
-  }
+  // ★★★ Sincronización clave: actualiza active cuando cambia la URL ★★★
+  useEffect(() => {
+    const pageFromUrl = parseInt(searchParams.get('p') || '1', 10);
+    setActive(pageFromUrl);
+    console.log('Sincronizando active → página desde URL:', pageFromUrl);
+  }, [searchParams]);
 
-  const previous_number = () => {
-    // window.scrollTo(0, 0);
-      if (currentPage !== 1) {
-          setCurrentPage(currentPage-1);
-          setActive(currentPage-1);
-          get_blog_list_page(currentPage-1)
-      }
+
+  const changePage = (newPage) => {
+    if (newPage < 1 || newPage > totalPages) return;
+    //setActive(newPage);
+    setSearchParams({ p: newPage.toString() });
+    //window.scrollTo(0, 0);
+    // NO fetch aquí – ya lo hace el componente padre
   };
 
-  const next_number = () => {window.scrollTo(0, 0);
-    if (currentPage !== Math.ceil(count / listingsPerPage)) {
-        setCurrentPage(currentPage+1);
-        setActive(currentPage+1);
-        get_blog_list_page(currentPage+1)
-    }
-  };
+ 
 
-  let numbers = [];
+  const previous_number = () => changePage(currentPage - 1);
+  const next_number = () => changePage(currentPage + 1);
+  const visitPage = (page) => changePage(page);
+
+  
+
 
   const getNumbers = () => {
-    let itemsPerPage = listingsPerPage;
+    const pages = [];
     let pageNumber = 1;
 
-    for (let i = 0; i < count; i += itemsPerPage) {
+    for (let i = 0; i < count; i += listingsPerPage) {
       const page = pageNumber;
-      let content = null;
 
-      if (active === page) {
-        content = (
-            <div key={i} className={`hidden md:-mt-px md:flex`}>
-                <div className="border-indigo-500 text-indigo-600 border-t-2 pt-4 px-4 inline-flex items-center text-sm font-medium">
-                {pageNumber}
-                </div>
+      const content =
+        active === page ? (
+          <div key={i} className="hidden md:-mt-px md:flex">
+            <div className="border-indigo-500 text-indigo-600 border-t-2 pt-4 px-4 inline-flex items-center text-sm font-medium">
+              {pageNumber}
             </div>
-        );
-      }
-      else {
-        content = (
-            <div key={i} onClick={() => {
-              visitPage(page)
-              }} className={`hidden md:-mt-px md:flex`}>
-              <div className="cursor-pointer border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-t-2 pt-4 px-4 inline-flex items-center text-sm font-medium">
-                {pageNumber}
-              </div>
+          </div>
+        ) : (
+          <div key={i} onClick={() => visitPage(page)} className="hidden md:-mt-px md:flex">
+            <div className="cursor-pointer border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-t-2 pt-4 px-4 inline-flex items-center text-sm font-medium">
+              {pageNumber}
             </div>
+          </div>
         );
-      }
 
-      numbers.push(
-        content
-      );
+      pages.push(content);
       pageNumber++;
     }
 
-    return numbers;
-  }
+    console.log('📑 Total páginas generadas:', pages.length);
+    return pages;
+  };
 
-  return(
-    
-      <nav className="border-t border-gray-200 px-4 flex items-center justify-between sm:px-0 mt-24">
-        
+  const pageButtons = getNumbers();
+
+  return (
+    <nav className="border-t border-gray-200 px-4 mt-[18px] flex items-center justify-between sm:px-0">
+      {/* Botón anterior */}
+      {currentPage !== 1 ? (
         <div className="-mt-px w-0 flex-1 flex">
-      
           <button
-            onClick={()=>{previous_number()}}
-            className="border-t-2 border-transparent pt-4 pr-1 inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300"
+            onClick={previous_number}
+            className="cursor-pointer pr-1 inline-flex items-center text-sm font-medium text-gray-600 hover:text-gray-700 hover:border-gray-300"
           >
-                 <BellIcon className="mr-3 h-5 w-5 text-gray-400" aria-hidden="true" />
+            <FaArrowLeft className="mr-3 h-5 w-5 text-gray-500" aria-hidden="true" />
             Previous
           </button>
         </div>
+      ) : (
+        <div className="-mt-px w-0 flex-1 flex" />
+      )}
 
-        {getNumbers()}
+      {/* Números de página */}
+      {pageButtons}
 
+      {/* Botón siguiente */}
+      {pageButtons.length === 0 || currentPage === totalPages ? (
+        <div className="-mt-px w-0 flex-1 flex justify-end" />
+      ) : (
         <div className="-mt-px w-0 flex-1 flex justify-end">
           <button
-            onClick={()=>{next_number()}}
-            className="border-t-2 border-transparent pt-4 pl-1 inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300"
+            onClick={next_number}
+            className="pl-1 inline-flex items-center text-sm font-medium text-gray-600 hover:text-gray-700 hover:border-gray-300"
           >
             Next
-            <BellIcon className="mr-3 h-5 w-5 text-gray-400" aria-hidden="true" />
+            <FaArrowRight className="ml-3 h-5 w-5 text-gray-500" aria-hidden="true" />
           </button>
         </div>
-
-      </nav>
-  )
+      )}
+    </nav>
+  );
 }
-
-export default SmallSetPaginationBlog
+export default SmallSetPaginationBlog;

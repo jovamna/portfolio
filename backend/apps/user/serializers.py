@@ -3,7 +3,11 @@ from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 from apps.user.models  import User
 from django.utils.translation import gettext as _
+from django.contrib.auth import authenticate
 
+from rest_framework import serializers
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 
 #para crear usuarios
@@ -151,4 +155,31 @@ class SetPasswordSerializer(serializers.Serializer):
 
         return data
 
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
+    def validate(self, attrs):
+        email = attrs.get("email")
+        password = attrs.get("password")
+
+        if not email or not password:
+            raise serializers.ValidationError("Email y password son requeridos")
+
+        # 🔥 clave importante: Django usa username internamente
+        user = authenticate(username=email, password=password)
+
+        if not user:
+            raise serializers.ValidationError("Credenciales incorrectas")
+
+        if not user.is_active:
+            raise serializers.ValidationError("Usuario desactivado")
+
+        # generar tokens correctamente
+        data = super().validate({
+            "username": user.username,
+            "password": password
+        })
+
+        data["email"] = user.email
+        data["msg"] = "Login correcto"
+
+        return data

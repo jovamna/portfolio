@@ -16,7 +16,8 @@ import {
 
 const initialState = {
     review: null,
-    reviews: null
+    reviews: [],  // ✅ Cambiado de null a []
+    totalReviews: 0,  // ✅ Agregado
 };
 
 export default function Reviews(state = initialState, action) {
@@ -24,73 +25,73 @@ export default function Reviews(state = initialState, action) {
 
     switch(type) {
         case GET_REVIEWS_SUCCESS:
+            console.log("📦 REDUCER - GET_REVIEWS_SUCCESS:", payload);
             return {
                 ...state,
-                reviews: payload.reviews
-            }
+                reviews: payload?.reviews || [],  // ✅ Siempre será array
+                totalReviews: payload?.totalReviews || 0,
+            };
         case GET_REVIEWS_FAIL:
             return {
                 ...state,
-                reviews: []
-            }
+                reviews: [],  // ✅ Array vacío
+                totalReviews: 0,
+            };
         case GET_REVIEW_SUCCESS:
-            console.log(payload)
+            console.log("📦 REDUCER - GET_REVIEW_SUCCESS:", payload);
             return {
                 ...state,
-                review: payload.review
-            }
+                review: payload?.review || null
+            };
         case GET_REVIEW_FAIL:
             return {
                 ...state,
-                review: {}
-            }
+                review: null
+            };
         case CREATE_REVIEW_SUCCESS:
             return {
                 ...state,
-                review: payload.review,
-                reviews: payload.reviews
-            }
+                review: payload?.review || null,
+                reviews: payload?.reviews || []
+            };
         case CREATE_REVIEW_FAIL:
             return {
                 ...state,
-                review: {}
-            }
+                review: null
+            };
         case UPDATE_REVIEW_SUCCESS:
-            console.log(payload)
+            console.log("📦 REDUCER - UPDATE_REVIEW_SUCCESS:", payload);
             return {
                 ...state,
-                review: payload.review,
-                reviews: payload.reviews
-            }
+                review: payload?.review || null,
+                reviews: payload?.reviews || []
+            };
         case UPDATE_REVIEW_FAIL:
             return {
                 ...state
-            }
+            };
         case DELETE_REVIEW_SUCCESS:
             const updatedReviews = state.reviews.filter(review => review.id !== payload);
-            console.log(payload)
+            console.log("📦 REDUCER - DELETE_REVIEW_SUCCESS:", payload);
             return {
                 ...state,
-                review: {},
-                reviews: updatedReviews
-            }
+                review: null,
+                reviews: updatedReviews || []
+            };
         case DELETE_REVIEW_FAIL:
             return {
                 ...state
-            }
+            };
         case FILTER_REVIEWS_SUCCESS:
-                return {
-                    ...state,
-                    reviews: payload.reviews
-                }
+            return {
+                ...state,
+                reviews: payload?.reviews || []
+            };
         case FILTER_REVIEWS_FAIL:
-                return {
-                    ...state
-                }
-       
+            return {
+                ...state
+            };
         default:
-            return state
+            return state;
     }
-
-
 }

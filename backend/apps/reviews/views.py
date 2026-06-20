@@ -61,8 +61,6 @@ class GetPostReviewsView(APIView):
             )
       
 
-    
-
 
 class GetPostReviewView(APIView):
     permission_classes = (permissions.AllowAny, )
@@ -93,38 +91,49 @@ class GetPostReviewView(APIView):
 
 
 
-
-
 class CreatePostReviewView(APIView):
     permission_classes = (IsAuthenticated,)
    
     def post(self, request, slug, format=None):
         user = self.request.user
-        #print(user)
+        
         if not user.is_authenticated:
-            raise PermissionDenied(detail="You need to be logged in to change your password.")
+            return Response(
+                {'error': 'You need to be logged in to post a review'},
+                status=status.HTTP_401_UNAUTHORIZED
+            )
 
         data = self.request.data
-        #print(data)
+        
         try:
-            hearts = data['hearts']
-            title = str(data.get('title', ''))
-            comment = str(data.get('comment', ''))
-            post = get_object_or_404(Post, slug=slug)  # Obtener la instancia de Recipe por el slug
-            #title = str(data['title'])
-            #comment = str(data['comment'])
-            #serializer = PostSerializer(post)  # Utiliza 
-
-           # max_title_length = 90
-            #max_comment_length = 1000
-
-            #if len(title) > max_title_length or len(comment) > max_comment_length:
-                #error_message = "El título o el comentario exceden el límite de caracteres permitidos."
-                #return Response({'error': error_message}, status=status.HTTP_400_BAD_REQUEST)
-
+            hearts = data.get('hearts', 0)
+            title = str(data.get('title', '')).strip()
+            comment = str(data.get('comment', '')).strip()
+            
+            if not comment and not title:
+                return Response(
+                    {'error': 'Title or comment is required'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            
+            if len(title) > 90:
+                return Response(
+                    {'error': 'Title cannot exceed 90 characters'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            
+            if len(comment) > 1000:
+                return Response(
+                    {'error': 'Comment cannot exceed 1000 characters'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            
+            post = get_object_or_404(Post, slug=slug)
+            
+            # ✅ SIEMPRE CREAR NUEVO REVIEW
             review = Review.objects.create(
                 user=user,
-                post=post,  # Asignar la instancia de Recipe al campo recipe
+                post=post,
                 hearts=hearts,
                 title=title,
                 comment=comment
@@ -134,16 +143,24 @@ class CreatePostReviewView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         except KeyError as e:
-            return Response({'error': f'Missing key: {str(e)}'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {'error': f'Missing key: {str(e)}'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
         except Post.DoesNotExist:
-            return Response({'error': 'This post does not exist'}, status=status.HTTP_404_NOT_FOUND)
+            return Response(
+                {'error': 'This post does not exist'},
+                status=status.HTTP_404_NOT_FOUND
+            )
         except Exception as e:
-            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        
-
-
-
-
+            import logging
+            logger = logging.getLogger(__name__)
+            logger.error(f"Error creating review: {str(e)}")
+            
+            return Response(
+                {'error': 'An error occurred while creating the review'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
 
 class UpdatePostReviewView(APIView):
    permission_classes = (IsAuthenticated,)

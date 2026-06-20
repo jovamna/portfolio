@@ -60,3 +60,6 @@ class PostListSerializer(serializers.ModelSerializer):
             'category',
             'status'
         ]
+        
+        
+        

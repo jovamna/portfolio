@@ -1,4 +1,4 @@
-from apps.category.models import Category
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -8,12 +8,16 @@ from .pagination import SmallSetPagination, MediumSetPagination
 from django.db.models import Sum
 from rest_framework.permissions import AllowAny
 from django.core.cache import cache
-from django.shortcuts import get_object_or_404
 from .models import Post, PostViewCount
 from apps.reviews.models import  Review
 from django.core.cache import cache
 from django.db.models import Sum, F
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
+from .models import Post, PostSlugHistory
+from django.http import Http404
+from apps.category.models import Category, CategorySlugHistory
+from apps.category.serializers import CategorySerializer
+
 
 
 #Entrar al VPS
@@ -26,7 +30,7 @@ from django.shortcuts import get_object_or_404
 #4. Abrir el shell de Django
 #python manage.py shell
 #5. Ejecutar los comandos
-#from blog.models import Post, PostViewCount
+#from apps.blog.models import Post, PostViewCount
 #Luego:
 #PostViewCount.objects.all().delete()
 
@@ -61,27 +65,124 @@ class BlogListView(APIView):
             return Response({'message': 'No posts found'}, status=status.HTTP_200_OK)
 
 
+
 class BlogListCategoryView(APIView):
     authentication_classes = []  # Desactiva la autenticación
     permission_classes = [AllowAny]  # Permite el acceso a cualquier usuario
 
     def get(self, request, category_slug, format=None):
-        if Post.post_objects.all().exists():
+        # 1. PASO 1: Intentamos buscar la categoría por su slug actual (Plan A)
+        try:
+            category = Category.objects.get(slug=category_slug)
             
-            category = Category.objects.get(slug=category_slug)    
-            posts = Post.post_objects.all().filter(category=category)
-            #print(posts)
-            paginator = SmallSetPagination()
-            results = paginator.paginate_queryset(posts, request)
+        except Category.DoesNotExist:
+            # 2. PASO 2: Si no existe, buscamos en el historial de categorías (Plan B)
+            history = CategorySlugHistory.objects.filter(old_slug=category_slug).select_related('category').first()
             
-            serializer = PostListSerializer(results, many=True)
+            if history:
+                # ¡La encontramos en el historial! Le avisamos a React para que redirija a la URL nueva
+                frontend_url = f"/blog/{history.category.slug}"  # Ajusta la ruta según tu frontend
+                return Response({
+                    'redirect': True,
+                    'frontend_url': frontend_url,
+                    'new_slug': history.category.slug,
+                    'message': 'La categoría cambió de slug'
+                }, status=status.HTTP_308_PERMANENT_REDIRECT)
+            
+            # 3. PASO 3: Si tampoco está en el historial, entonces no existe de verdad
+            return Response(
+                {'error': 'La categoría no existe'}, 
+                status=status.HTTP_404_NOT_FOUND
+            )
 
-            return paginator.get_paginated_response({'posts': serializer.data})
-        else:
-            return Response({'error': 'No posts found'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        # 4. PASO 4: Si encontramos la categoría (Plan A), filtramos sus posts
+        posts = Post.post_objects.filter(category=category)
+        
+        # Si no hay posts, simplemente devolvemos la lista vacía de forma elegante (sin romper el servidor)
+        if not posts.exists():
+            return Response({'posts': [], 'message': 'No hay posts en esta categoría'}, status=status.HTTP_200_OK)
 
+        # Paginación y serialización normal
+        paginator = SmallSetPagination()
+        results = paginator.paginate_queryset(posts, request)
+        serializer = PostListSerializer(results, many=True)
 
+        return paginator.get_paginated_response({'posts': serializer.data})
+    
+class BlogListSubcategoryView(APIView):
+    authentication_classes = []
+    permission_classes = [AllowAny]
 
+    def get(self, request, category_slug, subcategory_slug, format=None):
+        slugs_to_check = [category_slug, subcategory_slug]
+        redirect_slugs = {}
+        need_redirect = False
+
+        # =========================================================================
+        # PASO 1: VALIDAR TODOS LOS SLUGS EN EL HISTORIAL
+        # =========================================================================
+        for slug in slugs_to_check:
+            try:
+                Category.objects.get(slug=slug)
+                redirect_slugs[slug] = slug
+            except Category.DoesNotExist:
+                history = CategorySlugHistory.objects.filter(old_slug=slug).select_related('category').first()
+                
+                if history:
+                    redirect_slugs[slug] = history.category.slug
+                    need_redirect = True
+                else:
+                    return Response(
+                        {'error': f"El slug '{slug}' no existe en el sistema"}, 
+                        status=status.HTTP_404_NOT_FOUND
+                    )
+
+        # =========================================================================
+        # PASO 2: REDIRECT SI ES NECESARIO
+        # =========================================================================
+        if need_redirect:
+            new_category_slug = redirect_slugs.get(category_slug)
+            new_subcategory_slug = redirect_slugs.get(subcategory_slug)
+            
+            # Construcción correcta de la URL
+            frontend_url = f"/blog/{new_category_slug}/{new_subcategory_slug}/"
+            
+            return Response({
+                'redirect': True,
+                'frontend_url': frontend_url,
+                'new_slugs': [new_category_slug, new_subcategory_slug],
+                'message': 'La categoría o subcategoría cambió de slug'
+            }, status=status.HTTP_308_PERMANENT_REDIRECT)
+
+        # =========================================================================
+        # PASO 3: TODO CORRECTO → LÓGICA NORMAL
+        # =========================================================================
+        category = Category.objects.get(slug=category_slug)
+        subcategory = category.children.get(slug=subcategory_slug)
+
+        try:
+            all_subcategories = [subcategory] + list(subcategory.get_all_descendants())
+        except AttributeError:
+            all_subcategories = [subcategory]
+
+        queryset = Post.post_objects.select_related('category').filter(category__in=all_subcategories)
+
+        paginator = SmallSetPagination()
+        results = paginator.paginate_queryset(queryset, request)
+
+        serialized_data = []
+        if results is not None:
+            for p in results:
+                data = PostListSerializer(p).data
+                data['type'] = 'digital'
+                serialized_data.append(data)
+
+        return paginator.get_paginated_response({
+            'category': CategorySerializer(category).data,
+            'subcategory': CategorySerializer(subcategory).data,
+            'posts': serialized_data
+        })    
+    
 
 class PostDetailView(APIView):
     authentication_classes = []
@@ -170,82 +271,40 @@ class PostDetailView(APIView):
         return data
 
     def get(self, request, post_slug, format=None):
-
         ip = self.get_client_ip(request)
 
-        post = get_object_or_404(
-            Post,
-            slug=post_slug
-        )
+        try:
+            post = Post.objects.get(slug=post_slug)
+            self.register_view(post=post, ip=ip)
+            post.refresh_from_db(fields=["views"])
+            data = self.get_post_data(post)
+            data["views"] = post.views
+            return Response(data, status=status.HTTP_200_OK)
 
-        self.register_view(
-            post=post,
-            ip=ip
-        )
+        except Post.DoesNotExist:
+            # Buscar en historial de slugs antiguos
+            history = PostSlugHistory.objects.filter(old_slug=post_slug).select_related('post').first()
         
-        post.refresh_from_db(fields=["views"])
-
-        data = self.get_post_data(post)
-  
-        # Actualizamos el contador de vistas para que siempre
-        # refleje el valor real de la base de datos.
-        data["views"] = post.views
-
-        return Response(
-            data,
-            status=status.HTTP_200_OK
-        )
-        
-        
-        
-        
-        
-
-class originalPostDetailView(APIView):
-    authentication_classes = []  # Desactiva autenticación
-    permission_classes = [AllowAny]  # Permite acceso a cualquiera
-
-    CACHE_TIMEOUT = 60 * 15  # 15 minutos
-
-    def get(self, request, post_slug, format=None):
-        cache_key = f'post_{post_slug}'  # clave única para caché
-        cached_response = cache.get(cache_key)
-
-        if cached_response:
-            # Devuelve la respuesta cacheada
-            return Response(cached_response, status=status.HTTP_200_OK)
-
-        # Si no está en caché, buscamos en la DB
-        post = get_object_or_404(Post, slug=post_slug)
-
-        # Calcula total de hearts
-        total_hearts = Review.objects.filter(post=post).aggregate(
-            total_hearts=Sum('hearts')
-        )['total_hearts'] or 0
-
-        serializer = PostSerializer(post)
-        serialized_data = serializer.data
-        serialized_data['total_hearts'] = total_hearts
-
-        # Contar views por IP
-        ip = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR')).split(',')[-1].strip()
-        if not PostViewCount.objects.filter(post=post, ip_address=ip).exists():
-            PostViewCount.objects.create(post=post, ip_address=ip)
-            post.views += 1
-            post.save(update_fields=['views'])
-
-        #response_data = {'post': serialized_data}
-        response_data = serialized_data
-
-        # Guardar la respuesta en caché
-        cache.set(cache_key, response_data, self.CACHE_TIMEOUT)
-
-        return Response(response_data, status=status.HTTP_200_OK)
-    
+            if history:
+                # ✅ USAR 308 PARA REDIRECCIÓN (más semántico)
+                frontend_url = f"/blog/post/{history.post.slug}"
+                return Response({
+                    'redirect': True,
+                    'frontend_url': frontend_url,
+                    'new_slugs': [history.post.slug],
+                    'message': 'El artículo cambió de slug'
+                }, status=status.HTTP_308_PERMANENT_REDIRECT)  # ← CAMBIO IMPORTANTE
+            
+            # 404 real
+            return Response(
+                {'error': 'El artículo no existe'}, 
+                status=status.HTTP_404_NOT_FOUND
+            )
 
 
 
-    
+
+
 
 class SearchBlogView(APIView):
     authentication_classes = []  # Desactiva la autenticación

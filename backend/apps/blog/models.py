@@ -3,6 +3,7 @@ import uuid
 from django.utils import timezone
 from apps.category.models import Category
 #from apps.chatbot.models import ChatMessage
+from django.utils.text import slugify
 from tinymce.models import HTMLField  # Asegúrate de que tienes tinymce instalado
 import os
 from django.dispatch import receiver
@@ -28,7 +29,7 @@ class Post(models.Model):
 
     blog_uuid = models.UUIDField(default=uuid.uuid4, unique=True)
     title = models.CharField(max_length=90)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
     excerpt = models.CharField(max_length=140, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     thumbnail = models.ImageField(upload_to=blog_directory_path, blank=True, null=True)
@@ -80,13 +81,43 @@ class Post(models.Model):
             view_count=Count('post_view_count')  # Usamos Count sobre el related_name
             ).order_by('-view_count')
     
-    #@staticmethod
-    #def get_popular_posts():
-        #return Post.objects.filter(status='published').annotate(view_count=PostViewCount('post_view_count')).order_by('-view_count')
-    
+
     @staticmethod
     def popular_posts(num_posts):
         return Post.objects.filter(status='published').order_by('-views')[:num_posts]
+    
+    # NUEVO MÉTODO SAVE PARA AUTOGENERAR SLUG Y GUARDAR HISTORIAL 301
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+
+        if self.pk:
+            try:
+                old_instance = Post.objects.only('slug').get(pk=self.pk)
+                if old_instance.slug and old_instance.slug != self.slug:
+                    PostSlugHistory.objects.create(
+                        post=self,
+                        old_slug=old_instance.slug
+                    )
+            except Post.DoesNotExist:
+                pass
+
+        super().save(*args, **kwargs)
+        
+class PostSlugHistory(models.Model):
+    post = models.ForeignKey('Post', on_delete=models.CASCADE, related_name='post_slug_histories')
+    old_slug = models.SlugField(max_length=255, db_index=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = "Historial de slugs - Blog"
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.old_slug} → {self.post.slug}"       
+    
+    
+     
     
     
 # 1) Borrar archivo cuando se borra un Post
@@ -118,9 +149,6 @@ def auto_delete_old_file_on_change(sender, instance, **kwargs):
         if old_file and old_file != new_file:
             if os.path.isfile(old_file.path):
                 os.remove(old_file.path)
-
-
-    
 
 
     

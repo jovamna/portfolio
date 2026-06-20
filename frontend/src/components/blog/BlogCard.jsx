@@ -4,11 +4,6 @@ import moment from "moment"
 
 
 
-function classNames(...classes){
-    return classes.filter(Boolean).join("");
-
-
-}
     const URL =
     process.env.NODE_ENV === "production"
      ? import.meta.env.VITE_REACT_API_URL
@@ -19,7 +14,7 @@ function classNames(...classes){
 
 
 //FRONTEND SOLO DE LOS POSTS LIST , EL POST DETAIL(BlogPost) ES DIFERENTE A BlogCard
-function BlogCard(data){
+function BlogCard(data, category){
     let post = data && data.data;
     console.log(post)
 
@@ -115,7 +110,7 @@ function BlogCard(data){
                               className="block px-2"
                               >
                                <h1 className="kaushan text-center font-bold 
-                               text-black dark:text-white tracking-wider 
+                               text-black tracking-wider 
                                lg:text-lg text-xs sm:text-xl  
                                md:text-center" dangerouslySetInnerHTML={{
                                    __html:
@@ -129,26 +124,30 @@ function BlogCard(data){
 
                             
                           
-                                 {/*POST LA CATEGORIA */}
-                                 <div className=" flex items-center justify-center ">
-                                     <Link 
-                                     to={`/categories/${post.category.slug}`} 
-                                     className="inline-block"
-                                     >
+                      {/*POST LA CATEGORIA */}
+                      <div className=" flex items-center justify-center ">
+                        
+                          <Link 
+                              to={post.category.parent 
+                            ? `/blog/${post.category.parent.slug}/${post.category.slug}`
+                            : `/blog/${post.category.slug}`
+                            } 
+                             className="inline-block"
+                           >
+                        <span className="badge">
+                            {post.category.parent 
+                          ? `Subcategory: ${post.category.name} (en ${post.category.parent.name})` 
+                         : `Category: ${post.category.name}`
+                         }
+                        </span>
+                        </Link>
 
-                                    
-                                      <span className="lg:text-xs text-[0.5em]">
-                                      {post.category.name}
-                                      </span>
-
-                                      </Link>
-                                 </div>
-
+                         </div>
 
             
                                  {/*POST EXCERPT   PADDING IZQ Y DERECH px-4 PADDING BOTTOM pb-4*/}
                                  <Link 
-                                 to={`/blog/post/${post.slug}`} 
+                                 to={`/blog/${post.slug}`} 
                                  className="block"
                                  >
                                  <p

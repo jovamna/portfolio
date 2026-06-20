@@ -186,11 +186,76 @@ export const load_user = () => async dispatch => {
 
 
 
+// actions/auth.js
+// actions/auth.js - login
+export const login = (email, password) => async dispatch => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+  
+    const body = JSON.stringify({ email, password });
+  
+    try {
+      console.log('URL utilizada:', `${URL}/api/user/login/`); // Depuración
+      const res = await axios.post(`${URL}/api/user/login/`, body, config);
+      console.log('Respuesta del backend:', res.data); // <--- Agrega esto
+  
+      if (res.status === 200) {
+        const { access, refresh } = res.data;
+        localStorage.setItem('access', access);
+        localStorage.setItem('refresh', refresh);
+  
+        dispatch({
+          type: LOGIN_SUCCESS,
+          payload: res.data
+        });
+  
+        dispatch(load_user()); 
+        dispatch({
+          type: REMOVE_AUTH_LOADING
+        });
+        // Limpiar el formulario
+        //setFormData({ email: '', password1: '' });
+      }
+      
 
+    } catch (err) {
+      const status = err.response ? err.response.status : null;
+      const errorMessage = err.response && err.response.data && err.response.data.msg
+        ? err.response.data.msg
+        : 'Error al iniciar sesión';
+  
+      if (status === 404) {
+        dispatch({
+          type: LOGIN_FAIL,
+          payload: 'Usuario no registrado'
+        });
+      } else if (status === 401) {
+        dispatch({
+          type: LOGIN_FAIL,
+          payload: 'Credenciales incorrectas'
+        });
+    
+      } else {
+        dispatch({
+          type: LOGIN_FAIL,
+          payload: errorMessage
+        });
+      }
+  
+      dispatch({
+        type: REMOVE_AUTH_LOADING
+      });
+    }
+  };
+  
 
-
-
-
+// auth.js (o donde tengas las actions)
+export const clearError = () => ({
+    type: 'CLEAR_ERROR'
+});
 
 
 
@@ -198,7 +263,7 @@ export const load_user = () => async dispatch => {
 //SE AUTHENTIFICO E USUARIO, ESTA FUNCION DEBE IR INMEDIATAMENTE 
 //DEBAJO DEL DISPATCH LOGIN_SUCCESS
 //LOGIN  http://127.0.0.1:8000/auth/jwt/create/
-export const login = (email, password) => async dispatch => {
+export const ORIGINALlogin = (email, password) => async dispatch => {
     dispatch ({
         type: SET_AUTH_LOADING
     });
@@ -236,9 +301,7 @@ export const login = (email, password) => async dispatch => {
             dispatch({
                 type:REMOVE_AUTH_LOADING
            });
-           dispatch(setAlert('Inicio de sesión exitoso','green'));
-           
-          
+           dispatch(setAlert('Inicio de sesión exitoso','green'));  
         } else {
             dispatch({
                 type:LOGIN_FAIL

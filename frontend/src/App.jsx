@@ -1,13 +1,14 @@
 import Home from './containers/pages/Home';
-import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import store from './store';
 import { Provider } from 'react-redux';
 import Error404 from './containers/errors/Error404';
 import MyProject from './containers/pages/myproject/MyProject';
 import ProjectPost from './containers/pages/myproject/ProjectPost';
 import Blog from './containers/pages/blog/Blog';
-import BlogPost from './containers/pages/blog/BlogPost';
+import PostDetail from './containers/pages/blog/PostDetail';
 import BlogCategory from './containers/pages/blog/posts-por-category/BlogCategory';
+import BlogSubCategory from './containers/pages/blog/posts-por-category/BlogSubCategory';
 import Search from './containers/pages/blog/search/Search'
 import PoliticaCookies from './containers/pages/PoliticaCookies'
 import Signup from './containers/auth/Signup';
@@ -15,8 +16,7 @@ import Login from './containers/auth/Login';
 import Dashboard from './containers/auth/Dashboard';
 import SmoothScrollbar from './components/SmoothScrollbar';
 import "./styles/index.css";
-
-import { useEffect, useState } from 'react';
+import {useEffect, useState, lazy, Suspense } from 'react';
 import Logo from './containers/inicio/Logo';
 import Escandallo from './containers/pages/Escandallo';
 import Luz from './containers/pages/Luz';
@@ -124,9 +124,11 @@ function App() {
         <Route path="/tarifa-luz" element={<Luz/>} />
         <Route path="/search/:term" element={<Search />} />
    
-   
-        <Route path="/blog/post/:slug" element={<BlogPost/>} />
-        <Route path="/categories/:categorySlug" element={<BlogCategory/>} />
+        <Route path="/blog/post/:postSlug" element={<PostDetail/>} />
+     
+        <Route path="/blog/:categorySlug" element={<BlogCategory/>} />
+        <Route path="/blog/:categorySlug/:subcategorySlug" element={<BlogSubCategory/>} />
+
       
         <Route path="/politica-cookies" element={<PoliticaCookies />} />
         {/*NO HAY RUTA PARA LAS CATEGORIAS, NO ES NECESARIO */}

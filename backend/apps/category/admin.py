@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category
+from .models import Category, CategorySlugHistory
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ("id", "indented_name", "parent", "slug", "views")
@@ -17,3 +17,10 @@ class CategoryAdmin(admin.ModelAdmin):
     indented_name.short_description = "Category"
 
 admin.site.register(Category, CategoryAdmin)
+
+
+@admin.register(CategorySlugHistory)
+class CategorySlugHistoryAdmin(admin.ModelAdmin):
+    # Esto es opcional, pero hace que la tabla se vea súper bonita y ordenada en el panel
+    list_display = ('old_slug',  'created_at')
+    search_fields = ('old_slug',)

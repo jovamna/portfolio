@@ -24,6 +24,7 @@ const initialState = {
     isAuthenticated: localStorage.getItem('access') ? true : false, 
     user: null,
     loading: false,
+    error:null,
 }
 
 export default function Auth(state = initialState, action){
@@ -72,19 +73,28 @@ export default function Auth(state = initialState, action){
                 }
 
         case LOGIN_SUCCESS:
-            localStorage.setItem('access', payload.access); //payload.token es porque al hacer postamn del login la respuesta da token  y no access y payload viene de login actions
-            //localStorage.setItem('refresh', payload.refresh);
+            localStorage.setItem('access', payload.access);
             localStorage.setItem('refresh', payload.refresh);
-            
+    
             return {
                 ...state,
                 isAuthenticated: true,
-                access: localStorage.getItem('access'),
-                refresh: localStorage.getItem('refresh')
-             //   access: payload.access,
-             //   refresh: payload.refresh
-            
-            }
+                access: payload.access,
+                refresh: payload.refresh,
+                loading: false,
+                error: null   // ← solo aquí limpiamos error
+            };
+
+        case LOGIN_FAIL:
+            return {
+                ...state,
+                isAuthenticated: false,
+                access: null,
+                refresh: null,
+                user: null,
+                loading: false,
+                error: payload   // ← ¡¡ESTO ERA EL PROBLEMA!!
+            };
 
         case RESET_PASSWORD_SUCCESS:
         case RESET_PASSWORD_FAIL:
@@ -113,6 +123,8 @@ export default function Auth(state = initialState, action){
                     refresh:null,
                     isAuthenticated: false,
                     user: null,
+                    loading:false,
+                    error:null,
                 }
         case LOGOUT_FAIL:
                 return {
@@ -121,7 +133,16 @@ export default function Auth(state = initialState, action){
                       // Por ejemplo, puedes mostrar una alerta de error
                 };
               
-            
+        //case CLEAR_AUTH_ERROR:
+         //   return {
+         //       ...state,
+        //        error: null,
+        //    };
+        case 'CLEAR_ERROR':
+            return {
+                ...state,
+                 error: null
+            };    
 
         default:
             return state
