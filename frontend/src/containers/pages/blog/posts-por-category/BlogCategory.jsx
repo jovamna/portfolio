@@ -212,14 +212,13 @@ function BlogCategory({
                 <div className="mx-auto mb-[30px] lg:mb-[40px] 2xl:mb-[40px]">
                     <h1 className="kaushan 
                      underline underline-offset-8  
-                     lg:text-4xl text-3xl 
+                     lg:text-4xl text-xl 
                      font-bold text-center tracking-tight text-neutral-800 
                     sm:text-4xl  md:text-center
                      ">
-                        Artículos sobre: <span className="inline-flex">
-                            <h1 className="underline underline-offset-8">{category?.name}</h1>
-                        </span>
-                    </h1>
+                        {category?.name}</h1>
+                        
+                   
                     </div>
                   
 
@@ -229,7 +228,7 @@ function BlogCategory({
 
 
 
-              <div className="lg:px-8 ">
+                { /* <div className="lg:px-8 ">
                  {category && (
                     <div className="flex flex-row bg-neutral-50 rounded-xl py-2 border border-neutral-200">
                         <h2 className="text-xl font-bold text-neutral-800 kaushan">
@@ -256,7 +255,7 @@ function BlogCategory({
 
                     </div>
                     )}
-                  </div>
+                  </div>*/}
 
 
 
@@ -277,35 +276,12 @@ function BlogCategory({
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     <div>
                         {blog_list_category ? (
                             <>
-                                <div className="relative bg-gray-50 pb-8 px-4 sm:px-6 lg:pb-12 lg:px-8">
-                                    <div className="absolute inset-0">
-                                        <div className="bg-white h-1/3 sm:h-2/3" />
-                                    </div>
-                                    <div className="relative max-w-7xl mx-auto">
-                                        <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
+                                     <div className="relative bg-gray-50 pb-8 px-4 sm:px-6 lg:pb-12 lg:px-8">
+                    <div className="relative max-w-7xl mx-auto">    
+                        <div className="mt-2 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
                                             {blog_list_category.map((post, index) => (
                                                 <BlogCard 
                                                     key={post.slug}

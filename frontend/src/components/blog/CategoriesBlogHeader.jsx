@@ -22,7 +22,7 @@ function CategoriesBlogList ({
  
 
     return(
-      <div className="container-blog-categorias h-16  xl:px-8 py-2 mb-2">
+      <div className="container-blog-categorias h-16 xl:px-8 py-2 ">
       
       
            {/* Agregamos un contenedor para la sección de categorías */}

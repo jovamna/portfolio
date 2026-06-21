@@ -483,8 +483,8 @@ useEffect(() => {
         
             
              <div> 
-  {post?.title && (
-    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-zinc-50 rounded-xl p-4 border border-zinc-100 my-6">
+          {post?.title && (
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-zinc-50 rounded-xl p-4 border border-zinc-100 my-6">
       <div className="flex flex-col">
         <p className="text-sm font-semibold text-neutral-800 text-center sm:text-left">
           ¿Te ha servido este artículo?
@@ -501,28 +501,26 @@ useEffect(() => {
         url={`https://jovamnamedina.com/blog/post/${post.slug}`} 
       />
     </div>
-  )}
-</div>
+   )}
+  </div>
 
 
 
           
               {/**SOLO CATEGORIA */}
               {/*CATEGORIA*/}
-              <div className="">
+              <div className="px-4">
                 <p className="block text-xs font-mono text-orange-400 my-[10px] font-bold tracking-wide uppercase">
               {post.category.name}
               </p>
               </div>
               
-
-
               {/**FIN CATEGGORIA */}
 
                      
-                <div className="border-t border-gray-200 my-6" />
+                <div className="border-t border-gray-200 my-6 " />
                      {/*AUHOR Y FECHA border-t-2 border-zinc-200*/}
-               <div className='flex flex-row w-[100%] py-4 mx-auto '>
+               <div className='flex flex-row w-[100%] py-4 mx-auto px-4'>
                <div className='flex flex-row w-[68%] items-center '>
                   <img 
                   src={enviarlo}

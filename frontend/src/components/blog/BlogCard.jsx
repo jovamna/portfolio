@@ -76,20 +76,21 @@ function BlogCard(data, category){
   return null;
 };
 
-          //FIN Función para renderizar el componente de imagen o video       
-             
+          //FIN Función para renderizar el componente de imagen o video     
+          // responsive-altura-blogcard    
+             //responsive-altura-img-blog 
 
 
       return (
               <>
               {post ? (
-                     <div className="responsive-altura-blogcard  
-                     flex lg:flex-col flex-row bg-neutral-100 hover:bg-white 
+                     <div className="
+                     flex lg:flex-col flex-row  hover:bg-white 
                      hover:opacity-90 opacity-100 border-b-2 border-zinc-200 
-                     lg:py-4 py-2">
+                     lg:py-2 py-2  w-[100%]">
                      
                         {/*1 CONTAINER DE IIMAGEN O VIDEO*/}
-                        <div className=" responsive-altura-img-blog aspect-video lg:w-full w-[60%] overflow-hidden">   
+                        <div className=" aspect-video lg:w-full w-[50%] overflow-hidden">   
                            <Link 
                             to={`/blog/post/${post.slug}`} 
                             className="block">
@@ -102,64 +103,69 @@ function BlogCard(data, category){
                          {/*2 CONTAINER DE TITULO EXRCEPT LEER MAS--*/}
                          <div className=" flex flex-col relative 
                          responsive-blogcard-title-excerpt lg:w-full 
-                         w-[40%] lg:mt-[10px] ">
+                         w-[50%] lg:mt-[10px] ">
 
                               {/*POST TITULO  QUITAR SI SE QUIERE  oswald-muckas */}
-                              <Link 
-                              to={`/blog/post/${post.slug}`} 
-                              className="block px-2"
-                              >
-                               <h1 className="kaushan text-center font-bold 
-                               text-black tracking-wider 
-                               lg:text-lg text-xs sm:text-xl  
-                               md:text-center" dangerouslySetInnerHTML={{
-                                   __html:
-                                  post.excerpt && DOMPurify.sanitize(post.title.length) > 50
-                                    ? DOMPurify.sanitize(post.title.slice(0, 50)) 
-                                    : post.title && DOMPurify.sanitize(post.title),
-                                   }}>
-                               {/*post.title*/}
-                               </h1>  
-                               </Link>
+                              
+                          {/* POST TITULO (Corte inteligente con line-clamp: 2 líneas en móvil, libre en PC) */}
+                          <Link to={`/blog/post/${post.slug}`} className="block w-full">
+                             <h1 className="kaushan text-center font-bold text-black tracking-wider 
+                              lg:text-lg text-xs sm:text-xl md:text-center line-clamp-2 lg:line-clamp-none px-6" 
+                              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.title) }}>
+                            </h1>  
+                              </Link>
+
+
+                              {/* POST TITULO (Corte inteligente con line-clamp: 2 líneas en móvil, libre en PC) */}
+                        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                             
                           
                       {/*POST LA CATEGORIA */}
-                      <div className=" flex items-center justify-center ">
-                        
-                          <Link 
-                              to={post.category.parent 
-                            ? `/blog/${post.category.parent.slug}/${post.category.slug}`
-                            : `/blog/${post.category.slug}`
-                            } 
-                             className="inline-block"
-                           >
-                        <span className="badge">
-                            {post.category.parent 
-                          ? `Subcategory: ${post.category.name} (en ${post.category.parent.name})` 
-                         : `Category: ${post.category.name}`
-                         }
-                        </span>
-                        </Link>
-
-                         </div>
-
+                 
+                         {/*POST LA CATEGORIA */}
+                    <div className="flex items-center justify-center w-full px-4">
+                    <Link 
+                     to={post.category.parent 
+                     ? `/blog/${post.category.parent.slug}/${post.category.slug}`
+                     : `/blog/${post.category.slug}`
+                      } 
+                    className="block w-full max-w-full text-center">
+                   <span className="badge block w-full truncate text-[10px] sm:text-xs px-1 text-center">
+                   {post.category.parent 
+                   ? `${post.category.parent.name}` 
+                    : `${post.category.name}`
+                      }
+                    </span>
+                  </Link>
+                      </div>
             
                                  {/*POST EXCERPT   PADDING IZQ Y DERECH px-4 PADDING BOTTOM pb-4*/}
-                                 <Link 
-                                 to={`/blog/${post.slug}`} 
-                                 className="block"
-                                 >
-                                 <p
-                                  className="oswald-muckas excerpt  px-2 mt-2 text-[0.8em] dark:text-dark-txt text-center  text-neutral-700 tracking-wide font-light"
-                                   dangerouslySetInnerHTML={{
-                                   __html:
-                                  post.excerpt && DOMPurify.sanitize(post.excerpt.length) > 50
-                                    ? DOMPurify.sanitize(post.excerpt.slice(0, 50)) + "..."
-                                    : post.excerpt && DOMPurify.sanitize(post.excerpt),
-                                   }}
-                                 />
-                                  </Link>
+                                 
+                                  <Link to={`/blog/post/${post.slug}`} className="block ">
+                             <p className="excerpt text-center font-light text-black tracking-wider 
+                              lg:text-sm text-[0.7em] sm:text-sm md:text-center line-clamp-2 lg:line-clamp-none px-12" 
+                              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.excerpt) }}>
+                            </p>  
+                              </Link>
+
+
+
+
 
 
 
@@ -171,7 +177,11 @@ function BlogCard(data, category){
                                     to={`/blog/post/${post.slug}`} 
                                     className="block"
                                     >
-                                    <p className="lg:text-base kaushan text-[0.7em] text-zinc-700 font-extrabold hover:opacity-75">Leer mas</p>
+                                    <p className="lg:text-base kaushan text-[0.7em] 
+                                    text-zinc-700 font-extrabold 
+                                    hover:opacity-75">
+                                      Leer mas
+                                      </p>
                                    </Link>
                                   </div>
  

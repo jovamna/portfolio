@@ -59,43 +59,35 @@ function Blog({
         
         <FullWidthLayout>
 
-        
-
-
-
-
-           <div className="wrapper">
+           <div className="">
                <Header />
        
                 <div className="reset-password z-50 absolute w-[40%] max-auto">
                 <ResetPasswordSuccess /> {/* Agrega el componente aquí */}
                 </div>
 
-                  {/*max-w-lg limita el ancho y lo pone a lado left*/}
-                 <div className="segmento-header-categoria  inset-x-0  top-0 bg-opacity-50  w-[100%] text-white z-10">
+                  {/*max-w-lg limita el ancho y lo pone a lado left segmento-header-categoria */}
+                 <div className=" inset-x-0  top-0 bg-opacity-50  w-[100%] text-white z-10">
             
                  <CategoriesBlogHeader />
                  </div>
 
 
                  {/*el violet son nombres de la pagination*/}
-                 <div className="blog-list-top flex-1 py-2">
+                 <div className=" flex-1 ">
                  
-        <div>
+           
           
-            {
-                blog_list ?
-                <>
-                <div className="relative bg-gray-50 pb-8 px-4 sm:px-6 lg:pb-12 lg:px-8">
-                    <div className="absolute inset-0">
-                        <div className="bg-white h-1/3 sm:h-2/3" />
-                    </div>
-
+                  {
+                    blog_list ?
+                    <>
+                   <div className="relative bg-gray-50 sm:px-2 lg:pb-30 lg:px-8">
+                 
 
                     
                     <div className="relative max-w-7xl mx-auto">
                         
-                        <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
+                        <div className="mt-2 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
                             {
                                 blog_list.map((post,index)=>(
                                     <BlogCard 
@@ -113,12 +105,16 @@ function Blog({
                              <SmallSetPaginationBlog count={count}/>
                     </div>
                 </div>
-                </>
-                :
-                <LoadingCard/>
-            }
-        </div>
+                   </>
+                    :
+                   <LoadingCard/>
+                    }
                  </div>
+                
+                
+                
+                
+             
 
 
 

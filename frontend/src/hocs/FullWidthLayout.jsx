@@ -20,20 +20,24 @@ const FullWidthLayout = (props) => {
       
       
       
-      
-      
 
-    return (
-        <div className="min-h-screen flex flex-col">
-            <NavbarProject/>
-             <main className="flex-1 flex flex-col">
-              {props.children}
+return (
+   
+    <div className="min-h-screen flex flex-col justify-between">
+        <NavbarProject />
+        
+        {/* Este main se tragará todo el espacio vacío para empujar al footer */}
+        <main className="w-full flex-1">
+            {props.children}
+        </main>
+        
+        <Footer />
+    </div>
 
-             </main>
-            
-            <Footer className="mt-auto"/>
-        </div>
-    );
+);
+
+
+
 };
 export default connect(null, {
     check_authenticated,
@@ -41,3 +45,20 @@ export default connect(null, {
     refresh,
    
 }) (FullWidthLayout)
+
+
+
+
+
+//return (
+ //   <div className="min-h-screen flex flex-col justify-between">
+  //      <NavbarProject />
+        
+   //     {/* Este main se tragará todo el espacio vacío para empujar al footer */}
+   //     <main className="w-full flex-1">
+   //         {props.children}
+   //     </main>
+        
+   //     <Footer />
+   // </div>
+//);

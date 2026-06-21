@@ -176,7 +176,7 @@ function BlogSubCategory({
                      font-bold text-center tracking-tight text-neutral-800 
                     sm:text-4xl  md:text-center
                      ">
-                     Artículos sobre: <span className="inline-flex "><h1 className="underline underline-offset-8">   {category?.name}  </h1></span>
+                      {category?.name}  
                     </h1>
                 </div>
              
@@ -184,34 +184,6 @@ function BlogSubCategory({
             
 
 
-               <div  className="lg:px-8">
-                    {category && (
-                    <div className="flex flex-row bg-neutral-50 rounded-xl py-2 border border-neutral-200">
-                        <h2 className="text-xl font-bold text-neutral-800 kaushan">
-
-
-                        Explorar 
-                      
-                         </h2>
-                            <Link 
-                              to={category.parent 
-                            ? `/blog/${category.parent.slug}/${category.slug}`
-                            : `/blog/${category.slug}`
-                            } 
-                             className="pl-2 text-xl font-bold text-neutral-800 kaushan"
-                           >
-                        <span className="badge">
-                            {category.parent 
-                          ? `Subcategory: ${category.name} (en ${category.parent.name})` 
-                         : `Category: ${category.name}`
-                         }
-                        </span>
-                        </Link>
-                        
-
-                    </div>
-                    )}
-                  </div>
 
                  <CategoryBreadcrumbNav category={category} />
 
@@ -230,7 +202,7 @@ function BlogSubCategory({
                     
                     <div className="relative max-w-7xl mx-auto">
                         
-                        <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
+                        <div className="mt-2 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
                             {
                                 blog_list_subcategory.map((post,index)=>(
                                     <BlogCard 

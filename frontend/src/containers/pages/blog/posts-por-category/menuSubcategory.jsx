@@ -1,6 +1,6 @@
 // components/CategoryBreadcrumbNav.jsx
 import { Link, useParams } from 'react-router-dom';
-//import { ChevronRight, Home } from 'lucide-react'; // o cualquier icono que uses
+import { BiChevronRight } from "react-icons/bi"; // Usamos tu icono para los separadores
 
 const CategoryBreadcrumbNav = ({ category, categories }) => {
     const { categorySlug, subcategorySlug } = useParams();
@@ -34,12 +34,15 @@ const CategoryBreadcrumbNav = ({ category, categories }) => {
     // 2. RENDERIZAR
     // ============================================
     return (
-        <nav className="category-breadcrumb-nav rounded-lg shadow-sm border border-gray-100 p-4 mb-6">
-            <div className="flex flex-wrap items-center gap-2">
+        // 🌟 Añadido max-w-full y overflow-hidden para asegurar contención absoluta
+        <nav className="category-breadcrumb-nav rounded-lg shadow-sm border border-gray-100 p-4 mb-6 bg-white w-full max-w-full overflow-hidden">
+            {/* 🌟 flex-row, overflow-x-auto y whitespace-nowrap para forzar una sola línea deslizable */}
+            <div className="flex flex-row items-center gap-2 overflow-x-auto whitespace-nowrap scrollbar-none py-1">
+                
                 {/* === LINK "ALL" === */}
                 <Link
                     to="/blog"
-                    className={`category-nav-link px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                    className={`category-nav-link px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 shrink-0 ${
                         !categorySlug 
                             ? 'bg-indigo-600 text-white shadow-md' 
                             : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -51,11 +54,12 @@ const CategoryBreadcrumbNav = ({ category, categories }) => {
                     </span>
                 </Link>
                 
-                {/* === SEPARADOR === */}
-                <span className="text-gray-300">|</span>
+                {/* === SEPARADOR INICIAL === */}
+                <span className="text-gray-300 shrink-0">|</span>
                 
                 {/* === JERARQUÍA DE CATEGORÍAS === */}
-                <div className="flex flex-wrap items-center gap-1">
+                {/* 🌟 flex-row puro sin wrap para mantener la línea de navegación intacta */}
+                <div className="flex flex-row items-center gap-1">
                     {hierarchy.map((item, index) => {
                         const isLast = index === hierarchy.length - 1;
                         const isParent = item.isParent;
@@ -70,17 +74,18 @@ const CategoryBreadcrumbNav = ({ category, categories }) => {
                         }
                         
                         return (
-                            <div key={item.slug} className="flex items-center">
-                                {/* Separador entre niveles */}
+                            <div key={item.slug} className="flex flex-row items-center shrink-0">
+                                {/* 🌟 Separador dinámico real usando tu icono en vez de una caja vacía */}
                                 {index > 0 && (
-                                    <div className="w-4 h-4 text-gray-400 mx-1" />
+                                    <BiChevronRight className="w-4 h-4 text-gray-400 mx-1 shrink-0" />
                                 )}
                                 
                                 <Link
                                     to={toUrl}
-                                    className={`category-nav-link px-4 py-2 
-                                        rounded-full text-sm font-medium 
-                                        transition-all duration-200 ${
+                                    className={`category-nav-link px-3 py-2 
+                                        rounded-full 
+                                        text-center text-xs lg:text-sm font-light 
+                                        transition-all duration-200 shrink-0 ${
                                         isLast && !subcategorySlug
                                             ? 'bg-indigo-600 text-white shadow-md' 
                                             : isLast && subcategorySlug
@@ -95,7 +100,6 @@ const CategoryBreadcrumbNav = ({ category, categories }) => {
                     })}
                 </div>
             </div>
-           
         </nav>
     );
 };
