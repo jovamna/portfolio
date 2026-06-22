@@ -225,96 +225,141 @@ def build_base_context(request):
 # =========================
 # MAIN ENTRYPOINT
 # =========================
-
 def spa_entrypoint(request):
     path = request.path.strip('/')
     parts = [p for p in path.split('/') if p]
     context = build_base_context(request)
 
-    # HOME
+    # ====================== HOME ======================
     if not parts or parts[0] in ('home', ''):
+        url_canonica = build_absolute_url()
         context.update({
             'is_home_page': True,
-            'canonical_url': build_absolute_url(),
-            'breadcrumbs': [{'name': 'Inicio', 'url': build_absolute_url()}],
+            'canonical_url': url_canonica,
+            'og_type': 'website',
+            'og_title': "Jovamna Medina | Portfolio profesional de Desarrollo Web Full Stack",
+            'og_description': "Desarrolladora Full Stack especializada en Django y React.",
+            'og_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",  # imagen por defecto
+            'og_url': url_canonica,
+            'twitter_card': 'summary_large_image',
+            'twitter_title': "Jovamna Medina",
+            'twitter_description': "Desarrolladora Full Stack especializada en Django y React.",
+            'twitter_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
+            'seo_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
+            'breadcrumbs': [{'name': 'Inicio', 'url': url_canonica}],
             'jsonld_primary': json.dumps(home_json_ld(), ensure_ascii=False),
         })
         return render(request, 'index.html', context)
 
-    # PROJECT DETAIL
+    # ====================== PROJECT DETAIL ======================
     if len(parts) >= 3 and parts[0] == 'myproject' and parts[1] == 'project':
         try:
             project = Project.projectobjects.get(slug=parts[2])
-            canonical = build_absolute_url(f"myproject/project/{project.slug}/")
+            url_canonica = build_absolute_url(request.path)
             image = get_best_image(project)
 
             breadcrumbs = [
                 {'name': 'Inicio', 'url': build_absolute_url()},
                 {'name': 'Proyectos', 'url': build_absolute_url('myproject/')},
-                {'name': project.title, 'url': canonical}
+                {'name': project.title, 'url': url_canonica}
             ]
 
             context.update({
                 'seo_title': f"{project.title} | Jovamna Medina",
-                'seo_description': safe_truncate(project.description, 160),
-                'canonical_url': canonical,
+                'seo_description': safe_truncate(getattr(project, 'description', ''), 160),
+                'canonical_url': url_canonica,
                 'og_type': 'article',
+                'og_title': project.title,
+                'og_description': safe_truncate(getattr(project, 'description', ''), 160),
+                'og_image': image,
+                'og_url': url_canonica,
+                'twitter_card': 'summary_large_image',
+                'twitter_title': project.title,
+                'twitter_description': safe_truncate(getattr(project, 'description', ''), 160),
+                'twitter_image': image,
                 'seo_image': image,
                 'is_project_page': True,
                 'breadcrumbs': breadcrumbs,
-                'jsonld_primary': json.dumps(project_json_ld(project, canonical, image), ensure_ascii=False),
+                'jsonld_primary': json.dumps(project_json_ld(project, url_canonica, image), ensure_ascii=False),
                 'jsonld_breadcrumbs': json.dumps(breadcrumb_json_ld(breadcrumbs), ensure_ascii=False),
             })
             return render(request, 'index.html', context)
+            
         except Project.DoesNotExist:
             context['seo_robots'] = 'noindex,follow'
 
-    # BLOG POST
+    # ====================== BLOG POST ======================
     if len(parts) >= 3 and parts[0] == 'blog' and parts[1] == 'post':
+        slug_post = parts[2]
+        
         try:
-            post = Post.post_objects.get(slug=parts[2])
-            canonical = build_absolute_url(f"blog/post/{post.slug}/")
-            image = get_best_image(post)
+            post = Post.post_objects.get(slug=slug_post)
+            
+            imagen_seo = get_best_image(post)
+            descripcion_seo = safe_truncate(
+                post.excerpt or post.description or post.content or "", 
+                160
+            )
+            
+            url_canonica = build_absolute_url(request.path)
 
+            # Breadcrumbs
             breadcrumbs = [
                 {'name': 'Inicio', 'url': build_absolute_url()},
                 {'name': 'Blog', 'url': build_absolute_url('blog/')},
-                {'name': post.title, 'url': canonical}
             ]
+            if hasattr(post, 'category') and post.category:
+                breadcrumbs.append({
+                    'name': post.category.name,
+                    'url': build_absolute_url(f'blog/{post.category.slug}/')
+                })
+            breadcrumbs.append({'name': post.title, 'url': url_canonica})
 
             context.update({
-                'seo_title': f"{post.title} | Jovamna Medina",
-                'seo_description': safe_truncate(post.excerpt or post.description, 160),
-                'canonical_url': canonical,
-                'og_type': 'article',
-                'seo_image': image,
                 'is_post_page': True,
+                'seo_title': f"{post.title} | {post.category.name if hasattr(post, 'category') and post.category else ''} | Jovamna Medina".strip(' | '),
+                'seo_description': descripcion_seo,
+                'canonical_url': url_canonica,
+                'og_type': 'article',
+                'og_title': post.title,
+                'og_description': descripcion_seo,
+                'og_image': imagen_seo,
+                'og_url': url_canonica,
+                'twitter_card': 'summary_large_image',
+                'twitter_title': post.title,
+                'twitter_description': descripcion_seo,
+                'twitter_image': imagen_seo,
+                'seo_image': imagen_seo,
                 'breadcrumbs': breadcrumbs,
-                'jsonld_primary': json.dumps(post_json_ld(post, canonical, image), ensure_ascii=False),
-                'jsonld_breadcrumbs': json.dumps(breadcrumb_json_ld(breadcrumbs), ensure_ascii=False),
+                'jsonld_primary': json.dumps(
+                    post_json_ld(post, url_canonica, imagen_seo), 
+                    ensure_ascii=False
+                ),
+                'jsonld_breadcrumbs': json.dumps(
+                    breadcrumb_json_ld(breadcrumbs), 
+                    ensure_ascii=False
+                ),
             })
             return render(request, 'index.html', context)
+            
         except Post.DoesNotExist:
-            pass
-        
-    # ==========================================
-    # HERRAMIENTA: ESCANDALLO GRATUITO
-    # ==========================================
+            context['seo_robots'] = 'noindex,follow'
+
+    # ====================== ESCANDALLO ======================
     if len(parts) >= 1 and parts[0] == 'escandallo':
-        canonical = build_absolute_url("escandallo")
+        url_canonica = build_absolute_url("escandallo")
         
         breadcrumbs = [
             {'name': 'Inicio', 'url': build_absolute_url()},
-            {'name': 'Escandallo Gratuito para Hostelería', 'url': canonical}
+            {'name': 'Escandallo Gratuito para Hostelería', 'url': url_canonica}
         ]
 
-        # Estructura Schema.org especializada para Herramientas/Aplicaciones Web
         escandallo_json_ld = {
             "@context": "https://schema.org",
             "@type": "WebApplication",
             "name": "Escandallo Gratuito para Hostelería | Jovamna Medina",
             "description": "Calcula el costo de tus recetas, escandallos de cocina y gestiona los márgenes de ganancia de tu restaurante con esta herramienta online gratuita.",
-            "url": canonical,
+            "url": url_canonica,
             "applicationCategory": "BusinessApplication",
             "operatingSystem": "All",
             "browserRequirements": "Requires JavaScript. Requires HTML5.",
@@ -323,10 +368,19 @@ def spa_entrypoint(request):
 
         context.update({
             'seo_title': "Escandallo Gratuito para Hostelería | Jovamna Medina",
-            'seo_description': "Herramienta online gratuita para hosteleros y cocineros. Calcula el coste de tus platos, gestiona mermas y optimiza el beneficio de tu restaurante.",
+            'seo_description': "Herramienta online gratuita para hosteleros, cocineros, emprendedores",
             'seo_keywords': "escandallo gratis, escandallo cocina, calcular coste platos, plantilla escandallo, gestion restaurante, herramientas hosteleria",
-            'canonical_url': canonical,
+            'canonical_url': url_canonica,
             'og_type': 'website',
+            'og_title': "Escandallo Gratuito para Hostelería | Jovamna Medina",
+            'og_description': "Herramienta online gratuita para hosteleros y cocineros...",
+            'og_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",  # imagen por defecto
+            'og_url': url_canonica,
+            'twitter_card': 'summary_large_image',
+            'twitter_title': "Escandallo Gratuito para Hostelería",
+            'twitter_description': "Herramienta online gratuita para hosteleros...",
+            'twitter_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
+            'seo_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
             'is_home_page': False,
             'breadcrumbs': breadcrumbs,
             'jsonld_primary': json.dumps(escandallo_json_ld, ensure_ascii=False),
@@ -334,21 +388,36 @@ def spa_entrypoint(request):
         })
         return render(request, 'index.html', context)
 
-    # CATEGORÍAS
-    # ... (mantengo lógica similar pero más limpia)
+    # ====================== FALLBACK ======================
+    if 'canonical_url' not in context:
+        url_canonica = build_absolute_url(request.path)
+        context['canonical_url'] = url_canonica
+    else:
+        url_canonica = context['canonical_url']
 
-    # Fallback
+    context.setdefault('seo_title', 'Jovamna Medina')
+    context.setdefault('seo_description', '')
+    
+    # Fallbacks para redes
+    context.setdefault('og_type', 'website')
+    context.setdefault('og_title', context['seo_title'])
+    context.setdefault('og_description', context['seo_description'])
+    context.setdefault('og_image', "https://jovamnamedina.com/custom-static/images/facebookweb.jpg")
+    context.setdefault('og_url', url_canonica)
+    context.setdefault('twitter_card', 'summary_large_image')
+    context.setdefault('twitter_title', context['seo_title'])
+    context.setdefault('twitter_description', context['seo_description'])
+    context.setdefault('twitter_image', "https://jovamnamedina.com/custom-static/images/facebookweb.jpg")
+    context.setdefault('seo_image', "https://jovamnamedina.com/custom-static/images/facebookweb.jpg")
+
     context['jsonld_primary'] = json.dumps({
         "@context": "https://schema.org",
         "@type": "WebPage",
         "name": context['seo_title'],
-        "url": context['canonical_url']
+        "url": url_canonica
     }, ensure_ascii=False)
 
     return render(request, 'index.html', context)
-
-
-
 
 
 

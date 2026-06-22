@@ -726,7 +726,7 @@ const { calculatedRows, totales } = useMemo(() => {
 
 
       {/* ========================================== */}
-{/* 💻 VISTA PARA ORDENADORES (TU TABLA ACTUAL) */}
+{/* 💻 VISTA PARA ORDENADORES ( TABLA ACTUAL) */}
 {/* ========================================== */}
 <div className="hidden lg:block bg-white shadow overflow-x-auto border-2 border-black">
   <table className="w-full">
@@ -1212,17 +1212,3 @@ const { calculatedRows, totales } = useMemo(() => {
 
 
 
-  {/*INCORRECTO NO DEJA ELIMANR EL 1<input
-            type="number"
-            min="1"
-            value={raciones}
-            onChange={(e) =>
-              setRaciones(
-                Math.max(
-                  1,
-                  parseInt(e.target.value) || 1
-                )
-              )
-            }
-            className="w-full lg:p-4 p-2 border rounded-2xl lg:text-lg md:text-lg text-base text-base font-black"
-          />*/}

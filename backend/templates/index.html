@@ -8,50 +8,36 @@
     <meta name="theme-color" content="#000000">
 
     <!-- SEO básico -->
-    <title>{{ seo_title|default:"Jovamna Medina| Portfolio profesional de Desarrollo Web Full Stack" }}</title>
-    <meta name="description" content="{{ seo_description|default:'Portfolio profesional de Desarrollo Web Full Stack. arquitectura de software, interfaces interactivas y optimización de e-commerce.' }}">
+    <title>{{ seo_title|default:"Jovamna Medina | Portfolio profesional de Desarrollo Web Full Stack" }}</title>
+    <meta name="description" content="{{ seo_description|default:'Portfolio profesional de Desarrollo Web Full Stack...' }}">
     <meta name="robots" content="{{ seo_robots|default:'index,follow' }}">
 
-
-        <!-- Canonical -->
+    <!-- Canonical -->
     <link rel="canonical" href="{{ canonical_url|default:request.build_absolute_uri }}">
 
-    <!--------------------GOOGLE--------->
-
-
-
-  
-
-
-
-    <!-- Open Graph FACEBOOK WHATAPP LINKEIND-->
+    <!-- ==================== OPEN GRAPH ==================== -->
     <meta property="og:locale" content="es_ES">
     <meta property="og:type" content="{{ og_type|default:'website' }}">
     <meta property="og:site_name" content="{{ SITE_NAME|default:'Jovamna Medina' }}">
-    <meta property="og:title" content="{{ og_title|default:seo_title|default:'Jovamna Medina| Portfolio profesional de Desarrollo Web Full Stack' }}">
-    <meta property="og:description" content="{{ og_description|default:seo_description|default:'Portfolio profesional de Desarrollo Web Full Stack. arquitectura de software, interfaces interactivas y optimización de e-commerce.' }}">
-    <meta property="og:image:alt" content="{{ og_image_alt|default:seo_title|default:'Jovamna Medina| Portfolio profesional de Desarrollo Web Full Stack' }}">
-    <meta property="og:url" content="{{ canonical_url|default:request.build_absolute_uri }}">
-    <meta property="og:image" content="{{ seo_image }}">-->
-    <meta name="image" content="https://jovamnamedina.com/custom-static/images/googleweb.jpg">
+    <meta property="og:title" content="{{ og_title|default:seo_title }}">
+    <meta property="og:description" content="{{ og_description|default:seo_description }}">
+    <meta property="og:image" content="{{ og_image|default:seo_image|default:'https://jovamnamedina.com/custom-static/images/facebookweb.jpg' }}">
+    <meta property="og:image:alt" content="{{ seo_title }}">
+    <meta property="og:url" content="{{ og_url|default:canonical_url|default:request.build_absolute_uri }}">
 
+    <!-- ==================== TWITTER CARDS ==================== -->
+    <meta name="twitter:card" content="{{ twitter_card|default:'summary_large_image' }}">
+    <meta name="twitter:title" content="{{ twitter_title|default:seo_title }}">
+    <meta name="twitter:description" content="{{ twitter_description|default:seo_description }}">
+    <meta name="twitter:image" content="{{ twitter_image|default:seo_image|default:'https://jovamnamedina.com/custom-static/images/facebookweb.jpg' }}">
 
-
-
-
-
-    <!-- Twitter Cards -->
-    <meta name="twitter:card" content="summary_large_image">
-    {% if twitter_site %}
-    <meta name="twitter:site" content="{{ twitter_site }}">
-    {% endif %}
-    <meta name="twitter:title" content="{{ twitter_title|default:seo_title|default:'Jovamna Medina' }}">
-    <meta name="twitter:description" content="{{ twitter_description|default:seo_description|default:'Jovamna Medina | Full Stack Developer, Django & React,  & AI' }}">
-    <meta name="twitter:image" content="https://jovamnamedina.com/custom-static/images/facebookweb.jpg">
-
+    <!-- Keywords -->
+    <meta name="keywords" content="{{ seo_keywords|default:'' }}">
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2">
+
+
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -65,57 +51,43 @@
     <link rel="manifest" href="/manifest.json">
 
 
-<!-- Keywords -->
-    <meta name="keywords" content="{{ seo_keywords }}">
 
     <!-- Preload & Performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://jovamnamedina.com">
 
-    <!-- JSON-LD Structured Data (Muy Importante) -->
+
     
 
 
 
 
-
-
-
-
-
+    <!-- JSON-LD Dinámico (lo que enviamos desde spa_entrypoint) -->
+    {% if jsonld_primary %}
     <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Jovamna Medina",
-  "url": "https://jovamnamedina.com",
-  "jobTitle": "Full Stack Developer",
-  "description": "Desarrolladora Full Stack especializada en Django y React. Arquitectura de software y arte digital.",
-  "sameAs": [
-    "https://github.com/jovamna",
-    "https://www.linkedin.com/in/jovamna-medina/"
-  ]
-}
-</script>
+    {{ jsonld_primary|safe }}
+    </script>
+    {% endif %}
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "url": "https://jovamnamedina.com",
-  "name": "Jovamna Medina Portfolio",
-  "author": {
-    "@type": "Person",
-    "name": "Jovamna Medina"
-  }
-}
-</script>
+    {% if jsonld_breadcrumbs %}
+    <script type="application/ld+json">
+    {{ jsonld_breadcrumbs|safe }}
+    </script>
+    {% endif %}
 
-
-
-
-
- 
+    <!-- JSON-LD Fallback (Persona) -->
+    {% if not jsonld_primary %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Jovamna Medina",
+      "url": "https://jovamnamedina.com",
+      "jobTitle": "Full Stack Developer",
+      "description": "Desarrolladora Full Stack especializada en Django y React."
+    }
+    </script>
+    {% endif %}
 
     {% vite_asset_tags 'index.html' %}
 </head>
@@ -124,9 +96,3 @@
     <div id="root"></div>
 </body>
 </html>
-
-
-
-
-
-
