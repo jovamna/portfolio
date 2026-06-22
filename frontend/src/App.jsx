@@ -44,23 +44,6 @@ function App() {
 
 
 
-  //useEffect(() => {
-    // 2. Aquí manejas el título principal de forma nativa
-  //  document.title = "Portafolio Oficial de Jovamna Medina | Full Stack Developer & Arte Digital";
-    
-    // Si quieres cambiar el meta description dinámicamente:
-  //  const metaDesc = document.querySelector('meta[name="description"]');
-  //  if (metaDesc) {
- //     metaDesc.setAttribute("content", "Portafolio oficial de Jovamna Medina: Full Stack Developer especializada en Django/React.");
- //   }
-
-  //  const timer = setTimeout(() => {
-  //    setShowLogo(false);
-  //  }, 3000);
-
-  //  return () => clearTimeout(timer);
- // }, [])
-
 
 
   return (
@@ -101,7 +84,7 @@ function App() {
    
         {/*showLogo ? <Logo /> :   */   }
   
-<SmoothScrollbar />
+        <SmoothScrollbar />
 
 
 

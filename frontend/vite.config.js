@@ -10,6 +10,7 @@ export default defineConfig({
   ],
   base: process.env.NODE_ENV === 'production' ? '/' : '/',
   build: {
+    manifest:true,
     minify: 'terser',
     terserOptions: {
       compress: {

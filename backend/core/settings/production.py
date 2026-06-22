@@ -19,10 +19,15 @@ SECRET_KEY=os.environ.get('SECRET_KEY')
 SITE_ID = 1
 # Application definition
 
+
+
+FRONTEND_URL = 'https://www.muckas-store.com'
+# Opcional: cache de sitemap
+SITEMAP_CACHE_TIMEOUT = 60 * 60  # 1 hora
+
 DATABASES = {
     "default" : env.db("DATABASE_URL", default="postgres:///portfolio"),
 }
-
 
 # Configuración de correo electrónico para producción
 #email config
