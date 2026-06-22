@@ -260,7 +260,7 @@ def spa_entrypoint(request):
 
             breadcrumbs = [
                 {'name': 'Inicio', 'url': build_absolute_url()},
-                {'name': 'Proyectos', 'url': build_absolute_url('myproject/')},
+                {'name': 'Proyectos', 'url': build_absolute_url('myproject')},
                 {'name': project.title, 'url': url_canonica}
             ]
 
@@ -306,12 +306,12 @@ def spa_entrypoint(request):
             # Breadcrumbs
             breadcrumbs = [
                 {'name': 'Inicio', 'url': build_absolute_url()},
-                {'name': 'Blog', 'url': build_absolute_url('blog/')},
+                {'name': 'Blog', 'url': build_absolute_url('blog')},
             ]
             if hasattr(post, 'category') and post.category:
                 breadcrumbs.append({
                     'name': post.category.name,
-                    'url': build_absolute_url(f'blog/{post.category.slug}/')
+                    'url': build_absolute_url(f'blog/{post.category.slug}')
                 })
             breadcrumbs.append({'name': post.title, 'url': url_canonica})
 
