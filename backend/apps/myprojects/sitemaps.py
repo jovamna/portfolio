@@ -8,11 +8,11 @@ class ProjectSitemap(Sitemap):
     priority = 0.8
 
     def items(self):
-        return Project.objects.all()
+        return Project.projectobjects.all()
     
  
     def location(self, obj):
-        return f"/myproject/project/{obj.slug}/"
+        return f"/myproject/project/{obj.slug}"
         
     def lastmod(self, obj):
         return obj.published

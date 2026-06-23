@@ -45,9 +45,9 @@ class ProjectDetailView(APIView):
    
 
     def get(self, request, slug, format=None):
-        if Project.objects.filter(slug=slug).exists():
+        if Project.projectobjects.filter(slug=slug).exists():
 
-            project = Project.objects.get(slug=slug)
+            project = Project.projectobjects.get(slug=slug)
             serializer = ProjectSerializer(project)
 
             address = request.META.get('HTTP_X_FORWARDED_FOR')

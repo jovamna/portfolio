@@ -450,9 +450,9 @@ def robots_txt(request):
         # ==========================================
         # 🔴 BLOQUEOS DEL FRONTEND (Rutas de la SPA)
         # ==========================================
-        "Disallow: /signup/",
-        "Disallow: /login/",
-        "Disallow: /profile/",
+        "Disallow: /signup",
+        "Disallow: /login",
+        "Disallow: /profile",
         # ==========================================
         # 🔴 BLOQUEOS DEL BACKEND Y HERRAMIENTAS
         # ==========================================

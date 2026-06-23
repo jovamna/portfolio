@@ -38,6 +38,9 @@ function ProjectCard(data){
 
 
                   {/*TITULO DEL CARD DE GITHUB */}
+                   <Link 
+                    to={`/myproject/project/${project.slug}`} 
+                    className="">
                   <h3 className="title text-center 
                   font-bold lg:text-xl text-sm 
                   text-gray-900 mt-2 capitalize">
@@ -46,6 +49,12 @@ function ProjectCard(data){
                   {/*console.log(project)*/}
                   </h3>
 
+                  </Link>
+
+
+                    <Link 
+                    to={`/myproject/project/${project.slug}`} 
+                    className="">
                   <p
                     className="languages px-2 mt-[15px] 
                     text-sm dark:text-dark-txt text-center  
@@ -57,6 +66,8 @@ function ProjectCard(data){
                    : project.description && DOMPurify.sanitize(project.description),
                     }}
                     />
+
+                    </Link>
                     <Link 
                     to={`/myproject/project/${project.slug}`} 
                     className="block">

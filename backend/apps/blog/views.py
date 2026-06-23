@@ -184,6 +184,7 @@ class BlogListSubcategoryView(APIView):
         })    
     
 
+
 class PostDetailView(APIView):
     authentication_classes = []
     permission_classes = [AllowAny]
@@ -191,31 +192,16 @@ class PostDetailView(APIView):
     CACHE_TIMEOUT = 60 * 15  # 15 minutos
 
     def get_client_ip(self, request):
-        """
-        Obtiene la IP real soportando:
-        - Cloudflare
-        - Reverse proxies
-        - Desarrollo local
-        """
-
         ip = request.META.get("HTTP_CF_CONNECTING_IP")
-
         if not ip:
             x_forwarded = request.META.get("HTTP_X_FORWARDED_FOR")
-
             if x_forwarded:
                 ip = x_forwarded.split(",")[0].strip()
             else:
                 ip = request.META.get("REMOTE_ADDR")
-
         return ip
 
     def register_view(self, post, ip):
-        """
-        Registra una única visita por IP para este post.
-        Usa F() para evitar condiciones de carrera.
-        """
-
         already_viewed = PostViewCount.objects.filter(
             post=post,
             ip_address=ip
@@ -229,21 +215,17 @@ class PostDetailView(APIView):
             ip_address=ip
         )
 
+        # Usamos .objects general para asegurar la actualización atómica
         Post.objects.filter(pk=post.pk).update(
             views=F("views") + 1
         )
-
+        
+        # Sincronizamos el objeto en memoria una única vez aquí
         post.refresh_from_db(fields=["views"])
-
         return True
 
     def get_post_data(self, post):
-        """
-        Obtiene datos cacheados o los genera si no existen.
-        """
-
         cache_key = f"post_{post.slug}"
-
         data = cache.get(cache_key)
 
         if data:
@@ -258,53 +240,45 @@ class PostDetailView(APIView):
         )
 
         serializer = PostSerializer(post)
-
         data = serializer.data
         data["total_hearts"] = total_hearts
 
-        cache.set(
-            cache_key,
-            data,
-            self.CACHE_TIMEOUT
-        )
-
+        cache.set(cache_key, data, self.CACHE_TIMEOUT)
         return data
 
     def get(self, request, post_slug, format=None):
         ip = self.get_client_ip(request)
 
         try:
-            post = Post.objects.get(slug=post_slug)
+            # Tu mánager personalizado aquí está perfecto
+            post = Post.post_objects.get(slug=post_slug)
+            
+            # Registra e incrementa internamente
             self.register_view(post=post, ip=ip)
-            post.refresh_from_db(fields=["views"])
+            
+            # Traemos la data (de caché o DB)
             data = self.get_post_data(post)
+            
+            # Inyectamos el contador en tiempo real
             data["views"] = post.views
             return Response(data, status=status.HTTP_200_OK)
 
         except Post.DoesNotExist:
-            # Buscar en historial de slugs antiguos
             history = PostSlugHistory.objects.filter(old_slug=post_slug).select_related('post').first()
         
             if history:
-                # ✅ USAR 308 PARA REDIRECCIÓN (más semántico)
                 frontend_url = f"/blog/post/{history.post.slug}"
                 return Response({
                     'redirect': True,
                     'frontend_url': frontend_url,
                     'new_slugs': [history.post.slug],
                     'message': 'El artículo cambió de slug'
-                }, status=status.HTTP_308_PERMANENT_REDIRECT)  # ← CAMBIO IMPORTANTE
+                }, status=status.HTTP_308_PERMANENT_REDIRECT)
             
-            # 404 real
             return Response(
                 {'error': 'El artículo no existe'}, 
                 status=status.HTTP_404_NOT_FOUND
             )
-
-
-
-
-
 
 class SearchBlogView(APIView):
     authentication_classes = []  # Desactiva la autenticación
