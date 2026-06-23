@@ -129,7 +129,7 @@ def project_json_ld(project, canonical_url, image_url):
         "author": organization_json_ld(),
         "datePublished": project.published.isoformat(),
         "dateModified": project.updated_at.isoformat() if hasattr(project, 'updated_at') else project.published.isoformat(),
-        "keywords": [tag.name for tag in getattr(project, 'tags', [])] if hasattr(project, 'tags') else [],
+        "keywords": list(project.tags.values_list('name', flat=True)) if hasattr(project, 'tags') else [],
         "genre": "Portafolio Profesional",
         "inLanguage": "es"
     }
