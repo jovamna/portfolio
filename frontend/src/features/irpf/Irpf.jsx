@@ -1,9 +1,9 @@
 import { useState, useMemo, useEffect } from 'react';
-import { calcularRetencion } from '../../utils/irpfCalc';
-import SalaryForm   from '../../components/irpf/SalaryForm';
-import FamilyForm   from '../../components/irpf/FamilyForm';
-import ResultsPanel from '../../components/irpf/ResultsPanel';
-import FullWidthLayout from "../../hocs/FullWidthLayout";
+import { calcularRetencion } from '../../../utils/irpfCalc';
+import SalaryForm   from '../../../components/irpf/SalaryForm';
+import FamilyForm   from '../../../components/irpf/FamilyForm';
+import ResultsPanel from '../../../components/irpf/ResultsPanel';
+import FullWidthLayout from "../../../hocs/FullWidthLayout";
 
 
 // ─── SEO ──────────────────────────────────────────────────────────────────────

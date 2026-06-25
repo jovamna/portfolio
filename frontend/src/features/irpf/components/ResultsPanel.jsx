@@ -1,4 +1,4 @@
-import { fmtEur, fmtPct } from '../../utils/irpfCalc';
+import { fmtEur, fmtPct } from '../../../utils/irpfCalc';
 
 
 // ─── Sub-components ───────────────────────────────────────────────────────────

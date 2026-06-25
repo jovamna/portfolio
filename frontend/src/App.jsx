@@ -18,9 +18,10 @@ import SmoothScrollbar from './components/SmoothScrollbar';
 import "./styles/index.css";
 import {useEffect, useState, lazy, Suspense } from 'react';
 import Logo from './containers/inicio/Logo';
-import Escandallo from './containers/pages/Escandallo';
-import Luz from './containers/pages/Luz';
-import Irpf from './containers/pages/Irpf';
+import Escandallo from './features/escandallo/Escandallo';
+import Luz from './features/luz/Luz';
+import Irpf from './features/irpf/components/Irpf';
+import FichaTecnica from './features/ficha-tecnica//FichaTecnica';
 
 
 
@@ -104,6 +105,7 @@ function App() {
     
         <Route path="/calcula-irpf" element={<Irpf/>} />
         <Route path="/escandallo" element={<Escandallo/>} />
+        <Route path="/hosteleria-ficha-tecnica" element={<FichaTecnica/>} />
         <Route path="/tarifa-luz" element={<Luz/>} />
         <Route path="/search/:term" element={<Search />} />
    

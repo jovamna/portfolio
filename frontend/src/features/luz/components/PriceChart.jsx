@@ -5,7 +5,7 @@ import {
 import {
   getSortedHours, getPriceCategory,
   PRICE_COLORS, fmtCents,
-} from '../../utils/priceUtils';
+} from '../../../utils/priceUtils';
 
 // Mapeo de colores de texto y fondo en Tailwind según la categoría
 const COLOR_TAILWIND_MAP = {

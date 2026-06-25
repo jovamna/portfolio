@@ -1,4 +1,4 @@
-import { fmtCents } from '../../utils/priceUtils';
+import { fmtCents } from '../../../utils/priceUtils';
 
 export default function BestHours({ data }) {
   // Ordenamos de menor a mayor precio y tomamos las 3 mejores horas

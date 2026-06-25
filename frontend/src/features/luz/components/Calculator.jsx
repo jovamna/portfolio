@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { APPLIANCES, fmtEur } from '../../utils/priceUtils';
+import { APPLIANCES, fmtEur } from '../../../utils/priceUtils';
 
 // ─── Result row ───────────────────────────────────────────────────────────────
 function ResultRow({ label, value, textColorClass, large }) {

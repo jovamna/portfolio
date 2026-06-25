@@ -1,4 +1,4 @@
-import { fmtCents, getPriceCategory, PRICE_LABELS } from '../../utils/priceUtils';
+import { fmtCents, getPriceCategory, PRICE_LABELS } from '../../../utils/priceUtils';
 
 
 

@@ -79,109 +79,106 @@ function PostDetail({
     
 {/**SEO */}
 
+///SEO
 useEffect(() => {
-  if (post) {
-    // 1. Título con palabras clave (Keywords) - Corregido el "| |" extra
-    document.title = `${post.title} | Blog de Desarrollo Web | Jovamna Medina`;
+  if (!post) return;
 
-    // 2. Enlace Canonical Dinámico (¡Nuevo!)
-    let linkCanonical = document.querySelector('link[rel="canonical"]');
-    if (!linkCanonical) {
-      linkCanonical = document.createElement('link');
-      linkCanonical.rel = 'canonical';
-      document.head.appendChild(linkCanonical);
-    }
-    // Usamos la misma URL dinámica del post (En tu anterior ejemplo usabas con "www", lo mantengo así aquí)
-    linkCanonical.href = `https://jovamnamedina.com/blog/post/${post.slug}`;
+  const canonicalUrl = `https://jovamnamedina.com/blog/post/${post.slug}`;
 
-    // 3. Descripción técnica para Google
-    let metaDescription = document.querySelector('meta[name="description"]');
-    if (!metaDescription) {
-      metaDescription = document.createElement('meta');
-      metaDescription.name = 'description';
-      document.head.appendChild(metaDescription);
-    }
-    // Combinamos el título del post con tus habilidades principales
-    metaDescription.content = `${post.excerpt || post.title}. Aprende desarrollo web con Django, React y buenas prácticas Full Stack.`;
+  // 1. TITLE
+  document.title = `${post.title} | Blog de Desarrollo Web | Jovamna Medina`;
 
-    // 4. Meta tags: Open Graph y Twitter
-    const metaTags = [
-      { property: 'og:title', content: `${post.title} | Blog de Desarrollo Web` },
-      { property: 'og:description', content: post.excerpt || post.title },
-      { property: 'og:image', content: post.image || 'https://jovamnamedina.com/og-image-tech.png' },
-      { property: 'og:type', content: 'article' },
-      { property: 'og:url', content: `https://jovamnamedina.com/blog/post/${post.slug}` },
-
-      { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:title', content: `${post.title} | Jovamna Medina` },
-      { name: 'twitter:description', content: post.excerpt || post.title },
-      { name: 'twitter:image', content: post.image || 'https://jovamnamedina.com/og-image-tech.png' }, // Añadido fallback por si acaso
-      { name: 'twitter:label1', content: 'Tech Stack' },
-      { name: 'twitter:data1', content: 'Django, React, Redux, PostgreSQL' }
-    ];
-
-    // Lógica para actualizar o crear los metaTags (asegúrate de tener esta parte abajo para que se apliquen)
-    metaTags.forEach(tag => {
-      const selector = tag.property 
-        ? `meta[property="${tag.property}"]` 
-        : `meta[name="${tag.name}"]`;
-      
-      let element = document.querySelector(selector);
-      if (!element) {
-        element = document.createElement('meta');
-        if (tag.property) element.setAttribute('property', tag.property);
-        if (tag.name) element.name = tag.name;
-        document.head.appendChild(element);
-      }
-      element.content = tag.content;
-    });
-
-     // 4. JSON-LD (Esto le fascina a Google)
-      let scriptJsonLd = document.querySelector('script[data-schema="blog-post"]');
-      if (!scriptJsonLd) {
-        scriptJsonLd = document.createElement('script');
-        scriptJsonLd.type = 'application/ld+json';
-        scriptJsonLd.setAttribute('data-schema', 'blog-post');
-        document.head.appendChild(scriptJsonLd);
-      }
-
-      scriptJsonLd.textContent = JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'BlogPosting',
-        headline: post.title,
-        description: post.excerpt,
-        image: post.image ? `${URL}${post.image}` : undefined,
-        datePublished: post.published,
-        dateModified: post.updated || post.published,
-        author: {
-          '@type': 'Person',
-          name: 'Jovamna Medina',
-          jobTitle: 'Full Stack Developer',
-          knowsAbout: ['Django', 'React', 'Redux', 'Python', 'JavaScript', 'SQL']
-        },
-        publisher: {
-          '@type': 'Organization',
-          name: 'Jovamna Medina Dev',
-          logo: {
-            '@type': 'ImageObject',
-             url: 'https://jovamnamedina.com/logo.png'
-            }
-          },
-          mainEntityOfPage: {
-            '@type': 'WebPage',
-            '@id': `https://jovamnamedina.com/blog/post/${post.slug}`
-          },
-          keywords: post.category?.name,
-          articleBody: post.content
-        });
-
-
-
-
-
+  // 2. CANONICAL
+  let canonical = document.querySelector('link[rel="canonical"]');
+  if (!canonical) {
+    canonical = document.createElement('link');
+    canonical.rel = 'canonical';
+    document.head.appendChild(canonical);
   }
-}, [post]); // Recuerda añadir [post] como dependencia si no lo tenías para que se ejecute al cambiar de artículo
+  canonical.href = canonicalUrl;
 
+  // 3. DESCRIPTION
+  let metaDesc = document.querySelector('meta[name="description"]');
+  if (!metaDesc) {
+    metaDesc = document.createElement('meta');
+    metaDesc.name = 'description';
+    document.head.appendChild(metaDesc);
+  }
+  metaDesc.content = (post.excerpt || post.title).substring(0, 160);
+
+  // 4. OPEN GRAPH & TWITTER (estilo limpio como el de producto)
+  const metas = [
+    { property: 'og:title', content: `${post.title} | Blog de Desarrollo Web` },
+    { property: 'og:description', content: post.excerpt || post.title },
+    { property: 'og:image', content: post.image || 'https://jovamnamedina.com/og-image-tech.png' },
+    { property: 'og:url', content: canonicalUrl },
+    { property: 'og:type', content: 'article' },
+
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: `${post.title} | Jovamna Medina` },
+    { name: 'twitter:description', content: post.excerpt || post.title },
+    { name: 'twitter:image', content: post.image || 'https://jovamnamedina.com/og-image-tech.png' }
+  ];
+
+  metas.forEach(({ property, name, content }) => {
+    const selector = property 
+      ? `meta[property="${property}"]` 
+      : `meta[name="${name}"]`;
+    
+    let tag = document.querySelector(selector);
+    if (!tag) {
+      tag = document.createElement('meta');
+      if (property) tag.setAttribute('property', property);
+      if (name) tag.setAttribute('name', name);
+      document.head.appendChild(tag);
+    }
+    tag.content = content;
+  });
+
+  // 5. JSON-LD
+  let scriptJsonLd = document.querySelector('script[type="application/ld+json"][data-schema="blog-post"]');
+  if (!scriptJsonLd) {
+    scriptJsonLd = document.createElement('script');
+    scriptJsonLd.type = 'application/ld+json';
+    scriptJsonLd.setAttribute('data-schema', 'blog-post');
+    document.head.appendChild(scriptJsonLd);
+  }
+
+  scriptJsonLd.textContent = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt || post.title,
+    image: post.image ? `${window.location.origin}${post.image}` : undefined,
+    datePublished: post.published,
+    dateModified: post.updated || post.published,
+    author: {
+      '@type': 'Person',
+      name: 'Jovamna Medina'
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Jovamna Medina Dev'
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': canonicalUrl
+    }
+  });
+
+  // Cleanup (muy importante)
+  return () => {
+    document.title = "Jovamna Medina | Blog de Desarrollo Web"; // título por defecto
+
+    if (metaDesc) {
+      metaDesc.content = "Aprende desarrollo web con Django, React y buenas prácticas Full Stack."; // descripción por defecto
+    }
+
+    // Opcional: eliminar JSON-LD al salir de la página
+    if (scriptJsonLd) scriptJsonLd.remove();
+  };
+
+}, [post]);
 
 {/**FIN SEO */}
 

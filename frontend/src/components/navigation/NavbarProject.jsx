@@ -48,6 +48,12 @@ const solutions = [
     icon: MdArticle,
   },
   {
+    name: 'F.T.Hosteleria',
+    description: ' Diseñado para ayudar a digitalizar la gestión de pequeños negocios de hostelería de forma gratuita.',
+    href: '/hosteleria-ficha-tecnica',
+    icon: MdArticle,
+  },
+  {
     name: 'Escandallo',
     description: ' Diseñado para ayudar a digitalizar la gestión de pequeños negocios de hostelería de forma gratuita.',
     href: '/escandallo',
@@ -424,6 +430,16 @@ const guestLinks = (
                    lg:text-sm">
                   <span className="ml-6">
                     Calculo-IRPF
+                  </span>
+                  </NavLink>
+
+                     <NavLink to= "/hosteleria-ficha-tecnica" className="nav-item  
+                   text-black font-semibold hover:bg-neutral-100 
+                   hover:text-violet-700 border-b-2 border-transparent 
+                   hover:border-violet-700 inline-block px-3 h-[2rem]
+                   lg:text-sm">
+                  <span className="ml-6 "
+                  >F.T.Hosteleria
                   </span>
                   </NavLink>
 

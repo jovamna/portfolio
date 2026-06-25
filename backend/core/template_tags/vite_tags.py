@@ -92,3 +92,18 @@ def vite_asset_tags(entry='index.html'):
 
     return mark_safe('\n'.join(tags))
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

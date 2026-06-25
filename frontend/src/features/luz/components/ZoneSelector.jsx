@@ -1,4 +1,4 @@
-import { ZONES } from '../../utils/priceUtils';
+import { ZONES } from '../../../utils/priceUtils';
 
 export default function ZoneSelector({ active, onChange, disabled }) {
   return (

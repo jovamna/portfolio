@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { usePVPC }      from '../../hooks/usePVPC';
-import ZoneSelector     from '../../components/luz/ZoneSelector';
-import MetricCards      from '../../components/luz/MetricCards';
-import PriceChart       from '../../components/luz/PriceChart';
-import BestHours        from '../../components/luz/BestHours';
-import Calculator       from '../../components/luz/Calculator';
+import ZoneSelector     from './components/ZoneSelector';
+import MetricCards      from './components/MetricCards';
+import PriceChart       from './components/PriceChart';
+import BestHours        from './components/BestHours';
+import Calculator       from './components/Calculator';
 import FullWidthLayout from "../../hocs/FullWidthLayout";
 
 const REFRESH_EVERY_MS = 60 * 60 * 1000; // refrescar cada hora
