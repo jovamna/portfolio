@@ -56,7 +56,7 @@ THIRD_PARTY_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'coreapi',
-   'tinymce',
+    'tinymce',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
@@ -192,9 +192,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
-            'libraries': {
-                'vite_tags': 'blog.templatetags.vite_tags',  # 👈 Cambia "blog" por la app real donde lo hayas movido
-            }
         },
     },
 ]
