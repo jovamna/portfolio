@@ -21,7 +21,7 @@ SITE_ID = 1
 
 
 
-FRONTEND_URL = 'https://www.muckas-store.com'
+FRONTEND_URL = 'https://jovamnamedina.com'
 # Opcional: cache de sitemap
 SITEMAP_CACHE_TIMEOUT = 60 * 60  # 1 hora
 
