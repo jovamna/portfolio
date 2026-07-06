@@ -321,7 +321,7 @@ def spa_entrypoint(request):
 
             context.update({
                 'is_post_page': True,
-                'seo_title': f"{post.title} | {post.category.name if hasattr(post, 'category') and post.category else ''} | Jovamna Medina".strip(' | '),
+                'seo_title': safe_truncate(f"{post.title} | Jovamna Medina", 70),
                 'seo_description': descripcion_seo,
                 'canonical_url': url_canonica,
                 'og_type': 'article',
@@ -564,7 +564,7 @@ def robots_txt(request):
 
 
 
-
+#'seo_title': f"{post.title} | {post.category.name if hasattr(post, 'category') and post.category else ''} | Jovamna Medina".strip(' | '),
 
 
 
