@@ -80,7 +80,7 @@ def category_canonical_url(category):
 # =========================
 
 def organization_json_ld():
-    frontend_url = getattr(settings, 'FRONTEND_URL', 'https://jovamnamedina.com')
+    frontend_url = getattr(settings, 'FRONTEND_URL', 'https://jovamnamedina.com').rstrip('/')
     return {
         "@context": "https://schema.org",
         "@type": "Person",                    # Cambiado a Person porque es portafolio personal
@@ -99,7 +99,7 @@ def organization_json_ld():
 
 
 def website_json_ld():
-    frontend_url = getattr(settings, 'FRONTEND_URL', 'https://jovamnamedina.com')
+    frontend_url = getattr(settings, 'FRONTEND_URL', 'https://jovamnamedina.com').rstrip('/')
     return {
         "@context": "https://schema.org",
         "@type": "WebSite",
@@ -114,7 +114,7 @@ def website_json_ld():
     }
 
 
-def project_json_ld(project, canonical_url, image_url):
+def project_json_ld(project, canonical_url, seo_image):
     data = {
         "@context": "https://schema.org",
         "@type": "CreativeWork",
@@ -123,7 +123,7 @@ def project_json_ld(project, canonical_url, image_url):
         "url": canonical_url,
         "image": {
             "@type": "ImageObject",
-            "url": image_url,
+            "url": seo_image,
             "caption": project.title
         },
         "author": organization_json_ld(),
@@ -136,7 +136,7 @@ def project_json_ld(project, canonical_url, image_url):
     return data
 
 
-def post_json_ld(post, canonical_url, image_url):
+def post_json_ld(post, canonical_url, seo_image):
     data = {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
@@ -145,7 +145,7 @@ def post_json_ld(post, canonical_url, image_url):
         "url": canonical_url,
         "image": {
             "@type": "ImageObject",
-            "url": image_url,
+            "url": seo_image,
             "caption": post.title
         },
         "author": organization_json_ld(),
@@ -177,7 +177,7 @@ def category_json_ld(category, canonical_url):
 
 
 def home_json_ld():
-    frontend_url = getattr(settings, 'FRONTEND_URL', 'https://jovamnamedina.com')
+    frontend_url = getattr(settings, 'FRONTEND_URL', 'https://jovamnamedina.com').rstrip('/')
     return {
         "@context": "https://schema.org",
         "@type": "WebPage",
@@ -193,7 +193,7 @@ def home_json_ld():
 # =========================
 
 def build_base_context(request):
-    frontend_url = getattr(settings, 'FRONTEND_URL', 'https://jovamnamedina.com')
+    frontend_url = getattr(settings, 'FRONTEND_URL', 'https://jovamnamedina.com').rstrip('/')
 
     return {
         'seo_title': "Jovamna Medina | Full Stack Developer & AI",
@@ -229,23 +229,27 @@ def spa_entrypoint(request):
     path = request.path.strip('/')
     parts = [p for p in path.split('/') if p]
     context = build_base_context(request)
+    
+    # Para verificar en logs que está entrando por Django:
+    # print("🔥 DJANGO SPA ENTRYPOINT:", request.path)
 
     # ====================== HOME ======================
     if not parts or parts[0] in ('home', ''):
         url_canonica = build_absolute_url()
+        default_img = "https://jovamnamedina.com/custom-static/images/facebookweb.jpg"
         context.update({
             'is_home_page': True,
             'canonical_url': url_canonica,
             'og_type': 'website',
-            'og_title': "Jovamna Medina | Portfolio profesional de Desarrollo Web Full Stack",
+            'og_title': "Jovamna Medina | Portfolio Profesional de Desarrollo Web Full Stack",
             'og_description': "Desarrolladora Full Stack en Django y React.",
-            'og_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",  # imagen por defecto
+            'og_image': default_img,  # imagen por defecto
             'og_url': url_canonica,
             'twitter_card': 'summary_large_image',
             'twitter_title': "Jovamna Medina",
             'twitter_description': "Desarrolladora Full Stack en Django y React.",
-            'twitter_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
-            'seo_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
+            'twitter_image': default_img,
+            'seo_image': default_img,
             'breadcrumbs': [{'name': 'Inicio', 'url': url_canonica}],
             'jsonld_primary': json.dumps(home_json_ld(), ensure_ascii=False),
         })
@@ -344,6 +348,72 @@ def spa_entrypoint(request):
             
         except Post.DoesNotExist:
             context['seo_robots'] = 'noindex,follow'
+            
+            
+            
+    # ====================== BLOG CATEGORY / SUBCATEGORY ======================
+    # ====================== BLOG CATEGORY / SUBCATEGORY ======================
+    if parts[0] == 'blog' and len(parts) in (2, 3) and parts[1] != 'post':
+        
+        if len(parts) == 2:
+            # /blog/:categorySlug  -> debe ser una categoría SIN padre
+            slug_categoria = parts[1]
+            try:
+                category = Category.objects.get(slug=slug_categoria, parent__isnull=True)
+            except Category.DoesNotExist:
+                # 🔥 Blindaje: si existe como subcategoría (con padre), es una URL incorrecta -> 404
+                if Category.objects.filter(slug=slug_categoria, parent__isnull=False).exists():
+                    raise Http404("Las subcategorías no pueden accederse sin su categoría padre.")
+                context['seo_robots'] = 'noindex,follow'
+                category = None
+        else:
+            # /blog/:categorySlug/:subcategorySlug -> ambos deben coincidir en la cadena real
+            parent_slug, child_slug = parts[1], parts[2]
+            try:
+                category = Category.objects.get(slug=child_slug, parent__slug=parent_slug)
+            except Category.DoesNotExist:
+                context['seo_robots'] = 'noindex,follow'
+                category = None
+
+        if category:
+            chain = category_chain(category)
+            url_canonica = category_canonical_url(category)
+            imagen_seo = get_best_image(category)
+            descripcion_seo = safe_truncate(getattr(category, 'description', ''), 160)
+
+            breadcrumbs = [
+                {'name': 'Inicio', 'url': build_absolute_url()},
+                {'name': 'Blog', 'url': build_absolute_url('blog')},
+            ]
+            acumulado = ['blog']
+            for c in chain:
+                acumulado.append(c.slug)
+                breadcrumbs.append({
+                    'name': c.name,
+                    'url': build_absolute_url('/'.join(acumulado))
+                })
+
+            context.update({
+                'is_category_page': True,
+                'seo_title': f"{category.name} | Blog | Jovamna Medina",
+                'seo_description': descripcion_seo,
+                'canonical_url': url_canonica,
+                'og_type': 'website',
+                'og_title': category.name,
+                'og_description': descripcion_seo,
+                'og_image': imagen_seo,
+                'og_url': url_canonica,
+                'twitter_card': 'summary_large_image',
+                'twitter_title': category.name,
+                'twitter_description': descripcion_seo,
+                'twitter_image': imagen_seo,
+                'seo_image': imagen_seo,
+                'breadcrumbs': breadcrumbs,
+                'jsonld_primary': json.dumps(category_json_ld(category, url_canonica), ensure_ascii=False),
+                'jsonld_breadcrumbs': json.dumps(breadcrumb_json_ld(breadcrumbs), ensure_ascii=False),
+            })
+            return render(request, 'index.html', context)
+
 
     # ====================== ESCANDALLO ======================
     if len(parts) >= 1 and parts[0] == 'escandallo':

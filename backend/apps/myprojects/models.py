@@ -70,6 +70,7 @@ class Project(models.Model):
     tags = models.ManyToManyField('Tag', related_name="tag", verbose_name = "Keywords", blank=True)
     authors = models.ManyToManyField('Authors', verbose_name = "Autores", related_name="authors", blank=True)
     published = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Última modificación")
     views = models.IntegerField(default=0, blank=True)
     status =  models.CharField(max_length=10, choices=options, default='draft')
 

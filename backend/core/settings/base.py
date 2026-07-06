@@ -172,13 +172,18 @@ if not DEBUG:
 
 #os.path.join(BASE_DIR, 'templates/emails')
 
+#os.path.join(BASE_DIR, 'templates/emails')
+import os
+
+ROOT_URLCONF = 'core.urls'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-           'DIRS': [os.path.join(os.path.dirname(BASE_DIR), 'frontend', 'dist'),
-                    os.path.join(BASE_DIR, 'templates/emails')
-                    ],
-           
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(os.path.dirname(BASE_DIR), 'frontend', 'dist'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

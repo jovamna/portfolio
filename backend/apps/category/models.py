@@ -15,6 +15,7 @@ class Category(models.Model):
     
     name = models.CharField(max_length=200, unique=True)
     thumbnail = models.ImageField(upload_to='media/categories/', blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
     slug = models.SlugField(max_length=255, unique=True, blank=True)
     views = models.IntegerField(default=0, blank=True, verbose_name="Vistas")
 
