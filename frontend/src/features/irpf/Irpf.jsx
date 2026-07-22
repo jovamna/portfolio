@@ -1,12 +1,13 @@
 import { useState, useMemo, useEffect } from 'react';
-import { calcularRetencion } from '../../../utils/irpfCalc';
-import SalaryForm   from '../../../components/irpf/SalaryForm';
-import FamilyForm   from '../../../components/irpf/FamilyForm';
-import ResultsPanel from '../../../components/irpf/ResultsPanel';
-import FullWidthLayout from "../../../hocs/FullWidthLayout";
+import { calcularRetencion } from '../../utils/irpfCalc';
+import SalaryForm   from './components/SalaryForm';
+import FamilyForm   from './components/FamilyForm';
+import ResultsPanel from './components/ResultsPanel';
+import FullWidthLayout from "../../hocs/FullWidthLayout";
 
 
 // ─── SEO ──────────────────────────────────────────────────────────────────────
+// ─── SEO APP ──────────────────────────────────────────────────────────────────
 function useSEO() {
   useEffect(() => {
     document.title = 'Calculadora Retención IRPF 2026 — Cuánto me retienen en nómina';
@@ -31,21 +32,22 @@ function useSEO() {
       tag.setAttribute('content', content);
     };
 
+    // Metadatos Estándar
     setMeta('name', 'description',
-      'Calcula gratis tu retención de IRPF 2026 según tu salario, situación familiar e hijos. ' +
-      'Descubre tu neto mensual y el desglose del cálculo paso a paso.'
+      'Calcula gratis tu retención de IRPF 2026 según tu salario, situación familiar e hijos. Descubre tu neto mensual y el desglose del cálculo paso a paso.'
     );
     setMeta('name', 'keywords',
-      'calculadora irpf, retención irpf, cuanto me retienen nómina, irpf 2026, ' +
-      'calculadora retención, neto mensual españa'
-    );
-    setMeta('property', 'og:title',   'Calculadora IRPF 2026 — Retención en nómina');
-    setMeta('property', 'og:type',    'website');
-    setMeta('property', 'og:description',
-      'Calcula tu retención de IRPF y cuánto cobras neto al mes en España.'
+      'calculadora irpf, retención irpf, cuanto me retienen nómina, irpf 2026, calculadora retención, neto mensual españa'
     );
 
-    // JSON-LD
+    // Open Graph (Redes Sociales)
+    setMeta('property', 'og:title',       'Calculadora IRPF 2026 — Retención en nómina');
+    setMeta('property', 'og:type',        'website');
+    setMeta('property', 'og:url',         canonicalUrl);
+    setMeta('property', 'og:image', 'https://jovamnamedina.com/custom-static/images/facebookweb.jpg');
+    setMeta('property', 'og:description', 'Calcula tu retención de IRPF y cuánto cobras neto al mes en España.');
+
+    // JSON-LD (Schema.org WebApplication)
     let ld = document.querySelector('script[data-schema="irpf-app"]');
     if (!ld) {
       ld = document.createElement('script');
@@ -64,7 +66,6 @@ function useSEO() {
     });
   }, []);
 }
-
 
 
 
@@ -136,48 +137,58 @@ export default function App() {
 
   return (
     <FullWidthLayout>
-    <main className="w-full min-h-screen 
-    bg-gray-50/50 text-gray-800 
-    pt-[140px] pb-[60px] flex flex-col justify-center">
-      
-      {/* Header */}
-      <header className="w-full max-w-7xl px-4 md:px-8 mb-6">
-        <div className="w-full  bg-white">
-          <h1 className="kaushan tracking-wider 
-              lg:text-5xl  text-2xl font-black text-gray-900  
-              lg:py-4 flex items-center gap-2 underline underline-offset-8">
-            Calculadora de retención IRPF
-          </h1>
-          <p className="text-sm font-medium text-neutral-700 mt-0.5">
+    <main className="wrapper w-full min-h-screen text-gray-800 
+    pt-[120px] pb-[60px] ">
+
+
+      <div className='flex flex-col lg:w-[88.5%] w-full px-4 mx-auto'>
+
+         {/* Header */}
+        <header className="w-full flex flex-col items-center mb-6">
+       
+            <h1 className="kaushan tracking-wider 
+              lg:text-5xl text-2xl font-black text-gray-900  
+              lg:py-2 py-2 flex items-center underline underline-offset-8 text-center">
+             Calculadora de Retención IRPF
+            </h1>
+          <p className="lg:text-base lg:mt-[10px] mt-[4px] text-sm font-medium text-neutral-700 mt-0.5">
             Estima cuánto te retienen en la nómina y cuánto cobras neto al mes · 2026
           </p>
-        </div>
+        
       </header>
 
       {/* Grid Layout */}
-      <div className="w-full max-w-7xl px-4 md:px-8 grid grid-cols-1 lg:grid-cols-3 gap-6 items-start flex-1">
+      <div className="w-full max-w-7xl 
+      grid grid-cols-1 lg:grid-cols-3 gap-6 items-start 
+      flex-1 border border-neutral-600 rounded-md lg:py-8">
         
         {/* Columna Izquierda: Formularios y botón de reset */}
-        <div className="lg:col-span-2 w-full flex flex-col gap-6">
+        <div className="lg:col-span-2 w-full flex flex-col gap-6 ">
           <SalaryForm values={values} onChange={setValues} />
           <FamilyForm values={values} onChange={setValues} />
-          
-          <button
+
+
+          <div className='p-8'>
+             <button
             onClick={() => setValues(DEFAULTS)}
             type="button"
             className="text-xs lg:text-sm rounded-lg font-bold text-white 
-            hover:text-red-500 self-start 
-            transition-colors bg-mauve-600 px-2 py-2 "
+            hover:text-neutral-800 self-start 
+            transition-colors bg-mauve-600 px-4 py-4 uppercase"
           >
-            Restablecer datos del formulario
+            Nuevo cálculo
           </button>
+
+
+          </div>
+         
         </div>
 
 
        {/**COLUMNA DEL COSTADO */}
         {/* Columna Derecha: Resultados (Sticky / Fijo en escritorio) */}
         <aside className="w-full lg:sticky lg:top-[100px] flex flex-col gap-3">
-          <p className="kaushan tracking-wider underline underline-offset-8 lg:text-2xl text-xs font-bold text-black text-center  tracking-tight px-1">
+          <p className="kaushan tracking-wider underline underline-offset-8 lg:text-2xl text-base font-bold text-black text-center  tracking-tight px-1">
             Resultado del Análisis
           </p>
           <div className="w-full bg-white border border-gray-100 rounded-xl shadow-sm p-5">
@@ -187,16 +198,23 @@ export default function App() {
       </div>
 
      
+      </div>
+
+
+
+
+
+
 
 
     {/**CONTENIDO */}
 
-    <div>
+    <div className='lg:py-16 py-8  md:py-12'>
 
 
       <section className="max-w-4xl mx-auto px-4 py-12 text-gray-800 space-y-8">
   
-  <header className="space-y-2">
+       <header className="space-y-2">
     <h2 className="text-2xl font-bold text-black tracking-tight underline underline-offset-8">
       ¿Cómo calcular tu Sueldo Neto en España? Guía Paso a Paso
     </h2>

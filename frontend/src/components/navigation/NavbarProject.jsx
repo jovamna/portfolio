@@ -318,7 +318,8 @@ const guestLinks = (
                h-[48px] md:h-[60px] sm:h-[60px] lg:h-[60px]">
                
                <span className="sr-only">Portafolio Jovamna Medina</span>
-               <NavLink to= "/">
+               <NavLink  className="focus:outline-none focus:ring-0 focus-visible:outline-none"
+               to= "/">
                <img className="image-logo w-full h-full md:h-full md:w-full lg:h-[60px] object-contain"
                src={logo}
                alt="logo"

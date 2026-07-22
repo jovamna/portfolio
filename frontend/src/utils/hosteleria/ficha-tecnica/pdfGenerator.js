@@ -30,9 +30,24 @@ export function generarPDF(ficha) {
 
   // ── Datos generales ───────────────────────────────────────────────────────
   doc.setFontSize(10);
+
+  const formatManoObra = (valor) => {
+    if (!valor) return '—';
+    const texto = String(valor).trim();
+    // Si ya incluye la palabra "colaborador" o "colaboradores", lo dejamos tal cual
+    if (texto.toLowerCase().includes('colaborador')) {
+      return texto;
+    }
+    // Si solo puso un número (ej: 1 o 5)
+    return `${texto} ${Number(texto) === 1 ? 'colaborador' : 'colaboradores'}`;
+  };
+
+
   const datos = [
     ['Tiempo de elaboración', ficha.tiempoElaboracion || '—'],
     ['Temperatura de servicio', ficha.temperaturaLabel || '—'],
+    ['Mano de Obra', formatManoObra(ficha.ManodeObra)],
+    ['Utensilios Usados', ficha.maquinaria || '—'],
   ];
   datos.forEach(([label, value]) => {
     doc.setFont(undefined, 'bold');

@@ -20,7 +20,7 @@ import {useEffect, useState, lazy, Suspense } from 'react';
 import Logo from './containers/inicio/Logo';
 import Escandallo from './features/escandallo/Escandallo';
 import Luz from './features/luz/Luz';
-import Irpf from './features/irpf/components/Irpf';
+import Irpf from './features/irpf/Irpf';
 import FichaTecnica from './features/ficha-tecnica//FichaTecnica';
 
 

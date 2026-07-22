@@ -20,8 +20,10 @@ export default function SalaryForm({ values, onChange }) {
   const tipo = values.salarioTipo || 'anual';
   const esMensual = tipo === 'mensual';
 
+  //border-t border-gray-500
+
   return (
-    <section className="w-full p-8 bg-white border-t border-gray-500 hover:shadow-md transition-shadow flex flex-col gap-8">
+    <section className="w-full p-8 bg-white  hover:shadow-md transition-shadow flex flex-col gap-8">
       <h2 className="text-lg font-bold text-black underline underline-offset-4 tracking-tight">
         Datos del salario
       </h2>

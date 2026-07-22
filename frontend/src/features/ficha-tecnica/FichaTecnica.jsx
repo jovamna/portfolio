@@ -20,8 +20,11 @@ import RentabilidadPanel  from './components/RentabilidadPanel';
 // ─── SEO ──────────────────────────────────────────────────────────────────────
 function useSEO() {
   useEffect(() => {
-    // 1. Título de la página (¡Excelente elección de palabras clave!)
-    document.title = 'Ficha Técnica de Plato Gratis — Genera PDF para tu Restaurante';
+    // URL definitiva de la App
+    const canonicalUrl = 'https://jovamnamedina.com/hosteleria-ficha-tecnica';
+
+    // 1. Título de la página (Abarca platos de restaurante y recetas de coctelería/bar)
+    document.title = 'Ficha Técnica de Cocina y Cócteles Gratis — Generador PDF';
 
     // Helper para gestionar las etiquetas meta
     const setMeta = (attr, val, content) => {
@@ -34,27 +37,39 @@ function useSEO() {
       tag.setAttribute('content', content);
     };
 
+    // 2. Meta Descripción & Keywords (Atracción para Chefs y Head Bartenders)
     setMeta('name', 'description',
-      'Crea fichas técnicas de cocina profesionales gratis. Ingredientes, alérgenos, ' +
-      'preparación y emplatado. Descarga en PDF listo para tu restaurante.'
+      'Crea fichas técnicas de cocina y coctelería profesionales gratis. Estandariza recetas, ' +
+      'ingredientes, alérgenos y emplatado/presentación. Descarga en PDF para tu restaurante o bar.'
     );
     setMeta('name', 'keywords',
-      'ficha tecnica plato, ficha tecnica cocina pdf, plantilla ficha tecnica restaurante, ' +
-      'alergenos carta restaurante, escandallo ficha tecnica'
+      'ficha tecnica plato, ficha tecnica coctel, receta estandar bar, ficha tecnica cocina pdf, ' +
+      'plantilla ficha tecnica restaurante, alergenos carta restaurante, recetario de barra'
     );
 
-    // ─── 🔗 AÑADIR LA ETIQUETA CANONICAL ──────────────────────────────────────
+    // 3. Open Graph (Redes Sociales)
+    setMeta('property', 'og:title',       'Generador de Fichas Técnicas de Cocina y Bar Gratis (PDF)');
+    setMeta('property', 'og:type',        'website');
+    setMeta('property', 'og:url',         canonicalUrl);
+    setMeta('property', 'og:image',       'https://jovamnamedina.com/custom-static/images/facebookweb.jpg');
+    setMeta('property', 'og:description', 'Crea y estandariza fichas técnicas profesionales para platos y cócteles gratis. Control de alérgenos y exportación a PDF.');
+
+    // 4. Twitter Cards
+    setMeta('name', 'twitter:card',        'summary_large_image');
+    setMeta('name', 'twitter:title',       'Ficha Técnica de Platos y Cócteles | Jovamna Medina');
+    setMeta('name', 'twitter:description', 'Herramienta para crear fichas técnicas de cocina y barra en PDF. Estandariza tu carta.');
+    setMeta('name', 'twitter:image',       'https://jovamnamedina.com/custom-static/images/facebookweb.jpg');
+
+    // 5. Canonical Tag
     let canonicalTag = document.querySelector('link[rel="canonical"]');
     if (!canonicalTag) {
       canonicalTag = document.createElement('link');
       canonicalTag.setAttribute('rel', 'canonical');
       document.head.appendChild(canonicalTag);
     }
-    // Pon aquí la URL real definitiva de donde estará alojada tu app
-    canonicalTag.setAttribute('href', 'https://jovamnamedina.com/hosteleria-ficha-tecnica');
+    canonicalTag.setAttribute('href', canonicalUrl);
 
-
-    // ─── 📊 JSON-LD SCHEMA ORG (¡Puntazo extra para Google!) ──────────────────
+    // 6. JSON-LD Schema.org (WebApplication para Cocina y Bar)
     let ld = document.querySelector('script[data-schema="ficha-tecnica-app"]');
     if (!ld) {
       ld = document.createElement('script');
@@ -65,16 +80,20 @@ function useSEO() {
     ld.textContent = JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'WebApplication',
-      name: 'Generador de Fichas Técnicas de Cocina',
-      description: 'Herramienta gratuita para crear fichas técnicas de platos con ingredientes, alérgenos y emplatado, descargables en PDF.',
+      name: 'Generador de Fichas Técnicas de Cocina y Bar',
+      description: 'Herramienta gratuita para crear fichas técnicas de platos y cócteles con ingredientes, alérgenos, pasos y presentación, descargables en PDF.',
+      url: canonicalUrl,
       applicationCategory: 'BusinessApplication',
       operatingSystem: 'All',
+      author: {
+        '@type': 'Person',
+        name: 'Jovamna Medina',
+        url: 'https://jovamnamedina.com/'
+      },
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
     });
   }, []);
 }
-
-
 
 
 
@@ -115,15 +134,34 @@ export default function FichaTecnica() {
       <FullWidthLayout>
     <main className="min-h-screen bg-gray-50/50 py-8 lg:pt-[90px] pt-[80px] px-4 sm:px-6 lg:px-8">
       {/* Header de la página */}
-      <header className="max-w-4xl mx-auto text-center lg:mb-4 mb-2">
-        <h1 className="lg:text-3xl sm:text-4xl text-lg font-extrabold text-black tracking-tight mb-2">
-          Ficha Técnica de Plato
+      <header className="max-w-4xl mx-auto text-center mb-4 md:mb-4 lg:mb-4 px-4">
+        <h1 className="text-base lg:text-3xl sm:text-4xl  font-extrabold text-black tracking-tight mb-2">
+         Ficha Técnica Gratuita para Hosteleria
         </h1>
         <p className="text-xs sm:text-base text-gray-700 max-w-2xl mx-auto leading-relaxed">
-          Crea la ficha técnica de tu receta gratis y descárgala en PDF — ingredientes,
-          alérgenos, preparación y emplatado
+          
+
+          Crea la ficha técnica de tu receta gratis y descárgala en PDF
         </p>
-      </header>
+    
+
+
+
+
+         <div className="lg:my-6  bg-amber-50 p-6 rounded-xl border border-mauve-800">
+         <h3 className="text-sm lg:text-xl font-bold text-neutral-800 mb-2">
+        📄 ¿Por qué necesitas fichas técnicas en tu cocina o barra?
+        </h3>
+         <ul className="space-y-2 text-neutral-700">
+         <li className='text-sm'>🍳 <strong>Estandariza tus recetas:</strong> Mantén el mismo sabor y presentación, cocine quien cocine o prepare quien prepare la copa.</li>
+         <li className='text-sm'>🚀 <strong>Evita pérdidas por descontrol:</strong> Registra gramajes, ingredientes y mermas exactas en cada elaboración.</li>
+       <li className='text-sm'>⚠️ <strong>Control de alérgenos:</strong> Cumple con la normativa sanitaria y protege la salud de tus clientes.</li>
+       </ul>
+       </div>
+
+  </header>
+
+
 
       {/* Contenedor del Formulario */}
       <div className="max-w-4xl mx-auto space-y-6">

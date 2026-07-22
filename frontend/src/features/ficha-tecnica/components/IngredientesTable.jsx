@@ -28,7 +28,7 @@ export default function IngredientesTable({ ingredientes, onChange }) {
   return (
     <section className="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-gray-700">
       <div className="flex justify-between items-center lg:mb-6 mb-2">
-          <h2 className="text-base lg:text-lg font-bold text-black lg:mb-4 mb-2 underline underline-offset-4">
+          <h2 className="text-base lg:text-base font-bold text-black lg:mb-4 mb-2 underline underline-offset-4 uppercase">
           Ingredientes</h2>
         <button 
           type="button" 

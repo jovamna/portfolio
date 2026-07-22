@@ -12,70 +12,70 @@ import { FcCalculator } from "react-icons/fc";
 
 export default function Escandallo() {
 
+
+
+
   {/** 🚀 INICIO SEO DINÁMICO: CALCULADORA DE ESCANDALLOS **/}
+{/** 🚀 INICIO SEO DINÁMICO: CALCULADORA DE ESCANDALLOS (COCINA + BARRA) **/}
 useEffect(() => {
-  // 1. Título estratégico con palabras clave de alta búsqueda (Keywords)
-  document.title = "Calculadora de Escandallos para Hosteleria Gratis | Control de Mermas | Jovamna Medina";
+  // 1. Título estratégico (Abarca platos, recetas y bebidas/copas)
+  document.title = "Calculadora de Escandallos Gratis | Platos, Bebidas y Cócteles | Jovamna Medina";
 
   const canonicalUrl = "https://jovamnamedina.com/escandallo"; 
   
   let canonicalTag = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
   if (!canonicalTag) {
     canonicalTag = document.createElement('link') as HTMLLinkElement;
-    canonicalTag.rel = 'canonical';   // ✅
+    canonicalTag.rel = 'canonical';
     document.head.appendChild(canonicalTag);
-    }
-    canonicalTag.href = canonicalUrl;   // ✅
+  }
+  canonicalTag.href = canonicalUrl;
 
-
-  // 2. Descripción técnica para Google (Lo que aparece en los resultados de búsqueda)
+  // 2. Meta Description (Incluye Food & Beverage Cost)
   let metaDescription = document.querySelector('meta[name="description"]');
   if (!metaDescription) {
     metaDescription = document.createElement('meta');
-    metaDescription.setAttribute('name', 'description'); // <-- Cambiado aquí
+    metaDescription.setAttribute('name', 'description');
     document.head.appendChild(metaDescription);
   }
- metaDescription.setAttribute('content', 'Calcula el escandallo de tus recetas gratis. Controla mermas en bruto, calcula el precio neto por kilo, el coste por ración y optimiza el Food Cost de tu restaurante de forma profesional.'); 
-  
- 
- // 3. Meta tags: Open Graph (Para que se vea hermoso al compartir por WhatsApp o Facebook) y Twitter
+  // 💡 Añadimos "platos, cócteles y bebidas" + "Food & Beverage Cost"
+  metaDescription.setAttribute('content', 'Calcula el escandallo de tus platos, cócteles y bebidas gratis. Controla mermas, calcula el coste por ración o copa y optimiza el Food & Beverage Cost de tu restaurante, bar o pub.'); 
+
+  // 3. Open Graph y Twitter Cards
   const metaTags = [
-    { property: 'og:title', content: 'Calculadora de Escandallos Profesional Gratuita' },
-    { property: 'og:description', content: 'Herramienta hostelera interactiva para calcular el coste real de platos, controlar mermas de ingredientes y asegurar el beneficio de tu negocio.' },
-    { property: 'og:image', content: 'https://jovamnamedina.com/custom-static/images/googleweb.jpg' }, // 💡 Cambia esto por una captura bonita de tu app
+    { property: 'og:title', content: 'Calculadora de Escandallos Profesional (Cocina y Barra)' },
+    { property: 'og:description', content: 'Herramienta hostelera para calcular el coste real de platos, bebidas y cócteles. Controla mermas y asegura el beneficio de tu negocio.' },
+    { property: 'og:image', content: 'https://jovamnamedina.com/custom-static/images/googleweb.jpg' }, 
     { property: 'og:type', content: 'website' },
-    { property: 'og:url', content: 'https://jovamnamedina.com/' }, // 💡 Pon la URL exacta de tu página
+    { property: 'og:url', content: canonicalUrl }, // 💡 Corregido a la URL exacta de la app
 
     { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:title', content: 'Calculadora de Escandallos de Cocina | por Jovamna Medina' },
-    { name: 'twitter:description', content: 'Controla el coste de tus recetas y la pérdida por merma con esta herramienta interactiva inteligente.' },
+    { name: 'twitter:title', content: 'Calculadora de Escandallos: Platos y Bebidas | Jovamna Medina' },
+    { name: 'twitter:description', content: 'Controla el coste de tus recetas, copas y la pérdida por merma con esta herramienta interactiva inteligente.' },
     { name: 'twitter:image', content: 'https://jovamnamedina.com/custom-static/images/facebookweb.jpg' },
     { name: 'twitter:label1', content: 'Categoría' },
-    { name: 'twitter:data1', content: 'Software de Gestión Hostelera / Gastronomía' }
+    { name: 'twitter:data1', content: 'Software de Gestión Hostelera / Gastronomía y Bar' }
   ];
 
- // 3. El bucle para recorrer los Meta Tags (Corregido con setAttribute)
-metaTags.forEach(({ property, name, content }) => {
-  const selector = property ? `meta[property="${property}"]` : `meta[name="${name}"]`;
-  let tag = document.querySelector(selector);
-  
-  if (!tag) {
-    tag = document.createElement("meta");
-    if (property) tag.setAttribute("property", property);
-    if (name) tag.setAttribute("name", name);
-    document.head.appendChild(tag);
-  }
-  
-  // Al usar setAttribute en vez de tag.content, TypeScript ya no protesta
-  if (content) {
-    tag.setAttribute('content', content); // <-- ¡La solución mágica aquí!
-  }
-});
+  metaTags.forEach(({ property, name, content }) => {
+    const selector = property ? `meta[property="${property}"]` : `meta[name="${name}"]`;
+    let tag = document.querySelector(selector);
+    
+    if (!tag) {
+      tag = document.createElement("meta");
+      if (property) tag.setAttribute("property", property);
+      if (name) tag.setAttribute("name", name);
+      document.head.appendChild(tag);
+    }
+    
+    if (content) {
+      tag.setAttribute('content', content);
+    }
+  });
 
- // Le decimos a TypeScript que esto es un HTMLScriptElement o null
-let scriptJsonLd = document.querySelector('script[data-schema="cooking-app"]') as HTMLScriptElement | null;
+  // 4. Schema.org JSON-LD
+  let scriptJsonLd = document.querySelector('script[data-schema="cooking-app"]') as HTMLScriptElement | null;
   if (!scriptJsonLd) {
-    // Al crear el elemento, le aseguramos que es un script usando "as HTMLScriptElement"
     scriptJsonLd = document.createElement('script') as HTMLScriptElement;
     scriptJsonLd.type = 'application/ld+json';
     scriptJsonLd.setAttribute('data-schema', 'cooking-app');
@@ -84,10 +84,10 @@ let scriptJsonLd = document.querySelector('script[data-schema="cooking-app"]') a
 
   scriptJsonLd.textContent = JSON.stringify({
     '@context': 'https://schema.org',
-    '@type': 'WebApplication', // 🔥 Le decimos a Google que esto es un software online
-    name: 'Calculadora de Escandallos Inteligente',
-    description: 'Aplicación web gratuita para realizar escandallos de cocina profesionales, calcular mermas en alimentos, mermas de dinero y porcentaje de Food Cost.',
-    url: 'https://jovamnamedina.com/escandallo',
+    '@type': 'WebApplication',
+    name: 'Calculadora de Escandallos para Cocina y Bar',
+    description: 'Aplicación web gratuita para realizar escandallos de cocina y coctelería, calcular mermas de ingredientes, costes por copa/ración y porcentaje de Food & Beverage Cost.',
+    url: canonicalUrl,
     applicationCategory: 'BusinessApplication',
     operatingSystem: 'All',
     browserRequirements: 'Requires JavaScript. Requires HTML5.',
@@ -620,21 +620,24 @@ const { calculatedRows, totales } = useMemo(() => {
         <div className="max-w-7xl mx-auto px-8">
 
          {/* HEADER */}
-         <div className="flex flex-col w-full mb-6">
-          <h1 className="lg:text-4xl text-base md:text-2xl font-black text-neutral-900 mb-3 flex items-center gap-2">
+         <div className="flex flex-col w-full mb-6 items-center">
+          <h1 className="lg:text-4xl text-base md:text-2xl font-black text-neutral-900 mb-3 flex items-center gap-2 text-center">
           <FcCalculator /> Escandallo Profesional Gratuito
          </h1>
-  
-          <h2 className="text-neutral-700 lg:text-lg text-base font-medium leading-relaxed">
-          Controla mermas, calcula el coste real y asegura la rentabilidad de tus platos de forma profesional.
+
+          <h2 className="text-neutral-700 lg:text-lg text-base font-medium leading-6">
+          Controla mermas, calcula el coste real y asegura la rentabilidad de tus platos, bebidas y cócteles de forma profesional.
           </h2>
 
+
+
          {/* Instrucción Estilizada en una pequeña tarjetita de ayuda */}
-         <div className="bg-neutral-50 border border-neutral-200 rounded-xl text-sm text-neutral-600 shadow-sm">
-          <p className="flex items-center gap-2 font-medium text-neutral-800 mb-1">
+         <div className="flex flex-col items-center bg-neutral-50 border border-neutral-200 
+          lg:mt-[10px] mt-[6px] rounded-xl text-sm text-neutral-600 shadow-sm">
+          <p className="flex items-center gap-2 font-bold text-neutral-800 mb-1">
          💡 ¿Cómo empezar?
          </p>
-         <p>
+         <p className='lg:text-base'>
          Elimina las filas de ejemplo utilizando el botón de borrar y añade tantas filas como ingredientes necesite tu receta. ¡Los datos se guardan solos!
         </p>
         </div>
@@ -1120,7 +1123,7 @@ const { calculatedRows, totales } = useMemo(() => {
       {/* RESUMEN */}
    <div className="mt-6 bg-gradient-to-r from-gray-900 to-black text-white p-6 md:p-10 rounded-3xl shadow-2xl">
   <h2 className="lg:text-3xl md:text-4xl text-lg font-black text-center mb-10 text-amber-400">
-    📊 RESUMEN DEL PLATO
+    📊 RESUMEN DEL CALCULO
   </h2>
   
   {/* 💻 GRID EN 2 FILAS PARA PC (3 columnas) Y 1 COLUMNA EN MÓVIL */}

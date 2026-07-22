@@ -80,13 +80,14 @@ function PostDetail({
 {/**SEO */}
 
 ///SEO
+// ─── SEO POST BLOG ─────────────────────────────────────────────────────────────
 useEffect(() => {
   if (!post) return;
 
   const canonicalUrl = `https://jovamnamedina.com/blog/post/${post.slug}`;
 
-  // 1. TITLE
-  document.title = `${post.title} | Blog de Desarrollo Web | Jovamna Medina`;
+  // 1. TITLE (Optimizado para no superar los 60 caracteres y cortar en Google)
+  document.title = `${post.title} | Jovamna Medina`;
 
   // 2. CANONICAL
   let canonical = document.querySelector('link[rel="canonical"]');
@@ -106,18 +107,24 @@ useEffect(() => {
   }
   metaDesc.content = (post.excerpt || post.title).substring(0, 160);
 
-  // 4. OPEN GRAPH & TWITTER (estilo limpio como el de producto)
+  // Formatear imagen absoluta de forma segura
+  // Si el post tiene imagen propia la usa; si no, usa tu 'facebookweb.jpg' de respaldo
+  const postImageUrl = post.image 
+    ? (post.image.startsWith('http') ? post.image : `${window.location.origin}${post.image}`)
+    : 'https://jovamnamedina.com/custom-static/images/facebookweb.jpg';
+
+  // 4. OPEN GRAPH & TWITTER
   const metas = [
-    { property: 'og:title', content: `${post.title} | Blog de Desarrollo Web` },
-    { property: 'og:description', content: post.excerpt || post.title },
-    { property: 'og:image', content: post.image || 'https://jovamnamedina.com/og-image-tech.png' },
+    { property: 'og:title', content: `${post.title} | Jovamna Medina` },
+    { property: 'og:description', content: (post.excerpt || post.title).substring(0, 160) },
+    { property: 'og:image', content: postImageUrl },
     { property: 'og:url', content: canonicalUrl },
     { property: 'og:type', content: 'article' },
 
     { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:title', content: `${post.title} | Jovamna Medina` },
-    { name: 'twitter:description', content: post.excerpt || post.title },
-    { name: 'twitter:image', content: post.image || 'https://jovamnamedina.com/og-image-tech.png' }
+    { name: 'twitter:description', content: (post.excerpt || post.title).substring(0, 160) },
+    { name: 'twitter:image', content: postImageUrl }
   ];
 
   metas.forEach(({ property, name, content }) => {
@@ -135,7 +142,7 @@ useEffect(() => {
     tag.content = content;
   });
 
-  // 5. JSON-LD
+  // 5. JSON-LD (Schema.org BlogPosting)
   let scriptJsonLd = document.querySelector('script[type="application/ld+json"][data-schema="blog-post"]');
   if (!scriptJsonLd) {
     scriptJsonLd = document.createElement('script');
@@ -149,7 +156,7 @@ useEffect(() => {
     '@type': 'BlogPosting',
     headline: post.title,
     description: post.excerpt || post.title,
-    image: post.image ? `${window.location.origin}${post.image}` : undefined,
+    image: postImageUrl,
     datePublished: post.published,
     dateModified: post.updated || post.published,
     author: {
@@ -166,20 +173,18 @@ useEffect(() => {
     }
   });
 
-  // Cleanup (muy importante)
+  // Cleanup
   return () => {
-    document.title = "Jovamna Medina | Blog de Desarrollo Web"; // título por defecto
+    document.title = "Jovamna Medina | Blog de Desarrollo Web";
 
     if (metaDesc) {
-      metaDesc.content = "Aprende desarrollo web con Django, React y buenas prácticas Full Stack."; // descripción por defecto
+      metaDesc.content = "Aprende desarrollo web con Django, React y buenas prácticas Full Stack.";
     }
 
-    // Opcional: eliminar JSON-LD al salir de la página
     if (scriptJsonLd) scriptJsonLd.remove();
   };
 
 }, [post]);
-
 {/**FIN SEO */}
 
 

@@ -421,14 +421,14 @@ def spa_entrypoint(request):
         
         breadcrumbs = [
             {'name': 'Inicio', 'url': build_absolute_url()},
-            {'name': 'Escandallo Gratuito para Hostelería', 'url': url_canonica}
+            {'name': 'Calculadora de Escandallos Gratis: Platos y Cócteles', 'url': url_canonica}
         ]
 
         escandallo_json_ld = {
             "@context": "https://schema.org",
             "@type": "WebApplication",
             "name": "Escandallo Gratuito para Hostelería | Jovamna Medina",
-            "description": "Calcula el costo de tus recetas, escandallos de cocina y gestiona los márgenes de ganancia de tu restaurante con esta herramienta online gratuita.",
+            "description": "Calcula el costo de tus recetas, escandallos de cocina y bar,  gestiona los márgenes de ganancia de tu restaurante con esta herramienta online gratuita.",
             "url": url_canonica,
             "applicationCategory": "BusinessApplication",
             "operatingSystem": "All",
@@ -437,18 +437,18 @@ def spa_entrypoint(request):
         }
 
         context.update({
-            'seo_title': "Escandallo Gratuito para Hostelería | Jovamna Medina",
-            'seo_description': "Herramienta online gratuita para hosteleros, cocineros, emprendedores",
-            'seo_keywords': "escandallo gratis, escandallo cocina, calcular coste platos, plantilla escandallo, gestion restaurante, herramientas hosteleria",
+            'seo_title': "Calculadora de Escandallos Gratis: Platos, Cócteles y Bebidas | Jovamna Medina",
+            'seo_description': "Herramienta online gratuita para hosteleros, chefs y bartenders. Calcula el escandallo de tus recetas, bebidas y copas, controla mermas y optimiza tu Food & Beverage Cost.",
+            'seo_keywords': "escandallo gratis, escandallo cocina, escandallo coctel, escandallo bebidas, calcular coste platos, calcular coste copas, plantilla escandallo, gestion restaurante bar, herramientas hosteleria",
             'canonical_url': url_canonica,
             'og_type': 'website',
-            'og_title': "Escandallo Gratuito para Hostelería | Jovamna Medina",
-            'og_description': "Herramienta online gratuita para hosteleros y cocineros...",
+            'og_title': "Calculadora de Escandallos para Cocina y Bar Gratis | Jovamna Medina",
+            'og_description': "Herramienta online gratuita para calcular el coste real de tus platos, cócteles y bebidas. Controla mermas y asegura tu beneficio.",
             'og_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",  # imagen por defecto
             'og_url': url_canonica,
             'twitter_card': 'summary_large_image',
-            'twitter_title': "Escandallo Gratuito para Hostelería",
-            'twitter_description': "Herramienta online gratuita para hosteleros...",
+            'twitter_title': "Calculadora de Escandallos Gratis: Platos y Cócteles",
+            'twitter_description': "Calcula el coste de tus recetas de cocina y coctelería gratis. Controla mermas y Food & Beverage Cost.",
             'twitter_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
             'seo_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
             'is_home_page': False,
@@ -457,7 +457,6 @@ def spa_entrypoint(request):
             'jsonld_breadcrumbs': json.dumps(breadcrumb_json_ld(breadcrumbs), ensure_ascii=False),
         })
         return render(request, 'index.html', context)
-    
     # ====================== APP 2 ======================
     # ====================== FICHA TECNICA ======================
     if len(parts) >= 1 and parts[0] == 'hosteleria-ficha-tecnica':
@@ -471,7 +470,7 @@ def spa_entrypoint(request):
         ficha_json_ld = {
             "@context": "https://schema.org",
             "@type": "WebApplication",
-            "name": "Ficha Técnica Gratuita para Hostelería | Jovamna Medina",
+            "name": "Ficha Técnica de Cocina y Cócteles Gratis | Jovamna Medina",
             "description": "Administra las preparaciones con recetas guaradas en las fichas técnicas, con esta herramienta online gratuita.",
             "url": url_canonica,
             "applicationCategory": "BusinessApplication",
@@ -481,12 +480,12 @@ def spa_entrypoint(request):
         }
 
         context.update({
-            'seo_title': "Ficha Técnica Gratuita para Hostelería | Jovamna Medina",
+            'seo_title': "Ficha Técnica de Cocina y Cócteles Gratis| Jovamna Medina",
             'seo_description': "Herramienta online gratuita para hosteleros, cocineros, emprendedores",
             'seo_keywords': "ficha técnica gratis, escandallo cocina, reectas, plantilla recetas, gestion restaurante, herramientas hosteleria",
             'canonical_url': url_canonica,
             'og_type': 'website',
-            'og_title': "Ficha Técnica Gratuita para Hostelería | Jovamna Medina",
+            'og_title': "Ficha Técnica de Cocina y Cócteles Gratis | Jovamna Medina",
             'og_description': "Herramienta online gratuita para hosteleros y cocineros...",
             'og_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",  # imagen por defecto
             'og_url': url_canonica,

@@ -9,7 +9,7 @@ export default function RentabilidadPanel({ costeTotal, pvp, onPvpChange }) {
 
   return (
     <section className="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-gray-700">
-         <h2 className="text-base lg:text-lg font-bold text-black mb-4 underline underline-offset-4">
+         <h2 className="text-base lg:text-base font-bold text-black mb-4 underline underline-offset-4 uppercase">
         Rentabilidad</h2>
 
       <div className="flex flex-col mb-6 w-full max-w-[220px]">

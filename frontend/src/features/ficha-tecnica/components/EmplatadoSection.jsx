@@ -68,7 +68,7 @@ export default function EmplatadoSection({ values, onChange }) {
 
   return (
     <section className=" ">
-         <h2 className="text-base lg:text-lg font-bold text-black mb-4 underline underline-offset-4">
+         <h2 className="text-base lg:text-base font-bold text-black mb-4 underline underline-offset-4 uppercase">
         Emplatado
       </h2>
 

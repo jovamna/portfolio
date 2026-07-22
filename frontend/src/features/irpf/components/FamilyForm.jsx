@@ -64,7 +64,7 @@ export default function FamilyForm({ values, onChange }) {
 
   return (
     <section className="w-full p-8 bg-white 
-    border-t border-b border-gray-500 
+    border-t border-gray-500 
     hover:shadow-md transition-shadow flex flex-col gap-8">
       <h2 className="text-lg font-bold text-black underline underline-offset-4 tracking-tight">
         Situación personal y familiar
