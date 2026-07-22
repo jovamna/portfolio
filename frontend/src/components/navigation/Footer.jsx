@@ -15,47 +15,18 @@ const props = {
 };
 
 const navigation = {
-    blog: [
-      { name: 'Marketing', href: 'https://www.jovamnamedina.com' },
-      { name: 'Analytics', href: '#' },
-     
-    ],
-    
-    about: [
-      { name: 'About', href: '#' },
-      { name: 'Blog', href: '#' },
-     
-    ],
-    legal: [
-  
-      { name: 'Privacy', href: '#' },
-      { name: 'Terms', href: '#' },
-    ],
-    social: [
-      {
-        name: 'Linkedin',
-        href: '#',
-        icon: <LinkedinIcon />,
-      },
-     
-      {
-        name: 'Twitter',
-        href: '#',
-        icon: <TwitterIcon />,
-      },
-      {
-        name: 'GitHub',
-        href: '#',
-        icon: <GithubIcon />,
-      },
-      {
-        name: 'Dribbble',
-        href: '#',
-        icon: <DribbleIcon />,
-      },
-    ],
-  }
-  
+  main: [
+    { name: 'Blog', href: '/blog' },
+    { name: 'About', href: '/' },
+    { name: 'Contacto', href: '/' },
+    { name: 'Privacy', href: '/politica-cookies' },
+  ],
+  social: [
+    { name: 'Linkedin', href: 'https://www.linkedin.com/in/jovamna-medina/', icon: <LinkedinIcon /> },
+    { name: 'Twitter', href: 'https://x.com/FullStackmed', icon: <TwitterIcon /> },
+    { name: 'GitHub', href: 'https://github.com/jovamna', icon: <GithubIcon /> },
+  ],
+};
 function Footer() {
     return (
       <footer className="w-full  bottom-0 p-4  bg-black opacity-95 ">
@@ -69,7 +40,7 @@ function Footer() {
           
           {/*CONTAINER SUSCRIPTION*/}
           
-              <SubscribeForm className="footer-suscribe"/>
+             {/* <SubscribeForm className="footer-suscribe"/>*/}
          
           {/*FIN CONTAINER SUSCRIPTION*/}
 
@@ -79,60 +50,18 @@ function Footer() {
 
 
            {/*CONTAINER GRID DE TODAS LAS CAJAS SEPARACION ENTRE CAJAS xl:col-span-8*/}
-            <div className="movil-footer-tres-menus w-[60%] grid grid-cols-3 gap-16 xl:col-span-16 content-center mt-8 mb-8">
-
-              {/*PRIMERA    CAJA*/}
-                <div className=" movil-footer-tres-menus-uno px-8">
-                   <h3 className="text-xs font-semibold text-gray-400 tracking-wider uppercase">
-                    Blog
-                    </h3>
-                  <ul role="list" className="mt-4 space-y-4">
-                    {navigation.blog.map((item) => (
-                      <li key={item.name}>
-                        <a 
-                        href={item.href} 
-                        className="text-sm text-white hover:text-gray-400">
-                          {item.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              {/*FIN  PRIMERA  CAJA*/}
-
-              {/*SEGUNDA CAJA  padding izq y derechg px-8*/}     
-                <div className="movil-footer-tres-menus-uno  md:mt-0  px-8">
-                  <h3 className="text-xs font-semibold text-gray-400 tracking-wider uppercase">About me</h3>
-                  <ul role="list" className="mt-4 space-y-4">
-                    {navigation.about.map((item) => (
-                      <li key={item.name}>
-                        <a href={item.href} className="text-sm text-white hover:text-gray-400">
-                          {item.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-            {/*FIN SEGUNDA CAJA*/}
-         
-
-              {/*CONTAINER DE LA TERCERA CAJA padding izq y derech px-8*/}
-              <div className="movil-footer-tres-menus-uno md:grid px-8">
-                  <h3 className="text-xs font-semibold text-gray-400 tracking-wider uppercase">Legal</h3>
-                  <ul role="list" className="mt-4 space-y-4">
-                    {navigation.legal.map((item) => (
-                      <li key={item.name}>
-                        <a href={item.href} className="text-sm text-white hover:text-gray-400">
-                          {item.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-              </div>
-              {/*FIN CONTAINER DE LA TERCERA CAJA*/}
-
-
-           </div>
+          {/* NAVEGACIÓN EN UNA SOLA LÍNEA LIMPIA */}
+        <nav className="my-8 flex flex-wrap justify-center gap-x-8 gap-y-4" aria-label="Footer">
+          {navigation.main.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              className="text-sm font-medium text-gray-300 hover:text-white transition-colors"
+            >
+              {item.name}
+            </a>
+          ))}
+        </nav>
            {/*FIN CONTAINER GRID DE TODAS LAS CAJAS SEPARACION ENTRE CAJA*/}
 
 
@@ -156,11 +85,13 @@ function Footer() {
 
 
          {/*PIE DEL FOOTER*/}
-       <div className="footer-pie flex flex-col flex-item-center  border-t border-gray-200  md:flex md:items-center md:justify-between">
+       <div className="footer-pie flex flex-col items-center 
+        border-t border-gray-200  
+        md:flex md:items-center md:justify-between">
 
-       <div className="movil-footer-social flex mt-6">    
-              <ul className="movil-footer-social-ul flex flex-row ">
-              {navigation.social.map((item) => (
+             <div className="movil-footer-social flex mt-6">    
+                 <ul className="movil-footer-social-ul flex flex-row ">
+                {navigation.social.map((item) => (
                 <li className="flex h-6 w-6 ml-8" key={item.name} >
                 <a  href={item.href} className="movil-footer-social-a text-base h-6 w-6 text-white hover:text-gray-500 ">
                   {/*<span className="text-base h-6 w-6">{item.name}</span>*/}
@@ -173,8 +104,8 @@ function Footer() {
             </div>
 
              
-            <div className="movil-footer-pie mt-4 lg:py-2">   
-              <p className="movil-footer-pie-p  text-sm text-gray-400 md:mt-0 md:order-1">
+            <div className="movil-footer-pie mt-4 lg:py-2 flex items-center justify-center">   
+              <p className="movil-footer-pie-p  text-sm text-gray-400 md:mt-0 md:order-1 text-center">
               &copy; 2026 Portfolio Jovamna Medina , Inc. All rights reserved.
              </p>
             </div>

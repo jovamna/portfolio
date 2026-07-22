@@ -185,6 +185,7 @@ class BlogListSubcategoryView(APIView):
     
 
 
+        
 class PostDetailView(APIView):
     authentication_classes = []
     permission_classes = [AllowAny]
@@ -279,6 +280,9 @@ class PostDetailView(APIView):
                 {'error': 'El artículo no existe'}, 
                 status=status.HTTP_404_NOT_FOUND
             )
+            
+            
+          
 
 class SearchBlogView(APIView):
     authentication_classes = []  # Desactiva la autenticación
@@ -308,3 +312,116 @@ class SearchBlogView(APIView):
 
         return paginator.get_paginated_response({'filtered_posts': serializer.data})
         #return Response({'filtered_posts':serializer.data},status=status.HTTP_200_OK)
+        
+        
+        
+  
+
+class ConPostRecientePostDetailView(APIView):
+    authentication_classes = []
+    permission_classes = [AllowAny]
+
+    CACHE_TIMEOUT = 60 * 15  # 15 minutos
+
+    def get_client_ip(self, request):
+        ip = request.META.get("HTTP_CF_CONNECTING_IP")
+        if not ip:
+            x_forwarded = request.META.get("HTTP_X_FORWARDED_FOR")
+            if x_forwarded:
+                ip = x_forwarded.split(",")[0].strip()
+            else:
+                ip = request.META.get("REMOTE_ADDR")
+        return ip
+
+    def register_view(self, post, ip):
+        already_viewed = PostViewCount.objects.filter(
+            post=post,
+            ip_address=ip
+        ).exists()
+
+        if already_viewed:
+            return False
+
+        PostViewCount.objects.create(
+            post=post,
+            ip_address=ip
+        )
+
+        # Usamos .objects general para asegurar la actualización atómica
+        Post.objects.filter(pk=post.pk).update(
+            views=F("views") + 1
+        )
+        
+        # Sincronizamos el objeto en memoria una única vez aquí
+        post.refresh_from_db(fields=["views"])
+        return True
+    
+    
+    def get_post_data(self, post):
+        cache_key = f"post_{post.slug}"
+        data = cache.get(cache_key)
+
+        if data:
+            return data
+
+        total_hearts = (
+            Review.objects
+            .filter(post=post)
+            .aggregate(total_hearts=Sum("hearts"))
+            .get("total_hearts")
+            or 0
+        )
+
+        # 1. Serializamos el post principal
+        serializer = PostSerializer(post)
+        data = serializer.data
+        data["total_hearts"] = total_hearts
+
+        # 2. Obtenemos los posts recientes (o relacionados) excluyendo el actual
+        # (Usando tu método de modelo o una consulta directa)
+        recent_posts_qs = Post.objects.filter(
+            status='published'
+        ).exclude(
+            id=post.id # ¡Muy importante para no mostrar el mismo post abajo!
+        ).order_by('-published')[:4] 
+
+        # 3. Serializamos la lista de posts recientes
+        # Nota: Puedes usar PostSerializer o un serializer más ligero (ej: PostListSerializer)
+        data["recent_posts"] = PostSerializer(recent_posts_qs, many=True).data
+
+        cache.set(cache_key, data, self.CACHE_TIMEOUT)
+        return data
+    
+    def get(self, request, post_slug, format=None):
+        ip = self.get_client_ip(request)
+
+        try:
+            # Tu mánager personalizado aquí está perfecto
+            post = Post.post_objects.get(slug=post_slug)
+            
+            # Registra e incrementa internamente
+            self.register_view(post=post, ip=ip)
+            
+            # Traemos la data (de caché o DB)
+            data = self.get_post_data(post)
+            
+            # Inyectamos el contador en tiempo real
+            data["views"] = post.views
+            return Response(data, status=status.HTTP_200_OK)
+
+        except Post.DoesNotExist:
+            history = PostSlugHistory.objects.filter(old_slug=post_slug).select_related('post').first()
+        
+            if history:
+                frontend_url = f"/blog/post/{history.post.slug}"
+                return Response({
+                    'redirect': True,
+                    'frontend_url': frontend_url,
+                    'new_slugs': [history.post.slug],
+                    'message': 'El artículo cambió de slug'
+                }, status=status.HTTP_308_PERMANENT_REDIRECT)
+            
+            return Response(
+                {'error': 'El artículo no existe'}, 
+                status=status.HTTP_404_NOT_FOUND
+            )

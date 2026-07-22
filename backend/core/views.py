@@ -457,6 +457,103 @@ def spa_entrypoint(request):
             'jsonld_breadcrumbs': json.dumps(breadcrumb_json_ld(breadcrumbs), ensure_ascii=False),
         })
         return render(request, 'index.html', context)
+    
+    # ====================== APP 2 ======================
+    # ====================== FICHA TECNICA ======================
+    if len(parts) >= 1 and parts[0] == 'hosteleria-ficha-tecnica':
+        url_canonica = build_absolute_url("hosteleria-ficha-tecnica")
+        
+        breadcrumbs = [
+            {'name': 'Inicio', 'url': build_absolute_url()},
+            {'name': 'Fichas Técnica Gratuita para Hostelería', 'url': url_canonica}
+        ]
+
+        ficha_json_ld = {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "Ficha Técnica Gratuita para Hostelería | Jovamna Medina",
+            "description": "Administra las preparaciones con recetas guaradas en las fichas técnicas, con esta herramienta online gratuita.",
+            "url": url_canonica,
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "All",
+            "browserRequirements": "Requires JavaScript. Requires HTML5.",
+            "author": organization_json_ld()
+        }
+
+        context.update({
+            'seo_title': "Ficha Técnica Gratuita para Hostelería | Jovamna Medina",
+            'seo_description': "Herramienta online gratuita para hosteleros, cocineros, emprendedores",
+            'seo_keywords': "ficha técnica gratis, escandallo cocina, reectas, plantilla recetas, gestion restaurante, herramientas hosteleria",
+            'canonical_url': url_canonica,
+            'og_type': 'website',
+            'og_title': "Ficha Técnica Gratuita para Hostelería | Jovamna Medina",
+            'og_description': "Herramienta online gratuita para hosteleros y cocineros...",
+            'og_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",  # imagen por defecto
+            'og_url': url_canonica,
+            'twitter_card': 'summary_large_image',
+            'twitter_title': "Ficha Técnica Gratuita para Hostelería",
+            'twitter_description': "Herramienta online gratuita para hosteleros...",
+            'twitter_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
+            'seo_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
+            'is_home_page': False,
+            'breadcrumbs': breadcrumbs,
+            'jsonld_primary': json.dumps(ficha_json_ld, ensure_ascii=False),
+            'jsonld_breadcrumbs': json.dumps(breadcrumb_json_ld(breadcrumbs), ensure_ascii=False),
+        })
+        return render(request, 'index.html', context)
+    
+    # ====================== APP 3 ======================
+    
+    # ====================== IRPF ======================
+    # ====================== CALCULADORA IRPF ======================
+    if len(parts) >= 1 and parts[0] == 'calcula-irpf':
+        url_canonica = build_absolute_url("calcula-irpf")
+        breadcrumbs = [
+            {'name': 'Inicio', 'url': build_absolute_url()},
+            {'name': 'Calculadora de Retenciones IRPF', 'url': url_canonica}
+        ]
+        
+        irpf_json_ld = {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "Calculadora IRPF Gratuita | Jovamna Medina",
+            "description": "Calcula el tipo de retención del IRPF, sueldo neto mensual y retenciones según tu salario bruto y situación familiar con esta calculadora online gratuita.",
+            "url": url_canonica,
+            "applicationCategory": "FinanceApplication",  # ← Cambiado a Finanzas para mayor precisión SEO
+            "operatingSystem": "All",
+            "browserRequirements": "Requires JavaScript. Requires HTML5.",
+            "author": organization_json_ld(),
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "EUR"
+              }
+        }
+
+        context.update({
+            'seo_title': "Calculadora de IRPF Gratuita | Calcula tu Sueldo Neto",
+            'seo_description': "Calcula tu retención de IRPF y tu sueldo neto mensual de forma rápida y gratuita. Herramienta online para trabajadores y autónomos.",
+            'seo_keywords': "calculadora irpf, calcular sueldo neto, retenciones irpf, calcular nomina, irpf autonomos, retencion irpf gratis",
+            'canonical_url': url_canonica,
+            'og_type': 'website',
+            'og_title': "Calculadora de IRPF Gratuita | Jovamna Medina",
+            'og_description': "Descubre cuánto cobrarás en tu nómina. Calcula tu retención de IRPF y sueldo neto en segundos.",
+            'og_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
+            'og_url': url_canonica,
+            'twitter_card': 'summary_large_image',
+            'twitter_title': "Calculadora de Retenciones IRPF Gratuita",
+            'twitter_description': "Calcula tu sueldo neto y retención de IRPF de forma rápida y sencilla.",
+            'twitter_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
+            'seo_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
+            'is_home_page': False,
+            'breadcrumbs': breadcrumbs,
+            'jsonld_primary': json.dumps(irpf_json_ld, ensure_ascii=False),
+            'jsonld_breadcrumbs': json.dumps(breadcrumb_json_ld(breadcrumbs), ensure_ascii=False),
+         })
+        return render(request, 'index.html', context)
+    
+    # ====================== FIN APPS  ======================
+
 
     # ====================== FALLBACK ======================
     if 'canonical_url' not in context:

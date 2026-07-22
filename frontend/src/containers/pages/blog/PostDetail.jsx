@@ -295,23 +295,23 @@ useEffect(() => {
         pt-[70px]">
         
         {/*COLUMNA LATERAL */}
-        <div className="blogpost-column-1 hidden md:hidden lg:w-[12%] lg:block">
-        </div>
-        {/*FIN COLUMNA LATERAL */}
+      <div className="blogpost-column-1 hidden md:hidden lg:w-[12%] lg:block">
+      </div>
+      {/*FIN COLUMNA LATERAL */}
 
         {/*COLUMNA CENTRO */}
-        <div className="blogpost-column-2 w-[100%] md:w-[100%] lg:w-[76%] max-auto">
+    <div className="blogpost-column-2 w-[100%] md:w-[100%] lg:w-[76%] max-auto">
         {/*POST DETAIL TITULO, DESCRIPTION, IMAGE, CONTENT*/}
-        {
-          post ?
+       {
+       post ?
             //CONTAINER DE CATEGORIA TITULO DESCRPITON
             //prose prose-indigo prose-lg 
-            <div className="relative text-neutral-900 flex flex-col lg:w-[100%]">
+       <div className="relative text-neutral-900 flex flex-col lg:w-[100%]">
               
 
 
               {/* TITULO*/}
-              <div className=" z-10 mx-auto lg:pt-12 lg:pb-4 pb-2 px-4 md:px-4">                     
+          <div className="z-10 mx-auto lg:pt-12 lg:pb-4 pb-2 px-4 md:px-4">                     
               { /*span title sm:text-4xl*/}
                   <h1 className="kaushan blog-detail-title 
                   block tracking-wide text-center font-semibold 
@@ -321,56 +321,58 @@ useEffect(() => {
                   
                   {quitarEtiquetasHTML(post.title)}
                   </h1>   
-              </div>
+          </div>
 
               {/* EXCERPT*/}
-              <div className=" z-10 max-w-lg max-w-prose mx-auto">                     
+          <div className=" z-10 max-w-lg max-w-prose mx-auto px-4 md:px-4">                     
               { /*span title sm:text-4xl*/}
-                  <p className="roboto-condensed-muckas blog-detail-title block tracking-wide text-center font-normal tracking-tight text-neutral-700  lg:text-xl text-base mt-[20px]">
+                  <p className="roboto-condensed-muckas blog-detail-title 
+                  block tracking-wide text-center font-normal tracking-tight 
+                  text-neutral-700  lg:text-xl text-base mt-[20px]">
             
                   {quitarEtiquetasHTML(post.excerpt)}
                   </p>   
-              </div>
+          </div>
 
 
             {/**PRIMERA IMAGEN IMAGEN IMAGEN IMAGEN IMAGEN IMAGEN IMAGEN */}
-              <div className="flex  items-center justify-center mx-auto mt-[8px] ">
+          <div className="flex  items-center justify-center mx-auto mt-[8px] ">
                 {renderMedia()}
-              </div>
+          </div>
 
 
-              {/**CONTENIDO CONTENIDO CONTENIDO CONTENIDO  CONTENIDO CONTENIDO*/}
+          {/**CONTENIDO CONTENIDO CONTENIDO CONTENIDO  CONTENIDO CONTENIDO*/}
 
-             <div className="flex flex-col lg:w-[100%] w-[100%] md:w-[100%] items-center px-4 md:px-0">
+          <div className="flex flex-col lg:w-[100%] w-[100%] md:w-[100%] items-center lg:px-4  px-4 md:px-4">
               <h2 className="kaushan tracking-wide lg:text-2xl text-xl font-bold text-black mt-10">
                  Introducción
               </h2>
 
-            {/*DESCRIPTION prose prose-indigo prose-lg*/}
-            <p 
-            className="roboto-condensed-muckas parrafo mt-6 text-black lg:text-lg  whitespace-pre-line
-          [&_.blog-cta-banner]:bg-neutral-50 [&_.blog-cta-banner]:border-2 [&_.blog-cta-banner]:border-dashed [&_.blog-cta-banner]:border-purple-600 [&_.blog-cta-banner]:p-6 [&_.blog-cta-banner]:rounded-2xl [&_.blog-cta-banner]:text-center [&_.blog-cta-banner]:my-8
-          [&_.banner-title]:text-lg [&_.banner-title]:font-bold [&_.banner-title]:text-neutral-900 [&_.banner-title]:m-0
-          [&_.banner-text]:text-sm [&_.banner-text]:text-neutral-600 [&_.banner-text]:mb-4
-          [&_.banner-button]:inline-block [&_.banner-button]:bg-purple-700 [&_.banner-button]:text-white [&_.banner-button]:px-6 [&_.banner-button]:py-2.5 [&_.banner-button]:rounded-xl [&_.banner-button]:font-bold [&_.banner-button]:no-underline [&_.banner-button]:text-sm
-          [&_.table-container]:overflow-x-auto [&_.table-container]:my-4
-          [&_table]:w-full [&_table]:text-left [&_table]:border-collapse [&_table]:border [&_table]:border-neutral-200 [&_table]:text-sm
-          [&_th]:bg-neutral-100 [&_th]:p-3 [&_th]:border [&_th]:border-neutral-200 [&_th]:font-semibold
-          [&_td]:p-3 [&_td]:border [&_td]:border-neutral-200
-          [&_li]:mt-2 [&_li]:text-zinc-900 
-          [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-neutral-900 [&_h2]:mt-8 [&_h2]:mb-2 [&_h2]:tracking-tight
-          [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-black [&_h3]:mt-6 [&_h3]:mb-3 [&_h3]:tracking-wide
-          [&_h4]:text-xl [&_h4]:font-semibold [&_h4]:text-purple-800 [&_h4]:mt-6 [&_h4]:mb-3 [&_h4]:tracking-wide
-          [&_h5]:mt-2 [&_h5]:font-semibold [&_h5]:mb-2 [&_h5]:text-fuchsia-400
-          [&_ul]:mt-2 [&_ul]:mb-4
-          [&_ol]:mb-4
-          [&_strong]:text-black [&_strong]:font-bold
-          [&_pre]:bg-neutral-900 [&_pre]:text-neutral-100 [&_pre]:p-4 [&_pre]:rounded-xl [&_pre]:my-6 [&_pre]:overflow-x-auto [&_pre]:font-mono [&_pre]:text-sm [&_pre]:leading-relaxed [&_pre]:shadow-sm
-          [&_code]:font-mono [&_code]:bg-neutral-100 [&_code]:text-purple-700 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-[0.9em] [&_pre_code]:bg-transparent [&_pre_code]:text-neutral-100 [&_pre_code]:p-0
-          "
-            >
+             {/*DESCRIPTION prose prose-indigo prose-lg*/}
+             <p 
+             className="roboto-condensed-muckas parrafo mt-6 text-black lg:text-lg  whitespace-pre-line
+             [&_.blog-cta-banner]:bg-neutral-50 [&_.blog-cta-banner]:border-2 [&_.blog-cta-banner]:border-dashed [&_.blog-cta-banner]:border-purple-600 [&_.blog-cta-banner]:p-6 [&_.blog-cta-banner]:rounded-2xl [&_.blog-cta-banner]:text-center [&_.blog-cta-banner]:my-8
+             [&_.banner-title]:text-lg [&_.banner-title]:font-bold [&_.banner-title]:text-neutral-900 [&_.banner-title]:m-0
+             [&_.banner-text]:text-sm [&_.banner-text]:text-neutral-600 [&_.banner-text]:mb-4
+             [&_.banner-button]:inline-block [&_.banner-button]:bg-purple-700 [&_.banner-button]:text-white [&_.banner-button]:px-6 [&_.banner-button]:py-2.5 [&_.banner-button]:rounded-xl [&_.banner-button]:font-bold [&_.banner-button]:no-underline [&_.banner-button]:text-sm
+             [&_.table-container]:overflow-x-auto [&_.table-container]:my-4
+             [&_table]:w-full [&_table]:text-left [&_table]:border-collapse [&_table]:border [&_table]:border-neutral-200 [&_table]:text-sm
+             [&_th]:bg-neutral-100 [&_th]:p-3 [&_th]:border [&_th]:border-neutral-200 [&_th]:font-semibold
+             [&_td]:p-3 [&_td]:border [&_td]:border-neutral-200
+             [&_li]:mt-2 [&_li]:text-zinc-900 
+             [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-neutral-900 [&_h2]:mt-8 [&_h2]:mb-2 [&_h2]:tracking-tight
+             [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-black [&_h3]:mt-6 [&_h3]:mb-3 [&_h3]:tracking-wide
+             [&_h4]:text-xl [&_h4]:font-semibold [&_h4]:text-purple-800 [&_h4]:mt-6 [&_h4]:mb-3 [&_h4]:tracking-wide
+             [&_h5]:mt-2 [&_h5]:font-semibold [&_h5]:mb-2 [&_h5]:text-fuchsia-400
+             [&_ul]:mt-2 [&_ul]:mb-4
+             [&_ol]:mb-4
+             [&_strong]:text-black [&_strong]:font-bold
+             [&_pre]:bg-neutral-900 [&_pre]:text-neutral-100 [&_pre]:p-4 [&_pre]:rounded-xl [&_pre]:my-6 [&_pre]:overflow-x-auto [&_pre]:font-mono [&_pre]:text-sm [&_pre]:leading-relaxed [&_pre]:shadow-sm
+             [&_code]:font-mono [&_code]:bg-neutral-100 [&_code]:text-purple-700 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-[0.9em] [&_pre_code]:bg-transparent [&_pre_code]:text-neutral-100 [&_pre_code]:p-0
+             "
+             >
              {quitarEtiquetasHTML(post.description)}
-           </p>
+            </p>
 
             {/*imageUrl*/}
 
@@ -379,27 +381,27 @@ useEffect(() => {
                {/**PRIMER CONTENT oswald-muckas parrafo*/}
               <section
               className="roboto-condensed-muckas mt-6 text-black lg:text-lg
-          [&_.blog-cta-banner]:bg-neutral-50 [&_.blog-cta-banner]:border-2 [&_.blog-cta-banner]:border-dashed [&_.blog-cta-banner]:border-purple-600 [&_.blog-cta-banner]:p-6 [&_.blog-cta-banner]:rounded-2xl [&_.blog-cta-banner]:text-center [&_.blog-cta-banner]:my-8
-          [&_.banner-title]:text-lg [&_.banner-title]:font-bold [&_.banner-title]:text-neutral-900 [&_.banner-title]:m-0
-          [&_.banner-text]:text-sm [&_.banner-text]:text-neutral-600 [&_.banner-text]:mb-4
-          [&_.banner-button]:inline-block [&_.banner-button]:bg-purple-700 [&_.banner-button]:text-white [&_.banner-button]:px-6 [&_.banner-button]:py-2.5 [&_.banner-button]:rounded-xl [&_.banner-button]:font-bold [&_.banner-button]:no-underline [&_.banner-button]:text-sm
-          [&_.table-container]:overflow-x-auto [&_.table-container]:my-4
-          [&_table]:w-full [&_table]:text-left [&_table]:border-collapse [&_table]:border [&_table]:border-neutral-200 [&_table]:text-sm
-          [&_th]:bg-neutral-100 [&_th]:p-3 [&_th]:border [&_th]:border-neutral-200 [&_th]:font-semibold
-          [&_td]:p-3 [&_td]:border [&_td]:border-neutral-200
-          [&_li]:mt-2 [&_li]:text-zinc-900 
-          [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-neutral-900 [&_h2]:mt-8 [&_h2]:mb-2 [&_h2]:tracking-tight
-          [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-black [&_h3]:mt-6 [&_h3]:mb-3 [&_h3]:tracking-wide
-          [&_h4]:text-xl [&_h4]:font-semibold [&_h4]:text-purple-800 [&_h4]:mt-6 [&_h4]:mb-3 [&_h4]:tracking-wide
-          [&_h5]:mt-2 [&_h5]:font-semibold [&_h5]:mb-2 [&_h5]:text-fuchsia-400
-          [&_ul]:mt-2 [&_ul]:mb-4
-          [&_ol]:mb-4
-          [&_strong]:text-black [&_strong]:font-bold
-          [&_pre]:bg-neutral-900 [&_pre]:text-neutral-100 [&_pre]:p-4 [&_pre]:rounded-xl [&_pre]:my-6 [&_pre]:overflow-x-auto [&_pre]:font-mono [&_pre]:text-sm [&_pre]:leading-relaxed [&_pre]:shadow-sm
-          [&_code]:font-mono [&_code]:bg-neutral-100 [&_code]:text-purple-700 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-[0.9em] [&_pre_code]:bg-transparent [&_pre_code]:text-neutral-100 [&_pre_code]:p-0
-          "
+              [&_.blog-cta-banner]:bg-neutral-50 [&_.blog-cta-banner]:border-2 [&_.blog-cta-banner]:border-dashed [&_.blog-cta-banner]:border-purple-600 [&_.blog-cta-banner]:p-6 [&_.blog-cta-banner]:rounded-2xl [&_.blog-cta-banner]:text-center [&_.blog-cta-banner]:my-8
+              [&_.banner-title]:text-lg [&_.banner-title]:font-bold [&_.banner-title]:text-neutral-900 [&_.banner-title]:m-0
+              [&_.banner-text]:text-sm [&_.banner-text]:text-neutral-600 [&_.banner-text]:mb-4
+              [&_.banner-button]:inline-block [&_.banner-button]:bg-purple-700 [&_.banner-button]:text-white [&_.banner-button]:px-6 [&_.banner-button]:py-2.5 [&_.banner-button]:rounded-xl [&_.banner-button]:font-bold [&_.banner-button]:no-underline [&_.banner-button]:text-sm
+              [&_.table-container]:overflow-x-auto [&_.table-container]:my-4
+              [&_table]:w-full [&_table]:text-left [&_table]:border-collapse [&_table]:border [&_table]:border-neutral-200 [&_table]:text-sm
+              [&_th]:bg-neutral-100 [&_th]:p-3 [&_th]:border [&_th]:border-neutral-200 [&_th]:font-semibold
+              [&_td]:p-3 [&_td]:border [&_td]:border-neutral-200
+              [&_li]:mt-2 [&_li]:text-zinc-900 
+              [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-neutral-900 [&_h2]:mt-8 [&_h2]:mb-2 [&_h2]:tracking-tight
+              [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-black [&_h3]:mt-6 [&_h3]:mb-3 [&_h3]:tracking-wide
+              [&_h4]:text-xl [&_h4]:font-semibold [&_h4]:text-purple-800 [&_h4]:mt-6 [&_h4]:mb-3 [&_h4]:tracking-wide
+              [&_h5]:mt-2 [&_h5]:font-semibold [&_h5]:mb-2 [&_h5]:text-fuchsia-400
+               [&_ul]:mt-2 [&_ul]:mb-4
+              [&_ol]:mb-4
+              [&_strong]:text-black [&_strong]:font-bold
+              [&_pre]:bg-neutral-900 [&_pre]:text-neutral-100 [&_pre]:p-4 [&_pre]:rounded-xl [&_pre]:my-6 [&_pre]:overflow-x-auto [&_pre]:font-mono [&_pre]:text-sm [&_pre]:leading-relaxed [&_pre]:shadow-sm
+              [&_code]:font-mono [&_code]:bg-neutral-100 [&_code]:text-purple-700 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-[0.9em] [&_pre_code]:bg-transparent [&_pre_code]:text-neutral-100 [&_pre_code]:p-0
+               "
               dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.narrative) }}
-           />
+             />
 
                    
 
@@ -416,11 +418,11 @@ useEffect(() => {
             </div>
 
 
-              {/*SEGUNDO CONTENT*/}
+        
 
               {/* SEGUNDO CONTENT (Enriquecido con TinyMCE) */}
             <section
-           className="roboto-condensed-muckas mt-6 text-black lg:text-lg
+             className="roboto-condensed-muckas mt-6 text-black lg:text-lg 
           [&_.blog-cta-banner]:bg-neutral-50 [&_.blog-cta-banner]:border-2 [&_.blog-cta-banner]:border-dashed [&_.blog-cta-banner]:border-purple-600 [&_.blog-cta-banner]:p-6 [&_.blog-cta-banner]:rounded-2xl [&_.blog-cta-banner]:text-center [&_.blog-cta-banner]:my-8
           [&_.banner-title]:text-lg [&_.banner-title]:font-bold [&_.banner-title]:text-neutral-900 [&_.banner-title]:m-0
           [&_.banner-text]:text-sm [&_.banner-text]:text-neutral-600 [&_.banner-text]:mb-4
@@ -440,33 +442,42 @@ useEffect(() => {
           [&_pre]:bg-neutral-900 [&_pre]:text-neutral-100 [&_pre]:p-4 [&_pre]:rounded-xl [&_pre]:my-6 [&_pre]:overflow-x-auto [&_pre]:font-mono [&_pre]:text-sm [&_pre]:leading-relaxed [&_pre]:shadow-sm
           [&_code]:font-mono [&_code]:bg-neutral-100 [&_code]:text-purple-700 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-[0.9em] [&_pre_code]:bg-transparent [&_pre_code]:text-neutral-100 [&_pre_code]:p-0
           "
-        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
-      />
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
+             />
+            {/*FIN SEGUNDO CONTENT*/}
+          </div>
 
 
 
-            </div>
 
-              {/**POSTS RELACIONADOS */}
-                 <div className="lg:mt-[2px] md:w-[100%] lg:w-[100%] w-[100%]">
-                  {/* Mostrar título solo si hay relacionados */}
-                  {post.related_products?.length > 0 && (
-                    <h3 className="oswald-muckas mb-[4px] font-semibold lg:text-lg text-black text-base underline underline-offset-8">
-                      Posts relacionados
-                      </h3>
-                    )}
-                    {/* Listado de productos relacionados */}
-                    {post.related_products.map((rp) => (
-                      <div key={rp.slug} className="lg:mt-[20px] mt-[10px]">
-                        <Link to={`/blog/post/${rp.slug}`}>
-                        <h4 className="hover:underline cursor-pointer text-sm lg:text-sm text-black">
-                          - { rp.title}
-                        </h4>
-                        </Link>
-                      </div>
-                    ))}
-                 </div>
-                 {/**FIN PRODUCTOS RELACIONADOS */}
+                       {/* Bloque de compartir emocional */}
+           
+            
+             <div>
+              {post?.title && (
+               <div className="flex flex-col sm:flex-row 
+               items-center justify-between gap-4 bg-zinc-50 
+               rounded-xl p-4 border border-zinc-100 my-6">
+                <div className="flex flex-col">
+                  <p className="text-sm lg:text-base italic  font-semibold text-neutral-800 text-center sm:text-left">
+                      ¿Te ha servido este artículo?
+                      </p>
+                        <p className="text-xs lg:text-base text-neutral-500 italic text-center sm:text-left mt-0.5">
+                        Compártelo con otros desarrolladores y ayuda a crecer a la comunidad tech.
+                         </p>
+                </div>
+
+                 {/* Tu botón corregido y optimizado */}
+                <ShareButton 
+                    title={`${post.title} | Blog Jovamna Medina`} 
+                          text={`Te recomiendo este artículo sobre desarrollo web: "${post.title}"`} 
+                        url={`https://jovamnamedina.com/blog/post/${post.slug}`} 
+                        />
+                         </div>
+                      )}
+                </div>
+
+
 
 
 
@@ -475,34 +486,7 @@ useEffect(() => {
               
           
           
-               {/* Bloque de compartir emocional */}
-           
-        
-            
-             <div> 
-          {post?.title && (
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-zinc-50 rounded-xl p-4 border border-zinc-100 my-6">
-      <div className="flex flex-col">
-        <p className="text-sm font-semibold text-neutral-800 text-center sm:text-left">
-          ¿Te ha servido este artículo?
-        </p>
-        <p className="text-xs text-neutral-500 text-center sm:text-left mt-0.5">
-          Compártelo con otros desarrolladores y ayuda a crecer a la comunidad tech.
-        </p>
-      </div>
-
-      {/* Tu botón corregido y optimizado */}
-      <ShareButton 
-        title={`${post.title} | Blog Jovamna Medina`} 
-        text={`Te recomiendo este artículo sobre desarrollo web: "${post.title}"`} 
-        url={`https://jovamnamedina.com/blog/post/${post.slug}`} 
-      />
-    </div>
-   )}
-  </div>
-
-
-
+  
           
               {/**SOLO CATEGORIA */}
               {/*CATEGORIA*/}
@@ -565,6 +549,46 @@ useEffect(() => {
                   
  
                 </div>
+
+
+
+                
+
+              {/**POSTS RELACIONADOS POST RELACIONADOS POST RELACIONADOS */}
+                 <div className="lg:mt-[30px] mt-[18px] md:mt-[20px] px-4 md:px-4
+                 md:w-[100%] lg:w-[100%] w-[100%] lg:mb-[20px] mb-[10px]">
+                  {/* Mostrar título solo si hay relacionados */}
+                  {post.related_products?.length > 0 && (
+                  
+
+                    <div className=" border-t border-neutral-800 py-4 ">
+                      <h3 className="font-extrabold lg:text-lg 
+                    text-black text-base">
+                      Posts Relacionados
+                      </h3>
+                 
+
+                      </div>
+                    )}
+                    {/* Listado de productos relacionados */}
+                    {post.related_products.map((rp) => (
+                      <div key={rp.slug} className="lg:mt-[2px] mt-[4px]">
+                        <Link to={`/blog/post/${rp.slug}`}>
+                        <h4 className="hover:underline cursor-pointer text-sm lg:text-base text-black">
+                          - { rp.title}
+                        </h4>
+                        </Link>
+                      </div>
+                    ))}
+                 </div>
+                 {/**FIN PRODUCTOS RELACIONADOS */}
+
+
+
+
+
+
+
                   
 
 
@@ -623,6 +647,7 @@ useEffect(() => {
 
 
 
+
         
        
       </FullWidthLayout>
@@ -669,3 +694,30 @@ export default connect(mapStateToProps,{
 //const mapStateToProps = state => ({
 //    post: state.blog.pepita 
 //})
+
+
+
+
+ {/*<div className="lg:mt-[30px] mt-[18px] md:mt-[20px] px-4 md:px-4
+                 md:w-[100%] lg:w-[100%] w-[100%] lg:px-30">
+                  {/* Mostrar título solo si hay relacionados */}
+       //           {post.recent_posts?.length > 0 && (
+       //             <h3 className="mb-[6px] lg:mb-[12px] font-bold lg:text-lg 
+       //             text-black text-base underline underline-offset-2">
+        //              Posts Recientes
+        //              </h3>
+       //             )}
+                    {/* Listado de productos relacionados */}
+       //             {post.recent_posts.map((rp) => (
+       //               <div key={rp.slug} className="lg:mt-[2px] mt-[10px]">
+        //                <Link to={`/blog/post/${rp.slug}`}>
+        //                <h4 className="hover:underline cursor-pointer text-sm lg:text-base text-black">
+       //                   - { rp.title}
+       //                 </h4>
+        //                </Link>
+        //              </div>
+       //             ))}
+        //         </div>
+///*/}
+
+

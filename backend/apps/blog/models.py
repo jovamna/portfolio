@@ -86,6 +86,12 @@ class Post(models.Model):
     def popular_posts(num_posts):
         return Post.objects.filter(status='published').order_by('-views')[:num_posts]
     
+    @staticmethod
+    def get_recent_posts(num_posts=5):
+        return Post.objects.filter(
+            status='published'
+            ).order_by('-created_at')[:num_posts]  # O '-published_at', según llames a tu campo de fecha
+    
     # NUEVO MÉTODO SAVE PARA AUTOGENERAR SLUG Y GUARDAR HISTORIAL 301
     def save(self, *args, **kwargs):
         if not self.slug:

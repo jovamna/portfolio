@@ -2294,14 +2294,7 @@ width: 100%;
   
  }*/
 
- .movil-footer-tres-menus-uno h3{
-  text-align: center;
- }
 
- .movil-footer-tres-menus-uno ul li {
-  text-align: center;
- 
- }
 
  .footer-pie{
   margin-bottom: 15px;
@@ -3597,19 +3590,7 @@ body
     }
    
    
-    .movil-footer-tres-menus{
-     display: grid;
-     grid-column: fr fr fr ;
-     gap: 4px;
-    justify-content: center;
-    width: 98%;
-    }
-   
-    
-    .movil-footer-tres-menus-uno h3{
-     font-size: 0.9em;
-    }
-   
+
    
    .movil-form{
    display: flex;

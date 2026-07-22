@@ -15,6 +15,10 @@ class StaticPagesSitemap(Sitemap):
             '/blog/', 
             '/contacto/',
             '/politica-cookies/',
+            
+            '/escandallo',
+            '/hosteleria-ficha-tecnica',
+            '/calcula-irpf',
         ]
 
     def location(self, item):
