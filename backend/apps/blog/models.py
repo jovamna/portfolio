@@ -111,7 +111,13 @@ class Post(models.Model):
         super().save(*args, **kwargs)
         
 class PostSlugHistory(models.Model):
-    post = models.ForeignKey('Post', on_delete=models.CASCADE, related_name='post_slug_histories')
+    post = models.ForeignKey(
+        'Post',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='post_slug_histories'
+    )
     old_slug = models.SlugField(max_length=255, db_index=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -120,9 +126,7 @@ class PostSlugHistory(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        return f"{self.old_slug} → {self.post.slug}"       
-    
-    
+        return f"{self.old_slug} → {self.post.slug if self.post else '(eliminado)'}"
      
     
     

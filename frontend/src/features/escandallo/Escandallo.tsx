@@ -19,7 +19,7 @@ export default function Escandallo() {
 {/** 🚀 INICIO SEO DINÁMICO: CALCULADORA DE ESCANDALLOS (COCINA + BARRA) **/}
 useEffect(() => {
   // 1. Título estratégico (Abarca platos, recetas y bebidas/copas)
-  document.title = "Calculadora de Escandallos Gratis | Platos, Bebidas y Cócteles | Jovamna Medina";
+  document.title = "Calculadora de Escandallo Gratis | Restaurante, Catering, Bar, Platos, Bebidas y Cócteles | Jovamna Medina";
 
   const canonicalUrl = "https://jovamnamedina.com/escandallo"; 
   
@@ -50,7 +50,7 @@ useEffect(() => {
     { property: 'og:url', content: canonicalUrl }, // 💡 Corregido a la URL exacta de la app
 
     { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:title', content: 'Calculadora de Escandallos: Platos y Bebidas | Jovamna Medina' },
+    { name: 'twitter:title', content: 'Calculadora de Escandallo: Resturante, Catering, Bar, Platos y Bebidas | Jovamna Medina' },
     { name: 'twitter:description', content: 'Controla el coste de tus recetas, copas y la pérdida por merma con esta herramienta interactiva inteligente.' },
     { name: 'twitter:image', content: 'https://jovamnamedina.com/custom-static/images/facebookweb.jpg' },
     { name: 'twitter:label1', content: 'Categoría' },

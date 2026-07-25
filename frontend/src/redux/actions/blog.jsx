@@ -64,29 +64,6 @@ export const get_blog_list = (p = 1) => async dispatch => {
 
 
 //PRODUCTOS LSITADOS POR CATEGORIA
-export const FUNCIONAget_blog_list_category = (category_slug, page = 1, navigate) => async dispatch => {
-    const config = { headers: { 'Accept': 'application/json' } };
-    
-    try {
-        // Si page no se envía, usará 1. La URL siempre será consistente.
-        const res = await axios.get(`${URL}/api/blog/category/${category_slug}?p=${page}`, config);
-
-        if (handleCategoryRedirect(res, navigate)) return;  // ← Redirección ULTIMO
-        
-        if (res.status === 200) {
-            dispatch({
-                type: GET_BLOG_LIST_CATEGORIES_SUCCESS,
-                payload: res.data
-            });
-            return res.data; // Mantenemos el return para que tus componentes no sufran
-        }
-    } catch (err) {
-        // Axios a veces lanza 301 al catch
-        if (handleCategoryRedirect(err.response, navigate)) return; //ULTIMO
-        dispatch({ type: GET_BLOG_LIST_CATEGORIES_FAIL });
-        throw err;
-    }
-};
 
 
 
@@ -243,44 +220,59 @@ export const get_blog = (post_slug, navigate) => async dispatch => {
             });
         }
     } catch (err) {
-        console.error("=== ERROR EN THUNK ===", err);
+    console.error("=== ERROR EN THUNK ===", err);
 
-        // ✅ MANEJAR ERROR 308 (redirección)
-        if (err.response?.status === 308) {
-            console.log("🔄 308 DETECTADO!");
-            console.log("📦 Data:", err.response.data);
-            
-            const data = err.response.data;
-            
-            if (data.redirect === true && data.frontend_url) {
-                console.log("✅ Redirigiendo a:", data.frontend_url);
-                
-                if (navigate) {
-                    navigate(data.frontend_url, { replace: true });
-                } else {
-                    window.location.replace(data.frontend_url);
-                }
-                return { redirected: true, url: data.frontend_url };
+    if (err.response?.status === 308) {
+        const data = err.response.data;
+        if (data.redirect === true && data.frontend_url) {
+            if (navigate) {
+                navigate(data.frontend_url, { replace: true });
+            } else {
+                window.location.replace(data.frontend_url);
             }
-        } 
-
-        // ✅ MANEJAR ERROR 404
-        if (err.response?.status === 404) {
-            console.log("❌ Post no encontrado");
-            dispatch({
-                type: GET_BLOG_FAIL,
-                payload: 'Post not found'
-            });
-            return { error: 'Post not found' };
+            return { redirected: true, url: data.frontend_url };
         }
+    }
 
+    // ✅ NUEVO: MANEJAR ERROR 410 (eliminado permanentemente)
+    if (err.response?.status === 410) {
         dispatch({
             type: GET_BLOG_FAIL,
-            payload: err.message
+            payload: 'Post gone'
         });
-        throw err;
+        return { gone: true, error: 'Post gone' };
     }
+
+    if (err.response?.status === 404) {
+        dispatch({
+            type: GET_BLOG_FAIL,
+            payload: 'Post not found'
+        });
+        return { error: 'Post not found' };
+    }
+
+    dispatch({
+        type: GET_BLOG_FAIL,
+        payload: err.message
+    });
+    throw err;
+}
+
+
+
+
+
+
+
+
+
+
 };
+
+
+
+
+
 
 
 export const search_blog = (search_term) => async dispatch => {

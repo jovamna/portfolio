@@ -103,14 +103,15 @@ function BlogCard(data, category){
                          {/*2 CONTAINER DE TITULO EXRCEPT LEER MAS--*/}
                          <div className=" flex flex-col relative 
                          responsive-blogcard-title-excerpt lg:w-full 
-                         w-[50%] lg:mt-[10px] ">
+                         w-[50%] lg:mt-[10px]">
 
                               {/*POST TITULO  QUITAR SI SE QUIERE  oswald-muckas */}
                               
                           {/* POST TITULO (Corte inteligente con line-clamp: 2 líneas en móvil, libre en PC) */}
                           <Link to={`/blog/post/${post.slug}`} className="block w-full">
-                             <h1 className="kaushan text-center font-bold text-black tracking-wider 
-                              lg:text-lg text-xs sm:text-xl md:text-center line-clamp-2 lg:line-clamp-none px-6" 
+                             <h1 className="kaushan text-center font-bold text-black 
+                             tracking-wider lg:text-lg text-xs sm:text-xl md:text-center 
+                             line-clamp-2 lg:line-clamp-none px-6 leading-6 lg:px-2" 
                               dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.title) }}>
                             </h1>  
                               </Link>
@@ -119,26 +120,11 @@ function BlogCard(data, category){
                               {/* POST TITULO (Corte inteligente con line-clamp: 2 líneas en móvil, libre en PC) */}
                         
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            
                           
                       {/*POST LA CATEGORIA */}
                  
                          {/*POST LA CATEGORIA */}
-                    <div className="flex items-center justify-center w-full px-4">
+                    <div className="flex items-center justify-center w-full px-4 lg:mt-[2px] mt-[2px]">
                     <Link 
                      to={post.category.parent 
                      ? `/blog/${post.category.parent.slug}/${post.category.slug}`
@@ -157,8 +143,9 @@ function BlogCard(data, category){
                                  {/*POST EXCERPT   PADDING IZQ Y DERECH px-4 PADDING BOTTOM pb-4*/}
                                  
                                   <Link to={`/blog/post/${post.slug}`} className="block ">
-                             <p className="excerpt text-center font-light text-black tracking-wider 
-                              lg:text-sm text-[0.7em] sm:text-sm md:text-center line-clamp-2 lg:line-clamp-none px-12" 
+                             <p className="excerpt text-center font-light 
+                             text-black tracking-wider lg:text-sm text-[0.7em] sm:text-sm md:text-center 
+                             line-clamp-2 lg:line-clamp-2 px-12 " 
                               dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.excerpt) }}>
                             </p>  
                               </Link>

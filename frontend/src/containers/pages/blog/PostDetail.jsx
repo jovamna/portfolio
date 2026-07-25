@@ -1,6 +1,6 @@
 import LoadingCard from "../../../components/loaders/LoadingCard";
 import FullWidthLayout from "../../../hocs/FullWidthLayout";
-import { useEffect, useState } from "react";
+
 import { connect } from "react-redux";
 import axios from "axios"
 import { setAlert } from "../../../redux/actions/alert";
@@ -16,9 +16,12 @@ import autorblog from '../../../assets/img/users/autorblog.jpg';
 import enviarlo from '../../../assets/img/users/enviarlo.png';
 import vistas from '../../../assets/img/vistas.png';
 import "../../../styles/index.css";
+import {useEffect, useState, lazy} from 'react';
 import { Link, useParams, useNavigate, Navigate  } from "react-router-dom";
 import ShareButton  from '../../../components/blog/ShareButton'
 
+const Error404 = lazy(() => import('../../../containers/errors/Error404'));
+const Error410 = lazy(() => import('../../../containers/errors/Error410'));
 
 
 
@@ -55,12 +58,38 @@ function PostDetail({
 
 
 
-  useEffect(() => {
+
+
+
+
+
+const [status, setStatus] = useState('loading'); // loading | success | notfound | gone | error
+
+useEffect(() => {
     window.scrollTo(0, 0);
 
-    get_blog(postSlug, navigate);   // ← Pasamos navigate
-  }, [postSlug, get_blog, navigate]);
+    const fetchPost = async () => {
+        setStatus('loading');
+        try {
+            const result = await get_blog(postSlug, navigate);
 
+            if (result?.redirected) return; // ya está navegando
+            if (result?.gone) {
+                setStatus('gone');
+                return;
+            }
+            if (result?.error === 'Post not found') {
+                setStatus('notfound');
+                return;
+            }
+            setStatus('success');
+        } catch (err) {
+            setStatus('error');
+        }
+    };
+
+    fetchPost();
+}, [postSlug, get_blog, navigate]);
 
 
   // ============================================
@@ -255,25 +284,13 @@ useEffect(() => {
     return null;
   };
 
-  if (!post) return <div />;
+  //if (!post) return <div />;
 
   /* ============================================================
      RENDER PRINCIPAL
   ============================================================ */
 
-    
-
-     //CODIGO pARA RENDERIZAR VIDEO O IMAGEN, SEGUN SEA INCLUIDO EN EL ADMIN DE DJANGO
-    
-
-
-
-
- //URL PARA LAS IMAGENES QUE ESTAN EN LA CARPETA MEDIA LOCALIZEN EN LA CARPETA DEL BACKEND
-    if (!post) {
-     return <div> </div>;
-   }
-
+  
 
    // 1. Añade esta función helper arriba del todo de tu archivo (fuera del componente)
   const quitarEtiquetasHTML = (textoString) => {
@@ -282,6 +299,29 @@ useEffect(() => {
     return textoString.replace(/<\/?[^>]+(>|$)/g, "");
   };
 
+
+
+
+
+   // 1. PRIMERO: Comprobar errores (lo más prioritario)
+if (status === 'gone') {
+    return <Error410 message="Este artículo ya no está disponible." />;
+}
+
+if (status === 'notfound') {
+    return <Error404 />;
+}
+
+if (status === 'loading' || !post) {
+    return (
+        <div className="flex justify-center items-center h-screen">
+            <div className="text-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto"></div>
+                <p className="mt-4 text-gray-600 font-mono">Cargando artículo...</p>
+            </div>
+        </div>
+    );
+}
 
 
      

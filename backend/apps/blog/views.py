@@ -246,41 +246,46 @@ class PostDetailView(APIView):
 
         cache.set(cache_key, data, self.CACHE_TIMEOUT)
         return data
-
+    
     def get(self, request, post_slug, format=None):
         ip = self.get_client_ip(request)
-
         try:
-            # Tu mánager personalizado aquí está perfecto
             post = Post.post_objects.get(slug=post_slug)
-            
-            # Registra e incrementa internamente
             self.register_view(post=post, ip=ip)
-            
-            # Traemos la data (de caché o DB)
             data = self.get_post_data(post)
-            
-            # Inyectamos el contador en tiempo real
             data["views"] = post.views
             return Response(data, status=status.HTTP_200_OK)
 
         except Post.DoesNotExist:
             history = PostSlugHistory.objects.filter(old_slug=post_slug).select_related('post').first()
-        
+
             if history:
-                frontend_url = f"/blog/post/{history.post.slug}"
-                return Response({
-                    'redirect': True,
-                    'frontend_url': frontend_url,
-                    'new_slugs': [history.post.slug],
-                    'message': 'El artículo cambió de slug'
-                }, status=status.HTTP_308_PERMANENT_REDIRECT)
-            
+                # Caso 1: el slug cambió, pero el post SIGUE existiendo
+                if history.post is not None:
+                    frontend_url = f"/blog/post/{history.post.slug}"
+                    return Response({
+                        'redirect': True,
+                        'frontend_url': frontend_url,
+                        'new_slugs': [history.post.slug],
+                         'message': 'El artículo cambió de slug'
+                    }, status=status.HTTP_308_PERMANENT_REDIRECT)
+
+                # Caso 2: el post existió, pero fue eliminado para siempre
+                return Response(
+                    {'error': 'Este artículo ya no está disponible', 'gone': True},
+                    status=status.HTTP_410_GONE
+                )
+
+            # Caso 3: este slug nunca existió
             return Response(
-                {'error': 'El artículo no existe'}, 
+                {'error': 'El artículo no existe'},
                 status=status.HTTP_404_NOT_FOUND
             )
-            
+    
+    
+    
+    
+
             
           
 
