@@ -141,7 +141,7 @@ export default function App() {
     pt-[120px] pb-[60px] ">
 
 
-      <div className='flex flex-col lg:w-[88.5%] w-full px-4 mx-auto'>
+      <div className='flex flex-col lg:w-[88.8%] 2xl:w-[90%] items-center w-full px-4 mx-auto'>
 
          {/* Header */}
         <header className="w-full flex flex-col items-center mb-6">
@@ -158,12 +158,12 @@ export default function App() {
       </header>
 
       {/* Grid Layout */}
-      <div className="w-full max-w-7xl 
-      grid grid-cols-1 lg:grid-cols-3 gap-6 items-start 
+      <div className="w-full lg:w-[100%] 2xl:w-[85%] 
+      grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 gap-6 items-start 
       flex-1 border border-neutral-600 rounded-md lg:py-8">
         
         {/* Columna Izquierda: Formularios y botón de reset */}
-        <div className="lg:col-span-2 w-full flex flex-col gap-6 ">
+        <div className="lg:col-span-2 w-full flex flex-col gap-6 2xl:col-span-3">
           <SalaryForm values={values} onChange={setValues} />
           <FamilyForm values={values} onChange={setValues} />
 
