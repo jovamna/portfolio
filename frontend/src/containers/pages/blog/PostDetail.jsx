@@ -1,6 +1,5 @@
 import LoadingCard from "../../../components/loaders/LoadingCard";
 import FullWidthLayout from "../../../hocs/FullWidthLayout";
-
 import { connect } from "react-redux";
 import axios from "axios"
 import { setAlert } from "../../../redux/actions/alert";
@@ -12,7 +11,7 @@ import Hearts from '../../../components/blog/Hearts';
 import moment from "moment";
 import DOMPurify from 'dompurify'
 import Alert from "../../../components/Alert"
-import autorblog from '../../../assets/img/users/autorblog.jpg';
+
 import enviarlo from '../../../assets/img/users/enviarlo.png';
 import vistas from '../../../assets/img/vistas.png';
 import "../../../styles/index.css";
@@ -20,8 +19,9 @@ import {useEffect, useState, lazy} from 'react';
 import { Link, useParams, useNavigate, Navigate  } from "react-router-dom";
 import ShareButton  from '../../../components/blog/ShareButton'
 
-const Error404 = lazy(() => import('../../../containers/errors/Error404'));
+
 const Error410 = lazy(() => import('../../../containers/errors/Error410'));
+import Error404 from '../../../containers/errors/Error404'; // Ajusta la ruta si es necesario
 
 
 
