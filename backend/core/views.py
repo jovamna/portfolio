@@ -605,46 +605,68 @@ def breadcrumb_json_ld(breadcrumbs):
 
 # =========================
 # robots.txt
-# =========================
-
+# ========================
 def robots_txt(request):
     frontend_url = getattr(settings, 'FRONTEND_URL', 'https://jovamnamedina.com').rstrip('/')
 
     lines = [
+        # ==========================================
+        # 🌐 REGLAS GENERALES PARA BUSCADORES (Google, Bing, etc.)
+        # ==========================================
         "User-agent: *",
         
-        # ==========================================
         # 🔴 BLOQUEOS DEL FRONTEND (Rutas de la SPA)
-        # ==========================================
         "Disallow: /signup",
         "Disallow: /login",
         "Disallow: /profile",
-        # ==========================================
-        # 🔴 BLOQUEOS DEL BACKEND Y HERRAMIENTAS
-        # ==========================================
-        "Disallow: /admin/",         # Panel de Django (protegido por tu URL secreta)
         
-        # ==========================================
-        # 🔴 CONTROL TOTAL DE LAS APIs (Crawl Budget)
-        # ==========================================
+        # 🔴 BLOQUEOS DEL BACKEND Y HERRAMIENTAS
+        "Disallow: /admin/",         # Panel de Django
+        
         # 🟢 PERMITIDOS: Lo que Google necesita leer para renderizar tus productos
         "Allow: /api/project/",
         "Allow: /api/blog/",
         "Allow: /api/category/",
         "Disallow: /api/blog/search", 
         
-        # 🔴 BLOQUEADOS: APIs de usuario, compras, procesos y utilidades privadas
+        # 🔴 BLOQUEADOS: APIs privadas
         "Disallow: /api/user/",
         "Disallow: /api/chatbot/",
         "Disallow: /api/contacts/",
         "Disallow: /api/reviews/",
         
-        # ==========================================
         # 🔴 FILTROS Y CONTENIDO DUPLICADO
-        # ==========================================
-        # Bloquea URLs con signos de interrogación (búsquedas, ordenaciones, tracking)
         "Disallow: /*?*", 
         "Disallow: /*?search=",
+
+        # ==========================================
+        # 🤖 BLOQUEO DE IA (ENTRENAMIENTO)
+        # ==========================================
+        "",  # Línea en blanco separadora
+        "User-agent: Google-Extended",   # IA de Google (Gemini/Vertex)
+        "Disallow: /",
+        "",
+        "User-agent: GPTBot",            # IA de OpenAI (ChatGPT)
+        "Disallow: /",
+        "",
+        "User-agent: ClaudeBot",         # IA de Anthropic (Claude)
+        "Disallow: /",
+        "",
+        "User-agent: Anthropic-ai",      # Rastreador secundario de Anthropic
+        "Disallow: /",
+        "",
+        "User-agent: PerplexityBot",     # IA de Perplexity
+        "Disallow: /",
+        "",
+        "User-agent: CCBot",             # Common Crawl
+        "Disallow: /",
+        "",
+        "User-agent: Bytespider",        # IA de TikTok / ByteDance
+        "Disallow: /",
+        "",
+        "User-agent: Meta-ExternalAgent", # IA de Meta (Llama)
+        "Disallow: /",
+        "",
         # ==========================================
         # 🗺️ MAPA DEL SITIO
         # ==========================================
@@ -652,15 +674,6 @@ def robots_txt(request):
     ]
     return HttpResponse("\n".join(lines), content_type="text/plain")
 
-
-
-
-
-
-
-
-
-#'seo_title': f"{post.title} | {post.category.name if hasattr(post, 'category') and post.category else ''} | Jovamna Medina".strip(' | '),
 
 
 
