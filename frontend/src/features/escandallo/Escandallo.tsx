@@ -621,11 +621,16 @@ const { calculatedRows, totales } = useMemo(() => {
                {/**INICIO APP */}
              <div className="w-full lg:w-[89%] 2xl:w-[70%] mx-auto lg:px-4 px-3 ">
 
-         {/* HEADER */}
+          {/* HEADER */}
          <div className="flex flex-col w-full mb-2 items-center">
-          <h1 className="lg:text-4xl text-base md:text-2xl font-black text-neutral-900 mb-1 leading-6 flex items-center gap-2 text-center">
-          <FcCalculator /> Escandallo Profesional Gratuito
-         </h1>
+
+         
+             <h1 className=" flex lg:flex-row 2xl:flex-row lg:text-4xl text-xl 
+             md:text-2xl font-black text-neutral-900 mb-1 leading-6 text-center">
+             <FcCalculator className='hidden lg:block'/> Escandallo Profesional Gratuito
+             </h1>
+       
+            
 
           <h2 className="text-neutral-700 lg:text-lg text-base font-medium  text-center">
             Controla mermas, calcula el coste real y asegura la rentabilidad de tus platos, bebidas y cócteles de forma profesional.
@@ -681,7 +686,7 @@ const { calculatedRows, totales } = useMemo(() => {
           onChange={(e) => setNamePlato(e.target.value)} // Pasamos el texto real que escribe el chef
           type="text"
           placeholder="Ej. Tarta de Queso, Paella de Marisco..."
-          className="w-full lg:p-4 p-2 border text-mauve-600  rounded-2xl font-bold lg:text-lg md:text-lg text-base "
+          className="w-full lg:p-4 p-2 border text-mauve-600 text-center rounded-2xl font-bold lg:text-lg md:text-lg text-base "
            />
          </div>
 
@@ -712,7 +717,7 @@ const { calculatedRows, totales } = useMemo(() => {
               setRaciones(1);
             }
           }}
-          className="w-full lg:p-4 p-2 border rounded-2xl lg:text-lg md:text-lg text-base font-black"/>
+          className="w-full lg:p-4 p-2 border text-center rounded-2xl lg:text-lg md:text-lg text-base font-black"/>
 
         
         </div>
@@ -735,7 +740,7 @@ const { calculatedRows, totales } = useMemo(() => {
                 )
               )
             }
-            className="w-full lg:p-4 p-2 border rounded-2xl lg:text-lg md:text-lg text-base font-black text-green-700"
+            className="w-full lg:p-4 p-2 border text-center rounded-2xl lg:text-lg md:text-lg text-base font-black text-green-700"
           />
         </div>
       </div>

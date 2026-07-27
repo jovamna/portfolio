@@ -138,10 +138,10 @@ export default function App() {
   return (
     <FullWidthLayout>
     <main className="wrapper w-full min-h-screen text-gray-800 
-    pt-[120px] pb-[60px] ">
+    pt-[74px] pb-[60px] ">
 
 
-      <div className='flex flex-col lg:w-[88.8%] 2xl:w-[90%] items-center w-full px-4 mx-auto'>
+      <div className='flex flex-col lg:w-[88.8%] 2xl:w-[72%] items-center w-full px-4 mx-auto'>
 
          {/* Header */}
         <header className="w-full flex flex-col items-center mb-6">
@@ -161,12 +161,13 @@ export default function App() {
       </header>
 
       {/* Grid Layout */}
-      <div className="w-full lg:w-[100%] 2xl:w-[85%] 
+      <div className="w-full lg:w-[100%] 2xl:w-[100%] 
       grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 gap-6 items-start 
-      flex-1 border border-neutral-600 rounded-md lg:py-8">
+      flex-1 border border-neutral-600 rounded-md 
+      lg:py-8 2xl:px-4 lg:px-2">
         
         {/* Columna Izquierda: Formularios y botón de reset */}
-        <div className="lg:col-span-2 w-full flex flex-col gap-6 2xl:col-span-3">
+        <div className="lg:col-span-2 w-full flex flex-col gap-6 2xl:col-span-3 2xl:pr-6">
           <SalaryForm values={values} onChange={setValues} />
           <FamilyForm values={values} onChange={setValues} />
 
@@ -194,7 +195,7 @@ export default function App() {
           <p className="kaushan tracking-wider underline underline-offset-8 lg:text-2xl text-base font-bold text-black text-center  tracking-tight px-1">
             Resultado del Análisis
           </p>
-          <div className="w-full bg-white border border-gray-100 rounded-xl shadow-sm p-5">
+          <div className="w-full bg-white border border-gray-100 rounded-xl shadow-sm p-5 ">
             <ResultsPanel result={result} />
           </div>
         </aside>
