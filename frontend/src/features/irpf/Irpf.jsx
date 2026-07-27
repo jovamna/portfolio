@@ -149,11 +149,14 @@ export default function App() {
             <h1 className="kaushan tracking-wider 
               lg:text-5xl text-2xl font-black text-gray-900  
               lg:py-2 py-2 flex items-center underline underline-offset-8 text-center">
-             Calculadora de Retención IRPF
+            Calculadora de Retención IRPF 2026
             </h1>
-          <p className="lg:text-base lg:mt-[10px] mt-[4px] text-sm font-medium text-neutral-700 mt-0.5">
-            Estima cuánto te retienen en la nómina y cuánto cobras neto al mes · 2026
-          </p>
+
+            <h2 className="text-neutral-600 text-sm lg:text-base max-w-2xl mx-auto text-center mt-2">
+              Simulador y calculadora online para calcular el IRPF y las retenciones de tu 
+              nómina en 2026. Con esta herramienta puedes hacer el cálculo de tu retención 
+               de IRPF de forma rápida y gratuita, según tu situación personal y familiar.
+            </h2>
         
       </header>
 
@@ -277,10 +280,58 @@ export default function App() {
 
 
 
+    {/**FAQS */}
+    {/* FAQ SEO */}
+<div className="mt-2 max-w-4xl mx-auto w-full">
+  <h3 className="text-neutral-900 lg:text-2xl text-lg font-black text-center mb-6">
+    Preguntas Frecuentes
+  </h3>
+
+  <div className="flex flex-col gap-5">
+    <div>
+      <p className="font-bold text-neutral-800 lg:text-base text-sm">
+        ¿Cómo se calcula la retención del IRPF en la nómina 2026?
+      </p>
+      <p className="text-neutral-600 text-sm lg:text-base mt-1">
+        Esta calculadora tiene en cuenta tu salario bruto anual, tu situación familiar y las reducciones aplicables para estimar el tipo de retención de IRPF y cuánto cobrarás neto al mes.
+      </p>
+    </div>
+
+    <div>
+      <p className="font-bold text-neutral-800 lg:text-base text-sm">
+        ¿Es gratis este simulador de IRPF?
+      </p>
+      <p className="text-neutral-600 text-sm lg:text-base mt-1">
+        Sí, puedes hacer el cálculo de tu retención de IRPF de forma gratuita y sin necesidad de registro.
+      </p>
+    </div>
+
+    <div>
+      <p className="font-bold text-neutral-800 lg:text-base text-sm">
+        ¿Qué diferencia hay entre el cálculo del IRPF y las retenciones?
+      </p>
+      <p className="text-neutral-600 text-sm lg:text-base mt-1">
+        La retención es el adelanto que se descuenta cada mes en tu nómina, mientras que el cálculo final del IRPF se hace en la declaración de la renta, donde se ajusta si has pagado de más o de menos durante el año.
+      </p>
+    </div>
+  </div>
+</div>
+
+    {/**FIN FAQS */}
+
+
+
+
+
+
+
+
+
+
  {/* Footer */}
       {/* Footer */}
-        <footer className="w-full max-w-5xl mt-4 px-4 text-center">
-          <div className="border-t border-gray-200 pt-2 text-xs text-gray-700">
+        <footer className="flex flex-col items-center w-full max-w-5xl mx-auto mt-4 px-4">
+          <div className="border-t border-gray-200 pt-2 text-xs text-gray-700 text-center">
             Cálculo orientativo según normativa IRPF 2026 · 
            
           </div>

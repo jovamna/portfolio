@@ -610,47 +610,69 @@ const { calculatedRows, totales } = useMemo(() => {
   // =========================
   return (
       
-
-      <FullWidthLayout>
+    <FullWidthLayout>
   
-        <div className="wrapper w-full min-h-screen 
-        lg:pt-[130px] lg:pb-[80px] pt-[70px] pb-[50px] 
-        md:pt-[70px] md:pb-[50px]">
+         <div className="wrapper w-full min-h-screen 
+         lg:pt-[98px] 2xl:pt-[94px] lg:pb-[80px] pt-[70px] pb-[50px] 
+         md:pt-[70px] md:pb-[50px]">
 
-        <div className="max-w-7xl mx-auto px-8">
+
+
+               {/**INICIO APP */}
+             <div className="w-full lg:w-[89%] 2xl:w-[70%] mx-auto lg:px-4 px-3 ">
 
          {/* HEADER */}
-         <div className="flex flex-col w-full mb-6 items-center">
-          <h1 className="lg:text-4xl text-base md:text-2xl font-black text-neutral-900 mb-3 flex items-center gap-2 text-center">
+         <div className="flex flex-col w-full mb-2 items-center">
+          <h1 className="lg:text-4xl text-base md:text-2xl font-black text-neutral-900 mb-1 leading-6 flex items-center gap-2 text-center">
           <FcCalculator /> Escandallo Profesional Gratuito
          </h1>
 
-          <h2 className="text-neutral-700 lg:text-lg text-base font-medium leading-6">
-          Controla mermas, calcula el coste real y asegura la rentabilidad de tus platos, bebidas y cócteles de forma profesional.
+          <h2 className="text-neutral-700 lg:text-lg text-base font-medium  text-center">
+            Controla mermas, calcula el coste real y asegura la rentabilidad de tus platos, bebidas y cócteles de forma profesional.
           </h2>
+
+         {/* 👇 NUEVO BLOQUE SEO AQUÍ */}
+         <h3 className="text-neutral-800 lg:text-xl text-sm font-bold text-center mt-4 leading-5">
+            Simulador y Software de Escandallos Online para Cocina y Barra
+         </h3>
+        {/* Instrucción Estilizada... (tu código actual sigue igual) */}
+
+        <p className="text-neutral-600 text-sm lg:text-base max-w-3xl mx-auto text-center mt-2">
+           Este simulador de escandallos gratis es el programa ideal para cocina,
+            hostelería, restaurantes, bares y catering. Un software de escandallos 
+             pensado para calcular el coste real de tus productos, platos de cocina 
+              y cócteles, controlando mermas y márgenes sin complicaciones. Perfecto 
+              también para calcular el escandallo de un menú de catering para eventos 
+              o el coste por copa en la barra de tu bar.
+        </p>
+
+
+
+
 
 
 
          {/* Instrucción Estilizada en una pequeña tarjetita de ayuda */}
          <div className="flex flex-col items-center bg-neutral-50 border border-neutral-200 
-          lg:mt-[10px] mt-[6px] rounded-xl text-sm text-neutral-600 shadow-sm">
+          lg:mt-[10px] mt-[6px] rounded-xl text-sm text-neutral-600 shadow-sm py-2 px-2">
           <p className="flex items-center gap-2 font-bold text-neutral-800 mb-1">
          💡 ¿Cómo empezar?
          </p>
-         <p className='lg:text-base'>
+         <p className='lg:text-base text-sm text-center'>
          Elimina las filas de ejemplo utilizando el botón de borrar y añade tantas filas como ingredientes necesite tu receta. ¡Los datos se guardan solos!
         </p>
         </div>
-      </div>
+         </div>
 
       {/* TITULOS*/}
       <div className="lg:grid lg:grid-cols-5 
       md:grid md:grid-cols-7 flex flex-col  
-      gap-2 lg:mb-8 mb-4 lg:border-2 lg:border-black xl:border-2 xl:border-black">
+      gap-2 lg:mb-8 mb-4 lg:border-2 lg:border-black 
+      xl:border-2 xl:border-black py-1">
 
          {/* NOMBRE DEL PLATO */}
-        <div className="bg-white lg:col-span-3 md:col-span-3 px-2 py-2 rounded-3xl shadow">
-          <label className="block lg:text-lg md:text-lg text-base font-bold mb-2">
+        <div className=" lg:col-span-3 md:col-span-3 px-2 py-2 rounded-3xl shadow">
+          <label className="block lg:text-lg md:text-lg text-base font-bold mb-2 text-center">
           Nombre del Plato
          </label>
          <input
@@ -665,7 +687,7 @@ const { calculatedRows, totales } = useMemo(() => {
 
         {/* RACIONES */}
         <div className="bg-white lg:col-span-1 md:col-span-2 px-2 py-2 rounded-3xl shadow">
-          <label className="block lg:text-lg md:text-lg text-base font-bold mb-2">
+          <label className="block lg:text-lg md:text-lg text-base font-bold mb-2 text-center">
             N.º de Raciones
           </label>
           <input
@@ -697,7 +719,7 @@ const { calculatedRows, totales } = useMemo(() => {
 
         {/* PRECIO VENTA */}
         <div className="bg-white lg:col-span-1 md:col-span-2  px-2 py-2 rounded-3xl shadow">
-          <label className="block lg:text-lg md:text-lg text-base font-bold mb-2">
+          <label className="block lg:text-lg md:text-lg text-base font-bold mb-2 text-center">
             P.V. del Plato (€)
           </label>
           <input
@@ -1121,7 +1143,7 @@ const { calculatedRows, totales } = useMemo(() => {
 
 
       {/* RESUMEN */}
-   <div className="mt-6 bg-gradient-to-r from-gray-900 to-black text-white p-6 md:p-10 rounded-3xl shadow-2xl">
+    <div className="mt-6 bg-gradient-to-r from-gray-900 to-black text-white p-6 md:p-10 rounded-3xl shadow-2xl">
   <h2 className="lg:text-3xl md:text-4xl text-lg font-black text-center mb-10 text-amber-400">
     📊 RESUMEN DEL CALCULO
   </h2>
@@ -1189,10 +1211,37 @@ const { calculatedRows, totales } = useMemo(() => {
     </p>
   </div>
 
-</div>
+   </div>
+
+
+             </div>
+            {/**FIN APP */}
+        
+
+
+       {/** INICO FAQS*/}
+       {/* FAQ SEO 👇 AQUÍ */}
+<div className="mt-12 max-w-3xl mx-auto">
+  <h3 className="text-neutral-900 lg:text-2xl text-lg font-black text-center mb-6">
+    Preguntas Frecuentes
+  </h3>
+  <div className="flex flex-col gap-5">
+    <div>
+      <p className="font-bold text-neutral-800 lg:text-base text-sm">¿Es gratis este programa de escandallos?</p>
+      <p className="text-neutral-600 text-sm lg:text-base mt-1">Sí, este simulador de escandallos es completamente gratuito y no requiere registro para calcular el coste de tus recetas.</p>
     </div>
+    <div>
+      <p className="font-bold text-neutral-800 lg:text-base text-sm">¿Sirve para hostelería, bares y catering?</p>
+      <p className="text-neutral-600 text-sm lg:text-base mt-1">Sí, el software está pensado tanto para cocina como para barra, y se adapta a restaurantes, bares, catering y otros negocios de hostelería.</p>
+    </div>
+    <div>
+      <p className="font-bold text-neutral-800 lg:text-base text-sm">¿Puedo calcular el escandallo de un cóctel o solo de platos de cocina?</p>
+      <p className="text-neutral-600 text-sm lg:text-base mt-1">Puedes usar la herramienta tanto para platos de cocina como para cócteles y bebidas, calculando el coste por ración o por copa.</p>
+    </div>
+  </div>
+</div>
 
-
+       {/**FIN FAQS */}
 
 
 
