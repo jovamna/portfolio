@@ -18,37 +18,40 @@ import RentabilidadPanel  from './components/RentabilidadPanel';
 
 
 // ─── SEO ──────────────────────────────────────────────────────────────────────
+
 function useSEO() {
   useEffect(() => {
-    // URL definitiva de la App
     const canonicalUrl = 'https://jovamnamedina.com/hosteleria-ficha-tecnica';
 
+    // 1. Title Optimizado
+    //document.title = 'Ficha Técnica de Cocina y Cócteles Online Gratis | PDF';
+    
     // 1. Título de la página (Abarca platos de restaurante y recetas de coctelería/bar)
-    document.title = 'Ficha Técnica de Cocina y Cócteles Gratis — Generador PDF';
+    document.title = 'App de Ficha Técnica Online Gratis — Sin Registro | PDF';
 
-    // Helper para gestionar las etiquetas meta
+
+    // Array para rastrear elementos creados por nosotros y limpiarlos al desmontar
+    const createdElements = [];
+
     const setMeta = (attr, val, content) => {
       let tag = document.querySelector(`meta[${attr}="${val}"]`);
       if (!tag) {
         tag = document.createElement('meta');
         tag.setAttribute(attr, val);
         document.head.appendChild(tag);
+        createdElements.push(tag);
       }
       tag.setAttribute('content', content);
     };
 
-    // 2. Meta Descripción & Keywords (Atracción para Chefs y Head Bartenders)
+    // 2. Meta Descripción
     setMeta('name', 'description',
-      'Crea fichas técnicas de cocina y coctelería profesionales gratis. Estandariza recetas, ' +
-      'ingredientes, alérgenos y emplatado/presentación. Descarga en PDF para tu restaurante o bar.'
-    );
-    setMeta('name', 'keywords',
-      'ficha tecnica plato, ficha tecnica coctel, receta estandar bar, ficha tecnica cocina pdf, ' +
-      'plantilla ficha tecnica restaurante, alergenos carta restaurante, recetario de barra'
+      'Crea tu ficha técnica de cocina o coctelería online, sin registrarte y sin descargar ninguna app. ' +
+      'Añade ingredientes, alérgenos, elaboración y descarga en PDF al instante. 100% gratis.'
     );
 
-    // 3. Open Graph (Redes Sociales)
-    setMeta('property', 'og:title',       'Generador de Fichas Técnicas de Cocina y Bar Gratis (PDF)');
+    // 3. Open Graph
+    setMeta('property', 'og:title',       'App Ficha Técnica de Cocina y Cócteles Gratis (PDF)');
     setMeta('property', 'og:type',        'website');
     setMeta('property', 'og:url',         canonicalUrl);
     setMeta('property', 'og:image',       'https://jovamnamedina.com/custom-static/images/facebookweb.jpg');
@@ -56,7 +59,7 @@ function useSEO() {
 
     // 4. Twitter Cards
     setMeta('name', 'twitter:card',        'summary_large_image');
-    setMeta('name', 'twitter:title',       'Ficha Técnica de Platos y Cócteles | Jovamna Medina');
+    setMeta('name', 'twitter:title',       'App Ficha Técnica de Platos y Cócteles | Jovamna Medina');
     setMeta('name', 'twitter:description', 'Herramienta para crear fichas técnicas de cocina y barra en PDF. Estandariza tu carta.');
     setMeta('name', 'twitter:image',       'https://jovamnamedina.com/custom-static/images/facebookweb.jpg');
 
@@ -66,22 +69,24 @@ function useSEO() {
       canonicalTag = document.createElement('link');
       canonicalTag.setAttribute('rel', 'canonical');
       document.head.appendChild(canonicalTag);
+      createdElements.push(canonicalTag);
     }
     canonicalTag.setAttribute('href', canonicalUrl);
 
-    // 6. JSON-LD Schema.org (WebApplication para Cocina y Bar)
+    // 6. Schema JSON-LD WebApplication
     let ld = document.querySelector('script[data-schema="ficha-tecnica-app"]');
     if (!ld) {
       ld = document.createElement('script');
       ld.type = 'application/ld+json';
       ld.setAttribute('data-schema', 'ficha-tecnica-app');
       document.head.appendChild(ld);
+      createdElements.push(ld);
     }
     ld.textContent = JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'WebApplication',
       name: 'Generador de Fichas Técnicas de Cocina y Bar',
-      description: 'Herramienta gratuita para crear fichas técnicas de platos y cócteles con ingredientes, alérgenos, pasos y presentación, descargables en PDF.',
+      description: 'Herramienta gratuita para crear fichas técnicas de platos y cócteles con ingredientes, alérgenos y pasos, descargables en PDF.',
       url: canonicalUrl,
       applicationCategory: 'BusinessApplication',
       operatingSystem: 'All',
@@ -90,10 +95,73 @@ function useSEO() {
         name: 'Jovamna Medina',
         url: 'https://jovamnamedina.com/'
       },
-      offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' }
     });
+
+    // 7. Schema JSON-LD FAQPage
+    let ldFaq = document.querySelector('script[data-schema="ficha-tecnica-faq"]');
+    if (!ldFaq) {
+      ldFaq = document.createElement('script');
+      ldFaq.type = 'application/ld+json';
+      ldFaq.setAttribute('data-schema', 'ficha-tecnica-faq');
+      document.head.appendChild(ldFaq);
+      createdElements.push(ldFaq);
+    }
+    ldFaq.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: '¿Necesito registrarme para usar esta ficha técnica?',
+          acceptedAnswer: { '@type': 'Answer', text: 'No. Puedes crear y descargar tu ficha técnica sin crear ninguna cuenta ni dar tu email.' }
+        },
+        {
+          '@type': 'Question',
+          name: '¿Es gratis descargar la ficha técnica en PDF?',
+          acceptedAnswer: { '@type': 'Answer', text: 'Sí, la generación y descarga del PDF es completamente gratuita, sin límite de fichas ni marcas de agua.' }
+        },
+        {
+          '@type': 'Question',
+          name: '¿Tengo que instalar alguna aplicación?',
+          acceptedAnswer: { '@type': 'Answer', text: 'No, es una herramienta 100% online que funciona directamente desde el navegador.' }
+        },
+        {
+          '@type': 'Question',
+          name: '¿Qué pasa con mis datos y recetas?',
+          acceptedAnswer: { '@type': 'Answer', text: 'Todo el proceso ocurre localmente en tu navegador. Nada se envía ni se almacena en ningún servidor externo.' }
+        }
+      ]
+    });
+
+    // 🧹 LIMPIEZA AL DESMONTAR EL COMPONENTE
+    return () => {
+      createdElements.forEach(el => {
+        if (el && el.parentNode) {
+          el.parentNode.removeChild(el);
+        }
+      });
+    };
   }, []);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -130,41 +198,60 @@ export default function FichaTecnica() {
     }
   };
 
+
+
+  //    <h1 className="text-base lg:text-3xl sm:text-4xl  font-extrabold text-black tracking-tight mb-2">
+
   return (
       <FullWidthLayout>
     <main className="min-h-screen bg-gray-50/50 py-8 lg:pt-[90px] pt-[80px] px-4 sm:px-6 lg:px-8">
       {/* Header de la página */}
-      <header className="max-w-4xl mx-auto text-center mb-4 md:mb-4 lg:mb-4 px-4">
-        <h1 className="text-base lg:text-3xl sm:text-4xl  font-extrabold text-black tracking-tight mb-2">
-         Ficha Técnica Gratuita para Hosteleria
-        </h1>
-        <p className="text-xs sm:text-base text-gray-700 max-w-2xl mx-auto leading-relaxed">
-          
+      <header className="w-full lg:w-[90.8%] 2xl:w-[90%]  mx-auto text-center mb-6 px-4 ">
+  {/* H1 Principal con Palabras Clave de Cocina y Coctelería */}
+  <h1 className="text-xl md:text-2xl lg:text-4xl font-black text-neutral-900 mb-3 text-center leading-tight">
+    App de Ficha Técnica de Cocina y Coctelería — Gratis y Sin Registro
+  </h1>
 
-          Crea la ficha técnica de tu receta gratis y descárgala en PDF
-        </p>
+  <p className="text-xs sm:text-base text-gray-700 max-w-2xl mx-auto leading-relaxed mb-2">
+    Crea tu ficha técnica directamente en el navegador. Sin cuentas, sin instalar nada y sin límites. Descarga en PDF profesional cuando termines.
+  </p>
+
+  {/* BLOQUE DE ACLARACIÓN Y GARANTÍAS (SEO + Confianza de usuario) */}
+  <div className="mx-auto mb-2 px-5 py-3 bg-amber-50 border border-amber-200/80 rounded-2xl shadow-sm">
+    <h3 className="text-sm lg:text-lg font-bold text-neutral-800 mb-3 text-center ">
+      🔒 100% Online, Sin Registro y Sin Apps que Instalar
+    </h3>
     
+    <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-2 gap-2 text-neutral-700 text-sm">
+      <li>✅ <strong>Sin crear cuenta:</strong> Empieza a usarla ya, sin emails ni contraseñas.</li>
+      <li>✅ <strong>Sin descargar nada:</strong> Funciona en cualquier navegador, móvil u ordenador.</li>
+      <li>✅ <strong>Sin coste ni límites:</strong> Crea todas las fichas técnicas que necesites.</li>
+      <li>🔐 <strong>Tus datos son privados:</strong> Proceso 100% en tu navegador, sin enviar datos a servidores.</li>
+      <li className="md:col-span-2">📄 <strong>PDF al instante:</strong> Descarga tu ficha técnica lista para imprimir en segundos.</li>
+    </ul>
+  </div>
+
+  {/* BLOQUE DE BENEFICIOS DE LA FICHA TÉCNICA */}
+  <div className="mx-auto bg-white p-5 rounded-2xl border border-neutral-200 shadow-sm">
+    <h3 className="text-sm lg:text-lg font-bold text-neutral-800 mb-3">
+      📄 ¿Por qué necesitas fichas técnicas en tu cocina o barra?
+    </h3>
+    
+    <ul className="space-y-2 text-neutral-700 text-sm">
+      <li>🍳 <strong>Estandariza tus recetas:</strong> Mantén el mismo sabor, porciones y presentación, cocine quien cocine o prepare quien prepare la copa.</li>
+      <li>🚀 <strong>Evita pérdidas por descontrol:</strong> Registra gramajes e ingredientes exactos de cada elaboración.</li>
+      <li>⚠️ <strong>Control estricto de alérgenos:</strong> Cumple con la normativa sanitaria e identifica rápidamente los alérgenos para proteger a tus clientes.</li>
+    </ul>
+  </div>
+      </header>
 
 
 
-
-         <div className="lg:my-6  bg-amber-50 p-6 rounded-xl border border-mauve-800">
-         <h3 className="text-sm lg:text-xl font-bold text-neutral-800 mb-2">
-        📄 ¿Por qué necesitas fichas técnicas en tu cocina o barra?
-        </h3>
-         <ul className="space-y-2 text-neutral-700">
-         <li className='text-sm'>🍳 <strong>Estandariza tus recetas:</strong> Mantén el mismo sabor y presentación, cocine quien cocine o prepare quien prepare la copa.</li>
-         <li className='text-sm'>🚀 <strong>Evita pérdidas por descontrol:</strong> Registra gramajes, ingredientes y mermas exactas en cada elaboración.</li>
-       <li className='text-sm'>⚠️ <strong>Control de alérgenos:</strong> Cumple con la normativa sanitaria y protege la salud de tus clientes.</li>
-       </ul>
-       </div>
-
-  </header>
 
 
 
       {/* Contenedor del Formulario */}
-      <div className="max-w-4xl mx-auto space-y-6">
+      <div className="w-full lg:w-[90.8%] 2xl:w-[90%] mx-auto space-y-6">
         <PlatoHeader
           values={ficha}
           onChange={(v) => setFicha({ ...ficha, ...v })}
@@ -214,6 +301,95 @@ export default function FichaTecnica() {
           </button>
         </div>
       </div>
+
+
+
+
+
+
+
+
+
+      {/**FAQS */}
+      <section className="max-w-4xl mx-auto mt-18 mb-6 px-4 ">
+  <h2 className="text-lg lg:text-2xl font-extrabold text-neutral-900 mb-4 text-center ">
+    Preguntas frecuentes sobre esta ficha técnica online
+  </h2>
+  <div className="space-y-4">
+    <details className="bg-white p-4 rounded-lg border border-gray-200">
+      <summary className="font-semibold text-neutral-800 cursor-pointer">
+        ¿Necesito registrarme para usar esta ficha técnica?
+      </summary>
+      <p className="text-sm text-gray-700 mt-2">
+        No. Puedes crear y descargar tu ficha técnica sin crear ninguna cuenta ni dar tu email.
+      </p>
+    </details>
+
+    <details className="bg-white p-4 rounded-lg border border-gray-200">
+      <summary className="font-semibold text-neutral-800 cursor-pointer">
+        ¿Es gratis descargar la ficha técnica en PDF?
+      </summary>
+      <p className="text-sm text-gray-700 mt-2">
+        Sí, la generación y descarga del PDF es completamente gratuita, sin límite de fichas ni marcas de agua.
+      </p>
+    </details>
+
+    <details className="bg-white p-4 rounded-lg border border-gray-200">
+      <summary className="font-semibold text-neutral-800 cursor-pointer">
+        ¿Tengo que instalar alguna aplicación?
+      </summary>
+      <p className="text-sm text-gray-700 mt-2">
+        No, es una herramienta 100% online. Funciona directamente desde el navegador de tu móvil, tablet u ordenador.
+      </p>
+    </details>
+
+    <details className="bg-white p-4 rounded-lg border border-gray-200">
+      <summary className="font-semibold text-neutral-800 cursor-pointer">
+        ¿Qué pasa con mis datos y recetas? ¿Se guardan en algún servidor?
+      </summary>
+      <p className="text-sm text-gray-700 mt-2">
+        No. Todo el proceso —desde los ingredientes hasta la imagen del emplatado— ocurre localmente en tu navegador. 
+        Nada se envía ni se almacena en ningún servidor externo.
+      </p>
+    </details>
+
+    <details className="bg-white p-4 rounded-lg border border-gray-200">
+      <summary className="font-semibold text-neutral-800 cursor-pointer">
+        ¿Sirve tanto para platos de cocina como para cócteles?
+      </summary>
+      <p className="text-sm text-gray-700 mt-2">
+        Sí, puedes usar la misma herramienta para estandarizar recetas de cocina y también fichas de coctelería, 
+        incluyendo alérgenos, elaboración y emplatado.
+      </p>
+    </details>
+  </div>
+</section>
+
+
+
+      {/**FIN FAQS */}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       {/* Footer legal/informativo */}
       <footer className="max-w-4xl mx-auto text-center mt-12 pt-6 border-t border-gray-200/60 text-xs text-gray-400 leading-relaxed">

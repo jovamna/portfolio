@@ -10,7 +10,8 @@ import FullWidthLayout from "../../hocs/FullWidthLayout";
 // ─── SEO APP ──────────────────────────────────────────────────────────────────
 function useSEO() {
   useEffect(() => {
-    document.title = 'Calculadora Retención IRPF 2026 — Cuánto me retienen en nómina';
+  
+    document.title = 'Simulador de Retención IRPF en Nómina 2026 — Online, Sin Descargas';
 
     const canonicalUrl = "https://jovamnamedina.com/calcula-irpf"; 
     
@@ -34,7 +35,8 @@ function useSEO() {
 
     // Metadatos Estándar
     setMeta('name', 'description',
-      'Calcula gratis tu retención de IRPF 2026 según tu salario, situación familiar e hijos. Descubre tu neto mensual y el desglose del cálculo paso a paso.'
+      'Simula en segundos cuánto te van a retener de IRPF en tu nómina en 2026. Sin instalar apps, sin registro ' +
+      'ni declaración fiscal completa: solo introduce tu salario y obtén una estimación al instante.'
     );
     setMeta('name', 'keywords',
       'calculadora irpf, retención irpf, cuanto me retienen nómina, irpf 2026, calculadora retención, neto mensual españa'
@@ -137,26 +139,37 @@ export default function App() {
 
   return (
     <FullWidthLayout>
-    <main className="wrapper w-full min-h-screen text-gray-800 
-    pt-[74px] pb-[60px] ">
-
+     <main className="min-h-screen bg-gray-50/50 py-8 lg:pt-[90px] pt-[80px] px-4 sm:px-6 lg:px-8">
 
       <div className='flex flex-col lg:w-[88.8%] 2xl:w-[72%] items-center w-full px-4 mx-auto'>
 
          {/* Header */}
-        <header className="w-full flex flex-col items-center mb-6">
+        <header className="w-full flex flex-col items-center mb-6 px-4">
        
-            <h1 className="kaushan tracking-wider 
-              lg:text-5xl text-2xl font-black text-gray-900  
-              lg:py-2 py-2 flex items-center underline underline-offset-8 text-center">
-            Calculadora de Retención IRPF 2026
+              <h1 className="text-xl md:text-2xl lg:text-4xl font-black text-neutral-900 mb-3 text-center leading-tight">
+             Simulador de Retención IRPF en Nómina — Online al Instante
             </h1>
 
-            <h2 className="text-neutral-600 text-sm lg:text-base max-w-2xl mx-auto text-center mt-2">
-              Simulador y calculadora online para calcular el IRPF y las retenciones de tu 
-              nómina en 2026. Con esta herramienta puedes hacer el cálculo de tu retención 
-               de IRPF de forma rápida y gratuita, según tu situación personal y familiar.
+            <h2 className="text-neutral-600 text-sm lg:text-base mx-auto text-center mt-2">
+              Simulador y calculadora online para calcular IRPF y las retenciones de tu 
+              nómina en 2026. Sin instalar nada, sin registrarte 
+  y sin hacer la declaración completa — solo una estimación rápida y clara.
             </h2>
+
+
+             <div className="mx-auto mb-2 px-5 py-3 bg-amber-50 border border-amber-200/80 rounded-2xl shadow-sm">
+  <h3 className="text-center text-sm lg:text-xl font-bold text-neutral-800 mb-3">
+    ⚡ Rápido, Online y Sin Compromiso
+  </h3>
+   <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-2 gap-2 text-neutral-700 text-sm">
+    <li className="text-sm">🚫 <strong>Sin instalar ninguna app:</strong> Funciona directamente en tu navegador, móvil u ordenador.</li>
+    <li className="text-sm">🚫 <strong>Sin registro ni cuenta:</strong> Introduce tus datos y obtén el resultado al momento.</li>
+    <li className="text-sm">🎯 <strong>Solo lo que necesitas:</strong> No es la declaración de la Renta completa, es una simulación rápida de tu retención mensual.</li>
+    <li className="text-sm">🔐 <strong>Datos privados:</strong> El cálculo se hace en tu navegador, no se envía a ningún servidor.</li>
+  </ul>
+</div>
+
+
         
       </header>
 
@@ -213,111 +226,92 @@ export default function App() {
 
     {/**CONTENIDO */}
 
-    <div className='lg:py-16 py-8  md:py-12'>
+    <div className="lg:py-16 py-8 md:py-12">
+  {/* GUÍA EXPLICATIVA SEO */}
+  <section className="max-w-4xl mx-auto px-4 py-8 text-gray-800 space-y-8">
+    <header className="space-y-2">
+      <h2 className="text-xl md:text-2xl font-bold text-black tracking-tight underline underline-offset-8 leading-8 text-center">
+        ¿Cómo calcular tu Sueldo Neto en España? Guía Paso a Paso
+      </h2>
+      <p className="text-sm text-gray-600 leading-relaxed">
+        Calcular el salario neto a partir del sueldo bruto anual puede parecer complejo debido a las retenciones del IRPF y las cotizaciones a la Seguridad Social. A continuación, te explicamos los 3 factores clave que utiliza nuestra <strong>calculadora de sueldo neto</strong> para estimar tu nómina mes a mes.
+      </p>
+    </header>
 
+    <div className="space-y-6">
+      <article className="space-y-2">
+        <h3 className="text-base md:text-lg font-semibold text-gray-900">
+          1. Cotizaciones a la Seguridad Social en la Nómina
+        </h3>
+        <p className="text-sm text-gray-600 leading-relaxed">
+          Es el primer descuento obligatorio sobre tu salario bruto para cubrir contingencias comunes, desempleo y formación. Dependiendo del tipo de contrato:
+        </p>
+        <ul className="list-disc pl-5 text-sm text-gray-600 space-y-1">
+          <li><strong>Contrato Indefinido:</strong> Se aplica una retención fija del <strong>6,35%</strong> sobre la base de cotización.</li>
+          <li><strong>Contrato Temporal:</strong> La aportación asciende al <strong>6,40%</strong>.</li>
+        </ul>
+      </article>
 
-      <section className="max-w-4xl mx-auto px-4 py-12 text-gray-800 space-y-8">
-  
-       <header className="space-y-2">
-    <h2 className="text-2xl font-bold text-black tracking-tight underline underline-offset-8">
-      ¿Cómo calcular tu Sueldo Neto en España? Guía Paso a Paso
-    </h2>
-    <p className="text-sm text-gray-600 leading-relaxed">
-      Calcular el salario neto a partir del sueldo bruto anual puede parecer complejo debido a las retenciones del IRPF y las cotizaciones a la Seguridad Social. A continuación, te explicamos cómo funciona el algoritmo de nuestra <strong>calculadora de sueldo neto</strong> para que entiendas tu nómina mes a mes.
-    </p>
-  </header>
+      <article className="space-y-2">
+        <h3 className="text-base md:text-lg font-semibold text-gray-900">
+          2. Mínimo Personal y Familiar (Ingresos exentos de IRPF)
+        </h3>
+        <p className="text-sm text-gray-600 leading-relaxed">
+          El impuesto sobre la renta es progresivo. El <strong>mínimo personal exento con carácter general es de 5.550 €</strong> anuales. Tener hijos a cargo, personas mayores o personas con discapacidad reduce tu base imponible, aumentando el dinero neto que recibes cada mes.
+        </p>
+      </article>
 
-  <hr className="border-gray-100" />
+      <article className="space-y-2">
+        <h3 className="text-base md:text-lg font-semibold text-gray-900">
+          3. Tramos de IRPF por Comunidad Autónoma
+        </h3>
+        <p className="text-sm text-gray-600 leading-relaxed">
+          El IRPF se compone de un tramo estatal y otro autonómico. Comunidades como <strong>Madrid, Cataluña, Andalucía o la Comunidad Valenciana</strong> aplican escalas diferentes. Nuestra herramienta contempla estas variaciones regionales para ofrecer un resultado preciso.
+        </p>
+      </article>
+    </div>
 
-  <article className="space-y-4">
-    <h3 className="text-lg font-semibold text-gray-900">
-      1. Cotizaciones a la Seguridad Social en la Nómina
+    <div className="p-4 bg-blue-50/60 border border-blue-100 rounded-2xl text-xs md:text-sm text-blue-900 leading-relaxed">
+      💡 <strong>Nota sobre la retención:</strong> Este simulador calcula la retención mensual que aplica tu empresa en nómina (Modelo 145). El ajuste definitivo se realiza al año siguiente durante la campaña anual de la Renta.
+    </div>
+  </section>
+
+  {/* SECCIÓN PREGUNTAS FRECUENTES (FAQS) */}
+  <section className="mt-6 max-w-4xl mx-auto w-full px-4">
+    <h3 className="text-neutral-900 lg:text-2xl text-lg font-black text-center mb-6">
+      Preguntas Frecuentes sobre el Cálculo de IRPF
     </h3>
-    <p className="text-sm text-gray-600 leading-relaxed">
-      El primer descuento aplicable a tu salario bruto es la aportación a la Seguridad Social. Dependiendo de tu tipo de contrato, el porcentaje varía ligeramente:
-    </p>
-    <ul className="list-disc pl-5 text-sm text-gray-600 space-y-1">
-      <li><strong>Contrato Indefinido:</strong> Se aplica una retención del <strong>6,35%</strong> sobre la base de cotización.</li>
-      <li><strong>Contrato Temporal:</strong> La cuota asciende al <strong>6,40%</strong>.</li>
-    </ul>
-  </article>
 
-  <article className="space-y-4">
-    <h3 className="text-lg font-semibold text-gray-900">
-      2. El Mínimo Personal y Familiar: ¿Cuánto dinero está exento de IRPF?
-    </h3>
-    <p className="text-sm text-gray-600 leading-relaxed">
-      El impuesto sobre la renta es progresivo y protege las situaciones familiares particulares. El <strong>mínimo personal exento por defecto es de 5.550 €</strong> (cuantía que aumenta a partir de los 65 y 75 años). Además, tener hijos menores de 25 años a cargo o ascendientes que convivan contigo reduce la base imponible, haciendo que pagues menos impuestos mensuales.
-    </p>
-  </article>
+    <div className="flex flex-col gap-4">
+      <div className="p-4 bg-white border border-gray-100 rounded-xl shadow-sm">
+        <p className="font-bold text-neutral-800 lg:text-base text-sm">
+          ¿Cómo se calcula la retención del IRPF en la nómina?
+        </p>
+        <p className="text-neutral-600 text-sm mt-1 leading-relaxed">
+          Se calcula cruzando tu salario bruto anual con tu situación personal (hijos, tipo de contrato y comunidad autónoma) para determinar el porcentaje exacto que la empresa debe ingresar a Hacienda en tu nombre.
+        </p>
+      </div>
 
-  <article className="space-y-4">
-    <h3 className="text-lg font-semibold text-gray-900">
-      3. Tramos de IRPF por Comunidad Autónoma
-    </h3>
-    <p className="text-sm text-gray-600 leading-relaxed">
-      El IRPF se divide en un tramo estatal y otro autonómico. Regiones como <strong>Madrid, Cataluña, Andalucía o la Comunidad Valenciana</strong> tienen escalas propias que hacen que el sueldo neto de un mismo salario bruto varíe según dónde residas. Nuestra calculadora aplica estas tablas de forma automática para ofrecerte el cálculo de retención mensual más preciso.
-    </p>
-  </article>
+      <div className="p-4 bg-white border border-gray-100 rounded-xl shadow-sm">
+        <p className="font-bold text-neutral-800 lg:text-base text-sm">
+          ¿El simulador de IRPF es completamente gratuito?
+        </p>
+        <p className="text-neutral-600 text-sm mt-1 leading-relaxed">
+          Sí. Puedes hacer todas las simulaciones de sueldo neto que necesites de forma gratuita, ilimitada y sin necesidad de registrarte ni introducir datos personales.
+        </p>
+      </div>
 
-  <div className="p-4 bg-blue-50/50 border border-blue-100 rounded-2xl text-xs text-blue-800 leading-relaxed">
-    <strong>💡 Consejo para trabajadores:</strong> Las retenciones reflejadas en esta herramienta emulan el cálculo mensual de tu empresa (Modelo 145). El ajuste definitivo de tus impuestos se realiza al año siguiente durante la campaña de la Declaración de la Renta.
-  </div>
-
-</section>
-
+      <div className="p-4 bg-white border border-gray-100 rounded-xl shadow-sm">
+        <p className="font-bold text-neutral-800 lg:text-base text-sm">
+          ¿Este cálculo sustituye a los servicios oficiales de la Agencia Tributaria?
+        </p>
+        <p className="text-neutral-600 text-sm mt-1 leading-relaxed">
+          No. Es una herramienta estimativa de orientación laboral para saber cuánto cobrarás mes a mes. No realiza trámites ni sustituye al borrador oficial de la AEAT.
+        </p>
+      </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    {/**FAQS */}
-    {/* FAQ SEO */}
-<div className="mt-2 max-w-4xl mx-auto w-full">
-  <h3 className="text-neutral-900 lg:text-2xl text-lg font-black text-center mb-6">
-    Preguntas Frecuentes
-  </h3>
-
-  <div className="flex flex-col gap-5">
-    <div>
-      <p className="font-bold text-neutral-800 lg:text-base text-sm">
-        ¿Cómo se calcula la retención del IRPF en la nómina 2026?
-      </p>
-      <p className="text-neutral-600 text-sm lg:text-base mt-1">
-        Esta calculadora tiene en cuenta tu salario bruto anual, tu situación familiar y las reducciones aplicables para estimar el tipo de retención de IRPF y cuánto cobrarás neto al mes.
-      </p>
-    </div>
-
-    <div>
-      <p className="font-bold text-neutral-800 lg:text-base text-sm">
-        ¿Es gratis este simulador de IRPF?
-      </p>
-      <p className="text-neutral-600 text-sm lg:text-base mt-1">
-        Sí, puedes hacer el cálculo de tu retención de IRPF de forma gratuita y sin necesidad de registro.
-      </p>
-    </div>
-
-    <div>
-      <p className="font-bold text-neutral-800 lg:text-base text-sm">
-        ¿Qué diferencia hay entre el cálculo del IRPF y las retenciones?
-      </p>
-      <p className="text-neutral-600 text-sm lg:text-base mt-1">
-        La retención es el adelanto que se descuenta cada mes en tu nómina, mientras que el cálculo final del IRPF se hace en la declaración de la renta, donde se ajusta si has pagado de más o de menos durante el año.
-      </p>
-    </div>
-  </div>
+  </section>
 </div>
-
     {/**FIN FAQS */}
 
 

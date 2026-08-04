@@ -235,54 +235,61 @@ useEffect(() => {
   ============================================================ */
 
 
-  const renderMedia = () => {
-    if (post.thumbnail && !post.video) {
-      return (
+ const renderMedia = () => {
+  const defaultAlt = "Ilustración del artículo en el blog de Jovamna Medina";
+
+  // Caso 1: Solo imagen
+  if (post.thumbnail && !post.video) {
+    return (
+      <img
+        src={thumbnailUrl}
+        alt={post?.title ? `${post.title} — Blog Jovamna Medina` : defaultAlt}
+        loading="lazy"
+        className="object-contain w-full lg:w-[60%]"
+      />
+    );
+  }
+
+  // Caso 2: Solo vídeo
+  if (post.video && !post.thumbnail) {
+    return (
+      <video
+        src={videoUrl}
+        className="object-cover w-full h-[400px]"
+        autoPlay
+        loop
+        muted
+        playsInline // 👈 Esencial para que reproduzca bien en móviles iOS sin abrirse a pantalla completa
+        aria-label={post?.title || "Vídeo del artículo"}
+      />
+    );
+  }
+
+  // Caso 3: Imagen y vídeo
+  if (post.thumbnail && post.video) {
+    return (
+      <>
         <img
           src={thumbnailUrl}
-          alt={`${post?.title|| 'Jovamna Medina Desarrolladora Full Stack en Django y React.'}`}
+          alt={post?.title ? `${post.title} — Vista previa` : defaultAlt}
           loading="lazy"
-          className="object-contain w-full lg:w-[60%]"
+          className="object-contain w-full mb-4 lg:w-[60%]"
         />
-      );
-    }
-
-    if (post.video && !post.thumbnail) {
-      return (
         <video
           src={videoUrl}
           className="object-cover w-full h-[400px]"
           autoPlay
           loop
           muted
-          title={post.title}
+          playsInline
+          aria-label={post?.title || "Vídeo del artículo"}
         />
-      );
-    }
+      </>
+    );
+  }
 
-    if (post.thumbnail && post.video) {
-      return (
-        <>
-          <img
-            src={thumbnailUrl}
-            alt={post.title}
-            loading="lazy"
-            className="object-contain w-full mb-4 lg:w-[60%]"
-          />
-          <video
-            src={videoUrl}
-            className="object-cover w-full h-[400px]"
-            autoPlay
-            loop
-            muted
-            title={post.title}
-          />
-        </>
-      );
-    }
-
-    return null;
-  };
+  return null;
+};
 
   //if (!post) return <div />;
 

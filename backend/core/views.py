@@ -416,39 +416,46 @@ def spa_entrypoint(request):
 
 
     # ====================== ESCANDALLO ======================
+    # ====================== APP 1: ESCANDALLO ======================
     if len(parts) >= 1 and parts[0] == 'escandallo':
         url_canonica = build_absolute_url("escandallo")
         
         breadcrumbs = [
             {'name': 'Inicio', 'url': build_absolute_url()},
-            {'name': 'Calculadora de Escandallos Gratis: Platos y Cócteles', 'url': url_canonica}
+            {'name': 'Calculadora de Escandallo Online Gratis', 'url': url_canonica}
         ]
 
         escandallo_json_ld = {
             "@context": "https://schema.org",
             "@type": "WebApplication",
-            "name": "Escandallo Gratuito para Hostelería | Jovamna Medina",
-            "description": "Calcula el costo de tus recetas, escandallos de cocina y bar,  gestiona los márgenes de ganancia de tu restaurante con esta herramienta online gratuita.",
+            "name": "App Escandallo Online Gratuito para Hostelería | Jovamna Medina",
+            "description": "Calcula el costo de tus recetas, escandallos de cocina y bar, y gestiona los márgenes de ganancia de tu restaurante con esta herramienta online gratuita.",
             "url": url_canonica,
             "applicationCategory": "BusinessApplication",
             "operatingSystem": "All",
             "browserRequirements": "Requires JavaScript. Requires HTML5.",
-            "author": organization_json_ld()
+            "author": organization_json_ld(),
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "EUR"
+            }
         }
 
         context.update({
-            'seo_title': "Calculadora de Escandallos Gratis: Restaurantes, Catering y Bares | Jovamna Medina",
-            'seo_description': "Herramienta online gratuita para hosteleros, chefs, catering y bartenders. Calcula el escandallo de tus recetas y eventos, controla mermas y optimiza tu Food & Beverage Cost.",
-            'seo_keywords': "escandallo gratis, escandallo cocina, escandallo coctel, escandallo catering, calcular coste platos, calcular coste eventos, calcular coste copas, plantilla escandallo, gestion restaurante bar catering, herramientas hosteleria",
+            # Título optimizado (< 60 caracteres antes de la marca)
+            'seo_title': "App Calculadora de Escandallos Online Gratis | Jovamna Medina",
+            'seo_description': "Herramienta online gratuita para hosteleros, chefs y bartenders. Calcula el escandallo de tus recetas, controla mermas y optimiza tu Food & Beverage Cost.",
+            'seo_keywords': "escandallo gratis, escandallo cocina, escandallo coctel, escandallo catering, calcular coste platos, calcular coste copas, plantilla escandallo, gestion restaurante",
             'canonical_url': url_canonica,
             'og_type': 'website',
-            'og_title': "Calculadora de Escandallos para Cocina, Catering y Bar Gratis | Jovamna Medina",
-            'og_description': "Herramienta online gratuita para calcular el coste real de tus platos, eventos de catering y cócteles. Controla mermas y asegura tu beneficio.",
-            'og_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",  # imagen por defecto
+            'og_title': "App Calculadora de Escandallo para Cocina y Bar Gratis | Jovamna Medina",
+            'og_description': "Herramienta online gratuita para calcular el coste real de tus platos y cócteles. Controla mermas y asegura tu beneficio.",
+            'og_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
             'og_url': url_canonica,
             'twitter_card': 'summary_large_image',
-            'twitter_title': "Calculadora de Escandallos Gratis: Restaurantes, Catering y Bares",
-            'twitter_description': "Calcula el coste de tus recetas de cocina, catering y coctelería gratis. Controla mermas y Food & Beverage Cost.",
+            'twitter_title': "App Calculadora de Escandallos Online Gratis",
+            'twitter_description': "Calcula el coste de tus recetas de cocina y coctelería gratis. Controla mermas y costes.",
             'twitter_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
             'seo_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
             'is_home_page': False,
@@ -457,41 +464,48 @@ def spa_entrypoint(request):
             'jsonld_breadcrumbs': json.dumps(breadcrumb_json_ld(breadcrumbs), ensure_ascii=False),
         })
         return render(request, 'index.html', context)
-    # ====================== APP 2 ======================
-    # ====================== FICHA TECNICA ======================
+
+    # ====================== APP 2: FICHA TECNICA ======================
     if len(parts) >= 1 and parts[0] == 'hosteleria-ficha-tecnica':
         url_canonica = build_absolute_url("hosteleria-ficha-tecnica")
         
         breadcrumbs = [
             {'name': 'Inicio', 'url': build_absolute_url()},
-            {'name': 'Fichas Técnica Gratuita para Hostelería', 'url': url_canonica}
+            {'name': 'Ficha Técnica de Cocina y Cócteles', 'url': url_canonica}
         ]
 
         ficha_json_ld = {
             "@context": "https://schema.org",
             "@type": "WebApplication",
-            "name": "Ficha Técnica de Cocina y Cócteles Gratis | Jovamna Medina",
-            "description": "Administra las preparaciones con recetas guaradas en las fichas técnicas, con esta herramienta online gratuita.",
+            "name": "App Ficha Técnica de Cocina y Cócteles Online Gratis | Jovamna Medina",
+            "description": "Crea y gestiona las fichas técnicas y recetas de oro de tu cocina o barra. Descarga en PDF al instante.",
             "url": url_canonica,
             "applicationCategory": "BusinessApplication",
             "operatingSystem": "All",
             "browserRequirements": "Requires JavaScript. Requires HTML5.",
-            "author": organization_json_ld()
+            "author": organization_json_ld(),
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "EUR"
+            }
         }
 
         context.update({
-            'seo_title': "Ficha Técnica de Cocina y Cócteles Gratis| Jovamna Medina",
-            'seo_description': "Herramienta online gratuita para hosteleros, cocineros, emprendedores",
-            'seo_keywords': "ficha técnica gratis, escandallo cocina, reectas, plantilla recetas, gestion restaurante, herramientas hosteleria",
+            'seo_title': "App Ficha Técnica de Cocina y Cócteles Gratis | Jovamna Medina",
+            # Descripción completada correctamente:
+            'seo_description': "Crea tu ficha técnica de cocina o coctelería online sin registrarte. Organiza ingredientes, alérgenos y elaboración en PDF listo para imprimir.",
+            # Keywords corregidas sin erratas:
+            'seo_keywords': "ficha tecnica cocina, ficha tecnica coctel, plantilla receta estandar, crear ficha tecnica pdf, recetas de oro cocina, gestion barra restaurante",
             'canonical_url': url_canonica,
             'og_type': 'website',
-            'og_title': "Ficha Técnica de Cocina y Cócteles Gratis | Jovamna Medina",
-            'og_description': "Herramienta online gratuita para hosteleros y cocineros...",
-            'og_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",  # imagen por defecto
+            'og_title': "App Ficha Técnica de Cocina y Cócteles Gratis | Jovamna Medina",
+            'og_description': "Herramienta online gratuita para estandarizar las recetas de tu cocina o bar en PDF.",
+            'og_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
             'og_url': url_canonica,
             'twitter_card': 'summary_large_image',
-            'twitter_title': "Ficha Técnica Gratuita para Hostelería",
-            'twitter_description': "Herramienta online gratuita para hosteleros...",
+            'twitter_title': "App Ficha Técnica Gratuita para Cocina y Bar",
+            'twitter_description': "Crea y estandariza las fichas técnicas de tus platos y cócteles gratis.",
             'twitter_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
             'seo_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
             'is_home_page': False,
@@ -501,24 +515,21 @@ def spa_entrypoint(request):
         })
         return render(request, 'index.html', context)
     
-    # ====================== APP 3 ======================
-    
-    # ====================== IRPF ======================
-    # ====================== CALCULADORA IRPF ======================
+    # ====================== APP 3: IRPF ======================
     if len(parts) >= 1 and parts[0] == 'calcula-irpf':
         url_canonica = build_absolute_url("calcula-irpf")
         breadcrumbs = [
             {'name': 'Inicio', 'url': build_absolute_url()},
-            {'name': 'Calculadora de Retenciones IRPF', 'url': url_canonica}
+            {'name': 'Calculadora IRPF Online Gratis', 'url': url_canonica}
         ]
         
         irpf_json_ld = {
             "@context": "https://schema.org",
             "@type": "WebApplication",
-            "name": "Calculadora IRPF Gratuita | Jovamna Medina",
+            "name": "App Calculadora IRPF Online Gratuita | Jovamna Medina",
             "description": "Calcula el tipo de retención del IRPF, sueldo neto mensual y retenciones según tu salario bruto y situación familiar con esta calculadora online gratuita.",
             "url": url_canonica,
-            "applicationCategory": "FinanceApplication",  # ← Cambiado a Finanzas para mayor precisión SEO
+            "applicationCategory": "FinanceApplication",
             "operatingSystem": "All",
             "browserRequirements": "Requires JavaScript. Requires HTML5.",
             "author": organization_json_ld(),
@@ -526,21 +537,21 @@ def spa_entrypoint(request):
                 "@type": "Offer",
                 "price": "0",
                 "priceCurrency": "EUR"
-              }
+            }
         }
 
         context.update({
-            'seo_title': "Calculadora de IRPF Gratuita | Calcula tu Sueldo Neto",
+            'seo_title': "App Calculadora IRPF Online Gratuita | Sueldo Neto | Jovamna Medina",
             'seo_description': "Calcula tu retención de IRPF y tu sueldo neto mensual de forma rápida y gratuita. Herramienta online para trabajadores y autónomos.",
             'seo_keywords': "calculadora irpf, calcular sueldo neto, retenciones irpf, calcular nomina, irpf autonomos, retencion irpf gratis",
             'canonical_url': url_canonica,
             'og_type': 'website',
-            'og_title': "Calculadora de IRPF Gratuita | Jovamna Medina",
+            'og_title': "App Calculadora IRPF Online Gratuita | Jovamna Medina",
             'og_description': "Descubre cuánto cobrarás en tu nómina. Calcula tu retención de IRPF y sueldo neto en segundos.",
             'og_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
             'og_url': url_canonica,
             'twitter_card': 'summary_large_image',
-            'twitter_title': "Calculadora de Retenciones IRPF Gratuita",
+            'twitter_title': "App Calculadora IRPF Online Gratuita",
             'twitter_description': "Calcula tu sueldo neto y retención de IRPF de forma rápida y sencilla.",
             'twitter_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
             'seo_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
@@ -548,9 +559,8 @@ def spa_entrypoint(request):
             'breadcrumbs': breadcrumbs,
             'jsonld_primary': json.dumps(irpf_json_ld, ensure_ascii=False),
             'jsonld_breadcrumbs': json.dumps(breadcrumb_json_ld(breadcrumbs), ensure_ascii=False),
-         })
+        })
         return render(request, 'index.html', context)
-    
     # ====================== FIN APPS  ======================
 
 
