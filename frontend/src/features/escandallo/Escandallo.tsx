@@ -1364,22 +1364,22 @@ lg:px-0 2xl:px-0 md:px-18 px-4'>
 
        {/** INICO FAQS*/}
        {/* FAQ SEO 👇 AQUÍ */}
-<div className="mt-12 max-w-3xl mx-auto">
+<div className="mt-12 max-w-3xl mx-auto px-2 ">
   <h3 className="text-neutral-900 lg:text-2xl text-lg font-black text-center mb-6">
     Preguntas Frecuentes
   </h3>
   <div className="flex flex-col gap-5">
     <div>
       <p className="font-bold text-neutral-800 lg:text-base text-sm">¿Es gratis este programa de escandallos?</p>
-      <p className="text-neutral-600 text-sm lg:text-base mt-1">Sí, este simulador de escandallos es completamente gratuito y no requiere registro para calcular el coste de tus recetas.</p>
+      <p className="text-neutral-600 text-sm lg:text-base mt-1 text-justify">Sí, este simulador de escandallos es completamente gratuito y no requiere registro para calcular el coste de tus recetas.</p>
     </div>
     <div>
       <p className="font-bold text-neutral-800 lg:text-base text-sm">¿Sirve para hostelería, bares y catering?</p>
-      <p className="text-neutral-600 text-sm lg:text-base mt-1">Sí, el software está pensado tanto para cocina como para barra, y se adapta a restaurantes, bares, catering y otros negocios de hostelería.</p>
+      <p className="text-neutral-600 text-sm lg:text-base mt-1 text-justify">Sí, el software está pensado tanto para cocina como para barra, y se adapta a restaurantes, bares, catering y otros negocios de hostelería.</p>
     </div>
     <div>
       <p className="font-bold text-neutral-800 lg:text-base text-sm">¿Puedo calcular el escandallo de un cóctel o solo de platos de cocina?</p>
-      <p className="text-neutral-600 text-sm lg:text-base mt-1">Puedes usar la herramienta tanto para platos de cocina como para cócteles y bebidas, calculando el coste por ración o por copa.</p>
+      <p className="text-neutral-600 text-sm lg:text-base mt-1 text-justify">Puedes usar la herramienta tanto para platos de cocina como para cócteles y bebidas, calculando el coste por ración o por copa.</p>
     </div>
   </div>
 </div>
