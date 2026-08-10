@@ -1,6 +1,6 @@
 
 
-import { pasoVacio } from '../../../utils/hosteleria/ficha-tecnica/fichaUtils';
+import { pasoVacio } from '../../../utils/hosteleria/estandarizar-recetas/fichaUtils';
 
 export default function PreparacionSteps({ pasos, onChange }) {
 

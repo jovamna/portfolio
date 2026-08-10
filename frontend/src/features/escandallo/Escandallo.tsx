@@ -7,6 +7,15 @@ import { FcCalculator } from "react-icons/fc";
 import { useState, useEffect, useMemo, useCallback } from 'react';
 
 import { exportarPDF } from './components/exportarPdf';
+import ConsejosMermas  from './components/ConsejosMermas';
+
+
+
+
+
+
+
+
 
 
 // ==========================================
@@ -20,22 +29,31 @@ const EJEMPLO_INICIAL = {
   namePlato: "Salsa Boloñesa Casera 🍝",
   raciones: 10,
   precioVenta: 15,
+  gastosFijosPorRacion: 0, // 🆕 añadido, faltaba
   ingredients: [
     {
       id: "ejemplo-1",
       name: "Carne picada de ternera",
-      pricePerKg: "8.50",
-      grossWeight: "1.200",
-      mermaKg: "0.000",
-      usedWeight: "1.200"
+      priceTotalCompra: 8.50,
+      grossWeight: 1.200,
+      mermaKg: 0.000,
+      usedWeight: 1.200,
+      unitGross: 'kg',
+      unitMerma: 'kg',
+      unitUsed: 'kg',
+      density: undefined             // no es líquido
     },
     {
       id: "ejemplo-2",
       name: "Tomate triturado",
-      pricePerKg: "2.10",
-      grossWeight: "2.000",
-      mermaKg: "0.100",
-      usedWeight: "1.900"
+      priceTotalCompra: 2.10,
+      grossWeight: 2.000,
+      mermaKg: 0.100,
+      usedWeight: 1.900,
+      unitGross: 'kg',
+      unitMerma: 'kg',
+      unitUsed: 'kg',
+      density: 1.05                 // por ejemplo, densidad del tomate
     }
   ]
 };
@@ -44,14 +62,57 @@ const EJEMPLO_INICIAL = {
 // 2. INTERFACES
 // ==========================================
 
+//interface Ingrediente {
+//  id: string;
+  //name: string;
+//  priceTotalCompra: string;
+//  grossWeight: string;
+//  mermaKg: string;
+//  usedWeight: string;
+//}
+
+
 interface Ingrediente {
   id: string;
   name: string;
-  pricePerKg: string;
-  grossWeight: string;
-  mermaKg: string;
-  usedWeight: string;
+  priceTotalCompra: number;  // precio total en euros (número)
+  grossWeight: number;       // siempre en KG (unidad base para peso)
+  mermaKg: number;           // siempre en KG
+  usedWeight: number;        // siempre en KG
+  // Unidades que el USUARIO selecciona para cada campo (para mostrar y parsear)
+  unitGross: 'kg' | 'g' | 'l'; 
+  unitMerma: 'kg' | 'g' | 'l';
+  unitUsed: 'kg' | 'g' | 'l';
+  // Opcional: si es líquido, la densidad en kg/l (para convertir litros a kg)
+  density?: number; // si no se provee, asumimos 1 (agua)
 }
+
+const parseAndConvertToKg = (raw: string, selectedUnit: 'kg' | 'g' | 'l', density = 1): number => {
+  let clean = raw.trim().replace(',', '.').replace(/\s/g, '');
+  if (clean === '') return 0;
+
+  // Detectar unidad en el string
+  let detectedUnit = selectedUnit;
+  if (clean.toLowerCase().includes('kg')) detectedUnit = 'kg';
+  else if (clean.toLowerCase().includes('g') && !clean.toLowerCase().includes('kg')) detectedUnit = 'g';
+  else if (clean.toLowerCase().includes('l')) detectedUnit = 'l';
+
+  // Quitar letras
+  const numericStr = clean.replace(/[^0-9.]/g, '');
+  const num = parseFloat(numericStr);
+  if (isNaN(num) || num < 0) return 0;
+
+  switch (detectedUnit) {
+    case 'g': return num / 1000;
+    case 'l': return num * density;
+    default: return num;
+  }
+};
+
+
+
+
+
 
 // ==========================================
 // 3. HELPERS DE LOCALSTORAGE (¡SIN DUPLICACIÓN!)
@@ -81,6 +142,7 @@ const saveToStorage = (data: {
   namePlato: string;
   raciones: number;
   precioVenta: number;
+  gastosFijosPorRacion: number; // ← ALQUILERES
 }) => {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
@@ -196,15 +258,72 @@ export default function Escandallo() {
   const [modalAction, setModalAction] = useState<'limpiar' | 'ejemplo' | null>(null);
 
   // 🆕 Ahora con manejo de errores y validación
-  const [ingredients, setIngredients] = useState<Ingrediente[]>(() => {
-    const saved = loadFromStorage<Ingrediente[]>('ingredients', []);
+  //const [ingredients, setIngredients] = useState<Ingrediente[]>(() => {
+  //  const saved = loadFromStorage<Ingrediente[]>('ingredients', []);
     // Si hay datos guardados Y no están vacíos, los usamos
-    if (saved && saved.length > 0) {
-      return saved;
-    }
+  //  if (saved && saved.length > 0) {
+  //    return saved;
+  //  }
     // Si no, usamos el ejemplo inicial
-    return EJEMPLO_INICIAL.ingredients;
-  });
+  //  return EJEMPLO_INICIAL.ingredients;
+  //});
+
+  const [ingredients, setIngredients] = useState<Ingrediente[]>(() => {
+  const saved = loadFromStorage<Ingrediente[]>('ingredients', []);
+  if (saved && saved.length > 0) {
+    // MIGRACIÓN: si los campos son strings, los convertimos a number y añadimos unidades
+    return saved.map(item => ({
+      id: item.id,
+      name: item.name || '',
+      priceTotalCompra: typeof item.priceTotalCompra === 'string' 
+        ? parseFloat(item.priceTotalCompra) || 0 
+        : item.priceTotalCompra,
+      grossWeight: typeof item.grossWeight === 'string' 
+        ? parseFloat(item.grossWeight) || 0 
+        : item.grossWeight,
+      mermaKg: typeof item.mermaKg === 'string' 
+        ? parseFloat(item.mermaKg) || 0 
+        : item.mermaKg,
+      usedWeight: typeof item.usedWeight === 'string' 
+        ? parseFloat(item.usedWeight) || 0 
+        : item.usedWeight,
+      // Si no tienen unidades, las ponemos por defecto a 'kg'
+      unitGross: item.unitGross || 'kg',
+      unitMerma: item.unitMerma || 'kg',
+      unitUsed: item.unitUsed || 'kg',
+      density: item.density || undefined,
+    }));
+  }
+  // Si no hay guardado, usamos el ejemplo inicial (que ya tiene la nueva estructura)
+  return EJEMPLO_INICIAL.ingredients;
+});
+
+
+
+
+  //NUEVO
+  const [gastosFijosPorRacion, setGastosFijosPorRacion] = useState<number>(() =>
+    loadFromStorage('gastosFijosPorRacion', EJEMPLO_INICIAL.gastosFijosPorRacion)
+  );
+
+  //FORMATEADOR DE CEROS
+  // Formateador inteligente de pesos (elimina ceros innecesarios)
+const formatCleanWeight = (value: number | string | null | undefined, unit: string = 'kg'): string => {
+  if (value === undefined || value === null || value === '') return `0 ${unit === 'l' ? 'L' : unit}`;
+  
+  const num = typeof value === 'string' ? parseFloat(value.replace(',', '.')) : value;
+  if (isNaN(num)) return `0 ${unit === 'l' ? 'L' : unit}`;
+
+  // Elimina ceros a la derecha si no son necesarios (máximo 3 decimales)
+  const formatted = new Intl.NumberFormat('es-ES', {
+    maximumFractionDigits: 3
+  }).format(num);
+
+  const displayUnit = unit === 'l' ? 'L' : unit;
+  return `${formatted} ${displayUnit}`;
+};
+
+
 
   // =========================
   // 🆕 EFECTO PARA GUARDAR (CON CANDADO DE SEGURIDAD)
@@ -221,9 +340,10 @@ export default function Escandallo() {
       ingredients,
       namePlato,
       raciones,
-      precioVenta
+      precioVenta,
+      gastosFijosPorRacion, // ← ALQUILERES
     });
-  }, [ingredients, namePlato, raciones, precioVenta]);
+  }, [ingredients, namePlato, raciones, precioVenta, gastosFijosPorRacion]);
 
   // =========================
   // 🆕 HANDLERS CON MEMORIZACIÓN (useCallback) Y VALIDACIONES
@@ -235,10 +355,14 @@ export default function Escandallo() {
       {
         id: Date.now().toString(),
         name: '',
-        pricePerKg: '',
-        grossWeight: '',
-        mermaKg: '',
-        usedWeight: ''
+        priceTotalCompra: 0,
+        grossWeight: 0,
+        mermaKg: 0,
+        usedWeight: 0,
+        unitGross: 'kg',
+        unitMerma: 'kg',
+        unitUsed: 'kg',
+        density: undefined, // o 1 si quieres asumir agua
       }
     ]);
   }, []);
@@ -270,46 +394,177 @@ export default function Escandallo() {
 // 1. HANDLER CON VALIDACIÓN (CON useCallback)
 // ==========================================
 
+
+// Añade un estado para los textos de los inputs (uno por fila y campo)
+const [inputValues, setInputValues] = useState<Record<string, string>>({});
+
+// Helper para obtener la clave única de cada input
+const getInputKey = (id: string, field: string) => `${id}-${field}`;
+
+// Handler onChange: actualiza el texto local
+
+
+
+
+const handleInputChange = useCallback((id: string, field: string, value: string) => {
+  // Si es nombre o precio, actualiza directamente el estado global
+  if (field === 'name' || field === 'priceTotalCompra') {
+    setIngredients(prev =>
+      prev.map(row =>
+        row.id === id ? { ...row, [field]: value } : row
+      )
+    );
+    return; // Salimos, no usamos inputValues
+  }
+
+  // Para campos de peso, guardamos en inputValues (como ya tenías)
+  setInputValues(prev => ({
+    ...prev,
+    [getInputKey(id, field)]: value
+  }));
+}, []);
+
+
+
+
+// Handler onBlur: parsea y actualiza el estado global
+
+
+
+
+
+// Handler onBlur: parsea y actualiza el estado global
+const handleInputBlur = useCallback((id: string, field: string) => {
+  const key = getInputKey(id, field);
+  const raw = inputValues[key] || '';
+
+  // Buscamos el ingrediente actual para saber su unidad seleccionada
+  const ingredient = ingredients.find(i => i.id === id);
+  if (!ingredient) return;
+
+  let unit: 'kg' | 'g' | 'l';
+  let density = 1;
+  // Determinamos qué unidad corresponde a este campo
+  if (field === 'grossWeight') {
+    unit = ingredient.unitGross;
+    density = ingredient.density || 1;
+  } else if (field === 'mermaKg') {
+    unit = ingredient.unitMerma;
+    density = ingredient.density || 1;
+  } else if (field === 'usedWeight') {
+    unit = ingredient.unitUsed;
+    density = ingredient.density || 1;
+  } else {
+    return; // no es un campo de peso
+  }
+
+  // Parseamos el texto y lo convertimos a KG
+  const valueInKg = parseAndConvertToKg(raw, unit, density);
+
+  // Actualizamos el ingrediente en el estado global
+  setIngredients(prev =>
+    prev.map(row =>
+      row.id === id ? { ...row, [field]: valueInKg } : row
+    )
+  );
+
+  // Limpiamos el texto local (opcional)
+  setInputValues(prev => {
+    const newState = { ...prev };
+    delete newState[key];
+    return newState;
+  });
+}, [ingredients, inputValues]);
+
+// Además, necesitas una función para mostrar el valor en el input:
+// Cuando el input no tiene foco, mostramos el valor en KG formateado según la unidad.
+// Cuando tiene foco, mostramos el texto local (si existe) o el valor formateado.
+// Esto se puede hacer con un estado de "focus" o simplemente mostrando siempre el texto local
+// si existe, y si no, mostrando el valor formateado.
+
+// En el render de cada input:
+const getDisplayValue = (ingredient: Ingrediente, field: string) => {
+  const key = getInputKey(ingredient.id, field);
+  if (inputValues[key] !== undefined) return inputValues[key];
+
+  const value = ingredient[field as keyof Ingrediente];
+  // Asegurar que es número
+  const num = typeof value === 'number' ? value : parseFloat(value as string) || 0;
+
+  let unit: 'kg' | 'g' | 'l';
+  if (field === 'grossWeight') unit = ingredient.unitGross;
+  else if (field === 'mermaKg') unit = ingredient.unitMerma;
+  else if (field === 'usedWeight') unit = ingredient.unitUsed;
+  else return '';
+
+  if (unit === 'g') {
+    return (num * 1000).toString();
+  } else {
+    return num.toFixed(3);
+  }
+};
+
+
+
+
 // =========================
 // HANDLERS DEFINITIVOS
 // =========================
 
-const handleInputChange = useCallback((id: string, field: string, value: string) => {
+//const handleInputChange = useCallback((id: string, field: string, value: string) => {
   // Permitimos casi todo mientras se escribe (coma, punto, números)
-  let cleanValue = value.replace(',', '.');
+//  let cleanValue = value.replace(',', '.');
 
   // Solo bloqueamos letras y símbolos raros
-  if (field !== 'name' && cleanValue !== '' && !/^\d*\.?\d*$/.test(cleanValue)) {
-    return;
-  }
+ // if (field !== 'name' && cleanValue !== '' && !/^\d*\.?\d*$/.test(cleanValue)) {
+ //   return;
+ // }
 
-  setIngredients(prev =>
-    prev.map(row =>
-      row.id === id ? { ...row, [field]: cleanValue } : row
-    )
-  );
-}, []);
+//  setIngredients(prev =>
+//    prev.map(row =>
+ //     row.id === id ? { ...row, [field]: cleanValue } : row
+ //   )
+ // );
+//}, []);
 
 
 // ==========================================
 // 2. FORMATEO AL PERDER EL FOCO (onBlur)
 // ==========================================
-const handleInputBlur = useCallback((id: string, field: string) => {
+///SOLO PARA EL CAMPO TOTAL EUROS EN COMPRAS
+
+
+
+
+
+const handleBlur = useCallback((id: string, field: string) => {
   setIngredients(prev =>
     prev.map(row => {
       if (row.id !== id) return row;
 
-      const value = row[field as keyof Ingrediente] as string;
-      if (value === '' || value === '.') return row;
+      const rawValue = row[field as keyof Ingrediente] as string;
 
-      const num = parseFloat(value);
-      if (isNaN(num)) return row;
+      // Si está vacío, lo dejamos vacío para que pueda seguir editando
+      if (!rawValue || rawValue === '' || rawValue === '.') return row;
 
-      // Formateamos a 3 decimales solo al salir del input
-      return { ...row, [field]: num.toFixed(3) };
+      // Convertimos comas a puntos
+      const normalizedValue = String(rawValue).replace(',', '.');
+      const num = parseFloat(normalizedValue);
+
+      // SI ESCRIBIÓ PALABRAS COMO "vaca":
+      // Reemplazamos la palabra por "0" en el cuadro de texto
+      if (isNaN(num)) {
+        return { ...row, [field]: '0' };
+      }
+
+      // Si es un número válido, formateamos a 2 o 3 decimales
+      return { ...row, [field]: num.toFixed(2) };
     })
   );
 }, []);
+
+
+
 
 
 
@@ -318,6 +573,7 @@ const handleInputBlur = useCallback((id: string, field: string) => {
     setNamePlato(EJEMPLO_INICIAL.namePlato);
     setRaciones(EJEMPLO_INICIAL.raciones);
     setPrecioVenta(EJEMPLO_INICIAL.precioVenta);
+    setGastosFijosPorRacion(EJEMPLO_INICIAL.gastosFijosPorRacion); // 🆕
     setIngredients(EJEMPLO_INICIAL.ingredients);
     setModalOpen(false);
   }, []);
@@ -326,6 +582,7 @@ const handleInputBlur = useCallback((id: string, field: string) => {
     setNamePlato('');
     setRaciones(0);
     setPrecioVenta(0);
+    setGastosFijosPorRacion(0); // 🆕
     setIngredients([]);
     setModalOpen(false);
   }, []);
@@ -353,59 +610,82 @@ const handleInputBlur = useCallback((id: string, field: string) => {
     // ==========================================
     // Helper: acepta tanto kilos como gramos
      // ==========================================
-    const parseFlexible = (value: string, isWeight = false) => {
-      const num = parseFloat(value) || 0;
-      if (!isWeight) return Math.max(0, num); // precios siempre en €
-      // 
-      // // Si el número es >= 10, asumimos que el usuario escribió en gramos
-      if (num >= 10) return num / 1000;
-       return Math.max(0, num);
+  
+    const parseFlexible = (val: string | number | null | undefined, isWeight = false): number => {
+      // 1. Parseo robusto (copiado del segundo)
+      if (val === undefined || val === null || val === '') return 0;
+      if (typeof val === 'number') return Math.max(0, val); // Aseguramos no negativos
+      const cleanVal = String(val).replace(',', '.');
+      const parsed = parseFloat(cleanVal);
+      if (isNaN(parsed) || parsed < 0) return 0;
+
+      let result = parsed;
+
+      // 2. Lógica de peso (pero SIN el umbral mágico de 10)
+      // Aquí asumimos que el usuario SIEMPRE escribe en gramos si isWeight=true
+      if (isWeight) {
+        result = result / 1000; // Convertimos gramos a kilos
+      }
+
+     return result;
     };
 
-
+    
     const rows = ingredients.map((row) => {
-      // Usamos el helper
-      const precioKg = parseFlexible(row.pricePerKg);                 // €/kg
+      const precioTotalCompra = parseFlexible(row.priceTotalCompra); // o row.priceTotal si
+      // 1. Coste de la compra (ahora es directamente el que puso el usuario)
+      const costeTotalCompra = precioTotalCompra;
+      //LOS KILOS O KILO COMPRADOS
       const pesoBruto = parseFlexible(row.grossWeight, true);         // kg o g
+       //PRECIO POR KILO EN BRUTO calculamos 20 EUROS ENTRE 5 KILOS
+      const priceBrutokilo = pesoBruto > 0 ?  costeTotalCompra / pesoBruto : 0;
+    
+
+      //VALIDACION: La merma no puede ser nunca mayor que el peso total (P.BRUTO) del ingrediente
       const mermaKg = Math.min(parseFlexible(row.mermaKg, true), pesoBruto);
-
-
-      // 1. Coste de la compra inicial original
-      const costeTotalCompra = pesoBruto * precioKg;
-
-      // 2. Peso neto obtenido de la compra original
       const pesoNeto = pesoBruto - mermaKg;
 
-      // 3. Cantidad que el chef va a usar
+      
+      // 4. Precio por kilo limpio
+      const priceKgSinMerma = pesoNeto > 0 ? costeTotalCompra / pesoNeto : 0;
+
+     
+      const rendimiento = pesoBruto > 0 ? pesoNeto / pesoBruto : 0;
+        // 3. Cantidad que el chef va a usar
       const cantidadUsada = row.usedWeight !== undefined && row.usedWeight !== ''
       ? parseFlexible(row.usedWeight, true)
       : pesoNeto;
 
-      // ==========================================
-      // 🔥 TU LÓGICA DE NEGOCIO (¡INTACTA!)
-      // ==========================================
-      const rendimiento = pesoBruto > 0 ? pesoNeto / pesoBruto : 0;
-      const brutoNecesario = rendimiento > 0 ? cantidadUsada / rendimiento : 0;
-      const cantidadFaltanteKg = Math.max(0, cantidadUsada - pesoNeto);
-      const cantidadFaltanteGr = cantidadFaltanteKg * 1000;
-      const faltanteBruto = Math.max(0, brutoNecesario - pesoBruto);
+      //const brutoNecesario = rendimiento > 0 ? cantidadUsada / rendimiento : 0;
+      const totalBrutoNecesario = rendimiento > 0 ? cantidadUsada / rendimiento : 0;
+      const dineroPerdidoPorMerma = (totalBrutoNecesario - cantidadUsada) * priceBrutokilo;
+
+     // const cantidadFaltanteKg = Math.max(0, cantidadUsada - pesoNeto);
+      //const cantidadFaltanteGr = cantidadFaltanteKg * 1000;
+
+      
+      const faltanteSinMermaNetoKg = Math.max(0, cantidadUsada - pesoNeto);
+      const faltanteSinMermaNetoGr = faltanteSinMermaNetoKg  * 1000;
+     ///calculo de lo que sabemos que se necesita - lo usado en receta
+      const faltanteBruto = Math.max(0, totalBrutoNecesario - pesoBruto);
+      //Esa operación solo hace un cambio de unidad: pasa los kilos sobrantes que te faltan a gramos, multiplicando por 1.000.
       const faltanteBrutoGr = faltanteBruto * 1000;
 
-      // 4. Precio por kilo limpio
-      const priceKgSinMerma = pesoNeto > 0 ? costeTotalCompra / pesoNeto : 0;
+     
 
-      // 5. Dinero perdido por la merma
-      const dineroPerdidoPorMerma = mermaKg * precioKg;
+      // 6. COSTE REAL TOTAL
+      const costeRealTotal = totalBrutoNecesario * priceBrutokilo;
 
-      // 6. COSTE REAL TOTAL (¡TU FÓRMULA!)
-      const costeRealTotal = brutoNecesario * precioKg;
-
-      // 7. Coste por ración
+      // 7. Coste por ración  FINAL QUE DEBO USAR
       const nuevoCostePorRacion = raciones > 0 ? (costeRealTotal / raciones) : 0;
 
       // 8. Precio de venta sugerido
       const precioVentaSugeridoSinIva = nuevoCostePorRacion / 0.30;
       const precioVentaSugeridoConIva = precioVentaSugeridoSinIva * 1.10;
+
+
+      //NUEVO PARA AQLUILERES
+
 
       // Acumuladores Globales
       totalCompra += costeTotalCompra;
@@ -417,34 +697,74 @@ const handleInputBlur = useCallback((id: string, field: string) => {
       //totalRendimiento += rendimiento;
       totalPrecioVentaSugeridoSinIva += precioVentaSugeridoSinIva;
       totalPrecioVentaSugeridoConIva += precioVentaSugeridoConIva;
+    
 
       return {
         ...row,
         rendimiento: (rendimiento * 100).toFixed(1),
-        brutoNecesario: brutoNecesario.toFixed(3),
+        totalBrutoNecesario: totalBrutoNecesario.toFixed(3),
         faltanteBruto: faltanteBruto.toFixed(3),
-        faltanteBrutoGr: faltanteBrutoGr.toFixed(2),
+        faltanteBrutoGr: faltanteBrutoGr.toFixed(0),
         pesoNeto: pesoNeto.toFixed(3),
         cantidadUsada: cantidadUsada.toFixed(3),
         costeTotalCompra: costeTotalCompra.toFixed(2),
         dineroPerdidoPorMerma: dineroPerdidoPorMerma.toFixed(2),
+        //NUEVO
+        priceBrutokilo: priceBrutokilo.toFixed(2),
+
         priceKgSinMerma: priceKgSinMerma.toFixed(2),
-        cantidadFaltante: cantidadFaltanteKg.toFixed(3),
-        cantidadFaltanteG: cantidadFaltanteGr.toFixed(0),
+        //cantidadFaltante: cantidadFaltanteKg.toFixed(3),
+        //cantidadFaltanteG: cantidadFaltanteGr.toFixed(0),
+        faltanteSinMermaNetoKg:faltanteSinMermaNetoKg.toFixed(3),
+        faltanteSinMermaNetoGr: faltanteSinMermaNetoGr.toFixed(0),
         costeRealTotal: costeRealTotal.toFixed(2),
         nuevoCostePorRacion: nuevoCostePorRacion.toFixed(2),
       };
     });
 
 
-    // ✅MODIFCADO  Rendimiento global real de la receta
+     // ✅MODIFCADO  Rendimiento global real de la receta
      const totalRendimiento = totalPesoBruto > 0
-    ? (totalPesoNeto / totalPesoBruto) * 100
-    : 0;
+     ? (totalPesoNeto / totalPesoBruto) * 100
+     : 0;
 
-    // Cálculos finales
-    const beneficio = precioVenta - totalCosteRealPorRacion;
-    const foodCost = precioVenta > 0 ? (totalCosteRealPorRacion / precioVenta) * 100 : 0;
+     // Cálculos finales
+     //const beneficio = precioVenta - totalCosteRealPorRacion;
+
+     const beneficio = precioVenta > 0
+     ? precioVenta - totalCosteRealPorRacion
+     : null;
+
+     // 2. Food Cost solo si hay precio de venta
+     const foodCost = precioVenta > 0
+     ? (totalCosteRealPorRacion / precioVenta) * 100
+     : null
+    
+
+
+     // ==========================================
+     // CALCULO CON GASTOS FIJOS EN EUROS AÑADIDOS POR EL USUARIO + EL 20% RENTABILIDAD (no modifica nada anterior)
+    // ==========================================
+    // 1. Convertir y verificar si REALMENTE introdujo gastos fijos
+    const numGastosFijos = parseFloat(String(gastosFijosPorRacion));
+    const tieneGastosFijos = !isNaN(numGastosFijos) && numGastosFijos > 0;
+    const gastosFijos = tieneGastosFijos ? numGastosFijos : 0;
+
+    // 2. Coste Total Base del plato
+    const costeTotalPlato = totalCosteRealPorRacion + gastosFijos;
+
+    // 3. Aplicar margen y 4. IVA SOLO si tiene gastos fijos
+    let precioFinalSinIva = null;
+    let precioFinalConIva = null;
+
+    if (tieneGastosFijos) {
+     const porcentajeMargen = 20;
+     precioFinalSinIva = costeTotalPlato * (1 + porcentajeMargen / 100);
+     precioFinalConIva = precioFinalSinIva * 1.10;
+    }
+
+
+
 
     return {
       calculatedRows: rows,
@@ -453,21 +773,22 @@ const handleInputBlur = useCallback((id: string, field: string) => {
         totalMermaDinero: totalMermaDinero.toFixed(2),
         totalPesoNeto: totalPesoNeto.toFixed(3),
         totalCosteRealPorRacion: totalCosteRealPorRacion.toFixed(2),
-        beneficio: beneficio.toFixed(2),
-        foodCost: foodCost.toFixed(2),
+        beneficio: beneficio !== null ? beneficio.toFixed(2) : null,
+        foodCost: foodCost !== null ? foodCost.toFixed(2) : null,
         totalGastoConReposicion: totalGastoConReposicion.toFixed(2),
         totalRendimiento: totalRendimiento.toFixed(1),   // ahora es un % real (ej: 92.5)
         totalPrecioVentaSugeridoSinIva: totalPrecioVentaSugeridoSinIva.toFixed(2),
         totalPrecioVentaSugeridoConIva: totalPrecioVentaSugeridoConIva.toFixed(2),
+
+          //NUEVO ALQUILERES GASTOS FIJOS
+        // ← Solo se añade esto nuevo
+        precioFinalSinIva: precioFinalSinIva !== null ? precioFinalSinIva.toFixed(2) : null,
+        precioFinalConIva: precioFinalConIva !== null ? precioFinalConIva.toFixed(2) : null,
+  
+
       }
     };
-  }, [ingredients, raciones, precioVenta]);
-
-
-
-
-
-
+  }, [ingredients, raciones, precioVenta, gastosFijosPorRacion]);
 
 
 
@@ -485,6 +806,8 @@ const handleInputBlur = useCallback((id: string, field: string) => {
     totales
   });
 };
+
+
   // =========================
   // 🆕 BOTÓN "GUARDAR COPIA" (NUEVA FUNCIONALIDAD)
   // =========================
@@ -636,7 +959,7 @@ const handleInputBlur = useCallback((id: string, field: string) => {
       xl:border-2 xl:border-black py-1">
 
          {/* NOMBRE DEL PLATO */}
-        <div className=" lg:col-span-3 md:col-span-3 px-2 py-2 rounded-3xl shadow">
+        <div className=" lg:col-span-2 md:col-span-3 px-2 py-2 rounded-3xl shadow">
           <label className="block lg:text-lg md:text-lg text-base font-bold mb-2 text-center">
           Nombre del Plato
          </label>
@@ -652,7 +975,7 @@ const handleInputBlur = useCallback((id: string, field: string) => {
 
         {/* RACIONES */}
         <div className="bg-white lg:col-span-1 md:col-span-2 px-2 py-2 rounded-3xl shadow">
-          <label className="block lg:text-lg md:text-lg text-base font-bold mb-2 text-center">
+          <label className="block lg:text-base md:text-lg text-base font-bold mb-2 text-center">
             N.º de Raciones
           </label>
           <input
@@ -684,7 +1007,7 @@ const handleInputBlur = useCallback((id: string, field: string) => {
 
         {/* PRECIO VENTA */}
         <div className="bg-white lg:col-span-1 md:col-span-2  px-2 py-2 rounded-3xl shadow">
-          <label className="block lg:text-lg md:text-lg text-base font-bold mb-2 text-center">
+          <label className="block lg:text-base md:text-lg text-base font-bold mb-2 text-center">
             P.V. del Plato (€)
           </label>
           <input
@@ -703,6 +1026,48 @@ const handleInputBlur = useCallback((id: string, field: string) => {
             className="w-full lg:p-4 p-2 border text-center rounded-2xl lg:text-lg md:text-lg text-base font-black text-green-700"
           />
         </div>
+
+
+
+
+
+           {/*INFRAESTRUCTURA*/}
+
+           {/* % INFRAESTRUCTURA */}
+        
+
+
+         
+
+
+
+         <div className="bg-white lg:col-span-1 md:col-span-2 px-2 py-2 rounded-3xl shadow">
+          <label className="block lg:text-base md:text-lg text-base font-bold mb-2 text-center">
+            Gastos Fijos X Ración(€)
+            </label>
+            <input
+            type="number"
+            min="0"
+            step="0.01"
+            value={gastosFijosPorRacion}
+            onChange={(e) => {
+              const valor = parseFloat(e.target.value);
+              setGastosFijosPorRacion(isNaN(valor) ? 0 : Math.max(0, valor));
+            }}
+            className="w-full lg:p-4 p-2 border text-center rounded-2xl lg:text-lg md:text-lg text-base font-black text-purple-700"
+            placeholder="0.00"
+            />
+            <p className="text-[11px] text-center text-neutral-500 mt-1">
+              Alquiler, personal en €/plato(opcional)
+              </p>
+            </div>
+
+
+
+
+
+
+
       </div>
 
 
@@ -711,11 +1076,7 @@ const handleInputBlur = useCallback((id: string, field: string) => {
      
       {/* TABLA */}    {/* TABLA */}
    
-
-
-
-
-      {/* ========================================== */}
+      {/* ========================================= */}
 {/* 💻 VISTA PARA ORDENADORES ( TABLA ACTUAL) */}
 {/* ========================================== */}
 {/* 💻 VISTA PARA ORDENADORES */}
@@ -743,101 +1104,195 @@ const handleInputBlur = useCallback((id: string, field: string) => {
                 </div>
               </td>
 
-              {/* PRECIO POR KILO */}
-              <td className="p-2">
-                <p className='text-center lg:text-sm font-bold text-neutral-900'>
-                  Compra <span className="text-red-600">€</span> x Kg/Gr 
-                </p>
-                <div className='py-2'>
-                  <input
-                    type="text"
-                    inputMode="decimal"
-                    value={ing.pricePerKg}
-                    onChange={(e) => handleInputChange(ing.id, 'pricePerKg', e.target.value)}
-                    onBlur={() => handleInputBlur(ing.id, 'pricePerKg')}
-                    className="w-full text-center p-2 border rounded-xl text-neutral-900"
-                    placeholder="Ej. 4.00 ó 0.40"
-                  />
-                </div>
-              </td>
+           
 
-              {/* PESO BRUTO */}
-              <td className="p-2">
-                <p className='text-center lg:text-sm font-bold'>P. Bruto Total en Kg/Gr</p>
-                <div className='py-2'>
-                  <input
-                    type="text"
-                    inputMode="decimal"
-                    value={ing.grossWeight}
-                    onChange={(e) => handleInputChange(ing.id, 'grossWeight', e.target.value)}
-                    onBlur={() => handleInputBlur(ing.id, 'grossWeight')}
-                    className="w-full text-center p-2 border rounded-xl text-neutral-900"
-                    placeholder="Ej. 4 ó 0.350 (gr.)"
-                  />
-                </div>
-              </td>
-
-              {/* MERMA */}
-              <td className="p-2">
-                <p className='text-center lg:text-sm font-bold'>Merma Total en Kg/Gr</p>
-                <div className='py-2'>
-                  <input
-                    type="text"
-                    inputMode="decimal"
-                    value={ing.mermaKg}
-                    onChange={(e) => handleInputChange(ing.id, 'mermaKg', e.target.value)}
-                    onBlur={() => handleInputBlur(ing.id, 'mermaKg')}
-                    className="w-full text-center p-2 border rounded-xl text-neutral-900"
-                    placeholder="Ej. 0 ó 0.140 (140gr)"
-                  />
-                </div>
-              </td>
+              {/* PRECIO TOTAL DE LA COMPRA */}
+             <td className="p-2">
+             <p className='text-center lg:text-sm font-bold text-neutral-900'>
+             Precio total de compra <span className="text-red-600">€</span>
+             </p>
+             <div className='py-2'>
+             <input
+             type="text"
+             inputMode="decimal"
+             value={ing.priceTotalCompra}   // o ing.priceTotal
+             onChange={(e) => handleInputChange(ing.id, 'priceTotalCompra', e.target.value)}
+             onBlur={() =>   handleBlur(ing.id, 'priceTotalCompra')}
+             className="w-full text-center p-2 border rounded-xl text-neutral-900"
+            placeholder="Ej. 10 (bolsa) ó 8.50 (1 kg)"
+             />
+           </div>
+          </td>
 
 
 
 
-               {/* CANTIDAD A USAR */}
-              <td className="p-2">
-                <p className='text-center lg:text-sm font-bold'>Cantidad Total a Usar Kg/Gr</p>
-                <div className='py-2'>
-                  <input
-                    type="text"
-                    inputMode="decimal"
-                    value={ing.usedWeight}
-                    onChange={(e) => handleInputChange(ing.id, 'usedWeight', e.target.value)}
-                    onBlur={() => handleInputBlur(ing.id, 'usedWeight')}
-                    className="w-full text-center p-2 border rounded-xl text-neutral-900"
-                    placeholder={row.pesoNeto ? `Sugerido: ${row.pesoNeto} kg` : "Ej. 0.500 (500g)"}
-                  />
-                </div>
-              </td>
+           {/**BRUTO NUEVO */}
+           {/* PESO BRUTO */}
+           <td className="p-2 ">
+            <div className='w-full flex flex-row mx-auto items-center justify-center'>
+           
+                  <p className='text-center lg:text-sm font-bold'>P.Bruto Total</p>
+          
+           
+         
+               <select
+               value={ing.unitGross}
+               onChange={(e) => {
+               const newUnit = e.target.value as 'kg' | 'g' | 'l';
+               setIngredients(prev =>
+                prev.map(row =>
+                  row.id === ing.id ? { ...row, unitGross: newUnit } : row
+                 )
+                );
+               }}
+               className="px-2 py-1 bg-gray-200 rounded-lg text-sm font-bold">
+                <option value="kg">Kg</option>
+                <option value="g">g</option>
+                <option value="l">L</option>
+              </select>
 
+          
              
-            </tr>
+            </div>
+            
+             <div className='py-2 flex flex-col items-center gap-1'>
+              <input
+                type="text"
+                inputMode="decimal"
+                value={getDisplayValue(ing, 'grossWeight')}
+                onChange={(e) => handleInputChange(ing.id, 'grossWeight', e.target.value)}
+                onBlur={() => handleInputBlur(ing.id, 'grossWeight')}
+                className="w-full text-center p-2 border rounded-xl text-neutral-900"
+                placeholder="Ej. 1.5 (kg) o 1500g"
+              />
+
+            </div>
+               <p className="text-[10px] text-gray-600 text-center">
+                {ing.unitGross === 'g' ? 'Gramos' : ing.unitGross === 'l' ? 'Litros' : 'Kilogramos'}
+                </p>
+           </td>
 
 
 
 
 
-            {/* SEGUNDA FILA */}
-            <tr className='bg-neutral-50'>
+
+            <td className="p-2 ">
+              <div className='w-full flex flex-row mx-auto items-center justify-center'>
+               <p className='text-center lg:text-sm font-bold'>Merma Total</p>
+               <select
+                value={ing.unitMerma}
+                onChange={(e) => {
+                const newUnit = e.target.value as 'kg' | 'g' | 'l';
+                setIngredients(prev =>
+                  prev.map(row =>
+                  row.id === ing.id ? { ...row, unitMerma: newUnit } : row
+                 )
+                );
+              }}
+              className="px-2 py-1 bg-gray-200 rounded-lg text-sm font-bold">
+                <option value="kg">Kg</option>
+                <option value="g">g</option>
+                <option value="l">L</option>
+              </select>
+            </div>
+            
+
+             <div className='py-2 flex flex-col items-center gap-1'>
+              <input
+               type="text"
+               inputMode="decimal"
+               value={getDisplayValue(ing, 'mermaKg')}
+               onChange={(e) => handleInputChange(ing.id, 'mermaKg', e.target.value)}
+               onBlur={() => handleInputBlur(ing.id, 'mermaKg')}
+               className="w-full text-center p-2 border rounded-xl text-neutral-900"
+                placeholder="Ej. 1.5 (kg) o 1500g"
+                />
+
+               </div>
+               <p className="text-[10px] text-gray-600 text-center">
+                {ing.unitMerma === 'g' ? 'Gramos' : ing.unitMerma === 'l' ? 'Litros' : 'Kilogramos'}
+                </p>
+           </td>
 
 
-                  {/* RESULTADOS (solo lectura) */}
+
+          {/* CANTIDAD A USAR */}
+           <td className="p-2 ">
+            <div className='w-full flex flex-row mx-auto items-center justify-center'>
+              <p className='text-center lg:text-sm font-bold'>Uso en Receta</p>
+              <select
+               value={ing.unitUsed}
+               onChange={(e) => {
+               const newUnit = e.target.value as 'kg' | 'g' | 'l';
+               setIngredients(prev =>
+                prev.map(row =>
+                  row.id === ing.id ? { ...row, unitUsed: newUnit } : row
+                 )
+                );
+              }}
+              className="px-2 py-1 bg-gray-200 rounded-lg text-sm font-bold">
+                <option value="kg">Kg</option>
+                <option value="g">g</option>
+                <option value="l">L</option>
+              </select>
+            </div>
+            
+
+             <div className='py-2 flex flex-col items-center gap-1'>  
+                <input
+                type="text"
+                inputMode="decimal"
+                value={getDisplayValue(ing, 'usedWeight')}
+                onChange={(e) => handleInputChange(ing.id, 'usedWeight', e.target.value)}
+                onBlur={() => handleInputBlur(ing.id, 'usedWeight')}
+                className="w-full text-center p-2 border rounded-xl text-neutral-900"
+                 placeholder="Ej. 1.5 (kg) o 1500g"
+                />
+
+            </div>
+               <p className="text-[10px] text-gray-600 text-center">
+                {ing.unitUsed === 'g' ? 'Gramos' : ing.unitUsed === 'l' ? 'Litros' : 'Kilogramos'}
+                </p>
+           </td>
+
+
+        </tr>
+
+
+        {/* SEGUNDA FILA SEGUNDA FILA SEGUNDA FILA SEGUNDA FILA*/}
+          <tr className='bg-neutral-50'>
+
+
+              {/* RESULTADOS (solo lectura) */}
               <td className="p-2">
-                <p className='text-center lg:text-sm font-bold'>P. Neto x Kg/Gr</p>
-                <div className='py-2 text-center text-neutral-900 font-bold'>{row.pesoNeto ?? '0.000'} kg/Gr</div>
-              </td>
-
-
-
+                <p className='text-center lg:text-sm font-bold'>Peso Neto</p>
+                 <div className='py-2 text-center text-neutral-900 font-bold'>
+                  {formatCleanWeight(row.pesoNeto, ing.unitUsed)}
+                  {/*row.pesoNeto ?? '0.000'*/} 
+                  {/*ing.unitGross === 'l' ? ' L' : ' kg'*/}
+                </div>
+            </td>
 
 
                <td className="p-2">
-                <p className='text-center lg:text-sm font-bold'>Precio x Kg/Gr del P.Neto</p>
-                <div className='py-2 text-center text-neutral-900 font-bold'>{row.priceKgSinMerma ?? '0.00'} €</div>
+                <p className='text-center lg:text-sm font-bold'>Precio del P.Neto</p>
+                <div className='py-2 text-center text-neutral-900 font-bold'>
+                  {row.priceKgSinMerma ?? '0.00'}
+                   <span className="text-red-600"> € </span> x {ing.unitGross === 'l' ? 'L' : 'kg'}
+                  </div>
               </td>
 
+                 
+
+              <td className="p-2 ">
+               <p className='text-center lg:text-sm font-bold'>Precio del P.Bruto</p>
+                <div className='text-center py-2 text-neutral-900 font-bold'>
+                  {row.priceBrutokilo?? '0.000'} 
+                  <span className="text-red-600"> € </span> x {ing.unitGross === 'l' ? 'L' : 'kg'}
+                </div>
+              </td>
 
 
               {/**PERDIDA */}
@@ -848,59 +1303,66 @@ const handleInputBlur = useCallback((id: string, field: string) => {
 
            
 
-              {/* Faltante, Compra requerida, Costes... (igual que tenías) */}
-              <td className="p-2">
-                <p className='text-center lg:text-sm font-bold'>Faltante sin merma</p>
-                <div className='text-center py-2'>
-                  {parseFloat(row.cantidadFaltante || '0') > 0 ? (
-                    <span className='text-amber-600 font-semibold text-xs'>
-                      ⚠️ {row.cantidadFaltante} kg / ({row.cantidadFaltanteG} g)
-                    </span>
-                  ) : (
-                    <span className="text-emerald-600 font-medium text-sm">✅ Todo cubierto</span>
-                  )}
+              <td className="p-2 font-black">
+                <p className='text-center lg:text-sm font-bold'>Total Bruto a Comprar</p>
+                <div className='text-center py-2 text-neutral-900 font-bold'>
+                  {formatCleanWeight(row.totalBrutoNecesario, ing.unitGross)}
+                    {/*row.totalBrutoNecesario ?? '0.000'} {ing.unitGross === 'l' ? 'L' : 'kg'*/}
                 </div>
               </td>
-              
-              {/**TOTAL FALTANTE BRUTO */}
-              <td className="p-2">
-                <p className='text-center lg:text-sm font-bold'>Faltante Bruto Requerido</p>
-                <div className='text-center py-2'>
-                  {parseFloat(row.faltanteBruto || '0') > 0 ? (
-                    <span className='text-red-600 font-semibold text-xs'>⚠️ {row.faltanteBruto} kg</span>
-                  ) : (
-                    <span className="text-emerald-600 font-medium text-sm">✅ Todo cubierto</span>
-                  )}
-                </div>
-              </td>
-
-           
-             
-
 
             </tr>
 
-
-
+     
 
 
              {/* TERCERA FILA TERCERA FILA*/}
             <tr className='bg-neutral-50'>
+
+                {/* FALTANTE SIN MERMA Faltante, Compra requerida, Costes... (igual que tenías) */}
+              <td className="p-2">
+                <p className='text-center lg:text-sm font-bold'>Faltante sin merma</p>
+                <div className='text-center py-2'>
+                  {parseFloat(row.faltanteSinMermaNetoKg || '0') > 0 ? (
+                    <span className='text-fuchsia-600 font-semibold lg:text-base 2xl:text-lg sm:text:base text-xs'>
+                    
+                          ⚠️ {formatCleanWeight(row.faltanteSinMermaNetoKg, ing.unitUsed)}
+
+                       {/*row.faltanteSinMermaNetoKg*/} {/*ing.unitGross === 'l' ? 'L' : 'kg'*/} 
+                     {/* ({row.faltanteSinMermaNetoGr} g)*/}
+                      </span>
+                      ) : (
+                      <span className="text-emerald-600 font-medium text-sm">✅ Todo cubierto</span>
+                    )}
+                </div>
+
+              </td>
+
+
+              {/**TOTAL FALTANTE BRUTO  */}
+               <td className="p-2">
+                  <p className='text-center lg:text-sm font-bold'>Faltante Bruto Requerido</p>
+                <div className='text-center py-2'>
+                 {parseFloat(row.faltanteBruto || '0') > 0 ? (
+                    <span className='text-red-600 font-semibold lg:text-base 2xl:text-lg sm:text:base text-xs'>
+                      ⚠️ {formatCleanWeight(row.faltanteBruto, ing.unitUsed)}
+                       {/*row.faltanteBruto */} {/*ing.unitGross === 'l' ? 'L' : 'kg'*/}  {/*({row.faltanteBrutoGr} g)*/}
+                      </span>
+                      ) : (
+                      <span className="text-emerald-600 font-medium text-sm">✅ Todo cubierto</span>
+                    )}
+                </div>
              
-
-            
-
-           
-              <td className="p-2 font-black">
-                <p className='text-center lg:text-sm font-bold'>Total Bruto a Comprar</p>
-                <div className='text-center py-2 text-neutral-900 font-bold'>{row.brutoNecesario} kg</div>
               </td>
 
 
 
+             
+
+         
 
                <td className="p-2">
-                <p className='text-center lg:text-sm font-bold'>Rendimiento del Ingrediente</p>
+                <p className='text-center lg:text-sm font-bold'>Rendimiento del Ingred.</p>
                 <div className='py-2 text-center text-neutral-900 font-bold'> {row.rendimiento}%</div>
               </td>
 
@@ -949,6 +1411,14 @@ const handleInputBlur = useCallback((id: string, field: string) => {
 </div>
 
 
+
+
+
+
+
+
+
+
 {/* ========================================== */}
 {/* 📱 VISTA EN TARJETAS (CARDS) PARA MÓVILES */}
 {/* ========================================== */}
@@ -978,87 +1448,232 @@ const handleInputBlur = useCallback((id: string, field: string) => {
         {/* BLOQUE 1: DATOS REQUERIDOS (INPUTS) */}
         <div className="space-y-3">
           <div>
-            <label className="block text-xs font-bold text-blue-500 mb-1">Nombre del Ingrediente</label>
+            <label className="block text-xs font-bold text-blue-500 mb-1 text-center">Nombre del Ingrediente</label>
             <input
               type="text"
               value={ing.name}
               onChange={(e) => handleInputChange(ing.id, 'name', e.target.value)}
-              className="w-full text-left px-3 py-2 border rounded-xl text-neutral-900 bg-neutral-50/50"
+              className="w-full text-center px-3 py-2 border rounded-xl text-neutral-900 bg-neutral-50/50"
               placeholder="Ej. zanahoria"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-bold text-neutral-800 mb-1">
-                Precio Compra (<span className="text-red-600">€</span> x Kg/Gr)
+              <label className="block text-xs font-bold text-neutral-800 mb-1 text-center">
+                Precio Tot.Compra (<span className="text-red-600">€</span>)
               </label>
               <input
                 type="text"
                 inputMode="decimal"
-                value={ing.pricePerKg}
-                onChange={(e) => handleInputChange(ing.id, 'pricePerKg', e.target.value)}
-                onBlur={() => handleInputBlur(ing.id, 'pricePerKg')}
+                value={ing.priceTotalCompra}
+                onChange={(e) => handleInputChange(ing.id, 'priceTotalCompra', e.target.value)}
+                onBlur={() =>   handleBlur(ing.id, 'priceTotalCompra')}
                 className="w-full text-center px-2 py-2 border rounded-xl text-neutral-900"
                 placeholder="Ej. 4.00"
               />
             </div>
-            <div>
-              <label className="block text-xs font-bold text-neutral-800 mb-1">Cantidad Total a Usar Kg/Gr</label>
-              <input
+
+
+            
+          {/* CANTIDAD A USAR */}
+           <div className=" ">
+
+
+            <div className='w-full flex flex-row mx-auto items-center justify-center'>
+              <label className="block text-xs font-bold text-neutral-800 text-center">Uso en Receta</label>
+              <select
+               value={ing.unitUsed}
+               onChange={(e) => {
+               const newUnit = e.target.value as 'kg' | 'g' | 'l';
+               setIngredients(prev =>
+                prev.map(row =>
+                  row.id === ing.id ? { ...row, unitUsed: newUnit } : row
+                 )
+                );
+              }}
+              className="px-2 py-1 bg-gray-200 rounded-lg text-xs font-bold">
+                <option value="kg">Kg</option>
+                <option value="g">g</option>
+                <option value="l">L</option>
+              </select>
+            </div>
+            
+
+             <div className='flex flex-col items-center gap-1'>  
+                <input
                 type="text"
                 inputMode="decimal"
-                value={ing.usedWeight}
+                value={getDisplayValue(ing, 'usedWeight')}
                 onChange={(e) => handleInputChange(ing.id, 'usedWeight', e.target.value)}
                 onBlur={() => handleInputBlur(ing.id, 'usedWeight')}
-                className="w-full text-center px-2 py-2 border rounded-xl text-neutral-900 placeholder:text-[10px]"
-                placeholder={row.pesoNeto ? `${row.pesoNeto} kg` : "Ej. 0.500"}
-              />
+                className="w-full text-center p-2 border rounded-xl text-neutral-900"
+                 placeholder="Ej. 1.5 (kg) o 1500g"
+                />
+
             </div>
+               <p className="text-[10px] text-gray-600 text-center">
+                {ing.unitUsed === 'g' ? 'Gramos' : ing.unitUsed === 'l' ? 'Litros' : 'Kilogramos'}
+                </p>
+           </div>
+
+
+
+
+          
+
+
+
           </div>
 
+
+
+
+            {/**SEGUNDO BLOQUE */}
           <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="block text-xs font-bold text-neutral-700 mb-1">Peso Bruto (Kg/Gr)</label>
+
+             {/* PESO BRUTO */}
+           <div className="">
+            <div className='w-full flex flex-row mx-auto items-center justify-center'>
+           
+               <label className="block text-xs font-bold text-neutral-700 text-center">
+                Peso Bruto
+                </label>
+        
+               <select
+               value={ing.unitGross}
+               onChange={(e) => {
+               const newUnit = e.target.value as 'kg' | 'g' | 'l';
+               setIngredients(prev =>
+                prev.map(row =>
+                  row.id === ing.id ? { ...row, unitGross: newUnit } : row
+                 )
+                );
+               }}
+               className="px-2 py-1 bg-gray-200 rounded-lg text-xs font-bold">
+                <option value="kg">Kg</option>
+                <option value="g">g</option>
+                <option value="l">L</option>
+              </select>
+
+          
+             
+            </div>
+            
+             <div className='flex flex-col items-center gap-1'>
               <input
                 type="text"
                 inputMode="decimal"
-                value={ing.grossWeight}
+                value={getDisplayValue(ing, 'grossWeight')}
                 onChange={(e) => handleInputChange(ing.id, 'grossWeight', e.target.value)}
                 onBlur={() => handleInputBlur(ing.id, 'grossWeight')}
                 className="w-full text-center px-2 py-2 border rounded-xl text-neutral-900"
-                placeholder="Ej. 4.00"
+                placeholder="Ej. 1.5 (kg) o 1500g"
               />
+
             </div>
-            <div>
-              <label className="block text-xs font-bold text-neutral-700 mb-1">Merma (Kg/Gr)</label>
+               <p className="text-[10px] text-gray-600 text-center">
+                {ing.unitGross === 'g' ? 'Gramos' : ing.unitGross === 'l' ? 'Litros' : 'Kilogramos'}
+                </p>
+           </div>
+
+
+                  {/**MERMA TOTAL */}
+            <div className="">
+              <div className='w-full flex flex-row mx-auto items-center justify-center'>
+               <label className="block text-xs font-bold text-neutral-700 text-center">
+                Merma
+                </label>
+               <select
+                value={ing.unitMerma}
+                onChange={(e) => {
+                const newUnit = e.target.value as 'kg' | 'g' | 'l';
+                setIngredients(prev =>
+                  prev.map(row =>
+                  row.id === ing.id ? { ...row, unitMerma: newUnit } : row
+                 )
+                );
+              }}
+              className="px-2 py-1 bg-gray-200 rounded-lg text-xs font-bold">
+                <option value="kg">Kg</option>
+                <option value="g">g</option>
+                <option value="l">L</option>
+              </select>
+            </div>
+            
+
+             <div className=' flex flex-col items-center gap-1'>
               <input
-                type="text"
-                inputMode="decimal"
-                value={ing.mermaKg}
-                onChange={(e) => handleInputChange(ing.id, 'mermaKg', e.target.value)}
-                onBlur={() => handleInputBlur(ing.id, 'mermaKg')}
-                className="w-full text-center px-2 py-2 border rounded-xl text-neutral-900"
-                placeholder="Ej. 0.140"
-              />
-            </div>
+               type="text"
+               inputMode="decimal"
+               value={getDisplayValue(ing, 'mermaKg')}
+               onChange={(e) => handleInputChange(ing.id, 'mermaKg', e.target.value)}
+               onBlur={() => handleInputBlur(ing.id, 'mermaKg')}
+               className="w-full text-center p-2 border rounded-xl text-neutral-900"
+                placeholder="Ej. 1.5 (kg) o 1500g"
+                />
+
+               </div>
+               <p className="text-[10px] text-gray-600 text-center">
+                {ing.unitMerma === 'g' ? 'Gramos' : ing.unitMerma === 'l' ? 'Litros' : 'Kilogramos'}
+                </p>
+           </div>
           </div>
         </div>
 
-        {/* BLOQUE 2: ANÁLISIS ECONÓMICO (solo lectura) */}
+
+
+
+        {/* BLOQUE 2: ESTATICOS ECONÓMICO (solo lectura) */}
+
         <div className="mt-4 pt-4 border-t border-dashed border-neutral-200 grid grid-cols-2 gap-y-3 gap-x-2 text-xs">
+
+
+
+             <div className="bg-neutral-50 p-2 rounded-xl">
+                <p className="text-gray-900 font-medium text-center">Precio del P.Bruto</p>
+                <div className='text-center py-1 text-neutral-900 font-bold'>
+                  {row.priceBrutokilo?? '0.000'} <span className="text-red-600">€</span> x {ing.unitGross === 'l' ? 'L' : 'kg'}
+                </div>
+              </div>
+
+
+
+
+             {/* PESO NETO */}
+             
           <div className="bg-neutral-50 p-2 rounded-xl">
-            <p className="text-gray-900 font-medium">Peso Neto kg/Gr:</p>
-            <p className="font-bold text-neutral-900 mt-0.5">{row.pesoNeto ?? '0.000'} kg</p>
+                <p className="text-gray-900 text-center font-medium">Peso Neto</p>
+                 <div className='py-1 text-center text-neutral-900 font-bold'>
+                     {formatCleanWeight(row.pesoNeto, ing.unitGross)}
+                  {/*row.pesoNeto ?? '0.000'*/} 
+                  {/*ing.unitGross === 'l' ? ' L' : ' kg'*/}
+                </div>
+            </div>
+
+
+
+
+         
+ 
+         {/**PRECIO DEL PESO NETO */}
+         <div className="bg-neutral-50 p-2 rounded-xl">
+                <p className='text-center text-gray-900 font-medium'> 
+                  Precio Limpio
+                  </p>
+                <div className='py-1 text-center text-neutral-900 font-bold'>
+                  {row.priceKgSinMerma ?? '0.00'} <span className="text-red-600">€</span> x {ing.unitGross === 'l' ? 'L' : 'kg'}
+                  </div>
           </div>
+
+
           <div className="bg-neutral-50 p-2 rounded-xl">
-            <p className="text-gray-900 font-medium">Precio limpio x Kg/Gr:</p>
-            <p className="font-bold text-neutral-900 mt-0.5">{row.priceKgSinMerma ?? '0.00'} €</p>
+            <p className="text-center text-red-500 font-medium">Pérdida Merma:</p>
+            <p className="text-center font-bold text-red-600 py-1">-{row.dineroPerdidoPorMerma ?? '0.00'} €</p>
           </div>
-          <div className="bg-neutral-50 p-2 rounded-xl">
-            <p className="text-red-500 font-medium">Pérdida Merma:</p>
-            <p className="font-bold text-red-600 mt-0.5">-{row.dineroPerdidoPorMerma ?? '0.00'} €</p>
-          </div>
+
+
+
           <div className="bg-indigo-50 p-2 rounded-xl">
             <p className="text-indigo-600 font-bold">Coste Ración:</p>
             <p className="font-black text-indigo-700 mt-0.5 text-sm">{row.nuevoCostePorRacion ?? '0.00'} €</p>
@@ -1066,33 +1681,68 @@ const handleInputBlur = useCallback((id: string, field: string) => {
 
           {/* Faltantes */}
           <div className="col-span-2 bg-amber-50/60 p-2.5 rounded-xl border border-amber-100 flex flex-col justify-center space-y-1">
-            <div className="flex justify-between items-center">
-              <span className="text-neutral-600 font-medium">Faltante Neto:</span>
-              {parseFloat(row.cantidadFaltante || '0') > 0 ? (
-                <span className="text-amber-700 font-bold">⚠️ {row.cantidadFaltante} kg/Gr</span>
-              ) : (
-                <span className="text-emerald-600 font-bold">✅ Cubierto</span>
-              )}
-            </div>
+           
+           
+
+         
+              {/**FANTANTE SIN MERMA */}
+             <div className="flex justify-between items-center">
+                <span className="text-neutral-600 font-medium">Faltante Neto:</span>
+
+                <div className='text-center py-2'>
+                  {parseFloat(row.faltanteSinMermaNetoKg || '0') > 0 ? (
+                    <span className='text-fuchsia-600 font-semibold lg:text-base 2xl:text-lg sm:text:base text-xs'>
+                         ⚠️ {formatCleanWeight(row.faltanteSinMermaNetoKg, ing.unitGross)}
+
+                      {/*row.faltanteSinMermaNetoKg*/} {/*ing.unitGross === 'l' ? 'L' : 'kg'*/} 
+                     {/* ({row.faltanteSinMermaNetoGr} g)*/}
+                      </span>
+                      ) : (
+                      <span className="text-emerald-600 font-medium text-sm">✅ Todo cubierto</span>
+                    )}
+                </div>
+
+              </div>
 
 
+            
+              {/**FALTANTE BRUTO  */}
+               
             <div className="flex justify-between items-center">
-              <span className="text-neutral-600 font-medium">Compra Bruta Requerida:</span>
-              {parseFloat(row.faltanteBruto || '0') > 0 ? (
-                <span className="text-red-600 font-bold">⚠️ {row.faltanteBruto} kg/Gr</span>
-              ) : (
-                <span className="text-emerald-600 font-bold">✅ Cubierto</span>
-              )}
-            </div>
+                 <span className="text-neutral-600 font-medium">Faltante Bruta Requerida:</span>
+                <div className='text-center py-2'>
+                 {parseFloat(row.faltanteBruto || '0') > 0 ? (
+                    <span className='text-red-600 font-semibold lg:text-base 2xl:text-lg sm:text:base text-xs'>
+                       ⚠️{formatCleanWeight(row.faltanteBruto, ing.unitGross)}
+
+                     {/*row.faltanteBruto } {ing.unitGross === 'l' ? 'L' : 'kg'*/}  {/*({row.faltanteBrutoGr} g)*/}
+                      </span>
+                      ) : (
+                      <span className="text-emerald-600 font-medium text-sm">✅ Todo cubierto</span>
+                    )}
+                </div>
+             
+              </div>
+
 
 
 
 
                {/* 🆕 NUEVO: Total Bruto a Comprar */}
-              <div className="flex justify-between items-center">
-               <span className="text-neutral-600 font-medium">Total Bruto a Comprar:</span>
-               <span className="text-neutral-900 font-bold">{row.brutoNecesario ?? '0.000'} kg</span>
-              </div>
+           
+
+           <div className="flex justify-between items-center">
+                 <span className="text-neutral-600 font-medium">Total Bruto a Comprar:</span>
+                 <span className="text-neutral-900 font-bold">
+                  {formatCleanWeight(row.totalBrutoNecesario, ing.unitGross)}
+                 {/*row.totalBrutoNecesario ?? '0.000'} {ing.unitGross === 'l' ? 'L' : 'kg'*/}
+              </span>
+                  </div>
+
+              
+              
+
+
 
              {/* 🆕 NUEVO: Rendimiento del Ingrediente */}
             <div className="flex justify-between items-center">
@@ -1114,6 +1764,45 @@ const handleInputBlur = useCallback((id: string, field: string) => {
     );
   })}
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 {/* ========================================== */}
@@ -1296,7 +1985,7 @@ lg:px-0 2xl:px-0 md:px-18 px-4'>
     
     {/* === FILA 1 EN PC === */}
     <div className="bg-gray-800/40 p-5 rounded-2xl border border-gray-700/30">
-      <p className="text-gray-400 text-lg">Gasto Total Inicial</p>
+      <p className="text-gray-400 text-lg">Coste Compra Completa</p>
       <p className="lg:text-4xl md:text-5xl text-2xl font-black mt-3 text-white">{totales.totalCompra} €</p>
     </div>
 
@@ -1305,8 +1994,10 @@ lg:px-0 2xl:px-0 md:px-18 px-4'>
       <p className="lg:text-4xl md:text-5xl text-2xl font-black mt-3 text-red-500">-{totales.totalMermaDinero} €</p>
     </div>
 
+
+       {/** Gasto Final con Reposición  Gasto Final con Reposición   Gasto Final con Reposición */}
     <div className="bg-gray-800/40 p-5 rounded-2xl border border-gray-700/30">
-      <p className="text-amber-400 text-lg">Gasto Final con Reposición</p>
+      <p className="text-amber-400 text-lg"> Gasto Real Usado en Receta</p>
       <p className="lg:text-4xl md:text-5xl text-2xl font-black mt-3 text-amber-500">{totales.totalGastoConReposicion} €</p>
     </div>
 
@@ -1316,10 +2007,26 @@ lg:px-0 2xl:px-0 md:px-18 px-4'>
       <p className="lg:text-4xl md:text-5xl text-2xl font-black mt-3 text-indigo-400">{totales.totalCosteRealPorRacion} €</p>
     </div>
 
-    <div className="bg-gray-800/40 p-5 rounded-2xl border border-gray-700/30">
-      <p className="text-green-400 text-lg">Beneficio por Plato</p>
-      <p className="lg:text-4xl md:text-5xl text-2xl font-black mt-3 text-green-400">{totales.beneficio} €</p>
-    </div>
+
+
+{/* Beneficio */}
+<div className="bg-gray-800/40 p-5 rounded-2xl border border-gray-700/30">
+  <p className="text-green-400 text-lg">Beneficio por Plato</p>
+  <p className="lg:text-4xl md:text-5xl text-2xl font-black mt-3 text-green-400">
+    {totales.beneficio !== null ? `${totales.beneficio} €` : '—'}
+  </p>
+  {totales.beneficio === null && (
+    <p className="text-xs text-gray-400 mt-1">Introduce un precio de venta</p>
+  )}
+</div>
+
+      
+      
+
+
+
+
+
 
     <div className="bg-gray-800/40 p-5 rounded-2xl border border-gray-700/30">
       <p className="text-cyan-400 text-lg">Rendimiento Global</p>
@@ -1329,16 +2036,38 @@ lg:px-0 2xl:px-0 md:px-18 px-4'>
     {/**=== FILA 3 PC, MOVILES */}
     
     <div className="bg-gray-800/40 p-5 rounded-2xl border border-gray-700/30">
-      <p className="text-green-400 text-lg">Precio Sugerido Sin Iva por Plato</p>
+      <p className="text-green-400 text-lg">Precio Sugerido Plato + 30%</p>
       <p className="lg:text-4xl md:text-5xl text-2xl font-black mt-3 text-green-400">{totales.totalPrecioVentaSugeridoSinIva} €</p>
     </div>
 
     <div className="bg-gray-800/40 p-5 rounded-2xl border border-gray-700/30">
-      <p className="text-cyan-400 text-lg">Precio Sugerido Con Iva por Plato</p>
+      <p className="text-cyan-400 text-lg">P. Sugerido Plato + 30% + IVA</p>
       <p className="lg:text-4xl md:text-5xl text-2xl font-black mt-3 text-cyan-400">{totales.totalPrecioVentaSugeridoConIva} €</p>
     </div>
 
+          {/** precioFinalConIva  precioFinalSinIva  
+        <div className="bg-gray-800/40 p-5 rounded-2xl border border-gray-700/30">
+      <p className="text-mauve-500 text-lg">Plato + Fijos + 20% + IVA</p>
+      <p className="lg:text-4xl md:text-5xl text-2xl font-black mt-3 text-mauve-500">{totales.precioFinalConIva} €</p>
+    </div>
 
+*/}
+
+
+
+<div className="bg-gray-800/40 p-5 rounded-2xl border border-gray-700/30">
+  <p className="text-mauve-500 text-lg">Plato + Fijos + 20% + IVA</p>
+
+  {totales.precioFinalConIva ? (
+    <p className="lg:text-4xl md:text-5xl text-2xl font-black mt-3 text-mauve-500">
+      {totales.precioFinalConIva} €
+    </p>
+  ) : (
+    <p className="text-amber-400 text-sm font-medium mt-3">
+      ⚠️ Es necesario introducir los costes fijos
+    </p>
+  )}
+</div>
 
 
 
@@ -1346,15 +2075,41 @@ lg:px-0 2xl:px-0 md:px-18 px-4'>
   </div>
 
   {/* 👑 EL REY DE LAS MÉTRICAS: DESTACADO ABAJO EN GRANDE */}
-  <div className="mt-12 pt-8 border-t border-gray-800 text-center">
-    <p className="text-gray-400 text-xl mb-2">Food Cost de la Receta</p>
-    <p className="lg:text-7xl md:text-6xl text-3xl font-black text-amber-400 tracking-tight">{totales.foodCost}%</p>
-    <p className="text-xs text-gray-500 mt-2 max-w-xs mx-auto">
+ 
+
+    <div className="mt-12 pt-8 border-t border-gray-800 text-center">
+ <p className="text-gray-400 text-xl mb-2">Food Cost de la Receta</p>
+ <p className="lg:text-7xl md:text-6xl text-3xl font-black text-amber-400 tracking-tight">
+    {totales.foodCost !== null ? `${totales.foodCost}%` : '—'}
+  </p>
+  {totales.foodCost === null && (
+    <p className="text-xs text-gray-400 mt-1">Introduce un precio de venta</p>
+  )}
+
+<p className="text-xs text-gray-500 mt-2 max-w-xs mx-auto">
       * Porcentaje ideal recomendado para el control de costes del restaurante.
     </p>
-  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
 
    </div>
+
+     <ConsejosMermas ingredients={ingredients} />
+
+
+     {/* Justo debajo del bloque del RESUMEN DEL CÁLCULO */}
 
 
              </div>

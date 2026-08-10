@@ -87,3 +87,23 @@ export const fmtEur = (n) =>
 
 export const fmtPct = (n) =>
   n != null ? `${n.toFixed(1)} %` : '—';
+
+
+
+///NUEVO ESCALADOR DE RECETAS
+export function escalarIngredientes(ingredientes, racionesOriginales, racionesNuevas) {
+  const original = parseFloat(racionesOriginales) || 0;
+  const nuevas = parseFloat(racionesNuevas) || 0;
+
+  if (original <= 0 || nuevas <= 0) {
+    return [];
+  }
+
+  const factor = nuevas / original;
+
+  return ingredientes.map((ing) => ({
+    ...ing,
+    cantidadEscalada: (parseFloat(ing.cantidad) || 0) * factor,
+    costeEscalado: (parseFloat(ing.coste) || 0) * factor,
+  }));
+}

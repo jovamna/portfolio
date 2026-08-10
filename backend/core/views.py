@@ -466,19 +466,19 @@ def spa_entrypoint(request):
         return render(request, 'index.html', context)
 
     # ====================== APP 2: FICHA TECNICA ======================
-    if len(parts) >= 1 and parts[0] == 'hosteleria-ficha-tecnica':
-        url_canonica = build_absolute_url("hosteleria-ficha-tecnica")
+    if len(parts) >= 1 and parts[0] == 'estandarizar-recetas':
+        url_canonica = build_absolute_url("estandarizar-recetas")
         
         breadcrumbs = [
             {'name': 'Inicio', 'url': build_absolute_url()},
-            {'name': 'Ficha Técnica de Cocina y Cócteles', 'url': url_canonica}
+            {'name': 'Estandarizar Recetas Online Gratis', 'url': url_canonica}
         ]
 
-        ficha_json_ld = {
+        estandarizar_json_ld = {
             "@context": "https://schema.org",
             "@type": "WebApplication",
-            "name": "App Ficha Técnica de Cocina y Cócteles Online Gratis | Jovamna Medina",
-            "description": "Crea y gestiona las fichas técnicas y recetas de oro de tu cocina o barra. Descarga en PDF al instante.",
+            "name":"Gestor de Recetas Estandarizadas",
+            "description":"Herramienta online para crear, organizar y gestionar recetas estandarizadas de cocina, pastelería y coctelería. Guarda tus recetas y descárgalas en PDF sin registro.",
             "url": url_canonica,
             "applicationCategory": "BusinessApplication",
             "operatingSystem": "All",
@@ -492,25 +492,25 @@ def spa_entrypoint(request):
         }
 
         context.update({
-            'seo_title': "App Ficha Técnica de Cocina y Cócteles Gratis | Jovamna Medina",
+            'seo_title': "Estandarizar Recetas de Cocina y Pastelería | Gratis",
             # Descripción completada correctamente:
-            'seo_description': "Crea tu ficha técnica de cocina o coctelería online sin registrarte. Organiza ingredientes, alérgenos y elaboración en PDF listo para imprimir.",
+            'seo_description': "Estandariza recetas de Cocina, Pasteleria y Coctelería online sin registrarte. Organiza ingredientes, alérgenos y elaboración en PDF listo para imprimir.",
             # Keywords corregidas sin erratas:
-            'seo_keywords': "ficha tecnica cocina, ficha tecnica coctel, plantilla receta estandar, crear ficha tecnica pdf, recetas de oro cocina, gestion barra restaurante",
+            'seo_keywords': "estandarizar recetas de cocina, estandariza  recetas para pasteleria,  coctel, gestiona tus recetas estandarizadas,  plantilla receta estandar, crear ficha tecnica pdf, recetas de oro cocina, gestion barra restaurante",
             'canonical_url': url_canonica,
             'og_type': 'website',
-            'og_title': "App Ficha Técnica de Cocina y Cócteles Gratis | Jovamna Medina",
+            'og_title': "Estandarizar recetas de Cocina, Pasteleria y Cócteles Gratis | Jovamna Medina",
             'og_description': "Herramienta online gratuita para estandarizar las recetas de tu cocina o bar en PDF.",
             'og_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
             'og_url': url_canonica,
             'twitter_card': 'summary_large_image',
-            'twitter_title': "App Ficha Técnica Gratuita para Cocina y Bar",
+            'twitter_title': "Estandariza recetas de Pasteleria, Cocina y Bar",
             'twitter_description': "Crea y estandariza las fichas técnicas de tus platos y cócteles gratis.",
             'twitter_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
             'seo_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
             'is_home_page': False,
             'breadcrumbs': breadcrumbs,
-            'jsonld_primary': json.dumps(ficha_json_ld, ensure_ascii=False),
+            'jsonld_primary': json.dumps(estandarizar_json_ld, ensure_ascii=False),
             'jsonld_breadcrumbs': json.dumps(breadcrumb_json_ld(breadcrumbs), ensure_ascii=False),
         })
         return render(request, 'index.html', context)

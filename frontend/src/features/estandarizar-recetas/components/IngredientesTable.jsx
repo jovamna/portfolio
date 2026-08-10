@@ -1,4 +1,4 @@
-import { UNIDADES, ingredienteVacio, calcularCosteTotal, fmtEur } from '../../../utils/hosteleria/ficha-tecnica/fichaUtils';
+import { UNIDADES, ingredienteVacio, calcularCosteTotal, fmtEur } from '../../../utils/hosteleria/estandarizar-recetas/fichaUtils';
 
 export default function IngredientesTable({ ingredientes, onChange }) {
 

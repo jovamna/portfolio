@@ -1,5 +1,6 @@
+
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Home from './containers/pages/Home';
-import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import store from './store';
 import { Provider } from 'react-redux';
 import Error404 from './containers/errors/Error404';
@@ -21,8 +22,7 @@ import Logo from './containers/inicio/Logo';
 import Escandallo from './features/escandallo/Escandallo';
 import Luz from './features/luz/Luz';
 import Irpf from './features/irpf/Irpf';
-import FichaTecnica from './features/ficha-tecnica//FichaTecnica';
-
+import EstandarizarRecetas from './features/estandarizar-recetas/EstandarizarRecetas';
 
 
 
@@ -105,7 +105,12 @@ function App() {
     
         <Route path="/calcula-irpf" element={<Irpf/>} />
         <Route path="/escandallo" element={<Escandallo/>} />
-        <Route path="/hosteleria-ficha-tecnica" element={<FichaTecnica/>} />
+      
+
+         {/* 1. La ruta antigua que redirige a la nueva */}
+        <Route path="/hosteleria-ficha-tecnica" element={<Navigate to="/estandarizar-recetas" replace />} />
+
+        <Route path="/estandarizar-recetas" element={<EstandarizarRecetas/>} />
         <Route path="/tarifa-luz" element={<Luz/>} />
         <Route path="/search/:term" element={<Search />} />
    

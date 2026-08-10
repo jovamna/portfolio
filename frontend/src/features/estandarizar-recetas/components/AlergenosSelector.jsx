@@ -1,4 +1,4 @@
-import { ALERGENOS } from '../../../utils/hosteleria/ficha-tecnica/fichaUtils';
+import { ALERGENOS } from '../../../utils/hosteleria/estandarizar-recetas/fichaUtils';
 
 export default function AlergenosSelector({ selected, onChange }) {
 

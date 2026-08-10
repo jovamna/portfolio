@@ -93,7 +93,7 @@ export default function EmplatadoSection({ values, onChange }) {
         </label>
 
         {/* Aviso estático claro */}
-        <p className="text-amber-700 text-xs bg-amber-50 border border-amber-200 p-3 rounded-lg mb-4">
+        <p className="text-amber-700 text-xs bg-amber-50 border border-amber-200 p-1 rounded-lg mb-4">
           ⚠️ <strong>Importante:</strong> Máximo {MAX_SIZE_MB} MB por imagen.<br />
           Si la foto es pesada, puede tardar unos segundos en procesarse.
         </p>

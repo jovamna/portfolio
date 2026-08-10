@@ -33,15 +33,21 @@ const solutions = [
     icon: MdArticle,
   },
   {
-    name: 'Cálculo del IRPF',
-    description: 'Herramienta útil para calcular el irpf.',
-    href: '/calcula-irpf',
+    name: 'Estand.Recetas',
+    description: ' Diseñado para ayudar a digitalizar la gestión de pequeños negocios de hostelería de forma gratuita.',
+    href: '/estandarizar-recetas"',
     icon: MdArticle,
   },
   {
     name: 'Escandallo',
     description: ' Diseñado para ayudar a digitalizar la gestión de pequeños negocios de hostelería de forma gratuita.',
     href: '/escandallo',
+    icon: MdArticle,
+  },
+  {
+    name: 'Cálculo del IRPF',
+    description: 'Herramienta útil para calcular el irpf.',
+    href: '/calcula-irpf',
     icon: MdArticle,
   },
   {

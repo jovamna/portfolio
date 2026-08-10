@@ -17,7 +17,7 @@ class StaticPagesSitemap(Sitemap):
             '/politica-cookies/',
             
             '/escandallo',
-            '/hosteleria-ficha-tecnica',
+            '/estandarizar-recetas',
             '/calcula-irpf',
         ]
 

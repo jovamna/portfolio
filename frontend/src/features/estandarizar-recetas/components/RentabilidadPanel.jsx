@@ -1,19 +1,29 @@
 
 
 
-import { calcularRentabilidad, valorarFoodCost, fmtEur, fmtPct } from '../../../utils/hosteleria/ficha-tecnica/fichaUtils';
+import { calcularRentabilidad, valorarFoodCost, fmtEur, fmtPct } from '../../../utils/hosteleria/estandarizar-recetas/fichaUtils';
 
-export default function RentabilidadPanel({ costeTotal, pvp, onPvpChange }) {
+export default function RentabilidadPanel({ costeTotal, pvp, onPvpChange, raciones }) {
   const rent = calcularRentabilidad(costeTotal, pvp);
   const valoracion = valorarFoodCost(rent?.foodCostPct);
+
+  //NUEVO
+   // 🔢 Cálculos por ración
+  const racionesNum = parseFloat(raciones) || 0;
+  const costePorRacion = racionesNum > 0 ? costeTotal / racionesNum : 0;
+  const pvpNum = parseFloat(pvp) || 0;
+  const precioVentaPorRacion = (racionesNum > 0 && pvpNum > 0) ? pvpNum / racionesNum : 0;
+
 
   return (
     <section className="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-gray-700">
          <h2 className="text-base lg:text-base font-bold text-black mb-4 underline underline-offset-4 uppercase">
         Rentabilidad</h2>
 
-      <div className="flex flex-col mb-6 w-full max-w-[220px]">
-        <label className="text-sm font-semibold text-gray-600 mb-1" htmlFor="pvp">
+      <div className="flex flex-col lg:flex-row  mb-6 w-full lg:w-[100%] lg:justify-between">
+
+        <div className='flex flex-col'>
+          <label className="text-sm font-semibold text-gray-600 mb-1" htmlFor="pvp">
           PVP (precio de venta en carta)
         </label>
         <div className="relative flex items-center">
@@ -29,14 +39,37 @@ export default function RentabilidadPanel({ costeTotal, pvp, onPvpChange }) {
             className="w-full bg-white border border-gray-200 rounded-lg pl-7 pr-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
           />
         </div>
-      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-        {/* Coste Total */}
-        <div className="bg-gray-50/50 p-4 rounded-xl border border-gray-100 flex flex-col justify-center">
+
+        </div>
+        
+
+
+         {/* Coste Total */}
+        <div className="bg-gray-50/50 p-2 rounded-xl border border-gray-100 flex flex-col justify-center">
           <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Coste total</p>
           <p className="text-xl font-bold text-gray-800">{fmtEur(costeTotal)}</p>
         </div>
+
+
+        {/* 🆕 Coste por ración */}
+        <div className="bg-gray-50/50 p-2 rounded-xl border border-gray-100 flex flex-col justify-center">
+          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Coste por ración</p>
+          <p className="text-xl font-bold text-gray-800">
+            {racionesNum > 0 ? fmtEur(costePorRacion) : '—'}
+          </p>
+        </div>
+
+
+
+
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+       
+
+
+
 
         {/* Food Cost % */}
         <div className="bg-gray-50/50 p-4 rounded-xl border border-gray-100 flex flex-col justify-center relative">
@@ -55,6 +88,36 @@ export default function RentabilidadPanel({ costeTotal, pvp, onPvpChange }) {
             )}
           </div>
         </div>
+
+
+
+
+
+
+
+
+
+
+
+   <div className="bg-gray-50/50 p-4 rounded-xl border border-gray-100 flex flex-col justify-center relative">
+  <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">
+  Precio venta / ración</p>
+          <p className="text-xl font-bold text-[#185FA5]">
+            {racionesNum > 0 && pvpNum > 0 ? fmtEur(precioVentaPorRacion) : '—'}
+          </p>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
 
         {/* Margen Bruto */}
         <div className="bg-gray-50/50 p-4 rounded-xl border border-gray-100 flex flex-col justify-center">
