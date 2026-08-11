@@ -35,7 +35,7 @@ const solutions = [
   {
     name: 'Estand.Recetas',
     description: ' Diseñado para ayudar a digitalizar la gestión de pequeños negocios de hostelería de forma gratuita.',
-    href: '/estandarizar-recetas"',
+    href: '/estandarizar-recetas',
     icon: MdArticle,
   },
   {

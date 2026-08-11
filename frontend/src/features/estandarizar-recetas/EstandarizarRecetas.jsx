@@ -425,7 +425,7 @@ const cargarCopia = useCallback((event) => {
       {/* Header de la página */}
     
 
-<header className="w-full lg:w-[90.8%] 2xl:w-[90%] mx-auto text-center mb-6">
+   <header className="w-full lg:w-[90.8%] 2xl:w-[90%] mx-auto text-center mb-6">
   {/* H1 Principal con Palabras Clave de Cocina y Coctelería */}
   <h1 className="text-xl md:text-2xl lg:text-4xl font-black text-neutral-900 mb-3 text-center leading-tight">
     Estandariza tus Recetas de Cocina, Pastelería y Coctelería
@@ -450,7 +450,7 @@ const cargarCopia = useCallback((event) => {
       <li className="md:col-span-2 text-center mt-1">📄 <strong>Descarga en PDF:</strong> Obtén tu receta estandarizada lista para colgar en la pared o imprimir.</li>
     </ul>
   </div>
-</header>
+      </header>
 
 
 
@@ -463,7 +463,7 @@ const cargarCopia = useCallback((event) => {
 
 
       {/* Contenedor del Formulario */}
-      <div className="w-full lg:w-[90.8%] 2xl:w-[90%] mx-auto space-y-6">
+      <div className="w-full lg:w-[92%] 2xl:w-[90%] mx-auto space-y-6">
         <PlatoHeader
           values={ficha}
           onChange={(v) => setFicha({ ...ficha, ...v })}

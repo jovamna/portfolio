@@ -42,7 +42,7 @@ const EJEMPLO_INICIAL:{
       name: "Carne picada de ternera",
       priceTotalCompra: 8.50,
       grossWeight: 2.700,
-      mermaKg: 0.0356,
+      mermaKg: 0.290,
       usedWeight: 2.700,
       unitGross: 'kg',
       unitMerma: 'kg',
@@ -891,7 +891,7 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
 
 
           {/**INICIO APP */}
-          <div className="w-full lg:w-[89%] 2xl:w-[70%] mx-auto lg:px-4 px-3 ">
+          <div className="w-full lg:w-[90%] 2xl:w-[89%] mx-auto lg:px-4 px-3">
 
             {/* HEADER */}
             <div className="flex flex-col w-full mb-2 items-center">
@@ -946,9 +946,9 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
 
 
 
-         </div>
+           </div>
 
-      {/* TITULOS*/}
+      {/* PRIMER BLOQUE  TITULOS*/}
       <div className="lg:grid lg:grid-cols-5 
       md:grid md:grid-cols-7 flex flex-col  
       gap-2 lg:mb-8 mb-4 lg:border-2 lg:border-black 
@@ -1027,7 +1027,7 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
 
            {/* GSTOS FIJOS ALQUILER LUZ NOMINAS */}
       
-         <div className="bg-white lg:col-span-1 md:col-span-2 px-2 py-2 rounded-3xl shadow">
+        <div className="bg-white lg:col-span-1 md:col-span-2 px-2 py-2 rounded-3xl shadow">
           <label className="block lg:text-base md:text-lg text-base font-bold mb-2 text-center">
             Gastos Fijos X Ración(€)
             </label>
@@ -1046,7 +1046,7 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
             <p className="text-[11px] text-center text-neutral-500 mt-1">
               Alquiler, personal en €/plato(opcional)
               </p>
-            </div>
+        </div>
 
       </div>
 
@@ -1061,15 +1061,17 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
 {/* ========================================== */}
 {/* 💻 VISTA PARA ORDENADORES */}
 <div className="hidden lg:block bg-white shadow overflow-x-auto border-2 border-black">
-  <table className="w-full">
-    <tbody className="divide-y">
+
+
+  <table className="lg:w-full 2xl:w-full">
+    <tbody className="divide-y lg:w-full 2xl:w-full">
       {ingredients.map((ing) => {
         // Buscamos la fila calculada correspondiente
         const row = calculatedRows.find(r => r.id === ing.id) || {} as any;
 
         return (
           <React.Fragment key={ing.id}>
-            <tr className="hover:bg-gray-50">
+            <tr className="hover:bg-gray-50  lg:w-full 2xl:w-full ">
               {/* NOMBRE */}
               <td className="p-2">
                 <p className='text-center lg:text-base font-extrabold text-blue-500 '>Ingrediente</p>
@@ -1233,7 +1235,7 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
 
 
         {/* SEGUNDA FILA SEGUNDA FILA SEGUNDA FILA SEGUNDA FILA*/}
-          <tr className='bg-neutral-50'>
+          <tr className='hover:bg-gray-50 lg:w-full 2xl:w-full'>
 
 
               {/* RESULTADOS (solo lectura) */}
@@ -1352,7 +1354,7 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
 
 
 
-              <td className="p-2">
+              <td className="">
                 <p className='text-center lg:text-sm font-bold text-neutral-700'>Eliminar</p>
                 <div className='text-center py-2'>
                   <button
