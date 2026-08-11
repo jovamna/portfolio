@@ -465,20 +465,20 @@ def spa_entrypoint(request):
         })
         return render(request, 'index.html', context)
 
-    # ====================== APP 2: FICHA TECNICA ======================
+    # ====================== APP 2: ESTANDARIZA RECETAS FICHA TECNICA ======================
     if len(parts) >= 1 and parts[0] == 'estandarizar-recetas':
         url_canonica = build_absolute_url("estandarizar-recetas")
         
         breadcrumbs = [
             {'name': 'Inicio', 'url': build_absolute_url()},
-            {'name': 'Estandarizar Recetas Online Gratis', 'url': url_canonica}
+            {'name': 'Estandarizar Y Escalar Recetas Online Gratis', 'url': url_canonica}
         ]
 
         estandarizar_json_ld = {
             "@context": "https://schema.org",
             "@type": "WebApplication",
             "name":"Gestor de Recetas Estandarizadas",
-            "description":"Herramienta online para crear, organizar y gestionar recetas estandarizadas de cocina, pastelería y coctelería. Guarda tus recetas y descárgalas en PDF sin registro.",
+            "description":"Herramienta online para crear, organizar, escalar y gestionar recetas estandarizadas de cocina, pastelería y coctelería. Guarda tus recetas y descárgalas en PDF sin registro.",
             "url": url_canonica,
             "applicationCategory": "BusinessApplication",
             "operatingSystem": "All",
@@ -492,20 +492,20 @@ def spa_entrypoint(request):
         }
 
         context.update({
-            'seo_title': "Estandarizar Recetas de Cocina y Pastelería | Gratis",
+            'seo_title': "Estandarizar y Escala Recetas de Cocina y Pastelería | Gratis",
             # Descripción completada correctamente:
-            'seo_description': "Estandariza recetas de Cocina, Pasteleria y Coctelería online sin registrarte. Organiza ingredientes, alérgenos y elaboración en PDF listo para imprimir.",
+            'seo_description': "Estandariza y Escala recetas de Cocina, Pasteleria y Coctelería online sin registrarte. Organiza ingredientes, alérgenos y elaboración en PDF listo para imprimir.",
             # Keywords corregidas sin erratas:
             'seo_keywords': "estandarizar recetas de cocina, estandariza  recetas para pasteleria,  coctel, gestiona tus recetas estandarizadas,  plantilla receta estandar, crear ficha tecnica pdf, recetas de oro cocina, gestion barra restaurante",
             'canonical_url': url_canonica,
             'og_type': 'website',
-            'og_title': "Estandarizar recetas de Cocina, Pasteleria y Cócteles Gratis | Jovamna Medina",
-            'og_description': "Herramienta online gratuita para estandarizar las recetas de tu cocina o bar en PDF.",
+            'og_title': "Estandarizar y escalar recetas de Cocina, Pasteleria y Cócteles Gratis | Jovamna Medina",
+            'og_description': "Herramienta online gratuita para estandarizar y escalar las recetas de tu cocina o bar en PDF.",
             'og_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
             'og_url': url_canonica,
             'twitter_card': 'summary_large_image',
-            'twitter_title': "Estandariza recetas de Pasteleria, Cocina y Bar",
-            'twitter_description': "Crea y estandariza las fichas técnicas de tus platos y cócteles gratis.",
+            'twitter_title': "Estandariza y escalar recetas de Pasteleria, Cocina y Bar",
+            'twitter_description': "Crea, estandariza y escala recetas de tus platos y cócteles gratis.",
             'twitter_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
             'seo_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
             'is_home_page': False,

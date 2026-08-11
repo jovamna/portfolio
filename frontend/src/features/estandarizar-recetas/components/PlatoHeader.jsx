@@ -113,26 +113,18 @@ export default function PlatoHeader({ values, onChange }) {
 
 
 
-
-
-
-
-
-
-
- <div className="flex flex-col">
-          <label className="text-sm font-semibold text-gray-600 mb-1" htmlFor="tiempoElaboracion">
-            Mano de Obra
+        <div className="flex flex-col">
+         <label className="text-sm font-semibold text-gray-600 mb-1" htmlFor="fecha">
+          Fecha
           </label>
-          <input
-            id="ManodeObra"
-            type="text"
-            placeholder="Ej: 3 colaboradores"
-            value={values.ManodeObra}
-            onChange={set('ManodeObra')}
+           <input
+            id="fecha"
+            type="date"                          // ← correcto
+            value={values.fecha || ''}
+            onChange={set('fecha')}
             className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
-          />
-        </div>
+              />
+             </div>
 
 
 

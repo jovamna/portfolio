@@ -205,7 +205,7 @@ const initialState = () => ({
   emplatado: { descripcion: '', imagen: null, imagenNombre: null },
   pvp: '',
 
-
+  fecha: '',
   ManodeObra: '',
   maquinaria: '',          // ← utensilios usados
   raciones: 1,             // ← nuevo (por defecto 1)
@@ -233,14 +233,9 @@ useEffect(() => {
 }, [ficha]);
 
 
-  const handleDescargarPDF = () => {
-    if (!ficha.nombrePlato.trim()) {
-      alert('Ponle un nombre al plato antes de descargar la ficha.');
-      return;
-    }
-    const temperaturaLabel = TEMPERATURAS.find((t) => t.value === ficha.temperatura)?.label;
-    generarPDF({ ...ficha, temperaturaLabel });
-  };
+  
+
+
 
   const handleReset = () => {
     if (confirm('¿Empezar una ficha nueva? Se perderán los datos actuales.')) {
@@ -264,6 +259,30 @@ useEffect(() => {
 };
 
 
+  const handleDescargarPDF = () => {
+  if (!ficha.nombrePlato.trim()) {
+    alert('Ponle un nombre al plato antes de descargar la ficha.');
+    return;
+  }
+
+  const temperaturaLabel = TEMPERATURAS.find((t) => t.value === ficha.temperatura)?.label;
+
+  generarPDF({
+    ...ficha,
+    temperaturaLabel,
+    // Datos de la receta escalada (si existen)
+    ingredientesEscalados: ingredientesEscalados.length > 0 ? ingredientesEscalados : null,
+    racionesEscaladas: racionesEscaladas || null,
+  });
+};
+
+
+
+
+
+
+
+
   // =========================
     // 🆕 BOTÓN "GUARDAR COPIA" (NUEVA FUNCIONALIDAD)
     // =========================
@@ -277,25 +296,23 @@ useEffect(() => {
   if (!nombre) return;
 
   const data = {
-    version: '1.0',
-    nombre,
-    fecha: new Date().toISOString(),
-    nombrePlato,
-    tiempoElaboracion,
-    temperatura,
-    ingredientes,
-    alergenos,
-    pasos,
-    emplatadoDescripcion: emplatado.descripcion || '',
-    pvp,
-
-
-
-    ManodeObra,
-    maquinaria,          // ← utensilios usados
-    raciones,             // ← nuevo (por defecto 1)
-    categoria,   // ← nuevo
-  };
+  version: '1.0',
+  nombre,
+  fechaGuardado: new Date().toISOString(),   // opcional
+  nombrePlato,
+  tiempoElaboracion,
+  temperatura,
+  ingredientes,
+  alergenos,
+  pasos,
+  emplatadoDescripcion: emplatado.descripcion || '',
+  pvp,
+  ManodeObra,
+  maquinaria,
+  raciones,
+  categoria,
+  fecha: ficha.fecha || '',                  // ← la fecha del usuario
+};
 
     try {
       const blob = new Blob([JSON.stringify(data, null, 2)], {
@@ -331,18 +348,23 @@ const cargarCopia = useCallback((event) => {
       if (data.nombrePlato && data.ingredientes && Array.isArray(data.ingredientes)) {
         // 👇 Actualizamos TODO el estado de una sola vez con setFicha
         setFicha({
-          nombrePlato: data.nombrePlato,
-          tiempoElaboracion: data.tiempoElaboracion || '',
-          temperatura: data.temperatura || 'caliente',
-          ingredientes: data.ingredientes,
-          alergenos: data.alergenos || [],
-          pasos: data.pasos || [],
-          emplatado: { descripcion: data.emplatadoDescripcion || '', imagen: null, imagenNombre: null },
-          pvp: data.pvp || '',
-          ManodeObra: data.ManodeObra || '',
-          maquinaria: data.maquinaria || '',
-          raciones: data.raciones ?? 1,   // si es 0 o null, usa 1
-          categoria: data.categoria || 'entrante'
+           nombrePlato: data.nombrePlato,
+           tiempoElaboracion: data.tiempoElaboracion || '',
+           temperatura: data.temperatura || 'caliente',
+           ingredientes: data.ingredientes,
+           alergenos: data.alergenos || [],
+           pasos: data.pasos || [],
+           emplatado: { 
+            descripcion: data.emplatadoDescripcion || '', 
+            imagen: null, 
+           imagenNombre: null 
+            },
+            pvp: data.pvp || '',
+           ManodeObra: data.ManodeObra || '',
+            maquinaria: data.maquinaria || '',
+           raciones: data.raciones ?? 1,
+           categoria: data.categoria || 'entrante',
+           fecha: data.fecha || '',                   // ← añadir esto
        });
 
 
@@ -369,6 +391,32 @@ const cargarCopia = useCallback((event) => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   //    <h1 className="text-base lg:text-3xl sm:text-4xl  font-extrabold text-black tracking-tight mb-2">
 
   return (
@@ -377,27 +425,24 @@ const cargarCopia = useCallback((event) => {
       {/* Header de la página */}
     
 
-<header className="w-full lg:w-[90.8%] 2xl:w-[90%] mx-auto text-center mb-6 px-4">
+<header className="w-full lg:w-[90.8%] 2xl:w-[90%] mx-auto text-center mb-6">
   {/* H1 Principal con Palabras Clave de Cocina y Coctelería */}
   <h1 className="text-xl md:text-2xl lg:text-4xl font-black text-neutral-900 mb-3 text-center leading-tight">
     Estandariza tus Recetas de Cocina, Pastelería y Coctelería
   </h1>
 
   {/* Párrafo único, directo y optimizado para SEO */}
-  <p className="text-xs sm:text-base text-gray-700 max-w-2xl mx-auto leading-relaxed mb-4">
-    Herramienta online para crear, gestionar y escalar recetas estandarizadas profesionales de forma exacta. 
-    Organiza tus ingredientes, alérgenos, métodos de elaboración y descarga tu informe técnico en PDF al instante, gratis y sin registro.
+  <p className="text-xs sm:text-base text-gray-700 max-w-4xl mx-auto leading-relaxed mb-2">
+  Herramienta online gratuita y sin registro para crear, escalar y gestionar recetas estandarizadas profesionales. 
+  Organiza ingredientes, alérgenos y métodos de elaboración, y descarga tu informe técnico en PDF al instante.
   </p>
 
-  {/* BLOQUE DE ACLARACIÓN Y GARANTÍAS (Aporta Confianza y destaca frente al Excel) */}
-  <div className="mx-auto mb-4 px-5 py-3 bg-amber-50 border border-amber-200/80 rounded-2xl shadow-sm">
-    <h3 className="text-sm lg:text-lg font-bold text-neutral-800 mb-3 text-center">
-      🔒 Herramienta Profesional: Sin Registro y Sin Excel
-    </h3>
-    
-    <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-neutral-700 text-sm text-left max-w-2xl mx-auto">
-       <li>✅ <strong> Estandarizador + Escalador:</strong> Diseña tu receta base y recalcula raciones al instante en la misma pantalla.</li>
-        <li>✅ <strong> Escalado automático en un clic:</strong> Introduce tus ingredientes una sola vez y multiplica o divide toda la receta al instantea.</li>
+  {/* BLOQUE DE ACLARACIÓN Y GARANTÍAS (Aporta Confianza y destaca frente al Excel) bg-amber-50*/}
+  <div className="flex flex-col w-full lg:w-[100%] 2xl:w-[100%] mx-auto 
+  mb-4 px-5 py-3 bg-amber-50 border border-amber-200/80 rounded-2xl shadow-sm">
+
+    <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-neutral-700 text-sm text-left  mx-auto">
+       <li>✅ <strong> Estandarizador + Escalador:</strong>diseña tu receta base y multiplica o divide las raciones al instante, en la misma pantalla.</li>
       <li>✅ <strong>Sin crear cuenta:</strong> Empieza a usarla ya, sin correos ni contraseñas.</li>
       <li>✅ <strong>Sin instalar nada:</strong> Funciona directo en el navegador de tu móvil o tablet de cocina.</li>
       <li>✅ <strong>Consistencia total:</strong> Asegura el mismo sabor, porciones y alérgenos en cada plato o copa.</li>
@@ -445,8 +490,9 @@ const cargarCopia = useCallback((event) => {
 
 
       {/* Utensilios usados (al final) */}
-      <div className="flex flex-col max-w-sm"> 
-        <label className="text-sm font-semibold text-gray-600 mb-1" htmlFor="maquinaria">
+      <div className='flex flex-row w-full justify-between'>
+        <div className="flex flex-col  w-[45%]"> 
+        <label className="text-sm lg:text-lg font-semibold text-gray-900 mb-1" htmlFor="maquinaria">
           🍴 Utensilios usados
           </label>
          <input
@@ -457,7 +503,29 @@ const cargarCopia = useCallback((event) => {
          onChange={(e) => setFicha({ ...ficha, maquinaria: e.target.value })}
         className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
         />
+
       </div>
+
+      <div className="flex flex-col w-[45%]"> 
+        <label className="text-sm lg:text-lg font-semibold text-gray-900 mb-1" htmlFor="colaboradores">
+          Mano de Obra
+          </label>
+         <input
+         id="ManodeObra"
+         type="text"
+         placeholder="Ej: 4 personas."
+         value={ficha.ManodeObra || ''}
+         onChange={(e) => setFicha({ ...ficha, ManodeObra: e.target.value })}
+        className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+        />
+
+
+
+      </div>
+
+
+      </div>
+      
 
      
 
@@ -525,7 +593,8 @@ const cargarCopia = useCallback((event) => {
 
 
   <EscaladorReceta
-  racionesOriginales={ficha.raciones}
+  racionesOriginales={ficha.raciones ?? 1}
+  //racionesOriginales={ficha.raciones}
   racionesNuevas={racionesEscaladas}
   ingredientesEscalados={ingredientesEscalados}
   onRacionesNuevasChange={setRacionesEscaladas}

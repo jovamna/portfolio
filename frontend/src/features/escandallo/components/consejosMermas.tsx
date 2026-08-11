@@ -116,10 +116,10 @@ export default function ConsejosMermas({ ingredients }: ConsejosMermasProps) {
             className="bg-white rounded-2xl border border-emerald-100 shadow-sm"
           >
             <details>
-               <summary className="text-sm font-bold text-mauve-700 mb-1">
+               <summary className="text-sm font-bold text-mauve-700 mb-1 px-2 lg:px-2 ">
               {tip.ingrediente}
             </summary>
-            <p className="text-sm text-neutral-700 leading-relaxed">
+            <p className="text-sm text-neutral-700 leading-relaxed px-2 lg:px-4">
               {tip.consejo}
             </p>
 

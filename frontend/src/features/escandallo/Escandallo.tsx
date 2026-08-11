@@ -7,7 +7,7 @@ import { FcCalculator } from "react-icons/fc";
 import { useState, useEffect, useMemo, useCallback } from 'react';
 
 import { exportarPDF } from './components/exportarPdf';
-import ConsejosMermas  from './components/ConsejosMermas';
+import ConsejosMermas  from './components/consejosMermas';
 
 
 
@@ -25,19 +25,25 @@ import ConsejosMermas  from './components/ConsejosMermas';
 const STORAGE_KEY = 'escandallo-data';
 
 // 🆕 Tu ejemplo en un solo lugar (¡no más duplicación!)
-const EJEMPLO_INICIAL = {
+const EJEMPLO_INICIAL:{
+  namePlato: string;
+  raciones: number;
+  precioVenta: number;
+  gastosFijosPorRacion: number;
+  ingredients: Ingrediente[];
+ }={
   namePlato: "Salsa Boloñesa Casera 🍝",
   raciones: 10,
   precioVenta: 15,
-  gastosFijosPorRacion: 0, // 🆕 añadido, faltaba
+  gastosFijosPorRacion: 6, // 🆕 añadido, faltaba
   ingredients: [
     {
       id: "ejemplo-1",
       name: "Carne picada de ternera",
       priceTotalCompra: 8.50,
-      grossWeight: 1.200,
-      mermaKg: 0.000,
-      usedWeight: 1.200,
+      grossWeight: 2.700,
+      mermaKg: 0.0356,
+      usedWeight: 2.700,
       unitGross: 'kg',
       unitMerma: 'kg',
       unitUsed: 'kg',
@@ -46,8 +52,8 @@ const EJEMPLO_INICIAL = {
     {
       id: "ejemplo-2",
       name: "Tomate triturado",
-      priceTotalCompra: 2.10,
-      grossWeight: 2.000,
+      priceTotalCompra: 2.80,
+      grossWeight: 2.600,
       mermaKg: 0.100,
       usedWeight: 1.900,
       unitGross: 'kg',
@@ -102,6 +108,7 @@ const parseAndConvertToKg = (raw: string, selectedUnit: 'kg' | 'g' | 'l', densit
   const num = parseFloat(numericStr);
   if (isNaN(num) || num < 0) return 0;
 
+  //switch (selectedUnit) {
   switch (detectedUnit) {
     case 'g': return num / 1000;
     case 'l': return num * density;
@@ -254,19 +261,16 @@ export default function Escandallo() {
     loadFromStorage('precioVenta', EJEMPLO_INICIAL.precioVenta)
   );
 
+    //NUEVO
+  const [gastosFijosPorRacion, setGastosFijosPorRacion] = useState<number>(() =>
+    loadFromStorage('gastosFijosPorRacion', EJEMPLO_INICIAL.gastosFijosPorRacion)
+  );
+
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [modalAction, setModalAction] = useState<'limpiar' | 'ejemplo' | null>(null);
 
-  // 🆕 Ahora con manejo de errores y validación
-  //const [ingredients, setIngredients] = useState<Ingrediente[]>(() => {
-  //  const saved = loadFromStorage<Ingrediente[]>('ingredients', []);
-    // Si hay datos guardados Y no están vacíos, los usamos
-  //  if (saved && saved.length > 0) {
-  //    return saved;
-  //  }
-    // Si no, usamos el ejemplo inicial
-  //  return EJEMPLO_INICIAL.ingredients;
-  //});
+
+
 
   const [ingredients, setIngredients] = useState<Ingrediente[]>(() => {
   const saved = loadFromStorage<Ingrediente[]>('ingredients', []);
@@ -296,32 +300,8 @@ export default function Escandallo() {
   }
   // Si no hay guardado, usamos el ejemplo inicial (que ya tiene la nueva estructura)
   return EJEMPLO_INICIAL.ingredients;
-});
+  });
 
-
-
-
-  //NUEVO
-  const [gastosFijosPorRacion, setGastosFijosPorRacion] = useState<number>(() =>
-    loadFromStorage('gastosFijosPorRacion', EJEMPLO_INICIAL.gastosFijosPorRacion)
-  );
-
-  //FORMATEADOR DE CEROS
-  // Formateador inteligente de pesos (elimina ceros innecesarios)
-const formatCleanWeight = (value: number | string | null | undefined, unit: string = 'kg'): string => {
-  if (value === undefined || value === null || value === '') return `0 ${unit === 'l' ? 'L' : unit}`;
-  
-  const num = typeof value === 'string' ? parseFloat(value.replace(',', '.')) : value;
-  if (isNaN(num)) return `0 ${unit === 'l' ? 'L' : unit}`;
-
-  // Elimina ceros a la derecha si no son necesarios (máximo 3 decimales)
-  const formatted = new Intl.NumberFormat('es-ES', {
-    maximumFractionDigits: 3
-  }).format(num);
-
-  const displayUnit = unit === 'l' ? 'L' : unit;
-  return `${formatted} ${displayUnit}`;
-};
 
 
 
@@ -368,33 +348,77 @@ const formatCleanWeight = (value: number | string | null | undefined, unit: stri
   }, []);
 
 
-
-
- // const handleRemoveRow = useCallback((id: string) => {
-    // 🛡️ No permitir eliminar si solo hay 1 ingrediente
- //   if (ingredients.length <= 1) {
- //     alert('Debe haber al menos un ingrediente en la receta');
- //     return;
-//    }
-
-    // 🔥 Confirmación antes de eliminar
-//    if (window.confirm('¿Eliminar este ingrediente?')) {
-//      setIngredients(prev => prev.filter(row => row.id !== id));
-////    }
-//  }, [ingredients.length]);
-
-
-
   const handleRemoveRow = useCallback((id: string) => {
   setIngredients(prev => prev.filter(row => row.id !== id));
 }, []);
 
-  // 🆕 handleInputChange con validación de campos numéricos
+
+  //===================================================================
+  // Formateador EN RESULTADOS inteligente de pesos (elimina ceros innecesarios)
+  //======================================
+const formatCleanWeight = (value: number | string | null | undefined, unit: string = 'kg'): string => {
+  if (value === undefined || value === null || value === '') return `0 ${unit === 'l' ? 'L' : unit}`;
+
+  const num = typeof value === 'string' ? parseFloat(value.replace(',', '.')) : value;
+  if (isNaN(num)) return `0 ${unit === 'l' ? 'L' : unit}`;
+
+  // El valor SIEMPRE llega en kg: convertimos si la unidad de visualización es gramos
+  const displayNum = unit === 'g' ? num * 1000 : num;
+  const maxDecimals = unit === 'g' ? 2 : 3;
+  const rounded = parseFloat(displayNum.toFixed(maxDecimals));
+
+  const formatted = new Intl.NumberFormat('es-ES', {
+    maximumFractionDigits: maxDecimals,
+    useGrouping: false
+  }).format(rounded);
+
+  const displayUnit = unit === 'l' ? 'L' : unit;
+  return `${formatted} ${displayUnit}`;
+};
+
+
+
+
+
+ //================================================================================
+// 🆕 Formatea el número que se ve en el INPUT: sin ceros de más, con coma española
+//=========================================================================
+//NO LO ESTOY USANDO PORQUE NO ME DEJA PONER 0.0365 CANDO ESTA EN GRAMOS
+const formatEditableNumber = (num: number, unit: 'kg' | 'g' | 'l'): string => {
+  const displayNum = unit === 'g' ? num * 1000 : num;
+  const maxDecimals = unit === 'g' ? 2 : 3; // gramos en enteros, kg/l hasta 3 decimales
+
+  // Redondeamos antes de formatear para evitar artefactos de coma flotante
+  // (ej: 0.29 * 1000 puede dar 289.99999999999994 en JS)
+  const rounded = parseFloat(displayNum.toFixed(maxDecimals));
+
+  return new Intl.NumberFormat('es-ES', {
+    maximumFractionDigits: maxDecimals,
+    useGrouping: false // evita el "1.234" confundiéndose con separador de miles
+  }).format(rounded);
+};
+
+
+ //================================================================================
+// 🆕 Formatea LOS PRECIOS
+//=========================================================================
+const formatPrice = (value: number | string | null | undefined): string => {
+  if (value === undefined || value === null || value === '') return '0,00';
+  const num = typeof value === 'string' ? parseFloat(value.replace(',', '.')) : value;
+  if (isNaN(num)) return '0,00';
+  return new Intl.NumberFormat('es-ES', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+    // useGrouping en true por defecto: aquí SÍ queremos separador de miles,
+    // al contrario que en los pesos, porque un precio como "87.000" no se confunde
+    // con un peso de "87 kg" — el símbolo € y el contexto lo dejan claro.
+  }).format(num);
+};
+
+
   // ==========================================
 // 1. HANDLER CON VALIDACIÓN (CON useCallback)
 // ==========================================
-
-
 // Añade un estado para los textos de los inputs (uno por fila y campo)
 const [inputValues, setInputValues] = useState<Record<string, string>>({});
 
@@ -402,10 +426,6 @@ const [inputValues, setInputValues] = useState<Record<string, string>>({});
 const getInputKey = (id: string, field: string) => `${id}-${field}`;
 
 // Handler onChange: actualiza el texto local
-
-
-
-
 const handleInputChange = useCallback((id: string, field: string, value: string) => {
   // Si es nombre o precio, actualiza directamente el estado global
   if (field === 'name' || field === 'priceTotalCompra') {
@@ -423,14 +443,6 @@ const handleInputChange = useCallback((id: string, field: string, value: string)
     [getInputKey(id, field)]: value
   }));
 }, []);
-
-
-
-
-// Handler onBlur: parsea y actualiza el estado global
-
-
-
 
 
 // Handler onBlur: parsea y actualiza el estado global
@@ -497,46 +509,19 @@ const getDisplayValue = (ingredient: Ingrediente, field: string) => {
   else if (field === 'usedWeight') unit = ingredient.unitUsed;
   else return '';
 
-  if (unit === 'g') {
-    return (num * 1000).toString();
-  } else {
-    return num.toFixed(3);
-  }
+  //if (unit === 'g') {
+  //  return (num * 1000).toString();
+  //} else {
+  //  return num.toFixed(3);
+  //}
+
+  return formatEditableNumber(num, unit)
+
 };
-
-
-
-
-// =========================
-// HANDLERS DEFINITIVOS
-// =========================
-
-//const handleInputChange = useCallback((id: string, field: string, value: string) => {
-  // Permitimos casi todo mientras se escribe (coma, punto, números)
-//  let cleanValue = value.replace(',', '.');
-
-  // Solo bloqueamos letras y símbolos raros
- // if (field !== 'name' && cleanValue !== '' && !/^\d*\.?\d*$/.test(cleanValue)) {
- //   return;
- // }
-
-//  setIngredients(prev =>
-//    prev.map(row =>
- //     row.id === id ? { ...row, [field]: cleanValue } : row
- //   )
- // );
-//}, []);
-
 
 // ==========================================
 // 2. FORMATEO AL PERDER EL FOCO (onBlur)
 // ==========================================
-///SOLO PARA EL CAMPO TOTAL EUROS EN COMPRAS
-
-
-
-
-
 const handleBlur = useCallback((id: string, field: string) => {
   setIngredients(prev =>
     prev.map(row => {
@@ -544,25 +529,26 @@ const handleBlur = useCallback((id: string, field: string) => {
 
       const rawValue = row[field as keyof Ingrediente] as string;
 
-      // Si está vacío, lo dejamos vacío para que pueda seguir editando
       if (!rawValue || rawValue === '' || rawValue === '.') return row;
 
-      // Convertimos comas a puntos
       const normalizedValue = String(rawValue).replace(',', '.');
       const num = parseFloat(normalizedValue);
 
-      // SI ESCRIBIÓ PALABRAS COMO "vaca":
-      // Reemplazamos la palabra por "0" en el cuadro de texto
       if (isNaN(num)) {
         return { ...row, [field]: '0' };
       }
 
-      // Si es un número válido, formateamos a 2 o 3 decimales
-      return { ...row, [field]: num.toFixed(2) };
+      // 🔧 Coma en vez de punto, y siempre 2 decimales (es dinero, no pesa)
+      const formatted = new Intl.NumberFormat('es-ES', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+        useGrouping: false
+      }).format(num);
+
+      return { ...row, [field]: formatted };
     })
   );
 }, []);
-
 
 
 
@@ -592,9 +578,15 @@ const handleBlur = useCallback((id: string, field: string) => {
     if (modalAction === 'limpiar') handleLimpiarTodo();
   }, [modalAction, handleCargarEjemplo, handleLimpiarTodo]);
 
-  // =========================
-  // 🆕 CÁLCULOS (TU LÓGICA DE NEGOCIO INTACTA)
-  // =========================
+
+
+
+
+
+
+  // ===========================================================================================================================
+  // 🆕 USEMEMO CÁLCULOS (TU LÓGICA DE NEGOCIO INTACTA) USEMEMO USEMEMO USEMEMO
+  // ============================================================================================================================
 
   const { calculatedRows, totales } = useMemo(() => {
     // Acumuladores
@@ -611,71 +603,49 @@ const handleBlur = useCallback((id: string, field: string) => {
     // Helper: acepta tanto kilos como gramos
      // ==========================================
   
-    const parseFlexible = (val: string | number | null | undefined, isWeight = false): number => {
-      // 1. Parseo robusto (copiado del segundo)
+    const parseFlexible = (val: string | number | null | undefined): number => {
       if (val === undefined || val === null || val === '') return 0;
-      if (typeof val === 'number') return Math.max(0, val); // Aseguramos no negativos
-      const cleanVal = String(val).replace(',', '.');
-      const parsed = parseFloat(cleanVal);
-      if (isNaN(parsed) || parsed < 0) return 0;
-
-      let result = parsed;
-
-      // 2. Lógica de peso (pero SIN el umbral mágico de 10)
-      // Aquí asumimos que el usuario SIEMPRE escribe en gramos si isWeight=true
-      if (isWeight) {
-        result = result / 1000; // Convertimos gramos a kilos
-      }
-
-     return result;
-    };
-
+      if (typeof val === 'number') return Math.max(0, val);
+      const parsed = parseFloat(String(val).replace(',', '.'));
+       return isNaN(parsed) || parsed < 0 ? 0 : parsed;
+      };
     
     const rows = ingredients.map((row) => {
       const precioTotalCompra = parseFlexible(row.priceTotalCompra); // o row.priceTotal si
       // 1. Coste de la compra (ahora es directamente el que puso el usuario)
       const costeTotalCompra = precioTotalCompra;
       //LOS KILOS O KILO COMPRADOS
-      const pesoBruto = parseFlexible(row.grossWeight, true);         // kg o g
+      const pesoBruto = parseFlexible(row.grossWeight);         // kg o g
        //PRECIO POR KILO EN BRUTO calculamos 20 EUROS ENTRE 5 KILOS
       const priceBrutokilo = pesoBruto > 0 ?  costeTotalCompra / pesoBruto : 0;
     
 
       //VALIDACION: La merma no puede ser nunca mayor que el peso total (P.BRUTO) del ingrediente
-      const mermaKg = Math.min(parseFlexible(row.mermaKg, true), pesoBruto);
+      const mermaKg = Math.min(parseFlexible(row.mermaKg), pesoBruto);
       const pesoNeto = pesoBruto - mermaKg;
 
-      
       // 4. Precio por kilo limpio
       const priceKgSinMerma = pesoNeto > 0 ? costeTotalCompra / pesoNeto : 0;
-
-     
       const rendimiento = pesoBruto > 0 ? pesoNeto / pesoBruto : 0;
         // 3. Cantidad que el chef va a usar
-      const cantidadUsada = row.usedWeight !== undefined && row.usedWeight !== ''
-      ? parseFlexible(row.usedWeight, true)
+      const cantidadUsada = row.usedWeight > 0 
+      ? parseFlexible(row.usedWeight) 
       : pesoNeto;
 
       //const brutoNecesario = rendimiento > 0 ? cantidadUsada / rendimiento : 0;
       const totalBrutoNecesario = rendimiento > 0 ? cantidadUsada / rendimiento : 0;
-      const dineroPerdidoPorMerma = (totalBrutoNecesario - cantidadUsada) * priceBrutokilo;
+      const dineroPerdidoPorMerma = (totalBrutoNecesario - cantidadUsada) * priceBrutokilo;  //ORIGINAL
+      //const dineroPerdidoPorMerma = (cantidadUsada - totalBrutoNecesario) * priceBrutokilo;
+      //const dineroPerdidoPorMerma = -((totalBrutoNecesario - cantidadUsada) * priceBrutokilo);
 
-     // const cantidadFaltanteKg = Math.max(0, cantidadUsada - pesoNeto);
-      //const cantidadFaltanteGr = cantidadFaltanteKg * 1000;
-
-      
       const faltanteSinMermaNetoKg = Math.max(0, cantidadUsada - pesoNeto);
       const faltanteSinMermaNetoGr = faltanteSinMermaNetoKg  * 1000;
      ///calculo de lo que sabemos que se necesita - lo usado en receta
       const faltanteBruto = Math.max(0, totalBrutoNecesario - pesoBruto);
       //Esa operación solo hace un cambio de unidad: pasa los kilos sobrantes que te faltan a gramos, multiplicando por 1.000.
       const faltanteBrutoGr = faltanteBruto * 1000;
-
-     
-
       // 6. COSTE REAL TOTAL
       const costeRealTotal = totalBrutoNecesario * priceBrutokilo;
-
       // 7. Coste por ración  FINAL QUE DEBO USAR
       const nuevoCostePorRacion = raciones > 0 ? (costeRealTotal / raciones) : 0;
 
@@ -683,8 +653,8 @@ const handleBlur = useCallback((id: string, field: string) => {
       const precioVentaSugeridoSinIva = nuevoCostePorRacion / 0.30;
       const precioVentaSugeridoConIva = precioVentaSugeridoSinIva * 1.10;
 
-
-      //NUEVO PARA AQLUILERES
+      //NUEVO PARA LOS GRAMOS
+      const decimalesFaltante = row.unitUsed === 'g' ? 5 : 3;
 
 
       // Acumuladores Globales
@@ -694,7 +664,6 @@ const handleBlur = useCallback((id: string, field: string) => {
       totalPesoBruto += pesoBruto;     // ← acumula el bruto EN LUGAR DE RENDIMENTO
       totalCosteRealPorRacion += nuevoCostePorRacion;
       totalGastoConReposicion += costeRealTotal;
-      //totalRendimiento += rendimiento;
       totalPrecioVentaSugeridoSinIva += precioVentaSugeridoSinIva;
       totalPrecioVentaSugeridoConIva += precioVentaSugeridoConIva;
     
@@ -702,23 +671,43 @@ const handleBlur = useCallback((id: string, field: string) => {
       return {
         ...row,
         rendimiento: (rendimiento * 100).toFixed(1),
-        totalBrutoNecesario: totalBrutoNecesario.toFixed(3),
-        faltanteBruto: faltanteBruto.toFixed(3),
-        faltanteBrutoGr: faltanteBrutoGr.toFixed(0),
-        pesoNeto: pesoNeto.toFixed(3),
-        cantidadUsada: cantidadUsada.toFixed(3),
-        costeTotalCompra: costeTotalCompra.toFixed(2),
-        dineroPerdidoPorMerma: dineroPerdidoPorMerma.toFixed(2),
-        //NUEVO
-        priceBrutokilo: priceBrutokilo.toFixed(2),
 
-        priceKgSinMerma: priceKgSinMerma.toFixed(2),
-        //cantidadFaltante: cantidadFaltanteKg.toFixed(3),
-        //cantidadFaltanteG: cantidadFaltanteGr.toFixed(0),
-        faltanteSinMermaNetoKg:faltanteSinMermaNetoKg.toFixed(3),
+        totalBrutoNecesario: totalBrutoNecesario.toFixed(decimalesFaltante),
+        faltanteBruto: faltanteBruto.toFixed(decimalesFaltante),
+
+        //totalBrutoNecesario: totalBrutoNecesario.toFixed(3),
+       // faltanteBruto: faltanteBruto.toFixed(3),
+        faltanteBrutoGr: faltanteBrutoGr.toFixed(0),
+
+        pesoNeto: pesoNeto.toFixed(decimalesFaltante),
+        cantidadUsada: cantidadUsada.toFixed(decimalesFaltante),
+        //pesoNeto: pesoNeto.toFixed(3),
+        //cantidadUsada: cantidadUsada.toFixed(3),
+
+
+
+        costeTotalCompra: formatPrice(costeTotalCompra),          // 🔧
+        dineroPerdidoPorMerma: formatPrice(dineroPerdidoPorMerma), // 🔧
+        priceBrutokilo: formatPrice(priceBrutokilo),                // 🔧
+        priceKgSinMerma: formatPrice(priceKgSinMerma),   
+        //costeTotalCompra: costeTotalCompra.toFixed(2),
+        //dineroPerdidoPorMerma: dineroPerdidoPorMerma.toFixed(2),
+        //NUEVO
+        //priceBrutokilo: priceBrutokilo.toFixed(2),
+        //priceKgSinMerma: priceKgSinMerma.toFixed(2),
+
+        faltanteSinMermaNetoKg: faltanteSinMermaNetoKg.toFixed(decimalesFaltante),
+        //faltanteSinMermaNetoKg:faltanteSinMermaNetoKg.toFixed(3),
         faltanteSinMermaNetoGr: faltanteSinMermaNetoGr.toFixed(0),
-        costeRealTotal: costeRealTotal.toFixed(2),
-        nuevoCostePorRacion: nuevoCostePorRacion.toFixed(2),
+
+
+
+        costeRealTotal: formatPrice(costeRealTotal),                 // 🔧
+        nuevoCostePorRacion: formatPrice(nuevoCostePorRacion),      
+        //costeRealTotal: costeRealTotal.toFixed(2),
+        //nuevoCostePorRacion: nuevoCostePorRacion.toFixed(2),
+
+
       };
     });
 
@@ -727,9 +716,6 @@ const handleBlur = useCallback((id: string, field: string) => {
      const totalRendimiento = totalPesoBruto > 0
      ? (totalPesoNeto / totalPesoBruto) * 100
      : 0;
-
-     // Cálculos finales
-     //const beneficio = precioVenta - totalCosteRealPorRacion;
 
      const beneficio = precioVenta > 0
      ? precioVenta - totalCosteRealPorRacion
@@ -742,9 +728,9 @@ const handleBlur = useCallback((id: string, field: string) => {
     
 
 
-     // ==========================================
+     // ===========================================================================================================
      // CALCULO CON GASTOS FIJOS EN EUROS AÑADIDOS POR EL USUARIO + EL 20% RENTABILIDAD (no modifica nada anterior)
-    // ==========================================
+    // =============================================================================================================
     // 1. Convertir y verificar si REALMENTE introdujo gastos fijos
     const numGastosFijos = parseFloat(String(gastosFijosPorRacion));
     const tieneGastosFijos = !isNaN(numGastosFijos) && numGastosFijos > 0;
@@ -769,21 +755,28 @@ const handleBlur = useCallback((id: string, field: string) => {
     return {
       calculatedRows: rows,
       totales: {
-        totalCompra: totalCompra.toFixed(2),
-        totalMermaDinero: totalMermaDinero.toFixed(2),
+        totalCompra: formatPrice(totalCompra), // 
+        //totalCompra: totalCompra.toFixed(2),
+        totalMermaDinero: formatPrice(totalMermaDinero),     
+        //totalMermaDinero: totalMermaDinero.toFixed(2),
         totalPesoNeto: totalPesoNeto.toFixed(3),
-        totalCosteRealPorRacion: totalCosteRealPorRacion.toFixed(2),
+        totalCosteRealPorRacion: formatPrice(totalCosteRealPorRacion),
+        //totalCosteRealPorRacion: totalCosteRealPorRacion.toFixed(2),
         beneficio: beneficio !== null ? beneficio.toFixed(2) : null,
         foodCost: foodCost !== null ? foodCost.toFixed(2) : null,
-        totalGastoConReposicion: totalGastoConReposicion.toFixed(2),
+        totalGastoConReposicion: formatPrice(totalGastoConReposicion),
+        //totalGastoConReposicion: totalGastoConReposicion.toFixed(2),
         totalRendimiento: totalRendimiento.toFixed(1),   // ahora es un % real (ej: 92.5)
-        totalPrecioVentaSugeridoSinIva: totalPrecioVentaSugeridoSinIva.toFixed(2),
-        totalPrecioVentaSugeridoConIva: totalPrecioVentaSugeridoConIva.toFixed(2),
+        totalPrecioVentaSugeridoSinIva: formatPrice(totalPrecioVentaSugeridoSinIva),
+        //totalPrecioVentaSugeridoSinIva: totalPrecioVentaSugeridoSinIva.toFixed(2),
+        totalPrecioVentaSugeridoConIva: formatPrice(totalPrecioVentaSugeridoConIva),
+        //totalPrecioVentaSugeridoConIva: totalPrecioVentaSugeridoConIva.toFixed(2),
 
           //NUEVO ALQUILERES GASTOS FIJOS
         // ← Solo se añade esto nuevo
         precioFinalSinIva: precioFinalSinIva !== null ? precioFinalSinIva.toFixed(2) : null,
-        precioFinalConIva: precioFinalConIva !== null ? precioFinalConIva.toFixed(2) : null,
+        precioFinalConIva: precioFinalConIva !== null ? formatPrice(precioFinalConIva) : null,
+        //precioFinalConIva: precioFinalConIva !== null ? precioFinalConIva.toFixed(2) : null,
   
 
       }
@@ -813,74 +806,74 @@ const handleBlur = useCallback((id: string, field: string) => {
   // =========================
 
   const guardarCopia = useCallback(() => {
-    const nombre = prompt('¿Qué nombre quieres darle a este escandallo?', namePlato || 'Mi escandallo');
-    if (!nombre) return;
+  const nombre = prompt('¿Qué nombre quieres darle a este escandallo?', namePlato || 'Mi escandallo');
+  if (!nombre) return;
 
-    const data = {
-      version: '1.0',
-      nombre,
-      fecha: new Date().toISOString(),
-      namePlato,
-      ingredients,
-      raciones,
-      precioVenta,
-      totales,
-      // Guardamos también los datos calculados para referencia
-      calculatedRows
-    };
+  const data = {
+    version: '1.0',
+    nombre,
+    fecha: new Date().toISOString(),
+    namePlato,
+    ingredients,
+    raciones,
+    precioVenta,
+    gastosFijosPorRacion, // 🔧 esto faltaba
+    totales,
+    calculatedRows
+  };
 
-    try {
-      const blob = new Blob([JSON.stringify(data, null, 2)], {
-        type: 'application/json'
-      });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `escandallo-${nombre.toLowerCase().replace(/ /g, '-')}.json`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    } catch (error) {
-      console.error('Error al guardar copia:', error);
-      alert('Error al guardar la copia');
-    }
-  }, [namePlato, ingredients, raciones, precioVenta, totales, calculatedRows]);
+  try {
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `escandallo-${nombre.toLowerCase().replace(/ /g, '-')}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error('Error al guardar copia:', error);
+    alert('Error al guardar la copia');
+  }
+}, [namePlato, ingredients, raciones, precioVenta, gastosFijosPorRacion, totales, calculatedRows]);
+
+
 
   // =========================
   // 🆕 BOTÓN "CARGAR COPIA" (NUEVA FUNCIONALIDAD)
   // =========================
+const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+  const file = event.target.files?.[0];
+  if (!file) return;
 
-  const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const data = JSON.parse(e.target?.result as string);
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        const data = JSON.parse(e.target?.result as string);
-        
-        // Validar que tiene los campos necesarios
-        if (data.namePlato && data.ingredients && Array.isArray(data.ingredients)) {
-          setNamePlato(data.namePlato);
-          setRaciones(data.raciones || 10);
-          setPrecioVenta(data.precioVenta || 15);
-          setIngredients(data.ingredients);
-          alert(`✅ Escandallo "${data.nombre || 'sin nombre'}" cargado correctamente`);
-        } else {
-          alert('❌ El archivo no es un escandallo válido');
-        }
-      } catch (error) {
-        console.error('Error al cargar:', error);
-        alert('❌ Error al leer el archivo. Asegúrate de que es un JSON válido.');
+      if (data.namePlato && data.ingredients && Array.isArray(data.ingredients)) {
+        setNamePlato(data.namePlato);
+        setRaciones(data.raciones || EJEMPLO_INICIAL.raciones); // 🔧 antes: || 10
+        setPrecioVenta(data.precioVenta || EJEMPLO_INICIAL.precioVenta); // 🔧 antes: || 15
+        setGastosFijosPorRacion(data.gastosFijosPorRacion || EJEMPLO_INICIAL.gastosFijosPorRacion); // 🔧 esto faltaba
+        setIngredients(data.ingredients);
+        alert(`✅ Escandallo "${data.nombre || 'sin nombre'}" cargado correctamente`);
+      } else {
+        alert('❌ El archivo no es un escandallo válido');
       }
-    };
-    reader.readAsText(file);
-    
-    // Resetear el input para permitir cargar el mismo archivo de nuevo
-    event.target.value = '';
-  }, []);
+    } catch (error) {
+      console.error('Error al cargar:', error);
+      alert('❌ Error al leer el archivo. Asegúrate de que es un JSON válido.');
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}, []);
 
+
+
+ 
 
 
 
@@ -925,31 +918,34 @@ const handleBlur = useCallback((id: string, field: string) => {
                Este simulador de escandallos gratis es el programa ideal para cocina,
                hostelería, restaurantes, bares y catering. Un software de escandallos 
                 pensado para calcular el coste real de tus productos, platos de cocina 
-                 y cócteles, controlando mermas y márgenes sin complicaciones. Perfecto 
-                también para calcular el escandallo de un menú de catering para eventos 
-                o el coste por copa en la barra de tu bar.
+                 y cócteles, para un menú de catering para eventos o coste por copa en la barra 
+                 de tu bar controlando mermas y márgenes sin complicaciones. 
+         
                </p>
 
 
 
-
-
-
-
          {/* Instrucción Estilizada en una pequeña tarjetita de ayuda */}
-         <div className="flex flex-col items-center bg-neutral-50 border border-neutral-200 
-          lg:mt-[10px] mt-[6px] rounded-xl text-sm text-neutral-600 shadow-sm py-2 px-2">
+         <div className="flex flex-col items-center bg-neutral-50 shadow-xl/20 border border-neutral-200 
+          lg:mt-[4px] mt-[5px] 2xl:mt-[8px] rounded-xl text-sm text-neutral-600 shadow-sm py-2 px-2">
           <p className="flex items-center gap-2 font-bold text-neutral-800 mb-1">
          💡 ¿Cómo empezar?
          </p>
          <p className='lg:text-base text-sm text-center'>
-         Elimina las filas de ejemplo utilizando el botón de borrar y añade tantas filas como ingredientes necesite tu receta. ¡Los datos se guardan solos!
+      Elimina las filas de ejemplo con el botón de borrar y añade tantas filas como ingredientes necesite tu receta. ¡Los datos se guardan solos!
         </p>
-        </div>
+      
 
-         <p className='lg:text-base text-sm text-center'>
-          Ejemplo: Si necesitas Gramos escribe <strong>0.500 ó 0.5</strong> = 500 gramos, si es en kilo <strong>2.000 ó 2</strong> = 2 kg.
+         <p className='lg:text-base text-sm text-center 2xl:mt-[2px] px-2'>
+          Selecciona la unidad<strong> (Kg, g o L)</strong> en cada campo y escribe la cantidad en esa unidad: si eliges <strong>gramos</strong> y 
+          pones <strong>500 </strong>, son <strong>500 g </strong>; si eliges <strong>kilos</strong> y pones <strong>0,5</strong>, es medio kilo.
          </p>
+
+  </div>
+
+
+
+
          </div>
 
       {/* TITULOS*/}
@@ -1029,18 +1025,8 @@ const handleBlur = useCallback((id: string, field: string) => {
 
 
 
-
-
-           {/*INFRAESTRUCTURA*/}
-
-           {/* % INFRAESTRUCTURA */}
-        
-
-
-         
-
-
-
+           {/* GSTOS FIJOS ALQUILER LUZ NOMINAS */}
+      
          <div className="bg-white lg:col-span-1 md:col-span-2 px-2 py-2 rounded-3xl shadow">
           <label className="block lg:text-base md:text-lg text-base font-bold mb-2 text-center">
             Gastos Fijos X Ración(€)
@@ -1061,12 +1047,6 @@ const handleBlur = useCallback((id: string, field: string) => {
               Alquiler, personal en €/plato(opcional)
               </p>
             </div>
-
-
-
-
-
-
 
       </div>
 
@@ -1130,30 +1110,25 @@ const handleBlur = useCallback((id: string, field: string) => {
            {/**BRUTO NUEVO */}
            {/* PESO BRUTO */}
            <td className="p-2 ">
-            <div className='w-full flex flex-row mx-auto items-center justify-center'>
-           
+              <div className='w-full flex flex-row mx-auto items-center justify-center'>
                   <p className='text-center lg:text-sm font-bold'>P.Bruto Total</p>
           
-           
-         
-               <select
-               value={ing.unitGross}
-               onChange={(e) => {
-               const newUnit = e.target.value as 'kg' | 'g' | 'l';
-               setIngredients(prev =>
-                prev.map(row =>
-                  row.id === ing.id ? { ...row, unitGross: newUnit } : row
-                 )
-                );
-               }}
-               className="px-2 py-1 bg-gray-200 rounded-lg text-sm font-bold">
-                <option value="kg">Kg</option>
-                <option value="g">g</option>
-                <option value="l">L</option>
-              </select>
+                  <select
+                  value={ing.unitGross}
+                  onChange={(e) => {
+                    const newUnit = e.target.value as 'kg' | 'g' | 'l';
+                    setIngredients(prev =>
+                      prev.map(row =>
+                        row.id === ing.id ? { ...row, unitGross: newUnit } : row
+                      )
+                    );
+                  }}
+                  className="px-2 py-1 bg-gray-200 rounded-lg text-sm font-bold">
+                    <option value="kg">Kg</option>
+                    <option value="g">g</option>
+                    <option value="l">L</option>
+                  </select>
 
-          
-             
             </div>
             
              <div className='py-2 flex flex-col items-center gap-1'>
@@ -1172,10 +1147,6 @@ const handleBlur = useCallback((id: string, field: string) => {
                 {ing.unitGross === 'g' ? 'Gramos' : ing.unitGross === 'l' ? 'Litros' : 'Kilogramos'}
                 </p>
            </td>
-
-
-
-
 
 
             <td className="p-2 ">
