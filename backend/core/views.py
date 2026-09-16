@@ -444,17 +444,17 @@ def spa_entrypoint(request):
 
         context.update({
             # Título optimizado (< 60 caracteres antes de la marca)
-            'seo_title': "App Calculadora de Escandallos Online Gratis | Jovamna Medina",
-            'seo_description': "Herramienta online gratuita para hosteleros, chefs y bartenders. Calcula el escandallo de tus recetas, controla mermas y optimiza tu Food & Beverage Cost.",
+            'seo_title': "Calculadora de Escandallos Online Gratis y Sin Registro",
+            'seo_description': "Calcula el coste y margen de tus platos y bebidas al instante. Herramienta 100% gratuita, sin registros y sin anuncios. Incluye análisis de beneficios.",
             'seo_keywords': "escandallo gratis, escandallo cocina, escandallo coctel, escandallo catering, calcular coste platos, calcular coste copas, plantilla escandallo, gestion restaurante",
             'canonical_url': url_canonica,
             'og_type': 'website',
-            'og_title': "App Calculadora de Escandallo para Cocina y Bar Gratis | Jovamna Medina",
+            'og_title': "Calculadora de Escandallo de Cocina y Bar Gratis",
             'og_description': "Herramienta online gratuita para calcular el coste real de tus platos y cócteles. Controla mermas y asegura tu beneficio.",
-            'og_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
+            'og_image': "https://jovamnamedina.com/custom-static/images/googleweb.jpg",
             'og_url': url_canonica,
             'twitter_card': 'summary_large_image',
-            'twitter_title': "App Calculadora de Escandallos Online Gratis",
+            'twitter_title': "Calculadora de Escandallos Online Gratis",
             'twitter_description': "Calcula el coste de tus recetas de cocina y coctelería gratis. Controla mermas y costes.",
             'twitter_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
             'seo_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
@@ -492,20 +492,20 @@ def spa_entrypoint(request):
         }
 
         context.update({
-            'seo_title': "Estandarizar y Escala Recetas de Cocina y Pastelería | Gratis",
+            'seo_title': "Estandarizar y Escalar Recetas Online Gratis — Sin Registro (Descarga PDF)",
             # Descripción completada correctamente:
-            'seo_description': "Estandariza y Escala recetas de Cocina, Pasteleria y Coctelería online sin registrarte. Organiza ingredientes, alérgenos y elaboración en PDF listo para imprimir.",
+            'seo_description': "Crea, organiza y escala tus recetas de cocina, pastelería y bar al instante. Herramienta online 100% gratuita, sin registros y con descarga en PDF.",
             # Keywords corregidas sin erratas:
-            'seo_keywords': "estandarizar recetas de cocina, estandariza  recetas para pasteleria,  coctel, gestiona tus recetas estandarizadas,  plantilla receta estandar, crear ficha tecnica pdf, recetas de oro cocina, gestion barra restaurante",
+            'seo_keywords': "estandarizar recetas online, escalar recetas cocina, formato receta estandarizada, plantilla recetas pasteleria, gestionar recetas gratis, pdf recetas",
             'canonical_url': url_canonica,
             'og_type': 'website',
-            'og_title': "Estandarizar y escalar recetas de Cocina, Pasteleria y Cócteles Gratis | Jovamna Medina",
-            'og_description': "Herramienta online gratuita para estandarizar y escalar las recetas de tu cocina o bar en PDF.",
+            'og_title': "Gestor y Escalador de Recetas Estandarizadas Gratis Online",
+            'og_description': "Herramienta online para crear, organizar, escalar y gestionar recetas estandarizadas de cocina, pasteleria y coctelería. Gratis, sin registro y con descarga en PDF. Exporta a PDF y guarda tus recetas.",
             'og_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
             'og_url': url_canonica,
             'twitter_card': 'summary_large_image',
-            'twitter_title': "Estandariza y escalar recetas de Pasteleria, Cocina y Bar",
-            'twitter_description': "Crea, estandariza y escala recetas de tus platos y cócteles gratis.",
+            'twitter_title': "Estandarizar y Escalar Recetas Gratis Sin Registro",
+            'twitter_description': "Herramienta online para crear, organizar, escalar y gestionar recetas estandarizadas de cocina, pasteleria y coctelería. Gratis, sin registro y con descarga en PDF. Exporta a PDF y guarda tus recetas.",
             'twitter_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
             'seo_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
             'is_home_page': False,
@@ -520,13 +520,13 @@ def spa_entrypoint(request):
         url_canonica = build_absolute_url("calcula-irpf")
         breadcrumbs = [
             {'name': 'Inicio', 'url': build_absolute_url()},
-            {'name': 'Calculadora IRPF Online Gratis', 'url': url_canonica}
+            {'name': 'Calculadora IRPF Online Gratuita sin Registro', 'url': url_canonica}
         ]
         
         irpf_json_ld = {
             "@context": "https://schema.org",
             "@type": "WebApplication",
-            "name": "App Calculadora IRPF Online Gratuita | Jovamna Medina",
+            "name": "Calculadora IRPF Online Gratuita sin Registro",
             "description": "Calcula el tipo de retención del IRPF, sueldo neto mensual y retenciones según tu salario bruto y situación familiar con esta calculadora online gratuita.",
             "url": url_canonica,
             "applicationCategory": "FinanceApplication",
@@ -541,17 +541,17 @@ def spa_entrypoint(request):
         }
 
         context.update({
-            'seo_title': "App Calculadora IRPF Online Gratuita | Sueldo Neto | Jovamna Medina",
+            'seo_title': "Simulador de Retención IRPF en Nómina 2026 — Online Gratis, Sin Descarga",
             'seo_description': "Calcula tu retención de IRPF y tu sueldo neto mensual de forma rápida y gratuita. Herramienta online para trabajadores y autónomos.",
             'seo_keywords': "calculadora irpf, calcular sueldo neto, retenciones irpf, calcular nomina, irpf autonomos, retencion irpf gratis",
             'canonical_url': url_canonica,
             'og_type': 'website',
-            'og_title': "App Calculadora IRPF Online Gratuita | Jovamna Medina",
+            'og_title': "Simulador de Retención IRPF en Nómina 2026 — Online, Sin Descarga",
             'og_description': "Descubre cuánto cobrarás en tu nómina. Calcula tu retención de IRPF y sueldo neto en segundos.",
             'og_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
             'og_url': url_canonica,
             'twitter_card': 'summary_large_image',
-            'twitter_title': "App Calculadora IRPF Online Gratuita",
+            'twitter_title': "Simulador de Retención IRPF en Nómina 2026 — Online, Sin Descarga",
             'twitter_description': "Calcula tu sueldo neto y retención de IRPF de forma rápida y sencilla.",
             'twitter_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
             'seo_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",

@@ -167,7 +167,10 @@ export default function Escandallo() {
   // SEO (No toco nada, está perfecto)
   // =========================
   useEffect(() => {
-    document.title = "Calculadora de Escandallo Online Gratis | Restaurante, Catering, Bar, Platos, Bebidas y Cócteles | Jovamna Medina";
+
+    //DEBE CONCIDIR CON LA VIEW DE DJANGO DE SEO_TITLE
+    document.title = "Calculadora de Escandallos Online Gratis y Sin Registro";
+
 
     const canonicalUrl = "https://jovamnamedina.com/escandallo";
     let canonicalTag = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
@@ -184,17 +187,19 @@ export default function Escandallo() {
       metaDescription.setAttribute('name', 'description');
       document.head.appendChild(metaDescription);
     }
-    metaDescription.setAttribute('content', 'Calcula el escandallo de tus platos, cócteles y bebidas gratis. Controla mermas, calcula el coste por ración o copa y optimiza el Food & Beverage Cost de tu restaurante, bar o pub.');
+ 
+    metaDescription.setAttribute('content', 'Calcula el coste y margen de tus platos y bebidas al instante. Herramienta 100% gratuita, sin registros y sin anuncios. Incluye análisis de beneficios.');
+
 
     const metaTags = [
-      { property: 'og:title', content: 'Calculadora de Escandallos Profesional (Cocina y Barra)' },
-      { property: 'og:description', content: 'Herramienta hostelera para calcular el coste real de platos, bebidas y cócteles. Controla mermas y asegura el beneficio de tu negocio.' },
+      { property: 'og:title', content: 'Calculadora de Escandallo de Cocina y Bar Gratis' },
+      { property: 'og:description', content: 'Herramienta online gratuita para calcular el coste real de tus platos y cócteles. Controla mermas y asegura tu beneficio.' },
       { property: 'og:image', content: 'https://jovamnamedina.com/custom-static/images/googleweb.jpg' },
       { property: 'og:type', content: 'website' },
       { property: 'og:url', content: canonicalUrl },
       { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:title', content: 'Calculadora de Escandallo: Resturante, Catering, Bar, Platos y Bebidas | Jovamna Medina' },
-      { name: 'twitter:description', content: 'Controla el coste de tus recetas, copas y la pérdida por merma con esta herramienta interactiva inteligente.' },
+      { name: 'twitter:title', content: 'Calculadora de Escandallos Online Gratis' },
+      { name: 'twitter:description', content: 'Calcula el coste de tus recetas de cocina y coctelería gratis. Controla mermas y costes.' },
       { name: 'twitter:image', content: 'https://jovamnamedina.com/custom-static/images/facebookweb.jpg' },
       { name: 'twitter:label1', content: 'Categoría' },
       { name: 'twitter:data1', content: 'Software de Gestión Hostelera / Gastronomía y Bar' }

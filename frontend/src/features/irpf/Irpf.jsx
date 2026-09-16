@@ -11,7 +11,7 @@ import FullWidthLayout from "../../hocs/FullWidthLayout";
 function useSEO() {
   useEffect(() => {
   
-    document.title = 'Simulador de Retención IRPF en Nómina 2026 — Online, Sin Descargas';
+    document.title = 'Simulador de Retención IRPF en Nómina 2026 — Online Gratis, Sin Descargas';
 
     const canonicalUrl = "https://jovamnamedina.com/calcula-irpf"; 
     
@@ -43,11 +43,18 @@ function useSEO() {
     );
 
     // Open Graph (Redes Sociales)
-    setMeta('property', 'og:title',       'Calculadora IRPF 2026 — Retención en nómina');
+    setMeta('property', 'og:title',       'Simulador de Retención IRPF en Nómina 2026 — Online, Sin Descarga');
     setMeta('property', 'og:type',        'website');
     setMeta('property', 'og:url',         canonicalUrl);
-    setMeta('property', 'og:image', 'https://jovamnamedina.com/custom-static/images/facebookweb.jpg');
+    setMeta('property', 'og:image', 'https://jovamnamedina.com/custom-static/images/googleweb.jpg');
     setMeta('property', 'og:description', 'Calcula tu retención de IRPF y cuánto cobras neto al mes en España.');
+
+        // 4. Twitter Cards
+    setMeta('name', 'twitter:card',        'summary_large_image');
+    setMeta('name', 'twitter:title',       'Simulador de Retención IRPF en Nómina 2026 — Online, Sin Descarga');
+    setMeta('name', 'twitter:description', 'Calcula tu sueldo neto y retención de IRPF de forma rápida y sencilla.');
+    setMeta('name', 'twitter:image',       'https://jovamnamedina.com/custom-static/images/facebookweb.jpg');
+
 
     // JSON-LD (Schema.org WebApplication)
     let ld = document.querySelector('script[data-schema="irpf-app"]');

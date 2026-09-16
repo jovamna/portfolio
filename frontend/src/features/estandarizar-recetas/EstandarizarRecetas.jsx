@@ -24,8 +24,8 @@ function useSEO() {
   
     
     // 1. Título de la página (Abarca platos de restaurante y recetas de coctelería/bar)
-  
-    document.title = 'Estandarizar Recetas Online Gratis — Sin Registro | PDF';
+    //DEBE COINICIDR CON EL SEO_TITLE DE LA VIEW DE  DJANGO
+    document.title = 'Estandarizar y Escalar Recetas Online Gratis — Sin Registro (Descarga PDF)';
 
 
 
@@ -49,21 +49,21 @@ function useSEO() {
     setMeta('name', 'description', 
       'Estandariza recetas de cocina, pastelería y coctelería online. Organiza ingredientes, cantidades, elaboración y alérgenos. Guarda tus recetas, descárgalas en PDF y trabaja sin registro.'
     );
-  
+
     // 3. Open Graph\
-    setMeta('property', 'og:title', 'Estandariza Recetas Profesionales Online');
+    setMeta('property', 'og:title', 'Gestor y Escalador de Recetas Estandarizadas Gratis Online');
     setMeta('property', 'og:type',        'website');
     setMeta('property', 'og:url',         canonicalUrl);
-    setMeta('property', 'og:image',       'https://jovamnamedina.com/custom-static/images/facebookweb.jpg');
+    setMeta('property', 'og:image',       'https://jovamnamedina.com/custom-static/images/googleweb.jpg');
 
-     setMeta('property', 'og:description', 'Herramienta online para crear, organizar y gestionar recetas estandarizadas de cocina, pastelería y coctelería. Exporta a PDF y guarda tus recetas.'
+     setMeta('property', 'og:description', 'Herramienta online para crear, organizar, escalar y gestionar recetas estandarizadas de cocina, pasteleria y coctelería. Gratis, sin registro y con descarga en PDF. Exporta a PDF y guarda tus recetas.'
     );
 
 
     // 4. Twitter Cards
     setMeta('name', 'twitter:card',        'summary_large_image');
-    setMeta('name', 'twitter:title',       'Estandarizar Recetas Online | Jovamna Medina');
-    setMeta('name', 'twitter:description', 'Crea, guarda y organiza recetas estandarizadas profesionales. PDF, alérgenos y sin registro.');
+    setMeta('name', 'twitter:title',       'Estandarizar y Escalar Recetas Gratis Sin Registro');
+    setMeta('name', 'twitter:description', 'Herramienta online para crear, organizar, escalar y gestionar recetas estandarizadas de cocina, pasteleria y coctelería. Gratis, sin registro y con descarga en PDF. Exporta a PDF y guarda tus recetas.');
     setMeta('name', 'twitter:image',       'https://jovamnamedina.com/custom-static/images/facebookweb.jpg');
 
     // 5. Canonical Tag
@@ -162,6 +162,10 @@ function useSEO() {
     };
   }, []);
 }
+
+
+
+
 
 
 const STORAGE_KEY = 'estandarizar-receta-data';

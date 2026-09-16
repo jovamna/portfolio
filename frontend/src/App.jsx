@@ -28,8 +28,17 @@ import EstandarizarRecetas from './features/estandarizar-recetas/EstandarizarRec
 
 
 
+
+
+
+
 function App() {
   const [showLogo, setShowLogo] = useState(true);
+
+
+
+
+
 
   //useEffect(() => {
   //  const timer = setTimeout(() => {
@@ -37,7 +46,6 @@ function App() {
  //   }, 3000); // Ajusta el tiempo en milisegundos a la cantidad de tiempo que desees mostrar el logo
 
  //   return () => clearTimeout(timer);
-
 
 
  // }, []);
@@ -111,6 +119,7 @@ function App() {
         <Route path="/hosteleria-ficha-tecnica" element={<Navigate to="/estandarizar-recetas" replace />} />
 
         <Route path="/estandarizar-recetas" element={<EstandarizarRecetas/>} />
+
         <Route path="/tarifa-luz" element={<Luz/>} />
         <Route path="/search/:term" element={<Search />} />
    
