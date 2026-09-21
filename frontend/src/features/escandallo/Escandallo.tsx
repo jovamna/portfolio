@@ -307,6 +307,9 @@ export default function Escandallo() {
   return EJEMPLO_INICIAL.ingredients;
   });
 
+  const [infoVisible, setInfoVisible] = useState<string | null>(null);
+
+
 
 
 
@@ -896,7 +899,7 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
 
 
           {/**INICIO APP */}
-          <div className="w-full lg:w-[90%] 2xl:w-[89%] mx-auto lg:px-4 px-3">
+          <div className="w-full lg:w-[93%] 2xl:w-[89%] mx-auto lg:px-4 px-3  bg-white">
 
             {/* HEADER */}
             <div className="flex flex-col w-full mb-2 items-center">
@@ -937,30 +940,28 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
          💡 ¿Cómo empezar?
          </p>
          <p className='lg:text-base text-sm text-center'>
-      Elimina las filas de ejemplo con el botón de borrar y añade tantas filas como ingredientes necesite tu receta. ¡Los datos se guardan solos!
+          El escandallo carga una receta de ejemplo para que veas cómo funciona. Puedes eliminarla con el botón "Limpiar todo" y añadir los ingredientes de tu receta. ¡Los datos se guardan automáticamente!
         </p>
       
 
          <p className='lg:text-base text-sm text-center 2xl:mt-[2px] px-2'>
-          Selecciona la unidad<strong> (Kg, g o L)</strong> en cada campo y escribe la cantidad en esa unidad: si eliges <strong>gramos</strong> y 
-          pones <strong>500 </strong>, son <strong>500 g </strong>; si eliges <strong>kilos</strong> y pones <strong>0,5</strong>, es medio kilo.
+          Selecciona la unidad<strong> (Kg, g o L)</strong> y escribe la cantidad correspondiente. Por ejemplo: <strong>500</strong> si 
+          eliges <strong>gramos </strong>, ó <strong>0,5 Kg</strong>; si eliges <strong>kilos</strong>
          </p>
 
-  </div>
-
-
-
+         </div>
 
            </div>
 
       {/* PRIMER BLOQUE  TITULOS*/}
       <div className="lg:grid lg:grid-cols-5 
-      md:grid md:grid-cols-7 flex flex-col  
-      gap-2 lg:mb-8 mb-4 lg:border-2 lg:border-black 
+      md:grid md:grid-cols-4 sm:grid sm:grid-cols-4 
+      flex flex-col  md:gap-2
+     lg:mb-8 mb-4 lg:border-2 lg:border-black 
       xl:border-2 xl:border-black py-1">
 
          {/* NOMBRE DEL PLATO */}
-        <div className=" lg:col-span-2 md:col-span-3 px-2 py-2 rounded-3xl shadow">
+        <div className="lg:col-span-2 md:col-span-2 sm:col-span-2 px-2 py-2 rounded-3xl shadow">
           <label className="block lg:text-lg md:text-lg text-base font-bold mb-2 text-center">
           Nombre del Plato
          </label>
@@ -975,7 +976,7 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
          </div>
 
         {/* RACIONES */}
-        <div className="bg-white lg:col-span-1 md:col-span-2 px-2 py-2 rounded-3xl shadow">
+        <div className="bg-white lg:col-span-1 md:col-span-2 sm:col-span-2 px-2 py-2 rounded-3xl shadow">
           <label className="block lg:text-base md:text-lg text-base font-bold mb-2 text-center">
             N.º de Raciones
           </label>
@@ -1007,10 +1008,36 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
         </div>
 
         {/* PRECIO VENTA */}
-        <div className="bg-white lg:col-span-1 md:col-span-2  px-2 py-2 rounded-3xl shadow">
+        <div className="flex flex-col items-center bg-white lg:col-span-1 md:col-span-2  px-2 py-2 rounded-3xl shadow">
+
+
+         <div className='flex flex-row'>
           <label className="block lg:text-base md:text-lg text-base font-bold mb-2 text-center">
-            P.V. del Plato (€)
-          </label>
+           P.V. del Plato (€) 
+            </label>
+            <div className="ml-2 relative inline-block group">
+              <button
+              type="button"
+              onClick={() =>
+                setInfoVisible(
+                  infoVisible === "precio"
+                  ? null
+                  : "precio"
+                )
+              }
+              className="text-green-700 font-extrabold">[i]
+              </button>
+              <div className={`absolute z-10 w-64 p-2 text-xs text-white bg-gray-800 rounded-lg 
+              lg:right-1/2 lg:translate-x-1/4 right-1/2 translate-x-1/4 mt-2 ${infoVisible === 'precio' ? 'block' : 'hidden'} group-hover:block`}>
+               Déjalo en 0, si necesitas que la aplicación calcule el precio recomendado.
+                </div>
+              </div>
+       
+          </div>
+
+
+
+
           <input
             type="number"
             min="0"
@@ -1030,12 +1057,33 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
 
 
 
-           {/* GSTOS FIJOS ALQUILER LUZ NOMINAS */}
-      
-        <div className="bg-white lg:col-span-1 md:col-span-2 px-2 py-2 rounded-3xl shadow">
-          <label className="block lg:text-base md:text-lg text-base font-bold mb-2 text-center">
-            Gastos Fijos X Ración(€)
-            </label>
+        {/* GASTOS FIJOS ALQUILER LUZ NOMINAS */}
+        <div className="flex flex-col items-center bg-white lg:col-span-1 md:col-span-2 px-2 py-2 rounded-3xl shadow">
+           <div className='flex flex-row'>
+            <label className="block text-center lg:text-base md:text-lg text-base font-bold mb-2">
+              G.Fijos x Ración(€)
+              </label>
+              <div className="ml-2 relative inline-block group">
+                 <button
+                  type="button"
+                  onClick={() =>
+                    setInfoVisible(infoVisible === "gastos" 
+                      ? null
+                      : "gastos"
+                    )
+                  }
+                  className="font-extrabold text-purple-700">
+                  [i]
+                 </button>
+
+                  <div className={`absolute z-10 w-64 p-2 text-xs text-white bg-gray-800 rounded-lg 
+                    right-1/2 lg:translate-x-1/8 translate-x-1/4 mt-2 ${infoVisible === 'gastos' ? 'block' : 'hidden'} group-hover:block`}>
+                      Opcional. Si lo dejas en 0, la aplicación estimará el precio recomendado aplicando un margen orientativo del 30% más IVA.
+                </div>
+               
+              </div>
+            </div>
+
             <input
             type="number"
             min="0"
@@ -1058,14 +1106,16 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
 
 
 
+
+
      
-      {/* TABLA */}    {/* TABLA */}
+  {/* TABLA */}    {/* TABLA */}
    
-      {/* ========================================= */}
-{/* 💻 VISTA PARA ORDENADORES ( TABLA ACTUAL) */}
-{/* ========================================== */}
-{/* 💻 VISTA PARA ORDENADORES */}
-<div className="hidden lg:block bg-white shadow overflow-x-auto border-2 border-black">
+ {/* ========================================= */}
+ {/* 💻 VISTA PARA ORDENADORES ( TABLA ACTUAL) */}
+ {/* ========================================== */}
+ {/* 💻 VISTA PARA ORDENADORES */}
+ <div className="hidden lg:block bg-white shadow overflow-x-auto border-2 border-black">
 
 
   <table className="lg:w-full 2xl:w-full">
@@ -1352,7 +1402,7 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
                 <div className='text-center py-2 text-neutral-900 font-bold'>{row.costeRealTotal ?? '0.00'} €</div>
               </td>
 
-              <td className="p-2 font-black">
+              <td className="p-2 font-black ">
                 <p className='text-center lg:text-sm font-bold'>Coste por racion</p>
                 <div className='text-center py-2 text-indigo-600'>{row.nuevoCostePorRacion ?? '0.00'} €</div>
               </td>
@@ -1360,6 +1410,7 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
 
 
               <td className="">
+                <div className='px-2'>
                 <p className='text-center lg:text-sm font-bold text-neutral-700'>Eliminar</p>
                 <div className='text-center py-2'>
                   <button
@@ -1369,6 +1420,8 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
                     ✕
                   </button>
                 </div>
+                </div>
+
               </td>
 
 
@@ -1386,7 +1439,7 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
       })}
     </tbody>
   </table>
-</div>
+ </div>
 
 
 
@@ -2014,27 +2067,19 @@ lg:px-0 2xl:px-0 md:px-18 px-4'>
     {/**=== FILA 3 PC, MOVILES */}
     
     <div className="bg-gray-800/40 p-5 rounded-2xl border border-gray-700/30">
-      <p className="text-green-400 text-lg">Precio Sugerido Plato + 30%</p>
+      <p className="text-green-400 text-lg">P.V. Sugerido(30% incluido Sin Iva)</p>
       <p className="lg:text-4xl md:text-5xl text-2xl font-black mt-3 text-green-400">{totales.totalPrecioVentaSugeridoSinIva} €</p>
     </div>
 
     <div className="bg-gray-800/40 p-5 rounded-2xl border border-gray-700/30">
-      <p className="text-cyan-400 text-lg">P. Sugerido Plato + 30% + IVA</p>
+      <p className="text-cyan-400 text-lg">P.V. Sugerido(30% + IVA incluidos)</p>
       <p className="lg:text-4xl md:text-5xl text-2xl font-black mt-3 text-cyan-400">{totales.totalPrecioVentaSugeridoConIva} €</p>
     </div>
 
-          {/** precioFinalConIva  precioFinalSinIva  
-        <div className="bg-gray-800/40 p-5 rounded-2xl border border-gray-700/30">
-      <p className="text-mauve-500 text-lg">Plato + Fijos + 20% + IVA</p>
-      <p className="lg:text-4xl md:text-5xl text-2xl font-black mt-3 text-mauve-500">{totales.precioFinalConIva} €</p>
-    </div>
-
-*/}
-
-
+ 
 
 <div className="bg-gray-800/40 p-5 rounded-2xl border border-gray-700/30">
-  <p className="text-mauve-500 text-lg">Plato + Fijos + 20% + IVA</p>
+  <p className="text-mauve-500 text-lg">P.V.(Gast.Fijos + 20% + IVA incl)</p>
 
   {totales.precioFinalConIva ? (
     <p className="lg:text-4xl md:text-5xl text-2xl font-black mt-3 text-mauve-500">

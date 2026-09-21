@@ -395,7 +395,7 @@ const guestLinks = (
               <Popover.Group as="nav" 
               className="hidden lg:flex items-center justify-between 
               w-[79%] h-full lg:h-[60px] 
-              lg:block lg:w-[85%]">
+              lg:block lg:w-[85%] bg-white">
 
 
                 
@@ -461,7 +461,7 @@ const guestLinks = (
                   inline-block px-3 h-[2rem]
                   lg:text-sm">
                   <span className="ml-6">
-                    Tarif.Luz
+                    Cal.Luz
                   </span>
                   </NavLink>
                   
@@ -472,7 +472,7 @@ const guestLinks = (
                 <div className="flex justify-center items-center lg:w-[35%] h-full">
              
                  {/* BUSCADOR */}
-                 <div  className='inline-flex  lg:w-[50%] flex justify-center items-center lg:h-[56px]'>
+                 <div  className='inline-flex  lg:w-[50%] flex justify-center items-center lg:h-[56px] sm:w-[40%]'>
                 <button
                 onClick={() => {
                 setIsSearchOpen(!isSearchOpen);
@@ -500,7 +500,7 @@ const guestLinks = (
 
             
                 {/* LOGIN INICIAR SESION */}
-               <div className="lg:w-[45%] lg:h-[60px] inline-flex items-center">
+               <div className="lg:w-[45%] lg:h-[60px] sm:w-[55%] inline-flex items-center">
                   {
                 isAuthenticated ? authLinks:guestLinks
                 }
