@@ -117,10 +117,6 @@ const parseAndConvertToKg = (raw: string, selectedUnit: 'kg' | 'g' | 'l', densit
 };
 
 
-
-
-
-
 // ==========================================
 // 3. HELPERS DE LOCALSTORAGE (¡SIN DUPLICACIÓN!)
 // ==========================================
@@ -596,200 +592,258 @@ const handleBlur = useCallback((id: string, field: string) => {
   // 🆕 USEMEMO CÁLCULOS (TU LÓGICA DE NEGOCIO INTACTA) USEMEMO USEMEMO USEMEMO
   // ============================================================================================================================
 
-  const { calculatedRows, totales } = useMemo(() => {
-    // Acumuladores
-    let totalCompra = 0;
-    let totalMermaDinero = 0;
-    let totalPesoNeto = 0;
-    let totalPesoBruto = 0;       // ← EN LUGAR DE RENDIEMIENTO
-    let totalGastoConReposicion = 0;
-    let totalCosteRealPorRacion = 0;
-    let totalPrecioVentaSugeridoSinIva = 0;
-    let totalPrecioVentaSugeridoConIva = 0;
+const { calculatedRows, totales } = useMemo(() => {
+  // ==========================================
+  // Helpers
+  // ==========================================
+  const parseFlexible = (val: string | number | null | undefined): number => {
+    if (val === undefined || val === null || val === '') return 0;
+    if (typeof val === 'number') return Math.max(0, val);
+    const parsed = parseFloat(String(val).replace(',', '.'));
+    return isNaN(parsed) || parsed < 0 ? 0 : parsed;
+  };
+
+
+
+  // ==========================================
+  // Acumuladores
+  // ==========================================
+  let totalCompra = 0;
+  let totalMermaDinero = 0;
+  let totalPesoNeto = 0;      // en kg
+  let totalPesoBruto = 0;     // en kg
+  let totalGastoConReposicion = 0;
+  let totalCosteRealPorRacion = 0;
+  let totalPrecioVentaSugeridoSinIva = 0;
+  let totalPrecioVentaSugeridoConIva = 0;
+
+  
+
+
+
+  const rows = ingredients.map((row) => {
+    console.log('ENTRA:', {
+  unit: row.unitUsed,
+  unitGross: row.unitGross,
+  unitMerma: row.unitMerma,
+  grossWeight: row.grossWeight,
+  mermaKg: row.mermaKg,
+  usedWeight: row.usedWeight,
+  priceTotalCompra: row.priceTotalCompra,
+});
+
+
+
+
+    // Unidad de este ingrediente (usamos unitUsed como referencia principal)
+    const unit = row.unitUsed || row.unitGross || row.unitMerma || 'kg';
+
+    // 1. Precio por KILO (lo que realmente introduces)
+    const precioPorKilo = parseFlexible(row.priceTotalCompra); // ← aquí pones 4
+
+    // 2. Convertimos todos los pesos a kilos
+    const pesoBrutoKg = parseFlexible(row.grossWeight);
+    const mermaKg = parseFlexible(row.mermaKg ?? row.merma);
+    const cantidadUsadaKg = parseFlexible(row.usedWeight);
+    // 3. Cálculos base
+    const mermaRealKg = Math.min(mermaKg, pesoBrutoKg);
+    const pesoNetoKg = Math.max(0, pesoBrutoKg - mermaRealKg);
+
+    // 4. Coste total real de la compra de este ingrediente
+    //const costeTotalCompra = precioPorKilo * pesoBrutoKg;
+
+    // 5. Rendimiento
+    const rendimiento = pesoBrutoKg > 0 ? pesoNetoKg / pesoBrutoKg : 0;
+
+    // 6. Cuánto bruto necesitas para obtener la cantidad neta que usa el chef
+    const totalBrutoNecesarioKg = rendimiento > 0
+      ? cantidadUsadaKg / rendimiento
+      : 0;
+
+    // 7. Dinero perdido por merma (solo de la parte que usas)
+    const dineroPerdidoPorMerma = (totalBrutoNecesarioKg - cantidadUsadaKg) * precioPorKilo;
+
+    // 8. Coste real de lo que se usa en la receta
+    const costeRealTotal = totalBrutoNecesarioKg * precioPorKilo;
+
+    // 9. Coste por ración
+    const nuevoCostePorRacion = raciones > 0 ? costeRealTotal / raciones : 0;
+
+    // 10. Precios de venta sugeridos (food cost 30%)
+    const precioVentaSugeridoSinIva = nuevoCostePorRacion / 0.30;
+    const precioVentaSugeridoConIva = precioVentaSugeridoSinIva * 1.10;
+
+    // 11. Faltantes
+    const faltanteSinMermaNetoKg = Math.max(0, cantidadUsadaKg - pesoNetoKg);
+    const faltanteBrutoKg = Math.max(0, totalBrutoNecesarioKg - pesoBrutoKg);
+
+
+
+    const priceKgSinMerma= pesoNetoKg > 0 ? pesoBrutoKg * precioPorKilo:0;
+
+    const  priceBrutoFaltante= costeRealTotal - priceKgSinMerma;
+
+
+    //const costeTotalCompra = precioPorKilo * pesoBrutoKg;
+    // 4. Coste total real de la compra (CON reposición)
+    const costeTotalCompra = precioPorKilo * totalBrutoNecesarioKg;
+
+    const precioKgNeto = costeTotalCompra / pesoNetoKg;   // 6 €/kg
+    //const precioUnidadUsado = unit === 'g' ? precioKgNeto / 1000 : precioKgNeto; // → 0,006 €/g
+
+
+
+   //const precioUnidadUsado = pesoNetoKg * precioPorKilo;   // 0.2 * 4 = 0.80 €
+
+
+    const precioUnidadUsado = precioPorKilo / rendimiento * pesoNetoKg;
+
+    const precioPorKiloNeto = precioPorKilo / rendimiento;         // €/kg neto
+    const precioRealDespuesDeMerma = precioPorKiloNeto * pesoNetoKg; // € total del neto
+
+
+    
+
+
+
+
+
+
+
+    // Decimales según unidad
+    const decimales = unit === 'g' ? 0 : 3;
 
     // ==========================================
-    // Helper: acepta tanto kilos como gramos
-     // ==========================================
-  
-    const parseFlexible = (val: string | number | null | undefined): number => {
-      if (val === undefined || val === null || val === '') return 0;
-      if (typeof val === 'number') return Math.max(0, val);
-      const parsed = parseFloat(String(val).replace(',', '.'));
-       return isNaN(parsed) || parsed < 0 ? 0 : parsed;
-      };
-    
-    const rows = ingredients.map((row) => {
-      const precioTotalCompra = parseFlexible(row.priceTotalCompra); // o row.priceTotal si
-      // 1. Coste de la compra (ahora es directamente el que puso el usuario)
-      const costeTotalCompra = precioTotalCompra;
-      //LOS KILOS O KILO COMPRADOS
-      const pesoBruto = parseFlexible(row.grossWeight);         // kg o g
-       //PRECIO POR KILO EN BRUTO calculamos 20 EUROS ENTRE 5 KILOS
-      const priceBrutokilo = pesoBruto > 0 ?  costeTotalCompra / pesoBruto : 0;
-    
-
-      //VALIDACION: La merma no puede ser nunca mayor que el peso total (P.BRUTO) del ingrediente
-      const mermaKg = Math.min(parseFlexible(row.mermaKg), pesoBruto);
-      const pesoNeto = pesoBruto - mermaKg;
-
-      // 4. Precio por kilo limpio
-      const priceKgSinMerma = pesoNeto > 0 ? costeTotalCompra / pesoNeto : 0;
-      const rendimiento = pesoBruto > 0 ? pesoNeto / pesoBruto : 0;
-        // 3. Cantidad que el chef va a usar
-      const cantidadUsada = row.usedWeight > 0 
-      ? parseFlexible(row.usedWeight) 
-      : pesoNeto;
-
-      //const brutoNecesario = rendimiento > 0 ? cantidadUsada / rendimiento : 0;
-      const totalBrutoNecesario = rendimiento > 0 ? cantidadUsada / rendimiento : 0;
-      const dineroPerdidoPorMerma = (totalBrutoNecesario - cantidadUsada) * priceBrutokilo;  //ORIGINAL
-      //const dineroPerdidoPorMerma = (cantidadUsada - totalBrutoNecesario) * priceBrutokilo;
-      //const dineroPerdidoPorMerma = -((totalBrutoNecesario - cantidadUsada) * priceBrutokilo);
-
-      const faltanteSinMermaNetoKg = Math.max(0, cantidadUsada - pesoNeto);
-      const faltanteSinMermaNetoGr = faltanteSinMermaNetoKg  * 1000;
-     ///calculo de lo que sabemos que se necesita - lo usado en receta
-      const faltanteBruto = Math.max(0, totalBrutoNecesario - pesoBruto);
-      //Esa operación solo hace un cambio de unidad: pasa los kilos sobrantes que te faltan a gramos, multiplicando por 1.000.
-      const faltanteBrutoGr = faltanteBruto * 1000;
-      // 6. COSTE REAL TOTAL
-      const costeRealTotal = totalBrutoNecesario * priceBrutokilo;
-      // 7. Coste por ración  FINAL QUE DEBO USAR
-      const nuevoCostePorRacion = raciones > 0 ? (costeRealTotal / raciones) : 0;
-
-      // 8. Precio de venta sugerido
-      const precioVentaSugeridoSinIva = nuevoCostePorRacion / 0.30;
-      const precioVentaSugeridoConIva = precioVentaSugeridoSinIva * 1.10;
-
-      //NUEVO PARA LOS GRAMOS
-      const decimalesFaltante = row.unitUsed === 'g' ? 5 : 3;
-
-
-      // Acumuladores Globales
-      totalCompra += costeTotalCompra;
-      totalMermaDinero += dineroPerdidoPorMerma;
-      totalPesoNeto += pesoNeto;
-      totalPesoBruto += pesoBruto;     // ← acumula el bruto EN LUGAR DE RENDIMENTO
-      totalCosteRealPorRacion += nuevoCostePorRacion;
-      totalGastoConReposicion += costeRealTotal;
-      totalPrecioVentaSugeridoSinIva += precioVentaSugeridoSinIva;
-      totalPrecioVentaSugeridoConIva += precioVentaSugeridoConIva;
-    
-
-      return {
-        ...row,
-        rendimiento: (rendimiento * 100).toFixed(1),
-
-        totalBrutoNecesario: totalBrutoNecesario.toFixed(decimalesFaltante),
-        faltanteBruto: faltanteBruto.toFixed(decimalesFaltante),
-
-        //totalBrutoNecesario: totalBrutoNecesario.toFixed(3),
-       // faltanteBruto: faltanteBruto.toFixed(3),
-        faltanteBrutoGr: faltanteBrutoGr.toFixed(0),
-
-        pesoNeto: pesoNeto.toFixed(decimalesFaltante),
-        cantidadUsada: cantidadUsada.toFixed(decimalesFaltante),
-        //pesoNeto: pesoNeto.toFixed(3),
-        //cantidadUsada: cantidadUsada.toFixed(3),
+    // Acumuladores
+    // ==========================================
+    totalCompra += costeTotalCompra;
+    totalMermaDinero += dineroPerdidoPorMerma;
+    totalPesoNeto += pesoNetoKg;
+    totalPesoBruto += pesoBrutoKg;
+    totalGastoConReposicion += costeRealTotal;
+    totalCosteRealPorRacion += nuevoCostePorRacion;
+    totalPrecioVentaSugeridoSinIva += precioVentaSugeridoSinIva;
+    totalPrecioVentaSugeridoConIva += precioVentaSugeridoConIva;
 
 
 
-        costeTotalCompra: formatPrice(costeTotalCompra),          // 🔧
-        dineroPerdidoPorMerma: formatPrice(dineroPerdidoPorMerma), // 🔧
-        priceBrutokilo: formatPrice(priceBrutokilo),                // 🔧
-        priceKgSinMerma: formatPrice(priceKgSinMerma),   
-        //costeTotalCompra: costeTotalCompra.toFixed(2),
-        //dineroPerdidoPorMerma: dineroPerdidoPorMerma.toFixed(2),
-        //NUEVO
-        //priceBrutokilo: priceBrutokilo.toFixed(2),
-        //priceKgSinMerma: priceKgSinMerma.toFixed(2),
-
-        faltanteSinMermaNetoKg: faltanteSinMermaNetoKg.toFixed(decimalesFaltante),
-        //faltanteSinMermaNetoKg:faltanteSinMermaNetoKg.toFixed(3),
-        faltanteSinMermaNetoGr: faltanteSinMermaNetoGr.toFixed(0),
 
 
-
-        costeRealTotal: formatPrice(costeRealTotal),                 // 🔧
-        nuevoCostePorRacion: formatPrice(nuevoCostePorRacion),      
-        //costeRealTotal: costeRealTotal.toFixed(2),
-        //nuevoCostePorRacion: nuevoCostePorRacion.toFixed(2),
-
-
-      };
-    });
-
-
-     // ✅MODIFCADO  Rendimiento global real de la receta
-     const totalRendimiento = totalPesoBruto > 0
-     ? (totalPesoNeto / totalPesoBruto) * 100
-     : 0;
-
-     const beneficio = precioVenta > 0
-     ? precioVenta - totalCosteRealPorRacion
-     : null;
-
-     // 2. Food Cost solo si hay precio de venta
-     const foodCost = precioVenta > 0
-     ? (totalCosteRealPorRacion / precioVenta) * 100
-     : null
-    
-
-
-     // ===========================================================================================================
-     // CALCULO CON GASTOS FIJOS EN EUROS AÑADIDOS POR EL USUARIO + EL 20% RENTABILIDAD (no modifica nada anterior)
-    // =============================================================================================================
-    // 1. Convertir y verificar si REALMENTE introdujo gastos fijos
-    const numGastosFijos = parseFloat(String(gastosFijosPorRacion));
-    const tieneGastosFijos = !isNaN(numGastosFijos) && numGastosFijos > 0;
-    const gastosFijos = tieneGastosFijos ? numGastosFijos : 0;
-
-    // 2. Coste Total Base del plato
-    const costeTotalPlato = totalCosteRealPorRacion + gastosFijos;
-
-    // 3. Aplicar margen y 4. IVA SOLO si tiene gastos fijos
-    let precioFinalSinIva = null;
-    let precioFinalConIva = null;
-
-    if (tieneGastosFijos) {
-     const porcentajeMargen = 20;
-     precioFinalSinIva = costeTotalPlato * (1 + porcentajeMargen / 100);
-     precioFinalConIva = precioFinalSinIva * 1.10;
-    }
-
-
-
+   // console.log('SALE:', {
+   // unit,
+   //// pesoBrutoKg,
+   // mermaRealKg,
+  //  pesoNetoKg,
+  //  cantidadUsadaKg,
+  //  rendimiento,
+  //  totalBrutoNecesarioKg,
+  //  costeRealTotal,
+  //  priceBrutoFaltante,
+  //  });
 
     return {
-      calculatedRows: rows,
-      totales: {
-        totalCompra: formatPrice(totalCompra), // 
-        //totalCompra: totalCompra.toFixed(2),
-        totalMermaDinero: formatPrice(totalMermaDinero),     
-        //totalMermaDinero: totalMermaDinero.toFixed(2),
-        totalPesoNeto: totalPesoNeto.toFixed(3),
-        totalCosteRealPorRacion: formatPrice(totalCosteRealPorRacion),
-        //totalCosteRealPorRacion: totalCosteRealPorRacion.toFixed(2),
-        beneficio: beneficio !== null ? beneficio.toFixed(2) : null,
-        foodCost: foodCost !== null ? foodCost.toFixed(2) : null,
-        totalGastoConReposicion: formatPrice(totalGastoConReposicion),
-        //totalGastoConReposicion: totalGastoConReposicion.toFixed(2),
-        totalRendimiento: totalRendimiento.toFixed(1),   // ahora es un % real (ej: 92.5)
-        totalPrecioVentaSugeridoSinIva: formatPrice(totalPrecioVentaSugeridoSinIva),
-        //totalPrecioVentaSugeridoSinIva: totalPrecioVentaSugeridoSinIva.toFixed(2),
-        totalPrecioVentaSugeridoConIva: formatPrice(totalPrecioVentaSugeridoConIva),
-        //totalPrecioVentaSugeridoConIva: totalPrecioVentaSugeridoConIva.toFixed(2),
+      ...row,
 
-          //NUEVO ALQUILERES GASTOS FIJOS
-        // ← Solo se añade esto nuevo
-        precioFinalSinIva: precioFinalSinIva !== null ? precioFinalSinIva.toFixed(2) : null,
-        precioFinalConIva: precioFinalConIva !== null ? formatPrice(precioFinalConIva) : null,
-        //precioFinalConIva: precioFinalConIva !== null ? precioFinalConIva.toFixed(2) : null,
-  
+      // Mostramos en la unidad original del ingrediente
+      //pesoNeto: fromKg(pesoNetoKg, unit).toFixed(decimales),
+      pesoNeto: pesoNetoKg,
+      cantidadUsada: cantidadUsadaKg,
+      //cantidadUsada: fromKg(cantidadUsadaKg, unit).toFixed(decimales),
+      totalBrutoNecesario: totalBrutoNecesarioKg,
+      //totalBrutoNecesario: fromKg(totalBrutoNecesarioKg, unit).toFixed(decimales),
+      faltanteBruto: faltanteBrutoKg,
+      faltanteSinMermaNetoKg: faltanteSinMermaNetoKg,  // en kg
+      //rendimiento: rendimiento,                        // 0-1
 
-      }
+      //faltanteBruto: fromKg(faltanteBrutoKg, unit).toFixed(decimales),
+      //faltanteSinMermaNetoKg: fromKg(faltanteSinMermaNetoKg, unit).toFixed(decimales),
+
+      // Dinero
+      costeTotalCompra: formatPrice(costeTotalCompra),
+      dineroPerdidoPorMerma: formatPrice(dineroPerdidoPorMerma),
+ 
+      //priceBrutokilo: formatPrice(precioPorKilo),                    // ← siempre el precio/kg que pusiste
+      priceKgSinMerma: formatPrice(priceKgSinMerma), ///precio de peso neto que quedo
+    
+      costeRealTotal: formatPrice(costeRealTotal), //precio final compra en bruto
+      priceBrutoFaltante: formatPrice(costeRealTotal - priceKgSinMerma),
+      nuevoCostePorRacion: formatPrice(nuevoCostePorRacion),
+      precioUnidadUsado: formatPrice(precioUnidadUsado),
+
+      precioRealDespuesDeMerma: formatPrice(precioRealDespuesDeMerma),
+      precioPorKiloNeto: formatPrice(precioPorKiloNeto),
+
+      rendimiento: (rendimiento * 100).toFixed(1),
     };
-  }, [ingredients, raciones, precioVenta, gastosFijosPorRacion]);
+  });
+
+  // ==========================================
+  // Totales
+  // ==========================================
+  const totalRendimiento = totalPesoBruto > 0
+    ? (totalPesoNeto / totalPesoBruto) * 100
+    : 0;
+
+  const beneficio = precioVenta > 0
+    ? precioVenta - totalCosteRealPorRacion
+    : null;
+
+  const foodCost = precioVenta > 0
+    ? (totalCosteRealPorRacion / precioVenta) * 100
+    : null;
+
+  // Gastos fijos
+  const numGastosFijos = parseFloat(String(gastosFijosPorRacion));
+  const tieneGastosFijos = !isNaN(numGastosFijos) && numGastosFijos > 0;
+  const gastosFijos = tieneGastosFijos ? numGastosFijos : 0;
+
+  const costeTotalPlato = totalCosteRealPorRacion + gastosFijos;
+
+
+
+  let precioFinalSinIva: number | null = null;
+  let precioFinalConIva: number | null = null;
+
+  if (tieneGastosFijos) {
+    const porcentajeMargen = 20;
+    precioFinalSinIva = costeTotalPlato * (1 + porcentajeMargen / 100);
+    precioFinalConIva = precioFinalSinIva * 1.10;
+  }
+
+  return {
+    calculatedRows: rows,
+    totales: {
+      totalCompra: formatPrice(totalCompra),
+      totalMermaDinero: formatPrice(totalMermaDinero),
+      totalPesoNeto: totalPesoNeto.toFixed(3),
+      totalPesoBruto: totalPesoBruto.toFixed(3),
+      totalGastoConReposicion: formatPrice(totalGastoConReposicion),
+      totalCosteRealPorRacion: formatPrice(totalCosteRealPorRacion),
+      totalRendimiento: totalRendimiento.toFixed(1),
+      totalPrecioVentaSugeridoSinIva: formatPrice(totalPrecioVentaSugeridoSinIva),
+      totalPrecioVentaSugeridoConIva: formatPrice(totalPrecioVentaSugeridoConIva),
+      beneficio: beneficio !== null ? beneficio.toFixed(2) : null,
+      foodCost: foodCost !== null ? foodCost.toFixed(2) : null,
+      precioFinalSinIva: precioFinalSinIva !== null ? precioFinalSinIva.toFixed(2) : null,
+      precioFinalConIva: precioFinalConIva !== null ? formatPrice(precioFinalConIva) : null,
+   
+    },
+  };
+}, [ingredients, raciones, precioVenta, gastosFijosPorRacion]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1146,7 +1200,7 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
               {/* PRECIO TOTAL DE LA COMPRA */}
              <td className="p-2">
              <p className='text-center lg:text-sm font-bold text-neutral-900'>
-             Precio total de compra <span className="text-red-600">€</span>
+             Precio x Kg <span className="text-red-600">€</span>
              </p>
              <div className='py-2'>
              <input
@@ -1204,6 +1258,11 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
                 {ing.unitGross === 'g' ? 'Gramos' : ing.unitGross === 'l' ? 'Litros' : 'Kilogramos'}
                 </p>
            </td>
+
+
+
+
+
 
 
             <td className="p-2 ">
@@ -1286,11 +1345,12 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
            </td>
 
 
-        </tr>
+            </tr>
 
 
-        {/* SEGUNDA FILA SEGUNDA FILA SEGUNDA FILA SEGUNDA FILA*/}
-          <tr className='hover:bg-gray-50 lg:w-full 2xl:w-full'>
+
+             {/* SEGUNDA FILA SEGUNDA FILA SEGUNDA FILA SEGUNDA FILA*/}
+            <tr className='hover:bg-gray-50 lg:w-full 2xl:w-full'>
 
 
               {/* RESULTADOS (solo lectura) */}
@@ -1305,20 +1365,20 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
 
 
                <td className="p-2">
-                <p className='text-center lg:text-sm font-bold'>Precio del P.Neto</p>
+                <p className='text-center lg:text-sm font-bold'>Precio Real del P.Neto</p>
                 <div className='py-2 text-center text-neutral-900 font-bold'>
-                  {row.priceKgSinMerma ?? '0.00'}
-                   <span className="text-red-600"> € </span> x {ing.unitGross === 'l' ? 'L' : 'kg'}
+                  {row.precioRealDespuesDeMerma?? '0.00'}
+                   <span className="text-red-600"> € </span> 
                   </div>
               </td>
 
                  
 
               <td className="p-2 ">
-               <p className='text-center lg:text-sm font-bold'>Precio del P.Bruto</p>
+               <p className='text-center lg:text-sm font-bold'>Precio x Kg Neto</p>
                 <div className='text-center py-2 text-neutral-900 font-bold'>
-                  {row.priceBrutokilo?? '0.000'} 
-                  <span className="text-red-600"> € </span> x {ing.unitGross === 'l' ? 'L' : 'kg'}
+                  {row.precioPorKiloNeto?? '0.000'} 
+                  <span className="text-red-600"> € </span> 
                 </div>
               </td>
 
@@ -1326,7 +1386,7 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
               {/**PERDIDA */}
               <td className="p-2">
                 <p className='text-center lg:text-sm font-bold text-neutral-900'>Perdida €</p>
-                <div className='text-center py-2 text-red-600 font-bold'>-{row.dineroPerdidoPorMerma ?? '0.00'} €</div>
+                <div className='text-center py-2 text-red-600 font-bold'>{row.dineroPerdidoPorMerma ?? '0.00'} €</div>
               </td>
 
            
@@ -1349,7 +1409,7 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
 
                 {/* FALTANTE SIN MERMA Faltante, Compra requerida, Costes... (igual que tenías) */}
               <td className="p-2">
-                <p className='text-center lg:text-sm font-bold'>Faltante sin merma</p>
+                <p className='text-center lg:text-sm font-bold'>P.Neto Faltante</p>
                 <div className='text-center py-2'>
                   {parseFloat(row.faltanteSinMermaNetoKg || '0') > 0 ? (
                     <span className='text-fuchsia-600 font-semibold lg:text-base 2xl:text-lg sm:text:base text-xs'>
@@ -1367,13 +1427,13 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
               </td>
 
 
-              {/**TOTAL FALTANTE BRUTO  */}
+              {/**FALTANTE BRUTO  */}
                <td className="p-2">
-                  <p className='text-center lg:text-sm font-bold'>Faltante Bruto Requerido</p>
+                  <p className='text-center lg:text-sm font-bold'>P.Bruto Faltante</p>
                 <div className='text-center py-2'>
                  {parseFloat(row.faltanteBruto || '0') > 0 ? (
                     <span className='text-red-600 font-semibold lg:text-base 2xl:text-lg sm:text:base text-xs'>
-                      ⚠️ {formatCleanWeight(row.faltanteBruto, ing.unitUsed)}
+                      ⚠️ {formatCleanWeight(row.faltanteBruto, ing.unitGross)}
                        {/*row.faltanteBruto */} {/*ing.unitGross === 'l' ? 'L' : 'kg'*/}  {/*({row.faltanteBrutoGr} g)*/}
                       </span>
                       ) : (
@@ -1492,7 +1552,7 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-bold text-neutral-800 mb-1 text-center">
-                Precio Tot.Compra (<span className="text-red-600">€</span>)
+                Precio x Kg (<span className="text-red-600">€</span>)
               </label>
               <input
                 type="text"
@@ -1568,7 +1628,7 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
             <div className='w-full flex flex-row mx-auto items-center justify-center'>
            
                <label className="block text-xs font-bold text-neutral-700 text-center">
-                Peso Bruto
+                P.Bruto Total
                 </label>
         
                <select
@@ -1660,49 +1720,45 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
         <div className="mt-4 pt-4 border-t border-dashed border-neutral-200 grid grid-cols-2 gap-y-3 gap-x-2 text-xs">
 
 
-
-             <div className="bg-neutral-50 p-2 rounded-xl">
-                <p className="text-gray-900 font-medium text-center">Precio del P.Bruto</p>
-                <div className='text-center py-1 text-neutral-900 font-bold'>
-                  {row.priceBrutokilo?? '0.000'} <span className="text-red-600">€</span> x {ing.unitGross === 'l' ? 'L' : 'kg'}
-                </div>
-              </div>
-
-
-
-
              {/* PESO NETO */}
              
           <div className="bg-neutral-50 p-2 rounded-xl">
                 <p className="text-gray-900 text-center font-medium">Peso Neto</p>
                  <div className='py-1 text-center text-neutral-900 font-bold'>
-                     {formatCleanWeight(row.pesoNeto, ing.unitGross)}
-                  {/*row.pesoNeto ?? '0.000'*/} 
-                  {/*ing.unitGross === 'l' ? ' L' : ' kg'*/}
+                     {formatCleanWeight(row.pesoNeto, ing.unitUsed)}
+              
                 </div>
             </div>
 
-
-
-
-         
- 
-         {/**PRECIO DEL PESO NETO */}
+                 {/**PRECIO DEL PESO NETO */}
          <div className="bg-neutral-50 p-2 rounded-xl">
                 <p className='text-center text-gray-900 font-medium'> 
                   Precio Limpio
                   </p>
                 <div className='py-1 text-center text-neutral-900 font-bold'>
-                  {row.priceKgSinMerma ?? '0.00'} <span className="text-red-600">€</span> x {ing.unitGross === 'l' ? 'L' : 'kg'}
+                    {row.precioRealDespuesDeMerma?? '0.00'}
                   </div>
           </div>
 
 
+
+
+
+
+              {/*row.priceBrutoFaltante?? '0.000'} <span className="text-red-600">€</span> x {ing.unitGross === 'l' ? 'L' : 'kg'*/}
+             <div className="bg-neutral-50 p-2 rounded-xl">
+                <p className="text-gray-900 font-medium text-center">Precio x Kg Neto</p>
+                <div className='text-center py-1 text-neutral-900 font-bold'>
+                    {row.precioPorKiloNeto?? '0.000'} 
+                  <span className="text-red-600"> € </span> 
+                </div>
+              </div>
+
+
           <div className="bg-neutral-50 p-2 rounded-xl">
             <p className="text-center text-red-500 font-medium">Pérdida Merma:</p>
-            <p className="text-center font-bold text-red-600 py-1">-{row.dineroPerdidoPorMerma ?? '0.00'} €</p>
+            <p className="text-center font-bold text-red-600 py-1">{row.dineroPerdidoPorMerma ?? '0.00'} €</p>
           </div>
-
 
 
           <div className="bg-indigo-50 p-2 rounded-xl">
@@ -1710,12 +1766,15 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
             <p className="font-black text-indigo-700 mt-0.5 text-sm">{row.nuevoCostePorRacion ?? '0.00'} €</p>
           </div>
 
+
+
+
+
+
+
           {/* Faltantes */}
           <div className="col-span-2 bg-amber-50/60 p-2.5 rounded-xl border border-amber-100 flex flex-col justify-center space-y-1">
            
-           
-
-         
               {/**FANTANTE SIN MERMA */}
              <div className="flex justify-between items-center">
                 <span className="text-neutral-600 font-medium">Faltante Neto:</span>
@@ -1765,8 +1824,8 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
            <div className="flex justify-between items-center">
                  <span className="text-neutral-600 font-medium">Total Bruto a Comprar:</span>
                  <span className="text-neutral-900 font-bold">
+              
                   {formatCleanWeight(row.totalBrutoNecesario, ing.unitGross)}
-                 {/*row.totalBrutoNecesario ?? '0.000'} {ing.unitGross === 'l' ? 'L' : 'kg'*/}
               </span>
                   </div>
 
