@@ -45,18 +45,6 @@ const solutions = [
     icon: MdArticle,
   },
   {
-    name: 'Cálculo del IRPF',
-    description: 'Herramienta útil para calcular el irpf.',
-    href: '/calcula-irpf',
-    icon: MdArticle,
-  },
-  {
-    name: 'Tarifa-Luz',
-    description: 'Calcula el precio de tu tarifa de Luz.',
-    href: '/tarifa-luz',
-    icon: MdArticle,
-  },
-  {
     name: 'MyProjects',
     description: 'Lista de repositorios en Github.',
     href: '/myproject',

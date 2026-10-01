@@ -11,18 +11,16 @@ class StaticPagesSitemap(Sitemap):
     def items(self):
         return [
             '/', 
-            '/myproject/', 
-            '/blog/', 
-            '/contacto/',
-            '/politica-cookies/',
-            
+            '/myproject', 
+            '/blog', 
+            '/politica-cookies',
             '/escandallo',
             '/estandarizar-recetas',
-            '/calcula-irpf',
+          
         ]
 
     def location(self, item):
         return item
 
-    def lastmod(self, item):
-        return timezone.now()
+    #def lastmod(self, item):
+        #return timezone.now()

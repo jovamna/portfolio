@@ -20,8 +20,7 @@ import "./styles/index.css";
 import {useEffect, useState, lazy, Suspense } from 'react';
 import Logo from './containers/inicio/Logo';
 import Escandallo from './features/escandallo/Escandallo';
-import Luz from './features/luz/Luz';
-import Irpf from './features/irpf/Irpf';
+
 import EstandarizarRecetas from './features/estandarizar-recetas/EstandarizarRecetas';
 
 
@@ -111,16 +110,13 @@ function App() {
         <Route path="/myproject/project/:slug" element={<ProjectPost />} />
         <Route path="/blog" element={<Blog />} />
     
-        <Route path="/calcula-irpf" element={<Irpf/>} />
         <Route path="/escandallo" element={<Escandallo/>} />
       
-
          {/* 1. La ruta antigua que redirige a la nueva */}
         <Route path="/hosteleria-ficha-tecnica" element={<Navigate to="/estandarizar-recetas" replace />} />
 
         <Route path="/estandarizar-recetas" element={<EstandarizarRecetas/>} />
 
-        <Route path="/tarifa-luz" element={<Luz/>} />
         <Route path="/search/:term" element={<Search />} />
    
         <Route path="/blog/post/:postSlug" element={<PostDetail/>} />

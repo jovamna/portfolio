@@ -961,7 +961,7 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
 
                    {/**TITULO PRINCIPAL */}
                 <div className='lg:max-w-4xl md:w-[90%] w-[96%] sm:max-w-4xl 
-                lg:mb-[4px] md:mb-[2px] mb-[8px]'>
+                lg:mb-[10px] md:mb-[8px] mb-[8px] 2xl:mb-[12px]'>
                     
                       <div className='flex w-80 lg:w-[96%] md:w-[95%] w-[99%] px-0 py-0 mx-auto'>
                             <FcCalculator className='lg:block block lg:text-2xl text-lg shrink-0 lg:mt-2 mt-[4px]'/>
@@ -1867,7 +1867,7 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
 
         {/* FOOTER: COSTE TOTAL FINAL */}
         <div className="mt-3 bg-neutral-900 text-white rounded-xl p-3 flex justify-between items-center">
-          <span className="text-xs uppercase font-bold tracking-wider text-neutral-400">Coste Total Final:</span>
+          <span className="text-xs uppercase font-bold tracking-wider text-neutral-400">Coste Total Ingrediente:</span>
           <span className="text-base font-black text-amber-400">{row.costeRealTotal ?? '0.00'} €</span>
         </div>
 

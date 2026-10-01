@@ -198,7 +198,7 @@ def build_base_context(request):
     return {
         'seo_title': "Jovamna Medina | Full Stack Developer & AI",
         'seo_description': "Portfolio profesional de Jovamna Medina. Developer en Django, React, Python y soluciones con Inteligencia Artificial.",
-        'seo_keywords': "django developer, react developer, full stack python, inteligencia artificial, ai specialist, portafolio developer",
+        'seo_keywords': "django developer, react developer, full stack python, inteligencia artificial, ai, portafolio developer",
         'seo_robots': 'index,follow',
         'canonical_url': build_absolute_url(request.path),
         'og_type': 'website',

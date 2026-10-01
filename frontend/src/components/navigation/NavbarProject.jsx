@@ -54,18 +54,6 @@ const solutions = [
     icon: MdArticle,
   },
   {
-    name: 'Cálculo del IRPF',
-    description: 'Herramienta útil para calcular el irpf.',
-    href: '/calcula-irpf',
-    icon: MdArticle,
-  },
-  {
-    name: 'Tarifa-Luz',
-    description: 'Calcula el precio de tu tarifa de Luz.',
-    href: '/tarifa-luz',
-    icon: MdArticle,
-  },
-  {
     name: 'MyProjects',
     description: 'Lista de repositorios en Github.',
     href: '/myproject',
@@ -445,7 +433,7 @@ const guestLinks = (
                   </span>
                   </NavLink>
 
-                  <NavLink to= "/calcula-irpf" className="nav-item  
+                 {/* <NavLink to= "/calcula-irpf" className="nav-item  
                    text-black font-semibold hover:bg-neutral-100 
                    hover:text-violet-700 border-b-2 border-transparent 
                    hover:border-violet-700 inline-block px-3 h-[2rem]
@@ -463,7 +451,7 @@ const guestLinks = (
                   <span className="ml-6">
                     Cal.Luz
                   </span>
-                  </NavLink>
+                  </NavLink>*/}
                   
                  </div>
                  
