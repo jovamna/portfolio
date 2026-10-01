@@ -190,13 +190,13 @@ export default function Escandallo() {
     const metaTags = [
       { property: 'og:title', content: 'Calculadora de Escandallo de Cocina y Bar Gratis' },
       { property: 'og:description', content: 'Herramienta online gratuita para calcular el coste real de tus platos y cócteles. Controla mermas y asegura tu beneficio.' },
-      { property: 'og:image', content: 'https://jovamnamedina.com/custom-static/images/googleweb.jpg' },
+      { property: 'og:image', content: 'https://jovamnamedina.com/custom-static/images/escandallo.webp' },
       { property: 'og:type', content: 'website' },
       { property: 'og:url', content: canonicalUrl },
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:title', content: 'Calculadora de Escandallos Online Gratis' },
       { name: 'twitter:description', content: 'Calcula el coste de tus recetas de cocina y coctelería gratis. Controla mermas y costes.' },
-      { name: 'twitter:image', content: 'https://jovamnamedina.com/custom-static/images/facebookweb.jpg' },
+      { name: 'twitter:image', content: 'https://jovamnamedina.com/custom-static/images/escandallo.webp' },
       { name: 'twitter:label1', content: 'Categoría' },
       { name: 'twitter:data1', content: 'Software de Gestión Hostelera / Gastronomía y Bar' }
     ];
@@ -957,48 +957,69 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
 
             {/* HEADER */}
             <div className="flex flex-col w-full mb-2 items-center">
- 
+
+
+                   {/**TITULO PRINCIPAL */}
+                <div className='lg:max-w-4xl md:w-[90%] w-[96%] sm:max-w-4xl 
+                lg:mb-[4px] md:mb-[2px] mb-[8px]'>
+                    
+                      <div className='flex w-80 lg:w-[96%] md:w-[95%] w-[99%] px-0 py-0 mx-auto'>
+                            <FcCalculator className='lg:block block lg:text-2xl text-lg shrink-0 lg:mt-2 mt-[4px]'/>
+                            <h1 className=" lg:text-4xl text-xl md:text-2xl font-black 
+                             text-neutral-900 leading-6 lg:leading-10 text-center px-0">
+                             Calculadora de Escandallo Online Gratis para Hostelería
+                            </h1>
+                     </div>
          
-              <h1 className=" flex lg:flex-row 2xl:flex-row lg:text-4xl text-xl 
-              md:text-2xl font-black text-neutral-900 mb-1 leading-6 text-center">
-              <FcCalculator className='hidden lg:block'/> Escandallo Profesional Gratuito
-              </h1>
-       
-            
+                </div>
+                {/**FIN TITULO PRINCIPAL */}
+
+
+
+
+
 
                <h2 className="text-neutral-700 lg:text-lg text-base font-medium  text-center">
                Controla mermas, calcula el coste real y asegura la rentabilidad de tus platos, bebidas y cócteles de forma profesional.
                </h2>
 
                 {/* 👇 NUEVO BLOQUE SEO AQUÍ */}
-               <h3 className="text-neutral-800 lg:text-xl text-sm font-bold text-center mt-4 leading-5">
+               <h3 className="text-neutral-900 lg:text-xl text-sm font-bold text-center mt-4 leading-5">
                 Simulador y Software de Escandallos Online para Cocina y Barra
                </h3>
                {/* Instrucción Estilizada... (tu código actual sigue igual) */}
 
-              <p className="text-neutral-600 text-sm lg:text-base max-w-3xl mx-auto text-center mt-2">
+              {/*<p className="text-neutral-600 text-sm lg:text-base max-w-3xl mx-auto text-center mt-2">
                Este simulador de escandallos gratis es el programa ideal para cocina,
-               hostelería, restaurantes, bares y catering. Un software de escandallos 
+               hostelería, restaurantes, catering y bares. Un software de escandallos 
                 pensado para calcular el coste real de tus productos, platos de cocina 
                  y cócteles, para un menú de catering para eventos o coste por copa en la barra 
                  de tu bar controlando mermas y márgenes sin complicaciones. 
          
+               </p>*/}
+
+
+                   <p className="text-neutral-700 text-sm lg:text-base mx-auto text-center mt-2">
+                Este simulador de escandallos gratis permite calcular el coste real de tus productos,
+                platos y cócteles y realizar un <strong>escandallo de costes</strong> para cocina, restaurantes,
+                catering y bares, controlando mermas y márgenes sin complicaciones.
                </p>
+
 
 
 
          {/* Instrucción Estilizada en una pequeña tarjetita de ayuda */}
          <div className="flex flex-col items-center bg-neutral-50 shadow-xl/20 border border-neutral-200 
-          lg:mt-[4px] mt-[5px] 2xl:mt-[8px] rounded-xl text-sm text-neutral-600 shadow-sm py-2 px-2">
-          <p className="flex items-center gap-2 font-bold text-neutral-800 mb-1">
+          lg:mt-[4px] mt-[5px] 2xl:mt-[8px] rounded-xl   shadow-sm py-2 px-2">
+          <p className="flex items-center gap-2 font-bold text-neutral-800 text-sm mb-1">
          💡 ¿Cómo empezar?
          </p>
-         <p className='lg:text-base text-sm text-center'>
+         <p className='lg:text-base text-sm text-center text-neutral-700'>
           El escandallo carga una receta de ejemplo para que veas cómo funciona. Puedes eliminarla con el botón "Limpiar todo" y añadir los ingredientes de tu receta. ¡Los datos se guardan automáticamente!
         </p>
       
 
-         <p className='lg:text-base text-sm text-center 2xl:mt-[2px] px-2'>
+         <p className='lg:text-base text-sm text-center 2xl:mt-[2px] px-2 text-neutral-700'>
           Selecciona la unidad<strong> (Kg, g o L)</strong> y escribe la cantidad correspondiente. Por ejemplo: <strong>500</strong> si 
           eliges <strong>gramos </strong>, ó <strong>0,5 Kg</strong>; si eliges <strong>kilos</strong>
          </p>
@@ -1458,7 +1479,7 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
 
 
                  <td className="p-2 font-black">
-                <p className='text-center lg:text-sm font-bold'>Coste Total Final</p>
+                <p className='text-center lg:text-sm font-bold'>Cost Tot. Ingred.</p>
                 <div className='text-center py-2 text-neutral-900 font-bold'>{row.costeRealTotal ?? '0.00'} €</div>
               </td>
 

@@ -349,9 +349,6 @@ def spa_entrypoint(request):
         except Post.DoesNotExist:
             context['seo_robots'] = 'noindex,follow'
             
-            
-            
-    # ====================== BLOG CATEGORY / SUBCATEGORY ======================
     # ====================== BLOG CATEGORY / SUBCATEGORY ======================
     if parts[0] == 'blog' and len(parts) in (2, 3) and parts[1] != 'post':
         
@@ -422,7 +419,7 @@ def spa_entrypoint(request):
         
         breadcrumbs = [
             {'name': 'Inicio', 'url': build_absolute_url()},
-            {'name': 'Calculadora de Escandallo Online Gratis', 'url': url_canonica}
+            {'name': 'Calculadora de Escandallo Online Gratis para Hostelería', 'url': url_canonica}
         ]
 
         escandallo_json_ld = {
@@ -451,13 +448,13 @@ def spa_entrypoint(request):
             'og_type': 'website',
             'og_title': "Calculadora de Escandallo de Cocina y Bar Gratis",
             'og_description': "Herramienta online gratuita para calcular el coste real de tus platos y cócteles. Controla mermas y asegura tu beneficio.",
-            'og_image': "https://jovamnamedina.com/custom-static/images/googleweb.jpg",
+            'og_image': "https://jovamnamedina.com/custom-static/images/escandallo.webp",
             'og_url': url_canonica,
             'twitter_card': 'summary_large_image',
             'twitter_title': "Calculadora de Escandallos Online Gratis",
             'twitter_description': "Calcula el coste de tus recetas de cocina y coctelería gratis. Controla mermas y costes.",
-            'twitter_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
-            'seo_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
+            'twitter_image': "https://jovamnamedina.com/custom-static/images/escandallo.webp",
+            'seo_image': "https://jovamnamedina.com/custom-static/images/escandallo.webp",
             'is_home_page': False,
             'breadcrumbs': breadcrumbs,
             'jsonld_primary': json.dumps(escandallo_json_ld, ensure_ascii=False),
