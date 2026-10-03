@@ -6,6 +6,9 @@ import {
 import FullWidthLayout from "../../hocs/FullWidthLayout";
 import { generarPDF } from '../../utils/hosteleria/estandarizar-recetas/pdfGenerator';
 
+import ShareButton  from '../../components/ShareButton'
+
+
 import PlatoHeader        from './components/PlatoHeader';
 import IngredientesTable  from './components/IngredientesTable';
 import AlergenosSelector  from './components/AlergenosSelector';
@@ -54,7 +57,7 @@ function useSEO() {
     setMeta('property', 'og:title', 'Gestor y Escalador de Recetas Estandarizadas Gratis Online');
     setMeta('property', 'og:type',        'website');
     setMeta('property', 'og:url',         canonicalUrl);
-    setMeta('property', 'og:image',       'https://jovamnamedina.com/custom-static/images/googleweb.jpg');
+    setMeta('property', 'og:image',       'https://jovamnamedina.com/custom-static/images/estandarizacion.webp');
 
      setMeta('property', 'og:description', 'Herramienta online para crear, organizar, escalar y gestionar recetas estandarizadas de cocina, pasteleria y coctelería. Gratis, sin registro y con descarga en PDF. Exporta a PDF y guarda tus recetas.'
     );
@@ -64,7 +67,7 @@ function useSEO() {
     setMeta('name', 'twitter:card',        'summary_large_image');
     setMeta('name', 'twitter:title',       'Estandarizar y Escalar Recetas Gratis Sin Registro');
     setMeta('name', 'twitter:description', 'Herramienta online para crear, organizar, escalar y gestionar recetas estandarizadas de cocina, pasteleria y coctelería. Gratis, sin registro y con descarga en PDF. Exporta a PDF y guarda tus recetas.');
-    setMeta('name', 'twitter:image',       'https://jovamnamedina.com/custom-static/images/facebookweb.jpg');
+    setMeta('name', 'twitter:image',       'https://jovamnamedina.com/custom-static/images/estandarizacion.webp');
 
     // 5. Canonical Tag
     let canonicalTag = document.querySelector('link[rel="canonical"]');
@@ -116,7 +119,7 @@ function useSEO() {
       mainEntity: [
         {
           '@type': 'Question',
-          name: '¿Necesito registrarme para estandariar mis recetas?',
+          name: '¿Necesito registrarme para estandarizar mis recetas?',
           acceptedAnswer: { '@type': 'Answer', text: 'No. Puedes crear y descargar tus recetas estandarizadas sin crear ninguna cuenta ni dar tu email.' }
         },
         {
@@ -429,7 +432,7 @@ const cargarCopia = useCallback((event) => {
       {/* Header de la página */}
     
 
-   <header className="w-full lg:w-[90.8%] 2xl:w-[90%] mx-auto text-center mb-6">
+   <header className="w-full lg:w-[90.8%] 2xl:w-[90%] mx-auto text-center lg:mb-2">
   {/* H1 Principal con Palabras Clave de Cocina y Coctelería */}
   <h1 className="text-xl md:text-2xl lg:text-4xl font-black text-neutral-900 mb-3 text-center leading-tight">
     Estandariza tus Recetas de Cocina, Pastelería y Coctelería
@@ -445,17 +448,28 @@ const cargarCopia = useCallback((event) => {
   <div className="flex flex-col w-full lg:w-[100%] 2xl:w-[100%] mx-auto 
   mb-4 px-5 py-3 bg-amber-50 border border-amber-200/80 rounded-2xl shadow-sm">
 
-    <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-neutral-700 text-sm text-left  mx-auto">
+    <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-neutral-700 text-sm text-left mx-auto">
        <li>✅ <strong> Estandarizador + Escalador:</strong>diseña tu receta base y multiplica o divide las raciones al instante, en la misma pantalla.</li>
       <li>✅ <strong>Sin crear cuenta:</strong> Empieza a usarla ya, sin correos ni contraseñas.</li>
       <li>✅ <strong>Sin instalar nada:</strong> Funciona directo en el navegador de tu móvil o tablet de cocina.</li>
       <li>✅ <strong>Consistencia total:</strong> Asegura el mismo sabor, porciones y alérgenos en cada plato o copa.</li>
       <li>🔐 <strong>Datos privados:</strong> Todo se procesa localmente en tu navegador de forma 100% segura.</li>
-      <li className="md:col-span-2 text-center mt-1">📄 <strong>Descarga en PDF:</strong> Obtén tu receta estandarizada lista para colgar en la pared o imprimir.</li>
+      {/**md:col-span-2 text-center */}
+      <li className=" ">📄 <strong>Descarga en PDF:</strong> Obtén tu receta estandarizada lista para colgar en la pared o imprimir.</li>
+
+        <li className='md:col-span-2 mx-auto'>
+           <ShareButton
+         title="Calculadora de Escandallos para Hostelería"
+         text="He encontrado una calculadora gratuita para analizar costes y márgenes en hostelería."
+          url="https://jovamnamedina.com/estandarizar-recetas"
+             />
+      </li>
+   
+
+
     </ul>
   </div>
       </header>
-
 
 
 

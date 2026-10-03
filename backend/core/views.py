@@ -13,7 +13,7 @@ from apps.category.models import Category
 # core/views.py
 from django.http import HttpResponse
 from django.utils import timezone
-
+from django.http import Http404
 
 from django.views.decorators.cache import cache_page
 
@@ -491,20 +491,20 @@ def spa_entrypoint(request):
         context.update({
             'seo_title': "Estandarizar y Escalar Recetas Online Gratis — Sin Registro (Descarga PDF)",
             # Descripción completada correctamente:
-            'seo_description': "Crea, organiza y escala tus recetas de cocina, pastelería y bar al instante. Herramienta online 100% gratuita, sin registros y con descarga en PDF.",
+            'seo_description': "Estandariza recetas de cocina, pastelería y coctelería online. Organiza ingredientes, cantidades, elaboración y alérgenos. Guarda tus recetas, descárgalas en PDF y trabaja sin registro.",
             # Keywords corregidas sin erratas:
             'seo_keywords': "estandarizar recetas online, escalar recetas cocina, formato receta estandarizada, plantilla recetas pasteleria, gestionar recetas gratis, pdf recetas",
             'canonical_url': url_canonica,
             'og_type': 'website',
             'og_title': "Gestor y Escalador de Recetas Estandarizadas Gratis Online",
             'og_description': "Herramienta online para crear, organizar, escalar y gestionar recetas estandarizadas de cocina, pasteleria y coctelería. Gratis, sin registro y con descarga en PDF. Exporta a PDF y guarda tus recetas.",
-            'og_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
+            'og_image': "https://jovamnamedina.com/custom-static/images/estandarizacion.webp",
             'og_url': url_canonica,
             'twitter_card': 'summary_large_image',
             'twitter_title': "Estandarizar y Escalar Recetas Gratis Sin Registro",
             'twitter_description': "Herramienta online para crear, organizar, escalar y gestionar recetas estandarizadas de cocina, pasteleria y coctelería. Gratis, sin registro y con descarga en PDF. Exporta a PDF y guarda tus recetas.",
-            'twitter_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
-            'seo_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
+            'twitter_image': "https://jovamnamedina.com/custom-static/images/estandarizacion.webp",
+            'seo_image': "https://jovamnamedina.com/custom-static/images/estandarizacion.webp",
             'is_home_page': False,
             'breadcrumbs': breadcrumbs,
             'jsonld_primary': json.dumps(estandarizar_json_ld, ensure_ascii=False),
@@ -512,55 +512,9 @@ def spa_entrypoint(request):
         })
         return render(request, 'index.html', context)
     
-    # ====================== APP 3: IRPF ======================
-    if len(parts) >= 1 and parts[0] == 'calcula-irpf':
-        url_canonica = build_absolute_url("calcula-irpf")
-        breadcrumbs = [
-            {'name': 'Inicio', 'url': build_absolute_url()},
-            {'name': 'Calculadora IRPF Online Gratuita sin Registro', 'url': url_canonica}
-        ]
-        
-        irpf_json_ld = {
-            "@context": "https://schema.org",
-            "@type": "WebApplication",
-            "name": "Calculadora IRPF Online Gratuita sin Registro",
-            "description": "Calcula el tipo de retención del IRPF, sueldo neto mensual y retenciones según tu salario bruto y situación familiar con esta calculadora online gratuita.",
-            "url": url_canonica,
-            "applicationCategory": "FinanceApplication",
-            "operatingSystem": "All",
-            "browserRequirements": "Requires JavaScript. Requires HTML5.",
-            "author": organization_json_ld(),
-            "offers": {
-                "@type": "Offer",
-                "price": "0",
-                "priceCurrency": "EUR"
-            }
-        }
-
-        context.update({
-            'seo_title': "Simulador de Retención IRPF en Nómina 2026 — Online Gratis, Sin Descarga",
-            'seo_description': "Calcula tu retención de IRPF y tu sueldo neto mensual de forma rápida y gratuita. Herramienta online para trabajadores y autónomos.",
-            'seo_keywords': "calculadora irpf, calcular sueldo neto, retenciones irpf, calcular nomina, irpf autonomos, retencion irpf gratis",
-            'canonical_url': url_canonica,
-            'og_type': 'website',
-            'og_title': "Simulador de Retención IRPF en Nómina 2026 — Online, Sin Descarga",
-            'og_description': "Descubre cuánto cobrarás en tu nómina. Calcula tu retención de IRPF y sueldo neto en segundos.",
-            'og_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
-            'og_url': url_canonica,
-            'twitter_card': 'summary_large_image',
-            'twitter_title': "Simulador de Retención IRPF en Nómina 2026 — Online, Sin Descarga",
-            'twitter_description': "Calcula tu sueldo neto y retención de IRPF de forma rápida y sencilla.",
-            'twitter_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
-            'seo_image': "https://jovamnamedina.com/custom-static/images/facebookweb.jpg",
-            'is_home_page': False,
-            'breadcrumbs': breadcrumbs,
-            'jsonld_primary': json.dumps(irpf_json_ld, ensure_ascii=False),
-            'jsonld_breadcrumbs': json.dumps(breadcrumb_json_ld(breadcrumbs), ensure_ascii=False),
-        })
-        return render(request, 'index.html', context)
+    # ====================== ================================
     # ====================== FIN APPS  ======================
-
-
+    
     # ====================== FALLBACK ======================
     if 'canonical_url' not in context:
         url_canonica = build_absolute_url(request.path)

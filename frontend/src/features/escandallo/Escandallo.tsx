@@ -9,7 +9,7 @@ import { useState, useEffect, useMemo, useCallback } from 'react';
 import { exportarPDF } from './components/exportarPdf';
 import ConsejosMermas  from './components/consejosMermas';
 
-
+import ShareButton  from '../../components/ShareButton'
 
 
 
@@ -1008,6 +1008,8 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
 
 
 
+
+
          {/* Instrucción Estilizada en una pequeña tarjetita de ayuda */}
          <div className="flex flex-col items-center bg-neutral-50 shadow-xl/20 border border-neutral-200 
           lg:mt-[4px] mt-[5px] 2xl:mt-[8px] rounded-xl   shadow-sm py-2 px-2">
@@ -1017,7 +1019,11 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
          <p className='lg:text-base text-sm text-center text-neutral-700'>
           El escandallo carga una receta de ejemplo para que veas cómo funciona. Puedes eliminarla con el botón "Limpiar todo" y añadir los ingredientes de tu receta. ¡Los datos se guardan automáticamente!
         </p>
-      
+      <ShareButton
+title="Calculadora de Escandallos para Hostelería"
+text="He encontrado una calculadora gratuita para analizar costes y márgenes en hostelería."
+url="https://jovamnamedina.com/escandallo"
+/>
 
          <p className='lg:text-base text-sm text-center 2xl:mt-[2px] px-2 text-neutral-700'>
           Selecciona la unidad<strong> (Kg, g o L)</strong> y escribe la cantidad correspondiente. Por ejemplo: <strong>500</strong> si 

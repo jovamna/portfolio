@@ -21,7 +21,7 @@ function MyProject({
 
     
           /**SEO */
-          useEffect(() => {
+    useEffect(() => {
       // 1. Cambiamos el título de la pestaña
       document.title = "Mis Projectos en GItHub| Jovamna Medina - Full Stack Developer";
     

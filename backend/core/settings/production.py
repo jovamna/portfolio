@@ -1,6 +1,9 @@
 # Importa la configuración base
 from .base import *
-from .jwt import *
+
+from .jwt import  *
+from .base import env
+
 
 
 
@@ -12,14 +15,12 @@ DEBUG = False
 ALLOWED_HOSTS = ['localhost', 'jovamnamedina.com', 'www.jovamnamedina.com', '104.248.82.51']
 
 
-SECRET_KEY=os.environ.get('SECRET_KEY')
+SECRET_KEY =os.environ.get('SECRET_KEY')
 
 
 #seo NECESRAIO DEJARLO EN 1
 SITE_ID = 1
 # Application definition
-
-
 
 FRONTEND_URL = 'https://jovamnamedina.com'
 # Opcional: cache de sitemap

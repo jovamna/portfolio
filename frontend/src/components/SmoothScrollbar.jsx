@@ -12,3 +12,4 @@ export default function SmoothScrollbar () {
 
   return null; // No pinta nada en pantalla, trabaja en secreto en segundo plano
 }
+
