@@ -16,6 +16,7 @@ import PreparacionSteps   from './components/PreparacionSteps';
 import EmplatadoSection   from './components/EmplatadoSection';
 import RentabilidadPanel  from './components/RentabilidadPanel';
 import EscaladorReceta from './components/EscaladorReceta';
+import EtiquetasCocina from './components/EtiquetasCocina';
 
 
 
@@ -166,11 +167,6 @@ function useSEO() {
   }, []);
 }
 
-
-
-
-
-
 const STORAGE_KEY = 'estandarizar-receta-data';
 
 const loadFromStorage = (defaultValue) => {
@@ -286,10 +282,6 @@ useEffect(() => {
 
 
 
-
-
-
-
   // =========================
     // 🆕 BOTÓN "GUARDAR COPIA" (NUEVA FUNCIONALIDAD)
     // =========================
@@ -397,33 +389,6 @@ const cargarCopia = useCallback((event) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   //    <h1 className="text-base lg:text-3xl sm:text-4xl  font-extrabold text-black tracking-tight mb-2">
 
   return (
@@ -433,52 +398,79 @@ const cargarCopia = useCallback((event) => {
     
 
    <header className="w-full lg:w-[90.8%] 2xl:w-[90%] mx-auto text-center lg:mb-2">
-  {/* H1 Principal con Palabras Clave de Cocina y Coctelería */}
+
+
+
+
+
+
+
+    {/* ==========================================
+    1. BLOQUE DE TÍTULOS SEO (Jerarquía Limpia)
+   ========================================== */}
+{/** TITULO PRINCIPAL H1 */}
+<div className='lg:max-w-4xl md:w-[90%] w-[96%] sm:max-w-4xl lg:mb-[10px] md:mb-[8px] mb-[8px] 2xl:mb-[12px] mx-auto'>
+    <div className='flex w-80 lg:w-[96%] md:w-[95%] w-[99%] px-0 py-0 mx-auto justify-center items-center gap-1'>
+        {/* H1 Principal con Palabras Clave de Cocina y Coctelería */}
   <h1 className="text-xl md:text-2xl lg:text-4xl font-black text-neutral-900 mb-3 text-center leading-tight">
-    Estandariza tus Recetas de Cocina, Pastelería y Coctelería
+    Estandariza, Escala y Etiqueta tus Recetas de Cocina, Pastelería y Coctelería
   </h1>
+      
+        {/*<h1 className="lg:text-4xl text-xl md:text-2xl font-black text-neutral-900 leading-6 lg:leading-10 text-center px-0">
+          Estandariza tus Recetas y Crea Etiquetas para tus Productos
+        </h1>*/}
+    </div>
+</div>
+
+
+
 
   {/* Párrafo único, directo y optimizado para SEO */}
-  <p className="text-xs sm:text-base text-gray-700 max-w-4xl mx-auto leading-relaxed mb-2">
-  Herramienta online gratuita y sin registro para crear, escalar y gestionar recetas estandarizadas profesionales. 
-  Organiza ingredientes, alérgenos y métodos de elaboración, y descarga tu informe técnico en PDF al instante.
-  </p>
+
+  <h2 className="text-neutral-700 lg:text-lg text-base font-medium text-center max-w-4xl mx-auto mb-3">
+  Herramienta online gratuita y sin registro para crear, escalar y gestionar recetas profesionales. Organiza ingredientes, alérgenos y métodos de elaboración al instante.
+</h2>
+
+
+
+
+{/** PALABRAS CLAVE SECUNDARIAS H3 */}
+<h3 className="text-neutral-900 lg:text-xl text-sm font-bold text-center mt-4 mb-4 leading-5">
+  Software de Recetas Estandarizadas e Impresión de Etiquetas Sencillas de Cocina
+</h3>
 
   {/* BLOQUE DE ACLARACIÓN Y GARANTÍAS (Aporta Confianza y destaca frente al Excel) bg-amber-50*/}
-  <div className="flex flex-col w-full lg:w-[100%] 2xl:w-[100%] mx-auto 
-  mb-4 px-5 py-3 bg-amber-50 border border-amber-200/80 rounded-2xl shadow-sm">
 
+  <div className="flex flex-col w-full lg:w-[90.8%] 2xl:w-[90%] mx-auto mb-2 px-5 py-3 bg-amber-50 border border-amber-200/80 rounded-2xl shadow-sm">
     <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-neutral-700 text-sm text-left mx-auto">
-       <li>✅ <strong> Estandarizador + Escalador:</strong>diseña tu receta base y multiplica o divide las raciones al instante, en la misma pantalla.</li>
+      <li>✅ <strong>Estandarizador + Escalador:</strong> diseña tu receta base y multiplica o divide las raciones al instante.</li>
+      <li>🏷️ <strong>Etiquetas de productos:</strong> escribe el nombre, fecha o ingredientes y genera etiquetas sencillas listas para imprimir.</li>
       <li>✅ <strong>Sin crear cuenta:</strong> Empieza a usarla ya, sin correos ni contraseñas.</li>
       <li>✅ <strong>Sin instalar nada:</strong> Funciona directo en el navegador de tu móvil o tablet de cocina.</li>
-      <li>✅ <strong>Consistencia total:</strong> Asegura el mismo sabor, porciones y alérgenos en cada plato o copa.</li>
       <li>🔐 <strong>Datos privados:</strong> Todo se procesa localmente en tu navegador de forma 100% segura.</li>
-      {/**md:col-span-2 text-center */}
-      <li className=" ">📄 <strong>Descarga en PDF:</strong> Obtén tu receta estandarizada lista para colgar en la pared o imprimir.</li>
-
+      <li className="md:col-span-2 text-center mt-1">📄 <strong>Listo para imprimir:</strong> Obtén tu receta en PDF o imprime tus etiquetas de cocina directamente.</li>
         <li className='md:col-span-2 mx-auto'>
-           <ShareButton
-         title="Calculadora de Escandallos para Hostelería"
-         text="He encontrado una calculadora gratuita para analizar costes y márgenes en hostelería."
-          url="https://jovamnamedina.com/estandarizar-recetas"
-             />
+           {/** BOTÓN COMPARTIR */}
+<ShareButton
+  title="Estandarizador de Recetas y Etiquetas para Hostelería"
+  text="He encontrado una herramienta gratuita para estandarizar recetas y crear etiquetas de cocina."
+  url="https://jovamnamedina.com/estandarizar-recetas"
+/>
       </li>
    
-
-
     </ul>
-  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
       </header>
-
-
-
-
-
-
-
-
-
 
       {/* Contenedor del Formulario */}
       <div className="w-full lg:w-[92%] 2xl:w-[90%] mx-auto space-y-6">
@@ -591,44 +583,49 @@ const cargarCopia = useCallback((event) => {
        {/**equipo que se usa */}
 
 
-
-
-
-
-
       </div>
 
 
 
-
-
-
-   {/**PRUEBA PRUEBA PRUEBA  */}
+       {/**PRUEBA PRUEBA PRUEBA  */}
 
       <div className="w-full lg:w-[90.8%] 2xl:w-[90%] mx-auto space-y-6">
+           <EscaladorReceta
+          racionesOriginales={ficha.raciones ?? 1}
+           //racionesOriginales={ficha.raciones}
+           racionesNuevas={racionesEscaladas}
+           ingredientesEscalados={ingredientesEscalados}
+            onRacionesNuevasChange={setRacionesEscaladas}
+           onEscalar={handleEscalar}
+           />
+       </div>
+
+
+
+     <div className="w-full lg:w-[90.8%] 2xl:w-[90%] mx-auto space-y-6">
+           <EtiquetasCocina
+         
+           />
+       </div>
 
 
 
 
-  <EscaladorReceta
-  racionesOriginales={ficha.raciones ?? 1}
-  //racionesOriginales={ficha.raciones}
-  racionesNuevas={racionesEscaladas}
-  ingredientesEscalados={ingredientesEscalados}
-  onRacionesNuevasChange={setRacionesEscaladas}
-  onEscalar={handleEscalar}
-/>
-
-
-
-</div>
 
 
 
 
 
-      {/**FAQS */}
-<section className="max-w-4xl mx-auto mt-18 mb-6 px-4">
+
+
+
+
+
+
+
+
+       {/**FAQS */}
+       <section className="max-w-4xl mx-auto mt-18 mb-6 px-4">
   <h2 className="text-lg lg:text-2xl font-extrabold text-neutral-900 mb-4 text-center">
     Preguntas frecuentes sobre este estandarizador de recetas online
   </h2>

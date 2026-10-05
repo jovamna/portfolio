@@ -9,17 +9,17 @@ interface IngredienteCalculado {
   mermaKg: number | string;
   usedWeight: number | string;
   rendimiento: string;
-  totalBrutoNecesario: string;
-  faltanteBruto: string;
-  faltanteBrutoGr: string;
-  pesoNeto: string;
-  cantidadUsada: string;
+  totalBrutoNecesario: number;
+  faltanteBruto: number;
+  faltanteBrutoGr: number;
+  pesoNeto: number;
+  cantidadUsada: number;
   costeTotalCompra: string;
   dineroPerdidoPorMerma: string;
   priceBrutokilo: string;
   priceKgSinMerma: string;
-  faltanteSinMermaNetoKg: string;
-  faltanteSinMermaNetoGr: string;
+  faltanteSinMermaNetoKg: number;
+  faltanteSinMermaNetoGr: number;
   costeRealTotal: string;
   nuevoCostePorRacion: string;
 }

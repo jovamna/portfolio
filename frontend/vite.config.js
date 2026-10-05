@@ -38,3 +38,5 @@ export default defineConfig({
 
 //EJECUTAR ESTO AL COMPILAR EN PRODUCTION
 //NODE_OPTIONS="--max-old-space-size=2048" npm run build
+
+

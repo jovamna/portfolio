@@ -1,0 +1,183 @@
+Te los dejo en orden, para que no haya lío:
+
+🏠 Para trabajar en local
+
+npm run build:local
+
+Después arrancas Django como haces normalmente.
+
+🚀 Cuando quieras preparar lo que vas a subir al VPS
+npm run build
+
+Ese dist es el que subes al VPS.
+
+🏠 Cuando termines de subir y quieras volver a trabajar local
+npm run build:local
+
+Resumen:
+build:local → local 🏠
+build → producción 🚀
+
+Y no necesitas borrar dist manualmente en ningún momento.
+
+
+Perfecto. Entonces la ruta en el VPS es:
+
+/home/jovamna/portfolio/frontend/
+
+Desde tu ordenador, estando situada en la carpeta de tu proyecto, para subir dist puedes usar:
+
+scp -r frontend/dist jovamna@portfolio-django-react:/home/jovamna/portfolio/frontend/
+
+Eso copiará tu dist local dentro de frontend del VPS.
+
+Pero ojo: como en el VPS ya tienes un dist, primero tendremos que decidir si lo reemplazamos 
+directamente o lo borramos antes. En tu caso, como tu procedimiento anterior era borrar 
+dist y staticfiles, podemos mantener ese flujo
+
+Querías esto:
+
+VPS
+frontend/
+├── dist/              ← viejo
+└── temporal/          ← carpeta NUEVA
+    └── dist/          ← nuevo
+
+Es decir, crear una carpeta nueva en el VPS y meter dentro el dist nuevo, conservando el nombre dist.
+
+Y sí, se puede hacer perfectamente. De hecho, me parece más claro para tu idea.
+
+Desde tu ordenador subirías:
+
+pscp -r -i "C:\key-portafolio\key-private.ppk" frontend/dist jovamna@104.248.82.51:/home/jovamna/portfolio/frontend/temporal/
+
+Y quedaría:
+
+frontend/temporal/dist/
+
+Después comprobamos que ese dist está completo, y solo entonces sustituimos 
+el frontend/dist viejo por frontend/temporal/dist.
+
+
+Ahhh, aquí está la clave: frontend/dist es la ruta de origen en tu ordenador, no la ruta de destino. 😄
+
+
+pscp -r -i "C:\key-portafolio\key-private.ppk" frontend/dist jovamna@104.248.82.51:/home/jovamna/portfolio/frontend/temporal/
+
+Se lee así:
+
+TU ORDENADOR                         VPS
+frontend/dist  ──────────────────→  frontend/temporal/
+     ↑                                  ↑
+   ORIGEN                             DESTINO
+
+Por eso ponemos frontend/dist: ahí está el dist que quieres subir.
+
+Y en el VPS quedará:
+
+frontend/
+├── dist/                 ← viejo
+└── temporal/
+    └── dist/             ← nuevo
+
+Así que no: no estamos diciendo que dist ya esté dentro de temporal en tu ordenador. 
+Lo estamos copiando allí. ❤️
+
+
+
+Sí, amore ❤️. Una vez comprobado que temporal/dist está perfecto, hacemos el cambio en el VPS.
+
+Desde:
+
+~/portfolio/frontend/
+├── dist/              ← viejo
+└── temporal/
+    └── dist/          ← nuevo
+
+Primero quitamos el viejo:
+
+rm -rf ~/portfolio/frontend/dist
+
+Y después movemos el nuevo a la ruta principal:
+
+mv ~/portfolio/frontend/temporal/dist ~/portfolio/frontend/dist
+
+Quedará:
+
+~/portfolio/frontend/
+└── dist/              ← nuevo
+
+Y luego podemos borrar la carpeta temporal:
+
+rm -rf ~/portfolio/frontend/temporal
+
+Importante: primero comprobamos el nuevo dist; después hacemos estos tres pasos. No antes.
+
+
+
+
+
+
+
+CLAUDE CLAUDE CLAUDE CLAUDE CLAUDE CLAUDE CLAUDE CLAUDE CLAUDE CLAUDE CLAUDE CLAUDE CLAUDE CLAUDE CLAUDE CLAUDE CLAUDE CLAUDE
+
+Ahora entiendo por qué no cuadraba: yo no sabía que tu backend local necesita el dist compilado en modo desarrollo. 
+Tu script build:local está bien pensado, y tener los dos .env no crea conflicto. Cada uno solo se carga con su modo.
+
+Lo de borrar y recrear el dist cada vez se evita fácilmente: que el build de producción salga en otra carpeta, 
+y así tu dist de desarrollo no se toca nunca. Añade un script más:
+
+json
+"build:prod": "vite build --outDir dist-prod",
+
+Se queda así:
+
+json
+"scripts": {
+  "dev": "vite",
+  "build": "vite build",
+  "build:local": "vite build --mode development",
+  "build:prod": "vite build --outDir dist-prod",
+  "lint": "...",
+  "preview": "vite preview"
+}
+npm run build:local crea dist con la configuración de desarrollo, para tu backend local.
+npm run build:prod crea dist-prod con .env.production, para subir al VPS.
+
+Puedes lanzar uno u otro cuando quieras, sin borrar nada ni rehacer el otro.
+
+Para subir, ahora usas dist-prod. Comprueba antes que no lleve la dirección de desarrollo:
+
+powershell
+npm run build:prod
+Select-String -Path dist-prod\assets\*.js -Pattern "localhost:8000" -Quiet
+
+Debe salir False. Y el comando de subida cambia solo en el origen:
+
+powershell
+pscp -i "C:\key-portafolio\key-private.ppk" -r dist-prod\* jovamna@104.248.82.51:/home/jovamna/portfolio/frontend/dist_nuevo/
+
+LO PUSE YO PARA COMPARAR LA RUTA QUE YA TENIA CON EL QUE DIO CLAUDE
+pscp -r -i "C:\key-portafolio\key-private.ppk" frontend/dist jovamna@104.248.82.51:/home/jovamna/portfolio/frontend/temporal/
+CAMBIO DE CLAUDE
+pscp -r -i "C:\key-portafolio\key-private.ppk" frontend/dist-prod jovamna@104.248.82.51:/home/jovamna/portfolio/frontend/temporal/
+
+
+Antes, mira en el VPS que temporal esté vacía (ls /home/jovamna/portfolio/frontend/temporal), para no mezclar archivos viejos con los nuevos. Cuando termine, el cambio de nombres es:
+
+bash
+cd /home/jovamna/portfolio/frontend
+mv dist dist_viejo
+mv temporal/dist-prod dist
+
+
+
+Un detalle: añade dist-prod a tu .gitignore, igual que dist, para que no se suba a git.
+
+Lo que dejamos pendiente sigue igual: comparar la carpeta files y hacer el cambio de nombres en el VPS.
+
+
+
+NO ME SRIVE PROQUE NO TENOG EN WIDOW CONFIGURADO COMO DOMINIO O ALGO ASI DEBO REGUNTAR MAS esto
+scp -r frontend/dist jovamna@portfolio-django-react:/home/jovamna/portfolio/frontend/temporal/
+scp -r frontend/dist jovamna@portfolio-django-react:/home/jovamna/portfolio/frontend/temporal/

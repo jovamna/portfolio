@@ -1,0 +1,145 @@
+
+
+Sí, cielo. Vamos a hacerlo exactamente con base: '/pepita/', para que veas 
+qué tendría que cambiar y por qué.
+
+Partimos de: // vite.config.js base: '/pepita/'
+
+Entonces Vite generaría las referencias así:
+
+/pepita/assets/index-C7WRxgkD.js
+/pepita/assets/index-xxxxx.css
+
+Para que todo encaje, tienes que conseguir que Django/Nginx 
+respondan a /pepita/assets/....
+
+1. STATIC_URL
+
+Aquí pondrías:
+
+STATIC_URL = '/pepita/assets/'
+
+Porque ahora la URL pública de los estáticos es:
+
+https://tudominio.com/pepita/assets/...
+
+Y coincide con lo que Vite genera.
+
+2. STATICFILES_DIRS
+
+Esto no necesita cambiar:
+
+STATICFILES_DIRS = [
+    os.path.join(
+        os.path.dirname(BASE_DIR),
+        'frontend',
+        'dist',
+        'assets'
+    ),
+]
+
+Porque esto no es una URL.
+
+Esto es: "Django, físicamente, ve a buscar los archivos aquí."
+
+Es decir:
+
+frontend/dist/assets/
+
+Mientras que:
+
+STATIC_URL = '/pepita/assets/'
+
+es:
+
+"Navegador, pide esos archivos mediante esta URL."
+
+Son dos cosas diferentes.
+
+3. Tu vite_asset_tags
+
+Aquí sí tienes que tener cuidado, porque tu función actual hace esto:
+
+tags.append(
+    f'<script type="module" src="/{entry_data["file"]}"></script>'
+)
+
+Si el manifest dice:
+
+assets/index-C7WRxgkD.js
+
+tu función produce:
+
+/assets/index-C7WRxgkD.js
+
+Pero con base: '/pepita/' necesitas:
+
+/pepita/assets/index-C7WRxgkD.js
+
+Por tanto, deberías añadir el prefijo /pepita/.
+
+Por ejemplo:
+
+tags.append(
+    f'<script type="module" src="/pepita/{entry_data["file"]}"></script>'
+)
+
+Y lo mismo para CSS:
+
+tags.append(
+    f'<link rel="stylesheet" href="/pepita/{css_file}">'
+)
+
+Y para los modulepreload:
+
+tags.append(
+    f'<link rel="modulepreload" href="/pepita/{import_file}">'
+)
+Entonces tendrías esta correspondencia
+Vite
+base: '/pepita/'
+        ↓
+        ↓
+/pepita/assets/...
+        ↓
+Django
+STATIC_URL = '/pepita/assets/'
+        ↓
+        ↓
+Nginx/Django
+        ↓
+frontend/dist/assets/
+
+Y tu STATICFILES_DIRS sigue apuntando físicamente a:
+
+frontend/dist/assets/
+Pero hay una cosa MUY importante
+
+En tu caso yo no cambiaría todo esto simplemente para probar pepita.
+
+Porque tu aplicación actualmente está funcionando con:
+
+/
+assets/
+
+y has construido toda la relación alrededor de eso.
+
+Lo que quiero que entiendas es la lógica:
+
+base = '/pepita/'
+        ↓
+las URLs de Vite llevan /pepita/
+        ↓
+STATIC_URL debe corresponder
+        ↓
+vite_asset_tags debe generar /pepita/
+        ↓
+Nginx debe saber servir /pepita/assets/
+        ↓
+los archivos físicos siguen estando en dist/assets/
+
+STATICFILES_DIRS no cambia porque /pepita/ no es una carpeta física.
+
+Y esta última frase es probablemente la pieza que más te va a ayudar a partir de ahora:
+
+/pepita/ pertenece a la URL; frontend/dist/assets/ pertenece al disco. No tienen por qué llamarse igual.

@@ -13,6 +13,25 @@ import ShareButton  from '../../components/ShareButton'
 
 
 
+// Fuera del componente (opcional)
+//const setupSEO = () => {
+ // document.title = "Calculadora de Escandallos Online Gratis y Sin Registro";
+  // ... todo el código de meta tags, canonical, json-ld
+//};
+
+// Dentro del componente
+//useEffect(() => {
+ // setupSEO();
+//}, []);
+
+
+
+
+
+
+
+
+
 
 
 
@@ -22,20 +41,43 @@ import ShareButton  from '../../components/ShareButton'
 // 1. CONSTANTES (UN SOLO LUGAR)
 // ==========================================
 
-const STORAGE_KEY = 'escandallo-data';
+// ==========================================
+// TIPOS
+// ==========================================
+type Unit = 'kg' | 'g' | 'l' | 'ml';
 
-// 🆕 Tu ejemplo en un solo lugar (¡no más duplicación!)
-const EJEMPLO_INICIAL:{
+// ==========================================
+// 2. INTERFACES
+// ==========================================
+interface Ingrediente {
+  id: string;
+  name: string;
+  priceTotalCompra: number;   // siempre número (euros)
+  grossWeight: number;        // siempre en KG
+  mermaKg: number;            // siempre en KG
+  usedWeight: number;         // siempre en KG
+  unitGross: Unit;
+  unitMerma: Unit;
+  unitUsed: Unit;
+  density?: number;           // kg/L (si no existe → 1)
+}
+
+interface EscandalloData {
   namePlato: string;
   raciones: number;
   precioVenta: number;
   gastosFijosPorRacion: number;
   ingredients: Ingrediente[];
- }={
+}
+
+// ==========================================
+// EJEMPLO INICIAL
+// ==========================================
+const EJEMPLO_INICIAL: EscandalloData = {
   namePlato: "Salsa Boloñesa Casera 🍝",
   raciones: 10,
   precioVenta: 15,
-  gastosFijosPorRacion: 6, // 🆕 añadido, faltaba
+  gastosFijosPorRacion: 6,
   ingredients: [
     {
       id: "ejemplo-1",
@@ -47,7 +89,7 @@ const EJEMPLO_INICIAL:{
       unitGross: 'kg',
       unitMerma: 'kg',
       unitUsed: 'kg',
-      density: undefined             // no es líquido
+      density: undefined,
     },
     {
       id: "ejemplo-2",
@@ -59,69 +101,183 @@ const EJEMPLO_INICIAL:{
       unitGross: 'kg',
       unitMerma: 'kg',
       unitUsed: 'kg',
-      density: 1.05                 // por ejemplo, densidad del tomate
-    }
-  ]
-};
-
-// ==========================================
-// 2. INTERFACES
-// ==========================================
-
-//interface Ingrediente {
-//  id: string;
-  //name: string;
-//  priceTotalCompra: string;
-//  grossWeight: string;
-//  mermaKg: string;
-//  usedWeight: string;
-//}
-
-
-interface Ingrediente {
-  id: string;
-  name: string;
-  priceTotalCompra: number;  // precio total en euros (número)
-  grossWeight: number;       // siempre en KG (unidad base para peso)
-  mermaKg: number;           // siempre en KG
-  usedWeight: number;        // siempre en KG
-  // Unidades que el USUARIO selecciona para cada campo (para mostrar y parsear)
-  unitGross: 'kg' | 'g' | 'l'; 
-  unitMerma: 'kg' | 'g' | 'l';
-  unitUsed: 'kg' | 'g' | 'l';
-  // Opcional: si es líquido, la densidad en kg/l (para convertir litros a kg)
-  density?: number; // si no se provee, asumimos 1 (agua)
+      density: 1.05,
+    },
+  ],
 }
 
-const parseAndConvertToKg = (raw: string, selectedUnit: 'kg' | 'g' | 'l', density = 1): number => {
+
+
+//El usuario ha escrito una cantidad en la unidad que ha elegido. 
+// Yo necesito guardarla internamente en KG."
+//PARSEAR = interpretar lo que ha escrito el usuario.
+//CONVERTIR = llevarlo a tu unidad interna, que es KG.
+// ==========================================
+// CONVERSIÓN A KG (única fuente de verdad)
+// ==========================================
+/**
+ * Convierte cualquier cantidad + unidad a kilogramos.
+ * - kg  → se queda igual
+ * - g   → / 1000
+ * - l   → * density
+ * - ml  → / 1000 * density
+ */
+const parseAndConvertToKg = (
+  raw: string,
+  selectedUnit: Unit,
+  density = 1
+): number => {
   let clean = raw.trim().replace(',', '.').replace(/\s/g, '');
   if (clean === '') return 0;
 
-  // Detectar unidad en el string
-  let detectedUnit = selectedUnit;
-  if (clean.toLowerCase().includes('kg')) detectedUnit = 'kg';
-  else if (clean.toLowerCase().includes('g') && !clean.toLowerCase().includes('kg')) detectedUnit = 'g';
-  else if (clean.toLowerCase().includes('l')) detectedUnit = 'l';
+  // Detectar unidad escrita por el usuario (opcional)
+  let detectedUnit: Unit = selectedUnit;
+  const lower = clean.toLowerCase();
 
-  // Quitar letras
+  if (lower.includes('kg')) detectedUnit = 'kg';
+  else if (lower.includes('ml')) detectedUnit = 'ml';
+  else if (lower.includes('g') && !lower.includes('kg')) detectedUnit = 'g';
+  else if (lower.includes('l') && !lower.includes('ml')) detectedUnit = 'l';
+
+  // Extraer solo el número
   const numericStr = clean.replace(/[^0-9.]/g, '');
   const num = parseFloat(numericStr);
   if (isNaN(num) || num < 0) return 0;
 
-  //switch (selectedUnit) {
   switch (detectedUnit) {
-    case 'g': return num / 1000;
-    case 'l': return num * density;
-    default: return num;
+    case 'g':
+      return num / 1000;
+    case 'ml':
+      return (num / 1000) * density;
+    case 'l':
+      return num * density;
+    case 'kg':
+    default:
+      return num;
   }
 };
+
+
+
+ //================================================================================
+// 🆕 Formatea el número que se ve en el INPUT: sin ceros de más, con coma española
+//=========================================================================
+/**
+ * Muestra el valor interno (kg) en la unidad que el usuario tiene seleccionada.
+ * Se usa en el value de los inputs de peso.
+ */
+// ==========================================
+// FORMATEO PARA INPUTS (kg → unidad elegida)
+// ==========================================
+/**
+ * Muestra el valor interno (kg) en la unidad que el usuario tiene seleccionada.
+ * Sirve para el value del <input>.
+ */
+const formatEditableNumber = (valueInKg: number, unit: Unit): string => {
+  if (!Number.isFinite(valueInKg) || valueInKg === 0) return '';
+
+  let displayNum: number;
+
+  switch (unit) {
+    case 'g':
+    case 'ml':
+      displayNum = valueInKg * 1000;
+      break;
+    case 'l':
+      displayNum = valueInKg;
+      break;
+    case 'kg':
+    default:
+      displayNum = valueInKg;
+  }
+
+  const maxDecimals = unit === 'g' || unit === 'ml' ? 1 : 3;
+
+  return new Intl.NumberFormat('es-ES', {
+    maximumFractionDigits: maxDecimals,
+    useGrouping: false,
+  }).format(displayNum);
+};
+
+  //============================================================================
+  // Formateador EN RESULTADOS inteligente de pesos (elimina ceros innecesarios)
+  //=============================================================================
+//Formatear 0,0365 kg → 36,5 g  es decidir cómo enseñárselo al usuario
+// ==========================================
+// FORMATEO LIMPIO PARA RESULTADOS (solo visual)
+// ==========================================
+const formatCleanWeight = (
+  valueInKg: number | string | null | undefined,
+  unit: Unit = 'kg'
+): string => {
+  if (valueInKg === undefined || valueInKg === null || valueInKg === '') {
+    return `0 ${unit === 'l' ? 'L' : unit}`;
+  }
+
+  const num =
+    typeof valueInKg === 'string'
+      ? parseFloat(valueInKg.replace(',', '.'))
+      : valueInKg;
+
+  if (isNaN(num)) return `0 ${unit === 'l' ? 'L' : unit}`;
+
+  let displayNum: number;
+  switch (unit) {
+    case 'g':
+    case 'ml':
+      displayNum = num * 1000;
+      break;
+    case 'l':
+      displayNum = num;
+      break;
+    default:
+      displayNum = num;
+  }
+
+  const maxDecimals = unit === 'g' || unit === 'ml' ? 1 : 3;
+  const rounded = parseFloat(displayNum.toFixed(maxDecimals));
+
+  const formatted = new Intl.NumberFormat('es-ES', {
+    maximumFractionDigits: maxDecimals,
+    useGrouping: false,
+  }).format(rounded);
+
+  const displayUnit = unit === 'l' ? 'L' : unit;
+  return `${formatted} ${displayUnit}`;
+};
+
+
+ //================================================================================
+// 🆕 Formatea LOS PRECIOS
+//=========================================================================
+//formatPrice Es exclusivamente para decir: "Un precio quiero mostrarlo como dinero."
+//Por eso: 8 se convierte visualmente en:8,00 y: 8.5 en: 8,50 No modifica el precio real.
+const formatPrice = (value: number | string | null | undefined): string => {
+  if (value === undefined || value === null || value === '') return '0,00';
+  const num = typeof value === 'string' ? parseFloat(value.replace(',', '.')) : value;
+  if (!Number.isFinite(num)) return '0,00';
+  //if (isNaN(num)) return '0,00';
+  return new Intl.NumberFormat('es-ES', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+    // useGrouping en true por defecto: aquí SÍ queremos separador de miles,
+    // al contrario que en los pesos, porque un precio como "87.000" no se confunde
+    // con un peso de "87 kg" — el símbolo € y el contexto lo dejan claro.
+  }).format(num);
+};
+
+
+
+
+
 
 
 // ==========================================
 // 3. HELPERS DE LOCALSTORAGE (¡SIN DUPLICACIÓN!)
 // ==========================================
-
-// 🆕 Función para cargar datos del localStorage con manejo de errores
+const STORAGE_KEY = 'escandallo-data';
+// Función para cargar datos del localStorage con manejo de errores
+//guardar los datos del escandallo en el navegador y recuperarlos cuando vuelves.
 const loadFromStorage = <T,>(key: string, defaultValue: T): T => {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
@@ -139,20 +295,32 @@ const loadFromStorage = <T,>(key: string, defaultValue: T): T => {
   return defaultValue;
 };
 
-// 🆕 Función para guardar datos en localStorage con manejo de errores
-const saveToStorage = (data: {
-  ingredients: Ingrediente[];
-  namePlato: string;
-  raciones: number;
-  precioVenta: number;
-  gastosFijosPorRacion: number; // ← ALQUILERES
-}) => {
+const saveToStorage = (data: EscandalloData) => {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   } catch (error) {
     console.error('Error saving to localStorage:', error);
   }
 };
+
+// 🆕 Función para guardar datos en localStorage con manejo de errores
+//const saveToStorage = (data: {
+  //ingredients: Ingrediente[];
+ // namePlato: string;
+ // raciones: number;
+ // precioVenta: number;
+ // gastosFijosPorRacion: number; // ← ALQUILERES
+//}) => {
+  //try {
+ //   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+ // } catch (error) {
+ //   console.error('Error saving to localStorage:', error);
+ // }
+//};
+
+
+
+
 
 // ==========================================
 // 4. COMPONENTE PRINCIPAL
@@ -357,67 +525,9 @@ export default function Escandallo() {
 }, []);
 
 
-  //===================================================================
-  // Formateador EN RESULTADOS inteligente de pesos (elimina ceros innecesarios)
-  //======================================
-const formatCleanWeight = (value: number | string | null | undefined, unit: string = 'kg'): string => {
-  if (value === undefined || value === null || value === '') return `0 ${unit === 'l' ? 'L' : unit}`;
-
-  const num = typeof value === 'string' ? parseFloat(value.replace(',', '.')) : value;
-  if (isNaN(num)) return `0 ${unit === 'l' ? 'L' : unit}`;
-
-  // El valor SIEMPRE llega en kg: convertimos si la unidad de visualización es gramos
-  const displayNum = unit === 'g' ? num * 1000 : num;
-  const maxDecimals = unit === 'g' ? 2 : 3;
-  const rounded = parseFloat(displayNum.toFixed(maxDecimals));
-
-  const formatted = new Intl.NumberFormat('es-ES', {
-    maximumFractionDigits: maxDecimals,
-    useGrouping: false
-  }).format(rounded);
-
-  const displayUnit = unit === 'l' ? 'L' : unit;
-  return `${formatted} ${displayUnit}`;
-};
 
 
 
-
-
- //================================================================================
-// 🆕 Formatea el número que se ve en el INPUT: sin ceros de más, con coma española
-//=========================================================================
-//NO LO ESTOY USANDO PORQUE NO ME DEJA PONER 0.0365 CANDO ESTA EN GRAMOS
-const formatEditableNumber = (num: number, unit: 'kg' | 'g' | 'l'): string => {
-  const displayNum = unit === 'g' ? num * 1000 : num;
-  const maxDecimals = unit === 'g' ? 2 : 3; // gramos en enteros, kg/l hasta 3 decimales
-
-  // Redondeamos antes de formatear para evitar artefactos de coma flotante
-  // (ej: 0.29 * 1000 puede dar 289.99999999999994 en JS)
-  const rounded = parseFloat(displayNum.toFixed(maxDecimals));
-
-  return new Intl.NumberFormat('es-ES', {
-    maximumFractionDigits: maxDecimals,
-    useGrouping: false // evita el "1.234" confundiéndose con separador de miles
-  }).format(rounded);
-};
-
-
- //================================================================================
-// 🆕 Formatea LOS PRECIOS
-//=========================================================================
-const formatPrice = (value: number | string | null | undefined): string => {
-  if (value === undefined || value === null || value === '') return '0,00';
-  const num = typeof value === 'string' ? parseFloat(value.replace(',', '.')) : value;
-  if (isNaN(num)) return '0,00';
-  return new Intl.NumberFormat('es-ES', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-    // useGrouping en true por defecto: aquí SÍ queremos separador de miles,
-    // al contrario que en los pesos, porque un precio como "87.000" no se confunde
-    // con un peso de "87 kg" — el símbolo € y el contexto lo dejan claro.
-  }).format(num);
-};
 
 
   // ==========================================
@@ -430,67 +540,177 @@ const [inputValues, setInputValues] = useState<Record<string, string>>({});
 const getInputKey = (id: string, field: string) => `${id}-${field}`;
 
 // Handler onChange: actualiza el texto local
-const handleInputChange = useCallback((id: string, field: string, value: string) => {
+//const handleInputChange = useCallback((id: string, field: string, value: string) => {
   // Si es nombre o precio, actualiza directamente el estado global
-  if (field === 'name' || field === 'priceTotalCompra') {
+  //if (field === 'name' || field === 'priceTotalCompra') {
+  //  setIngredients(prev =>
+   //   prev.map(row =>
+   //     row.id === id ? { ...row, [field]: value } : row
+    //  )
+   // );
+    //return; // Salimos, no usamos inputValues
+  //}
+
+  // Para campos de peso, guardamos en inputValues (como ya tenías)
+  //setInputValues(prev => ({
+  //  ...prev,
+  //  [getInputKey(id, field)]: value
+ // }));
+//}, []);
+
+
+
+const handleInputChange = useCallback((id: string, field: string, value: string) => {
+
+  if (field === 'name') {
     setIngredients(prev =>
       prev.map(row =>
         row.id === id ? { ...row, [field]: value } : row
       )
     );
-    return; // Salimos, no usamos inputValues
+    return;
   }
 
-  // Para campos de peso, guardamos en inputValues (como ya tenías)
   setInputValues(prev => ({
     ...prev,
     [getInputKey(id, field)]: value
   }));
+
 }, []);
 
 
-// Handler onBlur: parsea y actualiza el estado global
+
 const handleInputBlur = useCallback((id: string, field: string) => {
+
   const key = getInputKey(id, field);
+
   const raw = inputValues[key] || '';
 
-  // Buscamos el ingrediente actual para saber su unidad seleccionada
+  // Buscamos el ingrediente actual
   const ingredient = ingredients.find(i => i.id === id);
+
   if (!ingredient) return;
 
-  let unit: 'kg' | 'g' | 'l';
+  // PRECIO
+  if (field === 'priceTotalCompra') {
+    const normalized = raw.replace(',', '.').trim();
+    const num = parseFloat(normalized);
+
+    setIngredients(prev =>
+      prev.map(row =>
+        row.id === id
+          ? { ...row, priceTotalCompra: Number.isFinite(num) ? num : 0 }
+          : row
+      )
+    );
+
+    setInputValues(prev => {
+      const next = { ...prev };
+      delete next[key];
+      return next;
+    });
+
+    return;
+  }
+
+  let unit: 'kg' | 'g' | 'l' | 'ml';
   let density = 1;
+
   // Determinamos qué unidad corresponde a este campo
   if (field === 'grossWeight') {
+
     unit = ingredient.unitGross;
     density = ingredient.density || 1;
+
   } else if (field === 'mermaKg') {
+
     unit = ingredient.unitMerma;
     density = ingredient.density || 1;
+
   } else if (field === 'usedWeight') {
+
     unit = ingredient.unitUsed;
     density = ingredient.density || 1;
+
   } else {
+
     return; // no es un campo de peso
   }
 
   // Parseamos el texto y lo convertimos a KG
   const valueInKg = parseAndConvertToKg(raw, unit, density);
 
-  // Actualizamos el ingrediente en el estado global
+  // Actualizamos el ingrediente
   setIngredients(prev =>
     prev.map(row =>
       row.id === id ? { ...row, [field]: valueInKg } : row
     )
   );
 
-  // Limpiamos el texto local (opcional)
+  // Limpiamos el texto local
   setInputValues(prev => {
     const newState = { ...prev };
     delete newState[key];
     return newState;
   });
+
 }, [ingredients, inputValues]);
+
+
+
+// Handler onBlur: parsea y actualiza el estado global
+//const handleInputBlur = useCallback((id: string, field: string) => {
+  //const key = getInputKey(id, field);
+  //const raw = inputValues[key] || '';
+
+  // Buscamos el ingrediente actual para saber su unidad seleccionada
+  //const ingredient = ingredients.find(i => i.id === id);
+  //if (!ingredient) return;
+
+  //let unit: 'kg' | 'g' | 'l';
+  //let density = 1;
+  // Determinamos qué unidad corresponde a este campo
+ // if (field === 'grossWeight') {
+ //   unit = ingredient.unitGross;
+ //   density = ingredient.density || 1;
+ // } else if (field === 'mermaKg') {
+ //   unit = ingredient.unitMerma;
+  //  density = ingredient.density || 1;
+ // } else if (field === 'usedWeight') {
+ //   unit = ingredient.unitUsed;
+  //  density = ingredient.density || 1;
+  //} else {
+  //  return; // no es un campo de peso
+  //}
+
+  // Parseamos el texto y lo convertimos a KG
+  //const valueInKg = parseAndConvertToKg(raw, unit, density);
+
+  // Actualizamos el ingrediente en el estado global
+//  setIngredients(prev =>
+  //  prev.map(row =>
+  //    row.id === id ? { ...row, [field]: valueInKg } : row
+  //  )
+ // );
+
+  // Limpiamos el texto local (opcional)
+  //setInputValues(prev => {
+  //  const newState = { ...prev };
+  //  delete newState[key];
+  //  return newState;
+  //});
+//}, [ingredients, inputValues]);
+
+
+
+
+
+
+
+
+
+
+
 
 // Además, necesitas una función para mostrar el valor en el input:
 // Cuando el input no tiene foco, mostramos el valor en KG formateado según la unidad.
@@ -507,7 +727,7 @@ const getDisplayValue = (ingredient: Ingrediente, field: string) => {
   // Asegurar que es número
   const num = typeof value === 'number' ? value : parseFloat(value as string) || 0;
 
-  let unit: 'kg' | 'g' | 'l';
+  let unit: 'kg' | 'g' | 'l' | 'ml';
   if (field === 'grossWeight') unit = ingredient.unitGross;
   else if (field === 'mermaKg') unit = ingredient.unitMerma;
   else if (field === 'usedWeight') unit = ingredient.unitUsed;
@@ -524,6 +744,7 @@ const getDisplayValue = (ingredient: Ingrediente, field: string) => {
 };
 
 // ==========================================
+//SOLO PARA EL PRECIO DE LA COMPRA
 // 2. FORMATEO AL PERDER EL FOCO (onBlur)
 // ==========================================
 const handleBlur = useCallback((id: string, field: string) => {
@@ -588,9 +809,9 @@ const handleBlur = useCallback((id: string, field: string) => {
 
 
 
-  // ===========================================================================================================================
+  // =================================================================================
   // 🆕 USEMEMO CÁLCULOS (TU LÓGICA DE NEGOCIO INTACTA) USEMEMO USEMEMO USEMEMO
-  // ============================================================================================================================
+  // =================================================================================
 
 const { calculatedRows, totales } = useMemo(() => {
   // ==========================================
@@ -649,13 +870,14 @@ const { calculatedRows, totales } = useMemo(() => {
     const mermaRealKg = Math.min(mermaKg, pesoBrutoKg);
     const pesoNetoKg = Math.max(0, pesoBrutoKg - mermaRealKg);
 
-    // 4. Coste total real de la compra de este ingrediente
-    //const costeTotalCompra = precioPorKilo * pesoBrutoKg;
-
-    // 5. Rendimiento
+    // 5. RENDIMIENTO NOS DICE EL PORCENTAJE DE LOS QUE ES UTILIZABLE DENTRO DEL PESO BRUTO
     const rendimiento = pesoBrutoKg > 0 ? pesoNetoKg / pesoBrutoKg : 0;
 
-    // 6. Cuánto bruto necesitas para obtener la cantidad neta que usa el chef
+    // 6. CALCULAR PESO BRUTO TOTAL NECESARIO para obtener la cantidad neta que usa el chef
+    //IMPORTANTE PARA SABER EL PESO BRUTO NECESARIO SE USA EL RENDIMIENTO
+    //PESO BRUTO NECESARIO ES LA CANTIDAD EXACTA QUE AL QUITARLE LA 
+    //MERMA QUEDARA EL PESO LIMPIO QUE NECESITA LA RECETA 
+    //CANTIDAD USADA ES CANTIDAD A USAR EN LA RECETA EN PESO LIMPIO
     const totalBrutoNecesarioKg = rendimiento > 0
       ? cantidadUsadaKg / rendimiento
       : 0;
@@ -663,7 +885,9 @@ const { calculatedRows, totales } = useMemo(() => {
     // 7. Dinero perdido por merma (solo de la parte que usas)
     const dineroPerdidoPorMerma = (totalBrutoNecesarioKg - cantidadUsadaKg) * precioPorKilo;
 
-    // 8. Coste real de lo que se usa en la receta
+    // 8. PRECIO TOTAL DEL COSTE DEL TOTAL DEL PESO BRUTO NECESARIO
+    //PESO BRUTO NECESARIO ES LA CANTIDAD EXACTA QUE AL QUIARLE LA 
+    //MERMA QUEDARA EL PESO LIMPIO QUE NECESITA LA RECETA 
     const costeRealTotal = totalBrutoNecesarioKg * precioPorKilo;
 
     // 9. Coste por ración
@@ -692,22 +916,10 @@ const { calculatedRows, totales } = useMemo(() => {
     //const precioUnidadUsado = unit === 'g' ? precioKgNeto / 1000 : precioKgNeto; // → 0,006 €/g
 
 
-
-   //const precioUnidadUsado = pesoNetoKg * precioPorKilo;   // 0.2 * 4 = 0.80 €
-
-
     const precioUnidadUsado = precioPorKilo / rendimiento * pesoNetoKg;
 
     const precioPorKiloNeto = precioPorKilo / rendimiento;         // €/kg neto
     const precioRealDespuesDeMerma = precioPorKiloNeto * pesoNetoKg; // € total del neto
-
-
-    
-
-
-
-
-
 
 
     // Decimales según unidad
@@ -774,6 +986,16 @@ const { calculatedRows, totales } = useMemo(() => {
       precioPorKiloNeto: formatPrice(precioPorKiloNeto),
 
       rendimiento: (rendimiento * 100).toFixed(1),
+
+      // ✅ AQUÍ van las que pide el PDF
+  faltanteBrutoGr: faltanteBrutoKg * 1000,
+  faltanteSinMermaNetoGr: faltanteSinMermaNetoKg * 1000,
+  priceBrutokilo: formatPrice(precioPorKilo),
+
+
+
+
+
     };
   });
 
@@ -826,6 +1048,8 @@ const { calculatedRows, totales } = useMemo(() => {
       foodCost: foodCost !== null ? foodCost.toFixed(2) : null,
       precioFinalSinIva: precioFinalSinIva !== null ? precioFinalSinIva.toFixed(2) : null,
       precioFinalConIva: precioFinalConIva !== null ? formatPrice(precioFinalConIva) : null,
+
+   
    
     },
   };
@@ -833,31 +1057,16 @@ const { calculatedRows, totales } = useMemo(() => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // =========================
+  // ===========================================
   // EXPORTAR PDF (TAL CUAL, FUNCIONA PERFECTO)
-  // =========================
+  // ==========================================
 
  const handleExportarPDF = () => {
   exportarPDF({
     namePlato,
     raciones,
     precioVenta,
-    calculatedRows,
+     calculatedRows,
     totales
   });
 };
@@ -976,17 +1185,25 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
 
 
 
-
-
-
                <h2 className="text-neutral-700 lg:text-lg text-base font-medium  text-center">
                Controla mermas, calcula el coste real y asegura la rentabilidad de tus platos, bebidas y cócteles de forma profesional.
                </h2>
 
+               
+                <ShareButton
+             title="Calculadora de Escandallos para Hostelería"
+            text="He encontrado una calculadora gratuita para analizar costes y márgenes en hostelería."
+            url="https://jovamnamedina.com/escandallo"
+             />
+
+
                 {/* 👇 NUEVO BLOQUE SEO AQUÍ */}
                <h3 className="text-neutral-900 lg:text-xl text-sm font-bold text-center mt-4 leading-5">
                 Simulador y Software de Escandallos Online para Cocina y Barra
+                
                </h3>
+
+
                {/* Instrucción Estilizada... (tu código actual sigue igual) */}
 
               {/*<p className="text-neutral-600 text-sm lg:text-base max-w-3xl mx-auto text-center mt-2">
@@ -1008,26 +1225,29 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
 
 
 
-
-
          {/* Instrucción Estilizada en una pequeña tarjetita de ayuda */}
          <div className="flex flex-col items-center bg-neutral-50 shadow-xl/20 border border-neutral-200 
           lg:mt-[4px] mt-[5px] 2xl:mt-[8px] rounded-xl   shadow-sm py-2 px-2">
           <p className="flex items-center gap-2 font-bold text-neutral-800 text-sm mb-1">
          💡 ¿Cómo empezar?
-         </p>
-         <p className='lg:text-base text-sm text-center text-neutral-700'>
-          El escandallo carga una receta de ejemplo para que veas cómo funciona. Puedes eliminarla con el botón "Limpiar todo" y añadir los ingredientes de tu receta. ¡Los datos se guardan automáticamente!
-        </p>
-      <ShareButton
-title="Calculadora de Escandallos para Hostelería"
-text="He encontrado una calculadora gratuita para analizar costes y márgenes en hostelería."
-url="https://jovamnamedina.com/escandallo"
-/>
+        
 
+         </p>
+
+         <p className='lg:text-base text-sm text-center text-neutral-700'>
+         El escandallo incluye una receta de ejemplo para que veas cómo funciona. 
+         Puedes eliminarla con "Limpiar todo" y añadir tus ingredientes. Los datos se guardan automáticamente.
+        </p>
+
+        <p className='lg:text-base text-sm text-center text-black'>
+          <span className='text-green-700'> <strong>Importante:</strong></span> En <strong>P. Útil en receta</strong> introduce la cantidad que utilizarás en la receta, necesario para realizar los cálculos finales.
+        
+        </p>
+          
          <p className='lg:text-base text-sm text-center 2xl:mt-[2px] px-2 text-neutral-700'>
-          Selecciona la unidad<strong> (Kg, g o L)</strong> y escribe la cantidad correspondiente. Por ejemplo: <strong>500</strong> si 
-          eliges <strong>gramos </strong>, ó <strong>0,5 Kg</strong>; si eliges <strong>kilos</strong>
+          Selecciona la unidad<strong>(Kg, g o L)</strong>  e indica la cantidad correspondiente (por ejemplo, 500 g o 0,5 Kg).
+
+
          </p>
 
          </div>
@@ -1115,9 +1335,6 @@ url="https://jovamnamedina.com/escandallo"
               </div>
        
           </div>
-
-
-
 
           <input
             type="number"
@@ -1224,18 +1441,23 @@ url="https://jovamnamedina.com/escandallo"
 
            
 
-              {/* PRECIO TOTAL DE LA COMPRA */}
+              {/* PRECIO POR KILO DE LA COMPRA */}
              <td className="p-2">
              <p className='text-center lg:text-sm font-bold text-neutral-900'>
-             Precio x Kg <span className="text-red-600">€</span>
+             Precio x Kg/L <span className="text-red-600">€</span>
              </p>
              <div className='py-2'>
              <input
              type="text"
              inputMode="decimal"
-             value={ing.priceTotalCompra}   // o ing.priceTotal
+             //value={ing.priceTotalCompra}   // o ing.priceTotal
+             value={
+              inputValues[getInputKey(ing.id, 'priceTotalCompra')] ??
+              formatPrice(ing.priceTotalCompra)
+            }
              onChange={(e) => handleInputChange(ing.id, 'priceTotalCompra', e.target.value)}
-             onBlur={() =>   handleBlur(ing.id, 'priceTotalCompra')}
+             onBlur={() => handleInputBlur(ing.id, 'priceTotalCompra')}
+             //onBlur={() =>   handleBlur(ing.id, 'priceTotalCompra')}
              className="w-full text-center p-2 border rounded-xl text-neutral-900"
             placeholder="Ej. 10 (bolsa) ó 8.50 (1 kg)"
              />
@@ -1247,44 +1469,58 @@ url="https://jovamnamedina.com/escandallo"
 
            {/**BRUTO NUEVO */}
            {/* PESO BRUTO */}
-           <td className="p-2 ">
-              <div className='w-full flex flex-row mx-auto items-center justify-center'>
-                  <p className='text-center lg:text-sm font-bold'>P.Bruto Total</p>
-          
-                  <select
-                  value={ing.unitGross}
-                  onChange={(e) => {
-                    const newUnit = e.target.value as 'kg' | 'g' | 'l';
-                    setIngredients(prev =>
-                      prev.map(row =>
-                        row.id === ing.id ? { ...row, unitGross: newUnit } : row
-                      )
-                    );
-                  }}
-                  className="px-2 py-1 bg-gray-200 rounded-lg text-sm font-bold">
-                    <option value="kg">Kg</option>
-                    <option value="g">g</option>
-                    <option value="l">L</option>
-                  </select>
+           <td className="p-2">
+            <div className="w-full flex flex-row mx-auto items-center justify-center">
+            <p className="text-center lg:text-sm font-bold">P.Bruto en Receta</p>
 
-            </div>
-            
-             <div className='py-2 flex flex-col items-center gap-1'>
-              <input
-                type="text"
-                inputMode="decimal"
-                value={getDisplayValue(ing, 'grossWeight')}
-                onChange={(e) => handleInputChange(ing.id, 'grossWeight', e.target.value)}
-                onBlur={() => handleInputBlur(ing.id, 'grossWeight')}
-                className="w-full text-center p-2 border rounded-xl text-neutral-900"
-                placeholder="Ej. 1.5 (kg) o 1500g"
-              />
+            <select
+             value={ing.unitGross}
+            onChange={(e) => {
+            const newUnit = e.target.value as 'kg' | 'g' | 'l' | 'ml';
 
-            </div>
-               <p className="text-[10px] text-gray-600 text-center">
-                {ing.unitGross === 'g' ? 'Gramos' : ing.unitGross === 'l' ? 'Litros' : 'Kilogramos'}
-                </p>
-           </td>
+            setIngredients(prev =>
+             prev.map(row =>
+              row.id === ing.id
+              ? { ...row, unitGross: newUnit }
+              : row
+          )
+        );
+      }}
+      className="px-2 py-1 bg-gray-200 rounded-lg text-sm font-bold"
+    >
+      <option value="kg">Kg</option>
+      <option value="g">g</option>
+      <option value="l">L</option>
+      <option value="ml">ml</option>
+    </select>
+  </div>
+
+  <div className="py-2 flex flex-col items-center gap-1">
+    <input
+      type="text"
+      inputMode="decimal"
+      value={getDisplayValue(ing, 'grossWeight')}
+      onChange={(e) =>
+        handleInputChange(ing.id, 'grossWeight', e.target.value)
+      }
+      onBlur={() =>
+        handleInputBlur(ing.id, 'grossWeight')
+      }
+      className="w-full text-center p-2 border rounded-xl text-neutral-900"
+      placeholder="Ej. 1.5 (kg), 1500g o 250ml"
+    />
+  </div>
+
+  <p className="text-[10px] text-gray-600 text-center">
+    {ing.unitGross === 'g'
+      ? 'Gramos'
+      : ing.unitGross === 'l'
+        ? 'Litros'
+        : ing.unitGross === 'ml'
+          ? 'Mililitros'
+          : 'Kilogramos'}
+  </p>
+</td>
 
 
 
@@ -1294,21 +1530,24 @@ url="https://jovamnamedina.com/escandallo"
 
             <td className="p-2 ">
               <div className='w-full flex flex-row mx-auto items-center justify-center'>
-               <p className='text-center lg:text-sm font-bold'>Merma Total</p>
-               <select
-                value={ing.unitMerma}
-                onChange={(e) => {
-                const newUnit = e.target.value as 'kg' | 'g' | 'l';
-                setIngredients(prev =>
-                  prev.map(row =>
-                  row.id === ing.id ? { ...row, unitMerma: newUnit } : row
-                 )
-                );
-              }}
-              className="px-2 py-1 bg-gray-200 rounded-lg text-sm font-bold">
-                <option value="kg">Kg</option>
-                <option value="g">g</option>
-                <option value="l">L</option>
+                <p className='text-center lg:text-sm font-bold'>
+                  Merma Total
+                </p>
+                <select
+                  value={ing.unitMerma}
+                  onChange={(e) => {
+                    const newUnit = e.target.value as 'kg' | 'g' | 'l' | 'ml';
+                    setIngredients(prev =>
+                      prev.map(row =>
+                        row.id === ing.id ? { ...row, unitMerma: newUnit } : row
+                      )
+                    );
+                  }}
+                  className="px-2 py-1 bg-gray-200 rounded-lg text-sm font-bold">
+                      <option value="kg">Kg</option>
+                      <option value="g">g</option>
+                      <option value="l">L</option>
+                      <option value="ml">ml</option>
               </select>
             </div>
             
@@ -1326,8 +1565,14 @@ url="https://jovamnamedina.com/escandallo"
 
                </div>
                <p className="text-[10px] text-gray-600 text-center">
-                {ing.unitMerma === 'g' ? 'Gramos' : ing.unitMerma === 'l' ? 'Litros' : 'Kilogramos'}
-                </p>
+                      {ing.unitMerma === 'g'
+                        ? 'Gramos'
+                        : ing.unitMerma === 'l'
+                        ? 'Litros'
+                        : ing.unitMerma === 'ml'
+                         ? 'Mililitros'
+                          : 'Kilogramos'}
+                       </p>
            </td>
 
 
@@ -1335,21 +1580,22 @@ url="https://jovamnamedina.com/escandallo"
           {/* CANTIDAD A USAR */}
            <td className="p-2 ">
             <div className='w-full flex flex-row mx-auto items-center justify-center'>
-              <p className='text-center lg:text-sm font-bold'>Uso en Receta</p>
+              <p className='text-center lg:text-sm font-bold'>P.Útil en Receta</p>
               <select
                value={ing.unitUsed}
                onChange={(e) => {
-               const newUnit = e.target.value as 'kg' | 'g' | 'l';
-               setIngredients(prev =>
-                prev.map(row =>
-                  row.id === ing.id ? { ...row, unitUsed: newUnit } : row
-                 )
+                const newUnit = e.target.value as 'kg' | 'g' | 'l' | 'ml';
+                setIngredients(prev =>
+                   prev.map(row =>
+                    row.id === ing.id ? { ...row, unitUsed: newUnit } : row
+                  )
                 );
               }}
               className="px-2 py-1 bg-gray-200 rounded-lg text-sm font-bold">
                 <option value="kg">Kg</option>
                 <option value="g">g</option>
                 <option value="l">L</option>
+                <option value="ml">ml</option>
               </select>
             </div>
             
@@ -1367,7 +1613,13 @@ url="https://jovamnamedina.com/escandallo"
 
             </div>
                <p className="text-[10px] text-gray-600 text-center">
-                {ing.unitUsed === 'g' ? 'Gramos' : ing.unitUsed === 'l' ? 'Litros' : 'Kilogramos'}
+                 {ing.unitUsed === 'g'
+                        ? 'Gramos'
+                        : ing.unitUsed === 'l'
+                        ? 'Litros'
+                        : ing.unitUsed === 'ml'
+                         ? 'Mililitros'
+                          : 'Kilogramos'}
                 </p>
            </td>
 
@@ -1402,7 +1654,7 @@ url="https://jovamnamedina.com/escandallo"
                  
 
               <td className="p-2 ">
-               <p className='text-center lg:text-sm font-bold'>Precio x Kg Neto</p>
+               <p className='text-center lg:text-sm font-bold'>Precio x Kg/L Neto</p>
                 <div className='text-center py-2 text-neutral-900 font-bold'>
                   {row.precioPorKiloNeto?? '0.000'} 
                   <span className="text-red-600"> € </span> 
@@ -1579,7 +1831,7 @@ url="https://jovamnamedina.com/escandallo"
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-bold text-neutral-800 mb-1 text-center">
-                Precio x Kg (<span className="text-red-600">€</span>)
+                Precio x Kg/L (<span className="text-red-600">€</span>)
               </label>
               <input
                 type="text"
@@ -1593,69 +1845,12 @@ url="https://jovamnamedina.com/escandallo"
             </div>
 
 
-            
-          {/* CANTIDAD A USAR */}
-           <div className=" ">
-
-
-            <div className='w-full flex flex-row mx-auto items-center justify-center'>
-              <label className="block text-xs font-bold text-neutral-800 text-center">Uso en Receta</label>
-              <select
-               value={ing.unitUsed}
-               onChange={(e) => {
-               const newUnit = e.target.value as 'kg' | 'g' | 'l';
-               setIngredients(prev =>
-                prev.map(row =>
-                  row.id === ing.id ? { ...row, unitUsed: newUnit } : row
-                 )
-                );
-              }}
-              className="px-2 py-1 bg-gray-200 rounded-lg text-xs font-bold">
-                <option value="kg">Kg</option>
-                <option value="g">g</option>
-                <option value="l">L</option>
-              </select>
-            </div>
-            
-
-             <div className='flex flex-col items-center gap-1'>  
-                <input
-                type="text"
-                inputMode="decimal"
-                value={getDisplayValue(ing, 'usedWeight')}
-                onChange={(e) => handleInputChange(ing.id, 'usedWeight', e.target.value)}
-                onBlur={() => handleInputBlur(ing.id, 'usedWeight')}
-                className="w-full text-center p-2 border rounded-xl text-neutral-900"
-                 placeholder="Ej. 1.5 (kg) o 1500g"
-                />
-
-            </div>
-               <p className="text-[10px] text-gray-600 text-center">
-                {ing.unitUsed === 'g' ? 'Gramos' : ing.unitUsed === 'l' ? 'Litros' : 'Kilogramos'}
-                </p>
-           </div>
-
-
-
-
-          
-
-
-
-          </div>
-
-
-
-
-            {/**SEGUNDO BLOQUE */}
-          <div className="grid grid-cols-2 gap-3">
-
-             {/* PESO BRUTO */}
+              {/* PESO BRUTO */}
            <div className="">
             <div className='w-full flex flex-row mx-auto items-center justify-center'>
            
                <label className="block text-xs font-bold text-neutral-700 text-center">
-                P.Bruto Total
+                P.Bruto en Receta
                 </label>
         
                <select
@@ -1695,6 +1890,20 @@ url="https://jovamnamedina.com/escandallo"
                 </p>
            </div>
 
+
+          
+
+
+
+          </div>
+
+
+
+
+            {/**SEGUNDO BLOQUE */}
+          <div className="grid grid-cols-2 gap-3">
+
+         
 
                   {/**MERMA TOTAL */}
             <div className="">
@@ -1741,6 +1950,53 @@ url="https://jovamnamedina.com/escandallo"
 
 
 
+          
+          {/* CANTIDAD A USAR */}
+           <div className=" ">
+
+
+            <div className='w-full flex flex-row mx-auto items-center justify-center'>
+              <label className="block text-xs font-bold text-neutral-800 text-center">P.Útil en Receta</label>
+              <select
+               value={ing.unitUsed}
+               onChange={(e) => {
+               const newUnit = e.target.value as 'kg' | 'g' | 'l';
+               setIngredients(prev =>
+                prev.map(row =>
+                  row.id === ing.id ? { ...row, unitUsed: newUnit } : row
+                 )
+                );
+              }}
+              className="px-2 py-1 bg-gray-200 rounded-lg text-xs font-bold">
+                <option value="kg">Kg</option>
+                <option value="g">g</option>
+                <option value="l">L</option>
+              </select>
+            </div>
+            
+
+             <div className='flex flex-col items-center gap-1'>  
+                <input
+                type="text"
+                inputMode="decimal"
+                value={getDisplayValue(ing, 'usedWeight')}
+                onChange={(e) => handleInputChange(ing.id, 'usedWeight', e.target.value)}
+                onBlur={() => handleInputBlur(ing.id, 'usedWeight')}
+                className="w-full text-center p-2 border rounded-xl text-neutral-900"
+                 placeholder="Ej. 1.5 (kg) o 1500g"
+                />
+
+            </div>
+               <p className="text-[10px] text-gray-600 text-center">
+                {ing.unitUsed === 'g' ? 'Gramos' : ing.unitUsed === 'l' ? 'Litros' : 'Kilogramos'}
+                </p>
+           </div>
+
+
+
+
+
+
 
         {/* BLOQUE 2: ESTATICOS ECONÓMICO (solo lectura) */}
 
@@ -1774,7 +2030,7 @@ url="https://jovamnamedina.com/escandallo"
 
               {/*row.priceBrutoFaltante?? '0.000'} <span className="text-red-600">€</span> x {ing.unitGross === 'l' ? 'L' : 'kg'*/}
              <div className="bg-neutral-50 p-2 rounded-xl">
-                <p className="text-gray-900 font-medium text-center">Precio x Kg Neto</p>
+                <p className="text-gray-900 font-medium text-center">Precio x Kg/L Neto</p>
                 <div className='text-center py-1 text-neutral-900 font-bold'>
                     {row.precioPorKiloNeto?? '0.000'} 
                   <span className="text-red-600"> € </span> 

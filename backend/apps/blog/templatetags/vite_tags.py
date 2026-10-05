@@ -95,10 +95,29 @@ def vite_asset_tags(entry='index.html'):
 
 
 
+#Y tu vite_asset_tags hace otra cosa
+
+#Este código:
+
+#<script type="module" src="/{entry_data["file"]}"></script>
+
+#está cogiendo del manifest.json algo como:
+
+#{
+    #"index.html": {
+     #   "file": "assets/index-C7WRxgkD.js"
+   # }
+#}
+
+#y construye:
+
+
+#Si en frontend vite.config.js estuviera asi
+#base: process.env.NODE_ENV === 'production' ? '/pepita/' : '/',
 
 
 
-
+#src="/pepita/{entry_data['file']}"
 
 
 

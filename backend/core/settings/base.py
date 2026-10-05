@@ -6,7 +6,6 @@ from django.utils.translation import gettext
 django.utils.translation.ugettext = gettext
 
 
-
 env = environ.Env()
 environ.Env.read_env()
 ENVIRONMENT = env
@@ -16,16 +15,15 @@ ENVIRONMENT = env
 DEBUG = True
 ALLOWED_HOSTS = ['*']
 
-SECRET_KEY=os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 
 #ADMIN_URL = env('ADMIN_URL', default='notadmin123/')
-SECRET_ADMIN_URL=env('SECRET_ADMIN_URL')
+SECRET_ADMIN_URL = env('SECRET_ADMIN_URL')
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-
 
 
 DJANGO_APPS = [
@@ -82,9 +80,6 @@ TINYMCE_DEFAULT_CONFIG = {
 }
 
 
-
-
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -100,22 +95,16 @@ LOGGING = {
 }
 
 
-
-
 REST_FRAMEWORK = {
-     'DEFAULT_PERMISSION_CLASSES':(
+     'DEFAULT_PERMISSION_CLASSES': (
          'rest_framework.permissions.IsAuthenticated',
          
          'rest_framework.permissions.AllowAny'
-    ),
-    'DEFAULT_AUTHENTICATION_CLASSES': (
+         ),
+     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-      
-    ),
-
-   
-}
-
+        ),
+     }
 
 
 MIDDLEWARE = [
@@ -168,12 +157,8 @@ if not DEBUG:
     CORS_ORIGIN_WHITELIST = env.list('CORS_ORIGIN_WHITELIST_DEPLOY')
     CSRF_TRUSTED_ORIGINS = env.list('CORS_TRUSTED_ORIGIN_DEPLOY')
 
-
-
 #os.path.join(BASE_DIR, 'templates/emails')
 
-#os.path.join(BASE_DIR, 'templates/emails')
-import os
 
 ROOT_URLCONF = 'core.urls'
 
@@ -228,10 +213,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/4.1/topics/i18n/
-
 LANGUAGE_CODE = 'es-es'
 
 TIME_ZONE = 'UTC'
@@ -241,18 +222,33 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.1/howto/static-files/
-
+#Punto clave: Nginx leerá directamente desde esta carpeta STATIC_ROOT (staticfiles/).
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') #ruta django, creada al hacer collectstatic
-STATIC_URL = '/assets/' #ruta django de la carpeta staticfiles/assets
+
+STATIC_URL = '/assets/' 
+
+#STATIC_URL = '/assets/' hace que esos archivos se pidan 
+#desde /assets/..., que es justo la ruta que usa el index.html y manifest de Vite. del FRONTEND
+# <script type="module" crossorigin src="/assets/index-C7WRxgkD.js"></script>
+#Qué hace: Define la URL pública desde la cual el navegador pedirá los archivos estáticos.
+
+#Si pones /assets/, el navegador pedirá [https://tudominio.com/assets/main.js](https://tudominio.com/assets/main.js)
+
+#STATICFILES_DIRS = dónde están físicamente.
+#STATIC_URL = desde qué URL los verá el navegador.
+
+#1. Genero dist con Vite.
+#2. Abro dist/index.html.
+#3. Miro las rutas de los script y css.
+#4. Compruebo que Django/Nginx sirvan esas mismas rutas.
+
 
 #ruta frontend, creada al hacer npm run build en el frontend
+# Archivos generados por Vite (JS, CSS, imágenes) que Django recogerá con collectstatic
 STATICFILES_DIRS = [
-    #os.path.join(BASE_DIR, 'your_app/static'),  # Archivos estáticos de Django
+  
     os.path.join(os.path.dirname(BASE_DIR), 'frontend', 'dist', 'assets'),
 ]
-
 
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -262,8 +258,7 @@ MEDIA_URL = '/media/'
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
-
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 AUTH_USER_MODEL = 'user.User'
 
 

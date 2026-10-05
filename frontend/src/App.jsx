@@ -116,7 +116,7 @@ function App() {
         <Route path="/hosteleria-ficha-tecnica" element={<Navigate to="/estandarizar-recetas" replace />} />
 
         <Route path="/estandarizar-recetas" element={<EstandarizarRecetas/>} />
-
+     
         <Route path="/search/:term" element={<Search />} />
    
         <Route path="/blog/post/:postSlug" element={<PostDetail/>} />
