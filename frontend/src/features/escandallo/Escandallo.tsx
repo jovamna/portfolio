@@ -1204,16 +1204,6 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
                </h3>
 
 
-               {/* Instrucción Estilizada... (tu código actual sigue igual) */}
-
-              {/*<p className="text-neutral-600 text-sm lg:text-base max-w-3xl mx-auto text-center mt-2">
-               Este simulador de escandallos gratis es el programa ideal para cocina,
-               hostelería, restaurantes, catering y bares. Un software de escandallos 
-                pensado para calcular el coste real de tus productos, platos de cocina 
-                 y cócteles, para un menú de catering para eventos o coste por copa en la barra 
-                 de tu bar controlando mermas y márgenes sin complicaciones. 
-         
-               </p>*/}
 
 
                    <p className="text-neutral-700 text-sm lg:text-base mx-auto text-center mt-2">
@@ -1240,7 +1230,7 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
         </p>
 
         <p className='lg:text-base text-sm text-center text-black'>
-          <span className='text-green-700'> <strong>Importante:</strong></span> En <strong>P. Útil en receta</strong> introduce la cantidad que utilizarás en la receta, necesario para realizar los cálculos finales.
+          <span className='text-green-700'> <strong>Importante:</strong></span> En <strong>P. Útil en Receta</strong> introduce la cantidad que utilizarás en la receta, necesario para realizar los cálculos finales.
         
         </p>
           
@@ -1829,6 +1819,8 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
           </div>
 
           <div className="grid grid-cols-2 gap-3">
+
+
             <div>
               <label className="block text-xs font-bold text-neutral-800 mb-1 text-center">
                 Precio x Kg/L (<span className="text-red-600">€</span>)
@@ -1836,13 +1828,16 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
               <input
                 type="text"
                 inputMode="decimal"
-                value={ing.priceTotalCompra}
-                onChange={(e) => handleInputChange(ing.id, 'priceTotalCompra', e.target.value)}
-                onBlur={() =>   handleBlur(ing.id, 'priceTotalCompra')}
+                 value={
+              inputValues[getInputKey(ing.id, 'priceTotalCompra')] ??
+              formatPrice(ing.priceTotalCompra)}
+             onChange={(e) => handleInputChange(ing.id, 'priceTotalCompra', e.target.value)}
+             onBlur={() => handleInputBlur(ing.id, 'priceTotalCompra')}
                 className="w-full text-center px-2 py-2 border rounded-xl text-neutral-900"
                 placeholder="Ej. 4.00"
               />
             </div>
+
 
 
               {/* PESO BRUTO */}
@@ -1850,7 +1845,7 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
             <div className='w-full flex flex-row mx-auto items-center justify-center'>
            
                <label className="block text-xs font-bold text-neutral-700 text-center">
-                P.Bruto en Receta
+                P.Bruto en Rec
                 </label>
         
                <select
@@ -1903,7 +1898,6 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
             {/**SEGUNDO BLOQUE */}
           <div className="grid grid-cols-2 gap-3">
 
-         
 
                   {/**MERMA TOTAL */}
             <div className="">
@@ -1945,18 +1939,13 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
                 {ing.unitMerma === 'g' ? 'Gramos' : ing.unitMerma === 'l' ? 'Litros' : 'Kilogramos'}
                 </p>
            </div>
-          </div>
-        </div>
 
-
-
-          
-          {/* CANTIDAD A USAR */}
-           <div className=" ">
+             {/* CANTIDAD A USAR */}
+            <div className=" ">
 
 
             <div className='w-full flex flex-row mx-auto items-center justify-center'>
-              <label className="block text-xs font-bold text-neutral-800 text-center">P.Útil en Receta</label>
+              <label className="block text-xs font-bold text-neutral-800 text-center">P.Útil en Rec</label>
               <select
                value={ing.unitUsed}
                onChange={(e) => {
@@ -1993,6 +1982,27 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
            </div>
 
 
+
+
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+
+
+          
+       
 
 
 
