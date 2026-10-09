@@ -111,6 +111,12 @@ function App() {
         <Route path="/blog" element={<Blog />} />
     
         <Route path="/escandallo" element={<Escandallo/>} />
+
+        {/*<Route path="/en/recipe-cost-calculator" element={<Escandallo enIngles={true} />} />
+        <Route path="/en/recipe-cost-calculator" element={<Escandallo />} />
+
+*/}
+
       
          {/* 1. La ruta antigua que redirige a la nueva */}
         <Route path="/hosteleria-ficha-tecnica" element={<Navigate to="/estandarizar-recetas" replace />} />

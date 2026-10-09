@@ -27,11 +27,11 @@ const ShareButton = ({ title, text, url }) => {
   return (
     <button
       onClick={handleShare}
-      className="flex items-center gap-2 px-4 py-2 
-      bg-zinc-100 hover:bg-indigo-50 hover:text-indigo-600 text-zinc-800 
-      text-sm font-medium rounded-lg transition-all duration-200"
+      className="flex items-center gap-2 px-2 py-1
+      bg-zinc-50 hover:bg-indigo-50 hover:text-indigo-600 text-black 
+      text-xs  rounded-lg transition-all duration-200 font-medium"
     >
-      <FiShare2 className="text-base" />
+      <FiShare2 className="text-sm " />
       {copied ? '¡Enlace copiado! 📋' : 'Compartir'}
     </button>
   );

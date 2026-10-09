@@ -425,8 +425,12 @@ def spa_entrypoint(request):
         escandallo_json_ld = {
             "@context": "https://schema.org",
             "@type": "WebApplication",
-            "name": "App Escandallo Online Gratuito para Hostelería | Jovamna Medina",
-            "description": "Calcula el costo de tus recetas, escandallos de cocina y bar, y gestiona los márgenes de ganancia de tu restaurante con esta herramienta online gratuita.",
+            "name": "Calculadora de Escandallos Online Gratis — Sin Registro (Descarga PDF)",
+            'description': (
+                "Herramienta online para calcular escandallos de costes de cocina, bar y "
+                "pastelería, analiza los márgenes de beneficio de tu restaurante y descarga los "
+                "resultados en PDF, Gratis, sin registro ni anuncios. "
+                ),
             "url": url_canonica,
             "applicationCategory": "BusinessApplication",
             "operatingSystem": "All",
@@ -441,18 +445,34 @@ def spa_entrypoint(request):
 
         context.update({
             # Título optimizado (< 60 caracteres antes de la marca)
-            'seo_title': "Calculadora de Escandallos Online Gratis y Sin Registro",
-            'seo_description': "Calcula el coste y margen de tus platos y bebidas al instante. Herramienta 100% gratuita, sin registros y sin anuncios. Incluye análisis de beneficios.",
-            'seo_keywords': "escandallo gratis, escandallo cocina, escandallo coctel, escandallo catering, calcular coste platos, calcular coste copas, plantilla escandallo, gestion restaurante",
+            'seo_title': "Calculadora de Escandallos Online Gratis — Sin Registro (Descarga PDF)",
+            'seo_description': (
+                "Calcula el escandallo de costes de cocina, bar y pastelería, "
+                "analiza los márgenes de beneficio de tu restaurante y descarga los "
+                "resultados en PDF, Gratis, sin registro ni anuncios. "
+                ),
+            'seo_keywords': (
+                "escandallo gratis, escandallo de costes para cocina, escandallo cóctel, escandallo costes catering, "
+                "calcular coste platos, escandallo costes pasteleria, plantilla escandallo, "
+                "gestion restaurante, restauración"
+                ),
             'canonical_url': url_canonica,
             'og_type': 'website',
             'og_title': "Calculadora de Escandallo de Cocina y Bar Gratis",
-            'og_description': "Herramienta online gratuita para calcular el coste real de tus platos y cócteles. Controla mermas y asegura tu beneficio.",
+            'og_description': (
+                "Herramienta online para calcular escandallos de costes de cocina, bar y pastelería, "
+                "analiza los márgenes de beneficio de tu restaurante y descarga los "
+                "resultados en PDF, Gratis, sin registro ni anuncios. "
+                ),
             'og_image': "https://jovamnamedina.com/custom-static/images/escandallo.webp",
             'og_url': url_canonica,
             'twitter_card': 'summary_large_image',
             'twitter_title': "Calculadora de Escandallos Online Gratis",
-            'twitter_description': "Calcula el coste de tus recetas de cocina y coctelería gratis. Controla mermas y costes.",
+            'twitter_description': (
+                "Calcula el escandallo de costes de cocina, bar y pastelería, "
+                "analiza los márgenes de beneficio de tu restaurante y descarga los "
+                "resultados en PDF, Gratis, sin registro ni anuncios. "
+                ),
             'twitter_image': "https://jovamnamedina.com/custom-static/images/escandallo.webp",
             'seo_image': "https://jovamnamedina.com/custom-static/images/escandallo.webp",
             'is_home_page': False,
@@ -474,8 +494,12 @@ def spa_entrypoint(request):
         estandarizar_json_ld = {
             "@context": "https://schema.org",
             "@type": "WebApplication",
-            "name":"Gestor de Recetas Estandarizadas",
-            "description":"Herramienta online para crear, organizar, escalar y gestionar recetas estandarizadas de cocina, pastelería y coctelería. Guarda tus recetas y descárgalas en PDF sin registro.",
+            "name":"Estandarizador y Escalador de Recetas",
+            'description': (
+                "Herramienta online para crear, organizar, escalar y gestionar recetas "
+                "estandarizadas de cocina, pastelería y coctelería. Genera etiquetas "
+                "para tus platos y descarga tus recetas en PDF sin registro."
+                ),
             "url": url_canonica,
             "applicationCategory": "BusinessApplication",
             "operatingSystem": "All",
@@ -489,20 +513,35 @@ def spa_entrypoint(request):
         }
 
         context.update({
-            'seo_title': "Estandarizar y Escalar Recetas Online Gratis — Sin Registro (Descarga PDF)",
+            'seo_title': "Estandarizador y Escalador de Recetas Online Gratis — Sin Registro (Descarga PDF)",
             # Descripción completada correctamente:
-            'seo_description': "Estandariza recetas de cocina, pastelería y coctelería online. Organiza ingredientes, cantidades, elaboración y alérgenos. Guarda tus recetas, descárgalas en PDF y trabaja sin registro.",
-            # Keywords corregidas sin erratas:
-            'seo_keywords': "estandarizar recetas online, escalar recetas cocina, formato receta estandarizada, plantilla recetas pasteleria, gestionar recetas gratis, pdf recetas",
+            'seo_description': (
+                "Estandariza y escala recetas de cocina, pastelería y coctelería online. "
+                 "Genera Etiquetas para tus platos y descarga tus recetas en PDF "
+                "para guardarlas y tenerlas siempre a mano. Gratis y sin registro."
+                ),
+            'seo_keywords': (
+                            "estandarizar recetas online, escalar recetas cocina, formato receta estandarizada, "
+                            "plantilla recetas pasteleria, gestionar recetas gratis, generador de etiquetas, "
+                            "etiquetas para alimentación, pdf recetas."
+                            ),
             'canonical_url': url_canonica,
             'og_type': 'website',
-            'og_title': "Gestor y Escalador de Recetas Estandarizadas Gratis Online",
-            'og_description': "Herramienta online para crear, organizar, escalar y gestionar recetas estandarizadas de cocina, pasteleria y coctelería. Gratis, sin registro y con descarga en PDF. Exporta a PDF y guarda tus recetas.",
+            'og_title': "Estandarizador, Escalador de Recetas y Etiquetadores Gratis Online",
+            'og_description': (
+                "Herramienta online para crear, organizar, escalar y gestionar recetas estandarizadas "
+                "de cocina, pasteleria y coctelería. Genera Etiquetas para tus platos y descarga tus recetas en PDF . "
+                "Gratis y sin registro."
+                ),
             'og_image': "https://jovamnamedina.com/custom-static/images/estandarizacion.webp",
             'og_url': url_canonica,
             'twitter_card': 'summary_large_image',
             'twitter_title': "Estandarizar y Escalar Recetas Gratis Sin Registro",
-            'twitter_description': "Herramienta online para crear, organizar, escalar y gestionar recetas estandarizadas de cocina, pasteleria y coctelería. Gratis, sin registro y con descarga en PDF. Exporta a PDF y guarda tus recetas.",
+            'twitter_description': (
+                "Herramienta online para crear, organizar, escalar y gestionar recetas estandarizadas "
+                "de cocina, pasteleria y coctelería. Genera Etiquetas para tus platos y descarga tus recetas en PDF . "
+                "Gratis y sin registro."
+                ),
             'twitter_image': "https://jovamnamedina.com/custom-static/images/estandarizacion.webp",
             'seo_image': "https://jovamnamedina.com/custom-static/images/estandarizacion.webp",
             'is_home_page': False,

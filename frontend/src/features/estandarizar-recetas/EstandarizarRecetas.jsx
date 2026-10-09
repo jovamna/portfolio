@@ -29,7 +29,7 @@ function useSEO() {
     
     // 1. Título de la página (Abarca platos de restaurante y recetas de coctelería/bar)
     //DEBE COINICIDR CON EL SEO_TITLE DE LA VIEW DE  DJANGO
-    document.title = 'Estandarizar y Escalar Recetas Online Gratis — Sin Registro (Descarga PDF)';
+    document.title = 'Estandarizador y Escalador de Recetas Online Gratis — Sin Registro (Descarga PDF)';
 
 
 
@@ -214,6 +214,9 @@ const initialState = () => ({
   raciones: 1,             // ← nuevo (por defecto 1)
   categoria: 'entrante',   // ← nuevo
 });
+
+
+
 
 
 
@@ -416,9 +419,6 @@ const cargarCopia = useCallback((event) => {
     Estandariza, Escala y Etiqueta tus Recetas de Cocina, Pastelería y Coctelería
   </h1>
       
-        {/*<h1 className="lg:text-4xl text-xl md:text-2xl font-black text-neutral-900 leading-6 lg:leading-10 text-center px-0">
-          Estandariza tus Recetas y Crea Etiquetas para tus Productos
-        </h1>*/}
     </div>
 </div>
 
@@ -428,7 +428,7 @@ const cargarCopia = useCallback((event) => {
   {/* Párrafo único, directo y optimizado para SEO */}
 
   <h2 className="text-neutral-700 lg:text-lg text-base font-medium text-center max-w-4xl mx-auto mb-3">
-  Herramienta online gratuita y sin registro para crear, escalar y gestionar recetas profesionales. Organiza ingredientes, alérgenos y métodos de elaboración al instante.
+  Herramienta online gratuita y sin registro para crear, escalar y etiquetar recetas profesionales. Organiza ingredientes, alérgenos y métodos de elaboración al instante.
 </h2>
 
 
@@ -436,7 +436,7 @@ const cargarCopia = useCallback((event) => {
 
 {/** PALABRAS CLAVE SECUNDARIAS H3 */}
 <h3 className="text-neutral-900 lg:text-xl text-sm font-bold text-center mt-4 mb-4 leading-5">
-  Software de Recetas Estandarizadas e Impresión de Etiquetas Sencillas de Cocina
+ Software de Recetas Estandarizadas y Generación de Etiquetas de Cocina
 </h3>
 
   {/* BLOQUE DE ACLARACIÓN Y GARANTÍAS (Aporta Confianza y destaca frente al Excel) bg-amber-50*/}

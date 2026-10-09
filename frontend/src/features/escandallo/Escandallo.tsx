@@ -13,19 +13,105 @@ import ShareButton  from '../../components/ShareButton'
 
 
 
-// Fuera del componente (opcional)
-//const setupSEO = () => {
- // document.title = "Calculadora de Escandallos Online Gratis y Sin Registro";
-  // ... todo el código de meta tags, canonical, json-ld
-//};
 
-// Dentro del componente
-//useEffect(() => {
- // setupSEO();
-//}, []);
+  const setupSEO = () => {
+
+    //DEBE CONCIDIR CON LA VIEW DE DJANGO DE SEO_TITLE
+    document.title = "Calculadora de Escandallos Online Gratis — Sin Registro (Descarga PDF)";
 
 
+    const canonicalUrl = "https://jovamnamedina.com/escandallo";
+    let canonicalTag = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    if (!canonicalTag) {
+      canonicalTag = document.createElement('link') as HTMLLinkElement;
+      canonicalTag.rel = 'canonical';
+      document.head.appendChild(canonicalTag);
+    }
+    canonicalTag.href = canonicalUrl;
 
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.setAttribute('name', 'description');
+      document.head.appendChild(metaDescription);
+    }
+    metaDescription.setAttribute(
+    'content',
+    'Calcula el escandallo de costes de cocina, bar y pastelería, analiza los márgenes de beneficio de tu restaurante y descarga los resultados en PDF. Gratis, sin registro ni anuncios.'
+    );
+
+    const metaTags = [
+      { property: 'og:title', content: 'Calculadora de Escandallo de Cocina y Bar Gratis' },
+      {
+        property: 'og:description',
+        content:
+            'Herramienta online para calcular escandallos de costes de cocina, bar y pastelería, ' +
+            'analiza los márgenes de beneficio de tu restaurante y descarga los ' +
+            'resultados en PDF, Gratis, sin registro ni anuncios. '
+      },
+      { property: 'og:image', content: 'https://jovamnamedina.com/custom-static/images/escandallo.webp' },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:url', content: canonicalUrl },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:title', content: 'Calculadora de Escandallos Online Gratis' },
+      {
+        name: 'twitter:description',
+        content:
+            'Calcula el escandallo de costes de cocina, bar y pastelería, ' +
+            'analiza los márgenes de beneficio de tu restaurante y descarga los ' +
+            'resultados en PDF, Gratis, sin registro ni anuncios '
+      },
+      { name: 'twitter:image', content: 'https://jovamnamedina.com/custom-static/images/escandallo.webp' },
+      { name: 'twitter:label1', content: 'Categoría' },
+      { name: 'twitter:data1', content: 'Software de Gestión Hostelera / Gastronomía y Bar' }
+    ];
+
+    metaTags.forEach(({ property, name, content }) => {
+      const selector = property ? `meta[property="${property}"]` : `meta[name="${name}"]`;
+      let tag = document.querySelector(selector);
+      if (!tag) {
+        tag = document.createElement("meta");
+        if (property) tag.setAttribute("property", property);
+        if (name) tag.setAttribute("name", name);
+        document.head.appendChild(tag);
+      }
+      if (content) {
+        tag.setAttribute('content', content);
+      }
+    });
+
+    let scriptJsonLd = document.querySelector('script[data-schema="cooking-app"]') as HTMLScriptElement | null;
+    if (!scriptJsonLd) {
+      scriptJsonLd = document.createElement('script') as HTMLScriptElement;
+      scriptJsonLd.type = 'application/ld+json';
+      scriptJsonLd.setAttribute('data-schema', 'cooking-app');
+      document.head.appendChild(scriptJsonLd);
+    }
+    scriptJsonLd.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'WebApplication',
+      name: 'Calculadora de Escandallos Online Gratis — Sin Registro (Descarga PDF)',
+      description:
+        'Herramienta online para calcular escandallos de costes de cocina, bar y ' +
+        'pastelería, analiza los márgenes de beneficio de tu restaurante y descarga los ' +
+        'resultados en PDF, Gratis, sin registro ni anuncios.',
+      url: canonicalUrl,
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'All',
+      browserRequirements: 'Requires JavaScript. Requires HTML5.',
+      author: {
+        '@type': 'Person',
+        name: 'Jovamna Medina',
+        jobTitle: 'Full Stack Developer',
+        url: 'https://jovamnamedina.com/'
+      },
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'EUR'
+      }
+    });
+  }
 
 
 
@@ -330,88 +416,9 @@ export default function Escandallo() {
   // =========================
   // SEO (No toco nada, está perfecto)
   // =========================
-  useEffect(() => {
-
-    //DEBE CONCIDIR CON LA VIEW DE DJANGO DE SEO_TITLE
-    document.title = "Calculadora de Escandallos Online Gratis y Sin Registro";
-
-
-    const canonicalUrl = "https://jovamnamedina.com/escandallo";
-    let canonicalTag = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
-    if (!canonicalTag) {
-      canonicalTag = document.createElement('link') as HTMLLinkElement;
-      canonicalTag.rel = 'canonical';
-      document.head.appendChild(canonicalTag);
-    }
-    canonicalTag.href = canonicalUrl;
-
-    let metaDescription = document.querySelector('meta[name="description"]');
-    if (!metaDescription) {
-      metaDescription = document.createElement('meta');
-      metaDescription.setAttribute('name', 'description');
-      document.head.appendChild(metaDescription);
-    }
- 
-    metaDescription.setAttribute('content', 'Calcula el coste y margen de tus platos y bebidas al instante. Herramienta 100% gratuita, sin registros y sin anuncios. Incluye análisis de beneficios.');
-
-
-    const metaTags = [
-      { property: 'og:title', content: 'Calculadora de Escandallo de Cocina y Bar Gratis' },
-      { property: 'og:description', content: 'Herramienta online gratuita para calcular el coste real de tus platos y cócteles. Controla mermas y asegura tu beneficio.' },
-      { property: 'og:image', content: 'https://jovamnamedina.com/custom-static/images/escandallo.webp' },
-      { property: 'og:type', content: 'website' },
-      { property: 'og:url', content: canonicalUrl },
-      { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:title', content: 'Calculadora de Escandallos Online Gratis' },
-      { name: 'twitter:description', content: 'Calcula el coste de tus recetas de cocina y coctelería gratis. Controla mermas y costes.' },
-      { name: 'twitter:image', content: 'https://jovamnamedina.com/custom-static/images/escandallo.webp' },
-      { name: 'twitter:label1', content: 'Categoría' },
-      { name: 'twitter:data1', content: 'Software de Gestión Hostelera / Gastronomía y Bar' }
-    ];
-
-    metaTags.forEach(({ property, name, content }) => {
-      const selector = property ? `meta[property="${property}"]` : `meta[name="${name}"]`;
-      let tag = document.querySelector(selector);
-      if (!tag) {
-        tag = document.createElement("meta");
-        if (property) tag.setAttribute("property", property);
-        if (name) tag.setAttribute("name", name);
-        document.head.appendChild(tag);
-      }
-      if (content) {
-        tag.setAttribute('content', content);
-      }
-    });
-
-    let scriptJsonLd = document.querySelector('script[data-schema="cooking-app"]') as HTMLScriptElement | null;
-    if (!scriptJsonLd) {
-      scriptJsonLd = document.createElement('script') as HTMLScriptElement;
-      scriptJsonLd.type = 'application/ld+json';
-      scriptJsonLd.setAttribute('data-schema', 'cooking-app');
-      document.head.appendChild(scriptJsonLd);
-    }
-    scriptJsonLd.textContent = JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'WebApplication',
-      name: 'Calculadora de Escandallos para Cocina y Bar',
-      description: 'Aplicación web gratuita para realizar escandallos de cocina y coctelería, calcular mermas de ingredientes, costes por copa/ración y porcentaje de Food & Beverage Cost.',
-      url: canonicalUrl,
-      applicationCategory: 'BusinessApplication',
-      operatingSystem: 'All',
-      browserRequirements: 'Requires JavaScript. Requires HTML5.',
-      author: {
-        '@type': 'Person',
-        name: 'Jovamna Medina',
-        jobTitle: 'Full Stack Developer',
-        url: 'https://jovamnamedina.com/'
-      },
-      offers: {
-        '@type': 'Offer',
-        price: '0',
-        priceCurrency: 'EUR'
-      }
-    });
-  }, []);
+ useEffect(() => {
+    setupSEO();
+}, []);
 
   // =========================
   // 🆕 ESTADOS (AHORA CON EL HELPER loadFromStorage)
@@ -1185,31 +1192,29 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
 
 
 
-               <h2 className="text-neutral-700 lg:text-lg text-base font-medium  text-center">
-               Controla mermas, calcula el coste real y asegura la rentabilidad de tus platos, bebidas y cócteles de forma profesional.
+               <h2 className=" lg:text-lg text-base font-medium text-center text-neutral-700">
+               Controla mermas, costes y rentabilidad de tus platos, cócteles, pasteleria y 
+               <span className='text-black font-semibold'> descarga tu análisis en PDF para guardar o imprimir.</span>
                </h2>
 
-               
-                <ShareButton
-             title="Calculadora de Escandallos para Hostelería"
-            text="He encontrado una calculadora gratuita para analizar costes y márgenes en hostelería."
-            url="https://jovamnamedina.com/escandallo"
-             />
+           
 
-
-                {/* 👇 NUEVO BLOQUE SEO AQUÍ */}
+                 <div className='flex flex-row'>
+                 {/* 👇 NUEVO BLOQUE SEO AQUÍ */}
                <h3 className="text-neutral-900 lg:text-xl text-sm font-bold text-center mt-4 leading-5">
-                Simulador y Software de Escandallos Online para Cocina y Barra
+                Simulador y Software de Escandallos Online para Cocina y Barra 
                 
                </h3>
 
 
+                    </div>
+
+               
 
 
                    <p className="text-neutral-700 text-sm lg:text-base mx-auto text-center mt-2">
-                Este simulador de escandallos gratis permite calcular el coste real de tus productos,
-                platos y cócteles y realizar un <strong>escandallo de costes</strong> para cocina, restaurantes,
-                catering y bares, controlando mermas y márgenes sin complicaciones.
+                Este simulador de escandallos gratis permite calcular el coste real de tus
+                platos, cócteles, pastelería  y realizar un <span className='text-black font-semibold'>escandallo de costes</span> de cocina, bares y catering, controlando mermas y márgenes sin complicaciones.
                </p>
 
 
@@ -1218,28 +1223,53 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
          {/* Instrucción Estilizada en una pequeña tarjetita de ayuda */}
          <div className="flex flex-col items-center bg-neutral-50 shadow-xl/20 border border-neutral-200 
           lg:mt-[4px] mt-[5px] 2xl:mt-[8px] rounded-xl   shadow-sm py-2 px-2">
-          <p className="flex items-center gap-2 font-bold text-neutral-800 text-sm mb-1">
+
+
+              <div className=' flex flex-row justify-between items-center'>
+                
+
+          <p className="flex items-center gap-2 font-bold text-neutral-800 text-sm mb-1 px-6">
          💡 ¿Cómo empezar?
-        
-
          </p>
+          <ShareButton
+             title="Calculadora de Escandallos para Hostelería"
+            text="He encontrado una calculadora gratuita para analizar costes y márgenes en hostelería."
+            url="https://jovamnamedina.com/escandallo"
+             />
 
-         <p className='lg:text-base text-sm text-center text-neutral-700'>
-         El escandallo incluye una receta de ejemplo para que veas cómo funciona. 
-         Puedes eliminarla con "Limpiar todo" y añadir tus ingredientes. Los datos se guardan automáticamente.
-        </p>
+             </div>
+      
 
-        <p className='lg:text-base text-sm text-center text-black'>
-          <span className='text-green-700'> <strong>Importante:</strong></span> En <strong>P. Útil en Receta</strong> introduce la cantidad que utilizarás en la receta, necesario para realizar los cálculos finales.
-        
-        </p>
+
+        <ul className=''>
+          <li className='lg:text-base text-sm text-center text-neutral-700'>
+                 <span className='text-black font-semibold'>Receta de ejemplo cargada:</span>  Puedes trastear con ella o usar "Limpiar todo" y añadir tus ingredientes.
+          </li>
+   
+          <li className='lg:text-base text-sm text-center text-neutral-700'>
+            <span className='text-black font-semibold'>P. Útil en Receta:  </span><span className='text-green-700'><strong>Importante</strong> </span>poner la cantidad exacta que usarás en el plato para calcular el coste real sin mermas.
+          </li>
+
+            <li className='lg:text-base text-sm text-center text-neutral-700'>
+             
+      <span className='text-black font-semibold'>Tus datos están a salvo:</span> Se guardan automáticamente en tu navegador.
+          </li>
+      
+
+         <li className='lg:text-base text-sm text-center text-neutral-700'>
+             
+          Selecciona la unidad <span className='text-black font-semibold'>(Kg, g, L, ml)</span>  e indica la cantidad
+          <span className='text-black font-semibold'> (ejemplo, 500 g o 0,5 Kg).</span>
+
+      </li>
+
+
+        </ul>
+
+
+
           
-         <p className='lg:text-base text-sm text-center 2xl:mt-[2px] px-2 text-neutral-700'>
-          Selecciona la unidad<strong>(Kg, g o L)</strong>  e indica la cantidad correspondiente (por ejemplo, 500 g o 0,5 Kg).
-
-
-         </p>
-
+   
          </div>
 
            </div>
@@ -1794,12 +1824,12 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
         
         {/* Cabecera de la Tarjeta */}
         <div className="flex justify-between items-center mb-4 pb-2 border-b border-neutral-100">
-          <span className="text-xs bg-neutral-100 text-neutral-600 font-bold px-2.5 py-1 rounded-full">
+          <span className="text-xs bg-neutral-100 text-neutral-800 font-bold px-2.5 py-1 rounded-full">
             Ingrediente #{index + 1}
           </span>
           <button 
             onClick={() => handleRemoveRow(ing.id)} 
-            className="w-8 h-8 bg-red-50 text-red-500 rounded-full flex items-center justify-center font-bold"
+            className="w-8 h-8 bg-red-50 text-red-700 rounded-full flex items-center justify-center font-bold"
           >
             ✕
           </button>
@@ -1851,7 +1881,7 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
                <select
                value={ing.unitGross}
                onChange={(e) => {
-               const newUnit = e.target.value as 'kg' | 'g' | 'l';
+               const newUnit = e.target.value as 'kg' | 'g' | 'l' | 'ml';
                setIngredients(prev =>
                 prev.map(row =>
                   row.id === ing.id ? { ...row, unitGross: newUnit } : row
@@ -1859,9 +1889,10 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
                 );
                }}
                className="px-2 py-1 bg-gray-200 rounded-lg text-xs font-bold">
-                <option value="kg">Kg</option>
-                <option value="g">g</option>
-                <option value="l">L</option>
+                  <option value="kg">Kg</option>
+                  <option value="g">g</option>
+                  <option value="l">L</option>
+                 <option value="ml">ml</option>
               </select>
 
           
@@ -1881,7 +1912,13 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
 
             </div>
                <p className="text-[10px] text-gray-600 text-center">
-                {ing.unitGross === 'g' ? 'Gramos' : ing.unitGross === 'l' ? 'Litros' : 'Kilogramos'}
+                {ing.unitGross === 'g'
+                ? 'Gramos'
+                : ing.unitGross === 'l'
+                ? 'Litros'
+                : ing.unitGross === 'ml'
+                ? 'Mililitros'
+                : 'Kilogramos'}
                 </p>
            </div>
 
@@ -1908,7 +1945,7 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
                <select
                 value={ing.unitMerma}
                 onChange={(e) => {
-                const newUnit = e.target.value as 'kg' | 'g' | 'l';
+                 const newUnit = e.target.value as 'kg' | 'g' | 'l' | 'ml';
                 setIngredients(prev =>
                   prev.map(row =>
                   row.id === ing.id ? { ...row, unitMerma: newUnit } : row
@@ -1916,9 +1953,10 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
                 );
               }}
               className="px-2 py-1 bg-gray-200 rounded-lg text-xs font-bold">
-                <option value="kg">Kg</option>
-                <option value="g">g</option>
-                <option value="l">L</option>
+                 <option value="kg">Kg</option>
+                      <option value="g">g</option>
+                      <option value="l">L</option>
+                      <option value="ml">ml</option>
               </select>
             </div>
             
@@ -1936,7 +1974,13 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
 
                </div>
                <p className="text-[10px] text-gray-600 text-center">
-                {ing.unitMerma === 'g' ? 'Gramos' : ing.unitMerma === 'l' ? 'Litros' : 'Kilogramos'}
+                {ing.unitMerma === 'g'
+                ? 'Gramos'
+                : ing.unitMerma === 'l'
+                ? 'Litros'
+                : ing.unitMerma === 'ml'
+                ? 'Mililitros'
+                : 'Kilogramos'}
                 </p>
            </div>
 
@@ -1949,17 +1993,18 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
               <select
                value={ing.unitUsed}
                onChange={(e) => {
-               const newUnit = e.target.value as 'kg' | 'g' | 'l';
-               setIngredients(prev =>
-                prev.map(row =>
-                  row.id === ing.id ? { ...row, unitUsed: newUnit } : row
-                 )
+                const newUnit = e.target.value as 'kg' | 'g' | 'l' | 'ml';
+                setIngredients(prev =>
+                  prev.map(row =>
+                    row.id === ing.id ? { ...row, unitUsed: newUnit } : row
+                  )
                 );
               }}
               className="px-2 py-1 bg-gray-200 rounded-lg text-xs font-bold">
                 <option value="kg">Kg</option>
                 <option value="g">g</option>
                 <option value="l">L</option>
+                <option value="ml">ml</option>
               </select>
             </div>
             
@@ -1977,7 +2022,13 @@ const cargarCopia = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
 
             </div>
                <p className="text-[10px] text-gray-600 text-center">
-                {ing.unitUsed === 'g' ? 'Gramos' : ing.unitUsed === 'l' ? 'Litros' : 'Kilogramos'}
+                {ing.unitUsed === 'g'
+                 ? 'Gramos'
+                 : ing.unitUsed === 'l'
+                 ? 'Litros'
+                 : ing.unitUsed === 'ml'
+                 ? 'Mililitros'
+                 : 'Kilogramos'}
                 </p>
            </div>
 
